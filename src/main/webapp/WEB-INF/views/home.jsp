@@ -74,6 +74,13 @@ h2.hh{
    position: absolute;
 }
 </style>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
+  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+
 </head>
 <body>
    <form action= "/" method="post">
@@ -107,6 +114,18 @@ h2.hh{
    </div>
    </div>
 </form>
+<a id="chat-channel-button" href="javascript:chatChannel()">
+  <img src="/tool/resource/static/img/button/channel/consult/consult_small_yellow_pc.png"
+    alt="카카오톡 채널 채팅하기 버튼" />
+</a>
+
+<script>
+  function chatChannel() {
+    Kakao.Channel.chat({
+      channelPublicId: '_wNXab',
+    });
+  }
+</script>
 <script>
    var slideIndex = 0;
    showSlides();

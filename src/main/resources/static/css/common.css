@@ -11,3 +11,7 @@
 		text-align: center;
 		font-weight: bold;
 	}
+
+/* footer */
+div#footer		{ background:#515151; color: #FFF }
+div#footer p	{ margin:0;padding:5px 10px }

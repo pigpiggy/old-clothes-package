@@ -24,7 +24,11 @@ form {
   position: absoulute;
   margin: auto;
   object-fit: cover;
+<<<<<<< HEAD
+  font-size: 0;
+=======
   font-size:0; 
+>>>>>>> 670f306bfb89efd832bce32171173af49c8eca91
 }
 
 /* The dots/bullets/indicators */
@@ -41,7 +45,11 @@ form {
 }
 
 .active {
+<<<<<<< HEAD
+  background-color: #b3b0b0;
+=======
   background-color: #afa229;
+>>>>>>> 670f306bfb89efd832bce32171173af49c8eca91
 }
 
 /* Fading animation */
@@ -83,6 +91,7 @@ h1.h1{
    left:29%;
    font-size:40;
    position: absolute;
+   font-size: 32px;
 }
 
 h3.h3 {

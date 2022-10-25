@@ -5,6 +5,8 @@
 <html>
 <head>
    <title>Home</title>
+<link href="${pageContext.servletContext.contextPath }/resources/static/css/common.css" rel="stylesheet" type="text/css">
+   
 <style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif;}
@@ -135,5 +137,8 @@ h2.hh{
      setTimeout(showSlides, 3000); // Change image every 2 seconds
    }
 </script>
+<div>
+	<c:import url='/WEB-INF/views/includes/footer.jsp'/>
+</div>
 </body>
 </html>

@@ -24,6 +24,7 @@ form {
   position: absoulute;
   margin: auto;
   object-fit: cover;
+  font-size: 0;
 }
 
 /* The dots/bullets/indicators */
@@ -39,7 +40,7 @@ form {
 }
 
 .active {
-  background-color: lightpink;
+  background-color: #b3b0b0;
 }
 
 /* Fading animation */
@@ -79,6 +80,7 @@ h2.hh{
    top:40%;
    left:40%;
    position: absolute;
+   font-size: 32px;
 }
 .icons {
 	display: flex;

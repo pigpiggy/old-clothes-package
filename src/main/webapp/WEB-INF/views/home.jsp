@@ -5,6 +5,8 @@
 <html>
 <head>
    <title>Home</title>
+<link href="${pageContext.servletContext.contextPath }/resources/static/css/common.css" rel="stylesheet" type="text/css">
+   
 <style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif;}
@@ -74,11 +76,7 @@ h2.hh{
    position: absolute;
 }
 </style>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
-<script>
-  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
-</script>
+
 
 
 </head>
@@ -87,19 +85,20 @@ h2.hh{
    
    <div class="slideshow-container">
    <div class="mySlides fade">
-     <img src="../../resources/image/second.jpg" style="width:100.5%;height:93%;position:relative; display: block;">
+     <img src="image/second.jpg" style="width:100.5%;height:93%;position:relative; display: block;">
      <input type="button" class="img-button" onclick="location='test'">
+     <img src="image/community.png" style="position:absolute;width:100px;margin-top:-200px;">
      <h2 class="hh">헌 옷으로 행복해질 수 있어요!</h2>
    </div>
    
    <div class="mySlides fade">
-     <img src="../../resources/image/first.jpg" style="width:100.5%;height:93%">
+     <img src="image/first.jpg" style="width:100.5%;height:93%">
      <input type="button" class="img-button" onclick="location.href='test.jsp'">
      <h2 class="hh">헌 옷으로 행복해질 수 있어요!</h2>
    </div>
    
    <div class="mySlides fade">
-     <img src="../../resources/image/threee.png" style="width:100.5%;height:93%">
+     <img src="image/threee.png" style="width:100.5%;height:93%">
      <input type="button" class="img-button" onclick="location.href='test.jsp'">
      <h2 class="hh">헌 옷 수거함은 어디에 있나요~</h2>
    </div>
@@ -114,18 +113,9 @@ h2.hh{
    </div>
    </div>
 </form>
-<a id="chat-channel-button" href="javascript:chatChannel()">
-  <img src="/tool/resource/static/img/button/channel/consult/consult_small_yellow_pc.png"
-    alt="카카오톡 채널 채팅하기 버튼" />
-</a>
 
-<script>
-  function chatChannel() {
-    Kakao.Channel.chat({
-      channelPublicId: '_wNXab',
-    });
-  }
-</script>
+
+
 <script>
    var slideIndex = 0;
    showSlides();
@@ -147,5 +137,8 @@ h2.hh{
      setTimeout(showSlides, 3000); // Change image every 2 seconds
    }
 </script>
+<div>
+	<c:import url='/WEB-INF/views/includes/footer.jsp'/>
+</div>
 </body>
 </html>

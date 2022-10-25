@@ -9,9 +9,13 @@
    
 <style>
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
+body {font-family: Verdana, sans-serif; margin: 0;}
 .mySlides {display: none;}
 img {vertical-align: middle;}
+form {
+	position: relative;
+	margin: 0;
+}
 
 /* Slideshow container */
 .slideshow-container {
@@ -23,6 +27,7 @@ img {vertical-align: middle;}
 }
 
 /* The dots/bullets/indicators */
+
 .dot {
   height: 15px;
   width: 15px;
@@ -75,6 +80,33 @@ h2.hh{
    left:40%;
    position: absolute;
 }
+.icons {
+	display: flex;
+	left: 50%;
+	top:55%;
+	transform: translate(-50%, 0);
+	width: 700px;
+	height: auto;
+	justify-content: space-between;
+	position: absolute;
+}
+
+.icon {
+	width:100px;
+}
+
+#dots {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#footer>p {
+	margin:0;
+	padding: 16px 0;
+	background-color: gray;
+}
 </style>
 
 
@@ -85,28 +117,45 @@ h2.hh{
    
    <div class="slideshow-container">
    <div class="mySlides fade">
-     <img src="image/second.jpg" style="width:100.5%;height:93%;position:relative; display: block;">
+     <img src="image/second.jpg" style="width:100.5%;height:100%;position:relative; display: block;">
      <input type="button" class="img-button" onclick="location='test'">
-     <img src="image/community.png" style="position:absolute;width:100px;margin-top:-200px;">
+     <div class="icons">
+     	<img src="image/delete.png" class="icon">
+     	<img src="image/share.png" class="icon">
+     	<img src="image/sell.png" class="icon">
+     	<img src="image/community.png" class="icon">
+     </div>
      <h2 class="hh">헌 옷으로 행복해질 수 있어요!</h2>
    </div>
    
    <div class="mySlides fade">
-     <img src="image/first.jpg" style="width:100.5%;height:93%">
+     <img src="image/first.jpg" style="width:100.5%;height:100%">
      <input type="button" class="img-button" onclick="location.href='test.jsp'">
+     <div class="icons">
+     	<img src="image/delete.png" class="icon">
+     	<img src="image/share.png" class="icon">
+     	<img src="image/sell.png" class="icon">
+     	<img src="image/community.png" class="icon">
+     </div>
      <h2 class="hh">헌 옷으로 행복해질 수 있어요!</h2>
    </div>
    
    <div class="mySlides fade">
-     <img src="image/threee.png" style="width:100.5%;height:93%">
+     <img src="image/threee.png" style="width:100.5%;height:100%">
      <input type="button" class="img-button" onclick="location.href='test.jsp'">
+     <div class="icons">
+     	<img src="image/delete.png" class="icon">
+     	<img src="image/share.png" class="icon">
+     	<img src="image/sell.png" class="icon">
+     	<img src="image/community.png" class="icon">
+     </div>
      <h2 class="hh">헌 옷 수거함은 어디에 있나요~</h2>
    </div>
    
    
    <br>
    
-   <div style="text-align:center">
+   <div id="dots">
      <span class="dot"></span> 
      <span class="dot"></span> 
      <span class="dot"></span> 

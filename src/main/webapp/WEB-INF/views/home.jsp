@@ -108,15 +108,10 @@ h3.h3 {
 	top:55%;
 	transform: translate(-50%, 0);
 	width: 700px;
-	height: auto;
+	height: 125px;
 	justify-content: space-between;
 	position: absolute;
 }
-
-.icon {
-	width:100px;
-}
-
 #dots {
 	position: absolute;
 	top: 90%;

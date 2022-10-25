@@ -6,7 +6,6 @@
 <head>
    <title>Home</title>
 <link href="${pageContext.servletContext.contextPath }/resources/static/css/common.css" rel="stylesheet" type="text/css">
-   
 <style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif; margin: 0;

@@ -36,6 +36,7 @@ form {
   background-color:transparent;
   border-radius: 50%;
   display: inline-block;
+  opacity: 0.7;
   transition: background-color 0.6s rgb(176, 164, 140);
 }
 
@@ -117,6 +118,7 @@ h3.h3 {
 #footer>p {
 	margin:0;
 	padding: 16px 0;
+	opacity:0.7;
 	background-color: rgb(176, 164, 140);
 }
 </style>

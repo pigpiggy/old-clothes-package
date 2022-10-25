@@ -108,7 +108,7 @@ h3.h3 {
 	top:55%;
 	transform: translate(-50%, 0);
 	width: 700px;
-	height: 125px;
+	height: 98px;
 	justify-content: space-between;
 	position: absolute;
 }

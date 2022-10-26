@@ -6,9 +6,18 @@
 <head>
    <title>Home</title>
 <link href="${pageContext.servletContext.contextPath }/resources/static/css/common.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Montserrat:ital,wght@0,400;1,100&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <style>
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif; margin: 0;
+@font-face {
+    font-family: 'LeferiPoint-BlackA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {font-family: 'LeferiPoint-BlackA'; margin: 0; color: #404040}
 background-color:white;}
 .mySlides {display: none;}
 img {vertical-align: middle;}
@@ -24,20 +33,16 @@ form {
   position: absoulute;
   margin: auto;
   object-fit: cover;
-<<<<<<< HEAD
-  font-size: 0;
-=======
   font-size:0; 
->>>>>>> 670f306bfb89efd832bce32171173af49c8eca91
 }
 
 /* The dots/bullets/indicators */
 
 .dot {
-  height: 15px;
-  width: 15px;
-  margin: 70px 2px;
-  background-color:transparent;
+  height: 11px;
+  width: 11px;
+  margin: 70px 9px;
+  background-color:#e0e0e0;
   border-radius: 50%;
   display: inline-block;
   opacity: 0.7;
@@ -45,11 +50,7 @@ form {
 }
 
 .active {
-<<<<<<< HEAD
-  background-color: #b3b0b0;
-=======
-  background-color: #afa229;
->>>>>>> 670f306bfb89efd832bce32171173af49c8eca91
+  background-color: #7f7f7f;
 }
 
 /* Fading animation */
@@ -86,18 +87,20 @@ input.img-button{
 }
 
 h1.h1{
-   color:black;
    top:44%;
-   left:29%;
+   left:50%;
+   transform: translateX(-50%);
    font-size:40;
    position: absolute;
    font-size: 32px;
+   font-weight: normal;
 }
 
 h3.h3 {
 	color:gray;
 	top:39%;
-	left:42%;
+	left:50%;
+	transform: translateX(-50%);
 	font-size:25;
 	position: absolute;
 }
@@ -119,12 +122,7 @@ h3.h3 {
 	transform: translateX(-50%);
 }
 
-#footer>p {
-	margin:0;
-	padding: 16px 0;
-	opacity:0.7;
-	background-color: rgb(176, 164, 140);
-}
+
 </style>
 
 

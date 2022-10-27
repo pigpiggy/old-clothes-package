@@ -32,6 +32,6 @@ public class SharingController {
 	
 	@GetMapping("/sharingInsert")
 	public String sharingInsert() {
-		return "sharing/insert";
+		return "sharing/sharingResistForm";
 	}
 }

@@ -10,7 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
-	#content h1 {
+	#SharingContent h1 {
         text-align: center;
       }
 
@@ -20,7 +20,12 @@
       }
 
       #buttonAndOption {
+      	display: flex;
         justify-content: space-around;
+      }
+      
+      #SharingContent {
+      	padding: 20px;
       }
 </style>
 </head>
@@ -28,7 +33,7 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp'/>
 	</div>
-	<div id="content">
+	<div id="SharingContent">
       <h1>무료 나눔</h1>
       <div id="addressAndSearch">
         <div>

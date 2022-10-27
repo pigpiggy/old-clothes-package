@@ -50,7 +50,9 @@
         </form>
       </div>
       <div id="buttonAndOption">
-        <button type="button" value="상품등록" />
+      	<a href="sharingInsert">
+        	<button type="button">상품등록</button>
+        </a>
         <select>
           <option>거리순</option>
           <option>후기많은 순</option>

@@ -30,5 +30,8 @@ public class SharingController {
 		return mav;
 	}
 	
-	
+	@GetMapping("/sharingInsert")
+	public String sharingInsert() {
+		return "sharing/insert";
+	}
 }

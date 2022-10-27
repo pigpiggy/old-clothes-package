@@ -43,4 +43,9 @@ public class MainController {
 		}
 		
 	}
+	
+	@GetMapping("/sharingList")
+	public String sharingList() {
+		return "sharing/list";
+	}
 }

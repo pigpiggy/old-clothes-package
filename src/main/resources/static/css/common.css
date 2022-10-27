@@ -25,31 +25,21 @@ header {
   background-color: rgb(0, 118, 190);
   padding: 40px;
 }
-.searchForm {
-  background-color: rgb(0, 118, 190);
-  display: flex;
-  justify-content: flex-end;
-}
-
-input[type='search'] {
-  border-radius: 5px 0 0 5px;
-  border: none;
-}
-
-#searchFormIcon {
-  background-color: white;
-  margin-right: 5px;
-}
-
-.fa-magnifying-glass {
-  color: rgb(92, 133, 221);
-}
 
 .headerButton {
   background-color: rgb(94, 94, 94);
   color: white;
   border-radius: 5px;
   border: none;
+}
+
+.searchForm form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.searchForm form input {
+	margin: 5px;
 }
 
 #navBar ul,

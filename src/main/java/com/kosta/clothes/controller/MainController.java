@@ -43,6 +43,16 @@ public class MainController {
 		}
 	}
 	
-
+	//무료나눔
+	@GetMapping("/sharingList")
+	public String sharingList() {
+		return "sharing/list";
+	}
+	
+	// 정보 안내(헌웃수거함/기부업체)
+	@GetMapping("/information")
+	public String information() {
+		return "info/donationmap";
+	}
 
 }

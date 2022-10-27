@@ -16,6 +16,9 @@
 </style>
 </head>
 <body>
+	<div>
+		<c:import url='/WEB-INF/views/includes/header.jsp' />
+	</div>
 	
 		<table>
 			<tr>
@@ -29,6 +32,7 @@
 				<td></td>
 			</tr>
 		</table>
+	
 		<div id="map" style="width:400px;height:350px;"></div>
    	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=186ec7bfee52595efa89ccde838d9dbc&libraries=services"></script>
 	

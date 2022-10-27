@@ -38,16 +38,20 @@
               <a class="dropdown-item" href="#">모두 가능</a>
             </div><br>
         </div>
-        <div>거래지역: 
- 		 <input id="member_post"  type="text" placeholder="Zip Code" readonly onclick="findAddr()">
- 		 <input id="member_addr" type="text" placeholder="Address" readonly> <br>
-  		 <input type="text" placeholder="Detailed Address">
+        <div id="dealarea">거래지역: 
+ 		 <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
+ 		 <input id="member_addr" type="text" placeholder="도로명 주소" readonly> <br>
             
             
         </div>
      </div>
         <textarea name="text" id="editor"></textarea>
-        <p><input type="submit" value="전송"></p>
+	 <div id="btncontainer">
+	 	<a href="list">
+			<button type="button" class="btn btn-info">목록으로</button>
+		</a>
+		<button type="button" class="btn btn-warning">등록</button>
+   	 </div>
     </form>
     </div>   
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

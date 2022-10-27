@@ -175,6 +175,7 @@ body {
 /* insert */
     h1 {
         text-align: center;
+        padding: 50px;
     }
     #imgcontainer {
         display: flex;
@@ -183,12 +184,35 @@ body {
     #textarea {
         width: 600px;
     }
-
+	
+	.dropdown {
+		padding-right: 15px;
+	}
     .dropdown-toggle {
         border: 1px solid gray;
     }
 
     #dealcontainer {
+    	padding-bottom: 20px;
         display: flex;
+    }
+    #dealarea {
+    	margin: 5px;
+    }
+    
+    #member_post {
+    	margin: 5px;
+    }
+    
+    #member_addr {
+    	padding-right:160px; 
+    }
+    #btncontainer {
+    	text-align: center;
+    	padding-top: 10px;
+    }
+    
+    .btn {
+    	margin: 3px;
     }
       

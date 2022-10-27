@@ -142,7 +142,7 @@ h3.h3 {
      <img src="image/second.jpg" style="width:100.5%;height:100%;opacity:0.5; ">
      <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
      <div class="icons">
-     	<a href="sharingList" >
+     	<a href="information" >
      		<img src="image/delete.png" class="icon">
      	</a>
      	<a href="sharingList" >
@@ -163,7 +163,7 @@ h3.h3 {
      <img src="image/first.jpg" style="width:100.5%;height:100%;opacity:0.5; ">
      <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
      <div class="icons">
-     	<a href="sharingList">
+     	<a href="information">
      		<img src="image/delete.png" class="icon">
      	</a>
      	<a href="sharingList">
@@ -184,7 +184,7 @@ h3.h3 {
      <img src="image/threee.png" style="width:100.5%;height:100%;opacity:0.5; ">
     <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
      <div class="icons">
-     	<a href="sharingList">
+     	<a href="information">
      		<img src="image/delete.png" class="icon">
      	</a>
      	<a href="sharingList">

@@ -8,6 +8,7 @@
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://code.jquery.com/jquery-latest.js"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
     
 <head>
 <meta charset="UTF-8">
@@ -51,6 +52,8 @@
     </div>   
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	    ClassicEditor.create( document.querySelector( '#editor' ) );
+
 		function findAddr(){
 			new daum.Postcode({
         		oncomplete: function(data) {

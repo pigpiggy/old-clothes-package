@@ -9,16 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-    h1 {
-        text-align: center;
-    }
-    #imgcontainer {
-        display: flex;
-    }
-    
-</style>
+<title>무료나눔 상품 등록</title>
+<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet'/>
 
 </head>
 <body>
@@ -27,11 +20,13 @@
 </div>
 <div class="container"> 
     <h1>상품등록</h1>
-    <form action="">
+    <form action="sharingResist" method="post" name = "writeForm" enctype="multipart/form-data">
         <div>
             <input type="text" class="form-control" id="usr" name="username">
         </div>
         <div id="imgcontainer">
+           	
+           	<input type = "file" name = "imageFile" id ="imageFile"/>
             <img src="welshcorgi1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236"> 
         
             <textarea class="form-control" rows="5" id="comment"></textarea>

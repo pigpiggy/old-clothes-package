@@ -7,26 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
-<style>
-	#content h1 {
-        text-align: center;
-      }
+<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet'/>
 
-      #addressAndSearch {
-        display: flex;
-        justify-content: space-around;
-      }
-
-      #buttonAndOption {
-        justify-content: space-around;
-      }
-</style>
 </head>
 <body>
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp'/>
 	</div>
-	<div id="content">
+	<div id="listcontent">
       <h1>무료 나눔</h1>
       <div id="addressAndSearch">
         <div>

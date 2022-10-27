@@ -1,0 +1,27 @@
+@charset "UTF-8";
+	* {
+		font-family:sans-serif;
+	}
+
+/* list */
+	#listcontent h1 {
+        text-align: center;
+      }
+
+      #addressAndSearch {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      #buttonAndOption {
+        justify-content: space-around;
+      }
+      
+/* insert */
+    h1 {
+        text-align: center;
+    }
+    #imgcontainer {
+        display: flex;
+    }
+      

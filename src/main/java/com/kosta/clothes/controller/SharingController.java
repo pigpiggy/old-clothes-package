@@ -19,7 +19,7 @@ public class SharingController {
 	@Autowired
 	ServletContext servletContext;
 	
-	@GetMapping("/list")
+	@GetMapping("/sharingList")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {

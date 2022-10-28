@@ -8,6 +8,7 @@
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://code.jquery.com/jquery-latest.js"></script>
+   <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
     
 <head>
 <meta charset="UTF-8">
@@ -37,20 +38,26 @@
               <a class="dropdown-item" href="#">모두 가능</a>
             </div><br>
         </div>
-        <div>거래지역: 
- 		 <input id="member_post"  type="text" placeholder="Zip Code" readonly onclick="findAddr()">
- 		 <input id="member_addr" type="text" placeholder="Address" readonly> <br>
-  		 <input type="text" placeholder="Detailed Address">
+        <div id="dealarea">거래지역: 
+ 		 <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
+ 		 <input id="member_addr" type="text" placeholder="도로명 주소" readonly> <br>
             
             
         </div>
      </div>
         <textarea name="text" id="editor"></textarea>
-        <p><input type="submit" value="전송"></p>
+	 <div id="btncontainer">
+	 	<a href="list">
+			<button type="button" class="btn btn-info">목록으로</button>
+		</a>
+		<button type="button" class="btn btn-warning">등록</button>
+   	 </div>
     </form>
     </div>   
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	    ClassicEditor.create( document.querySelector( '#editor' ) );
+
 		function findAddr(){
 			new daum.Postcode({
         		oncomplete: function(data) {

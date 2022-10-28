@@ -1,8 +1,4 @@
 @charset "UTF-8";
-	* {
-		font-family:sans-serif;
-	}
-	
 	a.sharingItem {
 		color: black;	
 	}
@@ -100,7 +96,6 @@ a:link{
 }
 
 body {
-    font-family    : 'Montserrat', sans-serif;
     font-size      : 14px;
     min-height     : 100vh;
     width          : 100%;
@@ -109,7 +104,7 @@ body {
 .card-list {
     width                : 100%;
     display              : grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-gap             : 4em
 }
 
@@ -180,8 +175,44 @@ body {
 /* insert */
     h1 {
         text-align: center;
+        padding: 50px;
     }
     #imgcontainer {
         display: flex;
+    }
+    
+    #textarea {
+        width: 600px;
+    }
+	
+	.dropdown {
+		padding-right: 15px;
+	}
+    .dropdown-toggle {
+        border: 1px solid gray;
+    }
+
+    #dealcontainer {
+    	padding-bottom: 20px;
+        display: flex;
+    }
+    #dealarea {
+    	margin: 5px;
+    }
+    
+    #member_post {
+    	margin: 5px;
+    }
+    
+    #member_addr {
+    	padding-right:160px; 
+    }
+    #btncontainer {
+    	text-align: center;
+    	padding-top: 10px;
+    }
+    
+    .btn {
+    	margin: 3px;
     }
       

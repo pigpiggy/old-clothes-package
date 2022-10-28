@@ -28,6 +28,12 @@ dependencies {
    implementation 'javax.servlet:jstl:1.2'
    // https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp
    implementation 'org.apache.tiles:tiles-jsp:3.0.4'
+   //문자인증을 위한 dependencies 
+ // https://mvnrepository.com/artifact/net.nurigo/javaSDK
+	implementation 'net.nurigo:javaSDK:2.2'
+
+
+
 }
 
 tasks.named('test') {

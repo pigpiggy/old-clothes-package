@@ -137,31 +137,56 @@ button {
         width: 600px;
     }
 	
-	.dropdown {
-		padding-right: 15px;
+	.form-group {
+		display: flex;
+		align-items: center;
 	}
-    .dropdown-toggle {
+	
+	#sel1 {
+		width: 100px;
+		margin-right: 20px;
+	}
+	
+    .form-control {
         border: 1px solid gray;
+    }
+    
+    .form-control:disabled {
+    	width: 110px;
     }
 
     #dealcontainer {
     	padding-bottom: 20px;
         display: flex;
+        flex-direction: column;
     }
     #dealarea {
-    	margin: 5px;
+    	margin: 5px 0 5px 5px;
     }
     
     #member_post {
     	margin: 5px;
+    	width: 100px;
+    	height: 32px;
     }
     
-    #member_addr {
-    	padding-right:160px; 
+    #jibunAddress {
+    	width: 359px;
+    	height: 32px;
     }
+    
     #btncontainer {
     	text-align: center;
     	padding-top: 10px;
+    }
+    
+    #priceAndAI {
+    	display: flex;
+    	justify-content: flex-start;
+    }
+    
+    .nav-link {
+    	margin-left: 185px;
     }
     
     .btn {

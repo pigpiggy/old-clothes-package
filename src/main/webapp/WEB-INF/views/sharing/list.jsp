@@ -52,7 +52,11 @@ rel='stylesheet' />
 		</div>
 
 		<div id="buttonAndOption">
+<<<<<<< HEAD
 			<a href="sharingRegistForm">
+=======
+			<a href="sharingResistForm">
+>>>>>>> 12962560150851e8f53ce1844be460f730437a06
 				<button type="button">상품등록</button>
 			</a> <select>
 				<option>거리순</option>

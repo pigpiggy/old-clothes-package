@@ -15,7 +15,7 @@
 			
 			<link href="<c:url value="/resources/css/common.css"/>" rel="stylesheet" type="text/css"/>
 			<link rel="preconnect" href="https://fonts.googleapis.com">
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			
 			<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Montserrat:ital,wght@0,400;1,100&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 			
 		   
@@ -145,6 +145,9 @@ h3.subtitle {
 
 
 </head>
+
+ 
+
 <body>
 <aside class="sidebar">
       <div class="toggle">
@@ -188,8 +191,8 @@ h3.subtitle {
       
     </aside>
     <main>
+  
    <form action= "/" method="post">
-   
    <div class="slideshow-container">
    <div class="mySlides fade">
      <img src="image/second.jpg" style="width:100.5%;height:100%;opacity:0.5; ">
@@ -198,7 +201,7 @@ h3.subtitle {
      	<a href="information" >
      		<img src="image/delete.png" class="icon">
      	</a>
-     	<a href="sharingList" >
+     	<a href="joinform" >
      		<img src="image/share.png" class="icon">
      	</a>
      	<a href="sharingList" >
@@ -208,8 +211,8 @@ h3.subtitle {
      		<img src="image/community.png" class="icon">
      	</a>
      </div>
-     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
-	 <h1 class="h1">"하우헌옷에서 당신의 헌옷을 처리해 보세요"</h1>
+     <h3 class="subtitle">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="maintitle">"하우헌옷에서 당신의 헌옷을 처리해 보세요"</h1>
    </div>
    
    <div class="mySlides fade">
@@ -229,8 +232,8 @@ h3.subtitle {
      		<img src="image/community.png" class="icon">
      	</a>
      </div>
-     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
-	 <h1 class="h1">"하우헌옷은 당신의 헌옷 처리를 도와드립니다."</h1>
+     <h3 class="subtitle">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="maintitle">"하우헌옷은 당신의 헌옷 처리를 도와드립니다."</h1>
    </div>
    
    <div class="mySlides fade">
@@ -243,15 +246,15 @@ h3.subtitle {
      	<a href="sharingList">
      		<img src="image/share.png" class="icon">
      	</a>
-     	<a href="sharingList">
+     	<a href="joinform">
      		<img src="image/sell.png" class="icon">
      	</a>
      	<a href="sharingList">
      		<img src="image/community.png" class="icon">
      	</a>
      </div>
-     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
-	 <h1 class="h1">"당신의 주변에서 편리하게 헌옷을 처리해 보세요"</h1>
+     <h3 class="subtitle">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="maintitle">"당신의 주변에서 편리하게 헌옷을 처리해 보세요"</h1>
    </div>
    
    
@@ -266,7 +269,6 @@ h3.subtitle {
 </form>
 
 
-	   
 </main>
 
 	<script src="<c:url value="/resources/sidebar/js/jquery-3.3.1.min.js"/>"></script>
@@ -291,8 +293,9 @@ h3.subtitle {
      }
      slides[slideIndex-1].style.display = "block";  
      dots[slideIndex-1].className += " active";
-     setTimeout(showSlides, 3000); // Change image every 2 seconds
+     setTimeout(showSlides, 2500); // Change image every 2 seconds
    }
 </script>
+
 </body>
 </html>

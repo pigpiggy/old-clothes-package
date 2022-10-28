@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"
-	rel='stylesheet' />
+rel='stylesheet' />
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -43,7 +43,7 @@
 			<form>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control">
-					<div class="input-group-append"><button class="btn btn-primary"><i class="fas fa-search"></i></button></div>
+					<div class="input-group-append"><button class="btn btn-secondary btn-lg"><i class="fas fa-search"></i></button></div>
 				</div>
 			</form>
 		</div>

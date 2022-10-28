@@ -34,10 +34,15 @@ rel='stylesheet' />
 			<div>
 				<select>
 					<option>서울특별시</option>
-				</select> <select>
+				</select> 
+				<select>
 					<option>강남구</option>
-				</select> <select>
+					<option>강북구</option>
+					<option>도봉구</option>
+				</select> 
+				<select>
 					<option>압구정동</option>
+					<option>신사동</option>
 				</select>
 			</div>
 			<form>

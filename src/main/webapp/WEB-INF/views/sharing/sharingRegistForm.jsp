@@ -23,14 +23,14 @@
 	</div>
 	<div class="container">
 		<h1>상품등록</h1>
-		<form action="sharingResist" method="post" name="writeForm" enctype="multipart/form-data">
+		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data">
 			<div>
 				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
 			</div>
 			<br>
 			<div id="dealcontainer">
 				<div class="form-group">
-  					<select class="form-control" name="dealtype" id="sel1">
+  					<select class="form-control" name="sdealType" id="sel1">
     					<option>직거래</option>
     					<option>택배거래</option>
     					<option>모두가능</option>
@@ -39,6 +39,8 @@
 					<div id="dealarea">
 						거래지역: <input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
 							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly> <br>
+					<input type="hidden" name="addressCity" id="jibun_si" />
+					<input type="hidden" name="addressTown" id="jibun_dong" />
 					
 					</div>
 				</div>
@@ -54,7 +56,7 @@
 				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
 				</a>
-				<button type="button" class="btn btn-warning">등록</button>
+				<button type="submit" class="btn btn-warning">등록</button>
 			</div>
 		</form>
 	</div>
@@ -83,10 +85,19 @@
 							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 							var roadAddr = data.roadAddress; // 도로명 주소 변수
 							var jibunAddr = data.jibunAddress; // 지번 주소 변수
+							console.log(jibunAddr);
+							let si = [];
+							si = jibunAddr.split(" ")[0];
+							console.log(si);
+							let dong = jibunAddr.split(" ")[1].concat(" ",jibunAddr.split(" ")[2]);
+							console.log(dong);
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('member_post').value = data.zonecode;
 							//document.getElementById("roadAddress").value = roadAddr;
 			                document.getElementById("jibunAddress").value = data.jibunAddress;
+			                document.getElementById("jibun_si").value = si;
+			                document.getElementById("jibun_dong").value = dong;
+			                console.log(si);
 			                if (jibunAddr !== '') {
 								document.getElementById("jibunAddress").value = jibunAddr;
 							}
@@ -99,6 +110,8 @@
 						}
 					}).open();
 		}
+		
+		
 	</script>
 
 </body>

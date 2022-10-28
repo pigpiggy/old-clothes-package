@@ -13,7 +13,7 @@ public class SharingServiceImpl implements SharingService{
 	SharingDAO sharingDAO;
 
 	@Override
-	public void resistSharing(Sharing sharing) throws Exception {
+	public void registSharing(Sharing sharing) throws Exception {
 		sharingDAO.insertSharing(sharing);
 	}
 	

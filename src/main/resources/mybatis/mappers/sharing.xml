@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
-<mapper namespace="com.kosta.board.dao.sharingDAO">
+<mapper namespace="com.kosta.clothes.dao.SharingDAO">
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
-			insert into sharing(sid,sname,stitle,scontent,simage,sstatus,
-			addressCity,addressTown,grade,ai,count,regDate)
-			values (sharing_seq.nextval,#{sname},#{stitle},#{scontent},#{simage,jdbcType=VARCHAR},#{sstatus},
-			#{addressCity},#{addressTown},#{grade},#{ai},#{count},sysdate)
+			insert into sharing(sid,stitle,scontent,simage,sdealType,
+			addressCity,addressTown,regDate)
+			values (sharing_seq.nextval,#{stitle},#{scontent},#{simage,jdbcType=VARCHAR},#{sdealType},
+			#{addressCity},#{addressTown},sysdate)
 	
 		]]>
 	</insert>

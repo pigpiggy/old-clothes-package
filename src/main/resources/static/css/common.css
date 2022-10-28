@@ -1,3 +1,20 @@
+
+@charset "UTF-8";
+
+	* {
+		font-family:san
+		s-serif;
+	}
+	.container { width:500px;}
+	.input-group-text {
+		display: inline-block;
+		width:90px;
+	}
+	.title {
+		text-align: center;
+		font-weight: bold;
+	}
+
 @font-face {
     font-family: 'LeferiPoint-BlackA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
@@ -17,6 +34,7 @@ body {
 	text-align: center;
 	font-weight: bold;
 }
+
 
 /* footer */
 div#footer		{ background:#515151; color: #FFF }

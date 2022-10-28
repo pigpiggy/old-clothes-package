@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {/*모든테이블 테그에 적용되는 것*/
+    border-collapse: collapse; /*줄과 줄 사이의 간격 없앰*/
+
+}
+caption {
+    /*display: none; 안보이게*/
+    font-size: 30px;
+    padding: 50px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit; /*컬러는 부모의 값을 물려받도록 설정*/
+}/*a태그 초기화*/
+
+.board_list_wrap {
+    padding: 50px;
+
+}
+
+.board_list {
+    width: 100%; /*테이블의 가로길이 늘려줌*/
+    border-top: 2px solid navy;
+
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board_list td {
+    text-align: center; /*가운데정렬*/
+}
+.board_list tbody tr td:nth-child(2) {
+    text-align: left;
+}
+.board_list tbody tr td:nth-child(2):hover {/*마우스를 올렸을때*/
+    text-decoration: underline;
+}
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding : 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child{
+    margin-left: 0;
+}
+
+.board_list_wrap.paging a.bt{
+    border: 1px solid #eee;
+    background: #eee;
+
+}
+
+.board_list_wrap.paging a.num{
+    border: 1px solid #000;
+    fint-weight: 600;
+    color: navy;
+}
+
+.searching{
+    margin-top: -30px;
+    text-align: center;
+    font-size: 0;
+    
+    
+}

@@ -146,6 +146,7 @@ h3.subtitle {
 
 </head>
 <body>
+<<<<<<< HEAD
 <aside class="sidebar">
       <div class="toggle">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar" style="background-color: transparent;">
@@ -188,6 +189,83 @@ h3.subtitle {
       
     </aside>
     <main>
+   <form action= "/" method="post">
+   
+   <div class="slideshow-container">
+   <div class="mySlides fade">
+     <img src="image/second.jpg" style="width:100.5%;height:100%;opacity:0.5; ">
+     <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
+     <div class="icons">
+     	<a href="information" >
+     		<img src="image/delete.png" class="icon">
+     	</a>
+     	<a href="sharingList" >
+     		<img src="image/share.png" class="icon">
+     	</a>
+     	<a href="sharingList" >
+     		<img src="image/sell.png" class="icon">
+     	</a>
+     	<a href="sharingList" >
+     		<img src="image/community.png" class="icon">
+     	</a>
+     </div>
+     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="h1">"하우헌옷에서 당신의 헌옷을 처리해 보세요"</h1>
+   </div>
+   
+   <div class="mySlides fade">
+     <img src="image/first.jpg" style="width:100.5%;height:100%;opacity:0.5; ">
+     <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
+     <div class="icons">
+     	<a href="information">
+     		<img src="image/delete.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/share.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/sell.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/community.png" class="icon">
+     	</a>
+     </div>
+     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="h1">"하우헌옷은 당신의 헌옷 처리를 도와드립니다."</h1>
+   </div>
+   
+   <div class="mySlides fade">
+     <img src="image/threee.png" style="width:100.5%;height:100%;opacity:0.5; ">
+    <%--  <input type="button" class="img-button" onclick="location.href='test.jsp'"> --%>
+     <div class="icons">
+     	<a href="information">
+     		<img src="image/delete.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/share.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/sell.png" class="icon">
+     	</a>
+     	<a href="sharingList">
+     		<img src="image/community.png" class="icon">
+     	</a>
+     </div>
+     <h3 class="h3">| 헌옷 처리가 고민이신가요|</h3>
+	 <h1 class="h1">"당신의 주변에서 편리하게 헌옷을 처리해 보세요"</h1>
+   </div>
+   
+   
+   <br>
+   
+   <div id="dots">
+     <span class="dot"></span> 
+     <span class="dot"></span> 
+     <span class="dot"></span> 
+   </div>
+   </div>
+</form>
+
 
 	   <form action= "/" method="post">
 	   

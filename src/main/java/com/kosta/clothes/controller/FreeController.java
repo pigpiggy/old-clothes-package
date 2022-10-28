@@ -15,23 +15,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class SharingController {
+public class FreeController {
 	@Autowired
 	ServletContext servletContext;
 	
-	@GetMapping("/list")
+	@GetMapping("/freelist")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.setViewName("/sharing/list");
+			mav.setViewName("/free/freelist");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		return mav;
 	}
 	
-	@GetMapping("/sharingInsert")
-	public String sharingInsert() {
-		return "sharing/sharingResistForm";
-	}
+	
 }

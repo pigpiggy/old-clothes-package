@@ -11,10 +11,6 @@
 	<header>
       <div class="searchForm">
         <form>
-          <input type="search" placeholder="검색어를 입력하세요" />
-          <span id="searchFormIcon">
-            <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-          </span>
           <input
             type="button"
             class="headerButton"

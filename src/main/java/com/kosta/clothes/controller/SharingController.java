@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -45,9 +47,9 @@ public class SharingController {
 		return mav;
 	}
 	
-	@GetMapping("/sharingResistForm")
-	public String sharingResistForm() {
-		return "/sharing/sharingResistForm";
+	@GetMapping("/sharingRegistForm")
+	public String sharingRegistForm() {
+		return "/sharing/sharingRegistForm";
 	}
 	
 	@ResponseBody
@@ -87,14 +89,14 @@ public class SharingController {
 		}
 	}
 	
-	@PostMapping("/sharingResist")
-	public String write(@RequestParam("title") String title,
-			@RequestParam("content") String content, @RequestParam("dealtype") String dealtype, Model model) {
-		System.out.println(title); //DB 저장
-		System.out.println(content.trim()); //DB 저장, 반드시 trim()
-		model.addAttribute("title", title);
-		model.addAttribute("content", content);
-		return "sharingView";
+	@PostMapping("/sharingRegist")
+	public String registSharing(@ModelAttribute Sharing sharing, Model model) {
+		try {
+			sharingService.registSharing(sharing);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "/sharing/list";
 	}
 	
 }

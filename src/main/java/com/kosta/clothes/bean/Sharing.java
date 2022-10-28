@@ -9,8 +9,9 @@ public class Sharing {
 	private String sname;
 	private String stitle;
 	private String scontent;
-	private String image;
+	private String simage;
 	private String sstatus;
+	private String sdealType;
 	private int grade;
 	private int ai;
 	private String addressCity;
@@ -42,17 +43,25 @@ public class Sharing {
 	public void setScontent(String scontent) {
 		this.scontent = scontent;
 	}
-	public String getImage() {
-		return image;
+	
+	public String getSimage() {
+		return simage;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setSimage(String simage) {
+		this.simage = simage;
 	}
 	public String getSstatus() {
 		return sstatus;
 	}
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
+	}
+	
+	public String getSdealType() {
+		return sdealType;
+	}
+	public void setSdealType(String sdealType) {
+		this.sdealType = sdealType;
 	}
 	public int getGrade() {
 		return grade;

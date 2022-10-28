@@ -145,7 +145,7 @@ h3.h3 {
      	<a href="information" >
      		<img src="image/delete.png" class="icon">
      	</a>
-     	<a href="sharingList" >
+     	<a href="joinform" >
      		<img src="image/share.png" class="icon">
      	</a>
      	<a href="sharingList" >
@@ -190,7 +190,7 @@ h3.h3 {
      	<a href="sharingList">
      		<img src="image/share.png" class="icon">
      	</a>
-     	<a href="sharingList">
+     	<a href="joinform">
      		<img src="image/sell.png" class="icon">
      	</a>
      	<a href="sharingList">

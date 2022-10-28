@@ -122,6 +122,13 @@ button {
         text-align: center;
         padding: 50px;
     }
+    
+    .container {
+    	width: 700px;
+    	display: flex;
+    	flex-direction: column;
+    }
+    
     #imgcontainer {
         display: flex;
     }

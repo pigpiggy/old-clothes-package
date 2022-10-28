@@ -19,7 +19,7 @@ public class FreeController {
 	@Autowired
 	ServletContext servletContext;
 	
-	@GetMapping("/freelist")
+	@GetMapping("/freeList")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -29,6 +29,9 @@ public class FreeController {
 		}
 		return mav;
 	}
-	
+	@GetMapping("/freeInsert")
+	public String sharingInsert() {
+		return "free/freeResistForm";
+	}
 	
 }

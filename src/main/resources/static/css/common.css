@@ -1,7 +1,5 @@
 @charset "UTF-8";
-	* {
-		font-family:sans-serif;
-	}
+	
 	.container { width:500px;}
 	.input-group-text {
 		display: inline-block;

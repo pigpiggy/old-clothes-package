@@ -54,7 +54,7 @@ rel='stylesheet' />
 		</div>
 
 		<div id="buttonAndOption">
-			<a href="sharingInsert">
+			<a href="sharingResistForm">
 				<button type="button">상품등록</button>
 			</a> <select>
 				<option>거리순</option>

@@ -145,7 +145,10 @@ h3.subtitle {
 
 
 </head>
-<body> 
+
+ 
+
+<body>
 <aside class="sidebar">
       <div class="toggle">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar" style="background-color: transparent;">

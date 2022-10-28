@@ -25,35 +25,33 @@
 		<h1>상품등록</h1>
 		<form action="sharingResist" method="post" name="writeForm" enctype="multipart/form-data">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title" name="title">
+				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
 			</div>
 			<br>
 			<div id="dealcontainer">
-				<div class="dropdown">
-					<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">거래 유형</button>
+				<div class="form-group">
+  					<select class="form-control" name="dealtype" id="sel1">
+    					<option>직거래</option>
+    					<option>택배거래</option>
+    					<option>모두가능</option>
+  					</select>
 					<br>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">직거래</a> 
-						<a class="dropdown-item" href="#">택배거래</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">모두 가능</a>
-					</div>
-					<br>
-					<div>
-					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled />
-						<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
+					<div id="dealarea">
+						거래지역: <input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
+							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly> <br>
 					
 					</div>
 				</div>
-				<div id="dealarea">
-					거래지역: <input id="member_post" type="text" placeholder="우편번호" readonly onclick="findAddr()"> 
-						<input id="member_addr" type="text" placeholder="도로명 주소" readonly> <br>
+				
+				<div id="priceAndAI">
+					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled />
+					<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
 				</div>
 			</div>
 			
-			<textarea name="text" id="editor"></textarea>
+			<textarea name="scontent" id="editor"></textarea>
 			<div id="btncontainer">
-				<a href="list">
+				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
 				</a>
 				<button type="button" class="btn btn-warning">등록</button>
@@ -87,11 +85,17 @@
 							var jibunAddr = data.jibunAddress; // 지번 주소 변수
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('member_post').value = data.zonecode;
-							if (roadAddr !== '') {
-								document.getElementById("member_addr").value = roadAddr;
-							} else if (jibunAddr !== '') {
-								document.getElementById("member_addr").value = jibunAddr;
+							//document.getElementById("roadAddress").value = roadAddr;
+			                document.getElementById("jibunAddress").value = data.jibunAddress;
+			                if (jibunAddr !== '') {
+								document.getElementById("jibunAddress").value = jibunAddr;
 							}
+			                
+			                //if (roadAddr !== '') {
+								//document.getElementById("roadAddress").value = roadAddr;
+							//} else if (jibunAddr !== '') {
+								//document.getElementById("jibunAddress").value = jibunAddr;
+							//}
 						}
 					}).open();
 		}

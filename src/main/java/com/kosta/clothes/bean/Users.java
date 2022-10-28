@@ -2,7 +2,7 @@ package com.kosta.clothes.bean;
 
 import java.sql.Date;
 
-public class users {
+public class Users {
 	private Long id;
 	private String email;
 	private String name;

@@ -5,6 +5,7 @@
   
 <configuration>
 	<mappers>
+		<mapper resource="mybatis/mappers/users.xml"/>
 		<mapper resource="mybatis/mappers/sharing.xml"/>
 	</mappers>
 </configuration>	

@@ -1,6 +1,6 @@
 package com.kosta.clothes.bean;
 
-public class sharing {
+public class Sharing {
 	private Long sid;
 	private String sname;
 	private String stitle;

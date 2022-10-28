@@ -49,5 +49,11 @@ public class MainController {
 	public String information() {
 		return "info/donationmap";
 	}
+	
+	//임시 회원가입 페이지
+	@GetMapping("/joinform")
+	public String joinform() {
+		return "user/joinform";
+	}
 
 }

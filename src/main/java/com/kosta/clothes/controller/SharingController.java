@@ -38,7 +38,7 @@ public class SharingController {
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.setViewName("/sharing/list");
+			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
 			e.printStackTrace();
 		}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,37 +8,55 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<header>
-      <div class="searchForm">
-        <form>
-          <input
-            type="button"
-            class="headerButton"
-            href="#"
-            value="마이페이지"
-          />
-          <input type="button" class="headerButton" href="#" value="로그아웃" />
-        </form>
+    <div id="topMenu">
+      <div id="hamburger">
+        <i class="fa-solid fa-bars" id="hamburgerBar"></i>
       </div>
-
-      <nav id="navBar">
-        <ul id="navBarUl">
-          <li><img src="image/logo1.png" id="logo"/></li>
-          <li>하우헌옷 소개
-          	<ul>
-	          	<li><a>하우헌옷 소개</a></li>
-	          	<li><a>공지사항</a></li>
-          	</ul>
-          </li>
-          <li>헌 옷 버리기 / 기부</li>
-          
-          <li><a>무료나눔</a></li>
-          <li>헌 옷 사고 팔기</li>
-          <li>커뮤니티</li>
-        </ul>
-      </nav>
-    </header>
-</body>
-</html>
+      <div id="logo">
+        <img src="image/logo1.png" alt="하우헌옷 로고">
+      </div>
+      <div id="headerMenu">
+        <a href="#">마이페이지</a>
+        <a href="#">로그아웃</a>
+      </div>
+    </div>
+    <div class="headerMenuBar">
+      <ul>
+        <li class="hederMenuList">
+          <span>하우 헌옷</span>
+          <ul class="sideMenu">
+            <li><a href="#">하우 헌옷 소개</a></li>
+            <li><a href="#">공지사항</a></li>
+          </ul>
+        </li>
+        <li class="hederMenuList">
+          <span>헌옷 버리기/기부</span>
+          <ul class="sideMenu">
+            <li><a href="#">내 주변 헌옷수거함</a></li>
+            <li><a href="#">기부처 안내</a></li>
+          </ul>
+        </li>
+        <li class="hederMenuList">
+          <a href="#">무료나눔</a>
+        </li>
+        <li class="hederMenuList">
+          <span>헌옷 사고 팔기</span>
+          <ul class="sideMenu">
+            <li><a href="#">업체 판매</a></li>
+            <li><a href="#">개인 판매</a></li>
+          </ul>
+        </li>
+        <li class="hederMenuList">
+          <span>커뮤니티</span>
+          <ul class="sideMenu">
+            <li><a href="#">자유게시판</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </header>
+<script src="<c:url value='/resources/js/header.js'/>"></script>

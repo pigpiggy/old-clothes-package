@@ -3,8 +3,23 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
 <mapper namespace="com.kosta.clothes.dao.UsersDAO">
-	
-	
+	<!--닉네임 중복체크 -->
+	<select id="selectName" parameterType="String" resultType="com.kosta.clothes.bean.Users">
+		<![CDATA[
+			SELECT * 
+			FROM users 
+			WHERE name=#{checknick}
+		]]>
+	</select>
+
+	<!--이메일 중복체크 -->
+	<select id="selectEmail" parameterType="String" resultType="com.kosta.clothes.bean.Users">
+		<![CDATA[
+			SELECT * 
+			FROM users 
+			WHERE email=#{checkemail}
+		]]>
+	</select>
 </mapper>
 
 

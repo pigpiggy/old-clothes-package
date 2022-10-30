@@ -17,7 +17,7 @@ $(function(){
 	
 	let userPhoneNum;
 	let authCode= $('#authCode');
-		
+	passConfirm();
 	$(document).on('click','#goSMS', function () {		// 버튼을 클릭 했을 경우
 		let userPhoneNum = $('#userPhoneNum').val();	// 사용자가 입력한 전화번호
 		let authCode= $("#authCode");	//휴대폰 인증번호 담을 변수
@@ -111,6 +111,24 @@ $(function(){
 });
 
 
+//비밀번호 확인
+function passConfirm(){
+	var password = $('#password').val();
+	var checkpass = $('#checkpass').val();
+	var confrimMsg = $('#confrimMsg').val();
+	var correctColor="#00ff00";
+	var wrongColor = "#ff0000";
+	
+	if(password.value==checkpass.value){
+		confrimMsg.style.color = correctColor;
+		confrimMsg.innerHTML = "비밀번호 일치";
+	}else{
+		confrimMsg.style.color = wrongColor;
+		confrimMsg.innerHTML = "비밀번호 불일치";
+	}
+}
+
+
 </script>
 </head>
 <body>
@@ -134,7 +152,15 @@ $(function(){
 	<input type="email" name="checkemail" id="checkemail" placeholder="test@naver.com">
 	<input type="button" value="이메일 중복 확인" id="emailcheck">
 </div>
+<div>
+	<input type="password" name="password" id="password" placeholder="비밀번호입력">
+</div>
+<div>
+	<input type="password" name="checkpass" id="checkpass" placeholder="비밀번호확인">
+	<p id="confirmMsg" class="formerror"></p>
+</div>
 
+<input type="text" name="confrimMsg" id="confrimMsg" >
 
 </body>
 </html>

@@ -245,9 +245,13 @@ h1 {
 }
 
 .scontent {
-	position: relative;
-	top: 200px;
-	right: 150px;
+	position: absolute;
+    top: 67%;
+    border-top: solid gray;
+    border-bottom: solid gray;
+    padding: 20px;
+    padding-bottom: 50%;
+    right: 66%;
 }
 
 #stitle {

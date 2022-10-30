@@ -56,7 +56,7 @@ $(function() {
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <img src="upload/${sharing.simage}" />
+            <img src="/fileview/${sharing.scontent}" />
             <div class="swiper-slide">왜 안돼</div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
@@ -84,7 +84,7 @@ $(function() {
         <!-- Swiper JS -->
       </section>
       <div class="scontent">
-        <h2>상품정보</h2>
+        <h3>상품정보</h3>
       </div>
     </section>
 

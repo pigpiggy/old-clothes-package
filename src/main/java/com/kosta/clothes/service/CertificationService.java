@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //package com.kosta.clothes.service;
 //
 //import java.util.HashMap;
@@ -33,7 +33,7 @@
 //    }
 //
 //}
-=======
+
 package com.kosta.clothes.service;
 
 import java.util.HashMap;
@@ -97,4 +97,4 @@ public class CertificationService implements UsersService {
 	}
 
 }
->>>>>>> f212348d8d0f147af8727318e039f90c84d4a49d
+

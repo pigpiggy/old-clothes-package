@@ -17,6 +17,17 @@ public class UsersController {
 	
 	@Autowired
 	CertificationService certificationService;
+	
+	
+	//회원가입페이지 제작확인용입니다. 후에 joinform.jsp와 joinformview.jsp 합치고 삭제합니다!
+	@GetMapping("/joinformview")
+	public String joinForm() {
+		return "/user/joinformview";
+	}
+	
+	
+	
+	
 	/* 인증번호 */
     @ResponseBody
     @GetMapping("/main/execute")

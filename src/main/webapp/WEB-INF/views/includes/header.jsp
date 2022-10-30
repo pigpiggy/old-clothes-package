@@ -17,7 +17,9 @@
         <i class="fa-solid fa-bars" id="hamburgerBar"></i>
       </div>
       <div id="logo">
-        <img src="image/logo1.png" alt="하우헌옷 로고">
+      	<a href="/">
+        	<img src="image/logo1.png" alt="하우헌옷 로고">
+        </a>
       </div>
       <div id="headerMenu">
         <a href="#">마이페이지</a>
@@ -36,12 +38,12 @@
         <li class="hederMenuList">
           <span>헌옷 버리기/기부</span>
           <ul class="sideMenu">
-            <li><a href="#">내 주변 헌옷수거함</a></li>
-            <li><a href="#">기부처 안내</a></li>
+            <li><a href="information">내 주변 헌옷수거함</a></li>
+            <li><a href="information">기부처 안내</a></li>
           </ul>
         </li>
         <li class="hederMenuList">
-          <a href="#">무료나눔</a>
+          <a href="sharingList">무료나눔</a>
         </li>
         <li class="hederMenuList">
           <span>헌옷 사고 팔기</span>

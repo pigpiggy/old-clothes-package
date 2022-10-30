@@ -179,6 +179,7 @@ header {
     width: 70%;
     top: 13px;
     margin: 0 auto;
+    padding-bottom: 0;
   }
 
   .headerMenuBar>ul {
@@ -188,6 +189,9 @@ header {
 
   .hederMenuList {
     position: relative;
+    margin-bottom: 0;
+    height: 47px;
+    cursor: pointer;
   }
 
   .hederMenuList span {

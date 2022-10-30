@@ -3,14 +3,13 @@ package com.kosta.clothes.bean;
 import java.sql.Date;
 
 public class Users {
-	private Long id;
-	private String email;
-	private String name;
-	private String password;
-	private String sect;
-	private String kakao;
-	private Long bno;
-	private Date joinDate;
+	private Long id; // 번호(가입 회원 수)
+	private String email; //이메일(아이디)
+	private String name; //닉네임
+	private String password; //비밀 번호
+	private String sect; //구분(개인/업체)
+	private Long bno; //업체 번호
+	private Date joinDate; //날짜
 	public Long getId() {
 		return id;
 	}
@@ -41,12 +40,7 @@ public class Users {
 	public void setSect(String sect) {
 		this.sect = sect;
 	}
-	public String getKakao() {
-		return kakao;
-	}
-	public void setKakao(String kakao) {
-		this.kakao = kakao;
-	}
+	
 	public Long getBno() {
 		return bno;
 	}
@@ -58,6 +52,19 @@ public class Users {
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
+	}
+	public Users(Long id, String email, String name, String password, String sect, Long bno, Date joinDate) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.sect = sect;
+		this.bno = bno;
+		this.joinDate = joinDate;
+	}
+	public Users() {
+		super();
 	}
 	
 	

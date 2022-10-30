@@ -1,37 +1,38 @@
 @charset "UTF-8";
+
 * {
-    margin    : 0;
-    padding   : 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    min-height     : 100vh;
-    width          : 100%;
+	min-height: 100vh;
+	width: 100%;
 }
 
 /* list */
 #listcontent h1 {
-  text-align: center;
+	text-align: center;
 }
 
 #addressAndSearch {
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
 }
 
 #buttonAndOption {
 	display: flex;
-  	justify-content: space-around;
-  	margin-bottom: 50px;
+	justify-content: space-around;
+	margin-bottom: 50px;
 }
 
 #listcontent {
 	padding: 20px;
 }
 
-a:link{
-    text-decoration: none;
+a:link {
+	text-decoration: none;
 }
 
 select {
@@ -47,153 +48,222 @@ button {
 }
 
 .card-list {
-    width                : 100%;
-    display              : grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap             : 4em
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-gap: 4em
 }
 
-.card,
-.card-body,
-.card-footer {
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
+.card, .card-body, .card-footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .card {
-    border-radius: 18px;
-    background   : #fff;
-    box-shadow   : 4px 4px 25px rgba(0, 0, 0, 0.4);
-    overflow     : hidden;
-    cursor       : pointer;
-    transition   : transform 0.4s;
+	border-radius: 18px;
+	background: #fff;
+	box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.4);
+	overflow: hidden;
+	cursor: pointer;
+	transition: transform 0.4s;
 }
 
 .card:hover {
-    transform : scale(1.05);
-    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+	box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
 }
 
 .card-image {
-    display  : block;
-    position : relative;
-    height   : 180px;
-    width: 100%;
+	display: block;
+	position: relative;
+	height: 180px;
+	width: 100%;
 }
 
 .card-image img {
-    max-height     : 100%;
-    width          : 100%;
-    background-size: cover;
-    object-fit: cover;
+	max-height: 100%;
+	width: 100%;
+	background-size: cover;
+	object-fit: cover;
 }
 
 .card-body {
-    padding: 20px 28px;
+	padding: 20px 28px;
 }
 
 .card-body .date {
-    font-weight: bolder;
+	font-weight: bolder;
 }
 
 .card-body h2 {
-    font-size: 1.8em;
-    margin   : 2px auto 12px;
+	font-size: 1.8em;
+	margin: 2px auto 12px;
 }
 
 .card-body p {
-    color      : gray;
-    font-size  : 1.1em;
-    line-height: 22px;
-    text-align : center;
+	color: gray;
+	font-size: 1.1em;
+	line-height: 22px;
+	text-align: center;
 }
 
 .card-footer {
-    width                : 100%;
-    display              : grid;
-    border-top: 1px solid rgb(238, 238, 238);
+	width: 100%;
+	display: grid;
+	border-top: 1px solid rgb(238, 238, 238);
+}
+
+/* insert */
+h1 {
+	text-align: center;
+	padding: 50px;
+}
+
+.container {
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+}
+
+#imgcontainer {
+	display: flex;
+}
+
+#textarea {
+	width: 600px;
+}
+
+.form-group {
+	display: flex;
+	align-items: center;
+}
+
+#sel1 {
+	width: 100px;
+	margin-right: 20px;
+}
+
+.form-control {
+	border: 1px solid gray;
+}
+
+.form-control:disabled {
+	width: 110px;
+}
+
+#dealcontainer {
+	padding-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+#dealarea {
+	margin: 5px 0 5px 5px;
+}
+
+#member_post {
+	margin: 5px;
+	width: 100px;
+	height: 32px;
+}
+
+#jibunAddress {
+	width: 359px;
+	height: 32px;
+}
+
+#btncontainer {
+	text-align: center;
+	padding-top: 10px;
+}
+
+#priceAndAI {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.nav-link {
+	margin-left: 185px;
+}
+
+.btn {
+	margin: 3px;
+}
+
+.ck.ck-editor__editable_inline[dir=ltr] {
+	height: 250px;
 }
 
 
-      
-/* insert */
-    h1 {
-        text-align: center;
-        padding: 50px;
-    }
-    
-    .container {
-    	width: 700px;
-    	display: flex;
-    	flex-direction: column;
-    }
-    
-    #imgcontainer {
-        display: flex;
-    }
-    
-    #textarea {
-        width: 600px;
-    }
-	
-	.form-group {
-		display: flex;
-		align-items: center;
-	}
-	
-	#sel1 {
-		width: 100px;
-		margin-right: 20px;
-	}
-	
-    .form-control {
-        border: 1px solid gray;
-    }
-    
-    .form-control:disabled {
-    	width: 110px;
-    }
 
-    #dealcontainer {
-    	padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-    #dealarea {
-    	margin: 5px 0 5px 5px;
-    }
-    
-    #member_post {
-    	margin: 5px;
-    	width: 100px;
-    	height: 32px;
-    }
-    
-    #jibunAddress {
-    	width: 359px;
-    	height: 32px;
-    }
-    
-    #btncontainer {
-    	text-align: center;
-    	padding-top: 10px;
-    }
-    
-    #priceAndAI {
-    	display: flex;
-    	justify-content: flex-start;
-    }
-    
-    .nav-link {
-    	margin-left: 185px;
-    }
-    
-    .btn {
-    	margin: 3px;
-    }
-    
-    .ck.ck-editor__editable_inline[dir=ltr] {
-    	height: 250px;
-    }
-      
+/* view */
+.content_main {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	
+}
+
+.swiper {
+	width: 250px;
+	height: 250px;
+	float: left;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	height: 400px;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#content_right {
+	position: relative;
+	top: 100px;
+	left: 10%;
+}
+
+.scontent {
+	position: relative;
+	top: 200px;
+	right: 150px;
+}
+
+#stitle {
+	margin-bottom: 13px;
+}
+
+#sharingname {
+	margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#sreview {
+	margin-bottom: 5px;
+}
+
+#sbtn {
+	margin-bottom: 5px;
+}

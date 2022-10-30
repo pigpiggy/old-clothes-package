@@ -99,4 +99,9 @@ public class SharingController {
 		return "/sharing/list";
 	}
 	
+	@GetMapping("/sharingView")
+	public String sharingView() {
+		return "/sharing/sharingView";
+	}
+	
 }

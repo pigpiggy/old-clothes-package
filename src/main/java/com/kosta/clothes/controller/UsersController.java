@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.clothes.service.CertificationService;
 
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 @Controller

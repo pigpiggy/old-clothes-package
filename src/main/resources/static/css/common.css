@@ -31,12 +31,25 @@
 body {
 	font-family: 'LeferiPoint-BlackA';
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
 	
 .container { width:500px;}
 .input-group-text {
 	display: inline-block;
 	width:90px;
 }
+
+
+
 .title {
 	text-align: center;
 	font-weight: bold;
@@ -49,37 +62,152 @@ div#footer p	{ margin:0;padding:5px 10px }
 
 /* header */
 body {
+  box-sizing: border-box;
   margin: 0;
-  padding: 0;
-}
-header {
-  background-color: rgb(0, 118, 190);
-  padding: 40px;
 }
 
-.headerButton {
-  background-color: rgb(94, 94, 94);
-  color: white;
-  border-radius: 5px;
-  border: none;
-}
-
-.searchForm form {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.searchForm form input {
-	margin: 5px;
-}
-
-#navBar ul,
+ul,
 li {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(64, 64, 64);
+}
+
+header {
+  background-color: rgb(0, 118, 190);
+  position: relative;
+  height: 80px;
+}
+
+#topMenu {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+#hamburger {
+  position: absolute;
+  left: 5px;
+  top: 32px;
+}
+
+#hamburger i {
+  cursor: pointer;
+}
+
+#logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 11px;
+}
+
+#logo img {
+  display: block;
+  width: 100px;
+}
+
+#headerMenu a {
+  background: rgb(64, 64, 64);
+  border-radius: 5px;
+  color: white;
+  padding: 2px;
+}
+
+.headerMenuBar {
+  position: absolute;
+  padding: 5px;
+  background-color: rgb(0, 118, 190);
+  color: white;
+  top: 80px;
+  width: 285px;
+  display: none;
+}
+
+.headerMenuBar li a,
+.headerMenuBar ul {
   color: white;
 }
 
-#navBarUl {
-  display: flex;
-  justify-content: space-between;
+.hederMenuList {
+  margin-bottom: 10px;
+  position: relative;
 }
+
+.hederMenuList span {
+  cursor: pointer;
+}
+
+.sideMenu {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  text-align: right;
+  display: none;
+  width: 100%;
+}
+
+.sideMenu li {
+  margin-bottom: 10px;
+}
+
+.toggle {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+@media screen and (min-width: 768px) {
+  #logo {
+    left: 58px;
+  }
+
+  #hamburger {
+    display: none;
+  }
+
+  .headerMenuBar {
+    display: block;
+    position: static;
+    width: 70%;
+    top: 13px;
+    margin: 0 auto;
+    padding-bottom: 0;
+  }
+
+  .headerMenuBar>ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hederMenuList {
+    position: relative;
+    margin-bottom: 0;
+    height: 47px;
+    cursor: pointer;
+  }
+
+  .hederMenuList span {
+    display: inline-block;
+  }
+
+  .sideMenu {
+    position: absolute;
+    text-align: left;
+    top: 45px;
+    left: 0;
+    width:150px;
+    background-color: rgb(0, 118, 190);
+  }
+}
+
+
+

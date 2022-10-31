@@ -40,7 +40,7 @@ public class SharingController {
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.setViewName("/sharing/list");
+			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -97,6 +97,11 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return "/sharing/list";
+	}
+	
+	@GetMapping("/sharingView")
+	public String sharingView() {
+		return "/sharing/sharingView";
 	}
 	
 }

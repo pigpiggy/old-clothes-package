@@ -55,7 +55,7 @@
         <li class="hederMenuList">
           <span>커뮤니티</span>
           <ul class="sideMenu">
-            <li><a href="#">자유게시판</a></li>
+            <li><a href="freeList">자유게시판</a></li>
           </ul>
         </li>
       </ul>

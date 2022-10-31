@@ -83,8 +83,5 @@ public class UsersController {
     	}
     	return "false";
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 0699131dc67c9a76de2373c33b1fabab6c039ecc

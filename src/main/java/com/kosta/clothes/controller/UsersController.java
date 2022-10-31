@@ -1,7 +1,5 @@
 package com.kosta.clothes.controller;
-
 import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.kosta.clothes.service.CertificationService;
-
-
-
 @Controller
 public class UsersController {
 	
@@ -32,9 +26,7 @@ public class UsersController {
 	
 	
 	/* 인증번호 */
-
 	//본인 인증 !
-
     @ResponseBody
     @GetMapping("/main/execute")
     public String sendSMS(String userPhoneNum) {
@@ -48,7 +40,6 @@ public class UsersController {
         // 확인용
         System.out.println("수신자 번호 : " + userPhoneNum);
         System.out.println("인증번호 : " + numStr);
-
         // 문자 보내기
         certificationService.certifiedPhoneNumber(userPhoneNum , numStr);
         return numStr;    // 인증번호 반환
@@ -83,8 +74,4 @@ public class UsersController {
     	}
     	return "false";
     }
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 0699131dc67c9a76de2373c33b1fabab6c039ecc
+}    

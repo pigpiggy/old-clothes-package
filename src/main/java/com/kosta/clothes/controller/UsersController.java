@@ -1,31 +1,56 @@
 package com.kosta.clothes.controller;
 import java.util.Random;
+<<<<<<< HEAD
+
+import javax.servlet.ServletContext;
+
+=======
+>>>>>>> db43b81e119da9475d530808833cab5006618f0b
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< HEAD
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kosta.clothes.bean.Users;
+=======
+>>>>>>> db43b81e119da9475d530808833cab5006618f0b
 import com.kosta.clothes.service.CertificationService;
 @Controller
 public class UsersController {
 	
 	@Autowired
+	ServletContext servletContext;
+	
+	@Autowired
 	CertificationService certificationService;
 	
-	
-	//회원가입페이지 제작확인용입니다. 후에 joinform.jsp와 joinformview.jsp 합치고 삭제합니다!
-	@GetMapping("/joinformview")
-	public String joinForm() {
-		return "/user/joinformview";
+	//회원가입[개인]
+	@PostMapping("/personnal")
+	public ModelAndView personnal(@ModelAttribute Users users
+			, Model model) {
+		ModelAndView mav = new ModelAndView("redirect:/personnal"); //뷰 동시 설정
+		try {
+			certificationService.insertUsers(users);
+			model.addAttribute("users",users);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
 	}
 	
 	
+<<<<<<< HEAD
+=======
 	
 	
 	/* 인증번호 */
+>>>>>>> db43b81e119da9475d530808833cab5006618f0b
 	//본인 인증 !
     @ResponseBody
     @GetMapping("/main/execute")
@@ -47,11 +72,11 @@ public class UsersController {
     
     //닉네임 중복 확인!
     @ResponseBody
-    @PostMapping("/checknick")
-    public String checknick(Model model, @RequestParam("checknick") String checknick) {
-    	System.out.println("nickname" + checknick);
+    @PostMapping("/nickname")
+    public String checknick(Model model, @RequestParam("nickname") String nickname) {
+    	System.out.println("nickname" + nickname);
     	try {
-    		if(certificationService.checkId(checknick)) {
+    		if(certificationService.checkId(nickname)) {
     			return "true"; //닉네임이 중복이라면 true값을 가져온다.
     		}
     	}catch(Exception e) {
@@ -74,5 +99,12 @@ public class UsersController {
     	}
     	return "false";
     }
+<<<<<<< HEAD
+
+}
+
+
+=======
 }    
+>>>>>>> db43b81e119da9475d530808833cab5006618f0b
 

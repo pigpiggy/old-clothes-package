@@ -79,7 +79,7 @@ a {
 }
 
 header {
-  background-color: white;
+  background-color: rgb(0, 118, 190);
   position: relative;
   height: 80px;
 }
@@ -134,16 +134,15 @@ header {
 .headerMenuBar {
   position: absolute;
   padding: 5px;
-  background-color: white;
+  background-color: rgb(0, 118, 190);
   color: rgb(64, 64, 64);
   top: 80px;
   width: 285px;
   display: none;
 }
 
-.headerMenuBar li a,
 .headerMenuBar ul {
-  color: rgb(64, 64, 64);
+	color: white;
 }
 
 .hederMenuList {
@@ -151,6 +150,10 @@ header {
   position: relative;
   cursor: pointer;
   width: 60%;
+}
+
+.hederMenuList>a {
+  color: white;
 }
 
 .hederMenuList:hover .sideMenu {
@@ -169,6 +172,10 @@ header {
 
 .sideMenu li {
   margin-bottom: 10px;
+}
+
+.sideMenu li a {
+  color: rgb(64, 64, 64);
 }
 
 .toggle {
@@ -205,7 +212,7 @@ header {
   .hederMenuList {
     position: relative;
     margin-bottom: 0;
-    height: 47px;
+    height: 45px;
     cursor: pointer;
     width: 100%;
   }

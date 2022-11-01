@@ -113,35 +113,52 @@ header {
   width: 100px;
 }
 
+#headerMenu {
+	display: flex;
+}
+
+#headerMenu a:nth-child(1) {
+	margin-right: 5px;
+} 
+
 #headerMenu a {
-  background: rgb(64, 64, 64);
+  background: rgb(28 26 26 / 26%);;
   border-radius: 5px;
   color: white;
-  padding: 2px;
+  padding: 4px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
 }
 
 .headerMenuBar {
   position: absolute;
   padding: 5px;
   background-color: rgb(0, 118, 190);
-  color: white;
+  color: rgb(64, 64, 64);
   top: 80px;
   width: 285px;
   display: none;
 }
 
-.headerMenuBar li a,
 .headerMenuBar ul {
-  color: white;
+	color: white;
 }
 
 .hederMenuList {
   margin-bottom: 10px;
   position: relative;
+  cursor: pointer;
+  width: 60%;
 }
 
-.hederMenuList span {
-  cursor: pointer;
+.hederMenuList>a {
+  color: white;
+}
+
+.hederMenuList:hover .sideMenu {
+	display: block;
+	left: 62%;
 }
 
 .sideMenu {
@@ -155,6 +172,10 @@ header {
 
 .sideMenu li {
   margin-bottom: 10px;
+}
+
+.sideMenu li a {
+  color: rgb(64, 64, 64);
 }
 
 .toggle {
@@ -191,12 +212,18 @@ header {
   .hederMenuList {
     position: relative;
     margin-bottom: 0;
-    height: 47px;
+    height: 45px;
     cursor: pointer;
+    width: 100%;
   }
 
   .hederMenuList span {
     display: inline-block;
+  }
+  
+  .hederMenuList:hover .sideMenu {
+	display: block;
+	left: 0;
   }
 
   .sideMenu {
@@ -205,7 +232,7 @@ header {
     top: 45px;
     left: 0;
     width:150px;
-    background-color: rgb(0, 118, 190);
+    background-color: white;
   }
 }
 

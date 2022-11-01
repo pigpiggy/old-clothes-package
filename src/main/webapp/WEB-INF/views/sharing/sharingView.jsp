@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
-
+<script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <script>
 $(function() {
 	ClassicEditor.create(document.querySelector("#editor"))
@@ -56,7 +56,7 @@ $(function() {
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <img src="/fileview/${sharing.scontent}" />
+            <img src="/upload/${sharing.scontent}" />
             <div class="swiper-slide">왜 안돼</div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
@@ -72,8 +72,10 @@ $(function() {
         <div id="sharingname">
           <span>level icon</span>
           <span>nick name</span>
-          <span>letter icon</span>
-          <span>heart icon</span>
+          <span><i class="fa-regular fa-envelope"></i>
+          </span>
+          <span><i class="fa-solid fa-heart"></i>
+          </span>
         </div>
         <div id="sreview">거래후기: 12건</div>
         <div id="sbtn">
@@ -85,7 +87,20 @@ $(function() {
       </section>
       <div class="scontent">
         <h3>상품정보</h3>
+        <div id=sdetail>
+        	왜 안되는 거니!
+        </div>
       </div>
+      <form class="reply">
+      <div class="reply__column">
+        <i class="far fa-plus-square fa-lg"></i>
+      </div>
+      <div class="reply__column">
+        <input type="text" placeholder="Write a message..." />
+        <i class="far fa-smile-wink fa-lg"></i>
+        <button><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </form>    
     </section>
 
 </body>

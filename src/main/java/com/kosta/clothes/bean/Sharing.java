@@ -17,7 +17,7 @@ public class Sharing {
 	private String addressCity;
 	private String addressTown;
 	private Date regDate;
-	private MultipartFile simagefile;
+	private MultipartFile simageFile;
 	
 	public Long getSid() {
 		return sid;
@@ -93,13 +93,11 @@ public class Sharing {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public MultipartFile getSimagefile() {
-		return simagefile;
+	public MultipartFile getSimageFile() {
+		return simageFile;
 	}
-	public void setSimagefile(MultipartFile simagefile) {
-		this.simagefile = simagefile;
+	public void setSimageFile(MultipartFile simageFile) {
+		this.simageFile = simageFile;
 	}
-
-	
 	
 }

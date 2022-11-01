@@ -138,10 +138,13 @@ header {
 .hederMenuList {
   margin-bottom: 10px;
   position: relative;
+  cursor: pointer;
+  width: 60%;
 }
 
-.hederMenuList span {
-  cursor: pointer;
+.hederMenuList:hover .sideMenu {
+	display: block;
+	left: 62%;
 }
 
 .sideMenu {
@@ -193,10 +196,16 @@ header {
     margin-bottom: 0;
     height: 47px;
     cursor: pointer;
+    width: 100%;
   }
 
   .hederMenuList span {
     display: inline-block;
+  }
+  
+  .hederMenuList:hover .sideMenu {
+	display: block;
+	left: 0;
   }
 
   .sideMenu {

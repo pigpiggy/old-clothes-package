@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
- <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <script>
 $(function() {
 	ClassicEditor.create(document.querySelector("#editor"))
@@ -56,7 +56,7 @@ $(function() {
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <img src="/fileview/${sharing.scontent}" />
+            <img src="/upload/${sharing.scontent}" />
             <div class="swiper-slide">왜 안돼</div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
@@ -72,9 +72,9 @@ $(function() {
         <div id="sharingname">
           <span>level icon</span>
           <span>nick name</span>
-          <span><i class="fa-thin fa-envelope"></i>
+          <span><i class="fa-regular fa-envelope"></i>
           </span>
-          <span><i class="fa-thin fa-heart"></i>
+          <span><i class="fa-solid fa-heart"></i>
           </span>
         </div>
         <div id="sreview">거래후기: 12건</div>

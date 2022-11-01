@@ -23,15 +23,27 @@ public class FreeController {
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			mav.setViewName("/free/freelist");
+			mav.setViewName("/free/freeList");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	@GetMapping("/freeInsert")
-	public String sharingInsert() {
-		return "free/freeResistForm";
+	
+	@GetMapping("/freeRegist")
+	public String freeInsert() {
+		return "free/freeRegistForm";
 	}
+	
+	@GetMapping("/freeView")
+	public String freeView() {
+		return "free/freeView";
+	}
+	
+	@GetMapping("/freeModify")
+	public String freeModify() {
+		return "free/freeModify";
+	}
+	
 	
 }

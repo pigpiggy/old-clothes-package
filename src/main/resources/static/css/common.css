@@ -79,7 +79,7 @@ a {
 }
 
 header {
-  background-color: rgb(0, 118, 190);
+  background-color: white;
   position: relative;
   height: 80px;
 }
@@ -113,18 +113,29 @@ header {
   width: 100px;
 }
 
+#headerMenu {
+	display: flex;
+}
+
+#headerMenu a:nth-child(1) {
+	margin-right: 5px;
+} 
+
 #headerMenu a {
-  background: rgb(64, 64, 64);
+  background: rgb(28 26 26 / 26%);;
   border-radius: 5px;
   color: white;
-  padding: 2px;
+  padding: 4px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
 }
 
 .headerMenuBar {
   position: absolute;
   padding: 5px;
-  background-color: rgb(0, 118, 190);
-  color: white;
+  background-color: white;
+  color: rgb(64, 64, 64);
   top: 80px;
   width: 285px;
   display: none;
@@ -132,7 +143,7 @@ header {
 
 .headerMenuBar li a,
 .headerMenuBar ul {
-  color: white;
+  color: rgb(64, 64, 64);
 }
 
 .hederMenuList {
@@ -214,7 +225,7 @@ header {
     top: 45px;
     left: 0;
     width:150px;
-    background-color: rgb(0, 118, 190);
+    background-color: white;
   }
 }
 

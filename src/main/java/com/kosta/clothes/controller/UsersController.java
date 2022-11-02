@@ -38,7 +38,6 @@ public class UsersController {
 	}
 	
 	
-	
 	/* 인증번호 */
 	//본인 인증 !
     @ResponseBody
@@ -90,3 +89,4 @@ public class UsersController {
     }
 
 }
+

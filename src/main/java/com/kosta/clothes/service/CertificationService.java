@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> db43b81e119da9475d530808833cab5006618f0b
 package com.kosta.clothes.service;
 
 import java.util.HashMap;
@@ -64,12 +60,4 @@ public class CertificationService implements UsersService {
     	}
     	return true;
 	}
-<<<<<<< HEAD
-
-
-
-
 }
-=======
-}	
->>>>>>> db43b81e119da9475d530808833cab5006618f0b

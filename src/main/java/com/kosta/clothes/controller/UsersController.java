@@ -1,11 +1,7 @@
 package com.kosta.clothes.controller;
 import java.util.Random;
-<<<<<<< HEAD
-
 import javax.servlet.ServletContext;
 
-=======
->>>>>>> db43b81e119da9475d530808833cab5006618f0b
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Users;
-=======
->>>>>>> db43b81e119da9475d530808833cab5006618f0b
 import com.kosta.clothes.service.CertificationService;
 @Controller
 public class UsersController {
@@ -45,12 +38,8 @@ public class UsersController {
 	}
 	
 	
-<<<<<<< HEAD
-=======
-	
 	
 	/* 인증번호 */
->>>>>>> db43b81e119da9475d530808833cab5006618f0b
 	//본인 인증 !
     @ResponseBody
     @GetMapping("/main/execute")
@@ -99,12 +88,5 @@ public class UsersController {
     	}
     	return "false";
     }
-<<<<<<< HEAD
 
 }
-
-
-=======
-}    
->>>>>>> db43b81e119da9475d530808833cab5006618f0b
-

@@ -30,6 +30,9 @@ a {
 
 #sharingListSubject {
   margin-bottom: 30px;
+  font-size: 3rem;
+  text-align: left;
+  padding: 0;
 }
 
 #sigunguSearch {
@@ -89,7 +92,7 @@ select::-ms-expand {
 }
 
 .search-box {
-  width: 234px;
+  width: 200px;
   position: relative;
   display: flex;
 	bottom: 0;
@@ -101,7 +104,7 @@ select::-ms-expand {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  padding: 15px 45px 15px 15px;
+  padding: 9px 45px 9px 9px;
   background-color: #fff;
   color: #6c6c6c;
   border-radius: 6px;
@@ -161,13 +164,20 @@ select::-ms-expand {
 }
 
 .bt_wrap a.on {
-  background:rgb(23,162,184); /*등록버튼 색깔*/
+  background-color: #17a2b8;
+  border-color: #17a2b8; /*등록버튼 색깔*/
   color: white;
+}
+
+.bt_wrap a.on:hover {
+  color: #fff;
+  background-color: #138496;
+  border-color: #117a8b;
 }
 
 .card-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 3em;
   margin: 0 auto;
 }

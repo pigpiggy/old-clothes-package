@@ -96,6 +96,21 @@
               
           </div>
       </div>
+      
+      <div class="card">
+          <div class="card-image">
+              <img src="image/cloth1.jpg" alt="Marrakech trip">
+          </div>
+          <div class="card-body">
+              <span class="date">2 weeks ago</span>
+              <h2>Marrakech</h2>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat quasi repudiandae sed
+                  debitis ad numquam aliquid quos rem delectus doloremque, eos quia. Harum, minus?</p>
+          </div>
+          <div class="card-footer">
+              
+          </div>
+      </div>
     </div>
   </div>
 <script src="<c:url value='/resources/js/sharing/sigungu.js'/>"></script>

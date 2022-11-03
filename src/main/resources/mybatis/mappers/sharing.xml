@@ -5,10 +5,10 @@
 <mapper namespace="com.kosta.clothes.dao.SharingDAO">
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
-			insert into sharing(sid,stitle,scontent,simage,sdealType,
+			insert into sharing(sid,stitle,scontent,simage1,simage2,simage3,sdealType,
 			addressCity,addressTown,regDate)
-			values (sharing_seq.nextval,#{stitle},#{scontent},#{simage,jdbcType=VARCHAR},#{sdealType},
-			#{addressCity},#{addressTown},sysdate)
+			values (sharing_seq.nextval,#{stitle},#{scontent},#{simage1,jdbcType=VARCHAR},#{simage2,jdbcType=VARCHAR},#{simage3,jdbcType=VARCHAR},
+			#{sdealType},#{addressCity},#{addressTown},sysdate)
 	
 		]]>
 	</insert>

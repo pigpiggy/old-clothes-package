@@ -52,32 +52,34 @@ public class SharingController {
 		return "/sharing/sharingRegistForm";
 	}
 	
-	@ResponseBody
-	@PostMapping("/upload")
-	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
-		String path = servletContext.getRealPath("/upload/");
-		String filename = file.getOriginalFilename();
-		File destfile = new File(path+filename);
-		Map<String, Object> json = new HashMap<>();
+	@PostMapping("/sharingRegist")
+	public ModelAndView registSharing(@ModelAttribute Sharing sharing, Model model) {
+		ModelAndView mav = new ModelAndView();
 		try {
-			file.transferTo(destfile);
-			json.put("uploaded", 1);
-			json.put("filename", filename);
-			json.put("url", "/fileview/"+filename);
-		} catch(IOException e) {
+			MultipartFile file = sharing.getSimageFile();
+			System.out.println(file);
+			if(!file.isEmpty()) {
+				String path = servletContext.getRealPath("/upload/");
+				File destFile = new File(path+file.getOriginalFilename());
+				file.transferTo(destFile);
+				sharing.setSimage(file.getOriginalFilename());
+			}
+			sharingService.registSharing(sharing);
+			mav.setViewName("redirect:/sharingList");
+		}catch(Exception e) {
 			e.printStackTrace();
+			mav.setViewName("/err");
 		}
-		return json;
+		return mav;
 	}
-	
-	@GetMapping("/fileview/{filename}")
-	public void fileview(@PathVariable String filename, HttpServletResponse response) {
+		
+	@GetMapping("/upload/{filename}")
+	public void viewImage(@PathVariable String filename, HttpServletResponse response) {
 		String path=servletContext.getRealPath("/upload/");
-		File file = new File(path+filename);
 		FileInputStream fis = null;
 		try {
+			fis = new FileInputStream(path+filename);
 			OutputStream out = response.getOutputStream();
-			fis = new FileInputStream(file);
 			FileCopyUtils.copy(fis, out);
 			out.flush();
 		} catch(Exception e) {
@@ -89,15 +91,6 @@ public class SharingController {
 		}
 	}
 	
-	@PostMapping("/sharingRegist")
-	public String registSharing(@ModelAttribute Sharing sharing, Model model) {
-		try {
-			sharingService.registSharing(sharing);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "/sharing/list";
-	}
 	
 	@GetMapping("/sharingView")
 	public String sharingView() {

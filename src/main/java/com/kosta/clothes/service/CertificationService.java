@@ -1,11 +1,15 @@
 package com.kosta.clothes.service;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.UsersDAO;
+
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
@@ -60,5 +64,15 @@ public class CertificationService implements UsersService {
     	}
     	return true;
 	}
+	//로그인
+		@Override
+		public Users login(String email, String password) throws Exception {
+			System.out.println(email);
+			System.out.println(password);
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("email", email);
+			map.put("password", password);
+			return usersDao.selectAccount(map);
+		}
 
 }

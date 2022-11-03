@@ -12,46 +12,174 @@ body {
 }
 
 /* list */
-#listcontent h1 {
-	text-align: center;
+:root {
+  --background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
 }
 
-#addressAndSearch {
-	display: flex;
-	justify-content: space-around;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-#buttonAndOption {
-	display: flex;
-	justify-content: space-around;
-	margin-bottom: 50px;
+#sharingList{
+  width: 1000px;
+  margin: 100px auto;
 }
 
-#listcontent {
-	padding: 20px;
+#sharingListSubject {
+  margin-bottom: 30px;
+  font-size: 3rem;
+  text-align: left;
+  padding: 0;
 }
 
-a:link {
-	text-decoration: none;
+#sigunguSearch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+#sigungu {
+  display: flex;
 }
 
 select {
-	font-family: 'S-CoreDream-3Light';
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: var(--darkgray);
+  background-color: #fff;
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 9em;
+  height: 2em;
+  border: 1px solid var(--darkgray);
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  transition: .25s all ease;
+  pointer-events: none;
+  color: var(--darkgray);
+  line-height: 2em;
+  padding-right: 0.5em;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
 }
 
-select option {
-	font-family: 'S-CoreDream-3Light';
+.search-box {
+  width: 200px;
+  position: relative;
+  display: flex;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
-button {
-	font-family: 'S-CoreDream-3Light';
+.search-input {
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 9px 45px 9px 9px;
+  background-color: #fff;
+  color: #6c6c6c;
+  border-radius: 6px;
+  border:1px solid #b8c6db;
+  transition: all .4s;
+}
+
+.search-input:focus {
+  border:none;
+  outline:none;
+  box-shadow: 0 1px 12px #b8c6db;
+  -moz-box-shadow: 0 1px 12px #b8c6db;
+  -webkit-box-shadow: 0 1px 12px #b8c6db;
+}
+
+.search-btn {
+  background-color: transparent;
+  font-size: 18px;
+  padding: 6px 9px;
+  margin-left:-45px;
+  border:none;
+  color: #6c6c6c;
+  transition: all .4s;
+  z-index: 10;
+}
+
+.search-btn:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  color: black;
+}
+
+.search-btn:focus {
+  outline:none;
+  color:black;
+}
+
+#buttonAndSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.bt_wrap {
+  text-align: left;
+  font-size: 0;
+}
+
+.bt_wrap a {/*수정,목록 버튼*/
+  display: inline-block;
+  min-width: 60px;
+  padding: 6px;
+  border: 1px solid rgb(23,162,184); /*테두리*/
+  border-radius: 6px;
+  font-size: 1.5rem;
+}
+
+.bt_wrap a.on {
+  background-color: #17a2b8;
+  border-color: #17a2b8; /*등록버튼 색깔*/
+  color: white;
+}
+
+.bt_wrap a.on:hover {
+  color: #fff;
+  background-color: #138496;
+  border-color: #117a8b;
 }
 
 .card-list {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	grid-gap: 4em
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 3em;
+  margin: 0 auto;
 }
 
 .card, .card-body, .card-footer {
@@ -112,6 +240,7 @@ button {
 	width: 100%;
 	display: grid;
 	border-top: 1px solid rgb(238, 238, 238);
+  text-align: center;
 }
 
 /* insert */

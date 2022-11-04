@@ -66,6 +66,12 @@ a {
     color: white;
 }
 
+.bt_wrap a.on:hover {
+	color: #fff;
+	background-color: #138496;
+	border-color: #117a8b;
+}
+
 .board_list {
     width: 100%;
     border-top: 2px solid navy;

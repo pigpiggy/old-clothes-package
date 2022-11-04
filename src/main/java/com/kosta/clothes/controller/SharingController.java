@@ -1,5 +1,10 @@
 package com.kosta.clothes.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +35,8 @@ public class SharingController {
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
+			List<Sharing> sharingList = sharingService.getSharingList();
+			mav.addObject("sharingList", sharingList);
 			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
 			e.printStackTrace();

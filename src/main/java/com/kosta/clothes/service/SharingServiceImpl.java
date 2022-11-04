@@ -3,6 +3,7 @@ package com.kosta.clothes.service;
 import java.io.FileOutputStream;
 
 import javax.servlet.ServletContext;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +66,12 @@ public class SharingServiceImpl implements SharingService{
 	@Override
 	public Sharing viewSharing(Integer sid) throws Exception {
 		return sharingDAO.selectSharing(sid);
+	}
+
+	@Override
+	public List<Sharing> getSharingList() throws Exception {
+		// TODO Auto-generated method stub
+		return sharingDAO.selectSharingList();
 	}
 	
 	

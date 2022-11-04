@@ -49,70 +49,27 @@
         <button class="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </div>
-
+	
     <div class="card-list">
-
+	  <c:forEach var="sharing" items="${sharingList }">
       <div class="card">
           <div class="card-image">
-              <img src="image/cloth.jpg" alt="London trip">
+              <img src="upload/${ sharing.simage}" alt="무료나눔 옷">
           </div>
           <div class="card-body">
-              <span class="date">4 days ag</span>
-              <h2>London</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat quasi repudiandae sed
-                  debitis ad numquam aliquid quos rem delectus doloremque, eos quia. Harum, minus?</p>
+              <span class="date">${sharing.regDate}</span>
+              <h2>${sharing.stitle }</h2>
+              <p>${sharing.scontent }</p>
           </div>
           <div class="card-footer">
-              대전광역시 서구 탄방동
+              ${sharing.addressCity} ${sharing.addressTown }
           </div>
       </div>
-
-      <div class="card">
-          <div class="card-image">
-              <img src="image/cloth1.jpg" alt="New York trip">
-          </div>
-          <div class="card-body">
-              <span class="date">1 week ago</span>
-              <h2>New York</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat quasi repudiandae sed
-                  debitis ad numquam aliquid quos rem delectus doloremque, eos quia. Harum, minus?</p>
-          </div>
-          <div class="card-footer">
-              
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="card-image">
-              <img src="image/cloth1.jpg" alt="Marrakech trip">
-          </div>
-          <div class="card-body">
-              <span class="date">2 weeks ago</span>
-              <h2>Marrakech</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat quasi repudiandae sed
-                  debitis ad numquam aliquid quos rem delectus doloremque, eos quia. Harum, minus?</p>
-          </div>
-          <div class="card-footer">
-              
-          </div>
-      </div>
-      
-      <div class="card">
-          <div class="card-image">
-              <img src="image/cloth1.jpg" alt="Marrakech trip">
-          </div>
-          <div class="card-body">
-              <span class="date">2 weeks ago</span>
-              <h2>Marrakech</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate quaerat quasi repudiandae sed
-                  debitis ad numquam aliquid quos rem delectus doloremque, eos quia. Harum, minus?</p>
-          </div>
-          <div class="card-footer">
-              
-          </div>
-      </div>
+	  </c:forEach>
     </div>
+    
   </div>
 <script src="<c:url value='/resources/js/sharing/sigungu.js'/>"></script>
+<script src="<c:url value='/resources/js/sharing/infiniteScroll.js'/>"></script>
 </body>
 </html>

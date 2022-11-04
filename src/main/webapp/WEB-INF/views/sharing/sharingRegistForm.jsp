@@ -16,14 +16,16 @@
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
 <body>
-	<div>
+	<header>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
-	</div>
+	</header>
 	<div class="container">
 		<h1>상품등록</h1>
-		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data">
+		<form action="sharingRegist" method="post" name="writeForm"
+			enctype="multipart/form-data" accept="image/*">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
+				<input type="text" class="form-control" placeholder="제목" id="title"
+					name="stitle">
 			</div>
 			<br>
 			<div id="dealcontainer">
@@ -51,19 +53,78 @@
 			</div>
 
 			<div class="form-group">
-				<textarea class="form-control" rows="12" id="scontent" name="scontent"></textarea>
+				<textarea class="form-control" rows="12" id="scontent"
+					name="scontent"></textarea>
 			</div>
-			<input type = "file" multiple name = "simageFile" id ="image"/>
-			
+			<input type="file" multiple="multiple" name="simageFile" id="image"
+				onchange="addFile(this);" />
+			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
-				</a>
-				<button type="submit" class="btn btn-warning">등록</button>
+				</a> <input type="submit" id="uploadBtn" class="btn btn-warning"
+					value="등록">
 			</div>
 		</form>
 	</div>
+	<footer>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</footer>
 	<script>
+	$(function() { //파일 선택했을 때 미리보기로 보여주는 용도
+		$('#image').change(function(event) { //input id = file 
+			$('#imglist').empty();
+			for(let i=0; i<event.target.files.length; i++) {
+				let img = $('<img id="rep'+i+'" src="" width="100px" height="100px"/>');
+				let reader = new FileReader();
+				reader.onload = function(e) { //읽어오는 시점에 맞춰서 이미지에 저장
+					img.attr('src', e.target.result); //읽어들인 데이터를 attribute에 저장
+				}
+				reader.readAsDataURL(event.target.files[i]); //0번째 파일을 읽어라
+				$('#imglist').append(img);
+			}
+		});
+	})
+	
+	var fileNo = 0;
+	var filesArr = new Array();		
+
+	/* 첨부파일 추가 */
+	function addFile(obj){
+    	var maxFileCnt = 6;   // 첨부파일 최대 개수
+    	var attFileCnt = document.querySelectorAll('#imglist').length;    // 기존 추가된 첨부파일 개수
+    	var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
+    	var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
+
+    // 첨부파일 개수 확인
+    	if (curFileCnt > remainFileCnt) {
+        	alert("첨부파일은 최대 " + 5 + "개 까지 첨부 가능합니다.");
+    		} else {
+        		for (const file of obj.files) {// 첨부파일 검증
+            		if (validation(file)) {// 파일 배열에 담기
+                		var reader = new FileReader();
+                		reader.onload = function () {
+                    	filesArr.push(file);
+                		};
+                	reader.readAsDataURL(file);
+
+                // 목록 추가
+                let htmlData = '';
+                htmlData += '<div id="file' + fileNo + '" class="filebox">';
+                htmlData += '   <p class="name">' + file.name + '</p>';
+                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+                htmlData += '</div>';
+                $('#imglist').append(htmlData);
+                fileNo++;
+            		} else {
+                		continue;
+            		}
+        		}
+    		}
+   // 초기화
+    	document.querySelector("input[type=file]").value = "";
+	}
+
 		function findAddr() {
 			new daum.Postcode(
 					{
@@ -102,7 +163,7 @@
 						}
 					}).open();
 		}
+		
 	</script>
-
 </body>
 </html>

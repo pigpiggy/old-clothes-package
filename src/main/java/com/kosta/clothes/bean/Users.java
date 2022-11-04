@@ -66,6 +66,12 @@ public class Users {
 	public Users() {
 		super();
 	}
+	public Users(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+	
 	
 	
 }

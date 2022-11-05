@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -99,6 +100,46 @@ public class SharingController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/infiniteScrollDown")
+	public List<Sharing> infiniteScrollDown(@RequestBody Sharing sharing) {
+		System.out.println("들어옴");
+		Integer snoToStart = sharing.getSno()-1;
+		List<Sharing> sharingList = new ArrayList<>();
+		try {
+			sharingList = sharingService.infiniteScrollDown(snoToStart);
+			List<Integer> fileList = new ArrayList<>();
+			for(int i=0;i<sharingList.size();i++) {
+				fileList.add(Integer.parseInt(sharingList.get(i).getSfileids().split(",")[0]));
+				sharingList.get(i).setSfileids(Integer.toString(fileList.get(i)));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return sharingList;
+	}
+	
+	@ResponseBody
+	@PostMapping("/infiniteScrollUp")
+	public List<Sharing> infiniteScrollUp(@RequestBody Sharing sharing) {
+		System.out.println("들어옴");
+		Integer snoToStart = sharing.getSno()+1;
+		List<Sharing> sharingList = new ArrayList<>();
+		try {
+			sharingList = sharingService.infiniteScrollDown(snoToStart);
+			List<Integer> fileList = new ArrayList<>();
+			for(int i=0;i<sharingList.size();i++) {
+				fileList.add(Integer.parseInt(sharingList.get(i).getSfileids().split(",")[0]));
+				sharingList.get(i).setSfileids(Integer.toString(fileList.get(i)));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return sharingList;
 	}
 	
 }

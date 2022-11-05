@@ -52,7 +52,7 @@
 	
     <div class="card-list">
 	  <c:forEach var="sharing" items="${sharingList}">
-      <div class="card">
+      <div class="card" data-sno=${sharing.sno }>
           <div class="card-image">
               <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
           </div>

@@ -18,4 +18,6 @@ public interface SharingDAO {
 	void insertSharing(Sharing sharing) throws Exception;
 	Sharing selectSharing(Integer sno) throws Exception;
 	List<Sharing> selectSharingList() throws Exception;
+	List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception;
+	List<Sharing> infiniteScrollUp(Integer snoToStart) throws Exception;
 }

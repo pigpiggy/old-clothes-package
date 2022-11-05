@@ -27,7 +27,7 @@
 	
 	<select id="selectSharingList" resultType="com.kosta.clothes.bean.Sharing">
 		<![CDATA[
-			select * from sharing order by sid desc
+			select * from sharing order by sno desc
 		]]>
 	</select>
 </mapper>

@@ -7,10 +7,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import com.kosta.clothes.bean.Business;
-=======
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
+
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.UsersDAO;
 
@@ -72,7 +70,7 @@ public class CertificationService implements UsersService {
     	}
     	return true;
 	}
-<<<<<<< HEAD
+
 	
 	 //아이디 중복 체크[업체]
 		@Override
@@ -97,7 +95,7 @@ public class CertificationService implements UsersService {
 		System.out.println("business : " + business.toString());
 		usersDao.insertBusiness(business);
 	}
-=======
+
 	//로그인
 		@Override
 		public Users login(String email, String password) throws Exception {
@@ -108,11 +106,5 @@ public class CertificationService implements UsersService {
 			map.put("password", password);
 			return usersDao.selectAccount(map);
 		}
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 
-	
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5

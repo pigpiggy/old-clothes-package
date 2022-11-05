@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-=======
+
 import org.springframework.web.servlet.ModelAndView;
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
+
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
@@ -34,7 +33,7 @@ public class UsersController {
 	@Autowired
 	CertificationService certificationService;
 	
-<<<<<<< HEAD
+
 	
 	//joinform.jsp 페이지로 이동
 	@GetMapping("/joinform")
@@ -42,14 +41,14 @@ public class UsersController {
 		return "/user/joinform";
 	}
 
-=======
+
 	@Autowired
 	HttpSession session;
 	
 	@Autowired
 	UsersService usersService;
 	
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
+
 	//회원가입[개인]
 	@PostMapping("/personnal")
 	public String personnal(@ModelAttribute Users users, Model model) {
@@ -63,7 +62,7 @@ public class UsersController {
 	}
 	
 	
-<<<<<<< HEAD
+
 	//회원가입[업체]
 	@PostMapping("/businesss")
 	public String business(@ModelAttribute Business business, Model model) {
@@ -77,9 +76,7 @@ public class UsersController {
 	}
 	
 		
-	
-=======
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
+
 	/* 인증번호 */
 	//본인 인증 !
     @ResponseBody
@@ -129,7 +126,7 @@ public class UsersController {
     	}
     	return "false";
     }
-<<<<<<< HEAD
+
     
     //아이디 중복 확인[개인]
     @ResponseBody
@@ -161,11 +158,7 @@ public class UsersController {
     	return "false";
     }
 
-}
 
-
-
-=======
     //로그인창
     @GetMapping("/login")
     public String login() {
@@ -197,8 +190,7 @@ public class UsersController {
   			
   			session.removeAttribute("authUser");
   			return "redirect:/";
+  		
   		}
-
 }
 
->>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5

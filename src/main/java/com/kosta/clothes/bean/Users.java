@@ -2,31 +2,32 @@ package com.kosta.clothes.bean;
 
 import java.sql.Date;
 
+//개인 사용자 가입(VO)
 public class Users {
-	private Long id; // 번호(가입 회원 수)
-	private String email; //이메일(아이디)
-	private String name; //닉네임
+	private Long no; //번호(가입 회원 수)
+	private String userid; //(아이디)
+	private String nickname; //닉네임
 	private String password; //비밀 번호
-	private String sect; //구분(개인/업체)
-	private Long bno; //업체 번호
+	private String phone;//전화 번호
+	private Long grade; //옷점(레벨)
 	private Date joinDate; //날짜
-	public Long getId() {
-		return id;
+	public Long getNo() {
+		return no;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setNo(Long no) {
+		this.no = no;
 	}
-	public String getEmail() {
-		return email;
+	public String getUserid() {
+		return userid;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getPassword() {
 		return password;
@@ -34,18 +35,17 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getSect() {
-		return sect;
+	public String getPhone() {
+		return phone;
 	}
-	public void setSect(String sect) {
-		this.sect = sect;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	
-	public Long getBno() {
-		return bno;
+	public Long getGrade() {
+		return grade;
 	}
-	public void setBno(Long bno) {
-		this.bno = bno;
+	public void setGrade(Long grade) {
+		this.grade = grade;
 	}
 	public Date getJoinDate() {
 		return joinDate;
@@ -53,19 +53,25 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	public Users(Long id, String email, String name, String password, String sect, Long bno, Date joinDate) {
+	public Users(Long no, String userid, String nickname, String password, String phone, Long grade, Date joinDate) {
 		super();
-		this.id = id;
-		this.email = email;
-		this.name = name;
+		this.no = no;
+		this.userid = userid;
+		this.nickname = nickname;
 		this.password = password;
-		this.sect = sect;
-		this.bno = bno;
+		this.phone = phone;
+		this.grade = grade;
 		this.joinDate = joinDate;
 	}
 	public Users() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Users [no=" + no + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
+				+ ", phone=" + phone + ", grade=" + grade + ", joinDate=" + joinDate + "]";
+	}
+	
 	
 	
 }

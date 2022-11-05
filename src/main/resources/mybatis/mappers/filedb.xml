@@ -11,8 +11,8 @@
 	
 	<insert id="insertFileInfo" parameterType="FileVO">
 		<![CDATA[
-			insert into tfile (tid,directory_name,tname,tsize,content_type,upload_date)
-			values(#{tid},#{directory_name},#{tname},#{tsize},#{content_type},sysdate)
+			insert into tfile (tno,directory_name,tname,tsize,sno,content_type,upload_date)
+			values(#{tno},#{directory_name},#{tname},#{tsize},#{sno},#{content_type},sysdate)
 		]]>
 	</insert>
 </mapper>							

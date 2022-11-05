@@ -10,8 +10,8 @@ import com.kosta.clothes.bean.Sharing;
 @Mapper
 @Repository
 public interface SharingDAO {
-	Integer getNextSharingId() throws Exception;
+	Integer getNextSharingNo() throws Exception;
 	void insertSharing(Sharing sharing) throws Exception;
-	Sharing selectSharing(Integer sid) throws Exception;
+	Sharing selectSharing(Integer sno) throws Exception;
 	List<Sharing> selectSharingList() throws Exception;
 }

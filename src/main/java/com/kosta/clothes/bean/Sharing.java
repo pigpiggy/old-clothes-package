@@ -3,7 +3,7 @@ package com.kosta.clothes.bean;
 import java.sql.Date;
 
 public class Sharing {
-	private Integer sid;
+	private Integer sno;
 	private String sname;
 	private String stitle;
 	private String scontent;
@@ -15,11 +15,12 @@ public class Sharing {
 	private String addressCity;
 	private String addressTown;
 	private Date regDate;
-	public Integer getSid() {
-		return sid;
+	
+	public Integer getSno() {
+		return sno;
 	}
-	public void setSid(Integer sid) {
-		this.sid = sid;
+	public void setSno(Integer sno) {
+		this.sno = sno;
 	}
 	public String getSname() {
 		return sname;
@@ -90,10 +91,10 @@ public class Sharing {
 	public Sharing() {
 		super();
 	}
-	public Sharing(Integer sid, String sname, String stitle, String scontent, String sstatus, String sfileids,
+	public Sharing(Integer sno, String sname, String stitle, String scontent, String sstatus, String sfileids,
 			String sdealType, int grade, int ai, String addressCity, String addressTown, Date regDate) {
 		super();
-		this.sid = sid;
+		this.sno = sno;
 		this.sname = sname;
 		this.stitle = stitle;
 		this.scontent = scontent;
@@ -108,10 +109,11 @@ public class Sharing {
 	}
 	@Override
 	public String toString() {
-		return "Sharing [sid=" + sid + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
+		return "Sharing [sno=" + sno + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
 				+ ", sstatus=" + sstatus + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", grade=" + grade
 				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", regDate="
 				+ regDate + "]";
 	}
+	
 	
 }

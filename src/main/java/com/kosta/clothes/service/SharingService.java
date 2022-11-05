@@ -7,6 +7,6 @@ import com.kosta.clothes.bean.Sharing;
 
 public interface SharingService {
 	Integer registSharing(Sharing sharing, MultipartFile[] files) throws Exception;
-	Sharing viewSharing(Integer sid) throws Exception;
+	Sharing viewSharing(Integer sno) throws Exception;
 	List<Sharing> getSharingList() throws Exception;
 }

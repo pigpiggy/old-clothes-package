@@ -29,43 +29,47 @@ public class SharingServiceImpl implements SharingService{
 	@Override
 	public Integer registSharing(Sharing sharing, MultipartFile[] files) throws Exception {
 		String fileids = "";
+		FileVO fileVo = new FileVO();
 		if(files!=null) {
 			String path = servletContext.getRealPath("/upload/");
-			FileVO fileVo = new FileVO();
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
 					Integer fileid = fileDAO.getNextId();
-					fileVo.setTid(fileid);
+					fileVo.setTno(fileid);
 					fileVo.setDirectory_name(path);
 					fileVo.setTname(file.getOriginalFilename());
 					fileVo.setTsize(file.getSize());
 					fileVo.setContent_type(file.getContentType());
-					fileDAO.insertFileInfo(fileVo);
-					
-					FileOutputStream fos = new FileOutputStream(path+fileVo.getTid());
+					if(fileVo.getIno() == null) {
+						fileVo.setIno(0);
+					}
+					FileOutputStream fos = new FileOutputStream(path+fileVo.getTno());
 					FileCopyUtils.copy(file.getBytes(), fos);
 					
-					fileids += fileVo.getTid()+",";
+					fileids += fileVo.getTno()+",";
 				}
 			}
 		}
 	
-		Integer sharingid = sharingDAO.getNextSharingId();
-		sharing.setSid(sharingid);
+		Integer sharingid = sharingDAO.getNextSharingNo();
+		sharing.setSno(sharingid);
 		sharing.setStitle(sharing.getStitle());
 		sharing.setScontent(sharing.getScontent());
 		sharing.setSdealType(sharing.getSdealType());
 		sharing.setAddressCity(sharing.getAddressCity());
 		sharing.setAddressTown(sharing.getAddressTown());
 		sharing.setSfileids(fileids);
+		fileVo.setSno(sharingid);
+		fileDAO.insertFileInfo(fileVo);
+
 		sharingDAO.insertSharing(sharing);
 		
 		return sharingid;
 	}
 
 	@Override
-	public Sharing viewSharing(Integer sid) throws Exception {
-		return sharingDAO.selectSharing(sid);
+	public Sharing viewSharing(Integer sno) throws Exception {
+		return sharingDAO.selectSharing(sno);
 	}
 
 	@Override

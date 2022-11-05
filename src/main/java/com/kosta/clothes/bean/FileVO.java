@@ -3,17 +3,19 @@ package com.kosta.clothes.bean;
 import java.sql.Date;
 
 public class FileVO {
-	private Integer tid;
+	private Integer tno;
 	private String directory_name;
 	private String tname;
 	private Long tsize;
+	private Integer sno;
+	private Integer ino;
 	private String content_type;
 	private Date upload_date;
-	public Integer getTid() {
-		return tid;
+	public Integer getTno() {
+		return tno;
 	}
-	public void setTid(Integer tid) {
-		this.tid = tid;
+	public void setTno(Integer tno) {
+		this.tno = tno;
 	}
 	public String getDirectory_name() {
 		return directory_name;
@@ -33,6 +35,18 @@ public class FileVO {
 	public void setTsize(Long tsize) {
 		this.tsize = tsize;
 	}
+	public Integer getSno() {
+		return sno;
+	}
+	public void setSno(Integer sno) {
+		this.sno = sno;
+	}
+	public Integer getIno() {
+		return ino;
+	}
+	public void setIno(Integer ino) {
+		this.ino = ino;
+	}
 	public String getContent_type() {
 		return content_type;
 	}
@@ -48,20 +62,23 @@ public class FileVO {
 	public FileVO() {
 		super();
 	}
-	public FileVO(Integer tid, String directory_name, String tname, Long tsize, String content_type, Date upload_date) {
+	public FileVO(Integer tno, String directory_name, String tname, Long tsize, Integer sno, Integer ino,
+			String content_type, Date upload_date) {
 		super();
-		this.tid = tid;
+		this.tno = tno;
 		this.directory_name = directory_name;
 		this.tname = tname;
 		this.tsize = tsize;
+		this.sno = sno;
+		this.ino = ino;
 		this.content_type = content_type;
 		this.upload_date = upload_date;
 	}
-	
 	@Override
 	public String toString() {
-		return "FileVO [tid=" + tid + ", directory_name=" + directory_name + ", tname=" + tname + ", tsize=" + tsize
-				+ ", content_type=" + content_type + ", upload_date=" + upload_date + "]";
+		return "FileVO [tno=" + tno + ", directory_name=" + directory_name + ", tname=" + tname + ", tsize=" + tsize
+				+ ", sno=" + sno + ", ino=" + ino + ", content_type=" + content_type + ", upload_date=" + upload_date
+				+ "]";
 	}
-	
+
 }

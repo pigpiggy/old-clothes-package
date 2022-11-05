@@ -14,18 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <script>
-$(function() {
-	ClassicEditor.create(document.querySelector("#editor"))
-	.then(editor=> {
-		editor.setData('${scontent}');
-	})
-	.catch((error)=> {
-		console.error(error);
-	})
-	
+$(function() {	
 	 var swiper = new Swiper(".mySwiper", {
 	        cssMode: true,
 	        navigation: {
@@ -47,10 +38,10 @@ $(function() {
 
 </head>
 <body>
-<div>
+<header>
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
-</div>
-	
+</header>
+	<div class="container">
     <section class="content_main">
       <section id="content_left">
         <!-- Swiper -->
@@ -68,7 +59,7 @@ $(function() {
         </div>
       </section>
       <section id="content_right">
-        <span id="stitle"><h4>무료나눔 상세 페이지</h4></span>
+        <h4>무료나눔 상세 페이지</h4>
         <div id="sharingname">
           <span>level icon</span>
           <span>nick name</span>
@@ -102,6 +93,9 @@ $(function() {
       </div>
     </form>    
     </section>
-
+    </div>
+<footer>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+</footer>
 </body>
 </html>

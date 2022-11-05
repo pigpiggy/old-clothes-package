@@ -2,22 +2,17 @@ package com.kosta.clothes.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,6 +35,8 @@ public class SharingController {
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		try {
+			List<Sharing> sharingList = sharingService.getSharingList();
+			mav.addObject("sharingList", sharingList);
 			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
 			e.printStackTrace();
@@ -52,52 +49,64 @@ public class SharingController {
 		return "/sharing/sharingRegistForm";
 	}
 	
+//	@PostMapping("/sharingRegist")
+//	public ModelAndView registSharing(@ModelAttribute Sharing sharing, Model model) {
+//		ModelAndView mav = new ModelAndView();
+//		try {
+//			MultipartFile file = sharing.getSimageFile();
+//			System.out.println(file);
+//			if(!file.isEmpty()) {
+//				String path = servletContext.getRealPath("/upload/");
+//				File destFile = new File(path+file.getOriginalFilename());
+//				file.transferTo(destFile);
+//				sharing.setSimage(file.getOriginalFilename());
+//			}
+//			sharingService.registSharing(sharing);
+//			mav.setViewName("redirect:/sharingList");
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			mav.setViewName("/err");
+//		}
+//		return mav;
+//	}
+	
 	@ResponseBody
-	@PostMapping("/upload")
-	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
-		String path = servletContext.getRealPath("/upload/");
-		String filename = file.getOriginalFilename();
-		File destfile = new File(path+filename);
-		Map<String, Object> json = new HashMap<>();
-		try {
-			file.transferTo(destfile);
-			json.put("uploaded", 1);
-			json.put("filename", filename);
-			json.put("url", "/fileview/"+filename);
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		return json;
-	}
-	
-	@GetMapping("/fileview/{filename}")
-	public void fileview(@PathVariable String filename, HttpServletResponse response) {
-		String path=servletContext.getRealPath("/upload/");
-		File file = new File(path+filename);
-		FileInputStream fis = null;
-		try {
-			OutputStream out = response.getOutputStream();
-			fis = new FileInputStream(file);
-			FileCopyUtils.copy(fis, out);
-			out.flush();
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(fis!=null) fis.close();
-			} catch(Exception e) {}
-		}
-	}
-	
 	@PostMapping("/sharingRegist")
-	public String registSharing(@ModelAttribute Sharing sharing, Model model) {
+	public ModelAndView registSharing(@ModelAttribute Sharing sharing, Model model,
+			@RequestParam("simageFile") MultipartFile[] files) {
+		ModelAndView mav = new ModelAndView();
 		try {
-			sharingService.registSharing(sharing);
+			Integer sharingid = sharingService.registSharing(sharing, files);
+			Sharing sharingview = sharingService.viewSharing(sharingid);
+			model.addAttribute("title", sharing.getStitle());
+			model.addAttribute("content", sharing.getScontent());
+			String[] fidArr = sharingview.getSfileids().split(",");
+			mav.addObject("files", fidArr);
+			mav.setViewName("redirect:/sharingList");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "/sharing/list";
+		return mav;
 	}
+	
+//	@GetMapping("/upload/{filename}")
+//	public void viewImage(@PathVariable String filename, HttpServletResponse response) {
+//		String path=servletContext.getRealPath("/upload/");
+//		FileInputStream fis = null;
+//		try {
+//			fis = new FileInputStream(path+filename);
+//			OutputStream out = response.getOutputStream();
+//			FileCopyUtils.copy(fis, out);
+//			out.flush();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if(fis!=null) fis.close();
+//			} catch(Exception e) {}
+//		}
+//	}
+	
 	
 	@GetMapping("/sharingView")
 	public String sharingView() {

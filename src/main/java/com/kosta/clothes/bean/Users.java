@@ -66,10 +66,17 @@ public class Users {
 	public Users() {
 		super();
 	}
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "Users [no=" + no + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
 				+ ", phone=" + phone + ", grade=" + grade + ", joinDate=" + joinDate + "]";
+=======
+	public Users(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 	}
 	
 	

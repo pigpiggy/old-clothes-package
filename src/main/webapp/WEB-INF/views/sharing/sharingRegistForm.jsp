@@ -8,9 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <head>
 <meta charset="UTF-8">
 <title>무료나눔 상품 등록</title>
@@ -18,61 +16,115 @@
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
 <body>
-	<div>
+	<header>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
-	</div>
+	</header>
 	<div class="container">
 		<h1>상품등록</h1>
-		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data">
+		<form action="sharingRegist" method="post" name="writeForm"
+			enctype="multipart/form-data" accept="image/*">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
+				<input type="text" class="form-control" placeholder="제목" id="title"
+					name="stitle">
 			</div>
 			<br>
 			<div id="dealcontainer">
 				<div class="form-group">
-  					<select class="form-control" name="sdealType" id="sel1">
-    					<option>직거래</option>
-    					<option>택배거래</option>
-    					<option>모두가능</option>
-  					</select>
-					<br>
+					<select class="form-control" name="sdealType" id="sel1">
+						<option>직거래</option>
+						<option>택배거래</option>
+						<option>모두가능</option>
+					</select> <br>
 					<div id="dealarea">
-						거래지역: <input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
-							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly> <br>
-					<input type="hidden" name="addressCity" id="jibun_si" />
-					<input type="hidden" name="addressTown" id="jibun_dong" />
-					
+						거래지역: <input id="member_post" type="text" placeholder="주소검색"
+							readonly onclick="findAddr()"> <input name="jibunAddress"
+							id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly>
+						<br> <input type="hidden" name="addressCity" id="jibun_si" />
+						<input type="hidden" name="addressTown" id="jibun_dong" />
+
 					</div>
 				</div>
-				
+
 				<div id="priceAndAI">
-					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled />
-					<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
+					<input type="text" class="form-control" placeholder="가격: 0원"
+						id="price" disabled /> <span><a class="nav-link" href="#">AI
+							옷 상태 점검</a></span>
 				</div>
 			</div>
-			
-			<textarea name="scontent" id="editor"></textarea>
+
+			<div class="form-group">
+				<textarea class="form-control" rows="12" id="scontent"
+					name="scontent"></textarea>
+			</div>
+			<input type="file" multiple="multiple" name="simageFile" id="image"
+				onchange="addFile(this);" />
+			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
-				</a>
-				<button type="submit" class="btn btn-warning">등록</button>
+				</a> <input type="submit" id="uploadBtn" class="btn btn-warning"
+					value="등록">
 			</div>
 		</form>
 	</div>
+	<footer>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</footer>
 	<script>
-	$(function() {
-		ClassicEditor.create(document.querySelector("#editor"), {
-			ckfinder : {
-				uploadUrl:"/upload"
+	$(function() { //파일 선택했을 때 미리보기로 보여주는 용도
+		$('#image').change(function(event) { //input id = file 
+			$('#imglist').empty();
+			for(let i=0; i<event.target.files.length; i++) {
+				let img = $('<img id="rep'+i+'" src="" width="100px" height="100px"/>');
+				let reader = new FileReader();
+				reader.onload = function(e) { //읽어오는 시점에 맞춰서 이미지에 저장
+					img.attr('src', e.target.result); //읽어들인 데이터를 attribute에 저장
+				}
+				reader.readAsDataURL(event.target.files[i]); //0번째 파일을 읽어라
+				$('#imglist').append(img);
 			}
-		}).then(editor=> {
-			window.editor=editor;
-		}).catch((error)=>{
-			console.error(error);
 		});
-	});
-		
+	})
+	
+	var fileNo = 0;
+	var filesArr = new Array();		
+
+	/* 첨부파일 추가 */
+	function addFile(obj){
+    	var maxFileCnt = 6;   // 첨부파일 최대 개수
+    	var attFileCnt = document.querySelectorAll('#imglist').length;    // 기존 추가된 첨부파일 개수
+    	var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
+    	var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
+
+    // 첨부파일 개수 확인
+    	if (curFileCnt > remainFileCnt) {
+        	alert("첨부파일은 최대 " + 5 + "개 까지 첨부 가능합니다.");
+    		} else {
+        		for (const file of obj.files) {// 첨부파일 검증
+            		if (validation(file)) {// 파일 배열에 담기
+                		var reader = new FileReader();
+                		reader.onload = function () {
+                    	filesArr.push(file);
+                		};
+                	reader.readAsDataURL(file);
+
+                // 목록 추가
+                let htmlData = '';
+                htmlData += '<div id="file' + fileNo + '" class="filebox">';
+                htmlData += '   <p class="name">' + file.name + '</p>';
+                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+                htmlData += '</div>';
+                $('#imglist').append(htmlData);
+                fileNo++;
+            		} else {
+                		continue;
+            		}
+        		}
+    		}
+   // 초기화
+    	document.querySelector("input[type=file]").value = "";
+	}
+
 		function findAddr() {
 			new daum.Postcode(
 					{
@@ -89,30 +141,29 @@
 							let si = [];
 							si = jibunAddr.split(" ")[0];
 							console.log(si);
-							let dong = jibunAddr.split(" ")[1].concat(" ",jibunAddr.split(" ")[2]);
+							let dong = jibunAddr.split(" ")[1].concat(" ",
+									jibunAddr.split(" ")[2]);
 							console.log(dong);
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('member_post').value = data.zonecode;
 							//document.getElementById("roadAddress").value = roadAddr;
-			                document.getElementById("jibunAddress").value = data.jibunAddress;
-			                document.getElementById("jibun_si").value = si;
-			                document.getElementById("jibun_dong").value = dong;
-			                console.log(si);
-			                if (jibunAddr !== '') {
+							document.getElementById("jibunAddress").value = data.jibunAddress;
+							document.getElementById("jibun_si").value = si;
+							document.getElementById("jibun_dong").value = dong;
+							console.log(si);
+							if (jibunAddr !== '') {
 								document.getElementById("jibunAddress").value = jibunAddr;
 							}
-			                
-			                //if (roadAddr !== '') {
-								//document.getElementById("roadAddress").value = roadAddr;
+
+							//if (roadAddr !== '') {
+							//document.getElementById("roadAddress").value = roadAddr;
 							//} else if (jibunAddr !== '') {
-								//document.getElementById("jibunAddress").value = jibunAddr;
+							//document.getElementById("jibunAddress").value = jibunAddr;
 							//}
 						}
 					}).open();
 		}
 		
-		
 	</script>
-
 </body>
 </html>

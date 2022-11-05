@@ -106,6 +106,16 @@
 			WHERE businessid=#{businessidCheck}
 		]]>
 	</select>
+	
+	<!--로그인 -->
+	<select id="selectAccount" parameterType="map" resultType="Users">
+		<![CDATA[
+			SELECT *
+			FROM users 
+			WHERE email=#{email} and password=#{password}
+		]]>
+	</select>
+	
 </mapper>
 
 

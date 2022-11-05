@@ -39,6 +39,7 @@ $(function(){
 		}
 	});
 });
+<<<<<<< HEAD
 
 //아이디 중복확인(개인)
 $(function(){
@@ -235,11 +236,192 @@ $(function(){
 })
 
 
+=======
+//닉네임 중복확인(개인)
+$(function(){
+	$('#nickname').change(function(){
+		$('#nicknamecheck').show();
+		$('#checkednickname').hide();
+	});
+	$(function(){
+	   $('#nicknamecheck').click(function(){
+	      var nickname =$('#nickname').val(); //사용자가 입력한 id값 
+	      console.log(nickname);
+	      $.ajax({
+	         type : "post",
+	         url : "http://localhost:8090/nickname",
+	         data : {nickname:nickname},
+	         success:function(data,textStatus){
+	            if(data=="true"){
+	               alert("이미 사용중인 닉네임입니다.");
+	            }else if(nickname==''){
+	               alert("닉네임을 입력해주세요");
+	            }else{
+	               alert("사용이 가능한 닉네임입니다.");
+	               $('#nicknamecheck').hide();
+		    	   $('#checkednickname').show();
+	            }
+	         }
+	      })
+	   });
+	});
+});
+//닉네임 중복확인(업체)
+$(function(){
+	$('#brandname').change(function(){
+		$('#brandnamecheck').show();
+		$('#checkedbrandname').hide();
+	});
+	$(function(){
+	   $('#brandnamecheck').click(function(){
+	      var nickname =$('#brandname').val(); //사용자가 입력한 id값 
+	      console.log(nickname);
+	      $.ajax({
+	         type : "post",
+	         url : "http://localhost:8090/nickname",
+	         data : {nickname:nickname},
+	         success:function(data,textStatus){
+	            if(data=="true"){
+	               alert("이미 있는 상호명입니다.");
+	            }else if(nickname==''){
+	               alert("상호명을 입력해주세요");
+	            }else{
+	               alert("사용이 가능한 상호명입니다.");
+	               $('#brandnamecheck').hide();
+		    	   $('#checkedbrandname').show();
+	            }
+	         }
+	      })
+	   });
+	});
+});
+//이메일 중복확인(개인)
+$(function(){
+	$('#email').change(function(){
+		$('#emailcheck').show();
+		$('#checkedemail').hide();
+	});
+	$(function(){
+	   $('#emailcheck').click(function(){
+	      var checkemail =$('#email').val();
+	      var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	      console.log(checkemail);
+	      $.ajax({
+	         type : "post",
+	         url : "http://localhost:8090/checkemail",
+	         data : {checkemail:checkemail},
+	         success:function(data,textStatus){
+	            if(data=="true"){
+	               alert("이미 사용중인 이메일입니다");
+	            }else if (checkemail==''){
+	               alert("이메일을 입력해주세요");
+	            }else if(exptext.test(checkemail)==false){
+	               alert("이메일 형식이 올바르지 않습니다.");   
+	            }else{
+	               alert("사용 가능한 이메일 입니다.");
+	               $('#emailcheck').hide();
+		    	   $('#checkedemail').show();
+	            }
+	         }
+	      })
+	   });
+	});
+});
+//이메일 중복확인(업체)
+$(function(){
+	$('#b_email').change(function(){
+		$('#b_emailcheck').show();
+		$('#b_checkedemail').hide();
+	});
+	$(function(){
+	   $('#b_emailcheck').click(function(){
+	      var checkemail =$('#b_email').val();
+	      var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	      console.log(checkemail.value);
+	      $.ajax({
+	         type : "post",
+	         url : "http://localhost:8090/checkemail",
+	         data : {checkemail:checkemail},
+	         success:function(data,textStatus){
+	            if(data=="true"){
+	               alert("이미 사용중인 이메일입니다");
+	            }else if (checkemail==''){
+	               alert("이메일을 입력해주세요");
+	            }else if(exptext.test(checkemail)==false){
+	               alert("이메일 형식이 올바르지 않습니다.");   
+	            }else{
+	               alert("사용 가능한 이메일 입니다.");
+	               $('#b_emailcheck').hide();
+		    	   $('#b_checkedemail').show();
+	            }
+	         }
+	      })
+	   });
+	});
+});
+
+//인증번호 5자리 번호 = 전송(개인)
+$(function(){
+	$('#phone').change(function(){
+		$('#confirmBnt').show();
+		$('#checkedauthNumber').hide();
+	});
+	$(function(){
+		
+		let phone;
+		let authCode= $('#authCode');
+		$(document).on('click','#goSMS', function () {		// 버튼을 클릭 했을 경우
+			let phone = $('#phone').val();	// 사용자가 입력한 전화번호
+			let authCode= $("#authCode");	//휴대폰 인증번호 담을 변수
+		
+			// 사용자가 입력한 전화번호가 공백이 아니고, 8자리 이상일 경우
+			if (phone != '' && phone.length > 8) {
+				$.ajax({
+					url: '/main/execute',	// 요청보낼 url
+					method: 'get',
+					data: {'phone': phone},	// 사용자가 입력한 휴대폰번호 전송
+					success: function (response) {
+						authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
+						console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
+		
+						alert('인증 번호가 발송 되었습니다.');
+					
+					},
+					error: function(response) {
+						alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')
+					}
+				});
+			}else{
+				alert("휴대폰 번호를 입력 해 주세요");
+			}
+		});
+		//인증번호 확인 (개인)
+		let authNumbers = document.getElementById("authNumber");
+		$(document).on('click', '#confirmBnt', function () {
+				// 인증번호가 공백이 아니고 0 이상일 경우
+				console.log("text에 사용자가 입력한 인증 번호 : " + authNumbers.value);
+				console.log("coolsms에서 받아온 인증 번호 : " + authCode.val());
+				if (authNumbers.value !='' && parseInt(authNumbers.value)>0) {	// val()로 받으면 문자열이기 때문에 형변환
+					if(authNumbers.value == authCode.val()){
+						cnfCheck = true;
+						alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
+						$('#confirmBnt').hide();
+						$('#checkedauthNumber').show();
+					} else {
+						alert('인증번호가 일치하지 않습니다.');
+					}
+					// 인증번호를 입력하지 않았을 경우
+				}else{alert("인증번호를 입력 해 주세요"); cnfCheck = false;}
+		});
+	})
+})
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 //인증번호 5자리 번호 = 전송(업체)
 $(function(){
 	$('#buserPhoneNum').change(function(){
 		$('#bconfirmBnt').show();
 		$('#bcheckedauthNumber').hide();
+<<<<<<< HEAD
 	});
 $(function(){
 	
@@ -290,15 +472,69 @@ $(function(){
 				// 인증번호를 입력하지 않았을 경우
 			}else{alert("인증번호를 입력 해 주세요"); cnfCheck = false;}
 		});
+=======
+	});
+	$(function(){
+		
+		let userPhoneNum;
+		let authCode= $('#bauthCode');
+		$(document).on('click','#bgoSMS', function () {		// 버튼을 클릭 했을 경우
+			let userPhoneNum = $('#buserPhoneNum').val();	// 사용자가 입력한 전화번호
+			let authCode= $("#bauthCode");	//휴대폰 인증번호 담을 변수
+			console.log(userPhoneNum);
+			// 사용자가 입력한 전화번호가 공백이 아니고, 8자리 이상일 경우
+			if (userPhoneNum != '' && userPhoneNum.length > 8) {
+				$.ajax({
+					url: '/main/execute',	// 요청보낼 url
+					method: 'get',
+					data: {'userPhoneNum': userPhoneNum},	// 사용자가 입력한 휴대폰번호 전송
+					success: function (response) {
+						authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
+						console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
+		
+						alert('인증 번호가 발송 되었습니다.');
+					
+					},
+					error: function(response) {
+						alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')
+					}
+				});
+			}else{
+				alert("휴대폰 번호를 입력 해 주세요");
+			}
+		});
+	
+		
+		//인증번호 확인 (업체)
+		let authNumbers = document.getElementById("bauthNumber");
+		$(document).on('click', '#bconfirmBnt', function () {
+				// 인증번호가 공백이 아니고 0 이상일 경우
+				console.log("text에 사용자가 입력한 인증 번호 : " + authNumbers.value);
+				console.log("coolsms에서 받아온 인증 번호 : " + authCode.val());
+				if (authNumbers.value !='' && parseInt(authNumbers.value)>0) {	// val()로 받으면 문자열이기 때문에 형변환
+					if(authNumbers.value == authCode.val()){
+						cnfCheck = true;
+						alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
+						$('#bconfirmBnt').hide();
+						$('#bcheckedauthNumber').show();
+					} else {
+						alert('인증번호가 일치하지 않습니다.');
+					}
+					// 인증번호를 입력하지 않았을 경우
+				}else{alert("인증번호를 입력 해 주세요"); cnfCheck = false;}
+		});
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 	})
 })
-
 //비밀번호 일치여부(개인)
 function isSame(){
 	var password = document.getElementById('password');
 	var checkpass = document.getElementById('pcheckpassword');
+<<<<<<< HEAD
 	var checkPwd = document.getElementById("password");
 	var checkPwd1 = document.getElementById("pcheckpassword");
+=======
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 	console.log(password);
 	console.log(checkpass);
 	
@@ -491,13 +727,21 @@ function Valid(){
                     			
 								
 								<div id=personalform>
+<<<<<<< HEAD
 								<form action="personnal" method="POST" onsubmit="return Validation();">
+=======
+								<form action="personnal" method="POST">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="nickname" style="position:absolute; margin:2.5%;" >닉네임<span class="req">*</span></label>
 				                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 					                    <input type="button" id="nicknamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
+<<<<<<< HEAD
 					                    <input type="hidden" name="check_nick" id="check_nick" value=0>
 					                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
+=======
+					                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 			                        </div>
 	
 									<%--[개인]이메일 form 
@@ -505,6 +749,7 @@ function Valid(){
 				                        <label class="form-label" for="email" style="position:absolute; margin:2.5%;">이메일<span class="req">*</span></label>
 				                        <input type="text" id="email" name="email" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 				                        <input type="button" id="emailcheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
+<<<<<<< HEAD
 				                        <input type="button" id="checkedemail" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
 			                        </div>
 	                        		--%>
@@ -513,6 +758,9 @@ function Valid(){
 				                        <input type="text" id="userid" name="userid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 				                        <input type="button" id="useridcheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
 				                        <input type="button" id="checkeduserid" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
+=======
+				                        <input type="button" id="checkedemail" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 			                        </div>
 			                
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -562,10 +810,17 @@ function Valid(){
 								<div id=businessform>
 								<form action="businesss" method="post" onsubmit="return Valid();">
 									<div class="form-outline mb-4" style="display:flex;">
+<<<<<<< HEAD
 				                        <label class="form-label" for="bname" style="position:absolute; margin:2.5%;" >상호명<span class="req">*</span></label>
 				                 		<input type="text" id="bname" name="bname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 					                    <input type="button" id="brandnamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
 					                    <input type="button" id="checkedbrandname" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
+=======
+				                        <label class="form-label" for="brandname" style="position:absolute; margin:2.5%;" >상호명<span class="req">*</span></label>
+				                 		<input type="text" id="brandname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+					                    <input type="button" id="brandnamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
+					                    <input type="button" id="checkedbrandname" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 		                        	</div>
 		                        
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -574,10 +829,17 @@ function Valid(){
 			                        </div>
 									<%--[업체]이메일
 			                        <div class="form-outline mb-4" style="display:flex;">
+<<<<<<< HEAD
 				                        <label class="form-label" for="bemail" style="position:absolute; margin:2.5%;">이메일<span class="req">*</span></label>
 				                        <input type="email" id="bemail" name="bemail" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 				                        <input type="button" id="b_emailcheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
 				                        <input type="button" id="b_checkedemail" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
+=======
+				                        <label class="form-label" for="b_email" style="position:absolute; margin:2.5%;">이메일<span class="req">*</span></label>
+				                        <input type="email" id="b_email" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
+				                        <input type="button" id="b_emailcheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
+				                        <input type="button" id="b_checkedemail" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 			                        </div>
 			                         --%>
 			                         
@@ -589,6 +851,7 @@ function Valid(){
 			                        </div>
 			                        
 			                        <div class="form-outline mb-4" style="display:flex;">
+<<<<<<< HEAD
 				                        <label class="form-label" for="bkakaoid" style="position:absolute; margin:2.5%;" >카카오ID</label>
 				                 		<input type="text" id="bkakaoid" name="bkakaoid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 			                        </div>
@@ -597,6 +860,11 @@ function Valid(){
 				                        <label class="form-label" for="bphone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 				                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 					                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" >
+=======
+				                        <label class="form-label" for="buserPhoneNum" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
+				                 		<input type="text" id="buserPhoneNum" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+					                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" style="margin-left:2%;">
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 			                        </div>
 			                        
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -626,10 +894,17 @@ function Valid(){
 					                        </div>
 				                       	</div>
 				                       	<div>
+<<<<<<< HEAD
 					                    	<label class="form-label" for="baddress" style="margin:2%;">[도로명]주소</label>
 					                 		<input type="text" id="baddress" name="baddress" class="form-control form-control-lg" readonly/>
 					                 		<label class="form-label" for="bdetailadd"style="margin:2%;">상세주소</label>
 					                 		<input type="text" id="bdetailadd" name="bdetailadd" class="form-control form-control-lg" />
+=======
+					                    	<label class="form-label" for="b_address" style="margin:2%;">[도로명]주소</label>
+					                 		<input type="text" id="b_address" class="form-control form-control-lg" readonly/>
+					                 		<label class="form-label" for="b_detailedaddress"style="margin:2%;">상세주소</label>
+					                 		<input type="text" id="b_detailedaddress" class="form-control form-control-lg" />
+>>>>>>> e66b4b78ef2b59c90846da7fad90efd4ee664bf5
 				                 		</div>
 									</div>
 									<br>

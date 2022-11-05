@@ -2,27 +2,23 @@ package com.kosta.clothes.bean;
 
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class Sharing {
-	private Long sid;
+	private Integer sid;
 	private String sname;
 	private String stitle;
 	private String scontent;
-	private String simage;
 	private String sstatus;
+	private String sfileids;
 	private String sdealType;
 	private int grade;
 	private int ai;
 	private String addressCity;
 	private String addressTown;
 	private Date regDate;
-	private MultipartFile simagefile;
-	
-	public Long getSid() {
+	public Integer getSid() {
 		return sid;
 	}
-	public void setSid(Long sid) {
+	public void setSid(Integer sid) {
 		this.sid = sid;
 	}
 	public String getSname() {
@@ -43,20 +39,18 @@ public class Sharing {
 	public void setScontent(String scontent) {
 		this.scontent = scontent;
 	}
-	
-	public String getSimage() {
-		return simage;
-	}
-	public void setSimage(String simage) {
-		this.simage = simage;
-	}
 	public String getSstatus() {
 		return sstatus;
 	}
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
 	}
-	
+	public String getSfileids() {
+		return sfileids;
+	}
+	public void setSfileids(String sfileids) {
+		this.sfileids = sfileids;
+	}
 	public String getSdealType() {
 		return sdealType;
 	}
@@ -93,13 +87,31 @@ public class Sharing {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public MultipartFile getSimagefile() {
-		return simagefile;
+	public Sharing() {
+		super();
 	}
-	public void setSimagefile(MultipartFile simagefile) {
-		this.simagefile = simagefile;
+	public Sharing(Integer sid, String sname, String stitle, String scontent, String sstatus, String sfileids,
+			String sdealType, int grade, int ai, String addressCity, String addressTown, Date regDate) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.stitle = stitle;
+		this.scontent = scontent;
+		this.sstatus = sstatus;
+		this.sfileids = sfileids;
+		this.sdealType = sdealType;
+		this.grade = grade;
+		this.ai = ai;
+		this.addressCity = addressCity;
+		this.addressTown = addressTown;
+		this.regDate = regDate;
 	}
-
-	
+	@Override
+	public String toString() {
+		return "Sharing [sid=" + sid + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
+				+ ", sstatus=" + sstatus + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", grade=" + grade
+				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", regDate="
+				+ regDate + "]";
+	}
 	
 }

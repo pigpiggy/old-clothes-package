@@ -1,11 +1,23 @@
 const container = document.querySelector('.container')
 
 //part1. get a batch of images and append to the container div
-function getRandNum(){
-    return Math.floor(Math.random() * 100)
-}
+var loading = false;
+var scrollPage = 1;
 
 function loadImages(numImages = 10){
+	if(!loading){
+		loading = true;
+		$.ajax({
+			url: "${pageContext.servletContext.contextPath }/sharingList",
+			type: "get",
+			data: {"page":page},
+			dataType:"html",
+			success:function(res){
+				$("")
+			}
+			
+		})
+	}
     let i = 0;
     while(i < numImages){
         const img = document.createElement('img')

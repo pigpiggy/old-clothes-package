@@ -10,4 +10,7 @@
 		<mapper resource="mybatis/mappers/filedb.xml"/>
 		
 	</mappers>
-</configuration>	
+</configuration>
+
+	
+

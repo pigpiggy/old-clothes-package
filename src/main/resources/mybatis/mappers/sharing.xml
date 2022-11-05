@@ -25,9 +25,9 @@
 		]]>
 	</select>
 	
-	<select id="selectSharingList" resultType="com.kosta.clothes.bean.Sharing">
+	<select id="selectSharingList" resultType="sharing">
 		<![CDATA[
-			select * from sharing order by sno desc
+			select sno, sname, stitle, scontent, sstatus, sfileids, addressCity, addressTown, grade, ai, count, sdealType, regdate from sharing order by sno desc
 		]]>
 	</select>
 </mapper>

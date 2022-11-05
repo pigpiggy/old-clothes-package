@@ -3,7 +3,10 @@ package com.kosta.clothes.service;
 import java.io.FileOutputStream;
 
 import javax.servlet.ServletContext;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.FileVO;
+import com.kosta.clothes.bean.JoinVo;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.SharingDAO;

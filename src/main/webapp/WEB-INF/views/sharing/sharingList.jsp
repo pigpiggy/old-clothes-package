@@ -51,10 +51,10 @@
     </div>
 	
     <div class="card-list">
-	  <c:forEach var="sharing" items="${sharingList }">
+	  <c:forEach var="sharing" items="${sharingList}">
       <div class="card">
           <div class="card-image">
-              <img src="upload/${ sharing.simage}" alt="무료나눔 옷">
+              <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
           </div>
           <div class="card-body">
               <span class="date">${sharing.regDate}</span>

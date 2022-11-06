@@ -81,6 +81,12 @@ public class SharingServiceImpl implements SharingService{
 		// TODO Auto-generated method stub
 		return sharingDAO.selectSharingList();
 	}
+
+	@Override
+	public List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception {
+		// TODO Auto-generated method stub
+		return sharingDAO.infiniteScrollDown(snoToStart);
+	}
 	
 	
 }

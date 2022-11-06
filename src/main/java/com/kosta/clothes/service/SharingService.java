@@ -13,4 +13,5 @@ public interface SharingService {
 	Integer registSharing(Sharing sharing, MultipartFile[] files) throws Exception;
 	Sharing viewSharing(Integer sno) throws Exception;
 	List<Sharing> getSharingList() throws Exception;
+	List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception;
 }

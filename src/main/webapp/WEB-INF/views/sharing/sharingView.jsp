@@ -41,13 +41,12 @@ $(function() {
 <header>
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
-	<div class="container">
+	<div id="viewcontainer">
     <section class="content_main">
       <section id="content_left">
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <img src="/upload/${sharing.scontent}" />
             <div class="swiper-slide">왜 안돼</div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
@@ -59,10 +58,11 @@ $(function() {
         </div>
       </section>
       <section id="content_right">
-        <h4>무료나눔 상세 페이지</h4>
+        <h4>${sharing.stitle}</h4>
+        <input type="hidden" name="sno">
         <div id="sharingname">
           <span>level icon</span>
-          <span>nick name</span>
+          <span>${sharing.sname }</span>
           <span><i class="fa-regular fa-envelope"></i>
           </span>
           <span><i class="fa-solid fa-heart"></i>
@@ -79,19 +79,13 @@ $(function() {
       <div class="scontent">
         <h3>상품정보</h3>
         <div id=sdetail>
-        	왜 안되는 거니!
+        	${sharing.scontent}
+        	<c:forEach var="sfileids" items="${files }">
+            <img src="/img/${sfileids}" />
+        	</c:forEach>
         </div>
       </div>
-      <form class="reply">
-      <div class="reply__column">
-        <i class="far fa-plus-square fa-lg"></i>
-      </div>
-      <div class="reply__column">
-        <input type="text" placeholder="Write a message..." />
-        <i class="far fa-smile-wink fa-lg"></i>
-        <button><i class="fas fa-arrow-up"></i></button>
-      </div>
-    </form>    
+      
     </section>
     </div>
 <footer>

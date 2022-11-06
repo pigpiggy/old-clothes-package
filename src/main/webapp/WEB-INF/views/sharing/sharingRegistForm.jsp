@@ -23,7 +23,7 @@
 		<h1>상품등록</h1>
 		<form action="sharingRegist" method="post" name="writeForm"
 			enctype="multipart/form-data" accept="image/*">
-			<input type="hidden" name="sid">
+			<input type="hidden" name="sno">
 			<div>
 				<input type="text" class="form-control" placeholder="제목" id="title"
 					name="stitle">

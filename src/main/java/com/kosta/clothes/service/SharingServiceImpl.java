@@ -30,8 +30,15 @@ public class SharingServiceImpl implements SharingService{
 
 	@Autowired
 	ServletContext servletContext;
+	
 	@Override
-	public Integer registSharing(Sharing sharing, MultipartFile[] files) throws Exception {
+	public void registSharing(Sharing sharing, MultipartFile[] files) throws Exception {
+		Integer sharingid = sharingDAO.getNextSharingNo();
+		Sharing sharingvo = new Sharing();
+		sharingvo.setSno(sharingid);
+		sharingvo.setStitle(sharing.getStitle());
+		sharingvo.setScontent(sharing.getScontent());
+		
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
@@ -43,33 +50,29 @@ public class SharingServiceImpl implements SharingService{
 					fileVo.setDirectory_name(path);
 					fileVo.setTname(file.getOriginalFilename());
 					fileVo.setTsize(file.getSize());
+					fileVo.setSno(sharingid);
 					fileVo.setContent_type(file.getContentType());
-					if(fileVo.getIno() == null) {
-						fileVo.setIno(0);
-					}
+					fileDAO.insertFileInfo(fileVo);
+					System.out.println("sharingServiceImpl:" + fileVo);
+					
 					FileOutputStream fos = new FileOutputStream(path+fileVo.getTno());
 					FileCopyUtils.copy(file.getBytes(), fos);
 					
 					fileids += fileVo.getTno()+",";
 				}
+				
 			}
 		}
-	
-		Integer sharingid = sharingDAO.getNextSharingNo();
-		sharing.setSno(sharingid);
-		sharing.setStitle(sharing.getStitle());
-		sharing.setScontent(sharing.getScontent());
-		sharing.setSdealType(sharing.getSdealType());
-		sharing.setAddressCity(sharing.getAddressCity());
-		sharing.setAddressTown(sharing.getAddressTown());
-		sharing.setSfileids(fileids);
-		fileVo.setSno(sharingid);
-		fileDAO.insertFileInfo(fileVo);
-
-		sharingDAO.insertSharing(sharing);
+		sharingvo.setSfileids(fileids);
+		sharingvo.setSdealType(sharing.getSdealType());
+		sharingvo.setAddressCity(sharing.getAddressCity());
+		sharingvo.setAddressTown(sharing.getAddressTown());
 		
-		return sharingid;
+		sharingDAO.insertSharing(sharingvo);
+		System.out.println(sharing);
+
 	}
+
 
 	@Override
 	public Sharing viewSharing(Integer sno) throws Exception {

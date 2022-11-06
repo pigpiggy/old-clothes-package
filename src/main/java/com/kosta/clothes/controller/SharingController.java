@@ -105,7 +105,6 @@ public class SharingController {
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Sharing sharing) {
-		System.out.println("들어옴");
 		Integer snoToStart = sharing.getSno()-1;
 		List<Sharing> sharingList = new ArrayList<>();
 		try {

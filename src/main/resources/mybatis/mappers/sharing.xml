@@ -28,21 +28,14 @@
 	<select id="selectSharingList" resultType="sharing">
 		<![CDATA[
 			select * from ( select * from sharing order by sno desc)
-			where rownum <= 9
+			where rownum <= 6
 		]]>
 	</select>
 	
 	<select id="infiniteScrollDown" parameterType="Integer" resultType="sharing">
 		<![CDATA[
 			select * from ( select * from sharing where sno <=#{snoToStart} order by sno desc)
-			where rownum <= 9
-		]]>
-	</select>
-	
-	<select id="infiniteScrollUp" parameterType="Integer" resultType="sharing">
-		<![CDATA[
-			select * from ( select * from sharing where sno >=#{snoToStart} order by sno desc)
-			where rownum <= 9
+			where rownum <= 6
 		]]>
 	</select>
 </mapper>

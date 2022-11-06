@@ -22,7 +22,6 @@
 <script>
 </script>
 <style>
-<<<<<<< HEAD
 <!--카카오 ID 넣는 방법 설명[hover 순서 중요] -->
 .req{
 	color:red;
@@ -37,16 +36,13 @@
 .form-outline:hover .my_img {
     display: block;
 }
-=======
 <!--카카오 ID 넣는 방법 설명[hover 순서 중요] 안 될시 req위로 display:block올리고 none 그 밑으로 올리고 왔다갔다하면 됩니다.. -->
->>>>>>> 9ccd8eae6592a13410da438550684f1abd89e27c
 
 #wrapper{
   height: auto;
   min-height: 100%;
   padding-bottom: 50px;
 }
-<<<<<<< HEAD
 
 footer{
   height: 50px;
@@ -54,7 +50,6 @@ footer{
   transform : translateY(-100%);
 }
 
-=======
 .my_img {
 	display:none;
 	width:495px;
@@ -63,7 +58,6 @@ footer{
 .form-outline:hover .my_img {
     display: block;
 }
->>>>>>> 9ccd8eae6592a13410da438550684f1abd89e27c
  
 </style>
 </head>
@@ -273,15 +267,8 @@ footer{
 	    </section>
 	</div>
 	
-	<footer>
-	       <c:import url='/WEB-INF/views/includes/footer.jsp' />
-<<<<<<< HEAD
-	</footer>
-=======
-	</footer> --%>
 <script src="<c:url value='/resources/js/users/join.js'/>"></script>
 <script src="<c:url value='/resources/js/users/validation.js'/>"></script>
->>>>>>> 9ccd8eae6592a13410da438550684f1abd89e27c
 </body>
 
 </html>

@@ -96,15 +96,67 @@ public class CertificationService implements UsersService {
 		usersDao.insertBusiness(business);
 	}
 
-	//로그인
+	//로그인[개인]
 		@Override
-		public Users login(String email, String password) throws Exception {
-			System.out.println(email);
+		public Users login(String userid, String password) throws Exception {
+			System.out.println(userid);
 			System.out.println(password);
 			Map<String,String> map = new HashMap<String, String>();
-			map.put("email", email);
+			map.put("userid", userid);
 			map.put("password", password);
 			return usersDao.selectAccount(map);
+		}
+		//로그인[업체]
+		@Override
+		public Business blogin(String businessid, String bpassword) throws Exception {
+			System.out.println(businessid);
+			System.out.println(bpassword);
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("businessid", businessid);
+			map.put("bpassword", bpassword);
+			return usersDao.selectbAccount(map);
+		}
+
+		@Override
+		public String findUserId(String phone) throws Exception {
+			return usersDao.findUserId(phone);
+		}
+
+		@Override
+		public String findBusinessId(String bphone) throws Exception {
+			return usersDao.findBusinessId(bphone);
+		}
+
+		@Override
+		public String checkUserIdnPhone(String userid, String phone) throws Exception {
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("userid", userid);
+			map.put("phone", phone);
+			return usersDao.checkUserIdnPhone(map);
+		}
+
+		@Override
+		public String checkBusinessIdnPhone(String businessid, String bphone) throws Exception {
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("businessid", businessid);
+			map.put("bphone", bphone);
+			return usersDao.checkUserIdnPhone(map);
+		}
+
+		@Override
+		public void renewalPass(String userid, String password) throws Exception {
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("userid", userid);
+			map.put("password", password);
+			usersDao.updatepassword(map);
+		}
+
+		@Override
+		public void renewalbPass(String businessid, String bpassword) throws Exception {
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("businessid", businessid);
+			map.put("bpassword", bpassword);
+			usersDao.updatebpassword(map);
 		}
 
 }

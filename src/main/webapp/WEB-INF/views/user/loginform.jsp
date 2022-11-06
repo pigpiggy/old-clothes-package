@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>login</title>
     
      <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,8 +36,8 @@
                     		<form action="login" method="post">               			
 								<div id=loginform>
 			                        <div class="form-outline mb-4" style="display:flex;">
-				                        <label class="form-label" for="email" style="position:absolute; margin:2.5%;"><img src="image/icons8-user-40.png" style="width:65%; margin-bottom:15%;"></label>
-				                        <input type="text" id="email" name="email" class="form-control form-control-lg" placeholder="이메일" style="padding:.5rem 1rem .5rem 3rem;" />
+				                        <label class="form-label" for="id" style="position:absolute; margin:2.5%;"><img src="image/icons8-user-40.png" style="width:65%; margin-bottom:15%;"></label>
+				                        <input type="text" id="id" name="id" class="form-control form-control-lg" placeholder="아이디" style="padding:.5rem 1rem .5rem 3rem;" />
 			                        </div>
 	
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -70,7 +70,6 @@
             </div>
         </div>
     </section>
-  
 </body>
 
 </html>

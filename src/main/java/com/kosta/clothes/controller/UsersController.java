@@ -1,6 +1,7 @@
 package com.kosta.clothes.controller;
 
 
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -16,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springframework.web.servlet.ModelAndView;
-
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
@@ -166,31 +164,129 @@ public class UsersController {
     }
     //로그인
     @PostMapping("/login")
-    public String login(@RequestParam(value="email",required = true,defaultValue = "")String email, 
+    public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
     					@RequestParam(value="password",required = true,defaultValue = "")String password,
     					Model model) {
     	try {
-    		System.out.println("email:"+email);
+    		Users authUser=null;
+    		Business bauthUser = null;
+    		String userid = id;
+    		System.out.println("id:"+userid);
     		System.out.println("password:"+password);
-    		Users authUser = usersService.login(email,password);
+    		authUser = usersService.login(userid,password);
     		System.out.println(authUser);
     		if(authUser == null) {
+    			String businessid = id;
+    			String bpassword = password;
+    			System.out.println("bid:"+businessid);
+        		System.out.println("password:"+bpassword);
+        		bauthUser = usersService.blogin(businessid,bpassword);
+    		}
+    		if(authUser == null && bauthUser==null) {
     			model.addAttribute("result", "fail");
 				return "/user/loginform";
+    		}else if(authUser!=null){
+    			session.setAttribute("authUser", authUser);
+    		}else {
+    		session.setAttribute("authUser", bauthUser);
     		}
-    		session.setAttribute("authUser", authUser);
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
     	return "redirect:/";
     }
   //로그아웃
-  		@RequestMapping(value="/logout",method = RequestMethod.GET)
-  		public String logout(HttpSession session) {
-  			
-  			session.removeAttribute("authUser");
-  			return "redirect:/";
-  		
-  		}
+  @RequestMapping(value="/logout",method = RequestMethod.GET)
+  public String logout(HttpSession session) {
+	  session.removeAttribute("authUser");
+	  return "redirect:/";
+  }
+  //아이디찾기창
+  @GetMapping("/searchid")
+  public String searchId() {
+	  return "user/searchid";
+  }
+  //아이디찾기
+  @PostMapping("/searchid")
+  public String searchId(@RequestParam("ph")String ph, Model model) {
+	  try {
+		 String fuId = null;
+		 String fbId = null;
+		 String phone = ph; 
+		 fuId = usersService.findUserId(phone);
+		 if(fuId != null) {
+			 model.addAttribute("user", fuId);
+		 } else if(fuId==null) {
+			 String bphone = ph;
+			 fbId = usersService.findBusinessId(bphone);
+			 model.addAttribute("business", fbId);
+		 }
+		 if(fuId==null&&fbId==null) {
+			 model.addAttribute("msg", "정보와 일치하는 아이디가 없습니다.");
+			 return "user/searchid";
+		 }
+		  
+	  }catch(Exception e) {
+		  e.printStackTrace();
+	  }
+	  return "user/searchidresult";
+  }
+  //아이디와 전화번호 체크창
+  @GetMapping("/checkidnphone")
+  public String checkIdnPhone() {
+	  return "user/checkidnphone";
+  }
+  //아이디와 전화번호 체크
+  @PostMapping("/checkidnphone")
+  public String checkIdnPhone(@RequestParam("id")String id,@RequestParam("phone")String ph, Model model) {
+	  try {
+		  String userid = null;
+		  String businessid = null;
+		  String phone = null;
+		  String bphone = null;
+		  String cbid = null;
+		  userid = id;
+		  phone = ph;
+		  String cuid = usersService.checkUserIdnPhone(userid, phone);
+		  if(cuid!=null) {
+			  model.addAttribute("user", cuid);
+		  } else if(cuid==null) {
+			  businessid = id;
+			  bphone = ph;
+			  cbid = usersService.checkBusinessIdnPhone(businessid, bphone);
+			  model.addAttribute("busineee", cbid);
+		  }
+		  if(cuid==null&&cbid==null) {
+			  model.addAttribute("msg", "정보와 일치하는 회원이 없습니다.");
+				 return "user/checkidnphone";
+		  }
+		  
+	  }catch(Exception e) {
+		  e.printStackTrace();
+	  }
+	  return "user/renewalpass";
+  }
+  //새 비밀번호
+  @PostMapping("/renewalpass")
+  public String renewalPass(@RequestParam("userid")String userid, 
+		  @RequestParam("businessid")String businessid, 
+		  @RequestParam("password") String password, Model model) {
+	  try { 
+		  if(userid!=null) {
+		  usersService.renewalPass(userid, password);
+	  	  }else if(businessid!=null) {
+	  	  String bpassword = password;
+	  	  usersService.renewalbPass(businessid, bpassword);
+	  	  }
+	  	  else {
+	  		  model.addAttribute("msg", "비밀번호 수정에 실패했습니다.");
+	  		  return "user/renewalpass";
+	  	  }
+		  
+	  }catch(Exception e) {
+		  e.printStackTrace();
+	  }
+	  return "user/loginform";
+  }
 }
 

@@ -827,10 +827,6 @@ function Valid(){
             </div>
         </div>
     </section>
-    <%--footer --%>
-	<footer>
-	       <c:import url='/WEB-INF/views/includes/footer.jsp' />
-	</footer>
 </body>
 
 </html>

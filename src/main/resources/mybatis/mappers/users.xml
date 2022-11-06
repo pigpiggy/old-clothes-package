@@ -107,14 +107,63 @@
 		]]>
 	</select>
 	
-	<!--로그인 -->
+	<!--로그인[개인] -->
 	<select id="selectAccount" parameterType="map" resultType="Users">
 		<![CDATA[
 			SELECT *
 			FROM users 
-			WHERE email=#{email} and password=#{password}
+			WHERE userid=#{userid} and password=#{password}
 		]]>
 	</select>
+	<!--로그인[업체] -->
+	<select id="selectbAccount" parameterType="map" resultType="Business">
+		<![CDATA[
+			SELECT *
+			FROM business 
+			WHERE businessid=#{businessid} and bpassword=#{bpassword}
+		]]>
+	</select>
+	
+	<!--아이디찾기 -->
+	<select id="findUserId" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT userid
+			FROM users
+			WHERE phone=#{phone}
+		]]>
+	</select>
+	<select id="findBusinessId" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT businessid
+			FROM business 
+			WHERE bphone=#{bphone}
+		]]>
+	</select>
+	<!--아이디&전화번호 체크 -->
+	<select id="checkUserIdnPhone" parameterType="map" resultType="String">
+		<![CDATA[
+			SELECT userid
+			FROM users
+			WHERE userid = #{userid} and phone=#{phone}
+		]]>
+	</select>
+	<select id="checkBusinessIdnPhone" parameterType="map" resultType="String">
+		<![CDATA[
+			SELECT businessid
+			FROM business
+			WHERE businessid = #{businessid} and bphone=#{bphone}
+		]]>
+	</select>
+	<update id="updatepassword" parameterType="map">
+		<![CDATA[
+			update users set password = #{password} where businessid = #{businessid}
+		]]>
+	</update>
+	<update id="updatebpassword" parameterType="map">
+		<![CDATA[
+			update business set bpassword = #{bpassword} where userid = #{userid}
+		]]>
+	</update>
 	
 </mapper>
 

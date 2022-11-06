@@ -1,38 +1,66 @@
-const container = document.querySelector('.container')
+// 스크롤 전 좌표
+let loading = false;
+let lastScrollTop = 0;
 
-//part1. get a batch of images and append to the container div
-var loading = false;
-var scrollPage = 1;
+$(window).scrollTop = 0;
 
-function loadImages(numImages = 10){
+$(window).scroll(function(){
+	//스크롤 후 좌표
+	let currentScrollTop = $(window).scrollTop();
+	//다운 스크롤
+	if(currentScrollTop + $(window).height() + 100 >=$(document).height()){
+		surveyList();
+		
+		
+		
+	}
+})
+
+function surveyList(){
 	if(!loading){
 		loading = true;
+		
+		let lastsno = $(".card:last").attr("data-sno");
+	
 		$.ajax({
-			url: "${pageContext.servletContext.contextPath }/sharingList",
-			type: "get",
-			data: {"page":page},
-			dataType:"html",
-			success:function(res){
-				$("")
+			type: 'post',
+			url: 'infiniteScrollDown',
+			dataType: 'json',
+			data: JSON.stringify({
+				sno: lastsno
+			}),
+			contentType: "application/json",
+			success: function(data){
+				console.log(data);
+				let str="";
+				if(data!=""){
+					$(data).each(
+						function(){
+							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
+		          			str	+=  "<div class="+"'card-image'"+">";
+		              		str	+=  "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
+		          			str	+= "</div>";
+		          			str	+= "<div class="+"'card-body'"+">";
+		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
+		              		str	+= "<h2>"+this.stitle+"</h2>";
+		              		str	+= "<p class="+"'sharingContent'"+">"+this.scontent+"</p>";
+		          			str	+= "</div>";
+		          			str	+= "<div class="+"'card-footer'"+">";
+		              		str	+= this.addressCity+" "+this.addressTown;
+		          			str	+= "</div>";
+		          			str	+= "</div>";
+		          			str	+= "</div>";
+						});
+						console.log(str);
+						$(".card-list").append(str);
+						loading = false;
+				}
 			}
-			
-		})
+		});
 	}
-    let i = 0;
-    while(i < numImages){
-        const img = document.createElement('img')
-        img.src = `${URL}${getRandNum()}`
-        container.appendChild(img)
-        i++
-    }
 }
 
-loadImages()
+	
 
-//part2. listen for a scroll event and load more images if we reach the bottom of the window
 
-window.addEventListener('scroll', () => {
-    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-        loadImages()
-    }
-})
+

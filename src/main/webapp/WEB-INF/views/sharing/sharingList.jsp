@@ -52,14 +52,14 @@
 	
     <div class="card-list">
 	  <c:forEach var="sharing" items="${sharingList}">
-      <div class="card">
+      <div class="card" data-sno=${sharing.sno }>
           <div class="card-image">
               <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
           </div>
           <div class="card-body">
               <span class="date">${sharing.regDate}</span>
               <h2>${sharing.stitle }</h2>
-              <p>${sharing.scontent }</p>
+              <p class="sharingContent">${sharing.scontent }</p>
           </div>
           <div class="card-footer">
               ${sharing.addressCity} ${sharing.addressTown }

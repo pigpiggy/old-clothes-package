@@ -3,6 +3,7 @@ let loading = false;
 let lastScrollTop = 0;
 
 $(window).scroll(function(){
+	$(window).scrollTop = 0;
 	//스크롤 후 좌표
 	let currentScrollTop = $(window).scrollTop();
 	//다운 스크롤
@@ -41,7 +42,7 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
 		              		str	+= "<h2>"+this.stitle+"</h2>";
-		              		str	+= "<p>"+this.scontent+"</p>";
+		              		str	+= "<p class="+"'sharingContent'"+">"+this.scontent+"</p>";
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-footer'"+">";
 		              		str	+= this.addressCity+" "+this.addressTown;

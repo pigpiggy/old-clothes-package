@@ -59,7 +59,7 @@
           <div class="card-body">
               <span class="date">${sharing.regDate}</span>
               <h2>${sharing.stitle }</h2>
-              <p>${sharing.scontent }</p>
+              <p class="sharingContent">${sharing.scontent }</p>
           </div>
           <div class="card-footer">
               ${sharing.addressCity} ${sharing.addressTown }

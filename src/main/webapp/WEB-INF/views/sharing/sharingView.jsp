@@ -47,7 +47,9 @@ $(function() {
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">왜 안돼</div>
+            <div class="swiper-slide">
+                <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
+            </div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
             <div class="swiper-slide">Slide 5</div>
@@ -59,14 +61,13 @@ $(function() {
       </section>
       <section id="content_right">
         <h4>${sharing.stitle}</h4>
-        <input type="hidden" name="sno">
+        <input type="hidden" name="sno" data-sno=${sharing.sno }>
         <div id="sharingname">
           <span>level icon</span>
           <span>${sharing.sname }</span>
-          <span><i class="fa-regular fa-envelope"></i>
+          <span class="letterAndHeart"><img src="image/letter.png" alt="쪽지">
           </span>
-          <span><i class="fa-solid fa-heart"></i>
-          </span>
+          <span class="letterAndHeart"><img src="image/heart.png" alt="찜신청전"></span>
         </div>
         <div id="sreview">거래후기: 12건</div>
         <div id="sbtn">
@@ -81,15 +82,15 @@ $(function() {
         <div id=sdetail>
         	${sharing.scontent}
         	<c:forEach var="sfileids" items="${files }">
-            <img src="/img/${sfileids}" />
+                <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
         	</c:forEach>
         </div>
       </div>
       
     </section>
     </div>
-<footer>
+<%-- <footer>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer>
+</footer> --%>
 </body>
 </html>

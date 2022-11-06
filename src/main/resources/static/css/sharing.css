@@ -24,6 +24,14 @@ a {
   color: inherit;
 }
 
+#sharingHtml {
+	overflow-y: scroll;
+}
+
+#sharingBody {
+	min-height: 101%;
+}
+
 #sharingList{
   width: 1000px;
   margin: 100px auto;
@@ -402,6 +410,10 @@ h1 {
 	margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+.letterAndHeart img{
+	width: 25px;
 }
 
 #sreview {

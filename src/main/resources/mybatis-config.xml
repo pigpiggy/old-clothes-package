@@ -8,6 +8,7 @@
 		<mapper resource="mybatis/mappers/users.xml"/>
 		<mapper resource="mybatis/mappers/sharing.xml"/>
 		<mapper resource="mybatis/mappers/filedb.xml"/>
+		<mapper resource="mybatis/mappers/free.xml"/>
 		
 	</mappers>
 </configuration>

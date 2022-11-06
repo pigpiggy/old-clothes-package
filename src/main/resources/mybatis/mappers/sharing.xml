@@ -29,7 +29,7 @@
 		<![CDATA[
 			select * from ( select * from sharing order by sno desc)
 
-			where rownum <= 3
+			where rownum <= 6
 		]]>
 	</select>
 	
@@ -37,7 +37,7 @@
 		<![CDATA[
 			select * from ( select * from sharing where sno <=#{snoToStart} order by sno desc)
 
-			where rownum <= 3
+			where rownum <= 6
 		]]>
 	</select>
 	

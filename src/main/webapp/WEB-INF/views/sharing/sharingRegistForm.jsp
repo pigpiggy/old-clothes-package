@@ -142,8 +142,7 @@
 							let si = [];
 							si = jibunAddr.split(" ")[0];
 							console.log(si);
-							let dong = jibunAddr.split(" ")[1].concat(" ",
-									jibunAddr.split(" ")[2]);
+							let dong = jibunAddr.split(" ")[1].concat(" ",jibunAddr.split(" ")[2]);
 							console.log(dong);
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
 							document.getElementById('member_post').value = data.zonecode;

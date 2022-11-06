@@ -43,7 +43,7 @@ public class SharingController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			List<Sharing> sharingList = sharingService.getSharingList();
-			System.out.println(sharingList);
+			System.out.println("sharing" + sharingList );
 			List<Integer> fileList = new ArrayList<>();
 			for(int i=0;i<sharingList.size();i++) {
 				fileList.add(Integer.parseInt(sharingList.get(i).getSfileids().split(",")[0]));

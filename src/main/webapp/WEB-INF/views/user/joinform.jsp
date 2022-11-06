@@ -19,6 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
 //업체 개인 radio버튼 체크씨 view전환
 $(function(){
@@ -628,11 +629,31 @@ function Valid(){
 }
 
 
+
 </script>
 <style>
+<!--카카오 ID 넣는 방법 설명[hover 순서 중요] -->
+.my_img {
+	display:none;
+	width:495px;
+	height:400px;
+    
+}
+
+.form-outline:hover .my_img {
+    display: block;
+}
+
 .req{
 	color:red;
 }
+
+
+ 
+
+
+
+
 </style>
 </head>
 <body>
@@ -663,7 +684,7 @@ function Valid(){
 								<form action="personnal" method="POST" onsubmit="return Validation();">
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="nickname" style="position:absolute; margin:2.5%;" >닉네임<span class="req">*</span></label>
-				                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+				                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 					                    <input type="button" id="nicknamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
 					                    <input type="hidden" name="check_nick" id="check_nick" value=0>
 					                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
@@ -688,7 +709,8 @@ function Valid(){
 			                
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="phone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
-				                 		<input type="text" id="phone" name="phone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+				                 		<input type="text" id="phone" name="phone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
+				                 		placeholder="'-'없어도 됩니다."/>
 					                    <input type="button" id="goSMS" class="btn btn-light" value="본인인증" style="margin-left:2%;">
 			                        </div>
 			                        
@@ -702,7 +724,8 @@ function Valid(){
 	
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="password" style="position:absolute; margin:2.5%;">비밀번호<span class="req">*</span></label>
-				                        <input type="password" id="password" name="password" onchange="isSame()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
+				                        <input type="password" id="password" name="password" onchange="isSame()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"
+				                        placeholder="6~10로 입력하세요."/>
 			                        </div>
 	
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -741,7 +764,8 @@ function Valid(){
 		                        
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="bnumber" style="position:absolute; margin:2.5%;" >사업자 번호<span class="req">*</span></label>
-				                 		<input type="text" id="bnumber" name="bnumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+				                 		<input type="text" id="bnumber" name="bnumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
+				                 		placeholder="'-'없어도 상관없습니다."/>
 			                        </div>
 									<%--[업체]이메일
 			                        <div class="form-outline mb-4" style="display:flex;">
@@ -759,14 +783,20 @@ function Valid(){
 				                        <input type="button" id="b_checkedbusinessid" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
 			                        </div>
 			                        
-			                        <div class="form-outline mb-4" style="display:flex;">
-				                        <label class="form-label" for="bkakaoid" style="position:absolute; margin:2.5%;" >카카오ID</label>
-				                 		<input type="text" id="bkakaoid" name="bkakaoid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+			                        <div class="form-outline mb-4" style="display:flex;" >
+				                        <div>
+					                        <label class="form-label" for="bkakaoid" style="position:absolute; margin:2.5%;" >카카오ID</label>
+					                 		<input type="text" id="bkakaoid" name="bkakaoid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
+					                 		title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다." placeholder="카카오 ID(오픈채팅)"/>					                 		
+					                 		<img class="my_img" src="../../resources/image/kakaopre.png" title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다.">
+				                 		</div>
 			                        </div>
+			                        
 			                        
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="bphone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
-				                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+				                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
+				                 		placeholder="'-'없어도 됩니다."/>
 					                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" >
 			                        </div>
 			                        
@@ -780,12 +810,13 @@ function Valid(){
 	
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="bpassword" style="position:absolute; margin:2.5%;">비밀번호<span class="req">*</span></label>
-				                        <input type="password" id="bpassword" name="bpassword" onchange="isSame1()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
+				                        <input type="password" id="bpassword" name="bpassword" onchange="isSame1()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
+				                        placeholder="6~10로 입력하세요."/>
 			                        </div>
 	
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="b_checkpassword" style="position:absolute; margin:2.5%;">비밀번호 확인<span class="req">*</span></label>
-				                        <input type="password" id="b_checkpassword" onchange="isSame1()"  class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 8rem;" />
+				                        <input type="password" id="b_checkpassword" onchange="isSame1()"  class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 8rem;" "/>
 			                        </div>
 			                        <span id="same1"></span>
 
@@ -798,9 +829,10 @@ function Valid(){
 				                       	</div>
 				                       	<div>
 					                    	<label class="form-label" for="baddress" style="margin:2%;">[도로명]주소</label>
-					                 		<input type="text" id="baddress" name="baddress" class="form-control form-control-lg" readonly/>
+					                 		<input type="text" id="baddress" name="baddress" class="form-control form-control-lg" readonly
+					                 		placeholder="도로명 주소 선택해주세요."/>
 					                 		<label class="form-label" for="bdetailadd"style="margin:2%;">상세주소</label>
-					                 		<input type="text" id="bdetailadd" name="bdetailadd" class="form-control form-control-lg" />
+					                 		<input type="text" id="bdetailadd" name="bdetailadd" class="form-control form-control-lg" placeholder="ex)101호"/>
 				                 		</div>
 									</div>
 									<br>
@@ -827,10 +859,10 @@ function Valid(){
             </div>
         </div>
     </section>
-    <%--footer --%>
+    <%--footer
 	<footer>
 	       <c:import url='/WEB-INF/views/includes/footer.jsp' />
-	</footer>
+	</footer> --%>
 </body>
 
 </html>

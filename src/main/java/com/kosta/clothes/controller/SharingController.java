@@ -72,6 +72,7 @@ public class SharingController {
 		try { 
 			sharingService.registSharing(sharing, files);
 			System.out.println("registcontroller:" + sharing);
+			mav.setViewName("/sharing/sharingList");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

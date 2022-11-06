@@ -79,6 +79,11 @@ public class SharingController {
 		return mav;
 	}
 	
+	@GetMapping("/sharingView")
+	public String sharingView() {
+		return "/sharing/sharingView";
+	}
+	
 	@GetMapping("/sharingView/{sno}")
 	public ModelAndView viewSharing(@PathVariable("sno") Integer sno) {
 		ModelAndView mav = new ModelAndView();

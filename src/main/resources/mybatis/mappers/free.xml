@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="com.kosta.clothes.dao.FreeDAO">
+<!-- 글쓰기 등록  -->
+	<insert id="insertFree" parameterType="Free">
+		<![CDATA[
+			insert into free (free_num,
+							   free_name, 
+							   free_title, 
+							   free_content, 
+						 	   free_readcount,
+						 	   free_date)
+			values(#{free_num},
+				   #{free_name},
+				   #{free_title},
+				   #{free_content},
+				   #{free_readcount},
+				   sysdate)
+		]]>
+				
+
+	</insert>
+	<!-- 최신 글 등록 번호 가져오기 -->
+	<select id="selectMaxFreeNum" resultType="Integer">
+		<![CDATA[
+			select max(free_num) from free
+		]]>
+	</select>
+	
+	<!-- 글 목록 보여주기 -->
+	<select id="selectFreeList" resultType="Free" parameterType="Integer">
+		<![CDATA[
+			SELECT free_num, 
+				   free_name,
+				   free_title,
+				   free_content,  
+				   free_readcount, 
+				   free_date
+			FROM (select free_num, free_name, free_title, free_content, free_readcount, free_date
+			from (select row_number() over (order by free_date desc) num, F.*
+					from FREE F))	
+			where free_num between #{row} AND #{row}+9
+					]]>
+	</select>
+	
+	<!-- 실제 글 전체 개수 -->
+	<select id="selectFreeCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from free
+		]]>
+	</select>
+	
+	<!-- 글 클릭 시 정보 가져가기 -->
+	<select id="selectFree" resultType="Free" parameterType="Integer">
+		<![CDATA[
+			select * from free where free_num=#{free_num}
+		]]>
+	</select>
+	
+	<!-- 글 수정  -->
+	<update id="updateFree"  parameterType="Free">
+		<![CDATA[
+			update free
+			set free_title=#{free_title}, free_content=#{free_content}
+			where free_num=#{free_num}
+		]]>
+	</update>
+	
+	
+	<!-- 글 삭제하기 -->
+	<delete id="deletefree" parameterType="Integer">
+		<![CDATA[
+			delete from free where free_num=#{freeNum}
+		]]>
+	</delete>
+</mapper>

@@ -66,7 +66,12 @@ public class Users {
 	public Users() {
 		super();
 	}
-
+	
+	public Users(String userid, String password) {
+		super();
+		this.userid = userid;
+		this.password = password;
+	}
 	@Override
 	public String toString() {
 		return "Users [no=" + no + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
@@ -74,4 +79,5 @@ public class Users {
 
 	
 	}
+	
 }

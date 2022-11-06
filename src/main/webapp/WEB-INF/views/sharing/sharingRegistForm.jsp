@@ -21,12 +21,10 @@
 	</header>
 	<div class="container">
 		<h1>상품등록</h1>
-		<form action="sharingRegist" method="post" name="writeForm"
-			enctype="multipart/form-data" accept="image/*">
+		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 			<input type="hidden" name="sno">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title"
-					name="stitle">
+				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
 			</div>
 			<br>
 			<div id="dealcontainer">
@@ -37,25 +35,22 @@
 						<option>모두가능</option>
 					</select> <br>
 					<div id="dealarea">
-						거래지역: <input id="member_post" type="text" placeholder="주소검색"
-							readonly onclick="findAddr()"> <input name="jibunAddress"
-							id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly>
-						<br> <input type="hidden" name="addressCity" id="jibun_si" />
+						거래지역: 
+						<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
+						<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
+						<input type="hidden" name="addressCity" id="jibun_si" />
 						<input type="hidden" name="addressTown" id="jibun_dong" />
-
 					</div>
 				</div>
 
 				<div id="priceAndAI">
-					<input type="text" class="form-control" placeholder="가격: 0원"
-						id="price" disabled /> <span><a class="nav-link" href="#">AI
-							옷 상태 점검</a></span>
+					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
+					<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<textarea class="form-control" rows="12" id="scontent"
-					name="scontent"></textarea>
+				<textarea class="form-control" rows="12" id="scontent" name="scontent"></textarea>
 			</div>
 			<input type="file" multiple="multiple" name="simageFile" id="image"
 				onchange="addFile(this);" />
@@ -63,8 +58,8 @@
 			<div id="btncontainer">
 				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
-				</a> <input type="submit" id="uploadBtn" class="btn btn-warning"
-					value="등록">
+				</a> 
+				<input type="submit" id="uploadBtn" class="btn btn-warning" value="등록">
 			</div>
 		</form>
 	</div>
@@ -72,7 +67,8 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</footer>
 	<script>
-	$(function() { //파일 선택했을 때 미리보기로 보여주는 용도
+	/* 파일 선택 - 미리보기 */
+	$(function() { 
 		$('#image').change(function(event) { //input id = file 
 			$('#imglist').empty();
 			for(let i=0; i<event.target.files.length; i++) {
@@ -126,11 +122,34 @@
     	document.querySelector("input[type=file]").value = "";
 	}
 
-		function findAddr() {
+	/* 유효성 검사 */
+	function valid() {
+		var titleCheck = document.getElementById("title");
+		var addCheck = document.getElementById("member_post");
+		var contentCheck = document.getElementById("scontent");
+		
+		if(titleCheck.value == "") {
+			alert("제목을 입력해주세요.");
+			return false;
+		}
+		
+		if(addCheck.value == "") {
+			alert("주소를 입력해주세요.");
+			return false;
+		}
+		
+		
+		if(contentCheck.value == "") {
+			alert("내용을 입력해주세요.");
+			return false;
+		}
+	}
+	
+	/* 주소 검색 */
+	function findAddr() {
 			new daum.Postcode(
 					{
 						oncomplete : function(data) {
-
 							console.log(data);
 
 							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.

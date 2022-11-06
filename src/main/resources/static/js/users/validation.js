@@ -8,7 +8,7 @@ function Validation(){
 	//[개인]
 	var PPwd = document.getElementById("password");//비밀번호[개인]
 	var PPwd1 = document.getElementById("pcheckpassword")//비밀번호[개인]
-	
+	var PAgree = document.getElementById("p_clause")//동의[업체]
 	 
 	if($('#checkeduserid').css("display")=="none"){
 		alert("아이디 중복확인 확인부탁드립니다.");
@@ -39,6 +39,10 @@ function Validation(){
 		alert("비밀번호가 일치하지 않습니다!!")
 		return false;
 	}
+	if(PAgree.checked==false){
+		alert("약관 동의 체크해주세요.");
+		return false;
+	}
 
 }	
 
@@ -49,8 +53,9 @@ function Valid(){
 	var BPwd1 = document.getElementById("b_checkpassword")//비밀번호일치[업체]]
 	var BNumber = document.getElementById("bnumber")//사업자 번호[업체]]
 	var BKaokao = document.getElementById("bkakaoid")//카카오[업체]]
-	var BAddress = document.getElementById("baddress")//카카오[업체]]
-	var BDetailadd = document.getElementById("bdetailadd")//카카오[업체]]
+	var BAddress = document.getElementById("baddress")//주소[업체]]
+	var BDetailadd = document.getElementById("bdetailadd")//상세주소[업체]
+	var BAgree = document.getElementById("b_clause")//동의[업체]
 	if(BNumber.value==''){
 		alert("사업자 번호를 입력해주세요.");
 		return false;
@@ -95,6 +100,11 @@ function Valid(){
 	
 	if(BAddress.value=='' || BDetailadd.value==''){
 		alert("주소를 정확하게 입력해주세요.");
+		return false;
+	}
+	
+	if(BAgree.checked==false){
+		alert("약관 동의 체크해주세요.");
 		return false;
 	}
 	

@@ -43,7 +43,6 @@ public class SharingController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			List<Sharing> sharingList = sharingService.getSharingList();
-			System.out.println("sharing" + sharingList );
 			for(int i=0;i<sharingList.size();i++) {
 				if(sharingList.get(i).getSfileids()!=null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
@@ -138,6 +137,7 @@ public class SharingController {
 		List<Sharing> sharingList = new ArrayList<>();
 		try {
 			sharingList = sharingService.infiniteScrollDown(snoToStart);
+			System.out.println("스크롤다운"+sharingList);
 			for(int i=0;i<sharingList.size();i++) {
 				if(sharingList.get(i).getSfileids()!=null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);

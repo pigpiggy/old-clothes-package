@@ -46,8 +46,10 @@ public class SharingController {
 			System.out.println("sharing" + sharingList );
 			List<Integer> fileList = new ArrayList<>();
 			for(int i=0;i<sharingList.size();i++) {
-				fileList.add(Integer.parseInt(sharingList.get(i).getSfileids().split(",")[0]));
-				sharingList.get(i).setSfileids(Integer.toString(fileList.get(i)));
+				System.out.println("들어옴");
+				if(sharingList.get(i).getSfileids()!=null) {
+					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+				}
 			}
 			
 			mav.addObject("sharingList", sharingList);
@@ -72,6 +74,7 @@ public class SharingController {
 		try { 
 			sharingService.registSharing(sharing, files);
 			System.out.println("registcontroller:" + sharing);
+			mav.setViewName("redirect:/sharingList");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

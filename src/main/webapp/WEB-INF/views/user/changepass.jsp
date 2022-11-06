@@ -47,7 +47,27 @@ function isSame(){
 	var msg ="${msg}";
 	if (msg != ""){
 		alert(msg)
-	} 
+	}
+	
+function Validation(){
+	var PPwd = document.getElementById("password");//비밀번호
+	var PPwd1 = document.getElementById("pcheckpassword")//비밀번호확인
+	
+	if(PPwd.value==''){
+		alert("비밀 번호를 입력해주세요.");
+		return false;
+	}
+
+	if(PPwd1.value==''){
+		alert("비밀번호일치 확인해주세요.");
+		return false;
+	}
+
+	if( PPwd.value != PPwd1.value){
+		alert("비밀번호가 일치하지 않습니다!!")
+		return false;
+	}
+}	
 </script>
 
 <style>
@@ -56,7 +76,9 @@ function isSame(){
 </style>
 </head>
 <body>
-	
+	<div>
+		<c:import url='/WEB-INF/views/includes/header.jsp' />
+	</div>
     <section class="vh-100 bg-image">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
             <div class="container h-100" style="width:1200px;">
@@ -66,16 +88,11 @@ function isSame(){
                     	<div class="card-body p-5">
                     	
 						 <h3 class="text-uppercase text-center mb-5">새 비밀번호 설정</h3> 
-                    		<form action="renewalpass" method="post">               			
-								<div id=renewalpassform>
-									<c:choose>
-										<c:when test="${user.userid!=null }">
-											<input type="hidden" id="userid" name="userid" value="${user.userid }">
-										</c:when>
-										<c:otherwise>
-											<input type="hidden" id="businessid" name="businessid" value="${business.businessid }">
-										</c:otherwise>
-									</c:choose>
+                    		<form action="changepass" method="post">               			
+								<div id=changepassform>
+									
+											<input type="hidden" id="id" name="id" value="${id }">
+										
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="password" style="position:absolute; margin:2.5%;">비밀번호</label>
 				                        <input type="password" id="password" name="password" onchange="isSame()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
@@ -89,7 +106,7 @@ function isSame(){
 									
 			                        <div class="d-flex justify-content-center">
 				                        <button type="submit"
-				                            class="btn btn-outline-primary">새 비밀번호 설정</button>
+				                            class="btn btn-outline-primary" onclick="return Validation();">새 비밀번호 설정</button>
 			                        </div>
 								</div>								
                     		</form>

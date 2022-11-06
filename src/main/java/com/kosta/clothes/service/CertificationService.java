@@ -140,11 +140,13 @@ public class CertificationService implements UsersService {
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("businessid", businessid);
 			map.put("bphone", bphone);
-			return usersDao.checkUserIdnPhone(map);
+			return usersDao.checkBusinessIdnPhone(map);
 		}
 
 		@Override
-		public void renewalPass(String userid, String password) throws Exception {
+		public void changePass(String userid, String password) throws Exception {
+			System.out.println("userid:"+userid);
+			System.out.println("password:"+password);
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("userid", userid);
 			map.put("password", password);
@@ -152,7 +154,9 @@ public class CertificationService implements UsersService {
 		}
 
 		@Override
-		public void renewalbPass(String businessid, String bpassword) throws Exception {
+		public void changebPass(String businessid, String bpassword) throws Exception {
+			System.out.println("businessid:"+businessid);
+			System.out.println("bpassword:"+bpassword);
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("businessid", businessid);
 			map.put("bpassword", bpassword);

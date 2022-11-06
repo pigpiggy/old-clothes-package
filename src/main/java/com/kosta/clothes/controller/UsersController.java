@@ -209,16 +209,19 @@ public class UsersController {
   //아이디찾기
   @PostMapping("/searchid")
   public String searchId(@RequestParam("ph")String ph, Model model) {
+	  System.out.println(ph);
 	  try {
 		 String fuId = null;
 		 String fbId = null;
 		 String phone = ph; 
 		 fuId = usersService.findUserId(phone);
+		 System.out.println(fuId);
 		 if(fuId != null) {
 			 model.addAttribute("user", fuId);
 		 } else if(fuId==null) {
 			 String bphone = ph;
 			 fbId = usersService.findBusinessId(bphone);
+			 System.out.println(fbId);
 			 model.addAttribute("business", fbId);
 		 }
 		 if(fuId==null&&fbId==null) {
@@ -249,12 +252,12 @@ public class UsersController {
 		  phone = ph;
 		  String cuid = usersService.checkUserIdnPhone(userid, phone);
 		  if(cuid!=null) {
-			  model.addAttribute("user", cuid);
+			  model.addAttribute("id", cuid);
 		  } else if(cuid==null) {
 			  businessid = id;
 			  bphone = ph;
 			  cbid = usersService.checkBusinessIdnPhone(businessid, bphone);
-			  model.addAttribute("busineee", cbid);
+			  model.addAttribute("id", cbid);
 		  }
 		  if(cuid==null&&cbid==null) {
 			  model.addAttribute("msg", "정보와 일치하는 회원이 없습니다.");
@@ -264,23 +267,27 @@ public class UsersController {
 	  }catch(Exception e) {
 		  e.printStackTrace();
 	  }
-	  return "user/renewalpass";
+	  return "user/changepass";
   }
   //새 비밀번호
-  @PostMapping("/renewalpass")
-  public String renewalPass(@RequestParam("userid")String userid, 
-		  @RequestParam("businessid")String businessid, 
+  @PostMapping("/changepass")
+  public String changePass(@RequestParam("id")String id, 
 		  @RequestParam("password") String password, Model model) {
 	  try { 
-		  if(userid!=null) {
-		  usersService.renewalPass(userid, password);
-	  	  }else if(businessid!=null) {
+		  System.out.println("id:"+id);
+		  boolean cuserid = usersService.checkuserid(id);
+		  boolean cbusinessid = usersService.businessidCheck(id);
+		  System.out.println("cuserid:"+cuserid);
+		  System.out.println("cbusinessid:"+cbusinessid);
+		  if(cuserid) {
+		  usersService.changePass(id, password);
+	  	  }else if(cbusinessid) {
 	  	  String bpassword = password;
-	  	  usersService.renewalbPass(businessid, bpassword);
+	  	  usersService.changebPass(id, bpassword);
 	  	  }
 	  	  else {
 	  		  model.addAttribute("msg", "비밀번호 수정에 실패했습니다.");
-	  		  return "user/renewalpass";
+	  		  return "user/changepass";
 	  	  }
 		  
 	  }catch(Exception e) {

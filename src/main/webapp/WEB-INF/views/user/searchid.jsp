@@ -46,7 +46,7 @@
 									
 			                        <div class="form-outline mb-4" >
 				                        <label class="form-label" for="ph" style="margin:2.5%;">전화번호</label>
-				                        <input type="text" id="ph" class="form-control form-control-lg" placeholder="전화번호입력" />
+				                        <input type="text" id="ph" name="ph" class="form-control form-control-lg" placeholder="전화번호입력" />
 			                        </div>
 									
 			                        <div class="d-flex justify-content-center">

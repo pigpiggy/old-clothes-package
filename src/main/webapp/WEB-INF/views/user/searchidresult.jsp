@@ -16,7 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <style>
 
 	
@@ -37,16 +37,16 @@
 
                         <p>회원님의 정보와 일치하는 아이디입니다.</p><br>
                         <c:choose>
-							<c:when test="${business.businessid != null}">
-								<h2 class="text-uppercase text-center mb-5">${business.businessid }</h2>
+							<c:when test="${business != null}">
+								<h2 class="text-center mb-5">${business }</h2>
 							</c:when>
 							<c:otherwise>
-								<h2 class="text-uppercase text-center mb-5">${user.userid }</h2>
+								<h2 class="text-center mb-5">${user }</h2>
 							</c:otherwise>
 						</c:choose>	            			
 			                        <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-outline-primary" style="margin-right:3%;" onclick="location.href='login'">&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</button>
-				                        <button type="button" class="btn btn-outline-success" style="margin-left:3%;" onclick="location.href='#'">비밀번호 찾기</button>
+				                        <button type="button" class="btn btn-outline-success" style="margin-left:3%;" onclick="location.href='checkidnphone'">비밀번호 찾기</button>
 			                        </div>
 								</div>								
                     	</div>

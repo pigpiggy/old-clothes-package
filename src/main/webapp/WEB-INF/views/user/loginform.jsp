@@ -58,8 +58,8 @@
 									</c:if>
 									<br>
 			                        <p class="text-center text-muted mt-5 mb-0">
-                                        <a href="#!" class="fw-bold text-body" style="text-decoration: none;"><u style="text-decoration: none;">아이디 찾기</u></a>&nbsp;&nbsp;&nbsp;
-                                        <a href="#!" class="fw-bold text-body" style="text-decoration: none;"><u style="text-decoration: none;">비밀번호 찾기</u></a>
+                                        <a href="searchid" class="fw-bold text-body" style="text-decoration: none;"><u style="text-decoration: none;">아이디 찾기</u></a>&nbsp;&nbsp;&nbsp;
+                                        <a href="checkidnphone" class="fw-bold text-body" style="text-decoration: none;"><u style="text-decoration: none;">비밀번호 찾기</u></a>
                                     </p>
 								</div>								
                     		</form>

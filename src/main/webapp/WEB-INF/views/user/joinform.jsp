@@ -22,7 +22,7 @@
 <script>
 </script>
 <style>
-<!--카카오 ID 넣는 방법 설명[hover 순서 중요] -->
+
 .req{
 	color:red;
 }
@@ -144,7 +144,7 @@ footer{
 				                        <div class="form-check d-flex justify-content-center mb-5">
 					                        <input class="form-check-input me-2" type="checkbox" value="" id="p_clause" />
 					                        <label class="form-check-label" for="p_clause">
-					                            <a href="#!" class="text-body"><u>약관</u></a>에 동의합니다
+					                            <a href="#myModal" class="text-body" data-bs-toggle="modal" ><u>약관</u></a>에 동의합니다
 					                        </label>
 				                        </div>
 		
@@ -153,7 +153,7 @@ footer{
 					                            class="btn btn-outline-primary">가입하기</button>
 				                        </div>
 		
-				                        <p class="text-center text-muted mt-5 mb-0">이미 계정이 있나요? <a href="#!"
+				                        <p class="text-center text-muted mt-5 mb-0">이미 계정이 있나요? <a href="login"
 				                            class="fw-bold text-body"><u>로그인하기</u></a></p>
 									</form>
 									</div>
@@ -245,7 +245,7 @@ footer{
 				                        <div class="form-check d-flex justify-content-center mb-5">
 					                        <input class="form-check-input me-2" type="checkbox" value="" id="b_clause" />
 					                        <label class="form-check-label" for="b_clause">
-					                            <a href="#!" class="text-body"><u>약관</u></a>에 동의합니다
+					                            <a href="#myModal" class="text-body" data-bs-toggle="modal" ><u>약관</u></a>에 동의합니다
 					                        </label>
 				                        </div>
 		
@@ -254,7 +254,7 @@ footer{
 					                            class="btn btn-outline-primary">가입하기</button>
 				                        </div>
 		
-				                        <p class="text-center text-muted mt-5 mb-0">이미 계정이 있나요? <a href="#!"
+				                        <p class="text-center text-muted mt-5 mb-0">이미 계정이 있나요? <a href="login"
 				                            class="fw-bold text-body"><u>로그인하기</u></a></p>
 				                       </form>
 									</div>
@@ -266,6 +266,55 @@ footer{
 	        </div>
 	    </section>
 	</div>
+	<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">하우헌옷 이용약관</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <h3>Some text to enable scrolling..</h3>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, 
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+        sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, 
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+        deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor 
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+        deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor 
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <script src="<c:url value='/resources/js/users/join.js'/>"></script>
 <script src="<c:url value='/resources/js/users/validation.js'/>"></script>
 </body>

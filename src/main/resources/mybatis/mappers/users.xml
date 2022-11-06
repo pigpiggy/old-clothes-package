@@ -156,12 +156,12 @@
 	</select>
 	<update id="updatepassword" parameterType="map">
 		<![CDATA[
-			update users set password = #{password} where businessid = #{businessid}
+			update users set password = #{password} where userid = #{userid}
 		]]>
 	</update>
 	<update id="updatebpassword" parameterType="map">
 		<![CDATA[
-			update business set bpassword = #{bpassword} where userid = #{userid}
+			update business set bpassword = #{bpassword} where businessid = #{businessid}
 		]]>
 	</update>
 	

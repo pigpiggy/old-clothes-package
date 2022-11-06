@@ -23,7 +23,7 @@ public interface UsersService {
 		public String checkUserIdnPhone(String userid, String phone) throws Exception;//아이디 전화번호 체크[개인]
 		public String checkBusinessIdnPhone(String businessid, String bphone) throws Exception;//아이디 전화번호 체크[업체]
 		
-		public void renewalPass(String userid, String password) throws Exception;//비밀번호수정[개인]
-		public void renewalbPass(String businessid, String bpassword) throws Exception;//비밀번호수정[업체]
+		public void changePass(String userid, String password) throws Exception;//비밀번호수정[개인]
+		public void changebPass(String businessid, String bpassword) throws Exception;//비밀번호수정[업체]
 		
 }

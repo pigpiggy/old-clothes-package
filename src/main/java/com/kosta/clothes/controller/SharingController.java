@@ -44,9 +44,7 @@ public class SharingController {
 		try {
 			List<Sharing> sharingList = sharingService.getSharingList();
 			System.out.println("sharing" + sharingList );
-			List<Integer> fileList = new ArrayList<>();
 			for(int i=0;i<sharingList.size();i++) {
-				System.out.println("들어옴");
 				if(sharingList.get(i).getSfileids()!=null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
 				}
@@ -139,10 +137,10 @@ public class SharingController {
 		List<Sharing> sharingList = new ArrayList<>();
 		try {
 			sharingList = sharingService.infiniteScrollDown(snoToStart);
-			List<Integer> fileList = new ArrayList<>();
 			for(int i=0;i<sharingList.size();i++) {
-				fileList.add(Integer.parseInt(sharingList.get(i).getSfileids().split(",")[0]));
-				sharingList.get(i).setSfileids(Integer.toString(fileList.get(i)));
+				if(sharingList.get(i).getSfileids()!=null) {
+					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+				}
 			}
 		}
 		catch(Exception e) {

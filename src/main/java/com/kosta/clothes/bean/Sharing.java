@@ -88,6 +88,7 @@ public class Sharing {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 	public Sharing() {
 		super();
 	}
@@ -107,6 +108,7 @@ public class Sharing {
 		this.addressTown = addressTown;
 		this.regDate = regDate;
 	}
+	
 	@Override
 	public String toString() {
 		return "Sharing [sno=" + sno + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent

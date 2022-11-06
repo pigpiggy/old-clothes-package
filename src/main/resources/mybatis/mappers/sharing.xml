@@ -25,9 +25,24 @@
 		]]>
 	</select>
 	
-	<select id="selectSharingList" resultType="com.kosta.clothes.bean.Sharing">
+	<select id="selectSharingList" resultType="sharing">
 		<![CDATA[
-			select * from sharing order by sno desc
+			select * from ( select * from sharing order by sno desc)
+			where rownum <= 3
+		]]>
+	</select>
+	
+	<select id="infiniteScrollDown" parameterType="Integer" resultType="sharing">
+		<![CDATA[
+			select * from ( select * from sharing where sno <=#{snoToStart} order by sno desc)
+			where rownum <= 3
+		]]>
+	</select>
+	
+	<select id="infiniteScrollUp" parameterType="Integer" resultType="sharing">
+		<![CDATA[
+			select * from ( select * from sharing where sno >=#{snoToStart} order by sno desc)
+			where rownum <= 3
 		]]>
 	</select>
 </mapper>

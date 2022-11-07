@@ -5,7 +5,7 @@ import java.sql.Date;
 
 //판매 업체 가입(VO)
 public class Business {
-	private Long bno; //가입한 업체 수 표시
+	private Integer bno; //가입한 업체 수 표시
 	private String bname; //상호명
 	private String businessid; //업체 아이디
 	private String baddress; //업체 주소
@@ -16,10 +16,10 @@ public class Business {
 	private String bnumber; //사업자 번호
 	private Long star; //별점
 	private Date regDate; //날짜
-	public Long getBno() {
+	public Integer getBno() {
 		return bno;
 	}
-	public void setBno(Long bno) {
+	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
 	public String getBname() {
@@ -82,7 +82,7 @@ public class Business {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Business(Long bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
+	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
 			String bphone, String bpassword, String bnumber, Long star, Date regDate) {
 		super();
 		this.bno = bno;

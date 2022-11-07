@@ -155,4 +155,19 @@ public class SharingController {
 		return sharingList;
 	}
 	
+	@PostMapping("/sharingSearch")
+	public ModelAndView sharingSearch(@ModelAttribute Sharing sharing, Model model,
+			@RequestParam("simageFile") MultipartFile[] files) {
+		ModelAndView mav = new ModelAndView();
+		try { 
+			sharingService.registSharing(sharing, files);
+			System.out.println("registcontroller:" + sharing);
+			mav.setViewName("/sharing/sharingList");
+			mav.setViewName("redirect:/sharingList");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
 }

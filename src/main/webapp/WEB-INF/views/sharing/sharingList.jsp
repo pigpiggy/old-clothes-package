@@ -45,8 +45,10 @@
         <a href="sharingRegistForm" class="on">글쓰기</a>
       </div>
       <div class="search-box">
-        <input class="search-input" type="text" placeholder="Search something..">
-        <button class="search-btn"><i class="fas fa-search"></i></button>
+      	<form id="search_form" action="sharingSearch" method="post">
+        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="Search something..">
+        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
       </div>
     </div>
 	
@@ -56,7 +58,7 @@
           <div class="card-image">
           	<c:choose>
           		<c:when test="${empty sharing.sfileids }">
-          			<img src="upload/logo2.png" alt="로고">
+          			<img src="upload/logo3.png" alt="로고">
           		</c:when>
           		<c:otherwise>
               		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">

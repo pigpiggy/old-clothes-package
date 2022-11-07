@@ -4,18 +4,18 @@ import java.sql.Date;
 
 //개인 사용자 가입(VO)
 public class Users {
-	private Long no; //번호(가입 회원 수)
+	private Integer userno; //번호(가입 회원 수)
 	private String userid; //(아이디)
 	private String nickname; //닉네임
 	private String password; //비밀 번호
 	private String phone;//전화 번호
 	private Long grade; //옷점(레벨)
 	private Date joinDate; //날짜
-	public Long getNo() {
-		return no;
+	public Integer getUserno() {
+		return userno;
 	}
-	public void setNo(Long no) {
-		this.no = no;
+	public void setUserno(Integer userno) {
+		this.userno = userno;
 	}
 	public String getUserid() {
 		return userid;
@@ -53,9 +53,9 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	public Users(Long no, String userid, String nickname, String password, String phone, Long grade, Date joinDate) {
+	public Users(Integer userno, String userid, String nickname, String password, String phone, Long grade, Date joinDate) {
 		super();
-		this.no = no;
+		this.userno = userno;
 		this.userid = userid;
 		this.nickname = nickname;
 		this.password = password;
@@ -74,7 +74,7 @@ public class Users {
 	}
 	@Override
 	public String toString() {
-		return "Users [no=" + no + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
+		return "Users [userno=" + userno + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
 				+ ", phone=" + phone + ", grade=" + grade + ", joinDate=" + joinDate + "]";
 
 	

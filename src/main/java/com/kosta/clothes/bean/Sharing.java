@@ -16,7 +16,7 @@ public class Sharing {
 	private String addressTown;
 	private Long count;
 	private Long likes;
-	private Integer userNo;
+	private Integer userno;
 	private Date regDate;
 	public Integer getSno() {
 		return sno;
@@ -96,11 +96,11 @@ public class Sharing {
 	public void setLikes(Long likes) {
 		this.likes = likes;
 	}
-	public Integer getUserNo() {
-		return userNo;
+	public Integer getUserno() {
+		return userno;
 	}
-	public void setUserNo(Integer userNo) {
-		this.userNo = userNo;
+	public void setUserNo(Integer userno) {
+		this.userno = userno;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -113,7 +113,7 @@ public class Sharing {
 	}
 	public Sharing(Integer sno, String sname, String stitle, String scontent, String sstatus, String sfileids,
 			String sdealType, Long grade, Long ai, String addressCity, String addressTown, Long count, Long likes,
-			Integer userNo, Date regDate) {
+			Integer userno, Date regDate) {
 		super();
 		this.sno = sno;
 		this.sname = sname;
@@ -128,7 +128,7 @@ public class Sharing {
 		this.addressTown = addressTown;
 		this.count = count;
 		this.likes = likes;
-		this.userNo = userNo;
+		this.userno = userno;
 		this.regDate = regDate;
 	}
 	@Override
@@ -136,7 +136,7 @@ public class Sharing {
 		return "Sharing [sno=" + sno + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
 				+ ", sstatus=" + sstatus + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", grade=" + grade
 				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", count=" + count
-				+ ", likes=" + likes + ", userNo=" + userNo + ", regDate=" + regDate + "]";
+				+ ", likes=" + likes + ", userno=" + userno + ", regDate=" + regDate + "]";
 	}
 	
 		

@@ -10,12 +10,14 @@ public class Sharing {
 	private String sstatus;
 	private String sfileids;
 	private String sdealType;
-	private int grade;
-	private int ai;
+	private Long grade;
+	private Long ai;
 	private String addressCity;
 	private String addressTown;
+	private Long count;
+	private Long likes;
+	private Integer userNo;
 	private Date regDate;
-	
 	public Integer getSno() {
 		return sno;
 	}
@@ -58,16 +60,16 @@ public class Sharing {
 	public void setSdealType(String sdealType) {
 		this.sdealType = sdealType;
 	}
-	public int getGrade() {
+	public Long getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(Long grade) {
 		this.grade = grade;
 	}
-	public int getAi() {
+	public Long getAi() {
 		return ai;
 	}
-	public void setAi(int ai) {
+	public void setAi(Long ai) {
 		this.ai = ai;
 	}
 	public String getAddressCity() {
@@ -82,18 +84,36 @@ public class Sharing {
 	public void setAddressTown(String addressTown) {
 		this.addressTown = addressTown;
 	}
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
+	}
+	public Long getLikes() {
+		return likes;
+	}
+	public void setLikes(Long likes) {
+		this.likes = likes;
+	}
+	public Integer getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(Integer userNo) {
+		this.userNo = userNo;
+	}
 	public Date getRegDate() {
 		return regDate;
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
 	public Sharing() {
 		super();
 	}
 	public Sharing(Integer sno, String sname, String stitle, String scontent, String sstatus, String sfileids,
-			String sdealType, int grade, int ai, String addressCity, String addressTown, Date regDate) {
+			String sdealType, Long grade, Long ai, String addressCity, String addressTown, Long count, Long likes,
+			Integer userNo, Date regDate) {
 		super();
 		this.sno = sno;
 		this.sname = sname;
@@ -106,16 +126,18 @@ public class Sharing {
 		this.ai = ai;
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
+		this.count = count;
+		this.likes = likes;
+		this.userNo = userNo;
 		this.regDate = regDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "Sharing [sno=" + sno + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
 				+ ", sstatus=" + sstatus + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", grade=" + grade
-				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", regDate="
-				+ regDate + "]";
+				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", count=" + count
+				+ ", likes=" + likes + ", userNo=" + userNo + ", regDate=" + regDate + "]";
 	}
 	
-	
+		
 }

@@ -37,17 +37,27 @@ function surveyList(){
 					$(data).each(
 						function(){
 							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
-		          			str	+=  "<div class="+"'card-image'"+">";
-		              		str	+=  "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
+		          			str	+= "<div class="+"'card-image'"+">";
+		          			if(this.sfileids!=null && this.sfileids !=""){
+								str	+= "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
+							} else {
+								str	+= "<img src="+"'upload/logo2.png'"+" alt="+"'로고'"+">";
+							}
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
 		              		str	+= "<h2>"+this.stitle+"</h2>";
 		              		str	+= "<p class="+"'sharingContent'"+">"+this.scontent+"</p>";
 		          			str	+= "</div>";
-		          			str	+= "<div class="+"'card-footer'"+">";
-		              		str	+= this.addressCity+" "+this.addressTown;
-		          			str	+= "</div>";
+		          			if(this.addressCity !=null && this.addressCity !=""){
+								str	+= "<div class="+"'card-footer'"+">";
+								str	+= "["+this.sdealType+"] "+this.addressCity+" "+this.addressTown;
+								str	+= "</div>";
+							} else {
+								str	+= "<div class="+"'card-footer'"+">";
+								str	+= "["+this.sdealType+"]";
+								str	+= "</div>";
+							}
 		          			str	+= "</div>";
 		          			str	+= "</div>";
 						});

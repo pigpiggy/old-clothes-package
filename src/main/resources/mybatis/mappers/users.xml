@@ -23,7 +23,7 @@
 					bphone,
 					bpassword,
 					bnumber,
-					star,
+					bstar,
 					regdate )
 					values(
 					#{bno},
@@ -55,7 +55,6 @@
 					userid,
 					phone,
 					password,
-					grade,
 					joindate )
 					values(
 					#{userno},
@@ -63,7 +62,6 @@
 					#{userid},
 					#{phone},
 					#{password},
-					0,
 					sysdate	)
 		]]>
 	</insert>

@@ -9,7 +9,6 @@ public class Users {
 	private String nickname; //닉네임
 	private String password; //비밀 번호
 	private String phone;//전화 번호
-	private Long grade; //옷점(레벨)
 	private Date joinDate; //날짜
 	public Integer getUserno() {
 		return userno;
@@ -41,26 +40,19 @@ public class Users {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Long getGrade() {
-		return grade;
-	}
-	public void setGrade(Long grade) {
-		this.grade = grade;
-	}
 	public Date getJoinDate() {
 		return joinDate;
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	public Users(Integer userno, String userid, String nickname, String password, String phone, Long grade, Date joinDate) {
+	public Users(Integer userno, String userid, String nickname, String password, String phone,Date joinDate) {
 		super();
 		this.userno = userno;
 		this.userid = userid;
 		this.nickname = nickname;
 		this.password = password;
 		this.phone = phone;
-		this.grade = grade;
 		this.joinDate = joinDate;
 	}
 	public Users() {
@@ -75,7 +67,7 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [userno=" + userno + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
-				+ ", phone=" + phone + ", grade=" + grade + ", joinDate=" + joinDate + "]";
+				+ ", phone=" + phone + ", joinDate=" + joinDate + "]";
 
 	
 	}

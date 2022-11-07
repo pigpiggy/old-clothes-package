@@ -14,7 +14,7 @@ public class Business {
 	private String bphone; //업체대표 전화번호
 	private String bpassword; //업체 비밀번호
 	private String bnumber; //사업자 번호
-	private Long star; //별점
+	private Long bstar; //별점
 	private Date regDate; //날짜
 	public Integer getBno() {
 		return bno;
@@ -70,11 +70,12 @@ public class Business {
 	public void setBnumber(String bnumber) {
 		this.bnumber = bnumber;
 	}
-	public Long getStar() {
-		return star;
+	
+	public Long getBstar() {
+		return bstar;
 	}
-	public void setStar(Long star) {
-		this.star = star;
+	public void setBstar(Long bstar) {
+		this.bstar = bstar;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -83,7 +84,7 @@ public class Business {
 		this.regDate = regDate;
 	}
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
-			String bphone, String bpassword, String bnumber, Long star, Date regDate) {
+			String bphone, String bpassword, String bnumber, Long bstar, Date regDate) {
 		super();
 		this.bno = bno;
 		this.bname = bname;
@@ -94,7 +95,7 @@ public class Business {
 		this.bphone = bphone;
 		this.bpassword = bpassword;
 		this.bnumber = bnumber;
-		this.star = star;
+		this.bstar = bstar;
 		this.regDate = regDate;
 	}
 	public Business() {
@@ -110,7 +111,7 @@ public class Business {
 	public String toString() {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress
 				+ ", bdetailadd=" + bdetailadd + ", bkakaoid=" + bkakaoid + ", bphone=" + bphone + ", bpassword="
-				+ bpassword + ", bnumber=" + bnumber + ", star=" + star + ", regDate=" + regDate + "]";
+				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + "]";
 	}
 
 	

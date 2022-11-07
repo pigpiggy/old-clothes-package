@@ -5,7 +5,7 @@
 <mapper namespace="com.kosta.clothes.dao.UsersDAO">
 	<!--회원가입[업체] 정보등록 -->
 	<insert id="insertBusiness" parameterType="business">
-		<selectKey keyProperty="bno" resultType="Long" order="BEFORE">
+		<selectKey keyProperty="bno" resultType="Integer" order="BEFORE">
 			<![CDATA[
 				select business_seq.nextval from dual
 			]]>
@@ -42,7 +42,7 @@
 	
 	<!--회원가입[개인] 정보등록 -->
 	<insert id="insertUsers" parameterType="users">
-		<selectKey keyProperty="no" resultType="Long" order="BEFORE">
+		<selectKey keyProperty="userno" resultType="Integer" order="BEFORE">
 			<![CDATA[
 				select users_seq.nextval from dual
 			]]>
@@ -50,7 +50,7 @@
 		
 		<![CDATA[
 			insert into users(
-					no,
+					userno,
 					nickname,
 					userid,
 					phone,
@@ -58,7 +58,7 @@
 					grade,
 					joindate )
 					values(
-					#{no},
+					#{userno},
 					#{nickname},
 					#{userid},
 					#{phone},

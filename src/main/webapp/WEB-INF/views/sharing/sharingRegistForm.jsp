@@ -93,7 +93,7 @@
     	var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
     	var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
 
-    // 첨부파일 개수 확인
+        // 첨부파일 개수 확인
     	if (curFileCnt > remainFileCnt) {
         	alert("첨부파일은 최대 " + 5 + "개 까지 첨부 가능합니다.");
     		} else {

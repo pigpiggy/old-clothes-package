@@ -17,6 +17,7 @@ public interface SharingDAO {
 	Integer getNextSharingNo() throws Exception;
 	void insertSharing(Sharing sharing) throws Exception;
 	Sharing selectSharing(Integer sno) throws Exception;
+	Sharing getByUserid(String userid) throws Exception;
 	List<Sharing> selectSharingList() throws Exception;
 	List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception;
 }

@@ -25,6 +25,14 @@
 		]]>
 	</select>
 	
+	<select id="getByUserid" parameterType="String" resultType="sharing">
+		<![CDATA[
+			select *
+			from users u, sharing s 
+			where u.userno = s.userno and userid=#{userid}
+		]]>
+	</select>
+	
 	<select id="selectSharingList" resultType="sharing">
 		<![CDATA[
 			select * from ( select * from sharing order by sno desc)

@@ -59,6 +59,8 @@ footer{
     display: block;
 }
  
+
+ 
 </style>
 </head>
 <body>
@@ -116,7 +118,7 @@ footer{
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="phone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="phone" name="phone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없어도 됩니다."/>
+					                 		placeholder="'-'없이 입력해주세요."/>
 						                    <input type="button" id="goSMS" class="btn btn-light" value="본인인증" style="margin-left:2%;">
 				                        </div>
 				                        
@@ -171,7 +173,7 @@ footer{
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="bnumber" style="position:absolute; margin:2.5%;" >사업자 번호<span class="req">*</span></label>
 					                 		<input type="text" id="bnumber" name="bnumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없어도 상관없습니다."/>
+					                 		placeholder="'-'없이 입력해주세요."/>
 				                        </div>
 										<%--[업체]이메일
 				                        <div class="form-outline mb-4" style="display:flex;">

@@ -3,13 +3,12 @@ package com.kosta.clothes.controller;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kosta.clothes.bean.JoinVo;
 import com.kosta.clothes.bean.Sharing;
+import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -64,12 +63,16 @@ public class SharingController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/sharingRegist")
-	public ModelAndView registSharing(@ModelAttribute Sharing sharing, Model model,
+	@PostMapping("/{userid}/sharingRegist")
+	public ModelAndView registSharing(@PathVariable("userid") String userid, HttpSession session,
+			@ModelAttribute Sharing sharing, Model model,
 			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
 		try { 
+			Users users = (Users)session.getAttribute("authUser");
+			
 			sharingService.registSharing(sharing, files);
+			
 			System.out.println("registcontroller:" + sharing);
 			mav.setViewName("/sharing/sharingList");
 			mav.setViewName("redirect:/sharingList");

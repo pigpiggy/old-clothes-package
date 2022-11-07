@@ -38,7 +38,6 @@ public class SharingServiceImpl implements SharingService{
 		sharingvo.setSno(sharingid);
 		sharingvo.setStitle(sharing.getStitle());
 		sharingvo.setScontent(sharing.getScontent());
-		
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
@@ -80,6 +79,10 @@ public class SharingServiceImpl implements SharingService{
 	}
 
 	@Override
+	public Sharing getUserid(String userid) throws Exception {
+		return sharingDAO.getByUserid(userid);
+	}
+	@Override
 	public List<Sharing> getSharingList() throws Exception {
 		// TODO Auto-generated method stub
 		return sharingDAO.selectSharingList();
@@ -90,6 +93,8 @@ public class SharingServiceImpl implements SharingService{
 		// TODO Auto-generated method stub
 		return sharingDAO.infiniteScrollDown(snoToStart);
 	}
+
+
 	
 	
 }

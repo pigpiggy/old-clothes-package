@@ -21,8 +21,8 @@
 	</header>
 	<div class="container">
 		<h1>상품등록</h1>
-		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
-			<input type="hidden" name="sno">
+		<form action="${pageContext.servletContext.contextPath }/${authUser.userid}/sharingRegist" method="post" name="writeForm" 
+		enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 			<div>
 				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
 			</div>

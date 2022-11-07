@@ -1,5 +1,6 @@
 package com.kosta.clothes.service;
 
+
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
 
@@ -13,5 +14,16 @@ public interface UsersService {
 		public void insertUsers(Users users) throws Exception;//회원가입[개인]
 		public void insertBusiness(Business business) throws Exception;//회원가입[업체]
 
-		public Users login(String email,String password) throws Exception;//로그인
+		public Users login(String userid,String password) throws Exception;//로그인[개인]
+		public Business blogin(String businessid,String bpassword) throws Exception;//로그인[업체]
+		
+		public String findUserId(String phone) throws Exception;//아이디 찾기[개인]
+		public String findBusinessId(String bphone) throws Exception;//아이디 조회[업체]
+		
+		public String checkUserIdnPhone(String userid, String phone) throws Exception;//아이디 전화번호 체크[개인]
+		public String checkBusinessIdnPhone(String businessid, String bphone) throws Exception;//아이디 전화번호 체크[업체]
+		
+		public void changePass(String userid, String password) throws Exception;//비밀번호수정[개인]
+		public void changebPass(String businessid, String bpassword) throws Exception;//비밀번호수정[업체]
+		
 }

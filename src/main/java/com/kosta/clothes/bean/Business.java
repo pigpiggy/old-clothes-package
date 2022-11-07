@@ -100,6 +100,12 @@ public class Business {
 	public Business() {
 		super();
 	}
+	
+	public Business(String businessid, String bpassword) {
+		super();
+		this.businessid = businessid;
+		this.bpassword = bpassword;
+	}
 	@Override
 	public String toString() {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress

@@ -24,7 +24,7 @@
       <div id="headerMenu">
       	<c:choose>
       		<c:when test="${authUser == null }">
-	      		<a href="#">회원가입</a>
+	      		<a href="joinform">회원가입</a>
 		        <a href="login">로그인</a>
 		    </c:when>
 		    <c:otherwise>

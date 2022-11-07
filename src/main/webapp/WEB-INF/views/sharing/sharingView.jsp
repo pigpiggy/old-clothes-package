@@ -41,14 +41,15 @@ $(function() {
 <header>
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
-	<div class="container">
+	<div id="viewcontainer">
     <section class="content_main">
       <section id="content_left">
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <img src="/upload/${sharing.scontent}" />
-            <div class="swiper-slide">왜 안돼</div>
+            <div class="swiper-slide">
+                <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
+            </div>
             <div class="swiper-slide">Slide 3</div>
             <div class="swiper-slide">Slide 4</div>
             <div class="swiper-slide">Slide 5</div>
@@ -59,14 +60,20 @@ $(function() {
         </div>
       </section>
       <section id="content_right">
-        <h4>무료나눔 상세 페이지</h4>
+        <h4>${sharing.stitle}</h4>
+        <input type="hidden" name="sno" data-sno=${sharing.sno }>
         <div id="sharingname">
           <span>level icon</span>
-          <span>nick name</span>
-          <span><i class="fa-regular fa-envelope"></i>
+          <span>${sharing.sname }</span>
+          <span>
+          	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor" class="w-6 h-6">
+  				<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+  				<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+		  	</svg>${sharing.count }
+		  </span>
+          <span class="letterAndHeart"><img src="image/letter.png" alt="쪽지">
           </span>
-          <span><i class="fa-solid fa-heart"></i>
-          </span>
+          <span class="letterAndHeart"><img src="image/heart.png" alt="찜신청전"></span>
         </div>
         <div id="sreview">거래후기: 12건</div>
         <div id="sbtn">
@@ -79,23 +86,17 @@ $(function() {
       <div class="scontent">
         <h3>상품정보</h3>
         <div id=sdetail>
-        	왜 안되는 거니!
+        	${sharing.scontent}
+        	<c:forEach var="sfileids" items="${files }">
+                <img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
+        	</c:forEach>
         </div>
       </div>
-      <form class="reply">
-      <div class="reply__column">
-        <i class="far fa-plus-square fa-lg"></i>
-      </div>
-      <div class="reply__column">
-        <input type="text" placeholder="Write a message..." />
-        <i class="far fa-smile-wink fa-lg"></i>
-        <button><i class="fas fa-arrow-up"></i></button>
-      </div>
-    </form>    
+      
     </section>
     </div>
-<footer>
+<%-- <footer>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer>
+</footer> --%>
 </body>
 </html>

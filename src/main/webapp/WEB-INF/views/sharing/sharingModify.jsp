@@ -11,7 +11,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>무료나눔 상품 등록</title>
+<title>무료나눔 상품 수정</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
@@ -20,7 +20,7 @@
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</header>
 	<div class="container">
-		<h1>상품등록</h1>
+		<h1>상품수정</h1>
 		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 			<input type="hidden" name="sno">
 			<div>

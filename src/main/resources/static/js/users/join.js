@@ -6,38 +6,18 @@
 $(function(){
 	$('#businessform').hide();
 	$('#personalform').show();
-	$('#personnal-radio input[type="radio"][id="users"]').on('click', function(){
-		var chkValue = $('input[type=radio][id="users"]:checked').val();
+	$('input[type="radio"][id="person"]').on('click', function(){
+		var chkValue = $('input[type=radio][id="person"]:checked').val();
 		if(chkValue){
 			$('#businessform').hide();
 			$('#personalform').show();
-			
 		}
 	});
-	
-	$('#personnal-radio input[type="radio"][id="busi"]').on('click', function(){
-		var chkValue = $('input[type=radio][id="busi"]:checked').val();
+	$('input[type="radio"][id="business"]').on('click', function(){
+		var chkValue = $('input[type=radio][id="business"]:checked').val();
 		if(chkValue){
 			$('#businessform').show();
 			$('#personalform').hide();
-			
-		}
-	});
-	$('#business-radio input[type="radio"][id="busi]').on('click', function(){
-		var chkValue = $('input[type=radio][id="busi"]:checked').val();
-		if(chkValue){
-			$('#businessform').show();
-			$('#personalform').hide();
-			
-		}
-	});
-	
-	$('#business-radio input[type="radio"][id="users]').on('click', function(){
-		var chkValue = $('input[type=radio][id="users"]:checked').val();
-		if(chkValue){
-			$('#businessform').hide();
-			$('#personalform').show();
-			
 		}
 	});
 });

@@ -77,21 +77,21 @@ footer{
 	                	<div class="card" style="border-radius: 15px;">
 	                    	<div class="card-body p-5">
 	                    	<h2 class="text-uppercase text-center mb-5">회원가입</h2>
-									
+	                    			<div class="form-radio" style="text-align:center;">
+				                        <input type="radio" name="member_level" value="person" id="person" checked="checked" />
+				                        <label for="person">개인</label>
+										 &nbsp; &nbsp;
+				                        <input type="radio" name="member_level" value="business" id="business" />
+				                        <label for="business">사업자</label>
+	                    			</div>
+	                    			<br>
 	                    			<%--개인 --%>
 	                    			
 									
 									<div id=personalform>
 									<form action="personnal" method="POST" onsubmit="return Validation();">
-	                    			<div class="form-radio" id="personnal-radio" style="text-align:center;">
-				                        <input type="radio" name="sect" value="users" id="users" checked="checked" />
-				                        <label for="person">개인</label>
-										 &nbsp; &nbsp;
-				                        <input type="radio" name="sect" value="business" id="busi" />
-				                        <label for="business">사업자</label>
-	                    			</div>
-	                    			<br>
 				                        <div class="form-outline mb-4" style="display:flex;">
+				                        	<input type="hidden" name="sect" value="users"/>
 					                        <label class="form-label" for="nickname" style="position:absolute; margin:2.5%;" >닉네임<span class="req">*</span></label>
 					                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 						                    <input type="button" id="nicknamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
@@ -163,17 +163,9 @@ footer{
 									
 									<%--업체 --%>
 									<div id=businessform>
-									
 									<form action="businesss" method="post" onsubmit="return Valid();">
-									<div class="form-radio" id="business-radio" style="text-align:center;">
-				                        <input type="radio" name="sect" value="users" id="users"  />
-				                        <label for="person">개인</label>
-										 &nbsp; &nbsp;
-				                        <input type="radio" name="sect" value="business" id="busi" checked="checked"/>
-				                        <label for="business">사업자</label>
-	                    			</div>
-	                    			<br>
 										<div class="form-outline mb-4" style="display:flex;">
+											<input type="hidden" name="sect" value="business"/>
 					                        <label class="form-label" for="bname" style="position:absolute; margin:2.5%;" >상호명<span class="req">*</span></label>
 					                 		<input type="text" id="bname" name="bname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 						                    <input type="button" id="brandnamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">

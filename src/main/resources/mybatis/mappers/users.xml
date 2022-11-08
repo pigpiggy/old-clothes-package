@@ -24,7 +24,8 @@
 					bpassword,
 					bnumber,
 					bstar,
-					regdate )
+					sect, 
+					regdate)
 					values(
 					#{bno},
 					#{bname},
@@ -36,6 +37,7 @@
 					#{bpassword},
 					#{bnumber},
 					0,
+					#{sect},
 					sysdate	)
 		]]>
 	</insert>
@@ -55,6 +57,7 @@
 					userid,
 					phone,
 					password,
+					sect,
 					joindate )
 					values(
 					#{userno},
@@ -62,6 +65,7 @@
 					#{userid},
 					#{phone},
 					#{password},
+					#{sect},
 					sysdate	)
 		]]>
 	</insert>

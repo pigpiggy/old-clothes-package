@@ -16,6 +16,7 @@ public class Business {
 	private String bnumber; //사업자 번호
 	private Long bstar; //별점
 	private Date regDate; //날짜
+	private String sect;
 	public Integer getBno() {
 		return bno;
 	}
@@ -82,6 +83,13 @@ public class Business {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	public String getSect() {
+		return sect;
+	}
+	public void setSect(String sect) {
+		this.sect = sect;
 	}
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
 			String bphone, String bpassword, String bnumber, Long bstar, Date regDate) {

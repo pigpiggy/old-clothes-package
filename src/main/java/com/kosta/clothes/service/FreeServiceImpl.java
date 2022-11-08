@@ -23,8 +23,8 @@ public class FreeServiceImpl implements FreeService{
 		}else {
 			freeNum = freeNum + 1; //글 번호 자동 생성 +1씩 증가해준다.
 		}		
-		free.setFree_num(freeNum);
-		free.setFree_readcount(0);
+		free.setFno(freeNum);
+		free.setFreadcount(Long.valueOf(0));
 		freeDao.insertFree(free);
 		
 	}

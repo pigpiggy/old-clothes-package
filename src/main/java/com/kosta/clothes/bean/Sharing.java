@@ -7,6 +7,7 @@ public class Sharing {
 	private String stitle;
 	private String scontent;
 	private String sstatus;
+	private String sname;
 	private String sfileids;
 	private String sdealType;
 	private Long ai;
@@ -40,6 +41,13 @@ public class Sharing {
 	}
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
+	}
+	
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 	public String getSfileids() {
 		return sfileids;

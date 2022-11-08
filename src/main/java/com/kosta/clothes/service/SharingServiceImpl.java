@@ -39,6 +39,7 @@ public class SharingServiceImpl implements SharingService{
 		sharingvo.setStitle(sharing.getStitle());
 		sharingvo.setScontent(sharing.getScontent());
 		sharingvo.setSstatus("등록완료");
+		sharingvo.setUserno(sharing.getUserno());
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
@@ -74,6 +75,7 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public Sharing viewSharing(Integer sno) throws Exception {
+		System.out.println("service:" + sharingDAO.selectSharing(sno));
 		return sharingDAO.selectSharing(sno);
 	}
 

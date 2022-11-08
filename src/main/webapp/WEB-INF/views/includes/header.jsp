@@ -18,7 +18,7 @@
       </div>
       <div id="logo">
       	<a href="/">
-        	<img src="image/logo1.png" alt="하우헌옷 로고">
+        	<img src="/image/logo1.png" alt="하우헌옷 로고">
         </a>
       </div>
       <div id="headerMenu">

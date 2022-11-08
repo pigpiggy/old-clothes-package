@@ -66,14 +66,14 @@ public class SharingController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/{userid}/sharingRegist")
-	public ModelAndView registSharing(@PathVariable("userid") String userid, 
-			@ModelAttribute Sharing sharing, Model model,
+	@PostMapping("/sharingRegist")
+	public ModelAndView registSharing(@ModelAttribute Sharing sharing,
 			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
 		try { 
 			Users users = (Users)session.getAttribute("authUser");
 			if(users!=null) {
+				sharing.setUserno(users.getUserno());
 				sharingService.registSharing(sharing, files);
 			}
 			System.out.println("registcontroller:" + sharing);
@@ -92,25 +92,29 @@ public class SharingController {
 	
 	@GetMapping("/sharingView/{sno}")
 	public ModelAndView viewSharing(@PathVariable("sno") Integer sno) {
+		System.out.println("sno:"+sno);
 		ModelAndView mav = new ModelAndView();
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
+			System.out.println("sharingview"+sharing);
 			String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
 			//fidArr[0]="1",fidArr[1]="2", fidArr[2]="3"
-			List<Integer> fileList = new ArrayList<>();
-			for(String fid : fidArr) {
-				if(fid.trim().length() > 0) { //trim은 앞 뒤 스페이스 제거하고 비어있지 않으면
-					fileList.add(Integer.parseInt(fid)); //int로 바꿔서 넣는다
-				}
-			}
-			mav.addObject("files", fileList); 
+//			List<Integer> fileList = new ArrayList<>();
+//			for(String fid : fidArr) {
+//				if(fid.trim().length() > 0) { //trim은 앞 뒤 스페이스 제거하고 비어있지 않으면
+//					fileList.add(Integer.parseInt(fid)); //int로 바꿔서 넣는다
+//				}
+//			}
+			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);
+			mav.setViewName("/sharing/sharingView");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
 	
+	/* commons에 필요한 애들*/
 	@GetMapping("/img/{sfileids}")
 	public void viewImage(@PathVariable Integer sfileids, HttpServletResponse response) {
 		String path = servletContext.getRealPath("/upload/");
@@ -131,7 +135,7 @@ public class SharingController {
 	}	
 	@GetMapping("/upload/{fileid}")
 	public void imgView(@PathVariable String fileid, HttpServletResponse response) {
-		String path = servletContext.getRealPath("upload/");
+		String path = servletContext.getRealPath("/upload/");
 		try {
 			FileInputStream fis = new FileInputStream(path+fileid);
 			OutputStream out = response.getOutputStream();

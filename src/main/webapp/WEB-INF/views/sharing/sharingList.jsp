@@ -56,35 +56,38 @@
 	
     <div class="card-list">
 	  <c:forEach var="sharing" items="${sharingList}">
-      <div class="card" data-sno=${sharing.sno }>
-          <div class="card-image">
-          	<c:choose>
-          		<c:when test="${empty sharing.sfileids }">
-          			<img src="upload/logo3.png" alt="로고">
-          		</c:when>
-          		<c:otherwise>
-              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
-          		</c:otherwise>
-          	</c:choose>
-          </div>
-          <div class="card-body">
-              <span class="date">${sharing.regDate}</span>
-              <h2>${sharing.stitle }</h2>
-              <p class="sharingContent">${sharing.scontent }</p>
-          </div>
-          <c:choose>
-          	<c:when test="${empty sharing.addressCity}">
-          		<div class="card-footer">
-          			[${sharing.sdealType}]
-          		</div>
-          	</c:when>
-          	<c:otherwise>
-	          <div class="card-footer">
-	              [${sharing.sdealType}] ${sharing.addressCity} ${sharing.addressTown }
+     <a href="sharingView/${sharing.sno}">
+	     <div class="card" data-sno=${sharing.sno }>
+	          <div class="card-image">
+	          	<c:choose>
+	          		<c:when test="${empty sharing.sfileids }">
+	          			<img src="upload/logo3.png" alt="로고">
+	          		</c:when>
+	          		<c:otherwise>
+	              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
+	          		</c:otherwise>
+	          	</c:choose>
 	          </div>
-          	</c:otherwise>
-          </c:choose>
-      </div>
+	          <div class="card-body">
+	              <span class="date">${sharing.regDate}</span>
+	              <h2>${sharing.stitle }</h2>
+	              <p class="sharingContent">${sharing.scontent }</p>
+	          </div>
+	          <c:choose>
+	          	<c:when test="${empty sharing.addressCity}">
+	          		<div class="card-footer">
+	          			[${sharing.sdealType}]
+	          		</div>
+	          	</c:when>
+	          	<c:otherwise>
+		          <div class="card-footer">
+		              [${sharing.sdealType}] ${sharing.addressCity} ${sharing.addressTown }
+		          </div>
+	          	</c:otherwise>
+	          </c:choose>
+	      </div>
+     </a>
+      
 	  </c:forEach>
     </div>
     

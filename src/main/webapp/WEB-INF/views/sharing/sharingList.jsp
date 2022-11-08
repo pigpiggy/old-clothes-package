@@ -17,29 +17,7 @@
 	</div>
   <div id="sharingList">
     <h1 id="sharingListSubject">무료나눔</h1>
-    <div id="sigunguSearch">
-      <div id="sigungu">
-        <div class="select">
-          <select id="sido">
-            <option value="">선택</option>
-          </select>
-        </div>
-        <div class="select">
-          <select id="sigugun">
-            <option value="">선택</option>
-          </select>
-        </div>
-      </div>
-      <div class="select">
-        <select>
-          <option value="거리순">거리순</option>
-          <option value="후기많은순">후기많은순</option>
-          <option value="높은평점순">높은평점순</option>
-          <option value="낮은평점순">낮은평점순</option>
-          <option value="조회순">조회순</option>
-        </select>
-      </div>
-    </div>
+    
     <div id="buttonAndSelect">
       <div class="bt_wrap">
         <a href="sharingRegistForm" class="on">글쓰기</a>

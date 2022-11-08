@@ -38,14 +38,13 @@ public class SharingServiceImpl implements SharingService{
 		sharingvo.setSno(sharingid);
 		sharingvo.setStitle(sharing.getStitle());
 		sharingvo.setScontent(sharing.getScontent());
+		sharingvo.setSstatus("등록완료");
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
 			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
-					Integer fileid = fileDAO.getNextId();
-					fileVo.setTno(fileid);
 					fileVo.setDirectory_name(path);
 					fileVo.setTname(file.getOriginalFilename());
 					fileVo.setTsize(file.getSize());

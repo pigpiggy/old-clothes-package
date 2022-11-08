@@ -37,6 +37,9 @@ public class SharingController {
 	@Autowired
 	ServletContext servletContext;
 	
+	@Autowired
+	HttpSession session;
+
 	@GetMapping("/sharingList")
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -64,15 +67,15 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/{userid}/sharingRegist")
-	public ModelAndView registSharing(@PathVariable("userid") String userid, HttpSession session,
+	public ModelAndView registSharing(@PathVariable("userid") String userid, 
 			@ModelAttribute Sharing sharing, Model model,
 			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
 		try { 
 			Users users = (Users)session.getAttribute("authUser");
-			
-			sharingService.registSharing(sharing, files);
-			
+			if(users!=null) {
+				sharingService.registSharing(sharing, files);
+			}
 			System.out.println("registcontroller:" + sharing);
 			mav.setViewName("/sharing/sharingList");
 			mav.setViewName("redirect:/sharingList");

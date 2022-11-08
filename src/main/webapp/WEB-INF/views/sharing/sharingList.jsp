@@ -42,7 +42,9 @@
     </div>
     <div id="buttonAndSelect">
       <div class="bt_wrap">
-        <a href="sharingRegistForm" class="on">글쓰기</a>
+	    <c:if test="${!empty authUser}">    
+		  	<a href="sharingRegistForm" class="on">글쓰기</a>
+      	</c:if>
       </div>
       <div class="search-box">
       	<form id="search_form" action="sharingSearch" method="post">

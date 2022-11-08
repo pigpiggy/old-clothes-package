@@ -19,16 +19,17 @@
         <div class="board_title">
             <strong>글 등록</strong>
         </div>
+        <form action="/freeInsert" method="post">
         <div class="board_write_wrap">
             <div class="board_write">
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
+                        <dd><input type="text" name="ftitle" placeholder="제목 입력"></dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    <textarea placeholder="ck어쩌고"></textarea>
+                    <textarea placeholder="ck에디터 들어갑니다" name="fcontent"></textarea>
                 </div>
             </div>
             <div class="bt_wrap">
@@ -36,6 +37,7 @@
                 <a href="freeList">취소</a>
                 </div>
         </div>
+        </form>
     </div>
 </body>
 </html>

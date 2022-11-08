@@ -3,48 +3,83 @@ package com.kosta.clothes.bean;
 import java.sql.Date;
 
 public class Free {
-	private int free_num;	//글 번호
-	private String free_name; //닉네임
-	private String free_title; //제목
-	private String free_content; //내용
-	private int free_readcount; //조회수 
-	private Date free_date; //날짜
+	private Integer fno;	//글 번호
+	private String fname; //닉네임
+	private String ftitle; //제목
+	private String fcontent; //내용
+	private Long freadcount; //조회수 
+	private Date regdate; //날짜
+	private Integer bno;
+	private Integer userno;
 	
-	public int getFree_num() {
-		return free_num;
+	public Integer getFno() {
+		return fno;
 	}
-	public void setFree_num(int free_num) {
-		this.free_num = free_num;
+	public void setFno(Integer fno) {
+		this.fno = fno;
 	}
-	public String getFree_name() {
-		return free_name;
+	public String getFname() {
+		return fname;
 	}
-	public void setFree_name(String free_name) {
-		this.free_name = free_name;
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
-	public String getFree_title() {
-		return free_title;
+	public String getFtitle() {
+		return ftitle;
 	}
-	public void setFree_title(String free_title) {
-		this.free_title = free_title;
+	public void setFtitle(String ftitle) {
+		this.ftitle = ftitle;
 	}
-	public String getFree_content() {
-		return free_content;
+	public String getFcontent() {
+		return fcontent;
 	}
-	public void setFree_content(String free_content) {
-		this.free_content = free_content;
+	public void setFcontent(String fcontent) {
+		this.fcontent = fcontent;
 	}
-	public int getFree_readcount() {
-		return free_readcount;
+	public Long getFreadcount() {
+		return freadcount;
 	}
-	public void setFree_readcount(int free_readcount) {
-		this.free_readcount = free_readcount;
+	public void setFreadcount(Long freadcount) {
+		this.freadcount = freadcount;
 	}
-	public Date getFree_date() {
-		return free_date;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setFree_date(Date free_date) {
-		this.free_date = free_date;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
-	
+	public Integer getBno() {
+		return bno;
+	}
+	public void setBno(Integer bno) {
+		this.bno = bno;
+	}
+	public Integer getUserno() {
+		return userno;
+	}
+	public void setUserno(Integer userno) {
+		this.userno = userno;
+		
+	}
+	public Free(Integer fno, String fname, String ftitle, String fcontent, Long freadcount, Date regdate, Integer bno,
+			Integer userno) {
+		super();
+		this.fno = fno;
+		this.fname = fname;
+		this.ftitle = ftitle;
+		this.fcontent = fcontent;
+		this.freadcount = freadcount;
+		this.regdate = regdate;
+		this.bno = bno;
+		this.userno = userno;
+	}
+	public Free() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Free [fno=" + fno + ", fname=" + fname + ", ftitle=" + ftitle + ", fcontent=" + fcontent
+				+ ", freadcount=" + freadcount + ", regdate=" + regdate + ", bno=" + bno + ", userno=" + userno + "]";
+	}
 }
+	

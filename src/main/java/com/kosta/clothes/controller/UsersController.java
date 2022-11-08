@@ -50,13 +50,14 @@ public class UsersController {
 	//회원가입[개인]
 	@PostMapping("/personnal")
 	public String personnal(@ModelAttribute Users users, Model model) {
+	
 		System.out.println("usersController:" + users.toString());
 		try {
 			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에] 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+		return "redirect:/login";
 	}
 	
 	
@@ -70,7 +71,7 @@ public class UsersController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+		return "redirect:/login";
 	}
 	
 		

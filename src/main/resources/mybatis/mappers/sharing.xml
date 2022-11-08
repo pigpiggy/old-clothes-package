@@ -11,18 +11,20 @@
 	
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
-			insert into sharing(sno,stitle,scontent,sfileids,sdealType,
-			addressCity,addressTown,regDate)
-			values (#{sno},#{stitle},#{scontent},#{sfileids,jdbcType=VARCHAR},
-			#{sdealType},#{addressCity},#{addressTown},sysdate)
+			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,
+			addressCity,addressTown,userno,regDate)
+			values (#{sno},#{stitle},#{scontent},#{sstatus},#{sfileids,jdbcType=VARCHAR},
+			#{sdealType},#{addressCity},#{addressTown},#{userno},sysdate)
 	
 		]]>
 	</insert>
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select * from sharing where sno=#{sno}
-		]]>
+			select u.nickname, stitle, scontent, sfileids, ai, likes, applycount 
+			from users u, sharing s 
+			where u.userno = s.userno and sno = #{sno}		
+			]]>
 	</select>
 	
 	<select id="getByUserid" parameterType="String" resultType="sharing">

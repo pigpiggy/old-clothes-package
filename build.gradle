@@ -22,6 +22,7 @@ dependencies {
    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
    testImplementation 'org.springframework.boot:spring-boot-starter-test'
    
+   
    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.56'
    // https://mvnrepository.com/artifact/javax.servlet/jstl
@@ -31,6 +32,9 @@ dependencies {
    //문자인증을 위한 dependencies 
  // https://mvnrepository.com/artifact/net.nurigo/javaSDK
 	implementation 'net.nurigo:javaSDK:2.2'
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	
 
 
 

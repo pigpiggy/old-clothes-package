@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -96,20 +97,18 @@ public class SharingController {
 	}
 	
 	@GetMapping("/sharingView/{sno}")
-	public ModelAndView viewSharing(@PathVariable("sno") Integer sno) {
+	public ModelAndView viewSharing(@PathVariable("sno") Integer sno, Model model) {
 		System.out.println("sno:"+sno);
 		ModelAndView mav = new ModelAndView();
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview"+sharing);
 			String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
-			//fidArr[0]="1",fidArr[1]="2", fidArr[2]="3"
-//			List<Integer> fileList = new ArrayList<>();
-//			for(String fid : fidArr) {
-//				if(fid.trim().length() > 0) { //trim은 앞 뒤 스페이스 제거하고 비어있지 않으면
-//					fileList.add(Integer.parseInt(fid)); //int로 바꿔서 넣는다
-//				}
-//			}
+			Users users = (Users)session.getAttribute("authUser");
+			if(users==null) {
+				model.addAttribute("logincheck", "false");
+				mav.setViewName("/users/loginform");
+			}
 			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");

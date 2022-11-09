@@ -281,3 +281,7 @@ a {
     border: 0;
     resize: vertical;
 }
+
+.ck.ck-editor__editable_inline[dir=ltr] {
+	height: 250px;
+}

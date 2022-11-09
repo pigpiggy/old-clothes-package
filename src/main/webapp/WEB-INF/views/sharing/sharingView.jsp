@@ -18,67 +18,6 @@
 <title>무료나눔 상세</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
-
-</head>
-<body>
-<header>
-	<c:import url='/WEB-INF/views/includes/header.jsp' />
-</header>
-	<div id="viewcontainer">
-    <section class="content_main">
-      <section id="content_left">
-        <!-- Swiper -->
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-			<c:forEach var="sfileids" items="${files }">
-            	<div class="swiper-slide">
-                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
-        		</div>
-        	</c:forEach>            
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
-      <section id="content_right">
-        <h4>${sharing.stitle}</h4>
-        <input type="hidden" name="sno" data-sno=${sharing.sno }>
-        <div id="sharingname">
-          <span>${sharing.sname }</span>
-        </div>
-        <c:choose>
-        	<c:when test="${empty authUser }">
-	          	<a href='javascript: login_need();'>
-	          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-	          	</a>
-        	</c:when>
-        	<c:otherwise>
-	          	<img src="/image/letter.png" id="letter_img" alt="쪽지">
-	          	<a href='javascript: '>
-	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-        		</a>
-        	</c:otherwise>
-		</c:choose>
-		        <div id="sreview">거래후기: 12건</div>
-		        <div id="sbtn">
-		        	<input type="button" value="옷장열기" />
-		        	<input type="button" value="구매신청" />
-        		</div>
-        <div>현재 신청 인원 : 3명</div>
-        <!-- Swiper JS -->
-      </section>
-      <div class="scontent">
-        <h3>상품정보</h3>
-        <div id=sdetail>${sharing.scontent}</div>
-      </div>
-      
-    </section>
-    </div>
-<%-- <footer>
-		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer> --%>
 <script>
 /* 이미지 슬라이드 */
 $(function() {	
@@ -98,14 +37,27 @@ $(function() {
 });
 
 /* 찜 기능 */
+
 $(function () {
 	//로그인 확인
 	$("#letter_img").on("click", function() {
-		var authuser = ${authUser}
-		if(authuser == null) {
+		var logincheck = "<c:out value='${logincheck}'/>";
+		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 		}
 	})	
+	
+	$("#heart_img").on("click", function() {
+		var logincheck = "<c:out value='${logincheck}'/>";
+		//let likeVal = document.getElementById('like_check').value;
+		const likeImg = document.getElementById('heart_img');
+		if(logincheck == "false") {
+			alert("로그인 후 이용해주세요.")
+		} else {
+			likeImg.src = "/image/redheart.png";
+		}
+	})
+	
 	
 	
     let likeVal = document.getElementById('like_check').value
@@ -143,7 +95,71 @@ $(function () {
         });
 
     });
+	
 });
 </script>
+</head>
+<body>
+<header>
+	<c:import url='/WEB-INF/views/includes/header.jsp' />
+</header>
+	<div id="viewcontainer">
+    <section class="content_main">
+      <section id="content_left">
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+			<c:forEach var="sfileids" items="${files }">
+            	<div class="swiper-slide">
+                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
+        		</div>
+        	</c:forEach>            
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      <section id="content_right">
+        <h4>${sharing.stitle}</h4>
+        <input type="hidden" name="sno" data-sno=${sharing.sno }>
+        <div id="sharingname">
+          <span>${sharing.sname }</span>
+        </div>
+        <c:choose>
+        	<c:when test="${empty authUser }">
+	          	<a href='javascript: login_need();'>
+	          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
+	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+	          	</a>
+        	</c:when>
+        	<c:otherwise>
+        		<c:if test="${authUser.userno ne sharing.userno }">
+	          		<img src="/image/letter.png" alt="쪽지">
+        				<a href='javascript: like_func();'>
+	          				<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+        				</a>
+        		</c:if>
+         	</c:otherwise>
+		</c:choose>
+		        <div id="sreview">거래후기: 12건</div>
+		        <div id="sbtn">
+		        	<input type="button" value="옷장열기" />
+		        	<input type="button" value="구매신청" />
+        		</div>
+        <div>현재 신청 인원 : 3명</div>
+        <!-- Swiper JS -->
+      </section>
+      <div class="scontent">
+        <h3>상품정보</h3>
+        <div id=sdetail>${sharing.scontent}</div>
+      </div>
+      
+    </section>
+    </div>
+<%-- <footer>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+</footer> --%>
+
 </body>
 </html>

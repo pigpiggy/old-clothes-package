@@ -245,8 +245,13 @@ select::-ms-expand {
 }
 
 .card-body h2 {
-	font-size: 1.8em;
+	font-size: 1.3em;
 	margin: 2px auto 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 .card-body p {
@@ -271,15 +276,6 @@ select::-ms-expand {
 h1 {
 	text-align: center;
 	padding: 50px;
-}
-
-#viewcontainer {
-	height: auto;
-	min-height: 100%;
-	padding-bottom: 25px;
-	width: 700px;
-	display: flex;
-	flex-direction: column;
 }
 
 #imgcontainer {
@@ -357,13 +353,22 @@ h1 {
 .content_main {
 	height: 100%;
 	display: flex;
-	justify-content: center;
-	
+	justify-content: space-evenly;
+}
+
+#viewcontainer {
+	height: auto;
+	min-height: 100%;
+	padding-bottom: 25px;
+	width: 900px;
+	display: flex;
+	flex-direction: column;
+	margin: 40px auto 0;
 }
 
 .swiper {
-	width: 250px;
-	height: 250px;
+	width: 290px;
+	height: 290px;
 	float: left;
 }
 
@@ -395,9 +400,11 @@ h1 {
 }
 
 #content_right {
+	display: flex;
 	position: relative;
-	top: 100px;
-	left: 10%;
+	width: 25%;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .scontent {

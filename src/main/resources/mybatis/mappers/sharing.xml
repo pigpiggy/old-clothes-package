@@ -21,7 +21,7 @@
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select u.nickname, stitle, scontent, sfileids, ai, likes, applycount 
+			select u.nickname as sname, stitle, scontent, sfileids, ai, likes, applycount 
 			from users u, sharing s 
 			where u.userno = s.userno and sno = #{sno}		
 			]]>
@@ -43,6 +43,13 @@
 		]]>
 	</select>
 	
+	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
+		<![CDATA[
+			select * from ( select * from sharing where (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
+			where rownum <= 6
+		]]>
+	</select>
+	
 	<select id="infiniteScrollDown" parameterType="Integer" resultType="sharing">
 		<![CDATA[
 			select * from ( select * from sharing where sno <=#{snoToStart} order by sno desc)
@@ -51,6 +58,12 @@
 		]]>
 	</select>
 	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="sharing">
+		<![CDATA[
+			select * from ( select * from sharing where sno <=#{sno} and (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc)
+			where rownum <= 6
+		]]>
+	</select>
 
 </mapper>
 

@@ -21,19 +21,18 @@ function surveyList(){
 		loading = true;
 		
 		let lastsno = $(".card:last").attr("data-sno");
-		let keyword = $("#keyword").val();
-	
+		let keyword = document.getElementById('keyword').value;
+		console.log("키워드"+keyword);
 		$.ajax({
 			type: 'post',
 			url: 'infiniteScrollDown',
 			dataType: 'json',
 			data: JSON.stringify({
 				sno: lastsno,
-				kwd: keyword
+				keyword: keyword
 			}),
 			contentType: "application/json",
 			success: function(data){
-				console.log(data);
 				let str="";
 				if(data!=""){
 					$(data).each(

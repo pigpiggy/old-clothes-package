@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -54,10 +55,9 @@ public class SharingController {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
 				}
 			}
-			
+			System.out.println("컨트롤리스트:"+sharingList);
 			mav.addObject("sharingList", sharingList);
 			mav.addObject("kwd", kwd);
-			
 			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
 			e.printStackTrace();
@@ -152,12 +152,16 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
-	public List<Sharing> infiniteScrollDown(@RequestBody Sharing sharing, @RequestParam(value="kwd", required=false) String kwd) {
-		Integer snoToStart = sharing.getSno()-1;
+	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
+		String keyword = (String) params.get("keyword");
+		Integer sno = Integer.parseInt((String) params.get("sno"));
+		System.out.println("키워드"+keyword);
+		Integer snoToStart = sno-1;
 		List<Sharing> sharingList = new ArrayList<>();
 		try {
-			if(kwd!=null&&kwd!="") {
-				sharingList = sharingService.infiniteScrollDown(snoToStart, kwd);
+			if(keyword!=null&&keyword!="") {
+				System.out.println(keyword);
+				sharingList = sharingService.infiniteScrollDown(snoToStart, keyword);
 			} else {
 				sharingList = sharingService.infiniteScrollDown(snoToStart);
 			}

@@ -20,4 +20,6 @@ public interface SharingDAO {
 	Sharing getByUserid(String userid) throws Exception;
 	List<Sharing> selectSharingList() throws Exception;
 	List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception;
+	List<Sharing> selectSharingSearchedList(String kwd) throws Exception;
+	List<Sharing> searchedInfiniteScrollDown(Map<String, Object> map) throws Exception;
 }

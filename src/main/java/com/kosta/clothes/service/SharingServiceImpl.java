@@ -96,6 +96,22 @@ public class SharingServiceImpl implements SharingService{
 	}
 
 
+	@Override
+	public List<Sharing> getSharingList(String kwd) throws Exception {
+		// TODO Auto-generated method stub
+		return sharingDAO.selectSharingSearchedList(kwd);
+	}
+
+
+	@Override
+	public List<Sharing> infiniteScrollDown(Integer snoToStart, String kwd) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sno", snoToStart);
+		map.put("kwd", kwd);
+		return sharingDAO.searchedInfiniteScrollDown(map);
+	}
+
+
 	
 	
 }

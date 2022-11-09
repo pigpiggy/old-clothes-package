@@ -25,9 +25,10 @@
       	</c:if>
       </div>
       <div class="search-box">
-      	<form id="search_form" action="sharingSearch" method="post">
+      	<form id="search_form" action="sharingList" method="get">
         	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="Search something..">
         	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
         </form>
       </div>
     </div>
@@ -37,6 +38,9 @@
      <a href="sharingView/${sharing.sno}">
 	     <div class="card" data-sno=${sharing.sno }>
 	          <div class="card-image">
+	          	<c:if test="${!'등록완료' eq sharing.sstatus}">
+	          		<div class="sharingStatus">${sharing.sstatus }</div>
+	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sharing.sfileids }">
 	          			<img src="upload/logo3.png" alt="로고">
@@ -48,7 +52,7 @@
 	          </div>
 	          <div class="card-body">
 	              <span class="date">${sharing.regDate}</span>
-	              <h2>${sharing.stitle }</h2>
+	              <h2 class="sharingTitle">${sharing.stitle }</h2>
 	              <p class="sharingContent">${sharing.scontent }</p>
 	          </div>
 	          <c:choose>

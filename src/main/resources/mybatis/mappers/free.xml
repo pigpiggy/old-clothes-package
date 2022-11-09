@@ -19,9 +19,9 @@
 				   #{ftitle},
 				   #{fcontent},
 				   #{freadcount},
+				   sysdate,
 				   #{userno},
-				   #{bno},
-				   sysdate)
+				   #{bno})
 		]]>
 				
 

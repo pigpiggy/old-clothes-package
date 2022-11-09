@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,10 +40,15 @@ public class SharingController {
 	HttpSession session;
 
 	@GetMapping("/sharingList")
-	public ModelAndView main(HttpServletRequest request) {
+	public ModelAndView main(HttpServletRequest request, @RequestParam(value="kwd", required=false) String kwd) {
 		ModelAndView mav = new ModelAndView();
+		List<Sharing> sharingList;
 		try {
-			List<Sharing> sharingList = sharingService.getSharingList();
+			if(kwd!=null&&kwd!="") {
+				sharingList = sharingService.getSharingList(kwd);
+			} else {
+				sharingList = sharingService.getSharingList();
+			}
 			for(int i=0;i<sharingList.size();i++) {
 				if(sharingList.get(i).getSfileids()!=null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
@@ -52,6 +56,7 @@ public class SharingController {
 			}
 			
 			mav.addObject("sharingList", sharingList);
+			mav.addObject("kwd", kwd);
 			
 			mav.setViewName("/sharing/sharingList");
 		} catch(Exception e){
@@ -147,15 +152,21 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
-	public List<Sharing> infiniteScrollDown(@RequestBody Sharing sharing) {
+	public List<Sharing> infiniteScrollDown(@RequestBody Sharing sharing, @RequestParam(value="kwd", required=false) String kwd) {
 		Integer snoToStart = sharing.getSno()-1;
 		List<Sharing> sharingList = new ArrayList<>();
 		try {
-			sharingList = sharingService.infiniteScrollDown(snoToStart);
+			if(kwd!=null&&kwd!="") {
+				sharingList = sharingService.infiniteScrollDown(snoToStart, kwd);
+			} else {
+				sharingList = sharingService.infiniteScrollDown(snoToStart);
+			}
+			
 			System.out.println("스크롤다운"+sharingList);
 			for(int i=0;i<sharingList.size();i++) {
 				if(sharingList.get(i).getSfileids()!=null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+					System.out.println(sharingList.get(i).getSfileids());
 				}
 			}
 		}
@@ -163,21 +174,6 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
-	}
-	
-	@PostMapping("/sharingSearch")
-	public ModelAndView sharingSearch(@ModelAttribute Sharing sharing, Model model,
-			@RequestParam("simageFile") MultipartFile[] files) {
-		ModelAndView mav = new ModelAndView();
-		try { 
-			sharingService.registSharing(sharing, files);
-			System.out.println("registcontroller:" + sharing);
-			mav.setViewName("/sharing/sharingList");
-			mav.setViewName("redirect:/sharingList");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
 	}
 	
 }

@@ -245,8 +245,13 @@ select::-ms-expand {
 }
 
 .card-body h2 {
-	font-size: 1.8em;
+	font-size: 1.3em;
 	margin: 2px auto 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 .card-body p {

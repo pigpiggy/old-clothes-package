@@ -21,13 +21,15 @@ function surveyList(){
 		loading = true;
 		
 		let lastsno = $(".card:last").attr("data-sno");
+		let keyword = $("#keyword").val();
 	
 		$.ajax({
 			type: 'post',
 			url: 'infiniteScrollDown',
 			dataType: 'json',
 			data: JSON.stringify({
-				sno: lastsno
+				sno: lastsno,
+				kwd: keyword
 			}),
 			contentType: "application/json",
 			success: function(data){
@@ -46,7 +48,7 @@ function surveyList(){
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
-		              		str	+= "<h2>"+this.stitle+"</h2>";
+		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.stitle+"</h2>";
 		              		str	+= "<p class="+"'sharingContent'"+">"+this.scontent+"</p>";
 		          			str	+= "</div>";
 		          			if(this.addressCity !=null && this.addressCity !=""){

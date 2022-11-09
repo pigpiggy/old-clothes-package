@@ -17,7 +17,7 @@ public class FreeDAOImpl implements FreeDAO {
 	//게시판 글 등록
 	@Override
 	public void insertFree(Free free) throws Exception {
-		sqlSession.insert("mapper.free.insertFree",free);
+		sqlSession.insert("insertFree",free);
 	}
 	
 	//등록된 글의 총 개수

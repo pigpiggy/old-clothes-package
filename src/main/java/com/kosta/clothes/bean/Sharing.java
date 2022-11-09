@@ -7,12 +7,15 @@ public class Sharing {
 	private String stitle;
 	private String scontent;
 	private String sstatus;
+	private String sname;
 	private String sfileids;
 	private String sdealType;
 	private Long ai;
 	private String addressCity;
 	private String addressTown;
 	private Long likes;
+	private Long selectedno;
+	private Long applycount;
 	private Integer userno;
 	private Date regDate;
 	public Integer getSno() {
@@ -38,6 +41,13 @@ public class Sharing {
 	}
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
+	}
+	
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 	public String getSfileids() {
 		return sfileids;
@@ -75,6 +85,18 @@ public class Sharing {
 	public void setLikes(Long likes) {
 		this.likes = likes;
 	}
+	public Long getSelectedno() {
+		return selectedno;
+	}
+	public void setSelectedno(Long selectedno) {
+		this.selectedno = selectedno;
+	}
+	public Long getApplycount() {
+		return applycount;
+	}
+	public void setApplycount(Long applycount) {
+		this.applycount = applycount;
+	}
 	public Integer getUserno() {
 		return userno;
 	}
@@ -91,7 +113,8 @@ public class Sharing {
 		super();
 	}
 	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sfileids, String sdealType,
-			Long ai, String addressCity, String addressTown, Long likes, Integer userno, Date regDate) {
+			Long ai, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,
+			Integer userno, Date regDate) {
 		super();
 		this.sno = sno;
 		this.stitle = stitle;
@@ -103,6 +126,8 @@ public class Sharing {
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
 		this.likes = likes;
+		this.selectedno = selectedno;
+		this.applycount = applycount;
 		this.userno = userno;
 		this.regDate = regDate;
 	}
@@ -110,10 +135,10 @@ public class Sharing {
 	public String toString() {
 		return "Sharing [sno=" + sno + ", stitle=" + stitle + ", scontent=" + scontent + ", sstatus=" + sstatus
 				+ ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", ai=" + ai + ", addressCity=" + addressCity
-				+ ", addressTown=" + addressTown + ", likes=" + likes + ", userno=" + userno + ", regDate=" + regDate
-				+ "]";
+				+ ", addressTown=" + addressTown + ", likes=" + likes + ", selectedno=" + selectedno + ", applycount="
+				+ applycount + ", userno=" + userno + ", regDate=" + regDate + "]";
 	}
-		
+
 	
 		
 }

@@ -10,6 +10,7 @@ public class Users {
 	private String password; //비밀 번호
 	private String phone;//전화 번호
 	private Date joinDate; //날짜
+	private String sect;
 	public Integer getUserno() {
 		return userno;
 	}
@@ -45,6 +46,13 @@ public class Users {
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
+	}
+	
+	public String getSect() {
+		return sect;
+	}
+	public void setSect(String sect) {
+		this.sect = sect;
 	}
 	public Users(Integer userno, String userid, String nickname, String password, String phone,Date joinDate) {
 		super();

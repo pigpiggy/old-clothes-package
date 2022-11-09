@@ -23,7 +23,6 @@
 					bphone,
 					bpassword,
 					bnumber,
-					bsect,
 					bstar,
 					sect, 
 					regdate)
@@ -37,7 +36,6 @@
 					#{bphone},
 					#{bpassword},
 					#{bnumber},
-					#{bsect},
 					0,
 					#{sect},
 					sysdate	)

@@ -5,11 +5,8 @@ public class Donation {
 	private String dname; //기부업체 이름
 	private String daddress; //기부업체 주소
 	private String dphone; //기부업체 전화번호
-<<<<<<< HEAD
-=======
 	private double lngx; //좌표 위도
 	private double laty; //좌표 경도
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 	public Long getBno() {
 		return bno;
 	}
@@ -34,9 +31,6 @@ public class Donation {
 	public void setDphone(String dphone) {
 		this.dphone = dphone;
 	}
-<<<<<<< HEAD
-	public Donation(Long bno, String dname, String daddress, String dphone) {
-=======
 	public double getLngx() {
 		return lngx;
 	}
@@ -50,30 +44,21 @@ public class Donation {
 		this.laty = laty;
 	}
 	public Donation(Long bno, String dname, String daddress, String dphone, double lngx, double laty) {
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 		super();
 		this.bno = bno;
 		this.dname = dname;
 		this.daddress = daddress;
 		this.dphone = dphone;
-<<<<<<< HEAD
-=======
 		this.lngx = lngx;
 		this.laty = laty;
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
-	}
-	public Donation() {
-		super();
 	}
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "Donation [bno=" + bno + ", dname=" + dname + ", daddress=" + daddress + ", dphone=" + dphone + "]";
-=======
 		return "Donation [bno=" + bno + ", dname=" + dname + ", daddress=" + daddress + ", dphone=" + dphone + ", lngx="
 				+ lngx + ", laty=" + laty + "]";
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 	}
+
+
 	
 	
 }

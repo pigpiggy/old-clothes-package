@@ -49,7 +49,7 @@ div.contents {
 			<select id="dong"><option value="">선택</option></select>
 		</div>
 		
-		<c:forEach var="donation" items="${dona}">
+		<c:forEach var="donation" items="${donation}">
 			<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
 			<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
 			<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
@@ -58,19 +58,16 @@ div.contents {
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
 			<input type="button" id="searchBtn" value="검색">
-<<<<<<< HEAD
+
 		</div>
-		<c:forEach var="dona" items="${donation }">
-			<input type="hidden" id="totaladdress" name="totaladdress" value="${dona.daddress }">
-		</c:forEach>
-=======
+		
+
 			
 		</div>		
 	</div>
 	
 	<div class="alladdresslist">
 		오른쪽 리스트
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 	</div>
 	
 	<%-- 지도를 표시할 div 입니다 --%>
@@ -79,71 +76,55 @@ div.contents {
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
-		        center: new kakao.maps.LatLng(36.6424341, 127.4890319), // 지도의 중심좌표
-		        level: 20 // 지도의 확대 레벨
+		        center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
+		        level: 7 // 지도의 확대 레벨
 		    };
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
-<<<<<<< HEAD
-=======
 		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성				
-
-		//DB에 주소를 불러와서 지도에 다중 마커표시하기 위한 것
-		var addressArray = []; //주소 리스트를 받을 배열
+	
+		//주소 리스트를 받을 배열
+		var addressArray = [];
 		var wishList = $('.alladdress'); //주소를 리스트에 담아온다.
 		for(var i=0; i< wishList.length; i++){ //길에 맞게 groupAddress에 담는다 순서대로
-			addressArray.push({
-				'groupAddress' : $("input[name=totaladdress]").eq(i).val(),
-				'lngx' : $("input[name=lngx]").eq(i).val(),
-				'laty' : $("input[name=laty]").eq(i).val(),
-			});			
+			addressArray.push(
+				{'groupAddress' : $("input[name=totaladdress]").eq(i).val(), //주소
+				'lngx' : $("input[name=lngx]").eq(i).val(), //위도
+				'laty' : $("input[name=laty]").eq(i).val()} //경도
+				);			
 		}		
-		
-		var allcontent;
-		var i=0;
-			//while(i<addressArray.length){
-		for(var i=0;i<addressArray.length;i++){
-			console.log("밖:"+addressArray.length + [i]);	
-			console.log("밖:"+addressArray[i].groupAddress);
-			geocoder.addressSearch(addressArray[i].groupAddress,function(result,status1,data){						
-				//정상적으로 검색이 완료됐으면		
-				//if(i==30){
-				//i=0;
-				//}	
-				var lngxx = document.getElementById('lngx').value;
-				var laty = document.getElementById('laty').value;
-				console.log(lngxx);
-				console.log(laty);
-				if(status1 === kakao.maps.services.Status.OK){
-					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-					//결과값으로 받은 위치를 마커로 표시합니다.								
-					var marker = new kakao.maps.Marker({
-						map : map,
-						position : coords
-					});
-					marker.setMap(map);
-					if(i==30){					
-						i=0;
-					}
-																								
-					
-					var contentt = document.getElementById('dongName').value;;					
-					var infowindow1 = new kakao.maps.InfoWindow({ //주소를 마커위에 표시						
-						content: contentt //주소를 마커위에 표시
-					});					
-					infowindow1.open(map,marker); //지도위에 표시해준다.
-					map.setCenter(coords);
-					
-				}
-				i++;
-			});
+		//DB에서 데이터 받은 만큼 for문 진행
+		for(var i = 0; i < addressArray.length; i++){
 			
+			console.log("길이:"+ addressArray.length);
+			//각 값들을 주소.위도,경도에 각각 담아준다.
+			var alladdress = addressArray[i].groupAddress; 
+			var alllngx = addressArray[i].lngx;
+			var alllaty = addressArray[i].laty;
+			
+			console.log(alladdress);
+			console.log(alllngx);
+			console.log(alllaty);
+			
+			getmultiAddr(alllaty,alllngx); //좌표를 함수에 전달
+			function getmultiAddr(alllaty,allngx){
+				var coord1 = new kakao.maps.LatLng(alllaty, alllngx); //좌표를 담아준다.
+				console.log("총 죄표" + coord1);
+				console.log("위치: " + coord1.getLat() +" "+ coord1.getLng());
+				var marker1 = new kakao.maps.Marker({ //지도에 좌표에 맞는 위치에 마커를 찍어준다.
+					map : map,
+					position : coord1
+				});
+				var infowindow1 = new kakao.maps.InfoWindow({ //마커가 찍힌 곳의 주소를 보여주기위한 것 
+					content:alladdress
+				});
+				//지도에 띄워주고 보여준다.
+				infowindow1.open(map,marker1);
+				map.setCenter(coord1);
+			}
 		}
 			
-			
-		
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
@@ -172,11 +153,12 @@ div.contents {
 						var callback = function(result,status){ //결과를  callback에 담는다.
 							if(status === kakao.maps.services.Status.OK){ //성공했다면
 								//추출한 도로명 주소를 해당 input의 value값으로 적용
-								$('#dongName').val(result[0].road_address.address_name);
+								$('#dongName').val();
 							}
 						}
 						geocoder.coord2Address(coord.getLng(),coord.getLat(),callback);
 						console.log(result);
+						console.log(coord.getLat());
 					}
 					//결과값으로ㅗ 받은 위치를 마커로 표시
 					var marker = new kakao.maps.Marker({

@@ -2,10 +2,7 @@ package com.kosta.clothes.controller;
 
 import java.util.List;
 
-<<<<<<< HEAD
 import org.json.simple.JSONArray;
-=======
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +18,6 @@ public class InfoController {
 	
 	@Autowired
 	DonationService donationService;
-<<<<<<< HEAD
 
 	
 	// 정보 안내(헌웃수거함/기부업체)
@@ -32,24 +28,11 @@ public class InfoController {
 			List<Donation> dona = donationService.allDonationInfo();
 			System.out.println(dona.toString());
 			mav.addObject("donation",dona);
-=======
 	
-	@GetMapping("/information")
-	public ModelAndView alldonation(Model model) {
-		ModelAndView mav = new ModelAndView();
-		try {
-			List<Donation> dona = donationService.allDonation();
-			System.out.println("dodonana"+dona.toString());
-			mav.addObject("dona",dona);
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
-			mav.setViewName("/info/donationmap");
+		mav.setViewName("/info/donationmap");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
-<<<<<<< HEAD
-		
-=======
->>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 	}
 }

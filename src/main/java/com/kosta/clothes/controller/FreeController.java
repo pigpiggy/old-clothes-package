@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Free;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Users;
@@ -58,6 +59,18 @@ public class FreeController {
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
 		try {
 			Users users = (Users)session.getAttribute("authUser");
+			String sect = users.getSect();
+			if (sect.equals("users")) {
+				free.setUserno(users.getUserno());
+				String nickname=users.getNickname();
+				free.setFname(nickname);
+			}else {
+				Business user = (Business)session.getAttribute("authUser");
+				free.setBno(user.getBno());
+				String nickname=user.getBname();
+				free.setFname(nickname);
+			}
+				
 			String nickname=users.getNickname();
 			free.setFname(nickname);
 			freeService.registFree(free); // board에 저장된 값을 Service에 있는 registBoard에 넘겨준다

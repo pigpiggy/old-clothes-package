@@ -58,7 +58,8 @@
 				<button class="button">검색</button>
 			</form>
 			<div class="bt_wrap">
-				<a href="freeRegistForm" class="on">글쓰기</a>
+			<c:if test="${!empty authUser}">
+				<a href="freeRegistForm" class="on">글쓰기</a> </c:if>
 			</div>
 
 		</div>

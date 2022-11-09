@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 
 <mapper namespace="com.kosta.clothes.dao.DonationDAO">
 	<select id="selectDonation" resultType="donation">
+=======
+						
+<mapper namespace="com.kosta.clothes.dao.DonationDAO">
+<!-- 기부업체 전체 조회 -->
+	<select id="selectDonation" resultType="Donation">
+>>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 		<![CDATA[
 			select * from donation
 		]]>

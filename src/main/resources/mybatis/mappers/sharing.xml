@@ -11,17 +11,27 @@
 	
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
-			insert into sharing(sno,stitle,scontent,sfileids,sdealType,
-			addressCity,addressTown,regDate)
-			values (#{sno},#{stitle},#{scontent},#{sfileids,jdbcType=VARCHAR},
-			#{sdealType},#{addressCity},#{addressTown},sysdate)
+			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,
+			addressCity,addressTown,userno,regDate)
+			values (#{sno},#{stitle},#{scontent},#{sstatus},#{sfileids,jdbcType=VARCHAR},
+			#{sdealType},#{addressCity},#{addressTown},#{userno},sysdate)
 	
 		]]>
 	</insert>
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select * from sharing where sno=#{sno}
+			select u.nickname as sname, stitle, scontent, sfileids, ai, likes, applycount 
+			from users u, sharing s 
+			where u.userno = s.userno and sno = #{sno}		
+			]]>
+	</select>
+	
+	<select id="getByUserid" parameterType="String" resultType="sharing">
+		<![CDATA[
+			select *
+			from users u, sharing s 
+			where u.userno = s.userno and userid=#{userid}
 		]]>
 	</select>
 	
@@ -29,6 +39,13 @@
 		<![CDATA[
 			select * from ( select * from sharing order by sno desc)
 
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
+		<![CDATA[
+			select * from ( select * from sharing where (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
 			where rownum <= 6
 		]]>
 	</select>
@@ -41,6 +58,12 @@
 		]]>
 	</select>
 	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="sharing">
+		<![CDATA[
+			select * from ( select * from sharing where sno <=#{sno} and (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc)
+			where rownum <= 6
+		]]>
+	</select>
 
 </mapper>
 

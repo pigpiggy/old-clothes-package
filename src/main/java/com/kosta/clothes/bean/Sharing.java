@@ -4,18 +4,18 @@ import java.sql.Date;
 
 public class Sharing {
 	private Integer sno;
-	private String sname;
 	private String stitle;
 	private String scontent;
 	private String sstatus;
+	private String sname;
 	private String sfileids;
 	private String sdealType;
-	private Long grade;
 	private Long ai;
 	private String addressCity;
 	private String addressTown;
-	private Long count;
 	private Long likes;
+	private Long selectedno;
+	private Long applycount;
 	private Integer userno;
 	private Date regDate;
 	public Integer getSno() {
@@ -23,12 +23,6 @@ public class Sharing {
 	}
 	public void setSno(Integer sno) {
 		this.sno = sno;
-	}
-	public String getSname() {
-		return sname;
-	}
-	public void setSname(String sname) {
-		this.sname = sname;
 	}
 	public String getStitle() {
 		return stitle;
@@ -48,6 +42,13 @@ public class Sharing {
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
 	}
+	
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 	public String getSfileids() {
 		return sfileids;
 	}
@@ -59,12 +60,6 @@ public class Sharing {
 	}
 	public void setSdealType(String sdealType) {
 		this.sdealType = sdealType;
-	}
-	public Long getGrade() {
-		return grade;
-	}
-	public void setGrade(Long grade) {
-		this.grade = grade;
 	}
 	public Long getAi() {
 		return ai;
@@ -84,22 +79,28 @@ public class Sharing {
 	public void setAddressTown(String addressTown) {
 		this.addressTown = addressTown;
 	}
-	public Long getCount() {
-		return count;
-	}
-	public void setCount(Long count) {
-		this.count = count;
-	}
 	public Long getLikes() {
 		return likes;
 	}
 	public void setLikes(Long likes) {
 		this.likes = likes;
 	}
+	public Long getSelectedno() {
+		return selectedno;
+	}
+	public void setSelectedno(Long selectedno) {
+		this.selectedno = selectedno;
+	}
+	public Long getApplycount() {
+		return applycount;
+	}
+	public void setApplycount(Long applycount) {
+		this.applycount = applycount;
+	}
 	public Integer getUserno() {
 		return userno;
 	}
-	public void setUserNo(Integer userno) {
+	public void setUserno(Integer userno) {
 		this.userno = userno;
 	}
 	public Date getRegDate() {
@@ -111,33 +112,33 @@ public class Sharing {
 	public Sharing() {
 		super();
 	}
-	public Sharing(Integer sno, String sname, String stitle, String scontent, String sstatus, String sfileids,
-			String sdealType, Long grade, Long ai, String addressCity, String addressTown, Long count, Long likes,
+	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sfileids, String sdealType,
+			Long ai, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,
 			Integer userno, Date regDate) {
 		super();
 		this.sno = sno;
-		this.sname = sname;
 		this.stitle = stitle;
 		this.scontent = scontent;
 		this.sstatus = sstatus;
 		this.sfileids = sfileids;
 		this.sdealType = sdealType;
-		this.grade = grade;
 		this.ai = ai;
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
-		this.count = count;
 		this.likes = likes;
+		this.selectedno = selectedno;
+		this.applycount = applycount;
 		this.userno = userno;
 		this.regDate = regDate;
 	}
 	@Override
 	public String toString() {
-		return "Sharing [sno=" + sno + ", sname=" + sname + ", stitle=" + stitle + ", scontent=" + scontent
-				+ ", sstatus=" + sstatus + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", grade=" + grade
-				+ ", ai=" + ai + ", addressCity=" + addressCity + ", addressTown=" + addressTown + ", count=" + count
-				+ ", likes=" + likes + ", userno=" + userno + ", regDate=" + regDate + "]";
+		return "Sharing [sno=" + sno + ", stitle=" + stitle + ", scontent=" + scontent + ", sstatus=" + sstatus
+				+ ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", ai=" + ai + ", addressCity=" + addressCity
+				+ ", addressTown=" + addressTown + ", likes=" + likes + ", selectedno=" + selectedno + ", applycount="
+				+ applycount + ", userno=" + userno + ", regDate=" + regDate + "]";
 	}
+
 	
 		
 }

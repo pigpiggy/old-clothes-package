@@ -25,7 +25,8 @@
 					bnumber,
 					bsect,
 					bstar,
-					regdate )
+					sect, 
+					regdate)
 					values(
 					#{bno},
 					#{bname},
@@ -38,6 +39,7 @@
 					#{bnumber},
 					#{bsect},
 					0,
+					#{sect},
 					sysdate	)
 		]]>
 	</insert>

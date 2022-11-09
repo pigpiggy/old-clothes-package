@@ -44,6 +44,10 @@ public class MainController {
 	}
 	
 	
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 4d767a1fb23282fdd30fce7cc4e0d44df44e450d
 	
 }

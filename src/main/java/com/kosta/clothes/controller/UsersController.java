@@ -1,7 +1,6 @@
 package com.kosta.clothes.controller;
 
 
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -50,13 +49,14 @@ public class UsersController {
 	//회원가입[개인]
 	@PostMapping("/personnal")
 	public String personnal(@ModelAttribute Users users, Model model) {
+	
 		System.out.println("usersController:" + users.toString());
 		try {
 			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에] 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+		return "redirect:/login";
 	}
 	
 	
@@ -70,7 +70,7 @@ public class UsersController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+		return "redirect:/login";
 	}
 	
 		
@@ -103,6 +103,8 @@ public class UsersController {
     	try {
     		if(certificationService.checkId(nickname)) {
     			return "true"; //닉네임이 중복이라면 true값을 가져온다.
+    		}else if(certificationService.checkBname(nickname)) {
+    			return "true"; //업체쪽 닉네임도 조회(m)
     		}
     	}catch(Exception e) {
     		e.printStackTrace();
@@ -118,6 +120,8 @@ public class UsersController {
     	try {
     		if(certificationService.checkBname(bname)) {
     			return "true"; //닉네임이 중복이라면 true값을 가져온다.
+    		} else if(certificationService.checkId(bname)) {
+    			return "true"; //개인쪽 닉네임도 조회(m)
     		}
     	}catch(Exception e) {
     		e.printStackTrace();
@@ -134,6 +138,8 @@ public class UsersController {
     	try {
     		if(certificationService.checkuserid(checkuserid)) {
     			return "true"; //아이디가 중복이라면 true값을 가져온다.
+    		} else if(certificationService.businessidCheck(checkuserid)) {
+    			return "true"; //업체쪽 아이디와도 중복체크(m)
     		}
     	}catch(Exception e) {
     		e.printStackTrace();
@@ -149,6 +155,8 @@ public class UsersController {
     	try {
     		if(certificationService.businessidCheck(businessid)) {
     			return "true"; //아이디가 중복이라면 true값을 가져온다.
+    		} else if(certificationService.checkuserid(businessid)) {
+    			return "true";//개인쪽 아이디와도 중복체크(m)
     		}
     	}catch(Exception e) {
     		e.printStackTrace();

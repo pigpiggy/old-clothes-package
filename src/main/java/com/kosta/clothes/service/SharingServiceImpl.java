@@ -38,15 +38,14 @@ public class SharingServiceImpl implements SharingService{
 		sharingvo.setSno(sharingid);
 		sharingvo.setStitle(sharing.getStitle());
 		sharingvo.setScontent(sharing.getScontent());
-		
+		sharingvo.setSstatus("등록완료");
+		sharingvo.setUserno(sharing.getUserno());
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
 			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
-					Integer fileid = fileDAO.getNextId();
-					fileVo.setTno(fileid);
 					fileVo.setDirectory_name(path);
 					fileVo.setTname(file.getOriginalFilename());
 					fileVo.setTsize(file.getSize());
@@ -76,9 +75,14 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public Sharing viewSharing(Integer sno) throws Exception {
+		System.out.println("service:" + sharingDAO.selectSharing(sno));
 		return sharingDAO.selectSharing(sno);
 	}
 
+	@Override
+	public Sharing getUserid(String userid) throws Exception {
+		return sharingDAO.getByUserid(userid);
+	}
 	@Override
 	public List<Sharing> getSharingList() throws Exception {
 		// TODO Auto-generated method stub
@@ -90,6 +94,24 @@ public class SharingServiceImpl implements SharingService{
 		// TODO Auto-generated method stub
 		return sharingDAO.infiniteScrollDown(snoToStart);
 	}
+
+
+	@Override
+	public List<Sharing> getSharingList(String kwd) throws Exception {
+		// TODO Auto-generated method stub
+		return sharingDAO.selectSharingSearchedList(kwd);
+	}
+
+
+	@Override
+	public List<Sharing> infiniteScrollDown(Integer snoToStart, String kwd) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sno", snoToStart);
+		map.put("kwd", kwd);
+		return sharingDAO.searchedInfiniteScrollDown(map);
+	}
+
+
 	
 	
 }

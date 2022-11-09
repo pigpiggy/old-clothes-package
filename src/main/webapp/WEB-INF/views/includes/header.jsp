@@ -51,7 +51,7 @@
           </ul>
         </li>
         <li class="hederMenuList">
-          <a href="sharingList">무료나눔</a>
+          <a href="/sharingList">무료나눔</a>
         </li>
         <li class="hederMenuList">
           <span>헌옷 사고 팔기</span>

@@ -91,6 +91,7 @@ footer{
 									<div id=personalform>
 									<form action="personnal" method="POST" onsubmit="return Validation();">
 				                        <div class="form-outline mb-4" style="display:flex;">
+				                        	<input type="hidden" name="sect" value="users"/>
 					                        <label class="form-label" for="nickname" style="position:absolute; margin:2.5%;" >닉네임<span class="req">*</span></label>
 					                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 						                    <input type="button" id="nicknamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
@@ -164,6 +165,7 @@ footer{
 									<div id=businessform>
 									<form action="businesss" method="post" onsubmit="return Valid();">
 										<div class="form-outline mb-4" style="display:flex;">
+											<input type="hidden" name="sect" value="business"/>
 					                        <label class="form-label" for="bname" style="position:absolute; margin:2.5%;" >상호명<span class="req">*</span></label>
 					                 		<input type="text" id="bname" name="bname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" />
 						                    <input type="button" id="brandnamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">

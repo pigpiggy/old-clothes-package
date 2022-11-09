@@ -21,7 +21,7 @@
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select u.nickname, stitle, scontent, sfileids, ai, likes, applycount 
+			select u.nickname as sname, stitle, scontent, sfileids, ai, likes, applycount 
 			from users u, sharing s 
 			where u.userno = s.userno and sno = #{sno}		
 			]]>

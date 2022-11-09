@@ -47,12 +47,11 @@ $(function() {
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="upload/${ file.fileid}" alt="무료나눔 옷">
-            </div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
+			<c:forEach var="sfileids" items="${files }">
+            	<div class="swiper-slide">
+                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
+        		</div>
+        	</c:forEach>            
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
@@ -63,12 +62,10 @@ $(function() {
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" data-sno=${sharing.sno }>
         <div id="sharingname">
-          <span>level icon</span>
           <span>${sharing.sname }</span>
-
-          <span class="letterAndHeart"><img src="image/letter.png" alt="쪽지">
+          <span class="letterAndHeart"><img src="/image/letter.png" alt="쪽지">
           </span>
-          <span class="letterAndHeart"><img src="image/heart.png" alt="찜신청전"></span>
+          <span class="letterAndHeart"><img src="/image/heart.png" alt="찜신청전"></span>
         </div>
         <div id="sreview">거래후기: 12건</div>
         <div id="sbtn">
@@ -80,12 +77,7 @@ $(function() {
       </section>
       <div class="scontent">
         <h3>상품정보</h3>
-        <div id=sdetail>
-        	${sharing.scontent}
-        	<c:forEach var="sfileids" items="${files }">
-                <img src="/upload/${sfileids}" alt="무료나눔 옷">
-        	</c:forEach>
-        </div>
+        <div id=sdetail>${sharing.scontent}</div>
       </div>
       
     </section>

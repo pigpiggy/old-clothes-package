@@ -52,7 +52,7 @@ function Valid(){
 	var BPwd = document.getElementById("bpassword");//비밀번호[업체]
 	var BPwd1 = document.getElementById("b_checkpassword")//비밀번호일치[업체]]
 	var BNumber = document.getElementById("bnumber")//사업자 번호[업체]]
-	var BKaokao = document.getElementById("bkakaoid")//카카오[업체]]
+	//var BKaokao = document.getElementById("bkakaoid")//카카오[업체]]
 	var BAddress = document.getElementById("baddress")//주소[업체]]
 	var BDetailadd = document.getElementById("bdetailadd")//상세주소[업체]
 	var BAgree = document.getElementById("b_clause")//동의[업체]
@@ -65,11 +65,12 @@ function Valid(){
 		alert("아이디 중복확인 확인부탁드립니다.");
 		return false;
 	}
-	
-	if(BKaokao.value==''){
+	/*if(BKaokao.value==''){
 		alert("카카오 아이디를 입력해주세요.");
 		return false;
-	}
+	}*/
+	
+	
 	if($('#checkedbrandname').css("display")=="none"){
 		alert("상호명 중복확인 확인부탁드립니다.");
 		return false;

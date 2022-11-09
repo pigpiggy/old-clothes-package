@@ -38,6 +38,7 @@ function surveyList(){
 				if(data!=""){
 					$(data).each(
 						function(){
+							str += "<a href="+"'sharingView/"+this.sno+"'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
 		          			str	+= "<div class="+"'card-image'"+">";
 		          			if(this.sfileids!=null && this.sfileids !=""){
@@ -62,6 +63,7 @@ function surveyList(){
 							}
 		          			str	+= "</div>";
 		          			str	+= "</div>";
+		          			str += "</a>";
 						});
 						console.log(str);
 						$(".card-list").append(str);

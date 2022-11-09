@@ -15,23 +15,6 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
-<script>
-$(function() {	
-	 var swiper = new Swiper(".mySwiper", {
-	        cssMode: true,
-	        navigation: {
-	          nextEl: ".swiper-button-next",
-	          prevEl: ".swiper-button-prev",
-	        },
-	        pagination: {
-	          el: ".swiper-pagination",
-	        },
-	        mousewheel: true,
-	        keyboard: true,
-	      });
-
-});
-</script>
 <title>무료나눔 상세</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
@@ -63,15 +46,26 @@ $(function() {
         <input type="hidden" name="sno" data-sno=${sharing.sno }>
         <div id="sharingname">
           <span>${sharing.sname }</span>
-          <span class="letterAndHeart"><img src="/image/letter.png" alt="쪽지">
-          </span>
-          <span class="letterAndHeart"><img src="/image/heart.png" alt="찜신청전"></span>
         </div>
-        <div id="sreview">거래후기: 12건</div>
-        <div id="sbtn">
-          <input type="button" value="옷장열기" />
-          <input type="button" value="구매신청" />
-        </div>
+        <c:choose>
+        	<c:when test="${empty authUser }">
+	          	<a href='javascript: login_need();'>
+	          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
+	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+	          	</a>
+        	</c:when>
+        	<c:otherwise>
+	          	<img src="/image/letter.png" id="letter_img" alt="쪽지">
+	          	<a href='javascript: '>
+	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+        		</a>
+        	</c:otherwise>
+		</c:choose>
+		        <div id="sreview">거래후기: 12건</div>
+		        <div id="sbtn">
+		        	<input type="button" value="옷장열기" />
+		        	<input type="button" value="구매신청" />
+        		</div>
         <div>현재 신청 인원 : 3명</div>
         <!-- Swiper JS -->
       </section>
@@ -85,5 +79,71 @@ $(function() {
 <%-- <footer>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
+<script>
+/* 이미지 슬라이드 */
+$(function() {	
+	 var swiper = new Swiper(".mySwiper", {
+	        cssMode: true,
+	        navigation: {
+	          nextEl: ".swiper-button-next",
+	          prevEl: ".swiper-button-prev",
+	        },
+	        pagination: {
+	          el: ".swiper-pagination",
+	        },
+	        mousewheel: true,
+	        keyboard: true,
+	      }); 
+
+});
+
+/* 찜 기능 */
+$(function () {
+	//로그인 확인
+	$("#letter_img").on("click", function() {
+		var authuser = ${authUser}
+		if(authuser == null) {
+			alert("로그인 후 이용해주세요.")
+		}
+	})	
+	
+	
+    let likeVal = document.getElementById('like_check').value
+    const boardId = $("#boardId").val();
+    const memberId = $("#memberId").val();
+    console.log(memberId);
+    console.log(likeVal);
+    const likeImg = document.getElementById("likeImg")
+
+    if (likeVal > 0) {
+        likeImg.src = "/assets/img/like_click.png";
+    } else {
+        likeImg.src = "/assets/img/like_empty.png";
+    }
+    // 좋아요 버튼을 클릭 시 실행되는 코드
+    $("#likeImg").on("click", function () {
+        $.ajax({
+            url: '/board/like',
+            type: 'POST',
+            data: {'boardId': boardId, 'memberId': memberId},
+            success: function (data) {
+                if (data == 1) {
+                    $("#likeImg").attr("src", "/assets/img/like_click.png");
+                    location.href="/board/"+boardId;
+
+                } else {
+                    $("#likeImg").attr("src", "/assets/img/like_empty.png");
+                    location.href="/board/"+boardId;
+                }
+            }, error: function () {
+                $("#likeImg").attr("src", "/assets/img/like_click.png");
+                console.log('오타 찾으세요')
+            }
+
+        });
+
+    });
+});
+</script>
 </body>
 </html>

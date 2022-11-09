@@ -39,9 +39,15 @@ div.contents {
 	</div>
 	
 	<div class="contents">
-		<select class="select" id="sido"><option value="">선택</option></select>
-		<select class="select" id="sigugun"><option value="">선택</option></select>
-		<select class="select" id="dong"><option value="">선택</option></select>
+		<div class="select">
+			<select id="sido"><option value="">선택</option></select>
+		</div>
+		<div class="select">
+			<select id="sigugun"><option value="">선택</option></select>
+		</div>
+		<div class="select">
+			<select id="dong"><option value="">선택</option></select>
+		</div>
 		
 		<c:forEach var="donation" items="${dona}">
 			<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">

@@ -35,7 +35,7 @@ select::-ms-expand {
 }
 /* Arrow */
 .select::after {
-  content: '\25BC';
+  content: '▼';
   position: absolute;
   top: 0;
   right: 0;

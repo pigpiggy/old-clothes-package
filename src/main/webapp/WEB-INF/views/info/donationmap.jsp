@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +41,9 @@ div.contents {
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
 			<input type="button" id="searchBtn" value="검색">
 		</div>
+		<c:forEach var="dona" items="${donation }">
+			<input type="hidden" id="totaladdress" name="totaladdress" value="${dona.daddress }">
+		</c:forEach>
 	</div>
 	
 	<%-- 지도를 표시할 div 입니다 --%>
@@ -55,8 +58,6 @@ div.contents {
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-		
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
 			var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
@@ -69,9 +70,10 @@ div.contents {
 					var contentadd = document.getElementById('dongName').value;
 					var lat = result[0].y;
 					var lng = result[0].x;
-					console.log(geocoder+"geo");
+					var daddress = $('input[name=totaladdress]').val();
+					console.log("address"+ daddress);
 					console.log(contentadd);
-					console.log("lat: " + lat);
+					console.log("lat: " + lat);	
 					console.log("lng: " + lng);
 					getAddr(lat,lng);
 					function getAddr(lat,lng){
@@ -85,6 +87,7 @@ div.contents {
 							}
 						}
 						geocoder.coord2Address(coord.getLng(),coord.getLat(),callback);
+						console.log(result);
 					}
 					//결과값으로ㅗ 받은 위치를 마커로 표시
 					var marker = new kakao.maps.Marker({

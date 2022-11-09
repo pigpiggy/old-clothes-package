@@ -44,10 +44,6 @@ public class MainController {
 	}
 	
 	
-	// 정보 안내(헌웃수거함/기부업체)
-	@GetMapping("/information")
-	public String information() {
-		return "info/donationmap";
-	}
+
 	
 }

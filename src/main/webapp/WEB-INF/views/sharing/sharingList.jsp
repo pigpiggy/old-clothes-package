@@ -38,6 +38,9 @@
      <a href="sharingView/${sharing.sno}">
 	     <div class="card" data-sno=${sharing.sno }>
 	          <div class="card-image">
+	          	<c:if test="${!'등록완료' eq sharing.sstatus}">
+	          		<div class="sharingStatus">${sharing.sstatus }</div>
+	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sharing.sfileids }">
 	          			<img src="upload/logo3.png" alt="로고">

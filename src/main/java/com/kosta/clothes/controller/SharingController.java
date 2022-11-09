@@ -155,7 +155,6 @@ public class SharingController {
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
 		String keyword = (String) params.get("keyword");
 		Integer sno = Integer.parseInt((String) params.get("sno"));
-		System.out.println("키워드"+keyword);
 		Integer snoToStart = sno-1;
 		List<Sharing> sharingList = new ArrayList<>();
 		try {

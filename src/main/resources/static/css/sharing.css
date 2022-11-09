@@ -228,6 +228,21 @@ select::-ms-expand {
 	width: 100%;
 }
 
+.sharingStatus {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+    opacity: 0.4;
+    color: white;
+    width: 63%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 2;
+    border-radius: 2px;
+}
+
 .card-image img {
 	max-height: 100%;
 	width: 100%;

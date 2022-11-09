@@ -40,6 +40,9 @@ function surveyList(){
 							str += "<a href="+"'sharingView/"+this.sno+"'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
 		          			str	+= "<div class="+"'card-image'"+">";
+		          			if(this.sstatus != '등록완료'){
+								str += "<div class="+"'sharingStatus'"+">"+this.sstatus+"</div>";
+							}
 		          			if(this.sfileids!=null && this.sfileids !=""){
 								str	+= "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
 							} else {

@@ -85,6 +85,7 @@ public class Business {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+
 	
 	
 	public Business(String businessid, String bpassword) {

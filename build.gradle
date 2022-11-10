@@ -35,6 +35,9 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	
+	// https://mvnrepository.com/artifact/net.sf.opencsv/opencsv
+	implementation 'net.sf.opencsv:opencsv:2.3'
+	
 
 
 

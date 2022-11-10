@@ -15,6 +15,7 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
+	<section id="articleForm">
     <div class="board_wrap">
         <div class="board_title">
             <strong>자유게시판</strong>
@@ -22,30 +23,33 @@
         <div class="board_view_wrap">
             <div class="board_view">
                 <div class="title">
-                    저메추 부탁드립니다.
+                   <dl>
+                   <section id="basicInfoArea">
+                        <dt>제목</dt>
+                        <dd><input type="text" name="ftitle" value= ${article.ftitle} placeholder="제목 입력"></dd>
+                    </dl>
                 </div>
                 <div class="info">
                     <dl>
                         <dt>글번호</dt>
-                        <dd>5</dd>
+                        <dd>${article.fno }</dd>
                     </dl>
                     <dl>
                         <dt>닉네임</dt>
-                        <dd>김NaNa</dd>
+                        <dd>${article.fname }</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>2022-10-27</dd>
+                        <dd>${article.regdate }</dd>
                     </dl>
                     <dl>
                         <dt>조회수</dt>
-                        <dd>6</dd>
+                        <dd>${article.freadcount}</dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    너무 배고프네요...<br>
-                    매일 라면만 먹었더니 너무 질려요 ㅠㅠ<br>
-                    저메추 해주세요ㅎㅎ                    
+                <section id="articleContentArea">
+                    <textarea placeholder="ck에디터 들어갑니다" value=${article.fcontent} name="fcontent"></textarea>                    
                 </div>                
             </div>
             <div class="bt_wrap">

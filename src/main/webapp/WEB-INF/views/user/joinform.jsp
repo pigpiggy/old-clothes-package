@@ -44,12 +44,6 @@
   padding-bottom: 50px;
 }
 
-footer{
-  height: 50px;
-  position : relative;
-  transform : translateY(-100%);
-}
-
 .my_img {
 	display:none;
 	width:495px;
@@ -64,7 +58,7 @@ footer{
 </style>
 </head>
 <body>
-	<div id="wrapper">
+	<div id="wrap">
 		<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 		</div>
@@ -269,6 +263,9 @@ footer{
 	            </div>
 	        </div>
 	    </section>
+	    <footer>
+			<c:import url='/WEB-INF/views/includes/footer.jsp' />
+		</footer>
 	</div>
 	<!-- The Modal -->
 <div class="modal" id="myModal">

@@ -40,6 +40,11 @@ h6 {
 	font-family: 'LeferiPoint-BlackA';
 }
 
+html,
+body {
+	height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -48,6 +53,12 @@ body {
 ul,
 li {
   list-style: none;
+}
+
+#wrap {
+    height: auto;
+    min-height: 100%;
+    position: relative;
 }
 	
 .container { width:500px;}
@@ -68,14 +79,12 @@ li {
 
 footer {
 	width: 100%;
-	height: 25px;
-	bottom: 0px;
-	position: relative;
-	transform: translateY(-100%);
+	position: absolute;
 	box-shadow: -4px -4px 4px 0 #f3f3f4;
 	border-top: 1px solid #E9E9E9;
-	padding-top: 7px;
-	font-size: 11px;
+    padding-top: 7px;
+    font-size: 11px;
+    bottom: 0;
 }
 
 footer a {

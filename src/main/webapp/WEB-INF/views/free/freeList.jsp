@@ -38,7 +38,7 @@
 				<div>
 					<div class="num">${free.fno}</div>
 					<div class="title">
-						<a href="view.html">${free.ftitle}</a>
+						<a href="/freeView/${free.fno}">${free.ftitle}</a>
 					</div>
 					<div class="writer">${free.fname}</div>
 					<div class="date">${free.regdate}</div>

@@ -65,9 +65,7 @@ $(function(){
 		<select id="sigugun"><option value="">선택</option></select>
 		<select id="dong"><option value="">선택</option></select>
 		
-		<c:forEach var="dona1" items="${dona}">
-			<input type="hidden" name="totaladdress" id="totaladdress" value="${dona1.daddress }">			
-		</c:forEach>
+		
 		<div>
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
@@ -105,12 +103,10 @@ $(function(){
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
-					var address = $('input[name=totaladdress]').val();
-					var address1 = document.getElementById('totaladdress').value;
+					
 					
 					console.log("donation list: "+ dona1);
-					console.log("total address : " +  address);
-					console.log("total address : " +  address1);
+					
 					//추출한 좌료를 통해 도로명 주소 추출
 					var contentadd = document.getElementById('dongName').value;
 					var lat = result[0].y;

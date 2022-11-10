@@ -17,11 +17,7 @@ public class Business {
 	private Long bstar; //별점
 	private Date regDate; //날짜
 	private String sect;//개인과사업의 구분
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public Integer getBno() {
 		return bno;
 	}
@@ -89,8 +85,7 @@ public class Business {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-<<<<<<< HEAD
-=======
+
 	
 	
 	public Business(String businessid, String bpassword) {
@@ -100,7 +95,6 @@ public class Business {
 	}
 
 
->>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public String getSect() {
 		return sect;
 	}

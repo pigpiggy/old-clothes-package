@@ -107,7 +107,6 @@ public class SharingController {
 			Users users = (Users)session.getAttribute("authUser");
 			if(users==null) {
 				model.addAttribute("logincheck", "false");
-				mav.setViewName("/users/loginform");
 			}
 			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);

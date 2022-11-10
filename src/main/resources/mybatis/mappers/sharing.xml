@@ -27,6 +27,11 @@
 			]]>
 	</select>
 	
+	<update id="sharinglikes" parameterType="Long">
+		UPDATE LIKES SET LIKESCHECK = LIKESCHECK + 1
+		WHERE sno = #{sno} AND userno = #{userno}
+	</update>
+		
 	<select id="getByUserid" parameterType="String" resultType="sharing">
 		<![CDATA[
 			select *

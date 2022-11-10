@@ -21,10 +21,10 @@
 	</header>
 	<div class="container">
 		<h1>상품수정</h1>
-		<form action="sharingRegist" method="post" name="writeForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
-			<input type="hidden" name="sno">
+		<form action="sharingModify" method="post" name="modifyForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
+			<input type="hidden" name="sno" value="${sharing.sno }">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
+				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle" value="${sharing.stitle }">
 			</div>
 			<br>
 			<div id="dealcontainer">
@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="form-group">
-				<textarea class="form-control" rows="12" id="scontent" name="scontent"></textarea>
+				<textarea class="form-control" rows="12" id="scontent" name="scontent">${sharing.scontent }</textarea>
 			</div>
 			<input type="file" multiple="multiple" name="simageFile" id="image"
 				onchange="addFile(this);" />
@@ -59,7 +59,7 @@
 				<a href="sharingList">
 					<button type="button" class="btn btn-info">목록으로</button>
 				</a> 
-				<input type="submit" id="uploadBtn" class="btn btn-warning" value="등록">
+				<input type="submit" id="uploadBtn" class="btn btn-warning" value="수정">
 			</div>
 		</form>
 	</div>

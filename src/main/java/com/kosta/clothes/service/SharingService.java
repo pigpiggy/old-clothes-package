@@ -18,4 +18,6 @@ public interface SharingService {
 	List<Sharing> getSharingList(String kwd) throws Exception;
 	List<Sharing> infiniteScrollDown(Integer snoToStart) throws Exception;
 	List<Sharing> infiniteScrollDown(Integer snoToStart, String kwd) throws Exception;
+	void modifySharing(Sharing sharing, MultipartFile[] files) throws Exception;
+	void deleteSharing(Integer sno) throws Exception;
 }

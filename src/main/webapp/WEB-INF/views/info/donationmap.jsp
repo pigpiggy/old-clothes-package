@@ -9,9 +9,11 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 <style>
 div.contents {
   text-align: left;
@@ -20,64 +22,131 @@ div.contents {
 }
 
 #map {
-	left: 50px;
-	top: 40px;
-	width:45%;
+	left: -40px;
+	top: 0px;
+	width:50%;
 	height:500px;
+	margin:40px;
 }	
+.alladdresslist {	
+	margin-left:1150px;	
+	width:400px; height:300px;
+}
+label {
+	font-size:3rem;
+}
+input[type=radio] {
+    border: 0px;
+    width: 50px;
+    height: 2em;
+}
 
-.alladdresslist {
-	float: right;
-	padding : 150px;
-	top:
+.offlinenames {
+	background-color:gray;
+	top:px;
+}
+#a {
+	display:flex;
+	width:100%;
+}
+#b {
+	display:flex;	
+	position:relative;
+	overflow-y:scroll;
+	flex-direction:column;
+	height:400px;
+	padding:5px;	
+	border:1px solid black;	
+}
+#c{
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+	justify-content:center;
+}
+#indexlist{
+	border:1px solid black;
 }
 </style>
+
 </head>
 <body>
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
 	
+	
 	<div class="contents">
-		<div class="select">
-			<select id="sido"><option value="">선택</option></select>
+		<div class="form-radio" style="text-align:left; margin-left:180px; margin-top:-100px;">
+	        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
+	        <label for="person" style="width:120px;">온라인</label>
+			&nbsp; &nbsp;
+	        <input type="radio" name="donation_level" value="offline" id="offline" />
+	        <label for="business">오프라인</label>
 		</div>
-		<div class="select">
-			<select id="sigugun"><option value="">선택</option></select>
-		</div>
-		<div class="select">
-			<select id="dong"><option value="">선택</option></select>
-		</div>
+		<br>		
+		<br>
 		
-		<c:forEach var="donation" items="${donation}">
-			<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
-			<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
-			<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
-		</c:forEach>
-		<div>
-			<%-- 텍스트: <span id="dongName"></span><br/>--%>
-			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-			<input type="button" id="searchBtn" value="검색">
-
-		</div>
-		
-
+			<div id="offlineview">
+				<div class="select" style="top:30px;">
+					<select id="sido"><option value="">선택</option></select>
+				</div>
+				<div class="select" style="margin-left:170px; top:-5px;">
+					<select id="sigugun"><option value="">선택</option></select>
+				</div>
+				<div class="select" style="margin-left:340px; top:-39px;">
+					<select id="dong"><option value="">선택</option></select>
+				</div>
+				<%-- 지도를 표시할 div 입니다 --%>
 			
-		</div>		
-	</div>
+					
+				<div>
+					<%-- 텍스트: <span id="dongName"></span><br/>--%>
+					<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+					<input type="button" id="searchBtn" value="검색">
+		
+				</div>
+			<div id="a">
+			<div id="map"></div>
+			<div id="c">
+				<h1 id="donationlist">[기부업체 리스트 목록]</h1>
+			
+			<div id="b">		
+				<c:forEach var="donation" items="${donation}">
+					<input type="hidden" class="allname" name="allname" id="allname" value="${donation.dname}">
+					<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
+					<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
+					<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
+						<div id="indexlist">
+							<h2>&nbsp; &nbsp;[${donation.dname }]</h2>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
+							<br>
+						</div>	
+					
+					
+				</c:forEach>
+				</div>
+			</div>
+			</div>
+						
+			</div>
+			
+			
+		</div>	
+		<div id="onlineview">
+			온라인 페이지 입니다.
+		</div>
+		
 	
-	<div class="alladdresslist">
-		오른쪽 리스트
-	</div>
 	
-	<%-- 지도를 표시할 div 입니다 --%>
-	<div id="map"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+	
+	
+	
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
-		        level: 7 // 지도의 확대 레벨
+		        level: 3 // 지도의 확대 레벨
 		    };
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -91,7 +160,9 @@ div.contents {
 			addressArray.push(
 				{'groupAddress' : $("input[name=totaladdress]").eq(i).val(), //주소
 				'lngx' : $("input[name=lngx]").eq(i).val(), //위도
-				'laty' : $("input[name=laty]").eq(i).val()} //경도
+				'laty' : $("input[name=laty]").eq(i).val(), //경도
+				'name' : $("input[name=allname]").eq(i).val()//이름
+				}
 				);			
 		}		
 		//DB에서 데이터 받은 만큼 for문 진행
@@ -102,6 +173,7 @@ div.contents {
 			var alladdress = addressArray[i].groupAddress; 
 			var alllngx = addressArray[i].lngx;
 			var alllaty = addressArray[i].laty;
+			var allname = addressArray[i].name;
 			
 			console.log(alladdress);
 			console.log(alllngx);
@@ -117,7 +189,7 @@ div.contents {
 					position : coord1
 				});
 				var infowindow1 = new kakao.maps.InfoWindow({ //마커가 찍힌 곳의 주소를 보여주기위한 것 
-					content:alladdress
+					content:allname
 				});
 				//지도에 띄워주고 보여준다.
 				infowindow1.open(map,marker1);
@@ -183,5 +255,6 @@ div.contents {
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
+<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
 </body>
 </html>

@@ -10,12 +10,10 @@
     <title>자유게시판 글작성</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-<<<<<<< HEAD
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/src/main/webapp/resources/ckeditor5/sample/styles.css"/>
+
 	<script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
-=======
+
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 <script>
 	$(function() {
 		ClassicEditor.create(document.querySelector("#editor"))
@@ -27,7 +25,7 @@
 		})
 	});
 </script>
->>>>>>> 087824972baee6f781622eba84be3fd28459d969
+
 </head>
 <body>
 	<div>
@@ -47,18 +45,7 @@
                     </dl>
                 </div>                
                 <div class="cont">
-<<<<<<< HEAD
-                <div id="editor"></div>
-                    <script>
-                    ClassicEditor
-                    .create( document.querySelector( '#editor' ) )
-                    .catch( error => {
-                      console.error( error );
-                    } );
-                </script>
-=======
                     <div id="editor"></div><br>
->>>>>>> 087824972baee6f781622eba84be3fd28459d969
                 </div>
             </div>
             <div class="bt_wrap">

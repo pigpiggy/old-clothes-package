@@ -53,7 +53,7 @@
 				<div class="form-group">
 					<textarea class="form-control" rows="12" id="scontent" name="scontent"></textarea>
 				</div>
-				<input type="file" multiple="multiple" name="simageFile" id="image"
+				<input type="file" multiple="multiple" name="simageFile" id="image" title="한 번에 최대 5개까지 선택가능"
 					onchange="addFile(this);" />
 				<div id=imglist class="filebox"></div>
 				<div id="btncontainer">

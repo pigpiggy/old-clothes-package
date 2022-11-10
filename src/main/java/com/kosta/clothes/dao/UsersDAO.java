@@ -19,7 +19,6 @@ public interface UsersDAO {
 	Users selectuserid(String checkuserid) throws Exception;//아이디 중복확인[개인]
 	Business selectbusinessid(String businessidCheck) throws Exception;//아이디 중복확인[업체]
 
-//	Users selectName(String checknick) throws Exception;//닉네임 중복확인
 	Users selectAccount(Map<String, String> map) throws Exception;//로그인[개인]
 	Business selectbAccount(Map<String, String> map) throws Exception;//로그인[업체]
 	

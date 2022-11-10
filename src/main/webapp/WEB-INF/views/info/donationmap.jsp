@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
 <title>지도</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
@@ -24,6 +25,12 @@ div.contents {
 	width:45%;
 	height:500px;
 }	
+
+.alladdresslist {
+	float: right;
+	padding : 150px;
+	top:
+}
 </style>
 </head>
 <body>
@@ -32,19 +39,35 @@ div.contents {
 	</div>
 	
 	<div class="contents">
-		<select id="sido"><option value="">선택</option></select>
-		<select id="sigugun"><option value="">선택</option></select>
-		<select id="dong"><option value="">선택</option></select>
+		<div class="select">
+			<select id="sido"><option value="">선택</option></select>
+		</div>
+		<div class="select">
+			<select id="sigugun"><option value="">선택</option></select>
+		</div>
+		<div class="select">
+			<select id="dong"><option value="">선택</option></select>
+		</div>
 		
-		<c:forEach var="dona1" items="${dona}">
-			<input type="hidden" name="totaladdress" id="totaladdress" value="${dona1.daddress }">			
+		<c:forEach var="donation" items="${donation}">
+			<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
+			<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
+			<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
 		</c:forEach>
 		<div>
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
 			<input type="button" id="searchBtn" value="검색">
+
+		</div>
+		
+
 			
 		</div>		
+	</div>
+	
+	<div class="alladdresslist">
+		오른쪽 리스트
 	</div>
 	
 	<%-- 지도를 표시할 div 입니다 --%>
@@ -53,34 +76,74 @@ div.contents {
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
+		        center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
+		        level: 7 // 지도의 확대 레벨
 		    };
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성				
 	
-		
+		//주소 리스트를 받을 배열
+		var addressArray = [];
+		var wishList = $('.alladdress'); //주소를 리스트에 담아온다.
+		for(var i=0; i< wishList.length; i++){ //길에 맞게 groupAddress에 담는다 순서대로
+			addressArray.push(
+				{'groupAddress' : $("input[name=totaladdress]").eq(i).val(), //주소
+				'lngx' : $("input[name=lngx]").eq(i).val(), //위도
+				'laty' : $("input[name=laty]").eq(i).val()} //경도
+				);			
+		}		
+		//DB에서 데이터 받은 만큼 for문 진행
+		for(var i = 0; i < addressArray.length; i++){
+			
+			console.log("길이:"+ addressArray.length);
+			//각 값들을 주소.위도,경도에 각각 담아준다.
+			var alladdress = addressArray[i].groupAddress; 
+			var alllngx = addressArray[i].lngx;
+			var alllaty = addressArray[i].laty;
+			
+			console.log(alladdress);
+			console.log(alllngx);
+			console.log(alllaty);
+			
+			getmultiAddr(alllaty,alllngx); //좌표를 함수에 전달
+			function getmultiAddr(alllaty,allngx){
+				var coord1 = new kakao.maps.LatLng(alllaty, alllngx); //좌표를 담아준다.
+				console.log("총 죄표" + coord1);
+				console.log("위치: " + coord1.getLat() +" "+ coord1.getLng());
+				var marker1 = new kakao.maps.Marker({ //지도에 좌표에 맞는 위치에 마커를 찍어준다.
+					map : map,
+					position : coord1
+				});
+				var infowindow1 = new kakao.maps.InfoWindow({ //마커가 찍힌 곳의 주소를 보여주기위한 것 
+					content:alladdress
+				});
+				//지도에 띄워주고 보여준다.
+				infowindow1.open(map,marker1);
+				map.setCenter(coord1);
+			}
+		}
+			
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
-			var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
 					var address = $('input[name=totaladdress]').val();
 					var address1 = document.getElementById('totaladdress').value;
-					
-					console.log("donation list: "+ dona1);
+										
 					console.log("total address : " +  address);
 					console.log("total address : " +  address1);
 					//추출한 좌료를 통해 도로명 주소 추출
 					var contentadd = document.getElementById('dongName').value;
 					var lat = result[0].y;
 					var lng = result[0].x;
-					console.log(geocoder+"geo");
+					var daddress = $('input[name=totaladdress]').val();
+					console.log("address"+ daddress);
 					console.log(contentadd);
-					console.log("lat: " + lat);
+					console.log("lat: " + lat);	
 					console.log("lng: " + lng);
 					getAddr(lat,lng);
 					function getAddr(lat,lng){
@@ -90,10 +153,12 @@ div.contents {
 						var callback = function(result,status){ //결과를  callback에 담는다.
 							if(status === kakao.maps.services.Status.OK){ //성공했다면
 								//추출한 도로명 주소를 해당 input의 value값으로 적용
-								$('#dongName').val(result[0].road_address.address_name);
+								$('#dongName').val();
 							}
 						}
 						geocoder.coord2Address(coord.getLng(),coord.getLat(),callback);
+						console.log(result);
+						console.log(coord.getLat());
 					}
 					//결과값으로ㅗ 받은 위치를 마커로 표시
 					var marker = new kakao.maps.Marker({

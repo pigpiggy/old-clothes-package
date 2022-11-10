@@ -13,10 +13,10 @@ public class DonationServiceImpl implements DonationService {
 
 	@Autowired
 	DonationDAO donationDao;
-	
+	 
 	@Override
-	public List<Donation> allDonation() throws Exception {
-		return donationDao.selectDonation(); //기부 정보 다 가져오기
+	public List<Donation> allDonationInfo() throws Exception {
+		return donationDao.selectDonation();
 	}
 
 }

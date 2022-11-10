@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Free;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Users;
@@ -55,9 +57,25 @@ public class FreeController {
 	//글 등록
 	@PostMapping("/freeInsert")
 	public ModelAndView boardwrite(@ModelAttribute Free free,HttpSession session ) {//값을 전부 받아온다.
+		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
 		try {
 			Users users = (Users)session.getAttribute("authUser");
+			System.out.println("users:"+users);
+			String sect = users.getSect();
+			if (sect.equals("users")) {
+				free.setUserno(users.getUserno());
+				String nickname=users.getNickname();
+				free.setFname(nickname);
+				System.out.println("users:"+free);
+			}else {
+				Business user = (Business)session.getAttribute("authUser");
+				free.setBno(user.getBno());
+				String nickname=user.getBname();
+				free.setFname(nickname);
+				System.out.println("business"+free);
+			}
+				
 			String nickname=users.getNickname();
 			free.setFname(nickname);
 			freeService.registFree(free); // board에 저장된 값을 Service에 있는 registBoard에 넘겨준다
@@ -70,12 +88,15 @@ public class FreeController {
 	}
 	
 	 //글 상세보기
-	@GetMapping("/freeView")
-	public ModelAndView freeView(@RequestParam("fno") int free_num,
+	@GetMapping("freeView/{fno}")
+	public ModelAndView freeView(@PathVariable("fno") Integer fno,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView();
 		try {
-			Free free = freeService.getFree(free_num);
+			Free free = freeService.getFree(fno);
+			mav.addObject("article", free);
+			mav.addObject("page", page);
 			mav.setViewName("/free/freeView");
 		} catch (Exception e) {
 			e.printStackTrace();		

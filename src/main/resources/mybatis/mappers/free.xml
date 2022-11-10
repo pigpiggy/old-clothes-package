@@ -16,12 +16,12 @@
 						 	   bno)
 			values(#{fno},
 				   #{fname},
-				   #{ftitle},
+				   #{ftitle,jdbcType=VARCHAR},
 				   #{fcontent},
 				   #{freadcount},
-				   #{userno},
-				   #{bno},
-				   sysdate)
+				   sysdate,
+				   #{userno,jdbcType=INTEGER},
+				   #{bno,jdbcType=INTEGER})
 		]]>
 				
 

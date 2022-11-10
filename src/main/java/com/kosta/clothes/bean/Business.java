@@ -16,7 +16,12 @@ public class Business {
 	private String bnumber; //사업자 번호
 	private Long bstar; //별점
 	private Date regDate; //날짜
-	private String sect;
+	private String sect;//개인과사업의 구분
+<<<<<<< HEAD
+	
+=======
+
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public Integer getBno() {
 		return bno;
 	}
@@ -84,7 +89,18 @@ public class Business {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+<<<<<<< HEAD
+=======
 	
+	
+	public Business(String businessid, String bpassword) {
+		super();
+		this.businessid = businessid;
+		this.bpassword = bpassword;
+	}
+
+
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public String getSect() {
 		return sect;
 	}
@@ -92,7 +108,8 @@ public class Business {
 		this.sect = sect;
 	}
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
-			String bphone, String bpassword, String bnumber, Long bstar, Date regDate) {
+			String bphone, String bpassword, String bnumber, Long bstar, Date regDate, String sect) {
+
 		super();
 		this.bno = bno;
 		this.bname = bname;
@@ -103,23 +120,21 @@ public class Business {
 		this.bphone = bphone;
 		this.bpassword = bpassword;
 		this.bnumber = bnumber;
+		this.sect = sect;
 		this.bstar = bstar;
 		this.regDate = regDate;
+
 	}
 	public Business() {
 		super();
-	}
-	
-	public Business(String businessid, String bpassword) {
-		super();
-		this.businessid = businessid;
-		this.bpassword = bpassword;
+
 	}
 	@Override
 	public String toString() {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress
 				+ ", bdetailadd=" + bdetailadd + ", bkakaoid=" + bkakaoid + ", bphone=" + bphone + ", bpassword="
-				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + "]";
+				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + ", sect=" + sect
+				+ "]";
 	}
 
 	

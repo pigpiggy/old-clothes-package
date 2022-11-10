@@ -38,7 +38,7 @@
 				<div>
 					<div class="num">${free.fno}</div>
 					<div class="title">
-						<a href="view.html">${free.ftitle}</a>
+						<a href="/freeView/${free.fno}">${free.ftitle}</a>
 					</div>
 					<div class="writer">${free.fname}</div>
 					<div class="date">${free.regdate}</div>
@@ -58,7 +58,8 @@
 				<button class="button">검색</button>
 			</form>
 			<div class="bt_wrap">
-				<a href="freeRegistForm" class="on">글쓰기</a>
+			<c:if test="${!empty authUser}">
+				<a href="freeRegistForm" class="on">글쓰기</a> </c:if>
 			</div>
 
 		</div>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<html>
+<html id="home">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -190,7 +190,7 @@ h3.subtitle {
       </div>
       
     </aside>
-    <main>
+   
   
    <form action= "/" method="post">
    <div class="slideshow-container">
@@ -269,7 +269,7 @@ h3.subtitle {
 </form>
 
 
-</main>
+
 
 	<script src="<c:url value="/resources/sidebar/js/jquery-3.3.1.min.js"/>"></script>
 	<script src="<c:url value="/resources/sidebar/js/popper.min.js"/>"></script>

@@ -22,9 +22,38 @@ div.contents {
 	left: 50px;
 	top: 40px;
 	width:45%;
-	height:350px;
+	height:500px;
 }	
 </style>
+<script>
+<%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
+$(function(){
+	$('#searchBtn').click(function(){
+		let sido = $("#sido option:selected").text();
+		let sigugun = $('#sigugun option:selected').text();
+		let dong = $('#dong option:selected').text();
+		console.log(sido+"!");
+		console.log(sigugun+"!");
+		console.log(dong+"!");
+		$.ajax({
+			type: 'post',
+			url: 'csvToBean',
+			dataType: 'json',
+			data: JSON.stringify({
+				"sido" : sido,
+				"sigugun" : sigugun,
+				"dong" : dong	
+			}),
+			contentType: "application/json",
+			success: function(data){
+				console.log(data);
+				
+			}
+		});
+	})
+})
+</script>
+
 </head>
 <body>
 	<div>
@@ -36,15 +65,27 @@ div.contents {
 		<select id="sigugun"><option value="">선택</option></select>
 		<select id="dong"><option value="">선택</option></select>
 		
+		<c:forEach var="dona1" items="${dona}">
+			<input type="hidden" name="totaladdress" id="totaladdress" value="${dona1.daddress }">			
+		</c:forEach>
 		<div>
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
 			<input type="button" id="searchBtn" value="검색">
-		</div>
+			
+		</div>		
 	</div>
 	
 	<%-- 지도를 표시할 div 입니다 --%>
-	<div id="map"></div>
+	<div style="dispaly:flex">
+		<div id="map" style="float:left;"></div>
+		<div style="float:right; padding-right:35%; ">
+		<li>표시</li>
+			<c:forEach var="Trash" items="${trash }">
+				<li>${Trash }</li>
+			</c:forEach>
+		</div>
+	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -55,7 +96,7 @@ div.contents {
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
+		
 		
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
@@ -64,7 +105,12 @@ div.contents {
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
+					var address = $('input[name=totaladdress]').val();
+					var address1 = document.getElementById('totaladdress').value;
 					
+					console.log("donation list: "+ dona1);
+					console.log("total address : " +  address);
+					console.log("total address : " +  address1);
 					//추출한 좌료를 통해 도로명 주소 추출
 					var contentadd = document.getElementById('dongName').value;
 					var lat = result[0].y;
@@ -103,7 +149,6 @@ div.contents {
 			});
 		});
 	</script>
-	<div>ddd</div>
 	
 	
 	

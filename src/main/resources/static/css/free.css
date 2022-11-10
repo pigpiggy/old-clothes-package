@@ -303,6 +303,12 @@ a {
     resize: vertical;
 }
 
+<<<<<<< HEAD
 .ck-editor{
 	height : 550px;	
 }
+=======
+.ck.ck-editor__editable_inline[dir=ltr] {
+	height: 250px;
+}
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969

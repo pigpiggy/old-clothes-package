@@ -11,8 +11,11 @@ public class Users {
 	private String phone;//전화 번호
 	private Date joinDate; //날짜
 	private String sect;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public Integer getUserno() {
 		return userno;
 	}
@@ -49,15 +52,23 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969
 	public String getSect() {
 		return sect;
 	}
 	public void setSect(String sect) {
 		this.sect = sect;
 	}
+<<<<<<< HEAD
 	public Users(Integer userno, String userid, String nickname, String password, String phone,Date joinDate) {
 
+=======
+	public Users(Integer userno, String userid, String nickname, String password, String phone, Date joinDate,
+			String sect) {
+>>>>>>> 087824972baee6f781622eba84be3fd28459d969
 		super();
 		this.userno = userno;
 		this.userid = userid;
@@ -67,11 +78,14 @@ public class Users {
 		this.joinDate = joinDate;
 		this.sect = sect;
 	}
+	public Users() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "Users [userno=" + userno + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
 				+ ", phone=" + phone + ", joinDate=" + joinDate + ", sect=" + sect + "]";
 	}
 	
-	
+
 }

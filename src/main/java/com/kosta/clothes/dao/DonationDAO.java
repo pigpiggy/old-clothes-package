@@ -10,5 +10,7 @@ import com.kosta.clothes.bean.Donation;
 @Mapper
 @Repository
 public interface DonationDAO {
-	List<Donation> selectDonation() throws Exception; //기부정보 전체 가져오기
+
+	List<Donation> selectDonation() throws Exception; //기부업체 정보 조회
+
 }

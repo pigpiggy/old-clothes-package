@@ -10,20 +10,20 @@
     <title>자유게시판 글작성</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-
-	<script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
-
+	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	$(function() {
-		ClassicEditor.create(document.querySelector("#editor"))
-		.then(editor=> {
-			editor.setData('${content}');
-		})
-		.catch((error)=> {
-			console.error(error);
-		})
+$(function() {
+	ClassicEditor.create(document.querySelector("#editor"), {
+		ckfinder : {
+			uploadUrl:"/upload"
+		}
+	}).then(editor=> {
+		window.editor=editor;
+	}).catch((error)=>{
+		console.error(error);
 	});
+});
 </script>
 
 </head>
@@ -44,12 +44,10 @@
                         <dd><input type="text" name="ftitle" placeholder="제목 입력"></dd>
                     </dl>
                 </div>                
-                <div class="cont">
-                    <div id="editor"></div><br>
-                </div>
+                    <textarea id="editor" name="content"></textarea>
             </div>
             <div class="bt_wrap">
-               <input id="input1" type="submit" value="등록">
+               <input type="submit" value="등록">
                 <a id="input2" href="freeList">취소</a>
                 </div>
         </div>

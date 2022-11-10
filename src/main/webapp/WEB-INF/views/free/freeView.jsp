@@ -9,7 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판 글보기</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />    
+	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script>
+$(function() {
+	ClassicEditor.create(document.querySelector("#editor"))
+	.then(editor=> {
+		editor.setData('${content}');
+	})
+	.catch((error)=> {
+		console.error(error);
+	})
+});
+</script>    
 </head>
 <body>
 	<div>
@@ -26,7 +39,7 @@
                    <dl>
                    <section id="basicInfoArea">
                         <dt>제목</dt>
-                        <dd><input type="text" name="ftitle" value= ${article.ftitle} placeholder="제목 입력"></dd>
+                        <dd>${article.ftitle }</dd>
                     </dl>
                 </div>
                 <div class="info">
@@ -47,14 +60,14 @@
                         <dd>${article.freadcount}</dd>
                     </dl>
                 </div>
-                <div class="cont">
-                <section id="articleContentArea">
-                    <textarea placeholder="ck에디터 들어갑니다" value=${article.fcontent} name="fcontent"></textarea>                    
+                <div id="editor">
+               <%-- <section id="articleContentArea">--%>
+                                      
                 </div>                
             </div>
             <div class="bt_wrap">
-                <a href="freeList" class="on">목록</a>
-                <a href="freeModify">수정</a>
+                <a href="/freeList" class="on">목록</a>
+                <a href="/freeModify/${article.fno }">수정</a>
             </div>
         </div>
     </div>

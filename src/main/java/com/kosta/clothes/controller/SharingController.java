@@ -103,6 +103,7 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview"+sharing);
+			
 			String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
 			Users users = (Users)session.getAttribute("authUser");
 			if(users==null) {
@@ -111,6 +112,32 @@ public class SharingController {
 			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@GetMapping("/sharingModifyForm")
+	public ModelAndView modifySharing(@RequestParam("sno") Integer sno) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			Sharing sharing = sharingService.viewSharing(sno);
+			mav.addObject("sharing", sharing);
+			mav.setViewName("/sharing/sharingModifyForm");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@PostMapping("/sharingModify")
+	public ModelAndView modifySharing(@ModelAttribute Sharing sharing) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			sharingService.modifySharing(sharing);
+			mav.addObject("sno", sharing.getSno());
+			mav.setViewName("redirect:/sharingView");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

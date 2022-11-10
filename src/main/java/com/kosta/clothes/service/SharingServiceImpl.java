@@ -72,7 +72,6 @@ public class SharingServiceImpl implements SharingService{
 
 	}
 
-
 	@Override
 	public Sharing viewSharing(Integer sno) throws Exception {
 		System.out.println("service:" + sharingDAO.selectSharing(sno));
@@ -95,13 +94,11 @@ public class SharingServiceImpl implements SharingService{
 		return sharingDAO.infiniteScrollDown(snoToStart);
 	}
 
-
 	@Override
 	public List<Sharing> getSharingList(String kwd) throws Exception {
 		// TODO Auto-generated method stub
 		return sharingDAO.selectSharingSearchedList(kwd);
 	}
-
 
 	@Override
 	public List<Sharing> infiniteScrollDown(Integer snoToStart, String kwd) throws Exception {
@@ -109,6 +106,40 @@ public class SharingServiceImpl implements SharingService{
 		map.put("sno", snoToStart);
 		map.put("kwd", kwd);
 		return sharingDAO.searchedInfiniteScrollDown(map);
+	}
+
+	@Override
+	public void modifySharing(Sharing sharing, MultipartFile[] files) throws Exception {
+		String fileids = "";
+		FileVO fileVo = new FileVO();
+		if(files!=null) {
+			String path = servletContext.getRealPath("/upload/");
+			for(MultipartFile file : files) {
+				if(!file.isEmpty()) {
+					fileVo.setDirectory_name(path);
+					fileVo.setTname(file.getOriginalFilename());
+					fileVo.setTsize(file.getSize());
+					//fileVo.setSno(sharingid);
+					fileVo.setContent_type(file.getContentType());
+					fileDAO.insertFileInfo(fileVo);
+					System.out.println("sharingServiceImpl:" + fileVo);
+					
+					FileOutputStream fos = new FileOutputStream(path+fileVo.getTno());
+					FileCopyUtils.copy(file.getBytes(), fos);
+					
+					fileids += fileVo.getTno()+",";
+				}
+				
+			}
+		}
+
+		sharingDAO.updateSharing(sharing);
+	}
+
+	@Override
+	public void deleteSharing(Integer sno) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 

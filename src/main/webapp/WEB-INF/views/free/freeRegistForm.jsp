@@ -10,6 +10,8 @@
     <title>자유게시판 글작성</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/src/main/webapp/resources/ckeditor5/sample/styles.css"/>
+	<script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
 </head>
 <body>
 	<div>
@@ -19,7 +21,7 @@
         <div class="board_title">
             <strong>글 등록</strong>
         </div>
-        <form action="/freeInsert" method="post">
+        <form action="freeInsert" method="post">
         <div class="board_write_wrap">
             <div class="board_write">
                 <div class="title">
@@ -27,14 +29,21 @@
                         <dt>제목</dt>
                         <dd><input type="text" name="ftitle" placeholder="제목 입력"></dd>
                     </dl>
-                </div>
+                </div>                
                 <div class="cont">
-                    <textarea placeholder="ck에디터 들어갑니다" name="fcontent"></textarea>
+                <div id="editor"></div>
+                    <script>
+                    ClassicEditor
+                    .create( document.querySelector( '#editor' ) )
+                    .catch( error => {
+                      console.error( error );
+                    } );
+                </script>
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="freeInsert" class="on">등록</a>
-                <a href="freeList">취소</a>
+               <input id="input1" type="submit" value="등록">
+                <a id="input2" href="freeList">취소</a>
                 </div>
         </div>
         </form>

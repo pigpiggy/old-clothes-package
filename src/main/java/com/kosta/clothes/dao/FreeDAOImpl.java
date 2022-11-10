@@ -35,25 +35,25 @@ public class FreeDAOImpl implements FreeDAO {
 	//글 수정
 	@Override
 	public void updateFree(Free free) throws Exception {
-		sqlSession.selectOne("mapper.free.updatefree",free);
+		sqlSession.selectOne("updatefree",free);
 		
 	}
 	
 	//글 삭제
 	@Override
 	public void deleteFree(Integer freeNum) throws Exception {
-		sqlSession.delete("mapper.free.deletefree",freeNum);
+		sqlSession.delete("deletefree",freeNum);
 	}
 
 	////글 클릭 시 관련 num 으로 정보 값 가져오기
 	@Override
 	public Free selectFree(Integer free_num) throws Exception {
-		return sqlSession.selectOne("mapper.free.selectFree",free_num);
+		return sqlSession.selectOne("selectFree",free_num);
 	}
 	//게시판 최신 글번호
 	@Override
 	public Integer selectMaxFreeNum() throws Exception {
-		return sqlSession.selectOne("mapper.free.selectMaxFreeNum");
+		return sqlSession.selectOne("selectMaxFreeNum");
 	}
 
 	

@@ -11,16 +11,8 @@ public class Users {
 	private String phone;//전화 번호
 	private Date joinDate; //날짜
 	private String sect;
-<<<<<<< HEAD
-	
-	public String getSect() {
-		return sect;
-	}
-	public void setSect(String sect) {
-		this.sect = sect;
-	}
-=======
->>>>>>> fb6e1e62c2003af00bfea112f8e9904d3c47877f
+
+
 	public Integer getUserno() {
 		return userno;
 	}
@@ -57,10 +49,6 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-<<<<<<< HEAD
-	public Users(Integer userno, String userid, String nickname, String password, String phone, Date joinDate,
-			String sect) {
-=======
 	
 	public String getSect() {
 		return sect;
@@ -69,7 +57,7 @@ public class Users {
 		this.sect = sect;
 	}
 	public Users(Integer userno, String userid, String nickname, String password, String phone,Date joinDate) {
->>>>>>> fb6e1e62c2003af00bfea112f8e9904d3c47877f
+
 		super();
 		this.userno = userno;
 		this.userid = userid;

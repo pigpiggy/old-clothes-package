@@ -9,8 +9,8 @@ public class Free {
 	private String fcontent; //내용
 	private Long freadcount; //조회수 
 	private Date regdate; //날짜
-	private Integer bno;
-	private Integer userno;
+	private Integer bno; //업체랑 연결 시킬 변수
+	private Integer userno; //개인이랑 연결 시킬 변수
 	
 	public Integer getFno() {
 		return fno;

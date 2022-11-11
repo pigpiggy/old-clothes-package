@@ -18,6 +18,11 @@ public class Business {
 	private Date regDate; //날짜
 	private String sect;//개인과사업의 구분
 
+<<<<<<< HEAD
+	
+
+=======
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 	public Integer getBno() {
 		return bno;
 	}
@@ -94,7 +99,11 @@ public class Business {
 		this.bpassword = bpassword;
 	}
 
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 	public String getSect() {
 		return sect;
 	}

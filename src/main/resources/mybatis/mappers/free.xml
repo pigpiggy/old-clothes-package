@@ -5,6 +5,11 @@
 <mapper namespace="com.kosta.clothes.dao.FreeDAO">
 <!-- 글쓰기 등록  -->
 	<insert id="insertFree" parameterType="Free">
+		<selectKey keyProperty="fno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select free_seq.nextval from dual
+			]]>
+		</selectKey>
 		<![CDATA[
 			insert into free (fno,
 							   fname, 
@@ -17,7 +22,7 @@
 			values(#{fno},
 				   #{fname},
 				   #{ftitle,jdbcType=VARCHAR},
-				   #{fcontent},
+				   #{fcontent,jdbcType=VARCHAR},
 				   #{freadcount},
 				   sysdate,
 				   #{userno,jdbcType=INTEGER},
@@ -58,7 +63,7 @@
 	</select>
 	
 	<!-- 글 수정  -->
-	<update id="updateFree"  parameterType="Free">
+	<update id="updatefree"  parameterType="Free">
 		<![CDATA[
 			update free
 			set ftitle=#{ftitle}, fcontent=#{fcontent}

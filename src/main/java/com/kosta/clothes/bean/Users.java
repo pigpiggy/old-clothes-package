@@ -11,7 +11,12 @@ public class Users {
 	private String phone;//전화 번호
 	private Date joinDate; //날짜
 	private String sect;
+<<<<<<< HEAD
+
+
+=======
 	
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 	public Integer getUserno() {
 		return userno;
 	}
@@ -48,6 +53,10 @@ public class Users {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 	public String getSect() {
 		return sect;
 	}
@@ -55,6 +64,10 @@ public class Users {
 		this.sect = sect;
 	}
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 	public Users(Integer userno, String userid, String nickname, String password, String phone, Date joinDate,
 			String sect) {
 		super();

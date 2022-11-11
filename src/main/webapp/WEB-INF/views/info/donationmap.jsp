@@ -55,6 +55,7 @@ input[type=radio] {
 	overflow-y:scroll;
 	flex-direction:column;
 	height:400px;
+	width:500px;
 	padding:5px;	
 	border:1px solid black;	
 }
@@ -107,26 +108,26 @@ input[type=radio] {
 		
 				</div>
 			<div id="a">
-			<div id="map"></div>
-			<div id="c">
+				<div id="map"></div>
+				<div id="c">
 				<h1 id="donationlist">[기부업체 리스트 목록]</h1>
 			
-			<div id="b">		
-				<c:forEach var="donation" items="${donation}">
-					<input type="hidden" class="allname" name="allname" id="allname" value="${donation.dname}">
-					<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
-					<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
-					<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
-						<div id="indexlist">
-							<h2>&nbsp; &nbsp;[${donation.dname }]</h2>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
-							<br>
-						</div>	
-					
-					
-				</c:forEach>
+					<div id="b">		
+						<c:forEach var="donation" items="${donation}">
+							<input type="hidden" class="allname" name="allname" id="allname" value="${donation.dname}">
+							<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
+							<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
+							<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
+							<div id="indexlist">
+								<h2>&nbsp; &nbsp;[${donation.dname }]</h2>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
+								<br>
+							</div>	
+						
+						
+					</c:forEach>
+					</div>
 				</div>
-			</div>
 			</div>
 						
 			</div>
@@ -255,6 +256,6 @@ input[type=radio] {
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
-<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
 </body>
 </html>

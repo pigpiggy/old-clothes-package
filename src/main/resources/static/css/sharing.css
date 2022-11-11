@@ -358,11 +358,6 @@ h1 {
 	margin: 3px;
 }
 
-.ck.ck-editor__editable_inline[dir=ltr] {
-	height: 250px;
-}
-
-
 
 /* view */
 .content_main {
@@ -429,8 +424,8 @@ h1 {
     border-bottom: solid gray;
     padding: 20px;
     padding-bottom: 50%;
-    right: 66%;
     height: 500px;
+    width: 80%;
 }
 
 #stitle {
@@ -438,7 +433,7 @@ h1 {
 }
 
 #sharingname {
-	margin-right: 10px;
+	margin-right: 15px;
     margin-bottom: 5px;
     margin-top: 5px;
 }
@@ -446,7 +441,14 @@ h1 {
 .letterAndHeart img{
 	width: 25px;
 }
-
+.letterAndHeart {
+	display: flex;
+	margin: 3px;
+	align-items: center;
+}
+#letter_img {
+	margin-right: 5px;
+}
 #sreview {
 	margin-bottom: 5px;
 }
@@ -457,4 +459,14 @@ h1 {
 
 svg {
 	width: 30px;
+}
+
+#modifydelete {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#modifydelete a {
+	margin-right: 15px;
 }

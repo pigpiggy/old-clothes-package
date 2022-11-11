@@ -57,7 +57,7 @@
 			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sharingList">
-					<button type="button" class="btn btn-info">목록으로</button>
+					<button type="button" class="btn btn-info">취소</button>
 				</a> 
 				<input type="submit" id="uploadBtn" class="btn btn-warning" value="수정">
 			</div>

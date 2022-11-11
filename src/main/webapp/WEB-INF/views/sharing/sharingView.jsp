@@ -59,11 +59,6 @@ $(function () {
 		}
 	})
 		
-	
-		
-	
-	
-	
     let likeVal = document.getElementById('like_check').value
     const boardId = $("#boardId").val();
     const memberId = $("#memberId").val();
@@ -99,7 +94,11 @@ $(function () {
         });
 
     });
-	
+	/* 글 삭제 */
+    $("#deleteicon").on("click", function () {
+    	
+    }) 
+
 });
 </script>
 </head>
@@ -162,11 +161,13 @@ $(function () {
         	<c:if test="${authUser.userno eq sharing.userno}">    
 	        	<div id="modifydelete">
 					<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
-    	    			<i class="fa-solid fa-gear fa-2x"></i>
+    	    			<i class="fa-solid fa-gear fa-lg"></i>
     	    		</a>
-        			<i class="fa-solid fa-trash-can fa-2x"></i>
+    	    		<a href="/sharingDelete?sno=${sharing.sno }">
+        				<i id="deleteicon" class="fa-solid fa-trash-can fa-lg"></i>
+        			</a>
         		</div>
-        	</c:if>	
+        	</c:if>	 
         </div>
         <div id=sdetail>${sharing.scontent}</div>
       </div>

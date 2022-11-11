@@ -109,37 +109,43 @@ public class SharingServiceImpl implements SharingService{
 	}
 
 	@Override
-	public void modifySharing(Sharing sharing, MultipartFile[] files) throws Exception {
-		String fileids = "";
-		FileVO fileVo = new FileVO();
-		if(files!=null) {
-			String path = servletContext.getRealPath("/upload/");
-			for(MultipartFile file : files) {
-				if(!file.isEmpty()) {
-					fileVo.setDirectory_name(path);
-					fileVo.setTname(file.getOriginalFilename());
-					fileVo.setTsize(file.getSize());
-					//fileVo.setSno(sharingid);
-					fileVo.setContent_type(file.getContentType());
-					fileDAO.insertFileInfo(fileVo);
-					System.out.println("sharingServiceImpl:" + fileVo);
-					
-					FileOutputStream fos = new FileOutputStream(path+fileVo.getTno());
-					FileCopyUtils.copy(file.getBytes(), fos);
-					
-					fileids += fileVo.getTno()+",";
-				}
-				
-			}
-		}
-
+	public void modifySharing(Sharing sharing) throws Exception {
 		sharingDAO.updateSharing(sharing);
 	}
 
 	@Override
 	public void deleteSharing(Integer sno) throws Exception {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void modifySfileids(Sharing sharing, FileVO fileVo, MultipartFile[] files) throws Exception {
+		System.out.println(sharing.getSno());
+		fileDAO.deleteFileInfo(sharing.getSno());
+		String fileids = "";
+		FileVO nfileVo = new FileVO();
+		if(files!=null) {
+			String path = servletContext.getRealPath("/upload/");
+			for(MultipartFile file : files) {
+				if(!file.isEmpty()) {
+					nfileVo.setDirectory_name(path);
+					nfileVo.setTname(file.getOriginalFilename());
+					nfileVo.setTsize(file.getSize());
+					nfileVo.setSno(sharing.getSno());
+					nfileVo.setContent_type(file.getContentType());
+					fileDAO.insertFileInfo(nfileVo);
+					System.out.println("sharingServiceImpl:" + nfileVo);
+					
+					FileOutputStream fos = new FileOutputStream(path+nfileVo.getTno());
+					FileCopyUtils.copy(file.getBytes(), fos);
+					
+					fileids += nfileVo.getTno()+",";
+					sharing.setSfileids(fileids);
+				}
+				
+			}
+		}
+		sharingDAO.updateSfileids(sharing);
 	}
 
 

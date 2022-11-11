@@ -23,5 +23,6 @@ public interface SharingDAO {
 	List<Sharing> selectSharingSearchedList(String kwd) throws Exception;
 	List<Sharing> searchedInfiniteScrollDown(Map<String, Object> map) throws Exception;
 	void updateSharing(Sharing sharing) throws Exception;
+	void updateSfileids(Sharing sharing) throws Exception;
 	void deleteSharing(Integer sno) throws Exception;
 }

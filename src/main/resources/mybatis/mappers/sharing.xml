@@ -29,10 +29,16 @@
 	
 	<update id="updateSharing" parameterType="sharing">
 		<![CDATA[
-			update sharing set stitle=#{stitle},scontent=#{scontent},sfileids=#{sfileids,jdbcType=VARCHAR},
-			sdealType=#{sdealType},addressCity=#{addressCity},addressTown=#{addressTown}
+			update sharing set stitle=#{stitle},scontent=#{scontent},addressCity=#{addressCity},
+			addressTown=#{addressTown},sfileids=null
 			where sno=#{sno}
-					
+		]]>
+	</update>
+	
+	<update id="updateSfileids" parameterType="sharing">
+		<![CDATA[
+			update sharing set sfileids=#{sfileids}
+			where sno=#{sno}
 		]]>
 	</update>
 	

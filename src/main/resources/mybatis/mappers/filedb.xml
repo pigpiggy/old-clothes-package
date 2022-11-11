@@ -14,4 +14,17 @@
 			values(#{tno},#{directory_name},#{tname},#{tsize},#{sno},#{content_type},sysdate)
 		]]>
 	</insert>
+	
+	<update id="modifyFileInfo" parameterType="FileVO">
+		<![CDATA[
+			update tfile set tname=#{tname},tsize=#{tsize},content_type=#{content_type}
+			where tno=#{tno}
+		]]>
+	</update>
+	
+	<delete id="deleteFileInfo" parameterType="Integer">
+		<![CDATA[
+			delete from tfile where sno=#{sno}
+		]]>
+	</delete>
 </mapper>							

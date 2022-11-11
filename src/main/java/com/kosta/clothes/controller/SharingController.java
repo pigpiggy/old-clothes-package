@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.SharingService;
@@ -103,13 +104,14 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview"+sharing);
-			
-			String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
+			if(sharing.getSfileids()!=null) {
+				String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
+				mav.addObject("files", fidArr); 
+			}
 			Users users = (Users)session.getAttribute("authUser");
 			if(users==null) {
 				model.addAttribute("logincheck", "false");
 			}
-			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
 		}catch(Exception e) {
@@ -132,17 +134,34 @@ public class SharingController {
 	}
 	
 	@PostMapping("/sharingModify")
-	public ModelAndView modifySharing(@ModelAttribute Sharing sharing) {
+	public ModelAndView modifySharing(@ModelAttribute Sharing sharing,
+			@ModelAttribute FileVO fileVo,
+			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			//sharingService.modifySharing(sharing);
-			mav.addObject("sno", sharing.getSno());
-			mav.setViewName("redirect:/sharingView");
+			System.out.println("modifycontroller: " + sharing);
+			sharingService.modifySharing(sharing);
+			sharingService.modifySfileids(sharing, fileVo, files);
+			//String[] fidArr = sharing.getSfileids().split(",");
+			//mav.addObject("files", fidArr); 
+			mav.setViewName("redirect:/sharingView/"+sharing.getSno());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
+	
+	@PostMapping("/sharingDelete")
+	public ModelAndView deleteSharing() {
+		ModelAndView mav = new ModelAndView();
+		try {
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
 	
 	/* commons에 필요한 애들*/
 	@GetMapping("/img/{sfileids}")

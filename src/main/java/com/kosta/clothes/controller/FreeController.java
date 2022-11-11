@@ -173,6 +173,7 @@ public class FreeController {
 	//글 수정하기 동작
 	@GetMapping("/freeModify")	
 	public ModelAndView freeModify(@ModelAttribute Free free) {
+		return null;
 	}
 	
 	//글 수정 페이지 이동

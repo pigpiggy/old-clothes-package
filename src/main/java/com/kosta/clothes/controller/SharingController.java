@@ -135,7 +135,7 @@ public class SharingController {
 	public ModelAndView modifySharing(@ModelAttribute Sharing sharing) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			sharingService.modifySharing(sharing);
+			//sharingService.modifySharing(sharing);
 			mav.addObject("sno", sharing.getSno());
 			mav.setViewName("redirect:/sharingView");
 		}catch(Exception e) {

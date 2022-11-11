@@ -249,6 +249,10 @@ a {
     line-height: 160%;
     font-size: 1.4rem;
 }
+#center {
+	display: flex;
+	justify-content: center;
+}
 
 .board_write {
     border-top: 2px solid navy;
@@ -303,12 +307,8 @@ a {
     resize: vertical;
 }
 
-<<<<<<< HEAD
-.ck-editor{
-	height : 550px;	
-}
-=======
+
 .ck.ck-editor__editable_inline[dir=ltr] {
-	height: 250px;
+	height: 500px;
 }
->>>>>>> 087824972baee6f781622eba84be3fd28459d969
+

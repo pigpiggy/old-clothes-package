@@ -8,8 +8,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판 글보기</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />    
+	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />  
+	  
 </head>
 <body>
 	<div>
@@ -22,12 +24,13 @@
         </div>
         <div class="board_view_wrap">
             <div class="board_view">
-                <div class="title">
-                   <dl>
+                  <div class="title">
                    <section id="basicInfoArea">
+                   <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" name="ftitle" value= ${article.ftitle} placeholder="제목 입력"></dd>
+                        <dd> "${article.ftitle}"</dd>
                     </dl>
+                         </section>
                 </div>
                 <div class="info">
                     <dl>
@@ -47,16 +50,18 @@
                         <dd>${article.freadcount}</dd>
                     </dl>
                 </div>
-                <div class="cont">
-                <section id="articleContentArea">
-                    <textarea placeholder="ck에디터 들어갑니다" value=${article.fcontent} name="fcontent"></textarea>                    
-                </div>                
+               
+                </section>
+                <div class="cont" id="center">               
+                  ${article.fcontent }                                                
+                </div>              
+            </div>
             </div>
             <div class="bt_wrap">
                 <a href="freeList" class="on">목록</a>
                 <a href="freeModify">수정</a>
             </div>
-        </div>
     </div>
+    </section>
 </body>
 </html>

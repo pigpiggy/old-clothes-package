@@ -9,7 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판 글수정</title>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />    
+	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />  
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+	
 </head>
 <body>
 	<div>
@@ -24,15 +27,28 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
+                        <dd><input type="text" name="ftitle" placeholder='${article.ftitle}'></dd>
                     </dl>
                 </div>               
                 <div class="cont">
-                  <textarea placeholder="안녕하세요 ck어쩌고로 할 부분입니다"></textarea>
+                 <textarea id="editor" name="fcontent"></textarea>
+					   <script>
+    $(function() {
+    	ClassicEditor.create(document.querySelector("#editor"), {
+    		ckfinder : {
+    			uploadUrl:"/upload"
+    		}
+    	}).then(editor=> {
+    		window.editor=editor;
+    	}).catch((error)=>{
+    		console.error(error);
+    	});
+    });
+    </script>						
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="boardview.html" class="on">수정</a>
+                <input id="input3" type="submit" value="수정">
                 <a href="freeList">취소</a>
             </div>
         </div>

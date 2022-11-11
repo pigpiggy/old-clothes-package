@@ -17,7 +17,7 @@
 			values(#{fno},
 				   #{fname},
 				   #{ftitle,jdbcType=VARCHAR},
-				   #{fcontent},
+				   #{fcontent,jdbcType=VARCHAR},
 				   #{freadcount},
 				   sysdate,
 				   #{userno,jdbcType=INTEGER},

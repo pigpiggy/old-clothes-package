@@ -1,6 +1,5 @@
 package com.kosta.clothes.controller;
 
-package com.kosta.clothes.controller;
 
 import java.io.FileInputStream;
 import java.io.OutputStream;

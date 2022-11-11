@@ -55,7 +55,7 @@ public class InfoController {
 	
 	@ResponseBody
 	@PostMapping("/csvToBean")
-	public String csvToBean(@RequestBody Map<String,Object> params , Model model) {
+	public List<String> csvToBean(@RequestBody Map<String,Object> params , Model model) {
 		String sido = (String) params.get("sido");
 		String sigungu = (String) params.get("sigugun");
 		String myeondong = (String) params.get("dong");
@@ -82,6 +82,6 @@ public class InfoController {
 		model.addAttribute("trash", list);
 		System.out.println("list:"+list);
 		
-		return "redirect:/clothingbin";
+		return list;
 	}
 }

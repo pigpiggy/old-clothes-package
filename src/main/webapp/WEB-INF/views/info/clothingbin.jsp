@@ -9,23 +9,51 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
-<script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+<script type="application/javascript" src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
 
 <style>
 div.contents {
   text-align: left;
-  padding-left: 50px;
-  padding-top: 180px;
+  padding-left: 4%;
+  padding-top: 10%;
 }
 
 #map {
-	left: 50px;
-	top: 40px;
+	left: 4%;
+	top: 5%;
 	width:45%;
-	height:500px;
+	height:55%;
+}
+#binpage {
+	display:flex;
+	width:100%;
+	height:100%;
+}
+#binlist {
+	display:flex;	
+	position:relative;
+	overflow-y:scroll;
+	flex-direction:column;
+	width:90%;
+	height:80%;
+	padding:5px;	
+	border:1px solid black;	
+}
+#listtitle{
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+	justify-content:center;
+	width:45%;
+	height:56%;
+	margin-left:7%;
+	margin-top:2%;
+
 }	
 </style>
+<!-- 
 <script>
+
 <%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
 $(function(){
 	$('#searchBtn').click(function(){
@@ -46,13 +74,35 @@ $(function(){
 			}),
 			contentType: "application/json",
 			success: function(data){
-				console.log(data);
+				$('#binlist').empty();
+				setMarkers(null);
+				var bli = "";
+				data.forEach(function(item){
+					bli += "<br>";
+					bli += "<li>"+item+"</li>";
+					geocoder.addressSearch(item, function(result, status){
+						if (status === kakao.maps.services.Status.OK) {
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker = new kakao.maps.Marker({
+					            map: map,
+					            position: coords
+					        });
+						}
+						markers.push(marker);
+					})
+				})
+				bli += "<br>";
+				$('#binlist').append(bli);
+				console.log(markers);
 				
-			}
+			},
+			error: function(){alert("조건 전송 오류");}
 		});
 	})
 })
 </script>
+-->
 
 </head>
 <body>
@@ -75,13 +125,12 @@ $(function(){
 	</div>
 	
 	<%-- 지도를 표시할 div 입니다 --%>
-	<div style="dispaly:flex">
-		<div id="map" style="float:left;"></div>
-		<div style="float:right; padding-right:35%; ">
-		<li>표시</li>
-			<c:forEach var="Trash" items="${trash }">
-				<li>${Trash }</li>
-			</c:forEach>
+	<div id="binpage">
+		<div id="map"></div>
+		<div id="listtitle">
+			<h1 id="binlisttitle">헌옷수거함 목록</h1>
+			<div id="binlist">
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
@@ -93,21 +142,25 @@ $(function(){
 		    };
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
+		var markers = new Array();
 		
 		
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
+			<!--
 			var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
+			-->
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
 					
 					
-					console.log("donation list: "+ dona1);
 					
-					//추출한 좌료를 통해 도로명 주소 추출
+					
+					//추출한 좌표를 통해 도로명 주소 추출
 					var contentadd = document.getElementById('dongName').value;
 					var lat = result[0].y;
 					var lng = result[0].x;
@@ -118,7 +171,8 @@ $(function(){
 					getAddr(lat,lng);
 					function getAddr(lat,lng){
 						//주소=>좌표 전환 객체 선언
-						var geocoder = new kakao.maps.services.Geocoder();
+						//var geocoder = new kakao.maps.services.Geocoder();
+						geocoder = new kakao.maps.services.Geocoder();
 						var coord = new kakao.maps.LatLng(lat, lng); //x,y값 받아온 걸아 담아서 coord에  담는다.
 						var callback = function(result,status){ //결과를  callback에 담는다.
 							if(status === kakao.maps.services.Status.OK){ //성공했다면
@@ -144,6 +198,60 @@ $(function(){
 				
 			});
 		});
+		<%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
+		$(function(){
+			$('#searchBtn').click(function(){
+				let sido = $("#sido option:selected").text();
+				let sigugun = $('#sigugun option:selected').text();
+				let dong = $('#dong option:selected').text();
+				console.log(sido+"!");
+				console.log(sigugun+"!");
+				console.log(dong+"!");
+				$.ajax({
+					type: 'post',
+					url: 'csvToBean',
+					dataType: 'json',
+					data: JSON.stringify({
+						"sido" : sido,
+						"sigugun" : sigugun,
+						"dong" : dong	
+					}),
+					contentType: "application/json",
+					success: function(data){
+						$('#binlist').empty();
+						setMarkers(null);
+						var bli = "";
+						data.forEach(function(item){
+							bli += "<br>";
+							bli += "<li>"+item+"</li>";
+							geocoder.addressSearch(item, function(result, status){
+								if (status === kakao.maps.services.Status.OK) {
+							        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							        // 결과값으로 받은 위치를 마커로 표시합니다
+							        var marker = new kakao.maps.Marker({
+							            map: map,
+							            position: coords
+							        });
+								}
+								markers.push(marker);
+							})
+						})
+						bli += "<br>";
+						$('#binlist').append(bli);
+						console.log(markers);
+						
+					},
+					error: function(){alert("조건 전송 오류");}
+				});
+			})
+		})
+		//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+		function setMarkers(map) {
+		    for (var i = 0; i < markers.length; i++) {
+		        markers[i].setMap(map);
+		    }            
+		}
+		
 	</script>
 	
 	

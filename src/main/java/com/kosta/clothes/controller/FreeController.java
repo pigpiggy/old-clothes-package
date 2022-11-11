@@ -57,6 +57,43 @@ public class FreeController {
 		}
 		return mav;
 	}
+	//ck에디터 사진 업로드<?>
+	@ResponseBody
+	@PostMapping("/upload")
+	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
+		String path = servletContext.getRealPath("/upload/");
+		String filename = file.getOriginalFilename();
+		File destfile = new File(path+filename);
+		Map<String, Object> json = new HashMap<>();
+		try {
+			file.transferTo(destfile);
+			json.put("uploaded", 1);
+			json.put("filename", filename);
+			json.put("url", "/freeView/"+filename);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	@GetMapping("/freeView/{filename}")
+	public void fileview(@PathVariable String filename, HttpServletResponse response) {
+		String path=servletContext.getRealPath("/upload/");
+		File file = new File(path+filename);
+		FileInputStream fis = null;
+		try {
+			OutputStream out = response.getOutputStream();
+			fis = new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+			out.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(fis!=null) fis.close();
+			} catch(Exception e) {}
+		}
+	}
 	
 	//글 작성 폼 띄우기
 	@GetMapping("/freeRegistForm")
@@ -66,7 +103,8 @@ public class FreeController {
 	
 	//글 등록 동작
 	@PostMapping("/freeInsert")
-	public ModelAndView boardwrite(@ModelAttribute Free free,HttpSession session ) {//값을 전부 받아온다.
+	public ModelAndView boardwrite(@ModelAttribute Free free,
+			@RequestParam("content") String content,HttpSession session ) {//값을 전부 받아온다.
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
 		try {
@@ -86,8 +124,10 @@ public class FreeController {
 				System.out.println("business"+free);
 			}
 				
+			System.out.println("content"  + content.trim());
 			String nickname=users.getNickname();
 			free.setFname(nickname);
+			free.setFcontent(content);
 			freeService.registFree(free); // board에 저장된 값을 Service에 있는 registBoard에 넘겨준다
 			mav.setViewName("redirect:/freeList"); // 아래로 간다 글 쓰고 페이지 목록 보여주기 위해서
 		} catch (Exception e) {
@@ -96,6 +136,7 @@ public class FreeController {
 
 		return mav;
 	}
+	
 	
 	 //글 상세보기
 	@GetMapping("freeView/{fno}")
@@ -112,6 +153,7 @@ public class FreeController {
 			e.printStackTrace();		
 		}
 		return mav;
+<<<<<<< HEAD
 	}	
 	//as CK에디터
 	@ResponseBody
@@ -168,11 +210,36 @@ public class FreeController {
 	//글 수정하기 동작
 	@GetMapping("/freeModify")	
 	public ModelAndView freeModify(@ModelAttribute Free free) {
+=======
+	}
+	
+	//글 수정 페이지 이동
+	@GetMapping("/freeModify/{fno}")
+	public ModelAndView freeModify(@PathVariable("fno") Integer fno) {
+>>>>>>> 959769eeb82c580b58d37fe86d17b68a8cb87952
 		ModelAndView mav = new ModelAndView();
 		System.out.println("들어옴?");
 		try {
+			Free free = freeService.getFree(fno);
+			System.out.println("여기여기:"+free.toString());
+			mav.addObject("free",free);
+			mav.setViewName("/free/freeModify");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+		
+	@PostMapping("/freeupdate")
+	public ModelAndView freeModify(@ModelAttribute Free free,
+			@RequestParam("fcontent") String fcontent,
+			@PathVariable("fno") Integer fno) {
+		System.out.println("수정하기 : " + free.toString());
+		ModelAndView mav = new ModelAndView();
+		try {
+			free.setFno(fno);
+			free.setFcontent(fcontent);
 			freeService.modifyFree(free);
-			mav.addObject("fno",free.getFno());
 			mav.setViewName("redirect:/freeView");
 		} catch (Exception e) {
 			e.printStackTrace();

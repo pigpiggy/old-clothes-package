@@ -1,5 +1,7 @@
 package com.kosta.clothes.controller;
 
+package com.kosta.clothes.controller;
+
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -25,13 +27,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
-public class SharingController {
+public class SellController {
 	
 	@Autowired
 	SharingService sharingService;
@@ -60,7 +61,7 @@ public class SharingController {
 			System.out.println("컨트롤리스트:"+sharingList);
 			mav.addObject("sharingList", sharingList);
 			mav.addObject("kwd", kwd);
-			mav.setViewName("/sharing/sharingList");
+			mav.setViewName("/sell/personal");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -104,14 +105,13 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview"+sharing);
-			if(sharing.getSfileids()!=null) {
-				String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
-				mav.addObject("files", fidArr); 
-			}
+			
+			String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
 			Users users = (Users)session.getAttribute("authUser");
 			if(users==null) {
 				model.addAttribute("logincheck", "false");
 			}
+			mav.addObject("files", fidArr); 
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
 		}catch(Exception e) {
@@ -134,34 +134,17 @@ public class SharingController {
 	}
 	
 	@PostMapping("/sharingModify")
-	public ModelAndView modifySharing(@ModelAttribute Sharing sharing,
-			@ModelAttribute FileVO fileVo,
-			@RequestParam("simageFile") MultipartFile[] files) {
+	public ModelAndView modifySharing(@ModelAttribute Sharing sharing) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			System.out.println("modifycontroller: " + sharing);
-			sharingService.modifySharing(sharing);
-			sharingService.modifySfileids(sharing, fileVo, files);
-			//String[] fidArr = sharing.getSfileids().split(",");
-			//mav.addObject("files", fidArr); 
-			mav.setViewName("redirect:/sharingView/"+sharing.getSno());
+			//sharingService.modifySharing(sharing);
+			mav.addObject("sno", sharing.getSno());
+			mav.setViewName("redirect:/sharingView");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
-	@PostMapping("/sharingDelete")
-	public ModelAndView deleteSharing() {
-		ModelAndView mav = new ModelAndView();
-		try {
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
-	
 	
 	/* commons에 필요한 애들*/
 	@GetMapping("/img/{sfileids}")

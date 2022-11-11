@@ -9,4 +9,6 @@ import com.kosta.clothes.bean.FileVO;
 @Repository
 public interface FileDAO {
 	void insertFileInfo(FileVO fileVo) throws Exception;
+	void modifyFileInfo(FileVO fileVo) throws Exception;
+	void deleteFileInfo(Integer sno) throws Exception;
 }

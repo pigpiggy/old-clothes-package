@@ -21,12 +21,34 @@
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select u.nickname as sname, stitle, scontent, sfileids, ai, likes, applycount, s.userno 
+			select u.nickname as sname, sno, stitle, scontent, sfileids, ai, likes, applycount, s.userno 
 			from users u, sharing s 
 			where u.userno = s.userno and sno = #{sno}		
-			]]>
+		]]>
 	</select>
 	
+	<update id="updateSharing" parameterType="sharing">
+		<![CDATA[
+			update sharing set stitle=#{stitle},scontent=#{scontent},addressCity=#{addressCity},
+			addressTown=#{addressTown},sfileids=null
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="updateSfileids" parameterType="sharing">
+		<![CDATA[
+			update sharing set sfileids=#{sfileids}
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="sharinglikes" parameterType="Long">
+		<![CDATA[
+			UPDATE LIKES SET LIKESCHECK = LIKESCHECK + 1
+			WHERE sno=#{sno} AND userno=#{userno}
+		]]>
+	</update>
+		
 	<select id="getByUserid" parameterType="String" resultType="sharing">
 		<![CDATA[
 			select *

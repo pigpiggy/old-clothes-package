@@ -33,6 +33,20 @@ import com.kosta.clothes.service.SharingService;
 @Controller
 public class SellController {
 	
+	@Autowired
+	ServletContext servletContext;
 	
+	@Autowired
+	HttpSession session;
 	
+	@GetMapping("/sellList")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.setViewName("/sell/individual");
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return mav;
+	}
 }

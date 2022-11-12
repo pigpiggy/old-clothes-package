@@ -57,7 +57,7 @@
           <span>헌옷 사고 팔기</span>
           <ul class="sideMenu">
             <li><a href="#">업체 판매</a></li>
-            <li><a href="#">개인 판매</a></li>
+            <li><a href="/sellList">개인 판매</a></li>
           </ul>
         </li>
         <li class="hederMenuList">

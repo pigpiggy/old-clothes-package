@@ -2,21 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html id="sharingHtml">
+<html id="individualHtml">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 </head>
-<body id="sharingBody">
+<body id="individualBody">
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
-  <div id="sharingList">
-    <h1 id="sharingListSubject">개인판매</h1>
+  <div id="individualList">
+    <h1 id="individualListSubject">개인판매</h1>
     
     <div id="buttonAndSelect">
       <div class="bt_wrap">
@@ -39,7 +39,7 @@
 	     <div class="card" data-sno=${sharing.sno }>
 	          <div class="card-image">
 	          	<c:if test="${!'등록완료' eq sharing.sstatus}">
-	          		<div class="sharingStatus">${sharing.sstatus }</div>
+	          		<div class="individualStatus">${sharing.sstatus }</div>
 	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sharing.sfileids }">

@@ -74,7 +74,7 @@ a {
     border-radius: 6px;
     font-size: 1.5rem;
 }
-#input2{
+#input2, #input3{
 	display: inline-block;
     min-width: 60px;
     margin-left: 10px;
@@ -85,7 +85,6 @@ a {
     background: white;	
     color:black; 
 }
-
 .bt_wrap a.on:hover {
 	color: #fff;
 	background-color: #138496;
@@ -232,10 +231,6 @@ a {
 .board_view .info dl dd {
     display: inline-block;
     font-size: 1.4rem;
-}
-
-.board_view .info dl dt {
-
 }
 
 .board_view .info dl dd {

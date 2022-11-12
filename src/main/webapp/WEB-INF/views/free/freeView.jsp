@@ -11,19 +11,6 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />  
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
-<script>
-$(function() {
-	ClassicEditor.create(document.querySelector("#editor"))
-	.then(editor=> {
-		editor.setData('${content}');
-	})
-	.catch((error)=> {
-		console.error(error);
-	})
-});
-</script>    
 </head>
 <body>
 	<div>

@@ -173,6 +173,7 @@ $(function () {
 
 });
 
+/* 삭제 처리 */
 function removeSharing() {
 	var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
 	var sno =  $('#sno').val();

@@ -115,6 +115,8 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public void deleteSharing(Integer sno) throws Exception {
+		sharingDAO.deleteSharing(sno);
+		fileDAO.deleteFileInfo(sno);
 		
 	}
 

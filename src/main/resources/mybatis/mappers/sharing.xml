@@ -42,6 +42,12 @@
 		]]>
 	</update>
 	
+	<delete id="deleteSharing" parameterType="Integer">
+		<![CDATA[
+			delete from sharing where sno=#{sno}
+		]]>
+	</delete>
+	
 	<update id="sharinglikes" parameterType="Long">
 		<![CDATA[
 			UPDATE LIKES SET LIKESCHECK = LIKESCHECK + 1

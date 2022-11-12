@@ -151,11 +151,14 @@ public class SharingController {
 		return mav;
 	}
 	
+	@ResponseBody
 	@PostMapping("/sharingDelete")
-	public ModelAndView deleteSharing() {
+	public ModelAndView deleteSharing(@RequestParam(value="sno", required=false) Integer sno, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			
+			System.out.println("delete");
+			sharingService.deleteSharing(sno);
+			mav.setViewName("redirect:/sharingList");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

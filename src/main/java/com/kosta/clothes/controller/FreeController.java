@@ -68,7 +68,7 @@ public class FreeController {
 	//글 등록 동작
 	@PostMapping("/freeInsert")
 	public ModelAndView boardwrite(@ModelAttribute Free free,
-			@RequestParam("content") String content,HttpSession session ) {//값을 전부 받아온다.
+			@RequestParam("fcontent") String content,HttpSession session ) {//값을 전부 받아온다.
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
 		try {

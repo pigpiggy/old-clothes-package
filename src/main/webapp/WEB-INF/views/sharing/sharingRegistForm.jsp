@@ -64,10 +64,10 @@
 				</div>
 			</form>
 		</div>
-		<footer>
+<%-- 		<footer>
 			<c:import url='/WEB-INF/views/includes/footer.jsp' />
 		</footer>
-	</div>
+ --%>	</div>
 		<script>
 		/* 파일 선택 - 미리보기 */
 		$(function() { 

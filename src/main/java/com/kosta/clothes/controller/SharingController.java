@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.FileVO;
+import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.SharingService;
@@ -165,6 +166,23 @@ public class SharingController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@PostMapping("/sharingView/likes")
+	public void registLikes(@ModelAttribute Sharing sharing, 
+			@ModelAttribute Likes likes, Model model) {
+		try {
+			System.out.println("likescontroller1:" + sharing + likes);
+			Users users = (Users)session.getAttribute("authUser");
+			if(users==null) {
+				model.addAttribute("logincheck", "false");
+			}
+			sharingService.modifySharingLikes(sharing);
+			System.out.println("likescontroller2:" + sharing + likes);
+
+			}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/* commons에 필요한 애들*/
 	@GetMapping("/img/{sfileids}")

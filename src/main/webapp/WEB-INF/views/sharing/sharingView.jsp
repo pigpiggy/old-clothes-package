@@ -56,9 +56,8 @@
         		<c:if test="${authUser.userno ne sharing.userno }">
 	          		<div class="letterAndHeart">	
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-	        				<a href='javascript: like_func();'>
-		          				<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-	        				</a>
+		          			<input type="hidden" id="like_check" value="${likes.likescheck }">
+		          			<img src="/image/heart.png" id="heart_img" alt="찜신청전">
         			</div>
         		</c:if>
          	</c:otherwise>
@@ -123,53 +122,42 @@ $(function () {
 		}
 	})	
 	
+    let likeVal = $('#like_check').val();
+	const likeImg = document.getElementById('heart_img');
+	console.log(sno);
+	console.log(likeVal);
+	if(likeVal > 0) {
+		likeImg.src = "/image/redheart.png";
+	} else {
+		likeImg.src = "/image/heart.png";
+	}
 	$("#heart_img").on("click", function() {
+		alert("1");
+		const sno =  $('#sno').val();
+		const userno = "<c:out value='${authUser.userno}'/>";
 		var logincheck = "<c:out value='${logincheck}'/>";
-		//let likeVal = document.getElementById('like_check').value;
-		const likeImg = document.getElementById('heart_img');
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
-			likeImg.src = "/image/redheart.png";
+			//likeImg.src = "/image/redheart.png";
+			$.ajax({
+				type: "post",
+				url: "/sharingView/likes",
+				data: {sno:sno, userno:userno},
+				success: function(data) {
+					if(data == 1) {
+	                    $("#heart_img").attr("src", "/image/redheart.png");
+					} else {
+	                    $("#heart_img").attr("src", "/image/heart.png");
+					}
+				}, error: function() {
+                    $("#heart_img").attr("src", "/image/redheart.png");
+                    console.log('오타 찾으세요')
+				}
+			})
 		}
 	})
-		
-    let likeVal = document.getElementById('like_check').value
-    const boardId = $("#boardId").val();
-    const memberId = $("#memberId").val();
-    console.log(memberId);
-    console.log(likeVal);
-    const likeImg = document.getElementById("likeImg")
-
-    if (likeVal > 0) {
-        likeImg.src = "/assets/img/like_click.png";
-    } else {
-        likeImg.src = "/assets/img/like_empty.png";
-    }
-    // 좋아요 버튼을 클릭 시 실행되는 코드
-    $("#likeImg").on("click", function () {
-        $.ajax({
-            url: '/board/like',
-            type: 'POST',
-            data: {'boardId': boardId, 'memberId': memberId},
-            success: function (data) {
-                if (data == 1) {
-                    $("#likeImg").attr("src", "/assets/img/like_click.png");
-                    location.href="/board/"+boardId;
-
-                } else {
-                    $("#likeImg").attr("src", "/assets/img/like_empty.png");
-                    location.href="/board/"+boardId;
-                }
-            }, error: function () {
-                $("#likeImg").attr("src", "/assets/img/like_click.png");
-                console.log('오타 찾으세요')
-            }
-
-        });
-
-    });
 
 });
 

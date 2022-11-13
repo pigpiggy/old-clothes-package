@@ -2,10 +2,10 @@ package com.kosta.clothes.bean;
 
 public class Likes {
 	private Integer likesno;
-	private Long userno; //authUser
-	private Long sno;
-	private Long ino;
-	private Long bno;
+	private Integer userno; //authUser
+	private Integer sno;
+	private Integer ino;
+	private Integer bno;
 	private Long likescheck; //좋아요 중복방지
 	public Integer getLikesno() {
 		return likesno;
@@ -13,28 +13,28 @@ public class Likes {
 	public void setLikesno(Integer likesno) {
 		this.likesno = likesno;
 	}
-	public Long getUserno() {
+	public Integer getUserno() {
 		return userno;
 	}
-	public void setUserno(Long userno) {
+	public void setUserno(Integer userno) {
 		this.userno = userno;
 	}
-	public Long getSno() {
+	public Integer getSno() {
 		return sno;
 	}
-	public void setSno(Long sno) {
+	public void setSno(Integer sno) {
 		this.sno = sno;
 	}
-	public Long getIno() {
+	public Integer getIno() {
 		return ino;
 	}
-	public void setIno(Long ino) {
+	public void setIno(Integer ino) {
 		this.ino = ino;
 	}
-	public Long getBno() {
+	public Integer getBno() {
 		return bno;
 	}
-	public void setBno(Long bno) {
+	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
 	public Long getLikescheck() {
@@ -46,7 +46,7 @@ public class Likes {
 	public Likes() {
 		super();
 	}
-	public Likes(Integer likesno, Long userno, Long sno, Long ino, Long bno, Long likescheck) {
+	public Likes(Integer likesno, Integer userno, Integer sno, Integer ino, Integer bno, Long likescheck) {
 		super();
 		this.likesno = likesno;
 		this.userno = userno;
@@ -60,6 +60,7 @@ public class Likes {
 		return "Likes [likesno=" + likesno + ", userno=" + userno + ", sno=" + sno + ", ino=" + ino + ", bno=" + bno
 				+ ", likescheck=" + likescheck + "]";
 	}
+	
 	
 	
 }

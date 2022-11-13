@@ -1,21 +1,19 @@
 package com.kosta.clothes.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.kosta.clothes.bean.JoinVo;
+import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 
 @Mapper
 @Repository
 public interface SharingDAO {
-	Integer getNextSharingNo() throws Exception;
-	void insertSharing(Sharing sharing) throws Exception;
+	Integer getNextSharingNo() throws Exception; //sharing sequence
+	void insertSharing(Sharing sharing) throws Exception; 
 	Sharing selectSharing(Integer sno) throws Exception;
 	Sharing getByUserid(String userid) throws Exception;
 	List<Sharing> selectSharingList() throws Exception;
@@ -25,4 +23,7 @@ public interface SharingDAO {
 	void updateSharing(Sharing sharing) throws Exception;
 	void updateSfileids(Sharing sharing) throws Exception;
 	void deleteSharing(Integer sno) throws Exception;
+	void insertSlikes(Likes likes) throws Exception; //찜 기능
+	void updateSharingLikes(Sharing sharing) throws Exception;
+	void deleteLikes(Integer sno) throws Exception;
 }

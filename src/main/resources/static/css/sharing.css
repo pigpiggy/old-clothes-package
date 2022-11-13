@@ -30,6 +30,7 @@ a {
 
 #sharingBody {
 	min-height: 101%;
+	background: linear-gradient(#fff, #c6d6e9);
 }
 
 #sharingList{
@@ -39,7 +40,7 @@ a {
 
 #sharingListSubject {
   margin-bottom: 30px;
-  font-size: 3rem;
+  font-size: 45px;
   text-align: left;
   padding: 0;
 }

@@ -26,19 +26,14 @@
      font-style: normal;
 }
 
-*,
-body {
-	font-family: 'S-CoreDream-3Light';
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: 'LeferiPoint-BlackA';
-}
+
 
 html,
 body {
@@ -126,9 +121,11 @@ a {
 }
 
 header {
-  background-color: rgb(0, 118, 190);
+  background-color: rgba(0, 118, 190,0);
   position: relative;
   height: 80px;
+  font-family: 'GyeonggiBatang';
+  font-size: 15px;
 }
 
 #topMenu {
@@ -151,13 +148,13 @@ header {
 #logo {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  top: 11px;
+  transform: translate(-50%,-50%);
+  top: 50%;
 }
 
 #logo img {
   display: block;
-  width: 100px;
+  width: 75px;
 }
 
 #headerMenu {
@@ -181,7 +178,7 @@ header {
 .headerMenuBar {
   position: absolute;
   padding: 5px;
-  background-color: rgb(0, 118, 190);
+  background-color: rgba(0, 118, 190,0);
   color: rgb(64, 64, 64);
   top: 80px;
   width: 285px;
@@ -189,7 +186,7 @@ header {
 }
 
 .headerMenuBar ul {
-	color: white;
+	color: rgb(64, 64, 64);
 }
 
 .hederMenuList {
@@ -200,7 +197,7 @@ header {
 }
 
 .hederMenuList>a {
-  color: white;
+  color: rgb(64, 64, 64);
 }
 
 .hederMenuList:hover .sideMenu {
@@ -243,17 +240,19 @@ header {
   }
 
   .headerMenuBar {
-    display: block;
     position: static;
-    width: 70%;
+    display: flex;
+    flex: 1;
     top: 13px;
-    margin: 0 auto;
+    margin: 0 0 0 50%;
     padding-bottom: 0;
+    width: 700px;
   }
 
   .headerMenuBar>ul {
     display: flex;
     justify-content: space-between;
+    flex: 1;
   }
 
   .hederMenuList {
@@ -279,7 +278,7 @@ header {
     top: 45px;
     left: 0;
     width:150px;
-    background-color: white;
+    background-color: rgba(1,1,1,0);
   }
 }
 

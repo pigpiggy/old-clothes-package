@@ -20,7 +20,7 @@
 				uploadUrl:"/upload"
 			}
 		}).then(editor=> {
-			editor.setData('${fcontent}');
+			editor.setData('${article.fcontent}');
 			window.editor=editor;
 		}).catch((error)=> {
 			console.error(error);
@@ -38,20 +38,20 @@
 		<div class="board_title">
 			<strong>글 수정</strong>
 		</div>
-		<form action="/freeupdate" method="post">
-			<input type="hidden" name="fno" value="${free.fno }" />
+		<form action="/freeModify/${article.fno }" method="post">
+			<input type="hidden" name="fno" value="${article.fno }" />
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="title">
 						<dl>
 							<dt>제목</dt>
 							<dd>
-								<input type="text" name="ftitle" placeholder='${article.ftitle}'>
+								<input type="text" name="ftitle" value="${article.ftitle}">
 							</dd>
 						</dl>
 					</div>
 					<div class="cont">
-						<textarea id="editor" name="fcontent"></textarea>
+						<textarea id="editor" name="fcontent" value="${article.fcontent}"></textarea>
 					</div>
 				</div>
 				<div class="bt_wrap">

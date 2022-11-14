@@ -59,7 +59,7 @@
                                       
             <div class="bt_wrap">
                 <a href="/freeList" class="on">목록</a>
-                <a href="/freeModify/${article.fno }">수정</a>
+                <a href="/modifyform/${article.fno }">수정</a>
             </div>
    
 </body>

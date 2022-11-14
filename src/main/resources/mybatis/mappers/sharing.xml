@@ -48,44 +48,12 @@
 		]]>
 	</delete>
 	
-	<insert id="insertSlikes" parameterType="Likes">
-	<selectKey keyProperty="likesno" resultType="Integer" order="BEFORE">
-		<![CDATA[
-			select likes_seq.nextval from dual
-		]]>
-	</selectKey>		
-		<![CDATA[
-			insert into likes(likesno,userno,sno)
-			values (#{likesno},#{userno},#{sno})
-		]]>
-	</insert>
-	
 	<update id="updateSharingLikes" parameterType="sharing">
 		<![CDATA[
 			update sharing set likes = likes + 1
 			where sno=#{sno}
 		]]>
 	</update>
-
-	<update id="likesUp" parameterType="likes">
-		<![CDATA[
-			update likes set likescheck = likescheck + 1
-			where sno=#{sno} and userno=#{userno}
-		]]>
-	</update>
-		
-	<update id="likesDown" parameterType="likes">
-		<![CDATA[
-			update likes set likescheck = 0
-			where sno=#{sno} and userno=#{userno}
-		]]>
-	</update>
-	
-	<delete id="deleteLikes" parameterType="Integer">
-		<![CDATA[
-			delete from likes where sno=#{sno}
-		]]>
-	</delete>
 		
 	<select id="getByUserid" parameterType="String" resultType="sharing">
 		<![CDATA[

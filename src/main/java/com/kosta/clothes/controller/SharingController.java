@@ -29,6 +29,7 @@ import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -36,6 +37,9 @@ public class SharingController {
 	
 	@Autowired
 	SharingService sharingService;
+	
+	@Autowired
+	LikesService likesService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -112,6 +116,14 @@ public class SharingController {
 			Users users = (Users)session.getAttribute("authUser");
 			if(users==null) {
 				model.addAttribute("logincheck", "false");
+			}else {
+			Likes likevo = new Likes();
+			likevo.setSno(sno);
+			likevo.setUserno(users.getUserno());
+			List<Likes> likeslist = likesService.selectSLikesList(likevo);
+			if(likeslist.size()>0) {
+				mav.addObject("likes", likeslist.get(0));
+			}
 			}
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
@@ -168,20 +180,39 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/sharingView/likes")
-	public void registLikes(@ModelAttribute Sharing sharing, 
-			@ModelAttribute Likes likes, Model model) {
+	public Likes registLikes(@RequestParam("sno") Integer sno, Model model,
+			@ModelAttribute Likes likes) {
 		try {
-			System.out.println("likescontroller1:" + sharing + likes);
+			Sharing sharing = sharingService.viewSharing(sno);
 			Users users = (Users)session.getAttribute("authUser");
+			Likes likevo = new Likes();
+			System.out.println("likes:"+likes);
+			likevo.setSno(sno);
+			likevo.setUserno(users.getUserno());
+			List<Likes> likeslist = likesService.selectSLikesList(likevo);
+			System.out.println("likescontroller1:" + sharing + likeslist);
+			System.out.println("sharinguserno1:" + sharing.getUserno());
 			if(users==null) {
 				model.addAttribute("logincheck", "false");
-			}
-			sharingService.modifySharingLikes(sharing);
-			System.out.println("likescontroller2:" + sharing + likes);
-
+			} else {
+				sharingService.modifySharingLikes(sharing);
+				System.out.println("sharinguserno2:" + sharing.getUserno());
+					if(likeslist.size()<=0) {
+						likesService.registSlikes(likes);
+						likeslist = likesService.selectSLikesList(likevo);
+						if(likeslist.get(0).getLikescheck()==1) {
+							System.out.println("likescontroller2:" + sharing + likeslist.get(0));
+							return likeslist.get(0);
+						}
+					}else {
+						likesService.updateSlikes(likeslist.get(0));
+					}
+				}
+				System.out.println("likescontroller3:" + sharing + likeslist.get(0));
 			}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return likes;
 	}
 	
 	/* commons에 필요한 애들*/

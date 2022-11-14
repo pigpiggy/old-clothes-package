@@ -14,10 +14,9 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.FileVO;
-import com.kosta.clothes.bean.JoinVo;
-import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.dao.FileDAO;
+import com.kosta.clothes.dao.LikesDAO;
 import com.kosta.clothes.dao.SharingDAO;
 
 @Service
@@ -29,6 +28,9 @@ public class SharingServiceImpl implements SharingService{
 	@Autowired
 	FileDAO fileDAO;
 
+	@Autowired
+	LikesDAO likesDAO;
+	
 	@Autowired
 	ServletContext servletContext;
 	
@@ -115,7 +117,7 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public void deleteSharing(Integer sno) throws Exception {
-		sharingDAO.deleteLikes(sno);
+		likesDAO.deleteSlikes(sno);
 		sharingDAO.deleteSharing(sno);
 		fileDAO.deleteFileInfo(sno);
 		
@@ -151,15 +153,9 @@ public class SharingServiceImpl implements SharingService{
 		sharingDAO.updateSfileids(sharing);
 	}
 
-	@Override
 	public void modifySharingLikes(Sharing sharing) throws Exception {
-		Sharing sharingvo = new Sharing();
-		sharingvo.setSno(sharing.getSno());
 		sharingDAO.updateSharingLikes(sharing);
 		System.out.println("likesservice3:" + sharing);
 	}
 
-
-	
-	
 }

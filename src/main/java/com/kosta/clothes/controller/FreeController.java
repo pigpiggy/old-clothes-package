@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +42,9 @@ public class FreeController {
 	
 	@Autowired
 	FreeService freeService;
+	
+	@Autowired
+	HttpSession session;
 	
 	// 자유게시판 글 목록
 	@GetMapping("/freeList")
@@ -102,17 +107,23 @@ public class FreeController {
 	}
 	
 	
-	 //글 상세보기
+	 //글 상세보기(조회수증가)
 	@GetMapping("freeView/{fno}")
 	public ModelAndView freeView(@PathVariable("fno") Integer fno,
-			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView();
 		try {
+			Users users = (Users)session.getAttribute("authUser");
+			if(users==null) {
+				model.addAttribute("logincheck", "false");//로그인했는지 여부-?jsp로		
+			}
+			Free free1 = freeService.Freehit(fno);
 			Free free = freeService.getFree(fno);
 			mav.addObject("article", free);
 			mav.addObject("page", page);
 			mav.setViewName("/free/freeView");
+			
 		} catch (Exception e) {
 			e.printStackTrace();		
 		}
@@ -189,6 +200,19 @@ public class FreeController {
 		}
 		return mav;
 	}
-	
-	
+	//글 삭제하기
+	@ResponseBody
+	@PostMapping("/freeDelete")
+	public ModelAndView freeDelete(@RequestParam("fno") String fno,Model model){
+		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("삭제 : " + fno);
+			freeService.freeDelete(Integer.parseInt(fno));
+			mav.setViewName("redirect:/freeList");
+		}catch(Exception e) {
+			e.printStackTrace();
+			mav.addObject("err",e.getMessage());
+		}
+		return mav;
+	}
 }

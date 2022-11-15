@@ -55,8 +55,8 @@
 					</div>
 				</div>
 				<div class="bt_wrap">
-					<input id="input3" type="submit" value="수정"> 
-					<a href="freeList">취소</a>
+					<input id="input3"  type="submit"  value="수정"> 
+					<a href="/freeList">취소</a>
 				</div>
 			</div>
 		</form>

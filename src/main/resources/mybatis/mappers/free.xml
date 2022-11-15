@@ -41,29 +41,33 @@
 	<!-- 글 목록 보여주기 -->
 	<select id="selectFreeList" resultType="Free" parameterType="Integer">
 		<![CDATA[
-			select fno,fname,ftitle,fcontent,freadcount,regdate,userno,bno
-			from (select row_number() over (order by regdate desc) num, F.*
-					from FREE F)	
-			where fno between #{row} AND #{row}+9
+			select * from free order by regdate desc
 					]]>
 	</select>
 	
-	<!-- 실제 글 전체 개수 -->
+	<!-- 조회수 증가 -->
+	<update id="hitFree" parameterType="Free">
+	<![CDATA[
+		update free set freadcount=freadcount+1 where fno=#{fno}
+		]]>
+	</update>
+	
+		<!-- 실제 글 전체 개수 -->
 	<select id="selectFreeCount" resultType="Integer">
 		<![CDATA[
 			select count(*) from free
-		]]>
-	</select>
+			]]>
+			</select>
 	
 	<!-- 글 클릭 시 정보 가져가기 -->
-	<select id="selectFree" resultType="Free" parameterType="Integer">
+	<select id="selectFree" parameterType="Free" resultType="Free">
 		<![CDATA[
 			select * from free where fno=#{fno}
 		]]>
 	</select>
 	
 	<!-- 글 수정  -->
-	<update id="updatefree"  parameterType="Free">
+	<update id="updateFree"  parameterType="Free">
 		<![CDATA[
 			update free
 			set ftitle=#{ftitle}, fcontent=#{fcontent}
@@ -73,7 +77,7 @@
 	
 	
 	<!-- 글 삭제하기 -->
-	<delete id="deletefree" parameterType="Integer">
+	<delete id="deleteFree" parameterType="Integer">
 		<![CDATA[
 			delete from free where fno=#{fno}
 		]]>

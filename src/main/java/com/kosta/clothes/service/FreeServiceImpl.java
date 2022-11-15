@@ -65,10 +65,17 @@ public class FreeServiceImpl implements FreeService{
 		freeDao.updateFree(free);
 	}
 
+	//글 삭제하기
 	@Override
-	public void freeDelete(Integer freeNum, String password) throws Exception {
-		Free free = getFree(freeNum);
+	public void freeDelete(Integer freeNum) throws Exception {
 		freeDao.deleteFree(freeNum);
 	}
+	
+	//조회수 증가
 
+	@Override
+	public Free Freehit(Integer freadcount) throws Exception {
+		return freeDao.hitFree(freadcount);
+		
+	}
 }

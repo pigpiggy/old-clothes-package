@@ -32,17 +32,22 @@ public class FreeDAOImpl implements FreeDAO {
 		return sqlSession.selectList("selectFreeList",row);
 	}
 	
+	//조회수 증가
+	public Free hitFree(Integer freadcount)throws Exception{
+		return sqlSession.selectOne("hitFree",freadcount);
+	}
+	
 	//글 수정
 	@Override
 	public void updateFree(Free free) throws Exception {
-		sqlSession.selectOne("updatefree",free);
+		sqlSession.selectOne("updateFree",free);
 		
 	}
 	
 	//글 삭제
 	@Override
 	public void deleteFree(Integer freeNum) throws Exception {
-		sqlSession.delete("deletefree",freeNum);
+		sqlSession.delete("deleteFree",freeNum);
 	}
 
 	////글 클릭 시 관련 num 으로 정보 값 가져오기

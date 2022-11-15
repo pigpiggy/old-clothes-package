@@ -56,11 +56,33 @@
                 <div class="cont" id="center">               
                   ${article.fcontent }                                                
                 </div>              
-                                      
-            <div class="bt_wrap">
-                <a href="/freeList" class="on">목록</a>
+                          <input type="hidden" name="fno" id="fno" value="${article.fno }">               
+            <div class="bt_wrap">            
+                <a id="input4" href="/freeList" class="on">목록</a>
+                <c:if test="${authUser.userno eq article.userno}">                 
                 <a href="/modifyform/${article.fno }">수정</a>
+                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제"></c:if>
             </div>
-   
+   <script>
+   function freeRemove() {
+		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
+		var fno =  $('#fno').val();
+		if(result) {
+			$.ajax({
+				type : "post",
+				url : "/freeDelete",
+				data : {fno:fno},
+				success : function(data) {
+					alert("삭제가 완료되었습니다.");
+					location.href="/freeList";
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+		}
+		
+	}
+   </script>
 </body>
 </html>

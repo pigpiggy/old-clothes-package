@@ -12,8 +12,8 @@ import com.kosta.clothes.bean.Likes;
 public interface LikesDAO {
 	void insertSlikes(Likes likes) throws Exception; //찜 기능
 	void deleteSlikes(Integer sno) throws Exception;
-	List<Likes> selectSLikesList(Likes likes) throws Exception;
-	void upSlikes(Likes likes) throws Exception;
-	void downSlikes(Likes likes) throws Exception;
-
+	//Likes selectSLikes(Likes likes) throws Exception;
+	void upSlikescheck(Likes likes) throws Exception;
+	void downSlikescheck(Likes likes) throws Exception;
+	Long getLikescheck(Likes likes) throws Exception;
 }

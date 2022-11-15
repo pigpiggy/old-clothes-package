@@ -43,7 +43,6 @@
       <section id="content_right">
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
-        <input type="hidden" name="likescheck" value="${likes.likescheck }">
         <div class="letterAndHeart" id="sharingname">
           <span>${sharing.sname }</span>
         <c:choose>
@@ -58,7 +57,7 @@
 	          		<div class="letterAndHeart">	
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
 		          			<c:choose>
-		          				<c:when test="${likes.likescheck eq 1}">
+		          				<c:when test="${likes eq 1}">
 		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청전">
 		          				</c:when>
 		          				<c:otherwise>
@@ -129,45 +128,32 @@ $(function () {
 		}
 	})	
 	$("#heart_img").on("click", function(e) {
-		e.preventDefault();
+		var logincheck = "${logincheck}";
 		const sno =  $('#sno').val();
-		const userno = "<c:out value='${authUser.userno}'/>";
-		var logincheck = "<c:out value='${logincheck}'/>";
-		var likescheck = "<c:out value='${likescheck}'/>";
-		const likeImg = document.getElementById('heart_img');
+		const userno = "${authUser.userno}";
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
-			likeImg.src = "/image/redheart.png";
 			console.log(sno);
-			console.log(likescheck);
-			if(likescheck == "false") {
-				likeImg.src = "/image/redheart.png";
-			} else {
-				likeImg.src = "/image/heart.png";
-			}
+		}
 			$.ajax({
 				type: "post",
 				url: "/sharingView/likes",
 				data: {sno:sno, userno:userno},
 				success: function(data) {
 					console.log(data);
-					if(data.likescheck == 1) {
-						//likeImg.src = "/image/redheart.png";
-						console.log(data);
+					if(data == 1) {
 						$("#heart_img").attr("src", "/image/redheart.png");
 					} else {
-						//likeImg.src = "/image/heart.png";
 	                    $("#heart_img").attr("src", "/image/heart.png");
 					}
 				}, error: function() {
-                    $("#heart_img").attr("src", "/image/redheart.png");
-                    console.log('오타 찾으세요')
+                    console.log('바보야!')
 				}
 			})
 		}
-	})
+	)
 
 });
 

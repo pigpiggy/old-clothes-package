@@ -240,9 +240,7 @@ public class SharingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-<<<<<<< HEAD
-	
+}	
 	/*@ResponseBody
 =======
 
@@ -276,8 +274,6 @@ public class SharingController {
 <<<<<<< HEAD
 	}*/
 	
-=======
+
 	}
 
->>>>>>> 04657133c7c4f6f4af0593b27c79ed3c707e2816
-}

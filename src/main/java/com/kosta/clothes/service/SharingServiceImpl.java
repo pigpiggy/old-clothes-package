@@ -76,7 +76,6 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public Sharing viewSharing(Integer sno) throws Exception {
-		System.out.println("service:" + sharingDAO.selectSharing(sno));
 		return sharingDAO.selectSharing(sno);
 	}
 
@@ -125,7 +124,6 @@ public class SharingServiceImpl implements SharingService{
 
 	@Override
 	public void modifySfileids(Sharing sharing, FileVO fileVo, MultipartFile[] files) throws Exception {
-		System.out.println(sharing.getSno());
 		fileDAO.deleteFileInfo(sharing.getSno());
 		String fileids = "";
 		FileVO nfileVo = new FileVO();
@@ -139,7 +137,6 @@ public class SharingServiceImpl implements SharingService{
 					nfileVo.setSno(sharing.getSno());
 					nfileVo.setContent_type(file.getContentType());
 					fileDAO.insertFileInfo(nfileVo);
-					System.out.println("sharingServiceImpl:" + nfileVo);
 					
 					FileOutputStream fos = new FileOutputStream(path+nfileVo.getTno());
 					FileCopyUtils.copy(file.getBytes(), fos);
@@ -153,9 +150,11 @@ public class SharingServiceImpl implements SharingService{
 		sharingDAO.updateSfileids(sharing);
 	}
 
-	public void modifySharingLikes(Sharing sharing) throws Exception {
-		sharingDAO.updateSharingLikes(sharing);
-		System.out.println("likesservice3:" + sharing);
+	public void upSharingLikes(Sharing sharing) throws Exception {
+		sharingDAO.upSharingLikes(sharing);
+	}
+	public void downSharingLikes(Sharing sharing) throws Exception {
+		sharingDAO.downSharingLikes(sharing);
 	}
 
 }

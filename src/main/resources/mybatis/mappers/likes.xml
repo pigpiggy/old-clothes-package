@@ -11,26 +11,34 @@
 	</selectKey>		
 		<![CDATA[
 			insert into likes(likesno,userno,sno,likescheck)
-			values (#{likesno},#{userno},#{sno},#{likescheck})
+			values (#{likesno},#{userno},#{sno},1)
 		]]>
 	</insert>
 	
-	<select id="selectSLikesList" resultType="Likes">
+	<select id="getLikescheck" resultType="Long">
 		<![CDATA[
-			select *
+			select likescheck
 			from likes
 			where sno=#{sno} and userno=#{userno}
 		]]>
 	</select>	
 
-	<update id="upSlikes" parameterType="Likes">
+<!-- 	<select id="selectSLikes" resultType="Likes">
+		<![CDATA[
+			select *
+			from likes
+			where sno=#{sno} and userno=#{userno}
+		]]>
+	</select> -->		
+
+	<update id="upSlikescheck" parameterType="Likes">
 		<![CDATA[
 			update likes set likescheck = 1
 			where sno=#{sno} and userno=#{userno}
 		]]>
 	</update>
 		
-	<update id="downSlikes" parameterType="Likes">
+	<update id="downSlikescheck" parameterType="Likes">
 		<![CDATA[
 			update likes set likescheck = 0
 			where sno=#{sno} and userno=#{userno}

@@ -36,14 +36,20 @@
                     	<!-- <h3 class="text-uppercase text-center mb-5">아이디 찾기</h3> -->
 
                         <p>회원님의 정보와 일치하는 아이디입니다.</p><br>
-                        <c:choose>
-							<c:when test="${business != null}">
-								<h2 class="text-center mb-5">${business }</h2>
-							</c:when>
-							<c:otherwise>
-								<h2 class="text-center mb-5">${user }</h2>
-							</c:otherwise>
-						</c:choose>	            			
+							<c:if test="${business != null}">
+								<h2 class="text-center mb-5">업체아이디:
+									<c:forEach var="bid" items="${business }" varStatus="status">
+									${bid }<c:if test="${not status.last }"> ,</c:if>
+									</c:forEach>
+								</h2>
+							</c:if>
+							<c:if test="${user != null}">
+								<h2 class="text-center mb-5">개인아이디:
+									<c:forEach var="uid" items="${user }" varStatus="status">
+									${uid }<c:if test="${not status.last }"> ,</c:if>
+									</c:forEach>
+								</h2>
+							</c:if>
 			                        <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-outline-primary" style="margin-right:3%;" onclick="location.href='login'">&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				                        <button type="button" class="btn btn-outline-success" style="margin-left:3%;" onclick="location.href='checkidnphone'">비밀번호 찾기</button>

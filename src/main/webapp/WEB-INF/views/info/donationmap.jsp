@@ -12,7 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
-<script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 <style>
 div.contents {
@@ -119,20 +119,15 @@ input[type=radio] {
 							<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
 							<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
 							<div id="indexlist">
-								<h2>&nbsp; &nbsp;[${donation.dname }]</h2>
+								<div id="listname"><h2>&nbsp; &nbsp;[${donation.dname }]</h2></div>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
 								<br>
 							</div>	
-						
-						
 					</c:forEach>
 					</div>
 				</div>
-			</div>
-						
-			</div>
-			
-			
+			</div>						
+			</div>			
 		</div>	
 		<div id="onlineview">
 			온라인 페이지 입니다.
@@ -153,7 +148,8 @@ input[type=radio] {
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성				
-	
+		//리스트 네임
+		var listdname = document.getElementById("listname");
 		//주소 리스트를 받을 배열
 		var addressArray = [];
 		var wishList = $('.alladdress'); //주소를 리스트에 담아온다.
@@ -255,6 +251,7 @@ input[type=radio] {
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
 </body>

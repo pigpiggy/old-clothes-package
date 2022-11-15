@@ -73,6 +73,7 @@ a {
     border: 1px solid rgb(23,162,184); /*테두리*/
     border-radius: 6px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 #input2, #input3{
 	display: inline-block;

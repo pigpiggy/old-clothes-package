@@ -43,6 +43,7 @@
       <section id="content_right">
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
+        <input type="hidden" name="likescheck" value="${likes.likescheck }">
         <div class="letterAndHeart" id="sharingname">
           <span>${sharing.sname }</span>
         <c:choose>
@@ -56,8 +57,14 @@
         		<c:if test="${authUser.userno ne sharing.userno }">
 	          		<div class="letterAndHeart">	
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-		          			<input type="hidden" id="like_check" value="${likes.likescheck }">
-		          			<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		          			<c:choose>
+		          				<c:when test="${likes.likescheck eq 1}">
+		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청전">
+		          				</c:when>
+		          				<c:otherwise>
+		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+        						</c:otherwise>
+        					</c:choose>
         			</div>
         		</c:if>
          	</c:otherwise>
@@ -121,34 +128,37 @@ $(function () {
 			location.href="/login";
 		}
 	})	
-	
-    let likeVal = $('#like_check').val();
-	const likeImg = document.getElementById('heart_img');
-	console.log(sno);
-	console.log(likeVal);
-	if(likeVal > 0) {
-		likeImg.src = "/image/redheart.png";
-	} else {
-		likeImg.src = "/image/heart.png";
-	}
-	$("#heart_img").on("click", function() {
-		alert("1");
+	$("#heart_img").on("click", function(e) {
+		e.preventDefault();
 		const sno =  $('#sno').val();
 		const userno = "<c:out value='${authUser.userno}'/>";
 		var logincheck = "<c:out value='${logincheck}'/>";
+		var likescheck = "<c:out value='${likescheck}'/>";
+		const likeImg = document.getElementById('heart_img');
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
-			//likeImg.src = "/image/redheart.png";
+			likeImg.src = "/image/redheart.png";
+			console.log(sno);
+			console.log(likescheck);
+			if(likescheck == "false") {
+				likeImg.src = "/image/redheart.png";
+			} else {
+				likeImg.src = "/image/heart.png";
+			}
 			$.ajax({
 				type: "post",
 				url: "/sharingView/likes",
 				data: {sno:sno, userno:userno},
 				success: function(data) {
-					if(data == 1) {
-	                    $("#heart_img").attr("src", "/image/redheart.png");
+					console.log(data);
+					if(data.likescheck == 1) {
+						//likeImg.src = "/image/redheart.png";
+						console.log(data);
+						$("#heart_img").attr("src", "/image/redheart.png");
 					} else {
+						//likeImg.src = "/image/heart.png";
 	                    $("#heart_img").attr("src", "/image/heart.png");
 					}
 				}, error: function() {

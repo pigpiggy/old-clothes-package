@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.FileVO;
-import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 
 public interface SharingService {
@@ -20,6 +19,7 @@ public interface SharingService {
 	void modifySharing(Sharing sharing) throws Exception;
 	void modifySfileids(Sharing sharing, FileVO fileVo, MultipartFile[] files) throws Exception;
 	void deleteSharing(Integer sno) throws Exception;
-	void modifySharingLikes(Sharing sharing) throws Exception;
-	
+	void upSharingLikes(Sharing sharing) throws Exception;
+	void downSharingLikes(Sharing sharing) throws Exception;
+
 }

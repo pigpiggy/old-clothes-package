@@ -29,98 +29,110 @@ import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
 public class SharingController {
-	
+
 	@Autowired
 	SharingService sharingService;
-	
+
+	@Autowired
+	LikesService likesService;
+
 	@Autowired
 	ServletContext servletContext;
-	
+
 	@Autowired
 	HttpSession session;
 
 	@GetMapping("/sharingList")
-	public ModelAndView main(HttpServletRequest request, @RequestParam(value="kwd", required=false) String kwd) {
+	public ModelAndView main(HttpServletRequest request, @RequestParam(value = "kwd", required = false) String kwd) {
 		ModelAndView mav = new ModelAndView();
 		List<Sharing> sharingList;
 		try {
-			if(kwd!=null&&kwd!="") {
+			if (kwd != null && kwd != "") {
 				sharingList = sharingService.getSharingList(kwd);
 			} else {
 				sharingList = sharingService.getSharingList();
 			}
-			for(int i=0;i<sharingList.size();i++) {
-				if(sharingList.get(i).getSfileids()!=null) {
+			for (int i = 0; i < sharingList.size(); i++) {
+				if (sharingList.get(i).getSfileids() != null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
 				}
 			}
-			System.out.println("컨트롤리스트:"+sharingList);
+			System.out.println("컨트롤리스트:" + sharingList);
 			mav.addObject("sharingList", sharingList);
 			mav.addObject("kwd", kwd);
 			mav.setViewName("/sharing/sharingList");
-		} catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("/sharingRegistForm")
 	public String sharingRegistForm() {
 		return "/sharing/sharingRegistForm";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/sharingRegist")
 	public ModelAndView registSharing(@ModelAttribute Sharing sharing,
 			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
-		try { 
-			Users users = (Users)session.getAttribute("authUser");
-			if(users!=null) {
+		try {
+			Users users = (Users) session.getAttribute("authUser");
+			if (users != null) {
 				sharing.setUserno(users.getUserno());
 				sharingService.registSharing(sharing, files);
 			}
 			System.out.println("registcontroller:" + sharing);
 			mav.setViewName("/sharing/sharingList");
 			mav.setViewName("redirect:/sharingList");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("/sharingView")
 	public String sharingView() {
 		return "/sharing/sharingView";
 	}
-	
+
 	@GetMapping("/sharingView/{sno}")
 	public ModelAndView viewSharing(@PathVariable("sno") Integer sno, Model model) {
-		System.out.println("sno:"+sno);
+		System.out.println("sno:" + sno);
 		ModelAndView mav = new ModelAndView();
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
-			System.out.println("sharingview"+sharing);
-			if(sharing.getSfileids()!=null) {
-				String[] fidArr = sharing.getSfileids().split(","); //1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌 
-				mav.addObject("files", fidArr); 
+			System.out.println("sharingview" + sharing);
+			if (sharing.getSfileids() != null) {
+				String[] fidArr = sharing.getSfileids().split(","); // 1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌
+				mav.addObject("files", fidArr);
 			}
-			Users users = (Users)session.getAttribute("authUser");
-			if(users==null) {
+			Users users = (Users) session.getAttribute("authUser");
+			if (users == null) {
 				model.addAttribute("logincheck", "false");
+			} else {
+				Likes likevo = new Likes();
+				likevo.setSno(sno);
+				likevo.setUserno(users.getUserno());
+				Long likeselect = likesService.getLikescheck(likevo);
+				if (likeselect != null) {
+					mav.addObject("likes", likeselect);
+				}
 			}
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@GetMapping("/sharingModifyForm")
 	public ModelAndView modifySharing(@RequestParam("sno") Integer sno) {
 		ModelAndView mav = new ModelAndView();
@@ -128,120 +140,144 @@ public class SharingController {
 			Sharing sharing = sharingService.viewSharing(sno);
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingModifyForm");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@PostMapping("/sharingModify")
-	public ModelAndView modifySharing(@ModelAttribute Sharing sharing,
-			@ModelAttribute FileVO fileVo,
+	public ModelAndView modifySharing(@ModelAttribute Sharing sharing, @ModelAttribute FileVO fileVo,
 			@RequestParam("simageFile") MultipartFile[] files) {
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("modifycontroller: " + sharing);
 			sharingService.modifySharing(sharing);
 			sharingService.modifySfileids(sharing, fileVo, files);
-			//String[] fidArr = sharing.getSfileids().split(",");
-			//mav.addObject("files", fidArr); 
-			mav.setViewName("redirect:/sharingView/"+sharing.getSno());
-		}catch(Exception e) {
+			// String[] fidArr = sharing.getSfileids().split(",");
+			// mav.addObject("files", fidArr);
+			mav.setViewName("redirect:/sharingView/" + sharing.getSno());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/sharingDelete")
-	public ModelAndView deleteSharing(@RequestParam(value="sno", required=false) Integer sno, Model model) {
+	public ModelAndView deleteSharing(@RequestParam(value = "sno", required = false) Integer sno, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("delete");
 			sharingService.deleteSharing(sno);
 			mav.setViewName("redirect:/sharingList");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/sharingView/likes")
-	public void registLikes(@ModelAttribute Sharing sharing, 
-			@ModelAttribute Likes likes, Model model) {
+	public Long registLikes(@RequestParam("sno") Integer sno, @RequestParam("userno") Integer userno) {
+		Likes likes = new Likes();
+		Long likescheck = null;
 		try {
-			System.out.println("likescontroller1:" + sharing + likes);
-			Users users = (Users)session.getAttribute("authUser");
-			if(users==null) {
-				model.addAttribute("logincheck", "false");
+			likes.setSno(sno);
+			likes.setUserno(userno);
+			Sharing sharing = new Sharing();
+			sharing.setSno(sno);
+			likescheck = likesService.getLikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+			if(likescheck == null) { //처음 눌렀을 때
+				likesService.registSlikes(likes);
+				sharingService.upSharingLikes(sharing);
+			}else if(likescheck == 1) {
+				System.out.println("1일때"+ likescheck);
+				likes.setLikescheck(likesService.getLikescheck(likes));
+				likesService.updateSlikes(likes);
+				sharingService.downSharingLikes(sharing);
+			}else { //likescheck가 0일 때 1로 올려주는
+				System.out.println("0일때"+ likescheck);
+				likes.setLikescheck(likesService.getLikescheck(likes));
+				likesService.updateSlikes(likes);
+				sharingService.upSharingLikes(sharing);
 			}
-			sharingService.modifySharingLikes(sharing);
-			System.out.println("likescontroller2:" + sharing + likes);
-
-			}catch(Exception e) {
+			likescheck = likesService.getLikescheck(likes);
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return likescheck;
 	}
-	
-	/* commons에 필요한 애들*/
+
+	/* commons에 필요한 애들 */
 	@GetMapping("/img/{sfileids}")
 	public void viewImage(@PathVariable Integer sfileids, HttpServletResponse response) {
 		String path = servletContext.getRealPath("/upload/");
 		FileInputStream fis = null;
 		try {
-			fis = new FileInputStream(path+sfileids);
+			fis = new FileInputStream(path + sfileids);
 			OutputStream out = response.getOutputStream();
 			FileCopyUtils.copy(fis, out);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(fis!=null) {
+		} finally {
+			if (fis != null) {
 				try {
 					fis.close();
-				} catch(Exception e) {}
+				} catch (Exception e) {
+				}
 			}
 		}
-	}	
+	}
+
 	@GetMapping("/upload/{fileid}")
 	public void imgView(@PathVariable String fileid, HttpServletResponse response) {
 		String path = servletContext.getRealPath("/upload/");
 		try {
-			FileInputStream fis = new FileInputStream(path+fileid);
+			FileInputStream fis = new FileInputStream(path + fileid);
 			OutputStream out = response.getOutputStream();
 			FileCopyUtils.copy(fis, out);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	/*@ResponseBody
+=======
+
+	@ResponseBody
+>>>>>>> 04657133c7c4f6f4af0593b27c79ed3c707e2816
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
 		String keyword = (String) params.get("keyword");
 		Integer sno = Integer.parseInt((String) params.get("sno"));
-		Integer snoToStart = sno-1;
+		Integer snoToStart = sno - 1;
 		List<Sharing> sharingList = new ArrayList<>();
 		try {
-			if(keyword!=null&&keyword!="") {
+			if (keyword != null && keyword != "") {
 				System.out.println(keyword);
 				sharingList = sharingService.infiniteScrollDown(snoToStart, keyword);
 			} else {
 				sharingList = sharingService.infiniteScrollDown(snoToStart);
 			}
-			
-			System.out.println("스크롤다운"+sharingList);
-			for(int i=0;i<sharingList.size();i++) {
-				if(sharingList.get(i).getSfileids()!=null) {
+
+			System.out.println("스크롤다운" + sharingList);
+			for (int i = 0; i < sharingList.size(); i++) {
+				if (sharingList.get(i).getSfileids() != null) {
 					sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
 					System.out.println(sharingList.get(i).getSfileids());
 				}
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sharingList;
+<<<<<<< HEAD
 	}*/
 	
+=======
+	}
+
+>>>>>>> 04657133c7c4f6f4af0593b27c79ed3c707e2816
 }

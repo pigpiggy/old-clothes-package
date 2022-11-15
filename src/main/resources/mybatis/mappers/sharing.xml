@@ -48,9 +48,16 @@
 		]]>
 	</delete>
 	
-	<update id="updateSharingLikes" parameterType="sharing">
+	<update id="upSharingLikes" parameterType="sharing">
 		<![CDATA[
 			update sharing set likes = likes + 1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="downSharingLikes" parameterType="sharing">
+		<![CDATA[
+			update sharing set likes = likes - 1
 			where sno=#{sno}
 		]]>
 	</update>

@@ -24,6 +24,7 @@ public interface SharingDAO {
 	void updateSfileids(Sharing sharing) throws Exception;
 	void deleteSharing(Integer sno) throws Exception;
 	void insertSlikes(Likes likes) throws Exception; //찜 기능
-	void updateSharingLikes(Sharing sharing) throws Exception;
+	void upSharingLikes(Sharing sharing) throws Exception;
+	void downSharingLikes(Sharing sharing) throws Exception;
 	void deleteLikes(Integer sno) throws Exception;
 }

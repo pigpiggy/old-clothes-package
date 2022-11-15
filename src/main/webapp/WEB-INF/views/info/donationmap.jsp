@@ -33,7 +33,7 @@ div.contents {
 	width:400px; height:300px;
 }
 label {
-	font-size:3rem;
+	font-size:2rem;
 }
 input[type=radio] {
     border: 0px;
@@ -119,11 +119,11 @@ input[type=radio] {
 							<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
 							<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
 							<div id="indexlist">
-								<div id="listname"><h2>&nbsp; &nbsp;[${donation.dname }]</h2></div>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
+								 <h2 id="listname" onmouseover="mOver()">&nbsp; &nbsp;[${donation.dname }]</h2>
+								<div id="listaddress" onmouseover="mOver1()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
 								<br>
 							</div>	
-					</c:forEach>
+						</c:forEach>
 					</div>
 				</div>
 			</div>						
@@ -132,12 +132,7 @@ input[type=radio] {
 		<div id="onlineview">
 			온라인 페이지 입니다.
 		</div>
-		
-	
-	
-	
-	
-	
+
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
@@ -148,8 +143,7 @@ input[type=radio] {
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성				
-		//리스트 네임
-		var listdname = document.getElementById("listname");
+		
 		//주소 리스트를 받을 배열
 		var addressArray = [];
 		var wishList = $('.alladdress'); //주소를 리스트에 담아온다.
@@ -171,7 +165,9 @@ input[type=radio] {
 			var alllngx = addressArray[i].lngx;
 			var alllaty = addressArray[i].laty;
 			var allname = addressArray[i].name;
-			
+			var listdname = document.getElementById("listname");
+			var listaddress = document.getElementById("listaddress");
+			console.log("리스트:" + listdname.textContent);
 			console.log(alladdress);
 			console.log(alllngx);
 			console.log(alllaty);
@@ -185,6 +181,19 @@ input[type=radio] {
 					map : map,
 					position : coord1
 				});
+				//마커 마우스 올릴 시 이동
+				kakao.maps.event.addListener(marker1, 'mouseover', function() {
+		             map.panTo(marker1.getPosition());
+		             console.log(marker1.getPosition());
+		        });	
+				
+				//리스트에 마우스 올렸을 시 마커 이동...인데...
+				listaddress.onmouseover = function mOver1(){
+					map.panTo(marker1.getPosition());
+					console.log(marker1.getPosition());
+				};
+				
+				
 				var infowindow1 = new kakao.maps.InfoWindow({ //마커가 찍힌 곳의 주소를 보여주기위한 것 
 					content:allname
 				});
@@ -192,6 +201,9 @@ input[type=radio] {
 				infowindow1.open(map,marker1);
 				map.setCenter(coord1);
 			}
+
+			
+			
 		}
 			
 		<%--검색 버튼 클릭시 --%>

@@ -32,21 +32,26 @@ public class InfoController {
 	DonationService donationService;
 
 	
-	// 정보 안내(헌웃수거함/기부업체)
+	// 정보 안내(기부업체)
 	@GetMapping("/information")
 	ModelAndView alladdress(Model model) {
 		ModelAndView mav = new ModelAndView();
+		
+		
 		try {
 			List<Donation> dona = donationService.allDonationInfo();
-			System.out.println(dona.toString());
+			//List<Donation> donation = donationService.DonationInfo(store,good,story);
+			System.out.println("dona" +dona.toString());
+			//System.out.println("donation" + donation.toString());
 			mav.addObject("donation",dona);
-	
-		mav.setViewName("/info/donationmap");
+			mav.setViewName("/info/donationmap");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
+	
+	
 	@GetMapping("/clothingbin")
 	public String clothingBin() {
 		return "info/clothingbin";

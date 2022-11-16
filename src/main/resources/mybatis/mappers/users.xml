@@ -166,6 +166,21 @@
 			update business set bpassword = #{bpassword} where businessid = #{businessid}
 		]]>
 	</update>
+	<select id="countUserIdbyPN" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT count(userid)
+			FROM users
+			WHERE phone=#{phone}
+		]]>
+	</select>
+	<select id="countBusinessIdbyPN" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT count(businessid)
+			FROM business
+			WHERE bphone=#{bphone}
+		]]>
+	</select>
+	
 	
 </mapper>
 

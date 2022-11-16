@@ -7,6 +7,7 @@ public class Donation {
 	private String dphone; //기부업체 전화번호
 	private double lngx; //좌표 위도
 	private double laty; //좌표 경도
+	private String dfile;//사진 가져오기
 	public Long getBno() {
 		return bno;
 	}
@@ -43,7 +44,13 @@ public class Donation {
 	public void setLaty(double laty) {
 		this.laty = laty;
 	}
-	public Donation(Long bno, String dname, String daddress, String dphone, double lngx, double laty) {
+	public String getDfile() {
+		return dfile;
+	}
+	public void setDfile(String dfile) {
+		this.dfile = dfile;
+	}
+	public Donation(Long bno, String dname, String daddress, String dphone, double lngx, double laty, String dfile) {
 		super();
 		this.bno = bno;
 		this.dname = dname;
@@ -51,14 +58,16 @@ public class Donation {
 		this.dphone = dphone;
 		this.lngx = lngx;
 		this.laty = laty;
+		this.dfile = dfile;
+	}
+	public Donation() {
+		super();
 	}
 	@Override
 	public String toString() {
 		return "Donation [bno=" + bno + ", dname=" + dname + ", daddress=" + daddress + ", dphone=" + dphone + ", lngx="
-				+ lngx + ", laty=" + laty + "]";
+				+ lngx + ", laty=" + laty + ", dfile=" + dfile + "]";
 	}
 
-
-	
 	
 }

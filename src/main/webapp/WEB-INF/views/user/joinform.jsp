@@ -19,8 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-</script>
+
 <style>
 
 .req{

@@ -168,7 +168,7 @@ h3.subtitle {
             </li>
             <li class="dropright"><a href="#">헌옷 버리기/기부</a>
               <ul class="dropdown-menu" style= "left:50%; min-width:5rem; border:0px;">
-                <li><a class="dropdown-item" href="#">내 주변 헌옷수거함</a></li>
+                <li><a class="dropdown-item" href="clothingbin">내 주변 헌옷수거함</a></li>
                 <li><a class="dropdown-item" href="#">기부처 안내</a></li>
               </ul>
             </li>

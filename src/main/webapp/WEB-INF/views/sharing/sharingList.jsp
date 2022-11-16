@@ -20,8 +20,10 @@
     
     <div id="buttonAndSelect">
       <div class="bt_wrap">
-	    <c:if test="${!empty authUser}">    
-		  	<a href="sharingRegistForm" class="on">글쓰기</a>
+	    <c:if test="${!empty authUser}">
+	    	<c:if test="${authUser.sect eq 'users'}">    
+		  		<a href="sharingRegistForm" class="on">글쓰기</a>
+		  	</c:if>
       	</c:if>
       </div>
       <div class="search-box">

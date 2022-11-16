@@ -180,11 +180,15 @@ $(function(){
 				method: 'get',
 				data: {'phone': phone},	// 사용자가 입력한 휴대폰번호 전송
 				success: function (response) {
+					if(response=="true"){
+						alert("동일번호로 가입할 수 있는 아이디는 최대 3개입니다.");
+					}else{
+					
 					authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
 					console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
 	
 					alert('인증 번호가 발송 되었습니다.');
-				
+					}
 				},
 				error: function(response) {
 					alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')
@@ -238,13 +242,16 @@ $(function(){
 			$.ajax({
 				url: '/main/execute',	// 요청보낼 url
 				method: 'get',
-				data: {'bphone': bphone},	// 사용자가 입력한 휴대폰번호 전송
+				data: {'phone': bphone},	// 사용자가 입력한 휴대폰번호 전송
 				success: function (response) {
+					if(response=="true"){
+						alert("동일번호로 가입할 수 있는 아이디는 최대 3개입니다.");
+					}else{
 					authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
 					console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
 	
 					alert('인증 번호가 발송 되었습니다.');
-				
+					}
 				},
 				error: function(response) {
 					alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')

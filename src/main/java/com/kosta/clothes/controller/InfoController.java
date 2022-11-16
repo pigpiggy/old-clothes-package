@@ -50,28 +50,35 @@ public class InfoController {
 		}
 		return mav;
 	}
+<<<<<<< HEAD
 	
 	
+=======
+	//헌옷수거함 페이지 오픈
+>>>>>>> f9fe2c692b99020b82d37745c7cdb519e8223ccb
 	@GetMapping("/clothingbin")
 	public String clothingBin() {
 		return "info/clothingbin";
 	}
-	
+	//csv 파일을 bean과 매칭
 	@ResponseBody
 	@PostMapping("/csvToBean")
 	public List<String> csvToBean(@RequestBody Map<String,Object> params , Model model) {
+		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");
 		String sigungu = (String) params.get("sigugun");
 		String myeondong = (String) params.get("dong");
 		Trash trash = null;
 		List<String> list = new ArrayList<String>();
+		//csv 파일 경로
 		String path = servletContext.getRealPath("/csv/");
 		path += "oldclothesutf.csv";
-		List<Trash> data = trashService.readCsvToBean(path);
+		List<Trash> data = trashService.readCsvToBean(path); //읽어온 것을 data에 담는다
 		
-		Iterator<Trash> it = data.iterator();
+		Iterator<Trash> it = data.iterator(); //Iterator생성
 		while(it.hasNext()) {
 			trash = (Trash)it.next();
+			//받아온 selectbox 데이터를 조건으로 그와 일치하는 리스트 검색
 			if(trash.getSido().contains(sido)&&trash.getSigungu().contains(sigungu)&&trash.getMyeondong().contains(myeondong)) {
 			System.out.println(trash.getOldcloaddress());
 			

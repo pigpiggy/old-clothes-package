@@ -34,14 +34,14 @@ public class TrashServiceImpl implements TrashService {
 	public List<Trash> readCsvToBean(String filename) {
 		List<Trash> data = null;
 		try {
-			CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"),',','"',0);
+			CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(filename),"UTF-8"),',','"',0); 
 			
 			ColumnPositionMappingStrategy<Trash> mapper = new ColumnPositionMappingStrategy<Trash>();
 			mapper.setType(Trash.class);   //VO파일을 맵핑하겠다.
 			String[] columns = new String[] {"sido","sigungu","myeondong","oldcloaddress"}; // 각 컬럼을 정의할 배열
 			mapper.setColumnMapping(columns); //각 컬럼명을 매퍼에 설정
 			
-			//매핑하기!!
+			//매핑하기
 			CsvToBean<Trash> csv = new CsvToBean<Trash>();
 			data = csv.parse(mapper, reader); //(매핑방법, csv파일)
 			

@@ -110,10 +110,10 @@ div.contents {
 		
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
-		var markers = [];
-		var markers2 = [];
-		var info = [];
-		var info2 = [];
+		var markers = [];//마커 저장할 배열
+		var markers2 = [];//마커 저장할 배열
+		var info = [];//인포윈도우 저장할 배열
+		var info2 = [];//인포윈도우 저장할 배열
 		
 		
 		
@@ -127,11 +127,12 @@ div.contents {
 				if(status === kakao.maps.services.Status.OK){
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
 					
-					
+					//검색 마커 있으면 마커 지우기
 					if(markers!=null){
 						setMarkers(null);
 						markers=[];
 					};
+					//인포윈도우 마커 있으면 인포윈도우 지우기
 					if(info!=null){
 						setInfo(null);
 						info=[];
@@ -164,14 +165,14 @@ div.contents {
 						map: map,
 						position: coords
 					});
-					marker.setMap(map);
-					markers.push(marker);
+					marker.setMap(map);//지도에 표시
+					markers.push(marker);//마커 정보 배열에 넣기
 					//인포윈도우로 장소에 대한 설명을 표시합니다.
 					var infowindow = new kakao.maps.InfoWindow({
 						content: contentadd //검색된 주소 표시
 					});
-					info.push(infowindow);
-					infowindow.open(map,marker);
+					info.push(infowindow);//인포 윈도우 배열에 인포 윈도우 넣기
+					infowindow.open(map,marker);//인포윈도우 오픈
 					//지도의 중심을 결과값으로 받은 위치로 이동시킵니다.
 					map.setCenter(coords);
 				}
@@ -181,16 +182,17 @@ div.contents {
 		<%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
 		$(function(){
 			$('#searchBtn').click(function(){
-				let sido = $("#sido option:selected").text();
-				let sigugun = $('#sigugun option:selected').text();
-				let dong = $('#dong option:selected').text();
+				let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
+				let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
+				let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값
 				if(sido=="선택"||sigugun=="선택"||dong=="선택"){
-					alert("지역을 전부 설정해주세요");
+					alert("지역을 전부 설정해주세요"); //하나라도 미선택 시 alert창
 					return false;
 				}
 				console.log(sido+"!");
 				console.log(sigugun+"!");
 				console.log(dong+"!");
+				//ajax로 selectbox 선택한 값 넘겨서 리스트 받아오기
 				$.ajax({
 					type: 'post',
 					url: 'csvToBean',
@@ -202,16 +204,16 @@ div.contents {
 					}),
 					contentType: "application/json",
 					success: function(data){
-						$('#binlist').empty();
-						setMarkers2(null);
-						setInfo2(null);
+						$('#binlist').empty(); //리스트 나타나는 곳에 기존 데이터 있을 수 있으니 비우기
+						setMarkers2(null); //기존에 있는 마커 있으면 초기화
+						setInfo2(null); //기존에 있는 인포윈도우 초기화
 						var bli = "";
 						bli += "<ul id='itl'>"
 						bli += "<br>";
 						data.forEach(function(item){
 							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' data-value='"+item+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
-							
+							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
 								imageSize = new kakao.maps.Size(40,44),
 								imageOption = {offset: new kakao.maps.Point(20,44)};
@@ -227,10 +229,9 @@ div.contents {
 							            position: coords2,
 							            image: markerImage,
 							            clickable: true
-							            
 							        });
 							        marker2.setMap(map);
-							        markers2.push(marker2);
+							        markers2.push(marker2); 
 							        
 							     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 							        var iwContent = '<div style="width:100%; padding:5px;">'+item+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
@@ -241,35 +242,24 @@ div.contents {
 							            removable : iwRemoveable
 							        });
 							        info2.push(infowindow2);
-							        
+							        //인포윈도우 열리는 function
 							        function displayInfowindow2(marker2, item) {
 									    infowindow2.open(map, marker2);
 									}
-							     
+							      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
 							      kakao.maps.event.addListener(marker2, 'mouseover', function() {
 							    	map.panTo(marker2.getPosition());
 					              	displayInfowindow2(marker2, item);
 					              });
-					
+								  //마우스 아웃 시 인포윈도우 클로즈
 					              kakao.maps.event.addListener(marker2, 'mouseout', function() {
 					              	infowindow2.close();
 					              });
-							     
-							     	<!--
-							     	 // 마커에 클릭이벤트를 등록합니다
-							        kakao.maps.event.addListener(marker2, 'click', function() {
-							        	  setInfo2(null);
-							        	  markers2=[];
-							              // 마커 위에 인포윈도우를 표시합니다
-							              infowindow2.open(map, marker2);  
-							        });  
-							     -->
-							        
 								}
 							})
 						})
 						bli += "</ul>"
-						$('#binlist').append(bli);
+						$('#binlist').append(bli); //binlist 위치에 받아온 리스트 출력
 						console.log(markers2);
 						
 					},
@@ -289,6 +279,7 @@ div.contents {
 		        markers2[i]?.setMap(map);
 		    }            
 		}
+		//인포윈도우 표시하거나 삭제하는 함수
 		function setInfo(map) {
 		    for (var i = 0; i < info.length; i++) {
 		        info[i]?.setMap(map);
@@ -299,7 +290,7 @@ div.contents {
 		        info2[i]?.setMap(map);
 		    }            
 		}
-		
+		//a태그에 클릭 시 해당 리스트의 마커 위치로 이동시키는 function
 		function listCheck(e){
 			data = $(e).attr('data-value');
 			var geocoder = new kakao.maps.services.Geocoder();
@@ -313,8 +304,6 @@ div.contents {
 		}
 		
 	</script>
-	
-	
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>

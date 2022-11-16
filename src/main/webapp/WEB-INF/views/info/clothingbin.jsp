@@ -35,9 +35,8 @@ div.contents {
 	position:relative;
 	overflow-y:scroll;
 	flex-direction:column;
-	width:90%;
-	height:80%;
-	padding:5px;	
+	width:99%;
+	height:99%;
 	border:1px solid black;	
 }
 #listtitle{
@@ -50,7 +49,16 @@ div.contents {
 	margin-left:7%;
 	margin-top:2%;
 
-}	
+}
+#border{
+	display:flex;	
+	position:relative;
+	flex-direction:column;
+	width:91%;
+	height:81%;
+	padding:5px;	
+	border:1px solid black;	
+}
 </style>
 
 </head>
@@ -85,12 +93,14 @@ div.contents {
 	<div id="binpage">
 		<div id="map"></div>
 		<div id="listtitle">
-			<h1 id="binlisttitle">헌옷수거함 목록</h1>
+			<h1 id="binlisttitle">[헌옷수거함 목록]</h1>
+			<div id = "border">
 			<div id="binlist">
+			</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3c4f67ffd89ba5324a466e5a4f4bd0f5&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
@@ -196,10 +206,10 @@ div.contents {
 						setMarkers2(null);
 						setInfo2(null);
 						var bli = "";
-						bli += "<br>";
 						bli += "<ul id='itl'>"
+						bli += "<br>";
 						data.forEach(function(item){
-							bli += "<li style='margin-bottom:4%;' ><a href='javascript:void(0);' data-value='"+item+"' onclick='listCheck(this)'>"+item+"</a></li>";
+							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' data-value='"+item+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							
 							var imageSrc = "image/icons8-marker-100.png",
@@ -237,6 +247,7 @@ div.contents {
 									}
 							     
 							      kakao.maps.event.addListener(marker2, 'mouseover', function() {
+							    	map.panTo(marker2.getPosition());
 					              	displayInfowindow2(marker2, item);
 					              });
 					
@@ -257,7 +268,6 @@ div.contents {
 								}
 							})
 						})
-						bli += "<br>";
 						bli += "</ul>"
 						$('#binlist').append(bli);
 						console.log(markers2);

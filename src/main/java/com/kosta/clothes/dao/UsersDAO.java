@@ -31,5 +31,8 @@ public interface UsersDAO {
 	
 	void updatepassword(Map<String, String> map) throws Exception;//비밀번호 수정[개인]
 	void updatebpassword(Map<String, String> map) throws Exception;//비밀번호 수정[업체]
+	
+	Integer countUserIdbyPN(String phone) throws Exception;//번호와 일치하는 아이디 수 조회[개인]
+	Integer countBusinessIdbyPN(String bphone) throws Exception;//번호와 일치하는 아이디 수 조회[업체]
 
 }

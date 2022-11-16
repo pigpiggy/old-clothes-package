@@ -21,6 +21,18 @@ public class CertificationService implements UsersService {
 	@Autowired
 	UsersDAO usersDao;
 
+	//번호 3개 이상 체크
+	public boolean countPN(String phone) throws Exception{
+		Integer uIdCount = usersDao.countUserIdbyPN(phone);
+		Integer bIdCount = usersDao.countBusinessIdbyPN(phone);
+		if((uIdCount+bIdCount) >= 3) {
+			return true;//같은 번호로 가입한 아이디 3개 이상이면 true;
+		}else {
+			return false;
+		}
+	}
+	
+	
 	// 인증번호(전화번호, 인증번호)
     public void certifiedPhoneNumber(String phone, String cerNum) {
         String api_key = "NCSDPJ0B6C6QCEYN"; //coolsms에서 발급받은 api_key

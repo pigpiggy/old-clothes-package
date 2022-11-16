@@ -125,8 +125,8 @@ input[type=radio] {
 								<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
 								<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
 								<div id="indexlist">
-									<div><h2> &nbsp; &nbsp; ${donation.dname }</h2></div>
-									<div class="listdnames"id="listdnames">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
+									<div class="listdnames"id="listdnames"><h2> &nbsp; &nbsp; ${donation.dname }</h2></div>
+									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
 									<br>
 								</div>	
 							</c:forEach>
@@ -160,6 +160,7 @@ input[type=radio] {
 		        center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
 		    };
+		//이미지 마커 
 		var imageSrc = "image/icons8-marker-100.png",
 		imageSize = new kakao.maps.Size(40,44),
 		imageOption = {offset: new kakao.maps.Point(20,44)};
@@ -209,11 +210,12 @@ input[type=radio] {
 			     '<div class="info">' +
 			       '<div class="title">' + 
 			       	     allname +			       	     
-			       	     '</div>' +
+			       	     '</div><br>' +
 			       	'<div class="body">' + 			       	 	
 			       		'<div class="desc">'+
-			       		 	'<div class="ellipsis">' +alladdress +'</div>' +			       		 	
-			       		 	'<div class="phone ellipsis">' + allphone  +'</div>' + 			       		 				       		 
+			       		 	'<div class="ellipsis">' +'주소 :'+ alladdress +'</div><br>' +			       		 	
+			       		 	'<div class="phone ellipsis">'+'전화 번호 :' + allphone  +'</div>' +
+			       		 '<div style="padding:5px;"><br><a href="https://map.kakao.com/link/to/'+alladdress+','+alllaty+','+alllngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
 			       		 '</div>' +
 			       	'</div>' +
 			       	'</div>' +
@@ -226,7 +228,7 @@ input[type=radio] {
 					clickable: true,
 					position : coord1
 				});
-				    
+				 //정보를 담아서 보여준다.    
 				var infowindow = new kakao.maps.InfoWindow({
 				   	content : contentt,
 				   	removeable : false
@@ -240,44 +242,34 @@ input[type=radio] {
 			    });				
 					//마커 마우스 내릴 시 이동
 				kakao.maps.event.addListener(marker1, 'mouseout', function() {
-					infowindow.close();		             		             
+					//infowindow.close();		             		             
 			    });				
 					
 					
-	            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.
+	            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 	            document.querySelectorAll("#listdnames")[i].addEventListener('mouseenter', (event) =>{
 	            	this.map.panTo(marker1.getPosition());	 
 	            	infowindow.open(map,marker1);
 	            });
 	            
-	            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.
+	            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
 	            document.querySelectorAll("#listdnames")[i].addEventListener('mouseout', (event) =>{
 	            		
 	            	infowindow.close();
 	            });
-	            	
-	            /*listdnames.onmouseover = function () {
-                map.panTo(marker1.getPosition());
-	            };
-			
-	            function mOver(obj){
-	        	obj.map.panTo(marker1.getPosition());
-	        	console.log("리스트의 주소가 선택된 값 : " + obj.map.panTo(marker1.getPosition()));
-	        	}
-	            */
-				
-				//지도에 띄워주고 보여준다.
-				//infowindow1.open(map,marker1);
-				//map.setCenter(coord1);
 			}
-
-			
-			
 		}
 		var markers = [];
 		var info = [];
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
+			let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
+			let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
+			let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값
+			if(sido=="선택"||sigugun=="선택"||dong=="선택"){
+				alert("지역을 전부 설정해주세요"); //하나라도 미선택 시 alert창
+				return false;
+			}
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
@@ -329,6 +321,7 @@ input[type=radio] {
 					var infowindow = new kakao.maps.InfoWindow({
 						content: contentfinal //검색된 주소 표시
 					});
+					//마커와 정보 검색을 연속으로 하였을 시 전에 했던 검색 결과는 지워지고 새로 검색된 값을 표시.
 					markers.push(marker);
 					info.push(infowindow);
 					

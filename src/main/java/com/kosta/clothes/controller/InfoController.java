@@ -50,12 +50,9 @@ public class InfoController {
 		}
 		return mav;
 	}
-<<<<<<< HEAD
-	
-	
-=======
+
 	//헌옷수거함 페이지 오픈
->>>>>>> f9fe2c692b99020b82d37745c7cdb519e8223ccb
+
 	@GetMapping("/clothingbin")
 	public String clothingBin() {
 		return "info/clothingbin";

@@ -45,10 +45,11 @@ public class SharingController {
 	@Autowired
 	LikesService likesService;
 
-	@Autowired
-	MessageService messageService;
 	
-	@Autowired
+	@Autowired 
+	MessageService messageService;
+	 
+	@Autowired 
 	ApplyService applyService;
 	
 	@Autowired

@@ -12,9 +12,9 @@
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
 			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,
-			addressCity,addressTown,userno,regDate)
+			addressCity,addressTown,userno,applycount,regDate)
 			values (#{sno},#{stitle},#{scontent},#{sstatus},#{sfileids,jdbcType=VARCHAR},
-			#{sdealType},#{addressCity},#{addressTown},#{userno},sysdate)
+			#{sdealType},#{addressCity},#{addressTown},#{userno},#{applycount},sysdate)
 	
 		]]>
 	</insert>
@@ -62,6 +62,21 @@
 		]]>
 	</update>
 		
+	<select id="getSnickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , SHARING s 
+			WHERE u.USERNO = s.USERNO AND s.SNO = #{sno}		
+		]]>
+	</select> 
+
+	<update id="upApplycount" parameterType="sharing">
+		<![CDATA[
+			update sharing set applycount = applycount + 1
+			where sno=#{sno}
+		]]>
+	</update>	
+
 	<select id="getByUserid" parameterType="String" resultType="sharing">
 		<![CDATA[
 			select *

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sharing;
+import com.kosta.clothes.bean.Users;
 
 @Mapper
 @Repository
@@ -27,4 +28,6 @@ public interface SharingDAO {
 	void upSharingLikes(Sharing sharing) throws Exception;
 	void downSharingLikes(Sharing sharing) throws Exception;
 	void deleteLikes(Integer sno) throws Exception;
+	Users getSnickname(Integer sno) throws Exception;
+	void upApplycount(Sharing sharing) throws Exception;
 }

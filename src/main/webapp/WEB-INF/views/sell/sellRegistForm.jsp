@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>무료나눔 상품 등록</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/sell.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<div id="wrap">

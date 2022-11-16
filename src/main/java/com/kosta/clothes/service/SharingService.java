@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sharing;
+import com.kosta.clothes.bean.Users;
 
 public interface SharingService {
 //	Integer registSharing(Sharing sharing, MultipartFile[] files) throws Exception;
@@ -21,5 +22,7 @@ public interface SharingService {
 	void deleteSharing(Integer sno) throws Exception;
 	void upSharingLikes(Sharing sharing) throws Exception;
 	void downSharingLikes(Sharing sharing) throws Exception;
-
+	Users getSnickname(Integer sno) throws Exception;
+	void upApplycount(Sharing sharing) throws Exception;
+	
 }

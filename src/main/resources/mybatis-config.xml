@@ -11,6 +11,8 @@
 		<mapper resource="mybatis/mappers/free.xml"/>
 		<mapper resource="mybatis/mappers/donation.xml"/>
 		<mapper resource="mybatis/mappers/likes.xml"/>
+		<mapper resource="mybatis/mappers/message.xml"/>
+		<mapper resource="mybatis/mappers/apply.xml"/>
 		
 	</mappers>
 </configuration>

@@ -1,6 +1,6 @@
 package com.kosta.clothes.bean;
 
-public class Individual {
+public class Sell {
 	private Integer ino;
 	private String iname;
 	private String ititle;
@@ -9,7 +9,6 @@ public class Individual {
 	private String ifileids;
 	private String addressCity;
 	private String addressTown;
-	private Long ai;
 	private String idealtype;
 	private String regdate;
 	private Long likes;
@@ -65,12 +64,6 @@ public class Individual {
 	public void setAddressTown(String addressTown) {
 		this.addressTown = addressTown;
 	}
-	public Long getAi() {
-		return ai;
-	}
-	public void setAi(Long ai) {
-		this.ai = ai;
-	}
 	public String getIdealtype() {
 		return idealtype;
 	}
@@ -113,8 +106,8 @@ public class Individual {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Individual(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
-			String addressCity, String addressTown, Long ai, String idealtype, String regdate, Long likes,
+	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
+			String addressCity, String addressTown, String idealtype, String regdate, Long likes,
 			Long selectedno, Long applycount, Long userno, Long price) {
 		super();
 		this.ino = ino;
@@ -125,7 +118,6 @@ public class Individual {
 		this.ifileids = ifileids;
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
-		this.ai = ai;
 		this.idealtype = idealtype;
 		this.regdate = regdate;
 		this.likes = likes;
@@ -134,7 +126,7 @@ public class Individual {
 		this.userno = userno;
 		this.price = price;
 	}
-	public Individual() {
+	public Sell() {
 		super();
 	}
 	

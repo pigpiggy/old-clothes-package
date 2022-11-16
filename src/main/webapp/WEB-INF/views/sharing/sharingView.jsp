@@ -18,12 +18,35 @@
 <title>무료나눔 상세</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
 <header>
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
 	<div id="viewcontainer">
+		<div id="demo-modal" class="modal">
+      		<div class="modal__content">
+      			<form action="smessage" method="post" id="messageform">
+      				<input type="hidden" name="recvUserno" value="${uservo.userno }">
+      				<input type="hidden" name="sno" value="${sharing.sno }">
+      				<h5>받는 사람: ${uservo.nickname }</h5> 
+	      			<div>
+		      			<label class="mcontext" for="mtitle">제목 </label>
+		      			<input type="text" class="form-control" name="mtitle" id="mtitle" /><br>
+	      			</div>
+	      			<div>
+		      			<label class="mcontext" for="mcontent">내용 </label>
+		      			<textarea class="form-control" rows="3" cols="50" name="mcontent" id="mcontent"> </textarea><br>
+	      			</div>
+	      			<input type="submit" class="btn btn-warning center" value="보내기" />
+	      			
+      			</form>
+      			
+      			
+				<a href="#" class="modal__close">&times;</a>
+      		</div>
+  		</div>
     <section class="content_main">
       <section id="content_left">
         <!-- Swiper -->
@@ -55,7 +78,9 @@
         	<c:otherwise>
         		<c:if test="${authUser.userno ne sharing.userno }">
 	          		<div class="letterAndHeart">	
-		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
+		          		<a href="#demo-modal">
+		          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+		          		</a>
 		          			<c:choose>
 		          				<c:when test="${likes eq 1}">
 		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청전">
@@ -72,7 +97,7 @@
 		        <div id="sreview">거래후기: 12건</div>
 		        <div id="sbtn">
 		        	<input type="button" class="btn btn-info" value="옷장열기" />
-		        	<input type="button" class="btn btn-warning" value="구매신청" />
+		        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
         		</div>
         <div>현재 신청 인원 : 3명</div>
         <!-- Swiper JS -->
@@ -177,7 +202,40 @@ function removeSharing() {
 	}
 	
 }
-    	
+
+/* 쪽지 확인 */
+var submitcheck = "<c:out value='${submitcheck}'/>";
+if(submitcheck == "true"){
+	alert("메시지가 성공적으로 발송되었습니다.");
+} else if(submitcheck =="false"){
+	alert("메시지 발송에 실패하였습니다.");
+} else{
+}
+
+/* 신청하기 */
+$("#wapply").on("click", function() {
+	var logincheck = "<c:out value='${logincheck}'/>";
+	const sno =  $('#sno').val();
+	const userno = "${authUser.userno}";
+	if(logincheck == "false") {
+		alert("로그인 후 이용해주세요.");
+		location.href="/login";
+	} else {
+		console.log(sno);
+		$.ajax({
+			type: "post",
+			url: "/sharingView/wapply",
+			data: {sno:sno, userno:userno},
+			success: function(data) {
+				console.log(data);
+				alert("신청이 완료되었습니다.");
+			}, error: function() {
+                console.log('바보야!')
+			}
+		})
+	}
+		
+})
 </script>
 
 </body>

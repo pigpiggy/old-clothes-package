@@ -1,6 +1,9 @@
 package com.kosta.clothes.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -219,19 +222,20 @@ public class UsersController {
   public String searchId(@RequestParam("ph")String ph, Model model) {
 	  System.out.println(ph);
 	  try {
-		 String fuId = null;
-		 String fbId = null;
+//		 List<List<String>> idList = new ArrayList<>();;
+//		 List<Map<String, Object>> fuId = new ArrayList<>();
+//		 List<Map<String, Object>> fbId = new ArrayList<>();
+		 List<String> fuId = new ArrayList<>();
+		 List<String> fbId = new ArrayList<>();
 		 String phone = ph; 
 		 fuId = usersService.findUserId(phone);
 		 System.out.println(fuId);
-		 if(fuId != null) {
-			 model.addAttribute("user", fuId);
-		 } else if(fuId==null) {
-			 String bphone = ph;
-			 fbId = usersService.findBusinessId(bphone);
-			 System.out.println(fbId);
-			 model.addAttribute("business", fbId);
-		 }
+		 model.addAttribute("user", fuId);
+		 String bphone = ph;
+		 fbId = usersService.findBusinessId(bphone);
+		 System.out.println(fbId);
+		 model.addAttribute("business", fbId);
+		 
 		 if(fuId==null&&fbId==null) {
 			 model.addAttribute("msg", "정보와 일치하는 아이디가 없습니다.");
 			 return "user/searchid";

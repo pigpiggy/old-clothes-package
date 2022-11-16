@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +42,9 @@ public class FreeController {
 	
 	@Autowired
 	FreeService freeService;
+	
+	@Autowired
+	HttpSession session;
 	
 	// 자유게시판 글 목록
 	@GetMapping("/freeList")
@@ -102,17 +107,23 @@ public class FreeController {
 	}
 	
 	
-	 //글 상세보기
+	 //글 상세보기(조회수증가)
 	@GetMapping("freeView/{fno}")
 	public ModelAndView freeView(@PathVariable("fno") Integer fno,
-			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView();
 		try {
+			Users users = (Users)session.getAttribute("authUser");
+			if(users==null) {
+				model.addAttribute("logincheck", "false");//로그인했는지 여부-?jsp로		
+			}
+			Free free1 = freeService.Freehit(fno);
 			Free free = freeService.getFree(fno);
 			mav.addObject("article", free);
 			mav.addObject("page", page);
 			mav.setViewName("/free/freeView");
+			
 		} catch (Exception e) {
 			e.printStackTrace();		
 		}
@@ -157,34 +168,14 @@ public class FreeController {
 	}
 	
 	//글 수정하기 폼 띄우기
-	@GetMapping("/modifyform")	public ModelAndView modifyform(@RequestParam("fno") Integer fno,
-			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
-		ModelAndView mav = new ModelAndView();
-		try {			
-			Free free = freeService.getFree(fno);
-			mav.addObject("article", free);
-			mav.setViewName("/free/modifyform");
-		} catch (Exception e) {
-			e.printStackTrace();		
-		}
-		return mav;
-	}
-
-	//글 수정하기 동작
-	@GetMapping("/freeModify")	
-	public ModelAndView freeModify(@ModelAttribute Free free) {
-		return null;
-	}
-	
-	//글 수정 페이지 이동
-	@GetMapping("/freeModify/{fno}")
-	public ModelAndView freeModify(@PathVariable("fno") Integer fno) {
+	@GetMapping("/modifyform/{fno}")
+	public ModelAndView freeModify(@PathVariable("fno") String fno) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("들어옴?");
 		try {
-			Free free = freeService.getFree(fno);
+			Free free = freeService.getFree(Integer.parseInt(fno));
 			System.out.println("여기여기:"+free.toString());
-			mav.addObject("free",free);
+			mav.addObject("article",free);
 			mav.setViewName("/free/freeModify");
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -192,22 +183,36 @@ public class FreeController {
 		return mav;
 	}
 		
-	@PostMapping("/freeupdate")
+	//글 수정하기 동작
+	@PostMapping("/freeModify/{fno}")
 	public ModelAndView freeModify(@ModelAttribute Free free,
 			@RequestParam("fcontent") String fcontent,
-			@PathVariable("fno") Integer fno) {
+			@PathVariable("fno") String fno) {
 		System.out.println("수정하기 : " + free.toString());
 		ModelAndView mav = new ModelAndView();
 		try {
-			free.setFno(fno);
+			free.setFno(Integer.parseInt(fno));
 			free.setFcontent(fcontent);
-			freeService.modifyFree(free);
-			mav.setViewName("redirect:/freeView");
+			freeService.modifyFree(free);			
+			mav.setViewName("redirect:/freeView/"+free.getFno());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	
-	
+	//글 삭제하기
+	@ResponseBody
+	@PostMapping("/freeDelete")
+	public ModelAndView freeDelete(@RequestParam("fno") String fno,Model model){
+		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("삭제 : " + fno);
+			freeService.freeDelete(Integer.parseInt(fno));
+			mav.setViewName("redirect:/freeList");
+		}catch(Exception e) {
+			e.printStackTrace();
+			mav.addObject("err",e.getMessage());
+		}
+		return mav;
+	}
 }

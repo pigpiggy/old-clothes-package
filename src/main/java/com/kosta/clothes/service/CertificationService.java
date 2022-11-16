@@ -1,6 +1,7 @@
 package com.kosta.clothes.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -118,12 +119,12 @@ public class CertificationService implements UsersService {
 		}
 
 		@Override
-		public String findUserId(String phone) throws Exception {
+		public List<String> findUserId(String phone) throws Exception {
 			return usersDao.findUserId(phone);
 		}
 
 		@Override
-		public String findBusinessId(String bphone) throws Exception {
+		public List<String> findBusinessId(String bphone) throws Exception {
 			return usersDao.findBusinessId(bphone);
 		}
 

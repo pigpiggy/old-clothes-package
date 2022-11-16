@@ -12,8 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
-<script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3c4f67ffd89ba5324a466e5a4f4bd0f5&libraries=services"></script>
 <style>
 div.contents {
   text-align: left;
@@ -33,7 +32,7 @@ div.contents {
 	width:400px; height:300px;
 }
 label {
-	font-size:3rem;
+	font-size:2rem;
 }
 input[type=radio] {
     border: 0px;
@@ -119,30 +118,20 @@ input[type=radio] {
 							<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
 							<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
 							<div id="indexlist">
-								<h2>&nbsp; &nbsp;[${donation.dname }]</h2>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/>
+								<div><h2> &nbsp; &nbsp; ${donation.dname }</h2></div>
+								<div class="listdnames"id="listdnames">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
 								<br>
 							</div>	
-						
-						
-					</c:forEach>
+						</c:forEach>
 					</div>
 				</div>
-			</div>
-						
-			</div>
-			
-			
+			</div>						
+			</div>			
 		</div>	
 		<div id="onlineview">
 			온라인 페이지 입니다.
 		</div>
-		
-	
-	
-	
-	
-	
+
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
@@ -153,7 +142,15 @@ input[type=radio] {
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성				
-	
+		
+		var listdnamee= $('.listdnames');
+		console.log("리스트의 길이 : " + listdnamee.length);
+		var listA = [];
+		for(var k=0; k<listdnamee.length;k++){
+			listA.push({
+				'listB' : $
+			});
+		}
 		//주소 리스트를 받을 배열
 		var addressArray = [];
 		var wishList = $('.alladdress'); //주소를 리스트에 담아온다.
@@ -175,7 +172,9 @@ input[type=radio] {
 			var alllngx = addressArray[i].lngx;
 			var alllaty = addressArray[i].laty;
 			var allname = addressArray[i].name;
+			var listdnames = document.querySelectorAll("#listdnames")[i].innerText; 
 			
+			console.log("리스트목록 값 : " + listdnames);
 			console.log(alladdress);
 			console.log(alllngx);
 			console.log(alllaty);
@@ -189,15 +188,37 @@ input[type=radio] {
 					map : map,
 					position : coord1
 				});
+				//마커 마우스 올릴 시 이동
+				kakao.maps.event.addListener(marker1, 'mouseover', function() {
+		             map.panTo(marker1.getPosition());
+		             console.log("마커선택된 좌표 값 : " + marker1.getPosition());
+		        });
+				
+				/*listdnames.onmouseover = function () {
+	                map.panTo(marker1.getPosition());
+	            };*/
+	            
+	            
+	           
+	            document.querySelectorAll("#listdnames")[i].addEventListener('mouseenter', (event) =>{
+	            	this.map.panTo(marker1.getPosition());
+	            });
+	            function mOver(obj){
+	            	obj.map.panTo(marker1.getPosition());
+	            	console.log("리스트의 주소가 선택된 값 : " + obj.map.panTo(marker1.getPosition()));
+	            }
 				var infowindow1 = new kakao.maps.InfoWindow({ //마커가 찍힌 곳의 주소를 보여주기위한 것 
 					content:allname
-				});
+				});	
 				//지도에 띄워주고 보여준다.
 				infowindow1.open(map,marker1);
 				map.setCenter(coord1);
 			}
-		}
+
 			
+			
+		}
+		
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
@@ -249,12 +270,15 @@ input[type=radio] {
 				
 			});
 		});
+		
+		
 	</script>
 	
 	
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
 </body>

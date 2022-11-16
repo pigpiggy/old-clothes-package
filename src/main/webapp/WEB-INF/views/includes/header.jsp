@@ -44,7 +44,7 @@
         <li class="hederMenuList">
           <span>버리기/기부</span>
           <ul class="sideMenu">
-            <li><a href="information">내 주변 헌옷수거함</a></li>
+            <li><a href="clothingbin">내 주변 헌옷수거함</a></li>
             <li><a href="information">기부처 안내</a></li>
           </ul>
         </li>

@@ -1,5 +1,6 @@
 package com.kosta.clothes.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -22,8 +23,8 @@ public interface UsersDAO {
 	Users selectAccount(Map<String, String> map) throws Exception;//로그인[개인]
 	Business selectbAccount(Map<String, String> map) throws Exception;//로그인[업체]
 	
-	String findUserId(String phone) throws Exception;//아이디 조회[개인]
-	String findBusinessId(String bphone) throws Exception;//아이디 조회[업체]
+	List<String> findUserId(String phone) throws Exception;//아이디 조회[개인]
+	List<String> findBusinessId(String bphone) throws Exception;//아이디 조회[업체]
 	
 	String checkUserIdnPhone(Map<String, String> map) throws Exception;//아이디 전화번호 체크[개인]
 	String checkBusinessIdnPhone(Map<String, String> map) throws Exception;//아이디 전화번호 체크[업체]

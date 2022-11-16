@@ -73,8 +73,9 @@ a {
     border: 1px solid rgb(23,162,184); /*테두리*/
     border-radius: 6px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
-#input2, #input3{
+#input2{
 	display: inline-block;
     min-width: 60px;
     margin-left: 10px;
@@ -84,7 +85,46 @@ a {
     font-size: 1.5rem;
     background: white;	
     color:black; 
+    cursor: pointer;
 }
+ #input3{
+	display: inline-block;
+    min-width: 74px;
+    margin-left: 10px;
+    padding: 6px;
+    border: 1px solid rgb(23,162,184); /*테두리*/
+    border-radius: 6px;
+    font-size: 1.5rem;
+    background: white;	
+    color:black; 
+    cursor: pointer;
+}
+#input4{
+display: inline-block;
+    min-width: 60px;
+    margin-left: 10px;
+    padding: 6px;
+    border: 1px solid rgb(23,162,184); /*테두리*/
+    border-radius: 6px;
+    font-size: 1.5rem;
+    background: white;	
+    color:black; 
+    cursor: pointer;
+}
+#freeDelete{
+	display: inline-block;
+    min-width: 74px;
+    margin-left: 10px;
+    padding: 6px;
+    border: 1px solid; /*테두리*/
+    border-radius: 6px;
+    font-size: 1.5rem;
+   background-color: #ffc107;
+   border-color: #ffc107;
+    color:black; 
+    cursor: pointer;
+}
+
 .bt_wrap a.on:hover {
 	color: #fff;
 	background-color: #138496;
@@ -238,12 +278,15 @@ a {
     color: #777;
 }
 
-.board_view .cont {
+.board_view.cont {
     padding: 15px;
-    border-bottom: 2px solid navy;
+    width: 1000px;
     line-height: 160%;
     font-size: 1.4rem;
+    height:500px;
+    border-bottom: 2px solid navy;
 }
+
 #center {
 	display: flex;
 	justify-content: center;
@@ -304,5 +347,6 @@ a {
 
 .ck.ck-editor__editable_inline[dir=ltr] {
 	height: 500px;
+	border-bottom: 2px solid navy;
 }
 

@@ -86,6 +86,7 @@ public class UsersController {
     	try {
 			if(usersService.countPN(phone)) {
 				return "true";
+				
 			}else {
 				// 5자리 인증번호 만들기
 		        Random random  = new Random();

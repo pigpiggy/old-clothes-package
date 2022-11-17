@@ -127,9 +127,15 @@
 			var titleCheck = document.getElementById("title");
 			var addCheck = document.getElementById("member_post");
 			var contentCheck = document.getElementById("icontent");
+			var priceCheck = document.getElementById("price");
 			
 			if(titleCheck.value == "") {
 				alert("제목을 입력해주세요.");
+				return false;
+			}
+			
+			if(priceCheck.value == "") {
+				alert("가격을 입력해주세요.");
 				return false;
 			}
 			
@@ -138,11 +144,11 @@
 				return false;
 			}
 			
-			
 			if(contentCheck.value == "") {
 				alert("내용을 입력해주세요.");
 				return false;
 			}
+			
 		}
 		
 		/* 주소 검색 */

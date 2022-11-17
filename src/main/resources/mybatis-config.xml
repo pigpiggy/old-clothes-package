@@ -13,6 +13,8 @@
 		<mapper resource="mybatis/mappers/likes.xml"/>
 		<mapper resource="mybatis/mappers/message.xml"/>
 		<mapper resource="mybatis/mappers/apply.xml"/>
+		<mapper resource="mybatis/mappers/sell.xml"/>
+		
 		
 	</mappers>
 </configuration>

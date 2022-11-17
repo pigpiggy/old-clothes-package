@@ -21,7 +21,7 @@
     <div id="buttonAndSelect">
       <div class="bt_wrap">
 	    <c:if test="${!empty authUser}">    
-		  	<a href="sharingRegistForm" class="on">글쓰기</a>
+		  	<a href="sellRegistForm" class="on">글쓰기</a>
       	</c:if>
       </div>
       <div class="search-box">

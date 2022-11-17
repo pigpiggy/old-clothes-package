@@ -9,5 +9,5 @@ import com.kosta.clothes.bean.Sell;
 @Repository
 public interface SellDAO {
 	Integer getNextIndividualNo() throws Exception;
-	void insertSell(Sell sell) throws Exception;
+	void insertIndividual(Sell sell) throws Exception;
 }

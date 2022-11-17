@@ -2,7 +2,6 @@ package com.kosta.clothes.bean;
 
 public class Sell {
 	private Integer ino;
-	private String iname;
 	private String ititle;
 	private String icontent;
 	private String istatus;
@@ -14,19 +13,13 @@ public class Sell {
 	private Long likes;
 	private Long selectedno;
 	private Long applycount;
-	private Long userno;
+	private Integer userno;
 	private Long price;
 	public Integer getIno() {
 		return ino;
 	}
 	public void setIno(Integer ino) {
 		this.ino = ino;
-	}
-	public String getIname() {
-		return iname;
-	}
-	public void setIname(String iname) {
-		this.iname = iname;
 	}
 	public String getItitle() {
 		return ititle;
@@ -94,10 +87,10 @@ public class Sell {
 	public void setApplycount(Long applycount) {
 		this.applycount = applycount;
 	}
-	public Long getUserno() {
+	public Integer getUserno() {
 		return userno;
 	}
-	public void setUserno(Long userno) {
+	public void setUserno(Integer userno) {
 		this.userno = userno;
 	}
 	public Long getPrice() {
@@ -106,12 +99,14 @@ public class Sell {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
-			String addressCity, String addressTown, String idealtype, String regdate, Long likes,
-			Long selectedno, Long applycount, Long userno, Long price) {
+	public Sell() {
+		super();
+	}
+	public Sell(Integer ino, String ititle, String icontent, String istatus, String ifileids, String addressCity,
+			String addressTown, String idealtype, String regdate, Long likes, Long selectedno, Long applycount,
+			Integer userno, Long price) {
 		super();
 		this.ino = ino;
-		this.iname = iname;
 		this.ititle = ititle;
 		this.icontent = icontent;
 		this.istatus = istatus;
@@ -126,10 +121,14 @@ public class Sell {
 		this.userno = userno;
 		this.price = price;
 	}
-	public Sell() {
-		super();
+	@Override
+	public String toString() {
+		return "Sell [ino=" + ino + ", ititle=" + ititle + ", icontent=" + icontent + ", istatus=" + istatus
+				+ ", ifileids=" + ifileids + ", addressCity=" + addressCity + ", addressTown=" + addressTown
+				+ ", idealtype=" + idealtype + ", regdate=" + regdate + ", likes=" + likes + ", selectedno="
+				+ selectedno + ", applycount=" + applycount + ", userno=" + userno + ", price=" + price + "]";
 	}
-	
+
 	
 	
 }

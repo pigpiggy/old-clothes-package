@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.SellDAO;
 
@@ -75,6 +76,16 @@ public class SellServiceImpl implements SellService{
 	public List<Sell> getSellList() throws Exception {
 		// TODO Auto-generated method stub
 		return sellDAO.getSellList();
+	}
+
+	@Override
+	public Sell viewSell(Integer ino) throws Exception {
+		return sellDAO.selectIndividual(ino);
+	}
+
+	@Override
+	public Users getInickname(Integer ino) throws Exception {
+		return sellDAO.getInickname(ino);
 	}
 	
 }

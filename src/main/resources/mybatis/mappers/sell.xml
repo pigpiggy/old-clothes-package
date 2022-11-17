@@ -19,6 +19,22 @@
 		]]>
 	</insert>
 	
+	<select id="selectIndividual" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select u.nickname as iname, ino, ititle, icontent, ifileids, likes, applycount, i.userno 
+			from users u, individual i 
+			where u.userno = i.userno and ino = #{ino}		
+		]]>
+	</select>
+	
+	<select id="getInickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , individual i
+			WHERE u.USERNO = i.USERNO AND i.ino = #{ino}		
+		]]>
+	</select> 
+	
 	<select id="getSellList" resultType="Sell">
 		<![CDATA[
 			select * from ( select * from individual order by ino desc)

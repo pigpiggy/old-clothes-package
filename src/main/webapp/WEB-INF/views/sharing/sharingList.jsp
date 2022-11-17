@@ -45,7 +45,7 @@
 	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sharing.sfileids }">
-	          			<img src="upload/logo3.png" alt="로고">
+	          			<img src="image/logo3.png" alt="로고">
 	          		</c:when>
 	          		<c:otherwise>
 	              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">

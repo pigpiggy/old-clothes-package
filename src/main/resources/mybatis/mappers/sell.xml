@@ -18,4 +18,18 @@
 	
 		]]>
 	</insert>
+	
+	<select id="getSellList" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="getSellSearchedList" resultType="Sell" parameterType="String">
+		<![CDATA[
+			select * from ( select * from individual where (ititle||icontent||istatus||addressCity||addressTown||idealType||regdate||price) like '%'||#{kwd}||'%' order by ino desc )
+			where rownum <= 6
+		]]>
+	</select>
 </mapper>	

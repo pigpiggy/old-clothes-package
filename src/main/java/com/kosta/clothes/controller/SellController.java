@@ -1,7 +1,9 @@
 package com.kosta.clothes.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.SellService;
@@ -42,9 +46,11 @@ public class SellController {
 	@GetMapping("/sellList")
 	public ModelAndView main(HttpServletRequest request, @RequestParam(value = "kwd", required = false) String kwd) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(kwd);
 		List<Sell> sellList;
 		try {
 			if (kwd != null && kwd != "") {
+				System.out.println("키워드있음");
 				sellList = sellService.getSellList(kwd);
 			} else {
 				sellList = sellService.getSellList();
@@ -124,7 +130,33 @@ public class SellController {
 	}	
 	
 	
-	
+	@ResponseBody
+	@PostMapping("/sellInfiniteScrollDown")
+	public List<Sell> infiniteScrollDown(@RequestBody Map<String, Object> params) {
+		String keyword = (String) params.get("keyword");
+		Integer ino = Integer.parseInt((String) params.get("ino"));
+		Integer inoToStart = ino - 1;
+		List<Sell> sellList = new ArrayList<>();
+		try {
+			if (keyword != null && keyword != "") {
+				System.out.println(keyword);
+				sellList = sellService.infiniteScrollDown(inoToStart, keyword);
+			} else {
+				sellList = sellService.infiniteScrollDown(inoToStart);
+			}
+
+			System.out.println("스크롤다운" + sellList);
+			for (int i = 0; i < sellList.size(); i++) {
+				if (sellList.get(i).getIfileids() != null) {
+					sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+					System.out.println(sellList.get(i).getIfileids());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sellList;
+	}
 	
 	
 	

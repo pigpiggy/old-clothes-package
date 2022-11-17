@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 
 public interface SellService {
@@ -13,5 +14,7 @@ public interface SellService {
 	Users getInickname(Integer ino) throws Exception;
 	List<Sell> getSellList(String kwd) throws Exception;
 	List<Sell> getSellList() throws Exception;
+	List<Sell> infiniteScrollDown(Integer inoToStart) throws Exception;
+	List<Sell> infiniteScrollDown(Integer inoToStart, String kwd) throws Exception;
 	
 }

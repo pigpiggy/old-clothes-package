@@ -1,7 +1,9 @@
 package com.kosta.clothes.service;
 
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -86,6 +88,19 @@ public class SellServiceImpl implements SellService{
 	@Override
 	public Users getInickname(Integer ino) throws Exception {
 		return sellDAO.getInickname(ino);
+	}
+
+	@Override
+	public List<Sell> infiniteScrollDown(Integer inoToStart) throws Exception {
+		return sellDAO.infiniteScrollDown(inoToStart);
+	}
+
+	@Override
+	public List<Sell> infiniteScrollDown(Integer inoToStart, String kwd) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ino", inoToStart);
+		map.put("kwd", kwd);
+		return sellDAO.searchedInfiniteScrollDown(map);
 	}
 	
 }

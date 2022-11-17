@@ -25,7 +25,7 @@
       	</c:if>
       </div>
       <div class="search-box">
-      	<form id="search_form" action="sharingList" method="get">
+      	<form id="search_form" action="sellList" method="get">
         	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="Search something..">
         	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
         	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
@@ -74,6 +74,6 @@
     </div>
     
   </div>
-<script src="<c:url value='/resources/js/sharing/infiniteScroll.js'/>"></script>
+<script src="<c:url value='/resources/js/sell/infiniteScroll.js'/>"></script>
 </body>
 </html>

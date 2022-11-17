@@ -48,4 +48,18 @@
 			where rownum <= 6
 		]]>
 	</select>
+	
+	<select id="infiniteScrollDown" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual where ino <=#{inoToStart} order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual where ino <=#{ino} and (ititle||icontent||istatus||addressCity||addressTown||idealType||regdate||price) like '%'||#{kwd}||'%' order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
 </mapper>	

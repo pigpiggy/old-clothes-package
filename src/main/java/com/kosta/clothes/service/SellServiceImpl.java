@@ -1,6 +1,7 @@
 package com.kosta.clothes.service;
 
 import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -63,6 +64,17 @@ public class SellServiceImpl implements SellService{
 		sellvo.setAddressTown(sell.getAddressTown());
 		
 		sellDAO.insertIndividual(sellvo);
+	}
+
+	@Override
+	public List<Sell> getSellList(String kwd) throws Exception {
+		return sellDAO.getSellSearchedList(kwd);
+	}
+
+	@Override
+	public List<Sell> getSellList() throws Exception {
+		// TODO Auto-generated method stub
+		return sellDAO.getSellList();
 	}
 	
 }

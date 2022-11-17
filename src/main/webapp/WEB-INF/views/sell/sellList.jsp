@@ -34,36 +34,36 @@
     </div>
 	
     <div class="card-list">
-	  <c:forEach var="sharing" items="${sharingList}">
-     <a href="sharingView/${sharing.sno}">
-	     <div class="card" data-sno=${sharing.sno }>
+	  <c:forEach var="sell" items="${sellList}">
+     <a href="sellView/${sell.ino}">
+	     <div class="card" data-sno=${sell.ino }>
 	          <div class="card-image">
-	          	<c:if test="${!'등록완료' eq sharing.sstatus}">
-	          		<div class="individualStatus">${sharing.sstatus }</div>
+	          	<c:if test="${!'등록완료' eq sell.istatus}">
+	          		<div class="individualStatus">${sell.istatus }</div>
 	          	</c:if>
 	          	<c:choose>
-	          		<c:when test="${empty sharing.sfileids }">
-	          			<img src="upload/logo3.png" alt="로고">
+	          		<c:when test="${empty sell.ifileids }">
+	          			<img src="image/logo3.png" alt="로고">
 	          		</c:when>
 	          		<c:otherwise>
-	              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
+	              		<img src="upload/${ sell.ifileids}" alt="무료나눔 옷">
 	          		</c:otherwise>
 	          	</c:choose>
 	          </div>
 	          <div class="card-body">
-	              <span class="date">${sharing.regDate}</span>
-	              <h2 class="sharingTitle">${sharing.stitle }</h2>
-	              <p class="sharingContent">${sharing.scontent }</p>
+	              <span class="date">${sell.regDate}</span>
+	              <h2 class="sharingTitle">${sell.ititle }</h2>
+	              <p class="sharingContent">${sell.icontent }</p>
 	          </div>
 	          <c:choose>
-	          	<c:when test="${empty sharing.addressCity}">
+	          	<c:when test="${empty sell.addressCity}">
 	          		<div class="card-footer">
-	          			[${sharing.sdealType}]
+	          			[${sell.idealType}]
 	          		</div>
 	          	</c:when>
 	          	<c:otherwise>
 		          <div class="card-footer">
-		              [${sharing.sdealType}] ${sharing.addressCity} ${sharing.addressTown }
+		              [${sell.idealType}] ${sell.addressCity} ${sell.addressTown }
 		          </div>
 	          	</c:otherwise>
 	          </c:choose>
@@ -74,7 +74,6 @@
     </div>
     
   </div>
-<script src="<c:url value='/resources/js/sharing/sigungu.js'/>"></script>
 <script src="<c:url value='/resources/js/sharing/infiniteScroll.js'/>"></script>
 </body>
 </html>

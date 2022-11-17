@@ -11,8 +11,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into wapply (wno,wuserno,sno)
-			values (#{wno},#{wuserno},#{sno})
+			insert into wapply (wno,wuserno,sno,ino)
+			values (#{wno},#{wuserno},#{sno},#{ino})
 		]]>
 	</insert>
 	

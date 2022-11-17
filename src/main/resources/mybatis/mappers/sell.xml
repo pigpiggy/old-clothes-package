@@ -11,10 +11,10 @@
 	
 	<insert id="insertIndividual" parameterType="Sell">
 		<![CDATA[
-			insert into individual(ino,iname,ititle,icontent,istatus,ifileids,idealType,
-			addressCity,addressTown,userno,applycount,price,regDate)
-			values (#{ino},#{iname},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
-			#{idealType},#{addressCity},#{addressTown},#{userno},#{applycount},#{price},sysdate)
+			insert into individual(ino,ititle,icontent,istatus,ifileids,idealType,
+			addressCity,addressTown,userno,price,regDate)
+			values (#{ino},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
+			#{idealType},#{addressCity},#{addressTown},#{userno},#{price},sysdate)
 	
 		]]>
 	</insert>

@@ -57,7 +57,8 @@ public class SellServiceImpl implements SellService{
 			}
 		}
 		sellvo.setIfileids(fileids);
-		sellvo.setIdealtype(sell.getIdealtype());
+		sellvo.setIdealType(sell.getIdealType());
+		sellvo.setPrice(sell.getPrice());
 		sellvo.setAddressCity(sell.getAddressCity());
 		sellvo.setAddressTown(sell.getAddressTown());
 		

@@ -15,7 +15,7 @@
     <div id="topMenu">
       <div id="headerMenu">
       	<c:choose>
-      		<c:when test="${authUser == null }">
+      		<c:when test="${authUser == null && bauthUser==null }">
 	      		<a href="/joinform">회원가입</a>
 		        <a href="/login">로그인</a>
 		    </c:when>
@@ -44,7 +44,7 @@
         <li class="hederMenuList">
           <span>버리기/기부</span>
           <ul class="sideMenu">
-            <li><a href="information">내 주변 헌옷수거함</a></li>
+            <li><a href="clothingbin">내 주변 헌옷수거함</a></li>
             <li><a href="information">기부처 안내</a></li>
           </ul>
         </li>

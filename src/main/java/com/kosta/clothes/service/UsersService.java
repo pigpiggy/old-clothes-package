@@ -29,4 +29,6 @@ public interface UsersService {
 		public void changePass(String userid, String password) throws Exception;//비밀번호수정[개인]
 		public void changebPass(String businessid, String bpassword) throws Exception;//비밀번호수정[업체]
 		
+		public boolean countPN(String phone) throws Exception;//번호로 가입된 아이디 수 체크
+		
 }

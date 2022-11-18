@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.ApplyDAO">
+<!-- 개인이 개인에게 무료나눔/개인판매 신청(wapply 테이블) -->
+	<insert id="insertSwapply" parameterType="Wapply">
+	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select wapply_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into wapply (wno,wuserno,sno,ino)
+			values (#{wno},#{wuserno},#{sno},#{ino})
+		]]>
+	</insert>
+	
+
+<!-- 개인이 업체에게 수거신청(apply 테이블) -->
+	
+</mapper>	

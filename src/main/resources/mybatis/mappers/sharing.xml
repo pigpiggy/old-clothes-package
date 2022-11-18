@@ -21,7 +21,7 @@
 	
 	<select id="selectSharing" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select u.nickname as sname, sno, stitle, scontent, sfileids, ai, likes, applycount, s.userno 
+			select u.nickname as sname, sno, stitle, scontent, sfileids, likes, applycount, s.userno 
 			from users u, sharing s 
 			where u.userno = s.userno and sno = #{sno}		
 		]]>
@@ -62,6 +62,21 @@
 		]]>
 	</update>
 		
+	<select id="getSnickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , SHARING s 
+			WHERE u.USERNO = s.USERNO AND s.SNO = #{sno}		
+		]]>
+	</select> 
+
+	<update id="upApplycount" parameterType="sharing">
+		<![CDATA[
+			update sharing set applycount = applycount + 1
+			where sno=#{sno}
+		]]>
+	</update>	
+
 	<select id="getByUserid" parameterType="String" resultType="sharing">
 		<![CDATA[
 			select *

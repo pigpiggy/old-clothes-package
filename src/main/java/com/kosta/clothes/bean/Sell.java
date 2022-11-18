@@ -1,6 +1,8 @@
 package com.kosta.clothes.bean;
 
-public class Individual {
+import java.sql.Date;
+
+public class Sell {
 	private Integer ino;
 	private String iname;
 	private String ititle;
@@ -9,13 +11,12 @@ public class Individual {
 	private String ifileids;
 	private String addressCity;
 	private String addressTown;
-	private Long ai;
-	private String idealtype;
-	private String regdate;
+	private String idealType;
+	private Date regDate;
 	private Long likes;
 	private Long selectedno;
 	private Long applycount;
-	private Long userno;
+	private Integer userno;
 	private Long price;
 	public Integer getIno() {
 		return ino;
@@ -23,6 +24,7 @@ public class Individual {
 	public void setIno(Integer ino) {
 		this.ino = ino;
 	}
+	
 	public String getIname() {
 		return iname;
 	}
@@ -65,23 +67,17 @@ public class Individual {
 	public void setAddressTown(String addressTown) {
 		this.addressTown = addressTown;
 	}
-	public Long getAi() {
-		return ai;
+	public String getIdealType() {
+		return idealType;
 	}
-	public void setAi(Long ai) {
-		this.ai = ai;
+	public void setIdealType(String idealType) {
+		this.idealType = idealType;
 	}
-	public String getIdealtype() {
-		return idealtype;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setIdealtype(String idealtype) {
-		this.idealtype = idealtype;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public Long getLikes() {
 		return likes;
@@ -101,10 +97,10 @@ public class Individual {
 	public void setApplycount(Long applycount) {
 		this.applycount = applycount;
 	}
-	public Long getUserno() {
+	public Integer getUserno() {
 		return userno;
 	}
-	public void setUserno(Long userno) {
+	public void setUserno(Integer userno) {
 		this.userno = userno;
 	}
 	public Long getPrice() {
@@ -113,9 +109,12 @@ public class Individual {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Individual(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
-			String addressCity, String addressTown, Long ai, String idealtype, String regdate, Long likes,
-			Long selectedno, Long applycount, Long userno, Long price) {
+	public Sell() {
+		super();
+	}
+	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
+			String addressCity, String addressTown, String idealType, Date regDate, Long likes, Long selectedno,
+			Long applycount, Integer userno, Long price) {
 		super();
 		this.ino = ino;
 		this.iname = iname;
@@ -125,19 +124,21 @@ public class Individual {
 		this.ifileids = ifileids;
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
-		this.ai = ai;
-		this.idealtype = idealtype;
-		this.regdate = regdate;
+		this.idealType = idealType;
+		this.regDate = regDate;
 		this.likes = likes;
 		this.selectedno = selectedno;
 		this.applycount = applycount;
 		this.userno = userno;
 		this.price = price;
 	}
-	public Individual() {
-		super();
+	@Override
+	public String toString() {
+		return "Sell [ino=" + ino + ", iname=" + iname + ", ititle=" + ititle + ", icontent=" + icontent + ", istatus="
+				+ istatus + ", ifileids=" + ifileids + ", addressCity=" + addressCity + ", addressTown=" + addressTown
+				+ ", idealType=" + idealType + ", regDate=" + regDate + ", likes=" + likes + ", selectedno="
+				+ selectedno + ", applycount=" + applycount + ", userno=" + userno + ", price=" + price + "]";
 	}
-	
-	
+
 	
 }

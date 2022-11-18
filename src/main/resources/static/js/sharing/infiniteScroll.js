@@ -52,15 +52,15 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.stitle+"</h2>";
-		              		str	+= "<p class="+"'sharingContent'"+">"+this.scontent+"</p>";
+		              		str	+= "<p>"+this.addressCity+" "+this.addressTown+"</p>";
 		          			str	+= "</div>";
 		          			if(this.addressCity !=null && this.addressCity !=""){
 								str	+= "<div class="+"'card-footer'"+">";
-								str	+= "["+this.sdealType+"] "+this.addressCity+" "+this.addressTown;
+								str	+= this.sdealType;
 								str	+= "</div>";
 							} else {
 								str	+= "<div class="+"'card-footer'"+">";
-								str	+= "["+this.sdealType+"]";
+								str	+= this.sdealType;
 								str	+= "</div>";
 							}
 		          			str	+= "</div>";

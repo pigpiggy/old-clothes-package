@@ -1,0 +1,76 @@
+package com.kosta.clothes.bean;
+
+import java.sql.Date;
+
+public class MessageVO {
+	private Integer mno;
+	private String mtitle;
+	private String mcontent;
+	private Date regDate;
+	private Integer sendUserno;
+	private Integer recvUserno;
+	private Long readChk;
+	public Integer getMno() {
+		return mno;
+	}
+	public void setMno(Integer mno) {
+		this.mno = mno;
+	}
+	public String getMtitle() {
+		return mtitle;
+	}
+	public void setMtitle(String mtitle) {
+		this.mtitle = mtitle;
+	}
+	public String getMcontent() {
+		return mcontent;
+	}
+	public void setMcontent(String mcontent) {
+		this.mcontent = mcontent;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+	public Integer getSendUserno() {
+		return sendUserno;
+	}
+	public void setSendUserno(Integer sendUserno) {
+		this.sendUserno = sendUserno;
+	}
+	public Integer getRecvUserno() {
+		return recvUserno;
+	}
+	public void setRecvUserno(Integer recvUserno) {
+		this.recvUserno = recvUserno;
+	}
+	public Long getReadChk() {
+		return readChk;
+	}
+	public void setReadChk(Long readChk) {
+		this.readChk = readChk;
+	}
+	public MessageVO() {
+		super();
+	}
+	public MessageVO(Integer mno, String mtitle, String mcontent, Date regDate, Integer sendUserno, Integer recvUserno,
+			Long readChk) {
+		super();
+		this.mno = mno;
+		this.mtitle = mtitle;
+		this.mcontent = mcontent;
+		this.regDate = regDate;
+		this.sendUserno = sendUserno;
+		this.recvUserno = recvUserno;
+		this.readChk = readChk;
+	}
+	@Override
+	public String toString() {
+		return "Message [mno=" + mno + ", mtitle=" + mtitle + ", mcontent=" + mcontent + ", regDate=" + regDate
+				+ ", sendUserno=" + sendUserno + ", recvUserno=" + recvUserno + ", readChk=" + readChk + "]";
+	}
+	
+	
+}

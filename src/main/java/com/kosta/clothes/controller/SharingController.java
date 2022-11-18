@@ -25,11 +25,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
+import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.bean.Wapply;
+import com.kosta.clothes.service.ApplyService;
 import com.kosta.clothes.service.LikesService;
+import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -41,6 +46,13 @@ public class SharingController {
 	@Autowired
 	LikesService likesService;
 
+	
+	@Autowired 
+	MessageService messageService;
+	 
+	@Autowired 
+	ApplyService applyService;
+	
 	@Autowired
 	ServletContext servletContext;
 
@@ -97,13 +109,8 @@ public class SharingController {
 		return mav;
 	}
 
-	@GetMapping("/sharingView")
-	public String sharingView() {
-		return "/sharing/sharingView";
-	}
-
 	@GetMapping("/sharingView/{sno}")
-	public ModelAndView viewSharing(@PathVariable("sno") Integer sno, Model model) {
+	public ModelAndView viewSharing(@PathVariable("sno") Integer sno, Model model, @RequestParam(value = "submitcheck", required = false) String submitcheck) {
 		System.out.println("sno:" + sno);
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -114,22 +121,28 @@ public class SharingController {
 				mav.addObject("files", fidArr);
 			}
 			Users users = (Users) session.getAttribute("authUser");
+			
 			if (users == null) {
 				model.addAttribute("logincheck", "false");
 			} else {
 				Likes likevo = new Likes();
 				likevo.setSno(sno);
 				likevo.setUserno(users.getUserno());
-				Long likeselect = likesService.getLikescheck(likevo);
+				Long likeselect = likesService.getSlikescheck(likevo);
 				if (likeselect != null) {
 					mav.addObject("likes", likeselect);
 				}
 			}
+			Users uservo = new Users();
+			uservo = sharingService.getSnickname(sno);
+			model.addAttribute("uservo", uservo);
+			model.addAttribute("submitcheck", submitcheck);
 			mav.addObject("sharing", sharing);
 			mav.setViewName("/sharing/sharingView");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return mav;
 	}
 
@@ -168,7 +181,6 @@ public class SharingController {
 	public ModelAndView deleteSharing(@RequestParam(value = "sno", required = false) Integer sno, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			System.out.println("delete");
 			sharingService.deleteSharing(sno);
 			mav.setViewName("redirect:/sharingList");
 		} catch (Exception e) {
@@ -187,26 +199,63 @@ public class SharingController {
 			likes.setUserno(userno);
 			Sharing sharing = new Sharing();
 			sharing.setSno(sno);
-			likescheck = likesService.getLikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+			likescheck = likesService.getSlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
 			if(likescheck == null) { //처음 눌렀을 때
 				likesService.registSlikes(likes);
 				sharingService.upSharingLikes(sharing);
 			}else if(likescheck == 1) {
 				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getLikescheck(likes));
+				likes.setLikescheck(likesService.getSlikescheck(likes));
 				likesService.updateSlikes(likes);
 				sharingService.downSharingLikes(sharing);
 			}else { //likescheck가 0일 때 1로 올려주는
 				System.out.println("0일때"+ likescheck);
-				likes.setLikescheck(likesService.getLikescheck(likes));
+				likes.setLikescheck(likesService.getSlikescheck(likes));
 				likesService.updateSlikes(likes);
 				sharingService.upSharingLikes(sharing);
 			}
-			likescheck = likesService.getLikescheck(likes);
+			likescheck = likesService.getSlikescheck(likes);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return likescheck;
+	}
+	
+	@PostMapping("/sharingView/smessage")
+	public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, @RequestParam("sno") Integer sno) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			Users users = (Users) session.getAttribute("authUser");
+			message.setSendUserno(users.getUserno());
+			System.out.println("messagecontroller:" + message);
+			String submitcheck = messageService.submitMessage(message);
+			System.out.println("submitcheck:"+submitcheck);
+			if(submitcheck == "true") {
+				mav.addObject("submitcheck", "true");
+			}else {
+				mav.addObject("submitcheck", "false");
+			}
+			mav.setViewName("redirect:/sharingView/"+sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/sharingView/wapply")
+	public void sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing) {
+		try {
+			Users users = (Users) session.getAttribute("authUser");
+			Wapply apply = new Wapply();
+			apply.setWuserno(users.getUserno());
+			apply.setSno(sno);
+			applyService.registSwapply(apply);
+			sharingService.upApplycount(sharing);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* commons에 필요한 애들 */
@@ -240,7 +289,11 @@ public class SharingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 	}
+=======
+}	
+>>>>>>> b52e981d330dc12046b38f164e715ad1e31e70f3
 
 	
 	@ResponseBody
@@ -269,9 +322,15 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
+<<<<<<< HEAD
 
 	}
 	
 
 	}
+=======
+	}
+	
+}
+>>>>>>> b52e981d330dc12046b38f164e715ad1e31e70f3
 

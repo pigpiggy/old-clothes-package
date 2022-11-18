@@ -3,10 +3,10 @@ package com.kosta.clothes.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,27 +76,35 @@ public class UsersController {
 		return "redirect:/login";
 	}
 	
-		
-
+	//동일 번호로 아이디 3개 이상 여부 체크
 	/* 인증번호 */
 	//본인 인증 !
     @ResponseBody
     @GetMapping("/main/execute")
     public String sendSMS(String phone) {
-        // 5자리 인증번호 만들기
-        Random random  = new Random();
-        String numStr = "";
-        for(int i=0; i<5; i++) {
-            String ranNum = Integer.toString(random.nextInt(10));   // 0부터 9까지 랜덤으로 숫자를 뽑는다.
-            numStr += ranNum;   // 랜덤으로 나온 숫자를 하나씩 누적해서 담는다.
-        }
-        // 확인용
-        System.out.println("수신자 번호 : " + phone);
-        System.out.println("인증번호 : " + numStr);
-        // 문자 보내기
-        certificationService.certifiedPhoneNumber(phone , numStr);
-        return numStr;    // 인증번호 반환
-    }
+    		String numStr = "";
+    	try {
+			if(usersService.countPN(phone)) {
+				return "true";
+				
+			}else {
+				// 5자리 인증번호 만들기
+		        Random random  = new Random();
+		        for(int i=0; i<5; i++) {
+		            String ranNum = Integer.toString(random.nextInt(10));   // 0부터 9까지 랜덤으로 숫자를 뽑는다.
+		            numStr += ranNum;   // 랜덤으로 나온 숫자를 하나씩 누적해서 담는다.
+		        }
+		        // 확인용
+		        System.out.println("수신자 번호 : " + phone);
+		        System.out.println("인증번호 : " + numStr);
+		        // 문자 보내기
+		        certificationService.certifiedPhoneNumber(phone , numStr);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} return numStr;
+    }	
+
     
     //닉네임 중복 확인[개인]
     @ResponseBody
@@ -185,7 +193,8 @@ public class UsersController {
     		System.out.println("id:"+userid);
     		System.out.println("password:"+password);
     		authUser = usersService.login(userid,password);
-    		System.out.println(authUser);
+    		
+    		System.out.println("너냐 : " +authUser);
     		if(authUser == null) {
     			String businessid = id;
     			String bpassword = password;
@@ -196,7 +205,7 @@ public class UsersController {
     		if(authUser == null && bauthUser==null) {
     			model.addAttribute("result", "fail");
 				return "/user/loginform";
-    		}else if(authUser!=null){
+    		}else if(authUser != null){
     			session.setAttribute("authUser", authUser);
     		}else {
     		session.setAttribute("authUser", bauthUser);

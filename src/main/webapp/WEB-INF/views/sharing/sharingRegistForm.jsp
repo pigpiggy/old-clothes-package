@@ -46,7 +46,6 @@
 	
 					<div id="priceAndAI">
 						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
-						<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
 					</div>
 				</div>
 	

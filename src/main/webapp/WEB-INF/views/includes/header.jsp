@@ -20,7 +20,7 @@
 		        <a href="/login">로그인</a>
 		    </c:when>
 		    <c:otherwise>
-		        <a href="#">마이페이지</a>
+		        <a href="/mypage">마이페이지</a>
 		        <a href="/logout">로그아웃</a>
 		    </c:otherwise>
         </c:choose>

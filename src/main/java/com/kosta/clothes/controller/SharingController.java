@@ -289,11 +289,8 @@ public class SharingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
 	}
-=======
-}	
->>>>>>> b52e981d330dc12046b38f164e715ad1e31e70f3
+
 
 	
 	@ResponseBody
@@ -322,15 +319,12 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
-<<<<<<< HEAD
+
 
 	}
-	
 
 	}
-=======
-	}
+
+
 	
-}
->>>>>>> b52e981d330dc12046b38f164e715ad1e31e70f3
 

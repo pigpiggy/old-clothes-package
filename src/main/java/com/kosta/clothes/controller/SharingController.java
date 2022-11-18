@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;

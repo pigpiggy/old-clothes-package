@@ -17,6 +17,11 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDAO.insertSwapply(wapply);
 	}
 
+	@Override
+	public void registIwapply(Wapply wapply) throws Exception {
+		applyDAO.insertIwapply(wapply);
+	}
+
 
 
 }

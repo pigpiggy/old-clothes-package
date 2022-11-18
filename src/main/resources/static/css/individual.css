@@ -257,12 +257,15 @@ h1 {
 }
 
 #sel1 {
-    width: 50px;
+    width: 100px;
     margin-right: 25px;
 }
 
 .form-control {
 	border: 1px solid gray;
+}
+.selectbox {
+	width: 100px;
 }
 
 .form-control:disabled {

@@ -156,5 +156,10 @@ public class SellServiceImpl implements SellService{
 	public void downSellLikes(Sell sell) throws Exception {
 		sellDAO.downIndividualLikes(sell);
 	}
+
+	@Override
+	public void upApplycount(Sell sell) throws Exception {
+		sellDAO.upApplycount(sell);
+	}
 	
 }

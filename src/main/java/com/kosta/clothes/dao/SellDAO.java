@@ -25,4 +25,5 @@ public interface SellDAO {
 	void deleteIndividual(Integer ino) throws Exception;
 	void upIndividualLikes(Sell sell) throws Exception;
 	void downIndividualLikes(Sell sell) throws Exception;
+	void upApplycount(Sell sell) throws Exception;
 }

@@ -8,5 +8,5 @@ import com.kosta.clothes.bean.MessageVO;
 @Mapper
 @Repository
 public interface MessageDAO {
-	void insertSmessage(MessageVO message) throws Exception;
+	void insertMessage(MessageVO message) throws Exception;
 }

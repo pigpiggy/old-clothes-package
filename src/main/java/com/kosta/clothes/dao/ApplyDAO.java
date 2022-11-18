@@ -9,4 +9,5 @@ import com.kosta.clothes.bean.Wapply;
 @Repository
 public interface ApplyDAO {
 	void insertSwapply(Wapply wapply) throws Exception;
+	void insertIwapply(Wapply wapply) throws Exception;
 }

@@ -24,9 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
+import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.bean.Wapply;
+import com.kosta.clothes.service.ApplyService;
 import com.kosta.clothes.service.LikesService;
+import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.SellService;
 
 @Controller
@@ -36,6 +40,12 @@ public class SellController {
 	
 	@Autowired 
 	LikesService likesService;
+	
+	@Autowired
+	MessageService messageService;
+	
+	@Autowired
+	ApplyService applyService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -200,6 +210,44 @@ public class SellController {
 			e.printStackTrace();
 		}
 		return likescheck;
+	}
+	
+	@PostMapping("/sellView/imessage")
+	public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, 
+			@RequestParam("ino") Integer ino) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			Users users = (Users) session.getAttribute("authUser");
+			message.setSendUserno(users.getUserno());
+			System.out.println("messagecontroller:" + message);
+			String submitcheck = messageService.submitMessage(message);
+			System.out.println("submitcheck:"+submitcheck);
+			if(submitcheck == "true") {
+				mav.addObject("submitcheck", "true");
+			}else {
+				mav.addObject("submitcheck", "false");
+			}
+			mav.setViewName("redirect:/sellView/"+ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
+	}
+
+	@ResponseBody
+	@PostMapping("/sellView/wapply")
+	public void sharingWapply(@RequestParam("ino") Integer ino, @ModelAttribute Sell sell) {
+		try {
+			Users users = (Users) session.getAttribute("authUser");
+			Wapply apply = new Wapply();
+			apply.setWuserno(users.getUserno());
+			apply.setIno(ino);
+			applyService.registIwapply(apply);
+			sellService.upApplycount(sell);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@ResponseBody

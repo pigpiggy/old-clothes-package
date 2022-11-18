@@ -30,7 +30,7 @@
 				<br>
 				<div id="dealcontainer">
 					<div class="form-group">
-						<select style="width:50px;" class="form-control" name="idealType" id="sel1">
+						<select class="form-control selectbox" name="idealType" id="sel1">
 							<option>직거래</option>
 							<option>택배거래</option>
 							<option>모두가능</option>

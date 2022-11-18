@@ -33,7 +33,7 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public List<Free> getFreeList(int page, PageInfo pageInfo) throws Exception {
 		int listCount = freeDao.selectFreeCount(); //전체 데이터 개수 가져오기 (전체 게시글 수)
-		int maxPage = (int)Math.ceil((double)listCount/10); 
+		int maxPage = (int)Math.ceil((double)listCount/10);  
 		int startPage = page/10 * 10 + 1; 
 		int endPage = startPage + 10 -1; 
 		if(endPage > maxPage) { 
@@ -77,5 +77,26 @@ public class FreeServiceImpl implements FreeService{
 	public Free Freehit(Integer freadcount) throws Exception {
 		return freeDao.hitFree(freadcount);
 		
+	}
+	@Override
+	public List<Free> getFreeList(String kwd, int page, PageInfo pageInfo) throws Exception {
+		int listCount = freeDao.searchedFreeCount(kwd); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		int maxPage = (int)Math.ceil((double)listCount/10);  
+		int startPage = page/10 * 10 + 1; 
+		int endPage = startPage + 10 -1; 
+		if(endPage > maxPage) { 
+			endPage = maxPage; 
+		}
+		
+		//pageInfo에 데이터 전달
+		pageInfo.setPage(page); 
+		pageInfo.setListCount(listCount);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		
+		//검색한 페이지의 시작 페이지 값을 구한 변수 
+		Integer row = (page - 1) * 10 + 1; //ex) (5페이지 -1) * 10 + 1 => 41
+		return freeDao.searchedFreeList(kwd, row);
 	}
 }

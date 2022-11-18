@@ -6,6 +6,7 @@ public class PageInfo {
 	private int startPage;
 	private int endPage;
 	private int listCount;
+	
 	public int getPage() {
 		return page;
 	}
@@ -36,4 +37,6 @@ public class PageInfo {
 	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
+	
 }
+

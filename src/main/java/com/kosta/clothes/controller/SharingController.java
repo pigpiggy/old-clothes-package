@@ -288,8 +288,9 @@ public class SharingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}	
+	}
 
+	
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
@@ -316,7 +317,10 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
+
 	}
+	
+
 	
 }
 

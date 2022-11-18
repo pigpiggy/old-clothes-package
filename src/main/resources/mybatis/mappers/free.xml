@@ -41,7 +41,10 @@
 	<!-- 글 목록 보여주기 -->
 	<select id="selectFreeList" resultType="Free" parameterType="Integer">
 		<![CDATA[
-			select * from free order by regdate desc
+			select fno,fname,ftitle,fcontent,freadcount,regdate,userno,bno
+			from (select row_number() over (order by regdate desc) num, F.*
+					from FREE F)	
+			where num between #{row} AND #{row}+9
 					]]>
 	</select>
 	
@@ -73,8 +76,7 @@
 			set ftitle=#{ftitle}, fcontent=#{fcontent}
 			where fno=#{fno}
 		]]>
-	</update>
-	
+	</update>	
 	
 	<!-- 글 삭제하기 -->
 	<delete id="deleteFree" parameterType="Integer">
@@ -82,4 +84,12 @@
 			delete from free where fno=#{fno}
 		]]>
 	</delete>
+	
+	<select id="selectFreeSearchedList" resultType="free" parameterType="String">
+	<![CDATA[
+ 			select * from 
+ 			( select * from free where (ftitle||fcontent||fname) like '%'||#{kwd}||'%' order by fno desc ) 
+ 			where rownum <= 10 
+ 			]]>
+	</select>	
 </mapper>

@@ -33,7 +33,7 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public List<Free> getFreeList(int page, PageInfo pageInfo) throws Exception {
 		int listCount = freeDao.selectFreeCount(); //전체 데이터 개수 가져오기 (전체 게시글 수)
-		int maxPage = (int)Math.ceil((double)listCount/10); 
+		int maxPage = (int)Math.ceil((double)listCount/10);  
 		int startPage = page/10 * 10 + 1; 
 		int endPage = startPage + 10 -1; 
 		if(endPage > maxPage) { 
@@ -77,5 +77,10 @@ public class FreeServiceImpl implements FreeService{
 	public Free Freehit(Integer freadcount) throws Exception {
 		return freeDao.hitFree(freadcount);
 		
+	}
+	@Override
+	public List<Free> getFreeList(String kwd) throws Exception {
+		// TODO Auto-generated method stub
+		return freeDao.selectFreeSearchedList(kwd);
 	}
 }

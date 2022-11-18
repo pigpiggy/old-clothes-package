@@ -8,7 +8,7 @@ import com.kosta.clothes.bean.Free;
 public interface FreeDAO {
 	void insertFree(Free free) throws Exception;//게시판 글 등록
 	
-	Integer selectFreeCount() throws Exception;//등록된 글의 총 개수
+	Integer selectFreeCount() throws Exception;//등록된 글의 총 개수(as페이징)
 
 	List<Free> selectFreeList(Integer row) throws Exception;//전체 글 목록 조회(as페이징)
 	
@@ -22,4 +22,5 @@ public interface FreeDAO {
 	
 	Integer selectMaxFreeNum() throws Exception; // 최근 번호 가져오기
 
+	List<Free> selectFreeSearchedList(String kwd)throws Exception; //검색기능
 }

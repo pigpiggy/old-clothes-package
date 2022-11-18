@@ -241,13 +241,9 @@ public class SharingController {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	
-	/*@ResponseBody
-=======
 
+	
 	@ResponseBody
->>>>>>> 04657133c7c4f6f4af0593b27c79ed3c707e2816
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
 		String keyword = (String) params.get("keyword");
@@ -273,11 +269,9 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
-<<<<<<< HEAD
-	}*/
+
+	}
 	
-=======
+
 	}
 
->>>>>>> 04657133c7c4f6f4af0593b27c79ed3c707e2816
-}

@@ -20,7 +20,7 @@ public class FreeDAOImpl implements FreeDAO {
 		sqlSession.insert("insertFree",free);
 	}
 	
-	//등록된 글의 총 개수
+	//등록된 글의 총 개수(as페이징)
 	@Override
 	public Integer selectFreeCount() throws Exception {
 		return sqlSession.selectOne("selectFreeCount");
@@ -59,6 +59,12 @@ public class FreeDAOImpl implements FreeDAO {
 	@Override
 	public Integer selectMaxFreeNum() throws Exception {
 		return sqlSession.selectOne("selectMaxFreeNum");
+	}
+	//검색기능
+	@Override
+	public List<Free> selectFreeSearchedList(String kwd) throws Exception {
+		
+		return  sqlSession.selectList("selectFreeSearchedList",kwd);
 	}
 
 	

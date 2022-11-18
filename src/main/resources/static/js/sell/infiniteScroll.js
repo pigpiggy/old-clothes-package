@@ -50,7 +50,7 @@ function surveyList(){
 							}
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-body'"+">";
-		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
+		              		str	+= "<div class="+"'priceAndDate'"+"><span class="+"'price'"+">"+this.price+"원</span><span class="+"'date'"+">"+this.regDate+"</span></div>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.ititle+"</h2>";
 		              		str	+= "<p>"+this.addressCity+" "+this.addressTown+"</p>";
 		          			str	+= "</div>";

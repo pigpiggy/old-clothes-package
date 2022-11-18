@@ -51,7 +51,7 @@
 	          	</c:choose>
 	          </div>
 	          <div class="card-body">
-	              <span class="date">${sell.regDate}</span>
+	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
 	              <p>${sell.addressCity} ${sell.addressTown }</p>
 	          </div>

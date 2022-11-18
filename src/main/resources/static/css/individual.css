@@ -198,8 +198,19 @@ a {
 	width: 100%;
 }
 
-.card-body .date {
+.card-body .priceAndDate {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.card-body .date,
+.card-body .price {
 	font-weight: bolder;
+}
+
+.card-body .date {
+	font-size: 0.8em;
 }
 
 .card-body h2 {

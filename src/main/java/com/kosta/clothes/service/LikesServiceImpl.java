@@ -63,5 +63,12 @@ public class LikesServiceImpl implements LikesService{
 			likesDAO.downIlikescheck(likes);
 		}		
 	}
+	
+	//bno 값을 가져오려고
+	@Override
+	public List<Likes> getbno(Integer userno) throws Exception {
+		
+		return likesDAO.getbno(userno);
+	}
 
 }

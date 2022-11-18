@@ -13,9 +13,13 @@
 		<mapper resource="mybatis/mappers/likes.xml"/>
 		<mapper resource="mybatis/mappers/message.xml"/>
 		<mapper resource="mybatis/mappers/apply.xml"/>
+<<<<<<< HEAD
+		<mapper resource="mybatis/mappers/business.xml"/>
+=======
 		<mapper resource="mybatis/mappers/sell.xml"/>
 		
 		
+>>>>>>> 45c2b24e927dd4b919fe1a66abb0896e7baf9453
 	</mappers>
 </configuration>
 

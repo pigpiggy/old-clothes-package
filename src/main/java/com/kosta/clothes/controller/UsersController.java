@@ -193,7 +193,8 @@ public class UsersController {
     		System.out.println("id:"+userid);
     		System.out.println("password:"+password);
     		authUser = usersService.login(userid,password);
-    		System.out.println(authUser);
+    		
+    		System.out.println("너냐 : " +authUser);
     		if(authUser == null) {
     			String businessid = id;
     			String bpassword = password;
@@ -204,7 +205,7 @@ public class UsersController {
     		if(authUser == null && bauthUser==null) {
     			model.addAttribute("result", "fail");
 				return "/user/loginform";
-    		}else if(authUser!=null){
+    		}else if(authUser != null){
     			session.setAttribute("authUser", authUser);
     		}else {
     		session.setAttribute("authUser", bauthUser);

@@ -25,4 +25,5 @@ public interface SharingService {
 	Users getSnickname(Integer sno) throws Exception;
 	void upApplycount(Sharing sharing) throws Exception;
 	
+	
 }

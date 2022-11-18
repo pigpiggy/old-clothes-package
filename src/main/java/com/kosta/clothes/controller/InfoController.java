@@ -14,12 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Donation;
 import com.kosta.clothes.bean.Likes;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Trash;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.BusinessService;
@@ -105,32 +107,36 @@ public class InfoController {
 		return list;
 	}
 	
-	//판매 업체	
+	//판매 업체 jsp 넘겨주는것	
 	@GetMapping("/businessinfo")
 	public String businessinfo(Model model) {
 		try {
 	         Business bauthuser=new Business();
 	         String sect;
 	         Integer userno =0;
-	         Users uauthuser=new Users();
-	         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
-	            uauthuser = (Users) session.getAttribute("authUser");
-	            sect = uauthuser.getSect(); 
-	            userno = uauthuser.getUserno();
-	            System.out.println("sect " + sect);
-	         } else {
-	            bauthuser = (Business) session.getAttribute("authUser");
-	            sect = bauthuser.getSect();
-//	            userno = bauthuser.getBno();
+	         Users uauthuser=new Users();	        
+	         if(session.getAttribute("authUser")!=null) {
+		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+		            uauthuser = (Users) session.getAttribute("authUser");
+		            sect = uauthuser.getSect(); 
+		            userno = uauthuser.getUserno();
+		            System.out.println("sect " + sect);
+		         } else{
+		        	 bauthuser = (Business) session.getAttribute("authUser");
+			         sect = bauthuser.getSect();
+			            //userno = bauthuser.getBno();
+			         System.out.println(sect);
+		         }
+	         }else {
+	        	 model.addAttribute("logincheck","false");
 	         }
-	         System.out.println(sect);			
-			//Business business = (Business) session.getAttribute("bauthUser");
-			System.out.println("users : " + userno.toString());
-			if(userno!=null) { //개인이 로그인 했을떄 										
+			 //Business business = (Business) session.getAttribute("bauthUser");			 
+			if(userno!=null || userno !=0) { //개인이 로그인 했을떄 										
 				List<Likes> list =  likesService.getbno(userno);
 				System.out.println("userslist : " + list);	
 				model.addAttribute("list",list);
 			}
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -144,7 +150,10 @@ public class InfoController {
 		List<Business> business = null;
 		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");		
-		String sigungu = (String) params.get("sigugun");		
+		String sigungu = (String) params.get("sigugun");
+		
+		System.out.println("sido : " + sido);
+		System.out.println("sigungu : " + sigungu);
 		try {
 			business = businessService.allBusinessInfo(sido,sigungu);			
 
@@ -153,4 +162,32 @@ public class InfoController {
 		}
 		return business;
 	}
+	
+	
+	//판매업체 좋아요
+	@ResponseBody
+	@PostMapping("/businessinfo/likes")
+	public Long registLikes(@RequestParam("bno") Integer bno, @RequestParam("userno") Integer userno) {
+		Likes likes = new Likes();
+		Long likescheck = null;
+		try {
+			likes.setBno(bno);
+			likes.setUserno(userno);
+			
+			likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+			if(likescheck == null) { //처음 눌렀을 때
+				likesService.registBlikes(likes);
+				likesService.upBusinessLikes(likes);
+			}else{
+				System.out.println("1일때"+ likescheck);
+				likes.setLikescheck(likesService.getBlikescheck(likes));
+				likesService.updateBlikes(likes);				
+			}
+			likescheck = likesService.getBlikescheck(likes);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return likescheck;
+	}
+	
 }

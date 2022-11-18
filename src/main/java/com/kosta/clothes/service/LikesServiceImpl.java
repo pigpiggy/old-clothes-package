@@ -69,6 +69,31 @@ public class LikesServiceImpl implements LikesService{
 	public List<Likes> getbno(Integer userno) throws Exception {
 		return likesDAO.getbno(userno);
 	}
+//판매업체
+	@Override
+	public void registBlikes(Likes likes) throws Exception {
+		likesDAO.insertBlikes(likes);
+	}
+
+	@Override
+	public void upBusinessLikes(Likes likes) throws Exception {
+		likesDAO.upBlikes(likes);
+	}
+
+	@Override
+	public Long getBlikescheck(Likes likes) throws Exception {
+		return likesDAO.getBlikescheck(likes);
+	}
+
+	@Override
+	public void updateBlikes(Likes likes) throws Exception {
+		if(likes.getLikescheck()==0) {
+			likesDAO.upBlikes(likes);
+		}else {
+			likesDAO.downBlikes(likes);
+		}
+		
+	}
 
 
 }

@@ -100,17 +100,14 @@
 			'bcheck' : $("input[name=list]").eq(i).val() //
 		});
 	}
-	var a = "${list}";
-	var bbbb =  listlist[0].bcheck;
-	console.log(bbbb);
-	
+	var businlist = "${list}";		
 	var auth = "${authUser}";
 	var authsect = "${authUser.sect}";
-	
-	
-	
 	console.log("auth" + "${authUser.sect}");
-	console.log("aaaa : " + a);
+	for(var i=0;i<businlist.length;i++){
+			
+	}
+	console.log("aaaa : " + businlist[i]);
 	<%--검색 버튼 클릭시 --%>
 	$('#searchBtn').click(function(){
 		let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값

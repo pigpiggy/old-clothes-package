@@ -54,7 +54,7 @@
           <div class="swiper-wrapper">
 			<c:forEach var="ifileids" items="${files }">
             	<div class="swiper-slide">
-                	<img src="/upload/${ifileids}" alt="무료나눔 옷">
+                	<img src="/upload/${ifileids}" alt="개인판매 옷">
         		</div>
         	</c:forEach>            
           </div>
@@ -64,10 +64,10 @@
         </div>
       </section>
       <section id="content_right">
-        <h4>${sharing.stitle}</h4>
+        <h4>${sell.ititle}</h4>
         <input type="hidden" name="ino" id="ino" value="${sell.ino }">
         <div class="letterAndHeart" id="sellname">
-          <span>${sell.iname }</span>
+          <span>${sell.iname}</span>
         <c:choose>
         	<c:when test="${empty authUser }">
         		<div class="letterAndHeart">	
@@ -160,7 +160,7 @@ $(function () {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
-			console.log(sno);
+			console.log(ino);
 		}
 			$.ajax({
 				type: "post",

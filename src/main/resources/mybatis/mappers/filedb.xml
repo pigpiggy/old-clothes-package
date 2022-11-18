@@ -22,9 +22,15 @@
 		]]>
 	</update>
 	
-	<delete id="deleteFileInfo" parameterType="Integer">
+	<delete id="deleteSfileInfo" parameterType="Integer">
 		<![CDATA[
 			delete from tfile where sno=#{sno}
+		]]>
+	</delete>
+	
+	<delete id="deleteIfileInfo" parameterType="Integer">
+		<![CDATA[
+			delete from tfile where ino=#{ino}
 		]]>
 	</delete>
 </mapper>							

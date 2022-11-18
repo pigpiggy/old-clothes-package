@@ -11,9 +11,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>무료나눔 상품 수정</title>
+<title>개인판매 상품 수정</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<header>
@@ -21,10 +21,10 @@
 	</header>
 	<div class="container">
 		<h1>상품수정</h1>
-		<form action="sharingModify" method="post" name="modifyForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
-			<input type="hidden" name="sno" value="${sharing.sno }">
+		<form action="sellModify" method="post" name="modifyForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
+			<input type="hidden" name="ino" value="${sell.ino }">
 			<div>
-				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle" value="${sharing.stitle }">
+				<input type="text" class="form-control" placeholder="제목" id="title" name="ititle" value="${sell.ititle }">
 			</div>
 			<br>
 			<div id="dealcontainer">
@@ -44,19 +44,20 @@
 				</div>
 
 				<div id="priceAndAI">
-					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
-					<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
+					<span class="sellfont price">가격:</span> 
+					<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
+					<span class="sellfont price">원</span> 				
 				</div>
 			</div>
 
 			<div class="form-group">
-				<textarea class="form-control" rows="12" id="scontent" name="scontent">${sharing.scontent }</textarea>
+				<textarea class="form-control" rows="12" id="icontent" name="icontent">${sell.icontent }</textarea>
 			</div>
-			<input type="file" multiple="multiple" name="simageFile" id="image"
+			<input type="file" multiple="multiple" name="iimageFile" id="image"
 				onchange="addFile(this);" />
 			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
-				<a href="sharingList">
+				<a href="sellList">
 					<button type="button" class="btn btn-info">취소</button>
 				</a> 
 				<input type="submit" id="uploadBtn" class="btn btn-warning" value="수정">
@@ -127,17 +128,22 @@
 		var titleCheck = document.getElementById("title");
 		var addCheck = document.getElementById("member_post");
 		var contentCheck = document.getElementById("scontent");
-		
+		var priceCheck = document.getElementById("price");
+
 		if(titleCheck.value == "") {
 			alert("제목을 입력해주세요.");
 			return false;
 		}
 		
+		if(priceCheck.value == "") {
+			alert("가격을 입력해주세요.");
+			return false;
+		}
+
 		if(addCheck.value == "") {
 			alert("주소를 입력해주세요.");
 			return false;
 		}
-		
 		
 		if(contentCheck.value == "") {
 			alert("내용을 입력해주세요.");

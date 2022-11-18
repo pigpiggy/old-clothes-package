@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sell;
-import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.SellService;
@@ -35,7 +35,7 @@ public class SellController {
 	SellService sellService;
 	
 	@Autowired 
-	LikesService likeService;
+	LikesService likesService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -101,6 +101,7 @@ public class SellController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			Sell sell = sellService.viewSell(ino);
+			System.out.println("sellview:" + sell);
 			if(sell.getIfileids() != null) {
 				String[] fidArr = sell.getIfileids().split(",");
 				mav.addObject("files", fidArr);
@@ -112,7 +113,7 @@ public class SellController {
 				Likes likevo = new Likes();
 				likevo.setIno(ino);
 				likevo.setUserno(users.getUserno());
-				Long likeselect = likeService.getLikescheck(likevo);
+				Long likeselect = likesService.getIlikescheck(likevo);
 				if(likeselect != null) {
 					mav.addObject("likes", likeselect);
 				}
@@ -121,6 +122,7 @@ public class SellController {
 			uservo = sellService.getInickname(ino);
 			model.addAttribute("uservo", uservo);
 			model.addAttribute("submitcheck", submitcheck);
+			mav.addObject("sell", sell);
 			mav.setViewName("/sell/sellView");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -129,6 +131,76 @@ public class SellController {
 		return mav;
 	}	
 	
+	@GetMapping("/sellModifyForm")
+	public ModelAndView modifySharing(@RequestParam("ino") Integer ino) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			Sell sell = sellService.viewSell(ino);
+			mav.addObject("sell", sell);
+			mav.setViewName("/sell/sellModifyForm");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@PostMapping("/sellModify")
+	public ModelAndView modifySharing(@ModelAttribute Sell sell, @ModelAttribute FileVO fileVo,
+			@RequestParam("iimageFile") MultipartFile[] files) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("modifysellcontroller: " + sell);
+			sellService.modifySell(sell);
+			sellService.modifyIfileids(sell, fileVo, files);
+			mav.setViewName("redirect:/sellView/" + sell.getIno());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@PostMapping("/sellDelete")
+	public ModelAndView deleteSharing(@RequestParam(value = "ino", required = false) Integer ino, Model model) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			sellService.deleteSell(ino);
+			mav.setViewName("redirect:/sellList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@ResponseBody
+	@PostMapping("/sellView/likes")
+	public Long registLikes(@RequestParam("ino") Integer ino, @RequestParam("userno") Integer userno) {
+		Likes likes = new Likes();
+		Long likescheck = null;
+		try {
+			likes.setIno(ino);
+			likes.setUserno(userno);
+			Sell sell = new Sell();
+			sell.setIno(ino);
+			likescheck = likesService.getIlikescheck(likes);
+			if(likescheck == null) {
+				likesService.registIlikes(likes);
+				sellService.upSellLikes(sell);
+			}else if(likescheck == 1) {
+				likes.setLikescheck(likesService.getIlikescheck(likes));
+				likesService.updateIlikes(likes);
+				sellService.downSellLikes(sell);
+			}else {
+				likes.setLikescheck(likesService.getIlikescheck(likes));
+				likesService.updateIlikes(likes);
+				sellService.upSellLikes(sell);
+			}
+			likescheck = likesService.getIlikescheck(likes);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return likescheck;
+	}
 	
 	@ResponseBody
 	@PostMapping("/sellInfiniteScrollDown")

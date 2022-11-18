@@ -40,8 +40,28 @@ public class LikesServiceImpl implements LikesService{
 	}
 
 	@Override
-	public Long getLikescheck(Likes likes) throws Exception {
-		return likesDAO.getLikescheck(likes);
+	public Long getSlikescheck(Likes likes) throws Exception {
+		return likesDAO.getSlikescheck(likes);
+	}
+
+	@Override
+	public void registIlikes(Likes likes) throws Exception {
+		likes.setLikescheck((long) 1);
+		likesDAO.insertIlikes(likes);
+	}
+
+	@Override
+	public Long getIlikescheck(Likes likes) throws Exception {
+		return likesDAO.getIlikescheck(likes);
+	}
+
+	@Override
+	public void updateIlikes(Likes likes) throws Exception {
+		if(likes.getLikescheck()==0) {
+			likesDAO.upIlikescheck(likes);
+		}else {
+			likesDAO.downIlikescheck(likes);
+		}		
 	}
 
 }

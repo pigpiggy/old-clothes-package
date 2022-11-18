@@ -27,6 +27,41 @@
 		]]>
 	</select>
 	
+	<update id="updateIndividual" parameterType="Sell">
+		<![CDATA[
+			update individual set ititle=#{ititle},icontent=#{icontent},addressCity=#{addressCity},
+			addressTown=#{addressTown},ifileids=null,price=#{price}
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="updateIfileids" parameterType="Sell">
+		<![CDATA[
+			update individual set ifileids=#{ifileids}
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<delete id="deleteIndividual" parameterType="Integer">
+		<![CDATA[
+			delete from individual where ino=#{ino}
+		]]>
+	</delete>
+	
+	<update id="upIndividualLikes" parameterType="Sell">
+		<![CDATA[
+			update individual set likes = likes + 1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="downIndividualLikes" parameterType="Sell">
+		<![CDATA[
+			update individual set likes = likes - 1
+			where ino=#{ino}
+		]]>
+	</update>
+	
 	<select id="getInickname" parameterType="Integer" resultType="users">
 		<![CDATA[
 			SELECT u.NICKNAME, u.userno 

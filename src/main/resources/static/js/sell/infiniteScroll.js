@@ -25,10 +25,10 @@ function surveyList(){
 		console.log("키워드"+keyword);
 		$.ajax({
 			type: 'post',
-			url: 'infiniteScrollDown',
+			url: 'sellInfiniteScrollDown',
 			dataType: 'json',
 			data: JSON.stringify({
-				sno: lastsno,
+				ino: lastsno,
 				keyword: keyword
 			}),
 			contentType: "application/json",
@@ -37,30 +37,30 @@ function surveyList(){
 				if(data!=""){
 					$(data).each(
 						function(){
-							str += "<a href="+"'sharingView/"+this.sno+"'>"
-							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
+							str += "<a href="+"'sellView/"+this.ino+"'>"
+							str	+= "<div class="+"'card'"+" data-sno='"+this.ino+"'>";
 		          			str	+= "<div class="+"'card-image'"+">";
-		          			if(this.sstatus != '등록완료'){
-								str += "<div class="+"'sharingStatus'"+">"+this.sstatus+"</div>";
+		          			if(this.istatus != '등록완료'){
+								str += "<div class="+"'individualStatus'"+">"+this.istatus+"</div>";
 							}
-		          			if(this.sfileids!=null && this.sfileids !=""){
-								str	+= "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
+		          			if(this.ifileids!=null && this.ifileids !=""){
+								str	+= "<img src="+"'upload/"+this.ifileids+"' alt="+"'무료나눔 옷'"+">";
 							} else {
-								str	+= "<img src="+"'upload/logo3.png'"+" alt="+"'로고'"+">";
+								str	+= "<img src="+"'image/logo3.png'"+" alt="+"'로고'"+">";
 							}
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-body'"+">";
-		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
-		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.stitle+"</h2>";
+		              		str	+= "<div class="+"'priceAndDate'"+"><span class="+"'price'"+">"+this.price+"원</span><span class="+"'date'"+">"+this.regDate+"</span></div>";
+		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.ititle+"</h2>";
 		              		str	+= "<p>"+this.addressCity+" "+this.addressTown+"</p>";
 		          			str	+= "</div>";
 		          			if(this.addressCity !=null && this.addressCity !=""){
 								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.sdealType;
+								str	+= this.idealType;
 								str	+= "</div>";
 							} else {
 								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.sdealType;
+								str	+= this.idealType;
 								str	+= "</div>";
 							}
 		          			str	+= "</div>";

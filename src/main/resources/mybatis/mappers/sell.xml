@@ -11,11 +11,55 @@
 	
 	<insert id="insertIndividual" parameterType="Sell">
 		<![CDATA[
-			insert into individual(ino,iname,ititle,icontent,istatus,ifileids,idealType,
-			addressCity,addressTown,userno,applycount,price,regDate)
-			values (#{ino},#{iname},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
-			#{idealType},#{addressCity},#{addressTown},#{userno},#{applycount},#{price},sysdate)
+			insert into individual(ino,ititle,icontent,istatus,ifileids,idealType,
+			addressCity,addressTown,userno,price,regDate)
+			values (#{ino},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
+			#{idealType},#{addressCity},#{addressTown},#{userno},#{price},sysdate)
 	
 		]]>
 	</insert>
+	
+	<select id="selectIndividual" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select u.nickname as iname, ino, ititle, icontent, ifileids, likes, applycount, i.userno 
+			from users u, individual i 
+			where u.userno = i.userno and ino = #{ino}		
+		]]>
+	</select>
+	
+	<select id="getInickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , individual i
+			WHERE u.USERNO = i.USERNO AND i.ino = #{ino}		
+		]]>
+	</select> 
+	
+	<select id="getSellList" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="getSellSearchedList" resultType="Sell" parameterType="String">
+		<![CDATA[
+			select * from ( select * from individual where (ititle||icontent||istatus||addressCity||addressTown||idealType||regdate||price) like '%'||#{kwd}||'%' order by ino desc )
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="infiniteScrollDown" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual where ino <=#{inoToStart} order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="Sell">
+		<![CDATA[
+			select * from ( select * from individual where ino <=#{ino} and (ititle||icontent||istatus||addressCity||addressTown||idealType||regdate||price) like '%'||#{kwd}||'%' order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
 </mapper>	

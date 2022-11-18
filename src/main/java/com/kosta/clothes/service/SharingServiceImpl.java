@@ -153,6 +153,7 @@ public class SharingServiceImpl implements SharingService{
 	public void upSharingLikes(Sharing sharing) throws Exception {
 		sharingDAO.upSharingLikes(sharing);
 	}
+	
 	public void downSharingLikes(Sharing sharing) throws Exception {
 		sharingDAO.downSharingLikes(sharing);
 	}

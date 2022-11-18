@@ -18,5 +18,5 @@ public interface FreeService {
 	 
 	Free Freehit(Integer freadcount) throws Exception; //조회수 증가
 	
-	List<Free> getFreeList(String kwd) throws Exception; //검색기능
+	List<Free> getFreeList(String kwd, int page, PageInfo pageInfo) throws Exception; //검색기능
 }

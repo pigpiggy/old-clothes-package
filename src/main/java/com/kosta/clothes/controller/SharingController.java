@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
@@ -290,7 +289,10 @@ public class SharingController {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf
 
 	
 	@ResponseBody
@@ -319,7 +321,10 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf
 
 	}
 
@@ -328,3 +333,9 @@ public class SharingController {
 
 	
 
+<<<<<<< HEAD
+=======
+	
+}
+
+>>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf

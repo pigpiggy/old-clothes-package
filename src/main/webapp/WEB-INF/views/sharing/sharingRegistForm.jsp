@@ -36,7 +36,7 @@
 							<option>모두가능</option>
 						</select> <br>
 						<div id="dealarea">
-							거래지역: 
+							<span class="sellfont">거래지역:</span> 
 							<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
 							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
 							<input type="hidden" name="addressCity" id="jibun_si" />

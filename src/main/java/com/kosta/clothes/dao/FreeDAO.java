@@ -23,4 +23,8 @@ public interface FreeDAO {
 	Integer selectMaxFreeNum() throws Exception; // 최근 번호 가져오기
 
 	List<Free> selectFreeSearchedList(String kwd)throws Exception; //검색기능
+	
+	Integer searchedFreeCount(String kwd) throws Exception;//검색된 글의 총 개수(as페이징)
+	
+	List<Free> searchedFreeList(String kwd, Integer row) throws Exception;//검색된 글 목록 조회(as페이징)
 }

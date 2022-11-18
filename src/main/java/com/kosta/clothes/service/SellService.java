@@ -21,4 +21,5 @@ public interface SellService {
 	void deleteSell(Integer ino) throws Exception;
 	void upSellLikes(Sell sell) throws Exception;
 	void downSellLikes(Sell sell) throws Exception;
+	void upApplycount(Sell sell) throws Exception;
 }

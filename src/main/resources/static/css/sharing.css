@@ -347,7 +347,9 @@ h1 {
 	display: flex;
 	justify-content: flex-start;
 }
-
+.sellfont {
+	font-weight: bold;
+}
 .nav-link {
 	margin-left: 185px;
 }

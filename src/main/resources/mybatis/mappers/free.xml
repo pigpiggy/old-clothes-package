@@ -92,4 +92,19 @@
  			where rownum <= 10 
  			]]>
 	</select>	
+	
+	<select id="searchedFreeCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from free where (ftitle||fcontent||fname) like '%'||#{kwd}||'%'
+			]]>
+			</select>
+			
+	<select id="searchedFreeList" resultType="Free" parameterType="map">
+		<![CDATA[
+			select fno,fname,ftitle,fcontent,freadcount,regdate,userno,bno
+			from (select row_number() over (order by fno desc) num, F.*
+					from FREE F where (ftitle||fcontent||fname) like '%'||#{kwd}||'%')	
+			where num between #{row} AND #{row}+9
+					]]>
+	</select>
 </mapper>

@@ -19,7 +19,7 @@ public class MessageServiceImpl implements MessageService{
 	
 	@Override
 	public String submitMessage(MessageVO message) throws Exception {
-		messageDAO.insertSmessage(message);
+		messageDAO.insertMessage(message);
 		System.out.println("messageservice:" + message);
 		return "true";
 	}

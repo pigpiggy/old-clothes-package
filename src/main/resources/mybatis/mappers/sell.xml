@@ -70,6 +70,13 @@
 		]]>
 	</select> 
 	
+	<update id="upApplycount" parameterType="sharing">
+		<![CDATA[
+			update individual set applycount = applycount + 1
+			where ino=#{ino}
+		]]>
+	</update>	
+	
 	<select id="getSellList" resultType="Sell">
 		<![CDATA[
 			select * from ( select * from individual order by ino desc)

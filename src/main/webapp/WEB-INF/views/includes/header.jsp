@@ -15,7 +15,7 @@
     <div id="topMenu">
       <div id="headerMenu">
       	<c:choose>
-      		<c:when test="${authUser == null }">
+      		<c:when test="${authUser == null && bauthUser==null }">
 	      		<a href="/joinform">회원가입</a>
 		        <a href="/login">로그인</a>
 		    </c:when>

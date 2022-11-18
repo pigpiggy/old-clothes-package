@@ -57,8 +57,8 @@ public class Likes {
 	}
 	@Override
 	public String toString() {
-		return "Likes [likesno=" + likesno + ", userno=" + userno + ", sno=" + sno + ", ino=" + ino + ", bno=" + bno
-				+ ", likescheck=" + likescheck + "]";
+		return "["+"likesno=" + likesno + ", userno=" + userno + ", sno=" + sno + ", ino=" + ino + ", bno=" + bno
+				+ ", likescheck=" + likescheck+"]";
 	}
 	
 	

@@ -128,7 +128,7 @@ public class SharingController {
 				Likes likevo = new Likes();
 				likevo.setSno(sno);
 				likevo.setUserno(users.getUserno());
-				Long likeselect = likesService.getLikescheck(likevo);
+				Long likeselect = likesService.getSlikescheck(likevo);
 				if (likeselect != null) {
 					mav.addObject("likes", likeselect);
 				}
@@ -181,7 +181,6 @@ public class SharingController {
 	public ModelAndView deleteSharing(@RequestParam(value = "sno", required = false) Integer sno, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			System.out.println("delete");
 			sharingService.deleteSharing(sno);
 			mav.setViewName("redirect:/sharingList");
 		} catch (Exception e) {
@@ -200,22 +199,22 @@ public class SharingController {
 			likes.setUserno(userno);
 			Sharing sharing = new Sharing();
 			sharing.setSno(sno);
-			likescheck = likesService.getLikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+			likescheck = likesService.getSlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
 			if(likescheck == null) { //처음 눌렀을 때
 				likesService.registSlikes(likes);
 				sharingService.upSharingLikes(sharing);
 			}else if(likescheck == 1) {
 				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getLikescheck(likes));
+				likes.setLikescheck(likesService.getSlikescheck(likes));
 				likesService.updateSlikes(likes);
 				sharingService.downSharingLikes(sharing);
 			}else { //likescheck가 0일 때 1로 올려주는
 				System.out.println("0일때"+ likescheck);
-				likes.setLikescheck(likesService.getLikescheck(likes));
+				likes.setLikescheck(likesService.getSlikescheck(likes));
 				likesService.updateSlikes(likes);
 				sharingService.upSharingLikes(sharing);
 			}
-			likescheck = likesService.getLikescheck(likes);
+			likescheck = likesService.getSlikescheck(likes);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

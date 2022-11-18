@@ -16,6 +16,7 @@ import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.FileDAO;
+import com.kosta.clothes.dao.LikesDAO;
 import com.kosta.clothes.dao.SellDAO;
 
 @Service
@@ -25,6 +26,9 @@ public class SellServiceImpl implements SellService{
 	
 	@Autowired
 	FileDAO fileDAO;
+	
+	@Autowired
+	LikesDAO likesDAO;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -101,6 +105,56 @@ public class SellServiceImpl implements SellService{
 		map.put("ino", inoToStart);
 		map.put("kwd", kwd);
 		return sellDAO.searchedInfiniteScrollDown(map);
+	}
+
+	@Override
+	public void modifySell(Sell sell) throws Exception {
+		sellDAO.updateIndividual(sell);
+	}
+
+	@Override
+	public void modifyIfileids(Sell sell, FileVO fileVo, MultipartFile[] files) throws Exception {
+		fileDAO.deleteIfileInfo(sell.getIno());
+		String fileids = "";
+		FileVO nfileVo = new FileVO();
+		if(files!=null) {
+			String path = servletContext.getRealPath("/upload/");
+			for(MultipartFile file : files) {
+				if(!file.isEmpty()) {
+					nfileVo.setDirectory_name(path);
+					nfileVo.setTname(file.getOriginalFilename());
+					nfileVo.setTsize(file.getSize());
+					nfileVo.setIno(sell.getIno());
+					nfileVo.setContent_type(file.getContentType());
+					fileDAO.insertFileInfo(nfileVo);
+					
+					FileOutputStream fos = new FileOutputStream(path+nfileVo.getTno());
+					FileCopyUtils.copy(file.getBytes(), fos);
+					
+					fileids += nfileVo.getTno()+",";
+					sell.setIfileids(fileids);
+				}
+				
+			}
+		}
+		sellDAO.updateIfileids(sell);
+	}
+
+	@Override
+	public void deleteSell(Integer ino) throws Exception {
+		likesDAO.deleteIlikes(ino);
+		sellDAO.deleteIndividual(ino);
+		fileDAO.deleteIfileInfo(ino);
+	}
+
+	@Override
+	public void upSellLikes(Sell sell) throws Exception {
+		sellDAO.upIndividualLikes(sell);
+	}
+
+	@Override
+	public void downSellLikes(Sell sell) throws Exception {
+		sellDAO.downIndividualLikes(sell);
 	}
 	
 }

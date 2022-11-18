@@ -10,7 +10,6 @@ public class Sharing {
 	private String sname;
 	private String sfileids;
 	private String sdealType;
-	private Long ai;
 	private String addressCity;
 	private String addressTown;
 	private Long likes;
@@ -42,7 +41,6 @@ public class Sharing {
 	public void setSstatus(String sstatus) {
 		this.sstatus = sstatus;
 	}
-	
 	public String getSname() {
 		return sname;
 	}
@@ -60,12 +58,6 @@ public class Sharing {
 	}
 	public void setSdealType(String sdealType) {
 		this.sdealType = sdealType;
-	}
-	public Long getAi() {
-		return ai;
-	}
-	public void setAi(Long ai) {
-		this.ai = ai;
 	}
 	public String getAddressCity() {
 		return addressCity;
@@ -112,17 +104,17 @@ public class Sharing {
 	public Sharing() {
 		super();
 	}
-	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sfileids, String sdealType,
-			Long ai, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,
+	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sname, String sfileids,
+			String sdealType, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,
 			Integer userno, Date regDate) {
 		super();
 		this.sno = sno;
 		this.stitle = stitle;
 		this.scontent = scontent;
 		this.sstatus = sstatus;
+		this.sname = sname;
 		this.sfileids = sfileids;
 		this.sdealType = sdealType;
-		this.ai = ai;
 		this.addressCity = addressCity;
 		this.addressTown = addressTown;
 		this.likes = likes;
@@ -134,11 +126,10 @@ public class Sharing {
 	@Override
 	public String toString() {
 		return "Sharing [sno=" + sno + ", stitle=" + stitle + ", scontent=" + scontent + ", sstatus=" + sstatus
-				+ ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", ai=" + ai + ", addressCity=" + addressCity
-				+ ", addressTown=" + addressTown + ", likes=" + likes + ", selectedno=" + selectedno + ", applycount="
-				+ applycount + ", userno=" + userno + ", regDate=" + regDate + "]";
+				+ ", sname=" + sname + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", addressCity="
+				+ addressCity + ", addressTown=" + addressTown + ", likes=" + likes + ", selectedno=" + selectedno
+				+ ", applycount=" + applycount + ", userno=" + userno + ", regDate=" + regDate + "]";
 	}
 
-	
 		
 }

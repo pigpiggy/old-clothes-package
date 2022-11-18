@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Sell {
 	private Integer ino;
+	private String iname;
 	private String ititle;
 	private String icontent;
 	private String istatus;
@@ -22,6 +23,13 @@ public class Sell {
 	}
 	public void setIno(Integer ino) {
 		this.ino = ino;
+	}
+	
+	public String getIname() {
+		return iname;
+	}
+	public void setIname(String iname) {
+		this.iname = iname;
 	}
 	public String getItitle() {
 		return ititle;
@@ -104,11 +112,12 @@ public class Sell {
 	public Sell() {
 		super();
 	}
-	public Sell(Integer ino, String ititle, String icontent, String istatus, String ifileids, String addressCity,
-			String addressTown, String idealType, Date regDate, Long likes, Long selectedno, Long applycount,
-			Integer userno, Long price) {
+	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
+			String addressCity, String addressTown, String idealType, Date regDate, Long likes, Long selectedno,
+			Long applycount, Integer userno, Long price) {
 		super();
 		this.ino = ino;
+		this.iname = iname;
 		this.ititle = ititle;
 		this.icontent = icontent;
 		this.istatus = istatus;
@@ -125,8 +134,8 @@ public class Sell {
 	}
 	@Override
 	public String toString() {
-		return "Sell [ino=" + ino + ", ititle=" + ititle + ", icontent=" + icontent + ", istatus=" + istatus
-				+ ", ifileids=" + ifileids + ", addressCity=" + addressCity + ", addressTown=" + addressTown
+		return "Sell [ino=" + ino + ", iname=" + iname + ", ititle=" + ititle + ", icontent=" + icontent + ", istatus="
+				+ istatus + ", ifileids=" + ifileids + ", addressCity=" + addressCity + ", addressTown=" + addressTown
 				+ ", idealType=" + idealType + ", regDate=" + regDate + ", likes=" + likes + ", selectedno="
 				+ selectedno + ", applycount=" + applycount + ", userno=" + userno + ", price=" + price + "]";
 	}

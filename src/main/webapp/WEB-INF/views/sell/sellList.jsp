@@ -53,17 +53,17 @@
 	          <div class="card-body">
 	              <span class="date">${sell.regDate}</span>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <p class="sharingContent">${sell.icontent }</p>
+	              <p>${sell.addressCity} ${sell.addressTown }</p>
 	          </div>
 	          <c:choose>
 	          	<c:when test="${empty sell.addressCity}">
 	          		<div class="card-footer">
-	          			[${sell.idealType}]
+	          			${sell.idealType}
 	          		</div>
 	          	</c:when>
 	          	<c:otherwise>
 		          <div class="card-footer">
-		              [${sell.idealType}] ${sell.addressCity} ${sell.addressTown }
+		              ${sell.idealType} 
 		          </div>
 	          	</c:otherwise>
 	          </c:choose>

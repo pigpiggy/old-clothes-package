@@ -120,6 +120,7 @@ public class SharingController {
 				mav.addObject("files", fidArr);
 			}
 			Users users = (Users) session.getAttribute("authUser");
+			
 			if (users == null) {
 				model.addAttribute("logincheck", "false");
 			} else {

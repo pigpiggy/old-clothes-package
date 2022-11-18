@@ -46,39 +46,39 @@
 				</div>
 				</c:forEach>						
 			</div>
-				<div class="page_list">
+			<ul id="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					<li><<&nbsp;</li>
 				</c:when>
 				<c:otherwise>
-					<a href="freeList?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+					<li><a href="freeList?page=${pageInfo.page-1}"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
-					<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+					<c:when test="${pageInfo.page==i }"><li>${i }</li></c:when>
 					<c:otherwise>
-						<a href="freeList?page=${i}">[${i }]</a>
+						<li><a href="freeList?page=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					<li>>></li>
 				</c:when>
 				<c:otherwise>
-					<a href="freeList?page=${pageInfo.page+1}">[다음]</a>
+					<li><a href="freeList?page=${pageInfo.page+1}">>></a></li>
 				</c:otherwise>
 			</c:choose>
-		</div>							
-			<div class="search-box">
-      	<form id="search_form" action="freeList" method="get">
-        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
-        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
-        </form>
-      </div>
+			</ul>							
+		<div class="search-box">
+	      	<form id="search_form" action="freeList" method="get">
+	        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
+	        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+	        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
+	        </form>
+      	</div>
 			<div class="bt_wrap">
 			<c:if test="${!empty authUser}">
 				<a href="freeRegistForm" class="on">글쓰기</a> </c:if>

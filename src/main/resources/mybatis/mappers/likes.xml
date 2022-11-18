@@ -63,7 +63,6 @@
 		]]>
 	</insert>
 
-<<<<<<< HEAD
 	<select id="getIlikescheck" resultType="Long">
 		<![CDATA[
 			select likescheck
@@ -91,8 +90,6 @@
 			delete from likes where ino=#{ino}
 		]]>
 	</delete>	
-=======
-
 
 	<select id="getbno" resultType="Likes" parameterType="Integer">
 		<![CDATA[
@@ -102,7 +99,6 @@
 		]]>
 	</select>
 
->>>>>>> 2bf4c1e3bd4bb197e9ab273794ceed0d8eda3d82
 </mapper>
 
 

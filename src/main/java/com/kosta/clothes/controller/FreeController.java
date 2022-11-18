@@ -55,7 +55,7 @@ public class FreeController {
 		List<Free> articleList;
 		try {
 			if (kwd != null && kwd != "") {
-				articleList = freeService.getFreeList(kwd);
+				articleList = freeService.getFreeList(kwd, page, pageInfo);
 			} else {
 			articleList = freeService.getFreeList(page,pageInfo);
 			}

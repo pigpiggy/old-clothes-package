@@ -1,6 +1,8 @@
 package com.kosta.clothes.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,19 @@ public class FreeDAOImpl implements FreeDAO {
 	public List<Free> selectFreeSearchedList(String kwd) throws Exception {
 		
 		return  sqlSession.selectList("selectFreeSearchedList",kwd);
+	}
+
+	@Override
+	public Integer searchedFreeCount(String kwd) throws Exception {
+		return sqlSession.selectOne("searchedFreeCount",kwd);
+	}
+
+	@Override
+	public List<Free> searchedFreeList(String kwd, Integer row) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("kwd",kwd);
+		map.put("row", row);
+		return sqlSession.selectList("searchedFreeList",map);
 	}
 
 	

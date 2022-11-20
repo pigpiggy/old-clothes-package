@@ -290,7 +290,10 @@ public class SharingController {
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 29615d86a383ab35444c3d03cd60deaf38024b78
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
@@ -319,6 +322,7 @@ public class SharingController {
 		return sharingList;
 
 
+<<<<<<< HEAD
 
 	}
 
@@ -326,5 +330,8 @@ public class SharingController {
 	
 
 	
+=======
+	}
+>>>>>>> 29615d86a383ab35444c3d03cd60deaf38024b78
 }
 

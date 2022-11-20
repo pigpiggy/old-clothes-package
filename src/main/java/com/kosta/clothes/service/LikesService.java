@@ -9,6 +9,7 @@ public interface LikesService {
 	void registSlikes(Likes likes) throws Exception;
 	//Likes selectSLikes(Likes likes) throws Exception;
 	void updateSlikes(Likes likes) throws Exception;
+	Long getLikescheck(Likes likes) throws Exception;
 	Long getSlikescheck(Likes likes) throws Exception;
 	/* 개인판매 찜 */
 	void registIlikes(Likes likes) throws Exception;
@@ -21,4 +22,5 @@ public interface LikesService {
 	void upBusinessLikes(Likes likes) throws Exception; //0->1
 	Long getBlikescheck(Likes likes) throws Exception; //
 	void updateBlikes(Likes likes) throws Exception; //같은 걸 눌렀을 때 
+
 }

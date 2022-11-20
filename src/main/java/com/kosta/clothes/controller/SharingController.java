@@ -290,6 +290,7 @@ public class SharingController {
 		}
 	}
 
+	
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
 	public List<Sharing> infiniteScrollDown(@RequestBody Map<String, Object> params) {
@@ -318,6 +319,12 @@ public class SharingController {
 		return sharingList;
 
 
+
 	}
+
+
+	
+
+	
 }
 

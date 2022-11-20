@@ -107,6 +107,7 @@ public class InfoController {
 		return list;
 	}
 	
+
 	//판매 업체 jsp 넘겨주는것	
 	@GetMapping("/businessinfo")
 	public String businessinfo(Model model) {
@@ -136,7 +137,6 @@ public class InfoController {
 				System.out.println("userslist : " + list);	
 				model.addAttribute("list",list);
 			}
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -150,7 +150,7 @@ public class InfoController {
 		List<Business> business = null;
 		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");		
-		String sigungu = (String) params.get("sigugun");
+		String sigungu = (String) params.get("sigugun");		
 		
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
@@ -162,32 +162,39 @@ public class InfoController {
 		}
 		return business;
 	}
-	
-	
+
 	//판매업체 좋아요
-	@ResponseBody
-	@PostMapping("/businessinfo/likes")
-	public Long registLikes(@RequestParam("bno") Integer bno, @RequestParam("userno") Integer userno) {
-		Likes likes = new Likes();
-		Long likescheck = null;
-		try {
-			likes.setBno(bno);
-			likes.setUserno(userno);
-			
-			likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
-			if(likescheck == null) { //처음 눌렀을 때
-				likesService.registBlikes(likes);
-				likesService.upBusinessLikes(likes);
-			}else{
-				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getBlikescheck(likes));
-				likesService.updateBlikes(likes);				
+		@ResponseBody
+		@PostMapping("/businessinfo/likes")
+		public Long registLikes(@RequestParam("bno") Integer bno) {
+			Likes likes = new Likes();
+			Long likescheck = null;
+			Users uauthuser=new Users();
+			Integer userno=0;
+			try {
+				//개인이 로그인 했을 때 
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+					uauthuser = (Users) session.getAttribute("authUser");
+					userno = uauthuser.getUserno();
+				}
+				likes.setBno(bno);
+				likes.setUserno(userno);
+				
+				likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+				if(likescheck == null) { //처음 눌렀을 때
+					likesService.registBlikes(likes);
+					likesService.upBusinessLikes(likes);
+				}else{
+					System.out.println("1일때"+ likescheck);
+					likes.setLikescheck(likesService.getBlikescheck(likes));
+					likesService.updateBlikes(likes);				
+				}
+				likescheck = likesService.getBlikescheck(likes);
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			likescheck = likesService.getBlikescheck(likes);
-		}catch(Exception e) {
-			e.printStackTrace();
+			return likescheck;
 		}
-		return likescheck;
-	}
+		
 	
 }

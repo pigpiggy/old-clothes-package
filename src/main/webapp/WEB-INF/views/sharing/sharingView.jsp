@@ -83,7 +83,7 @@
 		          		</a>
 		          			<c:choose>
 		          				<c:when test="${likes eq 1}">
-		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청전">
+		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
 		          				</c:when>
 		          				<c:otherwise>
 		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">

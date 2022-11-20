@@ -201,7 +201,7 @@ h3.subtitle {
      	<a href="information" >
      		<img src="image/delete.png" class="icon">
      	</a>
-     	<a href="joinform" >
+     	<a href="businessinfo" >
      		<img src="image/share.png" class="icon">
      	</a>
      	<a href="sharingList" >

@@ -9,4 +9,5 @@ public interface LikesService {
 	//Likes selectSLikes(Likes likes) throws Exception;
 	void updateSlikes(Likes likes) throws Exception;
 	Long getLikescheck(Likes likes) throws Exception;
+	List<Likes> getbno(Integer userno) throws Exception;
 }

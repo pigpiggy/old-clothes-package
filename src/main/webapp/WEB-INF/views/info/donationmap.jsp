@@ -165,7 +165,9 @@ input[type=radio] {
 		imageSize = new kakao.maps.Size(40,44),
 		imageOption = {offset: new kakao.maps.Point(20,44)};
 		var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
-		
+		//마커 회수용 배열 변수
+		var markers = [];
+		var info = [];
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성					
@@ -259,8 +261,7 @@ input[type=radio] {
 	            });
 			}
 		}
-		var markers = [];
-		var info = [];
+		
 		<%--검색 버튼 클릭시 --%>
 		$('#searchBtn').click(function(){
 			let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값

@@ -16,4 +16,5 @@ public interface LikesDAO {
 	void upSlikescheck(Likes likes) throws Exception;
 	void downSlikescheck(Likes likes) throws Exception;
 	Long getLikescheck(Likes likes) throws Exception;
+	List<Likes> getbno(Integer userno) throws Exception;
 }

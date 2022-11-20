@@ -14,11 +14,7 @@
 		<mapper resource="mybatis/mappers/message.xml"/>
 		<mapper resource="mybatis/mappers/apply.xml"/>
 		<mapper resource="mybatis/mappers/business.xml"/>
-<<<<<<< HEAD
-=======
 		<mapper resource="mybatis/mappers/sell.xml"/>
-		
->>>>>>> d96113bd85d3b3a9793ff877d7882fc4cd88516b
 	</mappers>
 </configuration>
 

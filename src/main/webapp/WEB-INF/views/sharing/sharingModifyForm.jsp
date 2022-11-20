@@ -34,6 +34,9 @@
 						<option>택배거래</option>
 						<option>모두가능</option>
 					</select> <br>
+					<div id="priceAndAI">
+						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
+					</div> <br>
 					<div id="dealarea">
 						거래지역: 
 						<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
@@ -43,10 +46,6 @@
 					</div>
 				</div>
 
-				<div id="priceAndAI">
-					<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
-					<span><a class="nav-link" href="#">AI 옷 상태 점검</a></span>
-				</div>
 			</div>
 
 			<div class="form-group">

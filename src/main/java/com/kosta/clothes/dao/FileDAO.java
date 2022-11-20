@@ -10,5 +10,6 @@ import com.kosta.clothes.bean.FileVO;
 public interface FileDAO {
 	void insertFileInfo(FileVO fileVo) throws Exception;
 	void modifyFileInfo(FileVO fileVo) throws Exception;
-	void deleteFileInfo(Integer sno) throws Exception;
+	void deleteSfileInfo(Integer sno) throws Exception;
+	void deleteIfileInfo(Integer ino) throws Exception;
 }

@@ -16,7 +16,18 @@
 		]]>
 	</insert>
 	
-
+	<insert id="insertIwapply" parameterType="Wapply">
+	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select wapply_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into wapply (wno,wuserno,ino)
+			values (#{wno},#{wuserno},#{ino})
+		]]>
+	</insert>
+	
 <!-- 개인이 업체에게 수거신청(apply 테이블) -->
 	
 </mapper>	

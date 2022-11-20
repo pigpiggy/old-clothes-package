@@ -112,11 +112,12 @@ public class CertificationService implements UsersService {
 	//로그인[개인]
 		@Override
 		public Users login(String userid, String password) throws Exception {
-			System.out.println(userid);
-			System.out.println(password);
+			System.out.println("개인 : " + userid);
+			System.out.println("개인 : " + password);
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("userid", userid);
 			map.put("password", password);
+			System.out.println("결과값 : " + map);
 			return usersDao.selectAccount(map);
 		}
 		//로그인[업체]

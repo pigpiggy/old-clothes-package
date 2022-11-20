@@ -23,7 +23,7 @@
 	<div class="board_wrap">
 		<div class="board_title">
 			<strong>자유게시판</strong>
-		</div>
+		</div>		
 		<div class="board_list_wrap">
 			<div class="board_list">
 				<div class="top">
@@ -44,25 +44,49 @@
 					<div class="date">${free.regdate}</div>
 					<div class="count">${free.freadcount}</div>
 				</div>
+				</c:forEach>						
+			</div>
+			<div class="center">
+				<ul class="pagination">
+				<c:choose>
+					<c:when test="${pageInfo.page<=1}">
+						<li id="prev"><a><<</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+					<c:choose>
+						<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:otherwise>
+							<li><a href="freeList?page=${i}">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
-			</div>
-			<div class="board_page">
-				<a href="#" class="bt first"><<</a> <a href="#" class="bt prev"><</a>
-				<a href="#" class="num on">1</a> <a href="#" class="num">2</a> <a
-					href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-					href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-					href="#" class="bt last">>></a>
-			</div>
-			<form class="searching">
-				<input type="text" name="query" placeholder="검색어를 입력하세요">
-				<button class="button">검색</button>
-			</form>
+				<c:choose>
+					<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+						<li id="next"><a>>></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>		
+		</div>					
+		<div class="search-box">
+	      	<form id="search_form" action="freeList" method="get">
+	        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
+	        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+	        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
+	        </form>
+      	</div>
 			<div class="bt_wrap">
 			<c:if test="${!empty authUser}">
 				<a href="freeRegistForm" class="on">글쓰기</a> </c:if>
 			</div>
-
 		</div>
 	</div>
+	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

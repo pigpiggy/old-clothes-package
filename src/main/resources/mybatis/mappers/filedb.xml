@@ -10,8 +10,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into tfile (tno,directory_name,tname,tsize,sno,content_type,upload_date)
-			values(#{tno},#{directory_name},#{tname},#{tsize},#{sno},#{content_type},sysdate)
+			insert into tfile (tno,directory_name,tname,tsize,sno,ino,content_type,upload_date)
+			values(#{tno},#{directory_name},#{tname},#{tsize},#{sno,jdbcType=VARCHAR},#{ino,jdbcType=VARCHAR},#{content_type},sysdate)
 		]]>
 	</insert>
 	
@@ -22,9 +22,15 @@
 		]]>
 	</update>
 	
-	<delete id="deleteFileInfo" parameterType="Integer">
+	<delete id="deleteSfileInfo" parameterType="Integer">
 		<![CDATA[
 			delete from tfile where sno=#{sno}
+		]]>
+	</delete>
+	
+	<delete id="deleteIfileInfo" parameterType="Integer">
+		<![CDATA[
+			delete from tfile where ino=#{ino}
 		]]>
 	</delete>
 </mapper>							

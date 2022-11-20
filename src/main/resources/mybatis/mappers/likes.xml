@@ -15,7 +15,7 @@
 		]]>
 	</insert>
 	
-	<select id="getLikescheck" resultType="Long">
+	<select id="getSlikescheck" resultType="Long">
 		<![CDATA[
 			select likescheck
 			from likes
@@ -51,7 +51,88 @@
 		]]>
 	</delete>
 		
+	<insert id="insertIlikes" parameterType="Likes">
+	<selectKey keyProperty="likesno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select likes_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into likes(likesno,userno,ino,likescheck)
+			values (#{likesno},#{userno},#{ino},1)
+		]]>
+	</insert>
 
+	<select id="getIlikescheck" resultType="Long">
+		<![CDATA[
+			select likescheck
+			from likes
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</select>	
+	
+	<update id="upIlikescheck" parameterType="Likes">
+		<![CDATA[
+			update likes set likescheck = 1
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
+		
+	<update id="downIlikescheck" parameterType="Likes">
+		<![CDATA[
+			update likes set likescheck = 0
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
+	
+	<delete id="deleteIlikes" parameterType="Integer">
+		<![CDATA[
+			delete from likes where ino=#{ino}
+		]]>
+	</delete>	
+<!-- 판매업체 -->
+	<select id="getbno" resultType="Likes" parameterType="Integer">
+		<![CDATA[
+			select bno , likescheck
+			from likes
+			where userno=#{userno} 
+		]]>
+	</select>
+	
+	<insert id="insertBlikes" parameterType="Likes">
+	<selectKey keyProperty="likesno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select likes_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into likes(likesno,userno,bno,likescheck)
+			values (#{likesno},#{userno},#{bno},1)
+		]]>
+	</insert>
+	
+	
+	<update id="upBlikes" parameterType="Likes">
+		<![CDATA[
+			update likes set likescheck = 1
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</update>
+	
+	<update id="downBlikes" parameterType="Likes">
+		<![CDATA[
+			update likes set likescheck = 0
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</update>
+	
+	<select id="getBlikescheck" resultType="Long">
+		<![CDATA[
+			select likescheck
+			from likes
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</select>	
 
 
 	<select id="getbno" resultType="Likes" parameterType="Integer">

@@ -48,11 +48,17 @@ public class FreeController {
 	
 	// 자유게시판 글 목록
 	@GetMapping("/freeList")
-	public ModelAndView freeList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+	public ModelAndView freeList(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(value = "kwd", required = false) String kwd) {
 		ModelAndView mav = new ModelAndView();
 		PageInfo pageInfo = new PageInfo();
+		List<Free> articleList;
 		try {
-			List<Free> articleList = freeService.getFreeList(page,pageInfo);
+			if (kwd != null && kwd != "") {
+				articleList = freeService.getFreeList(kwd, page, pageInfo);
+			} else {
+			articleList = freeService.getFreeList(page,pageInfo);
+			}
 			mav.addObject("articleList", articleList);
 			System.out.println("areticleList"+articleList.toString());
 			mav.addObject("pageInfo", pageInfo);

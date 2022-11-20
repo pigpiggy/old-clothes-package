@@ -11,9 +11,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>무료나눔 상품 등록</title>
+<title>개인판매 상품 등록</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sell.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<div id="wrap">
@@ -22,41 +22,42 @@
 		</header>
 		<div class="container">
 			<h1>상품등록</h1>
-			<form action="sharingRegist" method="post" name="writeForm" 
+			<form action="sellRegist" method="post" name="writeForm" 
 			enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 				<div>
-					<input type="text" class="form-control" placeholder="제목" id="title" name="stitle">
+					<input type="text" class="form-control" placeholder="제목" id="title" name="ititle">
 				</div>
 				<br>
 				<div id="dealcontainer">
 					<div class="form-group">
-						<select class="form-control" name="sdealType" id="sel1">
+						<select class="form-control selectbox" name="idealType" id="sel1">
 							<option>직거래</option>
 							<option>택배거래</option>
 							<option>모두가능</option>
 						</select> <br>
+						<div id="priceAndAI">
+							<span class="sellfont price">가격:</span> 
+							<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
+							<span class="sellfont price">원</span> 
+						</div>
+					</div>
 						<div id="dealarea">
-							거래지역: 
+							<span class="sellfont">거래지역:</span> 
 							<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
 							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
 							<input type="hidden" name="addressCity" id="jibun_si" />
 							<input type="hidden" name="addressTown" id="jibun_dong" />
 						</div>
-					</div>
-	
-					<div id="priceAndAI">
-						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
-					</div>
 				</div>
 	
 				<div class="form-group">
-					<textarea class="form-control" rows="12" id="scontent" name="scontent"></textarea>
+					<textarea class="form-control" rows="12" id="icontent" name="icontent"></textarea>
 				</div>
-				<input type="file" multiple="multiple" name="simageFile" id="image" title="한 번에 최대 5개까지 선택가능"
+				<input type="file" multiple="multiple" name="iimageFile" id="image" title="한 번에 최대 5개까지 선택가능"
 					onchange="addFile(this);" />
 				<div id=imglist class="filebox"></div>
 				<div id="btncontainer">
-					<a href="sharingList">
+					<a href="sellList">
 						<button type="button" class="btn btn-info">목록으로</button>
 					</a> 
 					<input type="submit" id="uploadBtn" class="btn btn-warning" value="등록">
@@ -127,10 +128,16 @@
 		function valid() {
 			var titleCheck = document.getElementById("title");
 			var addCheck = document.getElementById("member_post");
-			var contentCheck = document.getElementById("scontent");
+			var contentCheck = document.getElementById("icontent");
+			var priceCheck = document.getElementById("price");
 			
 			if(titleCheck.value == "") {
 				alert("제목을 입력해주세요.");
+				return false;
+			}
+			
+			if(priceCheck.value == "") {
+				alert("가격을 입력해주세요.");
 				return false;
 			}
 			
@@ -139,11 +146,11 @@
 				return false;
 			}
 			
-			
 			if(contentCheck.value == "") {
 				alert("내용을 입력해주세요.");
 				return false;
 			}
+			
 		}
 		
 		/* 주소 검색 */

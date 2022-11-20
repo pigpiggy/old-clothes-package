@@ -118,13 +118,13 @@ public class SharingServiceImpl implements SharingService{
 	public void deleteSharing(Integer sno) throws Exception {
 		likesDAO.deleteSlikes(sno);
 		sharingDAO.deleteSharing(sno);
-		fileDAO.deleteFileInfo(sno);
+		fileDAO.deleteSfileInfo(sno);
 		
 	}
 
 	@Override
 	public void modifySfileids(Sharing sharing, FileVO fileVo, MultipartFile[] files) throws Exception {
-		fileDAO.deleteFileInfo(sharing.getSno());
+		fileDAO.deleteSfileInfo(sharing.getSno());
 		String fileids = "";
 		FileVO nfileVo = new FileVO();
 		if(files!=null) {
@@ -153,6 +153,7 @@ public class SharingServiceImpl implements SharingService{
 	public void upSharingLikes(Sharing sharing) throws Exception {
 		sharingDAO.upSharingLikes(sharing);
 	}
+	
 	public void downSharingLikes(Sharing sharing) throws Exception {
 		sharingDAO.downSharingLikes(sharing);
 	}

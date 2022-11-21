@@ -57,18 +57,18 @@
 	
 	<nav class="my_Tab">
 		<ul>
-			<li><a href ="#a"class="on" >판매 상품</a></li>
-			<li><a href ="#a">구매 상품</a></li>
-			<li><a href ="#a">신청 목록</a></li>
-			<li><a href ="#a">거래 후기</a></li>
+			<li><a href ="#card1">판매 상품</a></li>
+			<li><a href ="#card2"class="on" >구매 상품</a></li>
+			<li><a href ="#card3">신청 목록</a></li>
+			<li><a href ="#card4">거래 후기</a></li>
 		</ul>
 	</nav>
 		
 	<div class="myList">
-		<div class="card"></div>
-		<div class="card"></div>
-		<div class="card"></div>
-		<div class="card"></div>		
+		<div id="card1">내용1</div>
+		<div id="card2">내용2</div>
+		<div id="card3">내용3</div>
+		<div id="card4">내용4</div>		
 	</div>
   </div>
 </body>

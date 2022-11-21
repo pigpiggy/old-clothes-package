@@ -1,0 +1,117 @@
+@charset "UTF-8";
+:root {
+  --background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: var(--darkgray);
+  background-color: #fff;
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 9em;
+  height: 2em;
+  border: 1px solid var(--darkgray);
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '▼';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  transition: .25s all ease;
+  pointer-events: none;
+  color: var(--darkgray);
+  line-height: 2em;
+  padding-right: 0.5em;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+/* content */
+h2 {
+	margin-bottom: 50px;
+}
+#select {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 13px;
+}
+
+img {
+	width: 25px;
+}
+
+thead {
+	text-align: center;
+}
+
+tbody {
+	text-align: center;
+}
+input[type="checkbox"] {
+	position: relative;
+	margin-left: 0;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* paging */
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+div.center {
+	text-align: center;
+	margin: 20px;
+}
+
+

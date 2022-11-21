@@ -16,6 +16,9 @@
 	<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
+	<div>
+		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
+	</div>
     <div class="container">
     <h2>쪽지함</h2>
     <div id="demo-modal" class="modal">

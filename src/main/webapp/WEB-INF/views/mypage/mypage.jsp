@@ -12,10 +12,9 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 </head>
 <body>
-<div>
+	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
-	
 	<div class="closet_wrap">  
     <div class="title">
       <div class="nicname">
@@ -27,7 +26,7 @@
 		        <a href="#">
 			      <img id="like" src="image/redheart.png" alt="찜">
 		        </a>          
-		        <a href="#">
+		        <a href="/mypage/message">
 			      <img id="letter" src="image/letter.png" alt="쪽지">
 		        </a>          
 		        <a href="#">
@@ -60,7 +59,7 @@
 			<li><a href ="#card1">판매 상품</a></li>
 			<li><a href ="#card2"class="on" >구매 상품</a></li>
 			<li><a href ="#card3">신청 목록</a></li>
-			<li><a href ="#card4">거래 후기</a></li>
+			<li><a href ="/mypage/review">거래 후기</a></li>
 		</ul>
 	</nav>
 		

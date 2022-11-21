@@ -85,6 +85,14 @@ public class MypageController {
 		}
 	}
 	
+	@GetMapping("/mypage/review")
+	public String review() {
+		try {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "/mypage/review";
+	}
 	
 	
 	

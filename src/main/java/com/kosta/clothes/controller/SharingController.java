@@ -289,11 +289,6 @@ public class SharingController {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf
-
 	
 	@ResponseBody
 	@PostMapping("/infiniteScrollDown")
@@ -321,21 +316,11 @@ public class SharingController {
 			e.printStackTrace();
 		}
 		return sharingList;
-<<<<<<< HEAD
 
-=======
->>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf
 
-	}
+
 
 	}
 
 
-	
-
-<<<<<<< HEAD
-=======
-	
 }
-
->>>>>>> 50ab0fa652e1dc02e6cd2e99dd9bcef810ec7faf

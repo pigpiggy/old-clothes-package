@@ -256,7 +256,6 @@
 			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
 			console.log(markers2);
-			if(authsect=='users'){
 			$(function () {
 				$("#heart_img").on("click", function(e) {
 					var logincheck = "${logincheck}"; //false
@@ -265,20 +264,11 @@
 					if(logincheck == "false") {
 						alert("로그인 후 이용해주세요.")
 						location.href="/login";
-					} else {
-						console.log(bno);
 					}
-					if(authsect == 'users'){
-						console.log("유저");
-						userno = "${authUser.userno}";
-					}else{
-						console.log("들어오겠지?");	
-						
-					}
-						$.ajax({
+					$.ajax({
 							type: "post",
 							url: "/businessinfo/likes",
-							data: {bno:bno, userno:userno},
+							data: {bno:bno},
 							success: function(data) {
 								console.log(data);
 								if(data == 1) {
@@ -292,7 +282,6 @@
 						})
 					});
 				});	
-			}
 		},	
 		error: function(){alert("조건 전송 오류");}
 		}); 

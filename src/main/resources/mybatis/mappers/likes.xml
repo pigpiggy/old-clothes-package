@@ -134,6 +134,15 @@
 		]]>
 	</select>	
 
+
+	<select id="getbno" resultType="Likes" parameterType="Integer">
+		<![CDATA[
+			select bno , likescheck
+			from likes
+			where userno=#{userno} 
+		]]>
+	</select>
+
 </mapper>
 
 

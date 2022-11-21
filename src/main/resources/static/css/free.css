@@ -21,6 +21,12 @@ a {
     margin: 100px auto;
 }
 
+#subjectAndSearch {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .board_title {
     margin-bottom: 30px;
 }
@@ -340,13 +346,13 @@ display: inline-block;
 }
 
 .search-box {
-  width: 200px;
-  position: relative;
-  display: flex;
+	width: 200px;
+	position: relative;
+	display: flex;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin: 0 auto;
+	margin-right: 10px;
 }
 
 #search_form {
@@ -398,4 +404,34 @@ display: inline-block;
 .search-btn:focus {
   outline:none;
   color:black;
+}
+
+/* 페이징 */
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #2196f3;;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+div.center {
+	text-align: center;
+	margin: 20px;
 }

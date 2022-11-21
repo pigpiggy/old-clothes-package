@@ -95,11 +95,11 @@
 		</c:choose>
         </div>
 		        <div id="sreview">거래후기: 12건</div>
+		        <div>현재 신청 인원 : 3명</div>
 		        <div id="sbtn">
 		        	<input type="button" class="btn btn-info" value="옷장열기" />
 		        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
         		</div>
-        <div>현재 신청 인원 : 3명</div>
         <!-- Swiper JS -->
       </section>
       <div class="scontent">

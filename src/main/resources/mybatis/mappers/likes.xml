@@ -133,16 +133,6 @@
 			where bno=#{bno} and userno=#{userno}
 		]]>
 	</select>	
-
-
-	<select id="getbno" resultType="Likes" parameterType="Integer">
-		<![CDATA[
-			select bno , likescheck
-			from likes
-			where userno=#{userno} 
-		]]>
-	</select>
-
 </mapper>
 
 

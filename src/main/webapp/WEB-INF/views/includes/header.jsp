@@ -38,7 +38,7 @@
           <span>하우 헌옷</span>
           <ul class="sideMenu">
             <li><a href="#">하우 헌옷 소개</a></li>
-            <li><a href="#">공지사항</a></li>
+            <li><a href="/noticeList">공지사항</a></li>
           </ul>
         </li>
         <li class="hederMenuList">

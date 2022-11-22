@@ -19,8 +19,8 @@
 	<div>
 		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	</div>
-    <div class="container">
-    <h2>쪽지함</h2>
+    <div class="messageContainer">
+    <h2><strong>쪽지함</strong></h2>
     <div id="demo-modal" class="modal">
       		<div class="modal__content">
       			<form action="smessage" method="post" id="messageform">
@@ -38,7 +38,7 @@
       			</form>
 				<a href="#" class="modal__close">&times;</a>
       		</div>
-  		</div>
+  	</div>
   		
         <div id="select">
             <div class="select">
@@ -71,10 +71,10 @@
 	            <input type="hidden" name="mno" class="mno" value="${recvmessage.mno }" />
               </td>
               <td>${recvmessage.nickname}</td>
-              <td>${recvmessage.mtitle }</td>
+              <td class="mtitle">${recvmessage.mtitle }</td>
               <td>${recvmessage.regDate }
               <a href="#demo-modal">
-		          <img src="/image/letter.png" id="letter_img" alt="쪽지">
+		          <img src="/image/letter.png" id="letter_img" alt="쪽지" title="답장하기">
 		        </a>
               </td>
             </tr>
@@ -89,7 +89,7 @@
                 <input type="checkbox" class="form-check-input" id="checkhead2" name="optionth" value="something" checked>
               </th>
               <th>받는 사람</th>
-              <th>제목</th>
+              <th >제목</th>
               <th>날짜</th>
             </tr>
           </thead>
@@ -101,7 +101,7 @@
                 <input type="hidden" name="mno" value="${sendmessage.mno }" />
               </td>
               <td>${sendmessage.nickname}</td>
-              <td>${sendmessage.mtitle }</td>
+              <td class="mtitle">${sendmessage.mtitle }</td>
               <td>${sendmessage.regDate }</td>
             </tr>
            </c:forEach>

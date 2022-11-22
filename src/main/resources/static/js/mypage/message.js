@@ -1,13 +1,20 @@
 $(function () {
-	var sect = $("#recv option:selected").val();
+	/* 쪽지함 위 nav 숨김 */
+	$(".my_Tab").hide();
+	
+	
+	/*var sect = $("#recv option:selected").val();
 		console.log(sect);
 		if(sect == "receive") {
-			$("#sendtable").hide();
+			$("#sendtable").css('display','none');
+			$("#recvtable").css('display','table');
+			
 		} else {
-			$("#recvtable").hide();
-		}
+			$("#recvtable").css('display','none');
+			$("#sendtable").css('display','table');
+		}*/
 		
-	$("#recv").change(function() {
+	/*$("#recv").change(function() {
 		var sect = $("#recv option:selected").val();
 		console.log(sect);
 		if(sect == "receive") {
@@ -18,7 +25,7 @@ $(function () {
 			$("#recvtable").css('display','none');
 			$("#sendtable").css('display','table');
 		}
-	})
+	})*/
 	
 	/* 전체 선택 */
 	$("#checkhead").change(function() {

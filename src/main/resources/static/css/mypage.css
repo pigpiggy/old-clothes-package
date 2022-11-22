@@ -121,25 +121,26 @@ overflow-y: scroll;
 }
 
 .my_Tab {
-  padding: 30px;
+	padding: 20px;
 }
 
-.my_Tab ul{
-  display: flex;
+.tabs { 
+	display: flex;
   height: 50px;
   border-bottom: 2px solid navy;
+
+}
+	
+.tabs li {
+	flex: 1;
 }
 
-.my_Tab ul li {
-  flex: 1;
-}
-
-.my_Tab ul li :first-child a{
+.tabs li :first-child a{
   border-left: 1px solid#ddd;
 }
 
-.my_Tab ul li a {
-  display: block;
+.tabs li a {
+	 display: block;
   height: 50px;
   border: 1px solid #ddd;
   border-bottom: none;
@@ -151,12 +152,24 @@ overflow-y: scroll;
 
 }
 
-.my_Tab ul li a.on {
-  position: relative;
+.tabs li.on a {
+position: relative;
   height: 48px;
   border-color: navy;
   border-top-width: 2px;
   line-height: 45px;
   border-bottom: 2px solid#fff;
+
 }
+
+.tab_con {
+	margin-top:20px;
+	display: none;
+	font-size: 24px;
+}
+
+.tab_con.on {
+	display: block;
+	
+	}
 

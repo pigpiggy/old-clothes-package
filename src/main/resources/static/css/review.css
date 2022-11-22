@@ -1,4 +1,10 @@
 @charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:content-box !important;
+}
+
  #reviewStar {
     margin-bottom: 10px;
     padding: 5px;

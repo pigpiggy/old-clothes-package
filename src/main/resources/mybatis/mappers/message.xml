@@ -15,11 +15,13 @@
 		]]>
 	</insert>
 	
+	<!-- 받은쪽지 보낸쪽지 리스트 -->
 	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname 
 			from message m, users u
 			where recvUserno=#{recvUserno} and m.sendUserno=u.userno
+			order by mno desc
 		]]>
 	</select>
 	
@@ -28,6 +30,7 @@
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
 			from message m, business b
 			where recvUserno=#{recvUserno} and m.sendUserno=b.bno
+			order by mno desc
 		]]>
 	</select>	
 	
@@ -36,6 +39,7 @@
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
 			from message m, users u
 			where sendUserno=#{sendUserno} and m.recvUserno=u.userno
+			order by mno desc
 		]]>
 	</select>	
 		
@@ -44,8 +48,43 @@
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
 			from message m, business b
 			where sendUserno=#{sendUserno} and m.recvUserno=b.bno
+			order by mno desc
 		]]>
 	</select>	
+	
+	<!-- 받은 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
+	<select id="uRecvViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
+			from message m, users u
+			where mno=#{mno} and m.sendUserno=u.userno
+		]]>
+	</select>
+	
+	<select id="bRecvViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
+			from message m, business b
+			where mno=#{mno} and m.sendUserno=b.bno
+		]]>
+	</select>	
+
+	<!-- 보낸 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
+	<select id="uSendViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
+			from message m, users u
+			where mno=#{mno} and m.recvUserno=u.userno
+		]]>
+	</select>
+	
+	<select id="bSendViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
+			from message m, business b
+			where mno=#{mno} and m.recvUserno=b.bno
+		]]>
+	</select>		
 	
 	<delete id="deleteMessage" parameterType="Integer">
 		<![CDATA[
@@ -54,7 +93,11 @@
 		]]>
 	</delete>
 	
-	
+	<select id="selectMessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message
+			]]>
+	</select>	
 	
 	
 	

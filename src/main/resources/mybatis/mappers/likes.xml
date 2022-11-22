@@ -133,6 +133,7 @@
 			where bno=#{bno} and userno=#{userno}
 		]]>
 	</select>	
+
 </mapper>
 
 

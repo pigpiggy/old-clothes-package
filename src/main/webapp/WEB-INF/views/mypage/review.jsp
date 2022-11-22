@@ -2,45 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 </head>
-<style>
-    #reviewStar {
-        margin-bottom: 10px;
-        padding: 5px;
-    }
-    .card-title {
-        font-weight: bold;
-    }
-    .card-text {
-        margin-right: 10px;
-    }
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #reviewStar {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .reviewcontent {
-        display: flex;
-    }
-</style>
 <body>
+	<div>
+		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
+	</div>
     <div class="card border-light mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <div id="reviewStar">
                 <h5 class="card-title">만족해요</h5>
-                <span>별점</span>
+                <span>★★★★☆</span>
             </div>
             <div class="reviewcontent" id="reviewTitle">
                 <span class="card-text">글제목: </span> 

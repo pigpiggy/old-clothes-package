@@ -1,0 +1,133 @@
+#map {
+	left: 4%;	
+	width:40%;
+	height:500px;
+	margin:40px;
+}	
+
+#selectbox {
+	padding-left: 10%;
+	padding-top:5%;
+}
+
+#allbusiness{
+	display:flex;
+}
+
+
+#blist {
+	justify-content:center;	
+	left:4%;
+	top:39px;
+	position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    height: 500px;
+    overflow-y: scroll;
+    background: #fff;
+    z-index: 2;
+}
+#finalbusin{
+	background-color:#f7f7f7;
+}
+
+#heart_img {
+	width:25px;
+	position: relative;
+    right: -4px;
+    top: -14px;
+}
+
+#listmove{
+	border:1px solid black;
+}
+#star{
+	position:absolute;
+	width:100%;
+	overflow:hidden;
+	color:#cdcdcd;
+}
+#starEnd{
+	position:absolute;
+	overflow:hidden;
+	white-space:nowrap;	
+}
+#totalstar{
+	position:relative;
+	width:120px;
+	top: -42px;
+    right: -35px;
+    
+}
+#cate {
+	left: 80%;
+}
+#bnames {
+	position: relative;
+    right: -9px;
+    top: -6px;
+}
+#btotaladdress{
+	position: relative;
+    right: -9px;
+    top: -21px;
+}
+.kakaoids{
+	position: relative;
+    right: -4px;
+    top: -3px;
+}
+#applymodal{
+    position: relative;
+    right: -673px;
+    top: -50px;
+    height: 35px;
+}
+.search-box {
+  width: 250px;
+  position: relative;
+  display: flex;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#dongName{
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 9px 45px 9px 9px;
+  background-color: #fff;
+  color: #6c6c6c;
+  border-radius: 6px;
+  border:1px solid #b8c6db;
+  transition: all .4s;
+}
+
+#searchBtn{
+  background-color: transparent;
+  font-size: 18px;
+  padding: 6px 9px;
+  margin-left:-45px;
+  border:none;
+  color: #6c6c6c;
+  transition: all .4s;
+  z-index: 10;	
+}
+
+#searchBtn:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  color: black;
+}
+
+#searchBtn:focus{
+  outline:none;
+  color:black;
+}
+
+#btotalphone{
+	position: relative;
+    right: -9px;
+    top: -20px;
+}

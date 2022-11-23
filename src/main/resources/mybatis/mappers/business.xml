@@ -12,4 +12,75 @@
 		]]>
 	</select>
 	
+	<select id="selectBusiness1" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT *
+			FROM BUSINESS b , LIKES l   
+			WHERE b.BNO = l.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND userno=#{userno}
+		]]>
+	</select>
+	
+	<!-- 로그인 안 했을 때 카테고리 정렬 -->
+	<select id="selectCatereview" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM BUSINESS b , review r
+			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY reviewcount desc			
+		]]>
+	</select>
+	
+	
+	<select id="selectCatehigh" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM BUSINESS b , review r
+			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar desc			
+		]]>
+	</select>
+	
+	<select id="selectCatelow" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM BUSINESS b , review r
+			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar asc			
+		]]>
+	</select>
+	
+	<!-- 로그인 했을 때 카테고리 정렬 -->
+	<select id="selectUserCatereview" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
+			FROM BUSINESS b ,LIKES l, review r   
+			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			ORDER BY reviewcount desc
+		]]>
+	</select>
+	
+	<select id="selectUserCatehigh" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
+			FROM BUSINESS b ,LIKES l, review r   
+			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			ORDER BY bstar desc
+		]]>
+	</select>
+	
+	<select id="selectUserCatelow" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
+			FROM BUSINESS b ,LIKES l, review r   
+			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			ORDER BY bstar asc
+		]]>
+	</select>
+	
 </mapper>

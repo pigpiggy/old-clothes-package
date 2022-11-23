@@ -13,8 +13,7 @@ $(window).scroll(function(){
 	//다운 스크롤
 	if(currentScrollTop + $(window).height() + 100 >=$(document).height()){
 		surveyList();
-		
-		
+
 		
 	}
 })

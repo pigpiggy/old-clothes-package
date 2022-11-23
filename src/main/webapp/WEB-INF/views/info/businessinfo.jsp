@@ -245,7 +245,37 @@
 			bli += "</ul>"
 			bli += "</div>"			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
+<<<<<<< HEAD
 			console.log(markers2);			
+=======
+			console.log(markers2);
+			$(function () {
+				$("#heart_img").on("click", function(e) {
+					var logincheck = "${logincheck}"; //false
+					let bno = businbno;					
+					console.log(bno + "gnmng");					
+					if(logincheck == "false") {
+						alert("로그인 후 이용해주세요.")
+						location.href="/login";
+					}
+					$.ajax({
+							type: "post",
+							url: "/businessinfo/likes",
+							data: {bno:bno},
+							success: function(data) {
+								console.log(data);
+								if(data == 1) {
+									$("#heart_img").attr("src", "/image/redheart.png");
+								} else {
+				                    $("#heart_img").attr("src", "/image/heart.png");
+								}
+							}, error: function() {
+				                console.log('바보야!')
+							}
+						})
+					});
+				});	
+>>>>>>> b042f049f25f9fd9f3fa74e7c27b7ad403f62d5a
 		},	
 		error: function(){alert("조건 전송 오류");}
 		}); //ajax 

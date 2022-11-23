@@ -43,6 +43,7 @@ public class LikesServiceImpl implements LikesService{
 	public Long getSlikescheck(Likes likes) throws Exception {
 		return likesDAO.getSlikescheck(likes);
 	}
+	
 
 	@Override
 	public void registIlikes(Likes likes) throws Exception {
@@ -93,6 +94,12 @@ public class LikesServiceImpl implements LikesService{
 			likesDAO.downBlikes(likes);
 		}
 		
+	}
+
+	@Override
+	public Long getLikescheck(Likes likes) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

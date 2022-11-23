@@ -10,6 +10,7 @@ public class MessageVO {
 	private Integer sendUserno;
 	private Integer recvUserno;
 	private Long readChk;
+	private String nickname;
 	public Integer getMno() {
 		return mno;
 	}
@@ -52,6 +53,13 @@ public class MessageVO {
 	public void setReadChk(Long readChk) {
 		this.readChk = readChk;
 	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public MessageVO() {
 		super();
 	}
@@ -68,9 +76,12 @@ public class MessageVO {
 	}
 	@Override
 	public String toString() {
-		return "Message [mno=" + mno + ", mtitle=" + mtitle + ", mcontent=" + mcontent + ", regDate=" + regDate
-				+ ", sendUserno=" + sendUserno + ", recvUserno=" + recvUserno + ", readChk=" + readChk + "]";
+		return "MessageVO [mno=" + mno + ", mtitle=" + mtitle + ", mcontent=" + mcontent + ", regDate=" + regDate
+				+ ", sendUserno=" + sendUserno + ", recvUserno=" + recvUserno + ", readChk=" + readChk + ", nickname="
+				+ nickname + "]";
 	}
+	
+	
 	
 	
 }

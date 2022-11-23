@@ -310,7 +310,7 @@ h1 {
 }
 
 .form-control {
-	border: 1px solid gray;
+	border: 1px solid #ced4da;
 }
 
 .form-control:disabled {
@@ -326,6 +326,13 @@ h1 {
 #dealarea {
 	margin: 5px 0 5px 5px;
 }
+
+.postarea {
+	border: 1px solid #ced4da;
+	border-radius: 4px;
+	padding: 10px;
+}
+
 
 #member_post {
 	margin: 5px;
@@ -454,7 +461,7 @@ h1 {
 }
 
 #sbtn {
-	margin-bottom: 5px;
+	margin-top: 10px;
 }
 
 svg {

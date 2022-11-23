@@ -153,14 +153,10 @@ public class InfoController {
 		List<Business> business = null;		
 		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");		
-<<<<<<< HEAD
 		String sigungu = (String) params.get("sigugun");
 		Integer userno =0;
-        Users uauthuser=new Users();
-=======
-		String sigungu = (String) params.get("sigugun");		
-		
->>>>>>> b042f049f25f9fd9f3fa74e7c27b7ad403f62d5a
+        Users uauthuser=new Users();		
+	
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
 		try {
@@ -188,32 +184,7 @@ public class InfoController {
 	}
 
 	//판매업체 좋아요
-<<<<<<< HEAD
-	@ResponseBody
-	@PostMapping("/businessinfo/likes")
-	public Long registLikes(@RequestParam("bno") Integer bno) {
-		System.out.println("controller : " + bno);
-		Likes likes = new Likes();
-		Users uauthuser = new Users();
-		Long likescheck = null;
-		Integer userno = 0;
-		try {
-			//사용자가 로그인 했을 때 
-			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
-				uauthuser = (Users)session.getAttribute("authUser");
-				userno = uauthuser.getUserno(); //userno 를 가져온다.
-			}
-			likes.setBno(bno);
-			likes.setUserno(userno);
-			likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
-			if(likescheck == null) { //처음 눌렀을 때
-				likesService.registBlikes(likes);//좋아요 생성
-				likesService.upBusinessLikes(likes); // 좋아요 up and down
-			}else{
-				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getBlikescheck(likes));//좋아요 생성
-				likesService.updateBlikes(likes);	// 좋아요 up and down			
-=======
+
 		@ResponseBody
 		@PostMapping("/businessinfo/likes")
 		public Long registLikes(@RequestParam("bno") Integer bno) {
@@ -242,7 +213,6 @@ public class InfoController {
 				likescheck = likesService.getBlikescheck(likes);
 			}catch(Exception e) {
 				e.printStackTrace();
->>>>>>> b042f049f25f9fd9f3fa74e7c27b7ad403f62d5a
 			}
 			return likescheck;
 		}

@@ -245,10 +245,6 @@
 			bli += "</ul>"
 			bli += "</div>"			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
-<<<<<<< HEAD
-			console.log(markers2);			
-=======
-			console.log(markers2);
 			$(function () {
 				$("#heart_img").on("click", function(e) {
 					var logincheck = "${logincheck}"; //false
@@ -275,8 +271,7 @@
 						})
 					});
 				});	
->>>>>>> b042f049f25f9fd9f3fa74e7c27b7ad403f62d5a
-		},	
+			},	
 		error: function(){alert("조건 전송 오류");}
 		}); //ajax 
 

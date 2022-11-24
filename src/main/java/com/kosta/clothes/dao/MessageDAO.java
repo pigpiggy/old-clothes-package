@@ -14,12 +14,14 @@ public interface MessageDAO {
 	void insertMessage(MessageVO message) throws Exception;
 	List<MessageVO> uRecvMessage(Map map) throws Exception;
 	List<MessageVO> bRecvMessage(Map map) throws Exception;
-	List<MessageVO> uSendMessage(Integer sendUserno) throws Exception;
-	List<MessageVO> bSendMessage(Integer sendUserno) throws Exception;
+	List<MessageVO> uSendMessage(Map map) throws Exception;
+	List<MessageVO> bSendMessage(Integer mno) throws Exception;
 	void deleteMessage(Integer mno) throws Exception;
 	MessageVO uRecvViewMessage(Integer mno) throws Exception;
 	MessageVO bRecvViewMessage(Integer mno) throws Exception;
 	MessageVO uSendViewMessage(Integer mno) throws Exception;
 	MessageVO bSendViewMessage(Integer mno) throws Exception;
-	Integer selectMessageCount() throws Exception;
+	Integer selectRmessageCount(Integer recvUserno) throws Exception;
+	Integer selectSmessageCount(Integer sendUserno) throws Exception;
+
 }

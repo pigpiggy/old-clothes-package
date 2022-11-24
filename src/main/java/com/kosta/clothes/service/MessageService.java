@@ -12,8 +12,8 @@ public interface MessageService {
 	//
 	List<MessageVO> uRecvMessage(Map map) throws Exception;
 	List<MessageVO> bRecvMessage(Map map) throws Exception;
-	List<MessageVO> uSendMessage(Integer sendUserno, Integer page, PageInfo pageInfo) throws Exception;
-	List<MessageVO> bSendMessage(Integer sendUserno, Integer page, PageInfo pageInfo) throws Exception;
+	List<MessageVO> uSendMessage(Integer sendUserno, Integer spage, PageInfo pageInfo) throws Exception;
+	List<MessageVO> bSendMessage(Integer sendUserno, Integer spage, PageInfo pageInfo) throws Exception;
 	void deleteMessage(Integer mno) throws Exception;
 	MessageVO uRecvViewMessage(Integer mno) throws Exception;
 	MessageVO bRecvViewMessage(Integer mno) throws Exception;

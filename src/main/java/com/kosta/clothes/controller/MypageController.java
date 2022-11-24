@@ -35,11 +35,14 @@ public class MypageController {
 	}
 	
 	@GetMapping ("/mypage/message")
-	String myMessage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
+	String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
+			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
+			@RequestParam(value = "select", required = false, defaultValue = "0") Integer select) {
 		List<MessageVO> rmessageList = new ArrayList<>();
 		List<MessageVO> smessageList = new ArrayList<>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		PageInfo pageInfo = new PageInfo();
+		PageInfo rpageInfo = new PageInfo();
+		PageInfo spageInfo = new PageInfo();
 		try {
 	         Business bauthuser = new Business();
 	         String sect;
@@ -47,22 +50,27 @@ public class MypageController {
 	         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 	            uauthuser = (Users) session.getAttribute("authUser");
 	            map.put("recvUserno", uauthuser.getUserno());
-	            map.put("page", page);
-	            map.put("pageInfo", pageInfo);
+	            map.put("rpage", rpage);
+	            map.put("pageInfo", rpageInfo);
 	            rmessageList = messageService.uRecvMessage(map);
-	            smessageList = messageService.uSendMessage(uauthuser.getUserno(),page,pageInfo);
+	            smessageList = messageService.uSendMessage(uauthuser.getUserno(),spage,spageInfo);
 	            model.addAttribute("recvmessage", rmessageList);
 	            model.addAttribute("sendmessage", smessageList);
+	            model.addAttribute("rpageInfo", rpageInfo);
+	            model.addAttribute("spageInfo", spageInfo);
+	            model.addAttribute("select", select);
 	            
 	         } else {
 	            bauthuser = (Business) session.getAttribute("authUser");
 	            map.put("recvUserno", bauthuser.getBno());
-	            map.put("page", page);
-	            map.put("pageInfo", pageInfo);
+	            map.put("page", rpage);
+	            map.put("pageInfo", rpageInfo);
 	            rmessageList = messageService.bRecvMessage(map);
-	            smessageList = messageService.bSendMessage(bauthuser.getBno(),page,pageInfo);
+	            smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
 	            model.addAttribute("recvmessage", rmessageList);
 	            model.addAttribute("sendmessage", smessageList);
+	            model.addAttribute("pageInfo", rpageInfo);
+	            model.addAttribute("select", select);
 	         }
 		}catch(Exception e) {
 			e.printStackTrace();

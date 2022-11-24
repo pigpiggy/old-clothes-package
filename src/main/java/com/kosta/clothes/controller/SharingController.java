@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
@@ -119,21 +120,37 @@ public class SharingController {
 				String[] fidArr = sharing.getSfileids().split(","); // 1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌
 				mav.addObject("files", fidArr);
 			}
-			Users users = (Users) session.getAttribute("authUser");
-			
-			if (users == null) {
+			Business bauthuser=new Business();
+			String sect;
+			Users uauthuser=new Users();
+			if(session.getAttribute("authUser") != null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+					uauthuser = (Users) session.getAttribute("authUser");
+					sect = uauthuser.getSect();
+				} else {
+					bauthuser = (Business) session.getAttribute("authUser");
+					sect = bauthuser.getSect();
+				}
+				System.out.println(sect);
+				model.addAttribute("sect", sect);
+			}
+			//개인
+			if (uauthuser.getUserno() == null && bauthuser.getBno() == null) {
 				model.addAttribute("logincheck", "false");
-			} else {
+			} else if (uauthuser.getUserno() != null){
 				Likes likevo = new Likes();
 				likevo.setSno(sno);
-				likevo.setUserno(users.getUserno());
+				likevo.setUserno(uauthuser.getUserno());
 				Long likeselect = likesService.getSlikescheck(likevo);
 				if (likeselect != null) {
 					mav.addObject("likes", likeselect);
 				}
+			}else {
+				
 			}
 			Users uservo = new Users();
 			uservo = sharingService.getSnickname(sno);
+			System.out.println("sharingviewuservo"+uservo);
 			model.addAttribute("uservo", uservo);
 			model.addAttribute("submitcheck", submitcheck);
 			mav.addObject("sharing", sharing);

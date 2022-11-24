@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -18,10 +17,10 @@
 <body>
 	<div>
 		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
-	</div>
+	</div>	
     <div class="messageContainer">
     <h2><strong>쪽지함</strong></h2>
-    <div id="demo-modal" class="modal">
+    <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
       			<form action="smessage" method="post" id="messageform">
       			</form>
@@ -75,7 +74,7 @@
            </c:forEach>
           </tbody>
         </table>
-        <div id="view-modal" class="modal">
+        <div id="view-modal" class="firstmodal">
       		<div class="modalContent"></div>
   		</div>
         <%-- 보낸쪽지함 --%>
@@ -108,7 +107,7 @@
            </c:forEach>
           </tbody>
         </table>
-        <div id="view-modal2" class="modal">
+        <div id="view-modal2" class="firstmodal">
       		<div class="modalContent2"></div>
   		</div>
 		<div class="center">

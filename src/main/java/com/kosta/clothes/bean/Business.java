@@ -17,10 +17,18 @@ public class Business {
 	private Double bstar; //별점
 	private Date regDate; //날짜
 	private String sect;//개인과사업의 구분
-	private Long reviewcount;
+	private Long reviewcount;		
+	private Long likescheck;		
+	private String category; //카테고리 종류 	
+	
+	
 		
-	private Long likescheck;
-		
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public Long getReviewcount() {
 		return reviewcount;
 	}
@@ -122,7 +130,7 @@ public class Business {
 	
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
 			String bphone, String bpassword, String bnumber, Double bstar, Date regDate, String sect, Long reviewcount,
-			Long likescheck) {
+			String category, Long likescheck) {
 		super();
 		this.bno = bno;
 		this.bname = bname;
@@ -137,6 +145,7 @@ public class Business {
 		this.regDate = regDate;
 		this.sect = sect;
 		this.reviewcount = reviewcount;
+		this.category = category;
 		this.likescheck = likescheck;
 	}
 	public Business() {
@@ -148,11 +157,6 @@ public class Business {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress
 				+ ", bdetailadd=" + bdetailadd + ", bkakaoid=" + bkakaoid + ", bphone=" + bphone + ", bpassword="
 				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + ", sect=" + sect
-				+ ", reviewcount=" + reviewcount + ", likescheck=" + likescheck + "]";
+				+ ", reviewcount=" + reviewcount + ", category=" + category + ", likescheck=" + likescheck + "]";
 	}
-	
-	
-	
-
-	
 }

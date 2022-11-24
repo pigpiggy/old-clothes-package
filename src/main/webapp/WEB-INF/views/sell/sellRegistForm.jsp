@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>개인판매 상품 등록</title>
@@ -43,8 +44,8 @@
 					</div>
 						<div id="dealarea">
 							<span class="sellfont">거래지역:</span> 
-							<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
-							<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
+							<input class="postarea" id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
+							<input class="postarea" name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
 							<input type="hidden" name="addressCity" id="jibun_si" />
 							<input type="hidden" name="addressTown" id="jibun_dong" />
 						</div>

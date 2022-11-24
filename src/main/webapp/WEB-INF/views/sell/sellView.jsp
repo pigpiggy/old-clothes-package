@@ -94,12 +94,12 @@
          	</c:otherwise>
 		</c:choose>
         </div>
-		        <div id="ireview">거래후기: 12건</div>
+		        <div id="ireview">거래 후기: 12건</div>
+		      	<span>신청 인원 : ${sell.applycount }명</span>
 		        <div id="sbtn">
 		        	<input type="button" class="btn btn-info" value="옷장열기" />
 		        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
         		</div>
-        <div>현재 신청 인원 : 3명</div>
         <!-- Swiper JS -->
       </section>
       <div class="icontent">

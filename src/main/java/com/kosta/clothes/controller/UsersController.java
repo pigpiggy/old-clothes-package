@@ -55,7 +55,8 @@ public class UsersController {
 	
 		System.out.println("usersController:" + users.toString());
 		try {
-			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에] 
+			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에]
+			model.addAttribute("msg", "개인회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -70,6 +71,7 @@ public class UsersController {
 		System.out.println("usersController:" + business.toString());
 		try {
 			certificationService.insertBusiness(business); //사용자가 입력한 정보를 DB에 전달[Service에]
+			model.addAttribute("msg", "업체회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

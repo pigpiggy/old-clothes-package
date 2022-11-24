@@ -319,8 +319,4 @@ public class SharingController {
 		return sharingList;
 
 	}
-	
-
-	
 }
-

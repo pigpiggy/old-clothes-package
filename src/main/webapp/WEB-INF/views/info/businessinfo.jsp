@@ -7,75 +7,86 @@
 <meta charset="UTF-8">
 <title>판매업체</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
-
+<link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
-#map {
-	left: 4%;	
-	width:40%;
-	height:500px;
-	margin:40px;
-}	
-
-#selectbox {
-	padding-left: 10%;
-	padding-top:5%;
+/* #name {
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+#address {
+	height: 25px;
+    width: 280px;
+    margin:15px;
 }
 
-#allbusiness{
+#weight{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+ #phone{
+ 	height: 25px;
+    width: 280px;
+    margin:15px;
+ }
+#day{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+} */
+label{
+	flex:1;
+	text-align: left;
+}
+.form>div {
 	display:flex;
+	margin-bottom: 20px;
+	justify-content: center;
+	padding-bottm:7px;
+	align-items:center;	
 }
-
-
-#blist {
-	justify-content:center;	
-	left:4%;
-	top:39px;
-	position: relative;
-    display: inline-block;
-    vertical-align: top;
-    width: 45%;
-    height: 500px;
-    overflow-y: scroll;
-    background: #fff;
-    z-index: 2;
+.allapply{	
+	padding: 5px 20px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width:360px; height: 265px;
+	margin-left: -220px;
+	margin-top: -170px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items:center;
 }
-#finalbusin{
-	background-color:#f7f7f7;
+.form{
+	witdh:300px;
 }
-
-#heart_img {
-	width:25px;
+.allapply>button{
+	width:85px;
+	float:right;
+	padding:3px;
 }
-
-#listmove{
-	border:1px solid black;
+.form>div>input{	
+	width:250px;
+	margin-left:15px;
+	padding:5px;
 }
-#star{
-	position:absolute;
-	width:100%;
-	overflow:hidden;
-	color:#cdcdcd;
+#alladdress{
+	display:block;
 }
-#starEnd{
-	position:absolute;
-	overflow:hidden;
-	white-space:nowrap;	
-}
-#totalstar{
-	position:relative;
-	width:120px;
-}
-#cate {
-	left: 80%;
+.allbutton>button{
+   display:inline-block;
+   width:100px;
+   height:25px;
+   margin-left:calc(50% - 100px - 10px);
 }
 </style>
-<script>
-
-</script>
 </head>
 <body>	
 		<div>
@@ -91,13 +102,14 @@
 				<select id="sigugun"><option value="">선택</option></select>
 			</div>	
 			
-			<div>
+			<div class="search-box">
 				<%-- 텍스트: <span id="dongName"></span><br/>--%>
-				<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-				<input type="button" id="searchBtn" value="검색">
+				<input type="text" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+				<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
 			</div>
 			<div id="cate" class="select">
 			<select id="catelist" onchange="catelist()">
+				<option value="">선택하세요</option>
 				<option value="review">후기 많은순</option>
 				<option value="high">높은 평점순</option>
 				<option value="low">낮은 평점순</option>
@@ -109,9 +121,58 @@
 			<div id="map"></div>				
 			<div id="blist"></div>				
 		</div>
+		<div id="modal">
+   
+		    <div class="modal_content">
+		        <h2>[헌옷 수거 신청]</h2>
+		       
+		        <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+		        
+		        <div class="allapply">
+		        <form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">		       
+			        <div>
+			        	<label>이름  </label>
+			        	<input type="text" id="aname" name="aname" placeholder="ex)홍길동">
+			        </div>
+			        <div>
+			        	<label>주소  </label>
+				        <input type="text" id="aaddress" name="aaddress" readonly onclick="findAddr()" placeholder="여기 클릭해주세요.">
+			        </div>
+			        <div>
+			            <label></label>
+			           	<input type="text" id="adetailaddress" name="adetailaddress" placeholder="ex)101동101호">			        	
+				
+			        </div>
+			        
+			        
+			        <div>
+			        	<label>옷 무게  </label>
+			        	<input type="text" id="weight" name="weight" placeholder="ex)30">
+			        </div>		  		  		             		      
+			        <div>
+			        	<label>전화 번호  </label>
+			        	<input type="text" id="aphone" name="aphone" placeholder="ex)-입력하지 마세요.">
+			        </div>
+			        <div>
+			        	<label>희망 날짜  </label>
+			        	<input type="text" id="apickup" name="apickup" placeholder="ex)시간 선택 조절 하세요">
+			        </div>
+		        	<div style="margin-top:10%" class="allbutton">     		       
+				        <button type="submit" form="form"id="applycloth">수거 신청</button>
+				        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+				    </div>		
+				    <input type="hidden" id="bno" name="bno" value="">	   
+			     </form>		        		
+		        </div>		      	       
+		    </div>
+		   
+		    <div class="modal_layer"></div>
+		</div>
+    
+		
 		
 	</div>
-	<script>
+	<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
@@ -178,7 +239,7 @@
 				console.log("찍히나 " +data.baddress);				
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<p>' + data.bname + '</p>';
+				bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
 				console.log("너냐" + bbno);
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<img src="/image/heart.png" id="heart_img">';
@@ -205,9 +266,12 @@
 				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
-				bli += '<p>' + data.baddress + ' ' + data.bdetailadd + '</p>';
-				bli += '<div id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
-				bli += '<button id="applymodal">신청서 작성</button>';
+				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
+				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+				if(authsect == 'users'){
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
+				}								
 				bli += '</li>' ;
 				
 				var businaddress = data.baddress;
@@ -289,14 +353,49 @@
 						      supportMultipleDensities: true,
 						    });
 						});
+			            //모달 켜기
+			            $(".buttonapply"+data.bno+"").click(function(){
+			            	 document.getElementById("modal").style.display="block";
+			            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+			            	 document.getElementById("bno").value=bno;
+			            	 
+			            });
+			           
+			            
+			            	
 					}//status 상태
 				})//geocoder 
 			}); //data.forEach							
 			bli += "</ul>"
 			bli += "</div>"			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
-			console.log(markers2);			
-		},	
+			$(function () {
+				$("#heart_img").on("click", function(e) {
+					var logincheck = "${logincheck}"; //false
+					let bno = businbno;					
+					console.log(bno + "gnmng");					
+					if(logincheck == "false") {
+						alert("로그인 후 이용해주세요.")
+						location.href="/login";
+					}
+					$.ajax({
+							type: "post",
+							url: "/businessinfo/likes",
+							data: {bno:bno},
+							success: function(data) {
+								console.log(data);
+								if(data == 1) {
+									$("#heart_img").attr("src", "/image/redheart.png");
+								} else {
+				                    $("#heart_img").attr("src", "/image/heart.png");
+								}
+							}, error: function() {
+				                console.log('바보야!')
+							}
+						})
+					});
+				});	
+			},	
 		error: function(){alert("조건 전송 오류");}
 		}); //ajax 
 
@@ -418,6 +517,7 @@
 	        info2[i]?.setMap(map);
 	    }            
 	}		
+	
 	//카테고리별 리스트 출력
 	function catelist(){
 		let category = $("#catelist option:selected").val(); //selectbox에서 sido 선택값
@@ -448,7 +548,7 @@
 					console.log("찍히나 " +data.baddress);				
 					var bbno = data.bno;				
 					bli += '<li class="listdnames" id="listmove">' ;
-					bli += '<p>' + data.bname + '</p>';
+					bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
 					console.log("너냐" + bbno);
 					if(auth==""){ //둘 다 로그인 안했을 때 
 						bli += '<img src="/image/heart.png" id="heart_img">';
@@ -475,10 +575,14 @@
 					bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
 					bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 					bli += '</div>';
-					bli += '<p>' + data.baddress + ' ' + data.bdetailadd + '</p>';
-					bli += '<div id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
-					bli += '<button id="applymodal">신청서 작성</button>';
+					bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
+					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+					if(authsect == 'users'){
+						bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
+					}
 					bli += '</li>' ;
+					
 					
 					var businaddress = data.baddress;
 					var businname = data.bname;
@@ -559,6 +663,13 @@
 							      supportMultipleDensities: true,
 							    });
 							});
+				            //모달 켜기
+				            $(".buttonapply"+data.bno+"").click(function(){
+				            	 document.getElementById("modal").style.display="block";
+				            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+				            	 document.getElementById("bno").value=bno;
+				            	 
+				            });
 						}//status 상태
 					})//geocoder 
 				}); //data.forEach							
@@ -569,13 +680,56 @@
 			},	
 			error: function(){alert("구,동 검색 먼저해주세요.");}
 			});
-	}
+		}
+		 //모달 닫기
+		 $("#modal_close_btn").click(function(){
+			 document.getElementById("modal").style.display="none";
+	     });
+		 //날짜 
+		  $(function(){
+		 $("#apickup").datepicker({
+			    language: 'ko',
+			    timepicker: true,
+			    timeFormat: "hh:ii AA"
+			});	
+		  });
+		  
+		//주소 찾기
+		  function findAddr(){
+		  	new daum.Postcode({
+		          oncomplete: function(data) {
+		              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		              var roadAddr = data.roadAddress; // 도로명 주소 변수
+		              
+		              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		             
+		              if(roadAddr !== ''){
+		                  document.getElementById("aaddress").value = roadAddr;
+		                  
+		              } 
+		          }
+		      }).open();
+		  }
+		//msg 체크
+		var msg ="${msg}";
+		if(msg != ""){
+			alert(msg);
+		}
+		
+	
+
 	</script>
 	
 	<%--js 불러오기 --%>
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
-      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>    
+	<script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/businessinfo.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/validations.js'/>"></script>
 </body>
 </html>

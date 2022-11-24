@@ -21,9 +21,18 @@
 	</div>
 	
 	<div class="board_wrap">
-		<div class="board_title">
-			<strong>자유게시판</strong>
-		</div>		
+		<div id="subjectAndSearch">
+			<div class="board_title">
+				<strong>자유게시판</strong>
+			</div>		
+			<div class="search-box">
+		      	<form id="search_form" action="freeList" method="get">
+		        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
+		        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+		        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
+		        </form>
+	      	</div>
+		</div>
 		<div class="board_list_wrap">
 			<div class="board_list">
 				<div class="top">
@@ -46,44 +55,40 @@
 				</div>
 				</c:forEach>						
 			</div>
-			<ul id="pagination">
-			<c:choose>
-				<c:when test="${pageInfo.page<=1}">
-					<li><<&nbsp;</li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="freeList?page=${pageInfo.page-1}"><<</a></li>&nbsp;
-				</c:otherwise>
-			</c:choose>
-			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			<div class="center">
+				<ul class="pagination">
 				<c:choose>
-					<c:when test="${pageInfo.page==i }"><li>${i }</li></c:when>
+					<c:when test="${pageInfo.page<=1}">
+						<li><a id="prev"><<</a></li>
+					</c:when>
 					<c:otherwise>
-						<li><a href="freeList?page=${i}">${i }</a></li>
+						<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
-			<c:choose>
-				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					<li>>></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="freeList?page=${pageInfo.page+1}">>></a></li>
-				</c:otherwise>
-			</c:choose>
-			</ul>							
-		<div class="search-box">
-	      	<form id="search_form" action="freeList" method="get">
-	        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
-	        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
-	        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
-	        </form>
-      	</div>
+				<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+					<c:choose>
+						<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:otherwise>
+							<li><a href="freeList?page=${i}">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+						<li><a id="next">>></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>		
+		</div>					
 			<div class="bt_wrap">
 			<c:if test="${!empty authUser}">
 				<a href="freeRegistForm" class="on">글쓰기</a> </c:if>
 			</div>
 		</div>
 	</div>
+	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

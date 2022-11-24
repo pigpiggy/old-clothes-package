@@ -12,16 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Donation;
 import com.kosta.clothes.bean.Likes;
-import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Trash;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.BusinessService;
@@ -109,6 +110,7 @@ public class InfoController {
 		return list;
 	}
 	
+
 	//판매 업체 jsp 넘겨주는것	
 	@GetMapping("/businessinfo")
 	public String businessinfo(Model model) {
@@ -139,7 +141,6 @@ public class InfoController {
 				System.out.println("userslist : " + list);	
 				model.addAttribute("list",list);
 			}
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -155,18 +156,20 @@ public class InfoController {
 		String sido = (String) params.get("sido");		
 		String sigungu = (String) params.get("sigugun");
 		Integer userno =0;
-        Users uauthuser=new Users();
+        Users uauthuser=new Users();			
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
 		try {
 			//사용자가 로그인 했을 때 
 			if(session.getAttribute("authUser")!=null) {
+				//사용자가 로그인했을 때 
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            
 		            business = businessService.allBusinessInfo1(sido, sigungu, userno);
 		            System.out.println("ㅁㅁ" + business);
-				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){//업체가 로그인 했을 때 
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+					//업체가 로그인 했을 때 
 					business = businessService.allBusinessInfo(sido,sigungu);
 					System.out.println("bb" + business);
 				}
@@ -179,40 +182,42 @@ public class InfoController {
 		}
 		return business;
 	}
-	
-	
+
 	//판매업체 좋아요
-	@ResponseBody
-	@PostMapping("/businessinfo/likes")
-	public Long registLikes(@RequestParam("bno") Integer bno) {
-		System.out.println("controller : " + bno);
-		Likes likes = new Likes();
-		Users uauthuser = new Users();
-		Long likescheck = null;
-		Integer userno = 0;
-		try {
-			//사용자가 로그인 했을 때 
-			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
-				uauthuser = (Users)session.getAttribute("authUser");
-				userno = uauthuser.getUserno(); //userno 를 가져온다.
+
+
+		@ResponseBody
+		@PostMapping("/businessinfo/likes")
+		public Long registLikes(@RequestParam("bno") Integer bno) {
+			Likes likes = new Likes();
+			Long likescheck = null;
+			Users uauthuser=new Users();
+			Integer userno=0;
+			try {
+				//개인이 로그인 했을 때 
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+					uauthuser = (Users) session.getAttribute("authUser");
+					userno = uauthuser.getUserno();
+				}
+				likes.setBno(bno);
+				likes.setUserno(userno);
+				
+				likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
+				if(likescheck == null) { //처음 눌렀을 때
+					likesService.registBlikes(likes);
+					likesService.upBusinessLikes(likes);
+				}else{
+					System.out.println("1일때"+ likescheck);
+					likes.setLikescheck(likesService.getBlikescheck(likes));
+					likesService.updateBlikes(likes);				
+				}
+				likescheck = likesService.getBlikescheck(likes);
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			likes.setBno(bno);
-			likes.setUserno(userno);
-			likescheck = likesService.getBlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
-			if(likescheck == null) { //처음 눌렀을 때
-				likesService.registBlikes(likes);//좋아요 생성
-				likesService.upBusinessLikes(likes); // 좋아요 up and down
-			}else{
-				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getBlikescheck(likes));//좋아요 생성
-				likesService.updateBlikes(likes);	// 좋아요 up and down			
-			}
-			likescheck = likesService.getBlikescheck(likes);
-		}catch(Exception e) {
-			e.printStackTrace();
+			return likescheck;
 		}
-		return likescheck;
-	}
+		
 	
 	
 	//카테코리 검색 결과 
@@ -232,17 +237,19 @@ public class InfoController {
 		try {
 			//사용자가 로그인 했을 때 
 			if(session.getAttribute("authUser")!=null) {
+				//사용자가 로그인 했을 때
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            
-		            business = businessService.allBusinessInfo3(sido, sigungu, userno,category);
+		            business = businessService.cateusers(sido, sigungu, userno,category);
 		            System.out.println("ㅁㅁ" + business);
-				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){//업체가 로그인 했을 때 
-					business = businessService.allBusinessInfo2(sido,sigungu,category);
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+					//업체가 로그인 했을 때 
+					business = businessService.cateException(sido,sigungu,category);
 					System.out.println("bb" + business);
 				}
 			}else {// 그외
-				business = businessService.allBusinessInfo2(sido,sigungu,category);
+				business = businessService.cateException(sido,sigungu,category);
 				System.out.println("bb" + business);
 			}
 		}catch(Exception e) {
@@ -250,4 +257,19 @@ public class InfoController {
 		}
 		return business;
 	}
+	
+	//신청 작성하기 
+	@PostMapping("/apply")
+	public String apply(@ModelAttribute Apply apply, Model model) {
+		System.out.println(apply.getBno());
+		try {
+			Users userno = (Users) session.getAttribute("authUser");
+			apply.setUserno(userno.getUserno());
+			businessService.registapply(apply);
+			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "info/businessinfo";
+	}		
 }

@@ -24,11 +24,11 @@ public interface LikesDAO {
 	void downIlikescheck(Likes likes) throws Exception;
 	void deleteIlikes(Integer ino) throws Exception;
 	Long getLikescheck(Likes likes) throws Exception;
-	
 	//판매업체 관려
 	List<Likes> getbno(Integer userno) throws Exception;
 	void insertBlikes(Likes likes) throws Exception;
 	void upBlikes(Likes likes) throws Exception;
 	void downBlikes(Likes likes) throws Exception;
 	Long getBlikescheck(Likes likes) throws Exception;
+
 }

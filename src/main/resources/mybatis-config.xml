@@ -15,7 +15,7 @@
 		<mapper resource="mybatis/mappers/apply.xml"/>
 		<mapper resource="mybatis/mappers/business.xml"/>
 		<mapper resource="mybatis/mappers/sell.xml"/>
-		
+		<mapper resource="mybatis/mappers/notice.xml"/>
 	</mappers>
 </configuration>
 

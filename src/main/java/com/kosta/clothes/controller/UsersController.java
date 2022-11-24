@@ -194,7 +194,7 @@ public class UsersController {
     		System.out.println("password:"+password);
     		authUser = usersService.login(userid,password);
     		
-    		System.out.println("너냐 : " +authUser);
+    		System.out.println("너냐11 : " +authUser);
     		if(authUser == null) {
     			String businessid = id;
     			String bpassword = password;

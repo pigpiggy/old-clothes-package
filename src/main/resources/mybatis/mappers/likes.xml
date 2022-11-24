@@ -93,7 +93,7 @@
 <!-- 판매업체 -->
 	<select id="getbno" resultType="Likes" parameterType="Integer">
 		<![CDATA[
-			select bno , likescheck
+			select bno,likescheck
 			from likes
 			where userno=#{userno} 
 		]]>

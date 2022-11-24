@@ -182,7 +182,7 @@
 	</select>
 	
 		<!--비밀번호 체크[개인] -->
-	<select id="checkpass" parameterType="String" resultType="String">
+	<select id="checkupass" parameterType="String" resultType="String">
 		<![CDATA[
 			SELECT password
 			FROM users 
@@ -264,6 +264,29 @@
 			where userno = #{userno}
 		]]>
 	</delete>
+	
+		<!--비밀번호 체크[업체] -->
+	<select id="checkbpass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT bpassword
+			FROM business 
+			WHERE businessid=#{id}
+		]]>
+	</select>
+	<!-- 업체정보ㅎ수정 -->
+	<update id="updatebusiness" parameterType="business">
+		<![CDATA[
+			update business 
+			set bname = #{bname},
+				bpassword = #{bpassword},
+				bphone = #{bphone},
+				baddress = #{baddress},
+				bdetailadd=#{bdetailadd},
+				bkakaoid=#{bkakaoid},
+				bnumber=#{bnumber
+			where businessid = #{businessid}
+		]]>
+	</update>
 </mapper>
 
 

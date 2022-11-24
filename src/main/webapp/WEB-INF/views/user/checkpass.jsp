@@ -40,7 +40,7 @@
                     	<!-- <h3 class="text-uppercase text-center mb-5">아이디 찾기</h3> -->
                     	<c:if test="${authUser.sect eq 'users'}">						
                     		<form action="upasscheck" method="POST">               			
-								<div id=searchidform>
+								<div id=checkupassform>
 									<br>
 									<p>개인비밀번호를 입력해주세요.</p>
 									
@@ -58,7 +58,7 @@
                     	</c:if>
                     	<c:if test="${authUser.sect eq 'business'}">						
                     		<form action="bpasscheck" method="POST">               			
-								<div id=searchidform>
+								<div id=checkbpassform>
 									<br>
 									<p>업체비밀번호를 입력해주세요.</p>
 									

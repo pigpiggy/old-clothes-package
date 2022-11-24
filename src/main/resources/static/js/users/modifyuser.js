@@ -12,7 +12,7 @@ $(function(){
    $('#nicknamecheck').click(function(){
       var nickname =$('#nickname').val(); //사용자가 입력한 id값 
       var checkPname = document.getElementById("nickname");
-      var test = document.getElementById("check_nick").value;
+      var hidden = document.getElementById("check_nick").value;
       
       console.log("texsst"+test);
       console.log(nickname);
@@ -21,7 +21,7 @@ $(function(){
          url : "http://localhost:8088/nickname",
          data : {nickname:nickname},
          success:function(data,textStatus){
-	 		if(nickname==test){
+	 		if(nickname==hidden){
 				alert("사용가능한 닉네임입니다..");
                 $('#nicknamecheck').hide();
        			$('#checkednickname').show();

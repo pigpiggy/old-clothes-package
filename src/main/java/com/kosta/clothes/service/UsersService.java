@@ -31,8 +31,11 @@ public interface UsersService {
 		
 		public boolean countPN(String phone) throws Exception;//번호로 가입된 아이디 수 체크
 		
-		public String checkpass(String id) throws Exception; //비밀번호 확인용
+		public String checkupass(String id) throws Exception; //개인비밀번호 확인용
 		public void modifyuser(Users user) throws Exception; //개인회원정보수정 
 		public void deleteuser(Integer userno) throws Exception; //개인탈퇴
+		
+		public String checkbpass(String id) throws Exception; //업체비밀번호 확인용
+		public void modifybusiness(Business business) throws Exception; //개인회원정보수정 
 		
 }

@@ -23,8 +23,8 @@ public class CertificationService implements UsersService {
 
 	//번호 3개 이상 체크
 	public boolean countPN(String phone) throws Exception{
-		Integer uIdCount = usersDao.countUserIdbyPN(phone);
-		Integer bIdCount = usersDao.countBusinessIdbyPN(phone);
+		Integer uIdCount = usersDao.countUserIdbyPN(phone); //개인 아이디 수
+		Integer bIdCount = usersDao.countBusinessIdbyPN(phone); //업체 아이디 수
 		if((uIdCount+bIdCount) >= 3) {
 			return true;//같은 번호로 가입한 아이디 3개 이상이면 true;
 		}else {
@@ -114,7 +114,7 @@ public class CertificationService implements UsersService {
 		public Users login(String userid, String password) throws Exception {
 			System.out.println("개인 : " + userid);
 			System.out.println("개인 : " + password);
-			Map<String,String> map = new HashMap<String, String>();
+			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("userid", userid);
 			map.put("password", password);
 			System.out.println("결과값 : " + map);
@@ -125,7 +125,7 @@ public class CertificationService implements UsersService {
 		public Business blogin(String businessid, String bpassword) throws Exception {
 			System.out.println(businessid);
 			System.out.println(bpassword);
-			Map<String,String> map = new HashMap<String, String>();
+			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("businessid", businessid);
 			map.put("bpassword", bpassword);
 			return usersDao.selectbAccount(map);
@@ -133,12 +133,12 @@ public class CertificationService implements UsersService {
 
 		@Override
 		public List<String> findUserId(String phone) throws Exception {
-			return usersDao.findUserId(phone);
+			return usersDao.findUserId(phone); //개인 아이디 리스트 조회
 		}
 
 		@Override
 		public List<String> findBusinessId(String bphone) throws Exception {
-			return usersDao.findBusinessId(bphone);
+			return usersDao.findBusinessId(bphone); // 업체 아이디 리스트 조회
 		}
 
 		@Override
@@ -146,7 +146,7 @@ public class CertificationService implements UsersService {
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("userid", userid);
 			map.put("phone", phone);
-			return usersDao.checkUserIdnPhone(map);
+			return usersDao.checkUserIdnPhone(map); //아이디와 전화번호로 개인 체크
 		}
 
 		@Override
@@ -154,36 +154,36 @@ public class CertificationService implements UsersService {
 			Map<String,String> map = new HashMap<String, String>();
 			map.put("businessid", businessid);
 			map.put("bphone", bphone);
-			return usersDao.checkBusinessIdnPhone(map);
+			return usersDao.checkBusinessIdnPhone(map); //아이디와 전화번호로 업체 체크
 		}
 
 		@Override
 		public void changePass(String userid, String password) throws Exception {
 			System.out.println("userid:"+userid);
 			System.out.println("password:"+password);
-			Map<String,String> map = new HashMap<String, String>();
+			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("userid", userid);
 			map.put("password", password);
-			usersDao.updatepassword(map);
+			usersDao.updatepassword(map); //개인비밀번호 변경
 		}
 
 		@Override
 		public void changebPass(String businessid, String bpassword) throws Exception {
 			System.out.println("businessid:"+businessid);
 			System.out.println("bpassword:"+bpassword);
-			Map<String,String> map = new HashMap<String, String>();
+			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("businessid", businessid);
 			map.put("bpassword", bpassword);
-			usersDao.updatebpassword(map);
+			usersDao.updatebpassword(map); //업체비밀번호 변경
 		}
 
-		//비밀번호 확인용
+		//개인비밀번호 확인용
 		@Override
-		public String checkpass(String id) throws Exception {
-			return usersDao.checkpass(id);
+		public String checkupass(String id) throws Exception {
+			return usersDao.checkupass(id);
 		}
 
-		//회원정보수정
+		//개인회원정보수정
 		@Override
 		public void modifyuser(Users user) throws Exception {
 			usersDao.updateuser(user);
@@ -194,6 +194,19 @@ public class CertificationService implements UsersService {
 		@Override
 		public void deleteuser(Integer userno) throws Exception {
 			usersDao.deleteuser(userno);
+			
+		}
+
+		//업체비밀번호 확인용
+		@Override
+		public String checkbpass(String id) throws Exception {
+			return usersDao.checkbpass(id);
+		}
+
+		//개인회원정보수정
+		@Override
+		public void modifybusiness(Business business) throws Exception {
+			usersDao.updatebusiness(business);
 			
 		}
 

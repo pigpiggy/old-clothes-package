@@ -51,7 +51,7 @@
 									<div id=personalform>
 									<form action="modifyuser" method="POST" onsubmit="return Validation();">
 				                        <div class="form-outline mb-4" style="display:flex;">
-				                        	<input type="hidden" name="no" value="${Uauthuser.userno }">
+				                        	<input type="hidden" name="userno" value="${Uauthuser.userno }">
 				                        	<input type="hidden" name="sect" value="users"/>
 					                        <label class="form-label" for="nickname" style="position:absolute; margin:2.5%;" >닉네임<span class="req">*</span></label>
 					                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" value="${Uauthuser.nickname }"/>
@@ -129,7 +129,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-       	 <form action="retire" method="post">
+       	 <form action="uretire" method="post">
 	        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
 	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
          </form>

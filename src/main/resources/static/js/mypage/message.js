@@ -20,9 +20,15 @@ $(function () {
 			$("#sendtable").css('display','none');
 			$("#recvtable").css('display','table');
 			
+			$(".spaging").css('display','none');
+			$(".rpaging").css('display','table');
+			
 		} else {
 			$("#recvtable").css('display','none');
 			$("#sendtable").css('display','table');
+			
+			$(".rpaging").css('display','none');
+			$(".spaging").css('display','table');
 		}
 	})
 	
@@ -174,5 +180,20 @@ $(function () {
 		}
 	
 	})
+	
+	/* select box 페이징 */
+	var select = $("#selectValue");
+	console.log(select.val());
+	if(select.val()==1) {
+		$("#recv option:eq(1)").attr("selected", "selected");
+	}
+	
+	if($("#recv option:selected").val()=="send") {
+		$("#recvtable").css('display','none');
+		$("#sendtable").css('display','table');
+		
+		$(".rpaging").css('display','none');
+		$(".spaging").css('display','table');
+	}
 	
 })

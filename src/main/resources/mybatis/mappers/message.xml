@@ -18,10 +18,10 @@
 	<!-- 받은쪽지 보낸쪽지 리스트 -->
 	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname 
-			from message m, users u
-			where recvUserno=#{recvUserno} and m.sendUserno=u.userno
-			order by mno desc
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
+			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u 
+			where recvUserno=#{recvUserno} and m.sendUserno=u.userno)
+			where num between #{row} AND #{row}+9 
 		]]>
 	</select>
 	
@@ -34,21 +34,21 @@
 		]]>
 	</select>	
 	
-	<select id="uSendMessage" parameterType="Integer" resultType="MessageVO">
+	<select id="uSendMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
-			from message m, users u
-			where sendUserno=#{sendUserno} and m.recvUserno=u.userno
-			order by mno desc
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
+			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u
+			where sendUserno=#{sendUserno} and m.recvUserno=u.userno)
+			where num between #{row} AND #{row}+9
 		]]>
 	</select>	
 		
 	<select id="bSendMessage" parameterType="Integer" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
-			from message m, business b
-			where sendUserno=#{sendUserno} and m.recvUserno=b.bno
-			order by mno desc
+			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
+			from (select row_number() over (order by mno desc) num, m.*,b.*,b.bname as nickname from message m, BUSINESS b 
+			where sendUserno=#{sendUserno} and m.recvUserno=b.bno)
+			where num between #{row} AND #{row}+9
 		]]>
 	</select>	
 	
@@ -93,13 +93,19 @@
 		]]>
 	</delete>
 	
-	<select id="selectMessageCount" resultType="Integer">
+	<select id="selectRmessageCount" resultType="Integer">
 		<![CDATA[
-			select count(*) from message
+			select count(*) from message m, users u
+			where recvUserno=#{recvUserno} and m.sendUserno=u.userno
 			]]>
 	</select>	
 	
-	
+	<select id="selectSmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, users u
+			where sendUserno=#{sendUserno} and m.recvUserno=u.userno
+			]]>
+	</select>		
 	
 	
 	

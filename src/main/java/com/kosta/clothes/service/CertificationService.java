@@ -177,4 +177,24 @@ public class CertificationService implements UsersService {
 			usersDao.updatebpassword(map);
 		}
 
+		//비밀번호 확인용
+		@Override
+		public String checkpass(String id) throws Exception {
+			return usersDao.checkpass(id);
+		}
+
+		//회원정보수정
+		@Override
+		public void modifyuser(Users user) throws Exception {
+			usersDao.updateuser(user);
+			
+		}
+
+		//회원탈퇴
+		@Override
+		public void deleteuser(Integer userno) throws Exception {
+			usersDao.deleteuser(userno);
+			
+		}
+
 }

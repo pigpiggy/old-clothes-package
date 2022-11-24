@@ -60,7 +60,7 @@ public class UsersController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/login";
+		return "user/loginform";
 	}
 	
 	
@@ -75,7 +75,7 @@ public class UsersController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/login";
+		return "user/loginform";
 	}
 	
 	//동일 번호로 아이디 3개 이상 여부 체크
@@ -318,5 +318,64 @@ public class UsersController {
 	  }
 	  return "user/loginform";
   }
+  
+//비밀번호 확인
+  @GetMapping("/passcheck")
+  public String passcheck() {
+  	return "user/checkpass";
+  }
+  
+  //회원정보 수정 jsp이동
+  @PostMapping("upasscheck")
+  public String upasscheck(@RequestParam("pass") String pass ,Model model){
+	 try {
+		 
+		 Users uauthuser = (Users) session.getAttribute("authUser");
+		 String id = uauthuser.getUserid();
+		 String upass = usersService.checkpass(id);
+		 System.out.println("pass" + pass);
+		 System.out.println("upass" + upass);
+		 if(pass.equals(upass)) {			 		
+			 model.addAttribute("Uauthuser", uauthuser);			 
+		 }else {
+			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			 return "user/checkpass";
+		 }
+	 }catch(Exception e) {
+		 e.printStackTrace();
+	 }
+	 return "user/modifyuser";
+  }
+  
+  //회원정보 수정
+  @PostMapping("modifyuser")
+  public String modifyuser(@ModelAttribute Users user, Model model) {
+	  try {
+		  usersService.modifyuser(user);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","개인회원정보 수정 완료!");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+  
+  //회원 탈퇴
+  
+  @PostMapping("retire")
+  public String retire(Model model) {
+	  try {
+		  Users uauthuser = (Users) session.getAttribute("authUser");
+		  Integer userno = uauthuser.getUserno();
+		  usersService.deleteuser(userno);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","개인 탈퇴 완료!!");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+  
+  
 }
 

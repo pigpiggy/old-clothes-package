@@ -181,7 +181,89 @@
 		]]>
 	</select>
 	
+		<!--비밀번호 체크[개인] -->
+	<select id="checkpass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT password
+			FROM users 
+			WHERE userid=#{id}
+		]]>
+	</select>
+	<!-- 개인정보ㅎ수정 -->
+	<update id="updateuser" parameterType="users">
+		<![CDATA[
+			update users 
+			set nickname = #{nickname},
+				password = #{password},
+				phone = #{phone}			 
+			where userid = #{userid}
+		]]>
+	</update>
 	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteuser" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletesharing" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletelikes" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletefree" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteindivi" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletecommet" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
 </mapper>
 
 

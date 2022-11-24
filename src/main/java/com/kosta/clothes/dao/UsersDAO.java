@@ -35,4 +35,15 @@ public interface UsersDAO {
 	Integer countUserIdbyPN(String phone) throws Exception;//번호와 일치하는 아이디 수 조회[개인]
 	Integer countBusinessIdbyPN(String bphone) throws Exception;//번호와 일치하는 아이디 수 조회[업체]
 
+	String checkpass(String id) throws Exception; //비밀번호 확인용
+	void updateuser(Users user) throws Exception; //개인 회원 정보 수정
+	
+	//회원탈퇴
+	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴 (user)
+	void deletesharing(Integer userno) throws Exception; //개인 회원 탈퇴 (sharing)
+	void deletelikes(Integer userno) throws Exception; //개인 회원 탈퇴 (likes)
+	void deletefree(Integer userno) throws Exception; //개인 회원 탈퇴 (free)
+	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)
+	void deleteapply(Integer userno) throws Exception; //개인 회원 탈퇴 (apply)
+	void deletecommet(Integer userno) throws Exception; //개인 회원 탈퇴 (comment)
 }

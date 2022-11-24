@@ -25,7 +25,7 @@
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
 	<div id="viewcontainer">
-		<div id="demo-modal" class="modal">
+		<div id="demo-modal" class="firstmodal">
       		<div class="modal__content">
       			<form action="smessage" method="post" id="messageform">
       				<input type="hidden" name="recvUserno" value="${uservo.userno }">

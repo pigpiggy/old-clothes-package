@@ -126,13 +126,14 @@ overflow-y: scroll;
 
 .tabs { 
 	display: flex;
-  height: 50px;
-  border-bottom: 2px solid navy;
-
+  	height: 50px;
+  	border-bottom: 2px solid navy;
+	box-sizing: content-box;
 }
 	
 .tabs li {
 	flex: 1;
+	box-sizing: content-box;
 }
 
 .tabs li :first-child a{
@@ -140,16 +141,16 @@ overflow-y: scroll;
 }
 
 .tabs li a {
-	 display: block;
-  height: 50px;
-  border: 1px solid #ddd;
-  border-bottom: none;
-  font-size: 14px;
-  color:#505050;
-  text-align: center;
-  line-height: 52px;
-  text-decoration: none;
-
+	display: block;
+	height: 50px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	font-size: 14px;
+	color:#505050;
+	text-align: center;
+	line-height: 52px;
+	text-decoration: none;
+	box-sizing: content-box;
 }
 
 .tabs li.on a {

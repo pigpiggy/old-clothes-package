@@ -102,6 +102,10 @@ input[type="checkbox"] {
 	cursor: pointer;
 }
 
+.mtitle a{
+	color: black;
+}
+
 #modal__content {
 	height: 375px;
 }

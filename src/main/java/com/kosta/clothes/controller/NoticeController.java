@@ -59,7 +59,7 @@ public class NoticeController {
 			System.out.println("들어옴");
 			ModelAndView mav = new ModelAndView();
 			try {				
-				Notice notice1 = noticeService.Noticehit(nno);
+				 noticeService.Noticehit(nno);
 				Notice notice = noticeService.getNotice(nno);
 				mav.addObject("article", notice);
 				mav.addObject("page", page);

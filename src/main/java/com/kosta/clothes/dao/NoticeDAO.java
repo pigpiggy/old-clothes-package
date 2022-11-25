@@ -17,9 +17,9 @@ public interface NoticeDAO {
 
 	List<Notice> selectNoticeList(Integer row) throws Exception;//전체 글 목록 조회(as페이징)
 	
-	Notice hitNotice(Integer noticecount)throws Exception; //조회수증가
+	void hitNotice(Integer nno) throws Exception; //조회수증가
 	
-	Notice selectNotice(Integer notice_num) throws Exception; // num으로 값 가져오기
+	Notice selectNotice(Integer nno) throws Exception; // num으로 값 가져오기
 	
 	Integer selectMaxNoticeNum() throws Exception; // 최근 번호 가져오기
 

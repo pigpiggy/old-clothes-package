@@ -46,8 +46,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	//조회수 증가
 	@Override
-	public Notice Noticehit(Integer nreadcount) throws Exception {
-		return noticeDao.hitNotice(nreadcount);
+	public void  Noticehit(Integer nreadcount) throws Exception {
+		 noticeDao.hitNotice(nreadcount);
 	}
 	
 	//검색했을때 페이징

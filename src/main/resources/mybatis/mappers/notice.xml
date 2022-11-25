@@ -22,14 +22,14 @@
 	</select>
 
 	<!-- 조회수 증가 -->
-	<update id="hitNotice" parameterType="Notice">
+	<update id="hitNotice" parameterType="Integer">
 	<![CDATA[
 		update notice set nreadcount=nreadcount+1 where nno=#{nno}
 		]]>
 	</update>
 	
 	<!-- 글 클릭 시 정보 가져가기 -->
-	<select id="selectNotice" parameterType="Notice" resultType="Notice">
+	<select id="selectNotice" parameterType="Integer" resultType="Notice">
 		<![CDATA[
 			select * from Notice where nno=#{nno}
 		]]>

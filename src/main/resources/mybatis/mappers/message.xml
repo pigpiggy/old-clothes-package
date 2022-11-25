@@ -15,6 +15,19 @@
 		]]>
 	</insert>
 	
+	<!-- sharing에서 사업자가 개인에게 쪽지 보낼 때(recvBno는 필요없음) -->
+	<insert id="insertSBMessage" parameterType="MessageVO">
+	<selectKey keyProperty="mno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select message_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into message (mno,mtitle,mcontent,sendBno,recvUserno,readChk,regdate)
+			values (#{mno},#{mtitle},#{mcontent},#{sendBno},#{recvUserno},0,sysdate)
+		]]>
+	</insert>
+	
 	<!-- 받은쪽지 보낸쪽지 리스트 -->
 	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[

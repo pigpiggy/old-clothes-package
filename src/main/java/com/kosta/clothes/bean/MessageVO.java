@@ -9,8 +9,8 @@ public class MessageVO {
 	private Date regDate;
 	private Integer sendUserno;
 	private Integer recvUserno;
-	private Integer sendbno;
-	private Integer recvbno;
+	private Integer sendBno;
+	private Integer recvBno;
 	private Long readChk;
 	private String nickname;
 	public Integer getMno() {
@@ -49,17 +49,17 @@ public class MessageVO {
 	public void setRecvUserno(Integer recvUserno) {
 		this.recvUserno = recvUserno;
 	}
-	public Integer getSendbno() {
-		return sendbno;
+	public Integer getSendBno() {
+		return sendBno;
 	}
-	public void setSendbno(Integer sendbno) {
-		this.sendbno = sendbno;
+	public void setSendBno(Integer sendBno) {
+		this.sendBno = sendBno;
 	}
-	public Integer getRecvbno() {
-		return recvbno;
+	public Integer getRecvBno() {
+		return recvBno;
 	}
-	public void setRecvbno(Integer recvbno) {
-		this.recvbno = recvbno;
+	public void setRecvBno(Integer recvBno) {
+		this.recvBno = recvBno;
 	}
 	public Long getReadChk() {
 		return readChk;

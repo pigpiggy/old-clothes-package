@@ -12,6 +12,7 @@ import com.kosta.clothes.bean.MessageVO;
 @Repository
 public interface MessageDAO {
 	void insertMessage(MessageVO message) throws Exception;
+	void insertSBMessage(MessageVO message) throws Exception;
 	List<MessageVO> uRecvMessage(Map map) throws Exception;
 	List<MessageVO> bRecvMessage(Map map) throws Exception;
 	List<MessageVO> uSendMessage(Map map) throws Exception;

@@ -179,7 +179,6 @@ $(function () {
 	$("#heart_img").on("click", function(e) {
 		var logincheck = "${logincheck}";
 		const sno =  $('#sno').val();
-		 
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
@@ -187,6 +186,7 @@ $(function () {
 			console.log(sno);
 		}
 		let sect = "${sect}";
+		console.log(sect);
 		if(sect == 'users') {
 			alert(sect);
 			$.ajax({
@@ -243,11 +243,7 @@ if(submitcheck == "true"){
 $("#wapply").on("click", function() {
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
-	let userno = 0;
 	let sect = "${sect}";
-	if(sect == 'users') {
-		userno = "${authUser.userno}";
-	}
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
@@ -256,7 +252,7 @@ $("#wapply").on("click", function() {
 		$.ajax({
 			type: "post",
 			url: "/sharingView/wapply",
-			data: {sno:sno, userno:userno},
+			data: {sno:sno},
 			success: function(data) {
 				console.log(data);
 				alert("신청이 완료되었습니다.");
@@ -268,6 +264,5 @@ $("#wapply").on("click", function() {
 		
 })
 </script>
-
 </body>
 </html>

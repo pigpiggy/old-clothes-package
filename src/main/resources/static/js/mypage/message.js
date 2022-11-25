@@ -194,6 +194,9 @@ $(function () {
 		
 		$(".rpaging").css('display','none');
 		$(".spaging").css('display','table');
+	} else {
+		$(".rpaging").css('display','table');
+		$(".spaging").css('display','none');
 	}
 	
 })

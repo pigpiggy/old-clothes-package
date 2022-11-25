@@ -202,7 +202,7 @@ public class CertificationService implements UsersService {
 			usersDao.updatebusiness(business);
 			
 		}
-<<<<<<< HEAD
+
 		
 		//회원탈퇴
 		@Override
@@ -217,7 +217,7 @@ public class CertificationService implements UsersService {
 			usersDao.deleteindivi(userno);		
 			usersDao.deleteuser(userno);
 		}
-=======
+
 
 
 		@Override
@@ -226,5 +226,5 @@ public class CertificationService implements UsersService {
 			
 		}
 
->>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
+
 }

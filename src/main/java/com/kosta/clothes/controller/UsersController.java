@@ -364,25 +364,9 @@ public class UsersController {
 	  return "user/loginform";
   }
   
-<<<<<<< HEAD
 
-=======
-  //개인회원 탈퇴
-  
-  @PostMapping("uretire")
-  public String uretire(Model model) {
-	  try {
-		  Users uauthuser = (Users) session.getAttribute("authUser");
-		  Integer userno = uauthuser.getUserno();
-		  usersService.deleteuser(userno);
-		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","탈퇴 완료");
-	  }catch (Exception e) {
-		  e.printStackTrace();		  
-	  }
-	  return "user/loginform";
-  }
->>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
+
+
 //업체 회원정보 수정 jsp이동
   @PostMapping("bpasscheck")
   public String bpasscheck(@RequestParam("pass") String pass ,Model model){

@@ -39,7 +39,7 @@ public interface UsersDAO {
 	void updateuser(Users user) throws Exception; //개인 회원 정보 수정
 	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴
 	
-<<<<<<< HEAD
+
 	String checkbpass(String id) throws Exception; //업체비밀번호 확인용
 	void updatebusiness(Business business) throws Exception; //업체 회원 정보 수정
 	
@@ -52,12 +52,6 @@ public interface UsersDAO {
 	void deleteapply(Integer userno) throws Exception; //개인 회원 탈퇴 (apply)		
 	void deletefree(Integer userno) throws Exception; //개인 회원 탈퇴 (free)
 	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)	
-	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴 (user)
-	
-=======
-	
-	String checkbpass(String id) throws Exception; //업체비밀번호 확인용
-	void updatebusiness(Business business) throws Exception; //업체 회원 정보 수정
 	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴
->>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
+
 }

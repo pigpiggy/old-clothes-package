@@ -420,7 +420,7 @@ public class UsersController {
 	  try {
 		  Business bauthuser = (Business) session.getAttribute("authUser");
 		  Integer bno = bauthuser.getBno();
-		  usersService.deleteuser(bno);
+		  usersService.deletebusiness(bno);
 		  session.removeAttribute("authUser");
 		  model.addAttribute("msg","탈퇴 완료");
 	  }catch (Exception e) {

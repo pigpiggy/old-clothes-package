@@ -210,4 +210,11 @@ public class CertificationService implements UsersService {
 			
 		}
 
+
+		@Override
+		public void deletebusiness(Integer bno) throws Exception {
+			usersDao.deletebusiness(bno);
+			
+		}
+
 }

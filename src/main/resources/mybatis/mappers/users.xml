@@ -201,69 +201,14 @@
 	</update>
 	
 	<!-- 개인정보탈퇴 -->
-	<delete id="deleteuser" parameterType="Integer">
+	<update id="deleteuser" parameterType="Integer">
 		<![CDATA[
-			delete  
-			from users		 
+			update users
+			set nickname = null, userid=null, phone=null, password=null, joindate=null, sect=null 
 			where userno = #{userno}
 		]]>
-	</delete>
+	</update>
 	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deletesharing" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
-	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deletelikes" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
-	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deletefree" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
-	
-	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deleteindivi" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
-	
-	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deleteapply" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
-	
-	<!-- 개인정보탈퇴 -->
-	<delete id="deletecommet" parameterType="Integer">
-		<![CDATA[
-			delete  
-			from users		 
-			where userno = #{userno}
-		]]>
-	</delete>
 	
 		<!--비밀번호 체크[업체] -->
 	<select id="checkbpass" parameterType="String" resultType="String">
@@ -285,6 +230,15 @@
 				bkakaoid=#{bkakaoid},
 				bnumber=#{bnumber}
 			where businessid = #{businessid}
+		]]>
+	</update>
+	<!-- 업체정보탈퇴 -->
+	<update id="deletebusiness" parameterType="Integer">
+		<![CDATA[
+			update business
+			set bname=null, businessid=null, baddress=null, bdetailadd=null, bkakaoid=null, 
+				bphone=null, bpassword=null, bnumber=null, bstar=null, regdate=null, sect=null 
+			where bno = #{bno}
 		]]>
 	</update>
 </mapper>

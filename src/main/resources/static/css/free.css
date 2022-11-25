@@ -44,6 +44,7 @@ a {
     margin-top: 23px;
     text-align: center;
     font-size: 0;
+    margin-bottom: 3px;
 }
 
 .searching{
@@ -434,4 +435,5 @@ ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 div.center {
 	text-align: center;
 	margin: 20px;
+	border-bottom: 2px solid navy;
 }

@@ -181,7 +181,66 @@
 		]]>
 	</select>
 	
+		<!--비밀번호 체크[개인] -->
+	<select id="checkupass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT password
+			FROM users 
+			WHERE userid=#{id}
+		]]>
+	</select>
+	<!-- 개인정보ㅎ수정 -->
+	<update id="updateuser" parameterType="users">
+		<![CDATA[
+			update users 
+			set nickname = #{nickname},
+				password = #{password},
+				phone = #{phone}			 
+			where userid = #{userid}
+		]]>
+	</update>
 	
+	<!-- 개인정보탈퇴 -->
+	<update id="deleteuser" parameterType="Integer">
+		<![CDATA[
+			update users
+			set nickname = null, userid=null, phone=null, password=null, joindate=null, sect=null 
+			where userno = #{userno}
+		]]>
+	</update>
+	
+	
+		<!--비밀번호 체크[업체] -->
+	<select id="checkbpass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT bpassword
+			FROM business 
+			WHERE businessid=#{id}
+		]]>
+	</select>
+	<!-- 업체정보ㅎ수정 -->
+	<update id="updatebusiness" parameterType="business">
+		<![CDATA[
+			update business 
+			set bname = #{bname},
+				bpassword = #{bpassword},
+				bphone = #{bphone},
+				baddress = #{baddress},
+				bdetailadd=#{bdetailadd},
+				bkakaoid=#{bkakaoid},
+				bnumber=#{bnumber}
+			where businessid = #{businessid}
+		]]>
+	</update>
+	<!-- 업체정보탈퇴 -->
+	<update id="deletebusiness" parameterType="Integer">
+		<![CDATA[
+			update business
+			set bname=null, businessid=null, baddress=null, bdetailadd=null, bkakaoid=null, 
+				bphone=null, bpassword=null, bnumber=null, bstar=null, regdate=null, sect=null 
+			where bno = #{bno}
+		]]>
+	</update>
 </mapper>
 
 

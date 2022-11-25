@@ -89,8 +89,7 @@
 					                 		<input type="text" id="nickname" name="nickname" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 						                    <input type="button" id="nicknamecheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
 						                    <input type="hidden" name="check_nick" id="check_nick" value=0>
-						                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
-						                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+						                    <input type="button" id="checkednickname" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">						                    
 				                        </div>
 		
 										<%--[개인]이메일 form 
@@ -105,8 +104,7 @@
 					                        <label class="form-label" for="userid" style="position:absolute; margin:2.5%;">아이디<span class="req">*</span></label>
 					                        <input type="text" id="userid" name="userid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"/>
 					                        <input type="button" id="useridcheck" class="btn btn-light" value="중복확인" style="margin-left:2%;">
-					                        <input type="button" id="checkeduserid" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">
-					                        <input type="button" id="checkedemail" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
+					                        <input type="button" id="checkeduserid" class="btn btn-light disabled" value="사용가능" style="margin-left:2%; display:none;">					                        
 				                        </div>
 				                
 				                        <div class="form-outline mb-4" style="display:flex;">
@@ -315,6 +313,12 @@
     </div>
   </div>
 </div>
+<script>
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
+</script>
 <script src="<c:url value='/resources/js/users/join.js'/>"></script>
 <script src="<c:url value='/resources/js/users/validation.js'/>"></script>
 </body>

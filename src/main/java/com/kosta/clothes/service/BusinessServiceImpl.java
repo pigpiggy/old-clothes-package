@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
+import com.kosta.clothes.dao.ApplyDAO;
 import com.kosta.clothes.dao.BusinessDAO;
 
 @Service
@@ -15,6 +17,9 @@ public class BusinessServiceImpl implements BusinessService {
 
 	@Autowired
 	BusinessDAO businessDao;
+	
+	@Autowired
+	ApplyDAO applyDao;
 	//시 구 검색
 	@Override
 	public List<Business> allBusinessInfo(String sido, String sigungu) throws Exception {
@@ -72,7 +77,13 @@ public class BusinessServiceImpl implements BusinessService {
 			System.out.println("low들어옴");
 			return businessDao.selectUserCatelow(map);
 		}
+	}
+
+	@Override
+	public void registapply(Apply apply) throws Exception {
+		applyDao.insertapply(apply);
 	}	
 	
+
 
 }

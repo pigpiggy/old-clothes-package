@@ -12,12 +12,81 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
-
+<link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
-</style>
-<script>
+/* #name {
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+#address {
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
 
-</script>
+#weight{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+ #phone{
+ 	height: 25px;
+    width: 280px;
+    margin:15px;
+ }
+#day{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+} */
+label{
+	flex:1;
+	text-align: left;
+}
+.form>div {
+	display:flex;
+	margin-bottom: 20px;
+	justify-content: center;
+	padding-bottm:7px;
+	align-items:center;	
+}
+.allapply{	
+	padding: 5px 20px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width:360px; height: 265px;
+	margin-left: -220px;
+	margin-top: -170px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items:center;
+}
+.form{
+	witdh:300px;
+}
+.allapply>button{
+	width:85px;
+	float:right;
+	padding:3px;
+}
+.form>div>input{	
+	width:250px;
+	margin-left:15px;
+	padding:5px;
+}
+#alladdress{
+	display:block;
+}
+.allbutton>button{
+   display:inline-block;
+   width:100px;
+   height:25px;
+   margin-left:calc(50% - 100px - 10px);
+}
+</style>
 </head>
 <body>	
 		<div>
@@ -53,12 +122,57 @@
 			<div id="blist"></div>				
 		</div>
 		<div id="modal">
-			<div class="modal_content" id="content" title="클릭시 닫힘">
+   
+		    <div class="modal_content">
+		        <h2>[헌옷 수거 신청]</h2>
+		       
+		        <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+		        
+		        <div class="allapply">
+		        <form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">		       
+			        <div>
+			        	<label>이름  </label>
+			        	<input type="text" id="aname" name="aname" placeholder="ex)홍길동">
+			        </div>
+			        <div>
+			        	<label>주소  </label>
+				        <input type="text" id="aaddress" name="aaddress" readonly onclick="findAddr()" placeholder="여기 클릭해주세요.">
+			        </div>
+			        <div>
+			            <label></label>
+			           	<input type="text" id="adetailaddress" name="adetailaddress" placeholder="ex)101동101호">			        	
 				
-			</div>
+			        </div>
+			        
+			        
+			        <div>
+			        	<label>옷 무게  </label>
+			        	<input type="text" id="weight" name="weight" placeholder="ex)30">
+			        </div>		  		  		             		      
+			        <div>
+			        	<label>전화 번호  </label>
+			        	<input type="text" id="aphone" name="aphone" placeholder="ex)-입력하지 마세요.">
+			        </div>
+			        <div>
+			        	<label>희망 날짜  </label>
+			        	<input type="text" id="apickup" name="apickup" placeholder="ex)시간 선택 조절 하세요">
+			        </div>
+		        	<div style="margin-top:10%" class="allbutton">     		       
+				        <button type="submit" form="form"id="applycloth">수거 신청</button>
+				        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+				    </div>		
+				    <input type="hidden" id="bno" name="bno" value="">	   
+			     </form>		        		
+		        </div>		      	       
+		    </div>
+		   
+		    <div class="modal_layer"></div>
 		</div>
+    
+		
+		
 	</div>
-	<script>
+	<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
@@ -155,9 +269,9 @@
 				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
 				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
 				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
-				//if(authsect == 'users'){
-					bli += '<button class="button" id="applymodal">신청서 작성</button>'; //신청서 작성 form [modal]	
-				//}
+				if(authsect == 'users'){
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
+				}								
 				bli += '</li>' ;
 				
 				var businaddress = data.baddress;
@@ -239,6 +353,16 @@
 						      supportMultipleDensities: true,
 						    });
 						});
+			            //모달 켜기
+			            $(".buttonapply"+data.bno+"").click(function(){
+			            	 document.getElementById("modal").style.display="block";
+			            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+			            	 document.getElementById("bno").value=bno;
+			            	 
+			            });
+			           
+			            
+			            	
 					}//status 상태
 				})//geocoder 
 			}); //data.forEach							
@@ -393,6 +517,7 @@
 	        info2[i]?.setMap(map);
 	    }            
 	}		
+	
 	//카테고리별 리스트 출력
 	function catelist(){
 		let category = $("#catelist option:selected").val(); //selectbox에서 sido 선택값
@@ -454,7 +579,7 @@
 					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
 					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
 					if(authsect == 'users'){
-						bli += '<button id="applymodal">신청서 작성</button>'; //신청서 작성 form [modal]	
+						bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
 					}
 					bli += '</li>' ;
 					
@@ -538,6 +663,13 @@
 							      supportMultipleDensities: true,
 							    });
 							});
+				            //모달 켜기
+				            $(".buttonapply"+data.bno+"").click(function(){
+				            	 document.getElementById("modal").style.display="block";
+				            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+				            	 document.getElementById("bno").value=bno;
+				            	 
+				            });
 						}//status 상태
 					})//geocoder 
 				}); //data.forEach							
@@ -549,14 +681,55 @@
 			error: function(){alert("구,동 검색 먼저해주세요.");}
 			});
 		}
-			
+		 //모달 닫기
+		 $("#modal_close_btn").click(function(){
+			 document.getElementById("modal").style.display="none";
+	     });
+		 //날짜 
+		  $(function(){
+		 $("#apickup").datepicker({
+			    language: 'ko',
+			    timepicker: true,
+			    timeFormat: "hh:ii AA"
+			});	
+		  });
+		  
+		//주소 찾기
+		  function findAddr(){
+		  	new daum.Postcode({
+		          oncomplete: function(data) {
+		              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		              var roadAddr = data.roadAddress; // 도로명 주소 변수
+		              
+		              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		             
+		              if(roadAddr !== ''){
+		                  document.getElementById("aaddress").value = roadAddr;
+		                  
+		              } 
+		          }
+		      }).open();
+		  }
+		//msg 체크
+		var msg ="${msg}";
+		if(msg != ""){
+			alert(msg);
+		}
+		
+	
+
 	</script>
 	
 	<%--js 불러오기 --%>
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
-      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
+      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>    
+	<script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/businessinfo.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/validations.js'/>"></script>
 </body>
 </html>

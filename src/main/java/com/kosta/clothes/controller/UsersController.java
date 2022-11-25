@@ -55,11 +55,12 @@ public class UsersController {
 	
 		System.out.println("usersController:" + users.toString());
 		try {
-			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에] 
+			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에]
+			model.addAttribute("msg", "개인회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/login";
+		return "user/loginform";
 	}
 	
 	
@@ -70,10 +71,11 @@ public class UsersController {
 		System.out.println("usersController:" + business.toString());
 		try {
 			certificationService.insertBusiness(business); //사용자가 입력한 정보를 DB에 전달[Service에]
+			model.addAttribute("msg", "업체회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/login";
+		return "user/loginform";
 	}
 	
 	//동일 번호로 아이디 3개 이상 여부 체크
@@ -84,10 +86,10 @@ public class UsersController {
     public String sendSMS(String phone) {
     		String numStr = "";
     	try {
-			if(usersService.countPN(phone)) {
+			if(usersService.countPN(phone)) {//아이디 3개 이상일 때
 				return "true";
 				
-			}else {
+			}else {//아이디 3개 이하일 때
 				// 5자리 인증번호 만들기
 		        Random random  = new Random();
 		        for(int i=0; i<5; i++) {
@@ -195,14 +197,14 @@ public class UsersController {
     		authUser = usersService.login(userid,password);
     		
     		System.out.println("너냐11 : " +authUser);
-    		if(authUser == null) {
+    		if(authUser == null) { //개인이 아닐 경우
     			String businessid = id;
     			String bpassword = password;
     			System.out.println("bid:"+businessid);
         		System.out.println("password:"+bpassword);
         		bauthUser = usersService.blogin(businessid,bpassword);
     		}
-    		if(authUser == null && bauthUser==null) {
+    		if(authUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
     			model.addAttribute("result", "fail");
 				return "/user/loginform";
     		}else if(authUser != null){
@@ -237,15 +239,15 @@ public class UsersController {
 		 List<String> fuId = new ArrayList<>();
 		 List<String> fbId = new ArrayList<>();
 		 String phone = ph; 
-		 fuId = usersService.findUserId(phone);
+		 fuId = usersService.findUserId(phone); //개인 아이디 검색
 		 System.out.println(fuId);
 		 model.addAttribute("user", fuId);
 		 String bphone = ph;
-		 fbId = usersService.findBusinessId(bphone);
+		 fbId = usersService.findBusinessId(bphone); //업체 아이디 검색
 		 System.out.println(fbId);
 		 model.addAttribute("business", fbId);
 		 
-		 if(fuId==null&&fbId==null) {
+		 if(fuId==null&&fbId==null) { // 검색 결과 둘 다 없을 때
 			 model.addAttribute("msg", "정보와 일치하는 아이디가 없습니다.");
 			 return "user/searchid";
 		 }
@@ -271,13 +273,13 @@ public class UsersController {
 		  String cbid = null;
 		  userid = id;
 		  phone = ph;
-		  String cuid = usersService.checkUserIdnPhone(userid, phone);
+		  String cuid = usersService.checkUserIdnPhone(userid, phone); //아이디와 전화번호로 일치하는 회원 찾기
 		  if(cuid!=null) {
 			  model.addAttribute("id", cuid);
 		  } else if(cuid==null) {
 			  businessid = id;
 			  bphone = ph;
-			  cbid = usersService.checkBusinessIdnPhone(businessid, bphone);
+			  cbid = usersService.checkBusinessIdnPhone(businessid, bphone);  //아이디와 전화번호로 일치하는 회원 찾기
 			  model.addAttribute("id", cbid);
 		  }
 		  if(cuid==null&&cbid==null) {
@@ -296,15 +298,15 @@ public class UsersController {
 		  @RequestParam("password") String password, Model model) {
 	  try { 
 		  System.out.println("id:"+id);
-		  boolean cuserid = usersService.checkuserid(id);
-		  boolean cbusinessid = usersService.businessidCheck(id);
+		  boolean cuserid = usersService.checkuserid(id); //개인 테이블 아이디 확인
+		  boolean cbusinessid = usersService.businessidCheck(id); // 업체 테이블 아이디 확인
 		  System.out.println("cuserid:"+cuserid);
 		  System.out.println("cbusinessid:"+cbusinessid);
-		  if(cuserid) {
-		  usersService.changePass(id, password);
-	  	  }else if(cbusinessid) {
+		  if(cuserid) {//개인 테이블에 아이디가 있을 때
+		  usersService.changePass(id, password); //비밀번호 변경
+	  	  }else if(cbusinessid) {//업체 테이블에 아이디가 있을 때
 	  	  String bpassword = password;
-	  	  usersService.changebPass(id, bpassword);
+	  	  usersService.changebPass(id, bpassword); // 비밀번호 변경
 	  	  }
 	  	  else {
 	  		  model.addAttribute("msg", "비밀번호 수정에 실패했습니다.");
@@ -316,5 +318,117 @@ public class UsersController {
 	  }
 	  return "user/loginform";
   }
+  
+//비밀번호 확인
+  @GetMapping("/passcheck")
+  public String passcheck(Model model) {
+	if(session.getAttribute("authUser")==null) { //로그인 안되어있다면 로그인 페이지로!
+		model.addAttribute("msg", "로그인이 필요합니다");
+		return "user/loginform";
+	}
+  	return "user/checkpass";
+  }
+  
+  //회원정보 수정 jsp이동
+  @PostMapping("upasscheck")
+  public String upasscheck(@RequestParam("pass") String pass ,Model model){
+	 try {
+		 
+		 Users uauthuser = (Users) session.getAttribute("authUser");
+		 String id = uauthuser.getUserid();
+		 String upass = usersService.checkupass(id);//개인 패스워드 체크
+		 System.out.println("pass" + pass);
+		 System.out.println("upass" + upass);
+		 if(pass.equals(upass)) {			 		
+			 model.addAttribute("Uauthuser", uauthuser);			 
+		 }else {
+			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			 return "user/checkpass";
+		 }
+	 }catch(Exception e) {
+		 e.printStackTrace();
+	 }
+	 return "user/modifyuser";
+  }
+  
+  //개인회원정보 수정
+  @PostMapping("modifyuser")
+  public String modifyuser(@ModelAttribute Users user, Model model) {
+	  try {
+		  usersService.modifyuser(user);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","회원정보 수정 완료!");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+  
+  //개인회원 탈퇴
+  
+  @PostMapping("uretire")
+  public String uretire(Model model) {
+	  try {
+		  Users uauthuser = (Users) session.getAttribute("authUser");
+		  Integer userno = uauthuser.getUserno();
+		  usersService.deleteuser(userno);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","탈퇴 완료");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+//업체 회원정보 수정 jsp이동
+  @PostMapping("bpasscheck")
+  public String bpasscheck(@RequestParam("pass") String pass ,Model model){
+	 try {
+		 
+		 Business bauthuser = (Business) session.getAttribute("authUser");
+		 String id = bauthuser.getBusinessid();
+		 String bpass = usersService.checkbpass(id);//업체 패스워드 체크
+		 System.out.println("pass" + pass);
+		 System.out.println("bpass" + bpass);
+		 if(pass.equals(bpass)) {			 		
+			 model.addAttribute("Bauthuser", bauthuser);			 
+		 }else {
+			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			 return "user/checkpass";
+		 }
+	 }catch(Exception e) {
+		 e.printStackTrace();
+	 }
+	 return "user/modifybusiness";
+  }
+  
+//업체회원정보 수정
+  @PostMapping("modifybusiness")
+  public String modifyuser(@ModelAttribute Business business, Model model) {
+	  try {
+		  usersService.modifybusiness(business); //업체 정보 수정
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","회원정보 수정 완료");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+//업체회원 탈퇴
+  
+  @PostMapping("bretire")
+  public String bretire(Model model) {
+	  try {
+		  Business bauthuser = (Business) session.getAttribute("authUser");
+		  Integer bno = bauthuser.getBno();
+		  usersService.deletebusiness(bno);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","탈퇴 완료");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
+  
+  
 }
 

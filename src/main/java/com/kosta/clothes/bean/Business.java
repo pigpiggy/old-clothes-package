@@ -17,9 +17,9 @@ public class Business {
 	private Double bstar; //별점
 	private Date regDate; //날짜
 	private String sect;//개인과사업의 구분
-	private Long reviewcount;//
-	private String category; //카테고리 종류 
-	private Long likescheck;
+	private Long reviewcount;		
+	private Long likescheck;		
+	private String category; //카테고리 종류 	
 	
 	
 		
@@ -125,7 +125,6 @@ public class Business {
 	public void setSect(String sect) {
 		this.sect = sect;
 	}
-	
 	
 	
 	

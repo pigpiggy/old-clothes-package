@@ -12,16 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Donation;
 import com.kosta.clothes.bean.Likes;
-import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Trash;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.BusinessService;
@@ -155,8 +156,7 @@ public class InfoController {
 		String sido = (String) params.get("sido");		
 		String sigungu = (String) params.get("sigugun");
 		Integer userno =0;
-        Users uauthuser=new Users();		
-	
+        Users uauthuser=new Users();			
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
 		try {
@@ -184,6 +184,7 @@ public class InfoController {
 	}
 
 	//판매업체 좋아요
+
 
 		@ResponseBody
 		@PostMapping("/businessinfo/likes")
@@ -256,4 +257,19 @@ public class InfoController {
 		}
 		return business;
 	}
+	
+	//신청 작성하기 
+	@PostMapping("/apply")
+	public String apply(@ModelAttribute Apply apply, Model model) {
+		System.out.println(apply.getBno());
+		try {
+			Users userno = (Users) session.getAttribute("authUser");
+			apply.setUserno(userno.getUserno());
+			businessService.registapply(apply);
+			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "info/businessinfo";
+	}		
 }

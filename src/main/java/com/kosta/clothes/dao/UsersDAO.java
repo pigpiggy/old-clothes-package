@@ -35,4 +35,12 @@ public interface UsersDAO {
 	Integer countUserIdbyPN(String phone) throws Exception;//번호와 일치하는 아이디 수 조회[개인]
 	Integer countBusinessIdbyPN(String bphone) throws Exception;//번호와 일치하는 아이디 수 조회[업체]
 
+	String checkupass(String id) throws Exception; //개인비밀번호 확인용
+	void updateuser(Users user) throws Exception; //개인 회원 정보 수정
+	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴
+	
+	
+	String checkbpass(String id) throws Exception; //업체비밀번호 확인용
+	void updatebusiness(Business business) throws Exception; //업체 회원 정보 수정
+	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴
 }

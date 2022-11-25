@@ -220,14 +220,13 @@ public class SellController {
 			Users users = (Users) session.getAttribute("authUser");
 			message.setSendUserno(users.getUserno());
 			System.out.println("messagecontroller:" + message);
-			String submitcheck = messageService.submitMessage(message);
-			System.out.println("submitcheck:"+submitcheck);
-			if(submitcheck == "true") {
-				mav.addObject("submitcheck", "true");
-			}else {
-				mav.addObject("submitcheck", "false");
-			}
-			mav.setViewName("redirect:/sellView/"+ino);
+			//String submitcheck = messageService.submitMessage(message);
+//			if(submitcheck == "true") {
+//				mav.addObject("submitcheck", "true");
+//			}else {
+//				mav.addObject("submitcheck", "false");
+//			}
+//			mav.setViewName("redirect:/sellView/"+ino);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

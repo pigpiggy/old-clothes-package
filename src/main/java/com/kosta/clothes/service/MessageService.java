@@ -9,7 +9,7 @@ import com.kosta.clothes.bean.PageInfo;
 
 public interface MessageService {
 	//쪽지 보내기
-	String submitMessage(MessageVO message) throws Exception;
+	String submitMessage(MessageVO message, String sect) throws Exception;
 	//
 	List<MessageVO> uRecvMessage(Map map) throws Exception;
 	List<MessageVO> bRecvMessage(Map map) throws Exception;

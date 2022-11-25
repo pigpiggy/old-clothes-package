@@ -111,7 +111,6 @@ public class SharingController {
 
 	@GetMapping("/sharingView/{sno}")
 	public ModelAndView viewSharing(@PathVariable("sno") Integer sno, Model model, @RequestParam(value = "submitcheck", required = false) String submitcheck) {
-		System.out.println("sno:" + sno);
 		ModelAndView mav = new ModelAndView();
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
@@ -136,8 +135,10 @@ public class SharingController {
 			}
 			//개인
 			if (uauthuser.getUserno() == null && bauthuser.getBno() == null) {
+				System.out.println("로그인 안했을 때:"+uauthuser.getUserno() + bauthuser.getBno());
 				model.addAttribute("logincheck", "false");
-			} else if (uauthuser.getUserno() != null){
+			}else if (uauthuser.getUserno() != null){
+				System.out.println("로그인 했을 때:"+uauthuser.getUserno() + bauthuser.getBno());
 				Likes likevo = new Likes();
 				likevo.setSno(sno);
 				likevo.setUserno(uauthuser.getUserno());
@@ -207,12 +208,15 @@ public class SharingController {
 
 	@ResponseBody
 	@PostMapping("/sharingView/likes")
-	public Long registLikes(@RequestParam("sno") Integer sno, @RequestParam("userno") Integer userno) {
+	public Long registLikes(@RequestParam("sno") Integer sno) {
 		Likes likes = new Likes();
 		Long likescheck = null;
 		try {
 			likes.setSno(sno);
-			likes.setUserno(userno);
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users user = (Users) session.getAttribute("authUser");
+				likes.setUserno(user.getUserno());
+			}
 			Sharing sharing = new Sharing();
 			sharing.setSno(sno);
 			likescheck = likesService.getSlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
@@ -241,10 +245,18 @@ public class SharingController {
 	public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, @RequestParam("sno") Integer sno) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			Users users = (Users) session.getAttribute("authUser");
-			message.setSendUserno(users.getUserno());
+			String sect = "";
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				message.setSendUserno(users.getUserno());
+				sect = users.getSect();
+			} else {
+				Business bauthuser = (Business) session.getAttribute("authUser");
+				message.setSendBno(bauthuser.getBno());
+				sect = bauthuser.getSect();
+			}
 			System.out.println("messagecontroller:" + message);
-			String submitcheck = messageService.submitMessage(message);
+			String submitcheck = messageService.submitMessage(message, sect);
 			System.out.println("submitcheck:"+submitcheck);
 			if(submitcheck == "true") {
 				mav.addObject("submitcheck", "true");
@@ -263,10 +275,12 @@ public class SharingController {
 	@PostMapping("/sharingView/wapply")
 	public void sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing) {
 		try {
-			Users users = (Users) session.getAttribute("authUser");
 			Wapply apply = new Wapply();
-			apply.setWuserno(users.getUserno());
 			apply.setSno(sno);
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				apply.setWuserno(users.getUserno());
+			}
 			applyService.registSwapply(apply);
 			sharingService.upApplycount(sharing);
 		}catch(Exception e) {

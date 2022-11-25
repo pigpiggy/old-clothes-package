@@ -6,7 +6,7 @@ public class Notice {
 	private Integer nno;	//글 번호
 	private String ntitle; //제목
 	private String ncontent; //내용
-	private Long nreadcount; //조회수 
+	private Integer nreadcount; //조회수 
 	private Date regdate;//날짜
 	
 	public Integer getNno() {
@@ -27,10 +27,10 @@ public class Notice {
 	public void setNcontent(String ncontent) {
 		this.ncontent = ncontent;
 	}
-	public Long getNreadcount() {
+	public Integer getNreadcount() {
 		return nreadcount;
 	}
-	public void setNreadcount(Long nreadcount) {
+	public void setNreadcount(Integer nreadcount) {
 		this.nreadcount = nreadcount;
 	}
 	public Date getRegdate() {
@@ -39,7 +39,7 @@ public class Notice {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public Notice(Integer nno, String ntitle, String ncontent, Long nreadcount, Date regdate) {
+	public Notice(Integer nno, String ntitle, String ncontent, Integer nreadcount, Date regdate) {
 		super();
 		this.nno = nno;
 		this.ntitle = ntitle;

@@ -36,6 +36,7 @@ public interface UsersService {
 		public void deleteuser(Integer userno) throws Exception; //개인탈퇴
 		
 		public String checkbpass(String id) throws Exception; //업체비밀번호 확인용
-		public void modifybusiness(Business business) throws Exception; //개인회원정보수정 
+		public void modifybusiness(Business business) throws Exception; //개인회원정보수정
+		public void deletebusiness(Integer bno) throws Exception; //업체탈퇴
 		
 }

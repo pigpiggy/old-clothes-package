@@ -124,7 +124,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        정말 회원 탈퇴를 하실건가요..?
+       	회원 탈퇴를 진행하시겠습니까?
       </div>
 
       <!-- Modal footer -->

@@ -199,6 +199,28 @@
 			where userid = #{userid}
 		]]>
 	</update>
+<<<<<<< HEAD
+=======
+	
+	<!-- 개인정보탈퇴 -->
+	<update id="deleteuser" parameterType="Integer">
+		<![CDATA[
+			update users
+			set nickname = null, userid=null, phone=null, password=null, joindate=null, sect=null 
+			where userno = #{userno}
+		]]>
+	</update>
+	
+	
+		<!--비밀번호 체크[업체] -->
+	<select id="checkbpass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT bpassword
+			FROM business 
+			WHERE businessid=#{id}
+		]]>
+	</select>
+>>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
 	<!-- 업체정보ㅎ수정 -->
 	<update id="updatebusiness" parameterType="business">
 		<![CDATA[
@@ -209,10 +231,11 @@
 				baddress = #{baddress},
 				bdetailadd=#{bdetailadd},
 				bkakaoid=#{bkakaoid},
-				bnumber=#{bnumber
+				bnumber=#{bnumber}
 			where businessid = #{businessid}
 		]]>
 	</update>
+<<<<<<< HEAD
 	
 		<!--비밀번호 체크[업체] -->
 	<select id="checkbpass" parameterType="String" resultType="String">
@@ -307,6 +330,17 @@
 		]]>
 	</delete>	
 	
+=======
+	<!-- 업체정보탈퇴 -->
+	<update id="deletebusiness" parameterType="Integer">
+		<![CDATA[
+			update business
+			set bname=null, businessid=null, baddress=null, bdetailadd=null, bkakaoid=null, 
+				bphone=null, bpassword=null, bnumber=null, bstar=null, regdate=null, sect=null 
+			where bno = #{bno}
+		]]>
+	</update>
+>>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
 </mapper>
 
 

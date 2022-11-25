@@ -74,7 +74,7 @@
 	                    			<br>
 									<%--업체 --%>
 									<div id=businessform>
-									<form action="businesss" method="post" onsubmit="return Valid();">
+									<form action="modifybusiness" method="post" onsubmit="return Valid();">
 										<div class="form-outline mb-4" style="display:flex;">
 											<input type="hidden" name="bno" value="${Bauthuser.bno }">
 											<input type="hidden" name="sect" value="business"/>
@@ -182,7 +182,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        정말 회원 탈퇴를 하실건가요..?
+       회원 탈퇴를 진행하시겠습니까?
       </div>
 
       <!-- Modal footer -->

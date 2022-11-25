@@ -34,7 +34,7 @@
                 <div class="info">
                     <dl>
                         <dt>글번호</dt>
-                        <dd>${article.fno }</dd>
+                        <dd>${article.nno }</dd>
                     </dl>                   
                     <dl>
                         <dt>작성일</dt>
@@ -42,7 +42,7 @@
                     </dl>
                     <dl>
                         <dt>조회수</dt>
-                        <dd>${article.freadcount}</dd>
+                        <dd>${article.nreadcount}</dd>
                     </dl>
                 </div>
             </div>

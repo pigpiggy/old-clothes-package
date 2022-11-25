@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -18,12 +17,13 @@
 <body>
 	<div>
 		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
-	</div>
+	</div>	
     <div class="messageContainer">
     <h2><strong>쪽지함</strong></h2>
-    <div id="demo-modal" class="modal">
+    <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
       			<form action="smessage" method="post" id="messageform">
+      				<input type="hidden" id="selectValue" value="${select }" />
       			</form>
 				<a href="#" class="modal__close">&times;</a>
       		</div>
@@ -75,7 +75,7 @@
            </c:forEach>
           </tbody>
         </table>
-        <div id="view-modal" class="modal">
+        <div id="view-modal" class="firstmodal">
       		<div class="modalContent"></div>
   		</div>
         <%-- 보낸쪽지함 --%>
@@ -108,39 +108,68 @@
            </c:forEach>
           </tbody>
         </table>
-        <div id="view-modal2" class="modal">
+        <div id="view-modal2" class="firstmodal">
       		<div class="modalContent2"></div>
   		</div>
-		<div class="center">
-			<ul class="pagination">
+  		<%-- 받은 쪽지 페이징 --%>
+  		<div class="center">
+			<ul class="pagination rpaging">
 				<c:choose>
-					<c:when test="${pageInfo.page<=1}">
+					<c:when test="${rpageInfo.page<=1}">
 						<li><a id="prev"><<</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="mypage/message?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+						<li><a href="/mypage/message?rpage=${rpageInfo.page-1}&select=0" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
-				<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
 					<c:choose>
-						<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 						<c:otherwise>
-							<li><a href="mypage/message?page=${i}">${i }</a></li>
+							<li><a href="/mypage/message?rpage=${i}&select=0">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:choose>
-					<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					<c:when test="${rpageInfo.page>=rpageInfo.maxPage }">
 						<li><a id="next">>></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="mypage/message?page=${pageInfo.page+1}" id="next">>></a></li>
+						<li><a href="/mypage/message?rpage=${rpageInfo.page+1}&select=0" id="next">>></a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>		
+		</div>		
+		<%-- 보낸 쪽지 페이징 --%>
+		<div class="center">
+			<ul class="pagination spaging">
+				<c:choose>
+					<c:when test="${spageInfo.page<=1}">
+						<li><a id="prev"><<</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/message?spage=${spageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
+					<c:choose>
+						<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:otherwise>
+							<li><a href="/mypage/message?spage=${i}&select=1">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${spageInfo.page>=spageInfo.maxPage }">
+						<li><a id="next">>></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/message?spage=${spageInfo.page+1}&select=1" id="next">>></a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>		
 		</div>					      
       </div>
-      <script src="<c:url value='/resources/js/free/paging.js'/>"></script>
       <script src="<c:url value='/resources/js/mypage/message.js'/>"></script>
 </body>
 </html>

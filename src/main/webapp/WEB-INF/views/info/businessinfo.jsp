@@ -7,52 +7,86 @@
 <meta charset="UTF-8">
 <title>판매업체</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+<link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
-#map {
-	left: 4%;	
-	width:40%;
-	height:500px;
-	margin:40px;
-}	
-
-#selectbox {
-	padding-left: 10%;
-	padding-top:5%;
+/* #name {
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+#address {
+	height: 25px;
+    width: 280px;
+    margin:15px;
 }
 
-#allbusiness{
+#weight{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+}
+ #phone{
+ 	height: 25px;
+    width: 280px;
+    margin:15px;
+ }
+#day{
+	height: 25px;
+    width: 280px;
+    margin:15px;
+} */
+label{
+	flex:1;
+	text-align: left;
+}
+.form>div {
 	display:flex;
+	margin-bottom: 20px;
+	justify-content: center;
+	padding-bottm:7px;
+	align-items:center;	
 }
-
-
-#blist {
-	justify-content:center;	
-	left:4%;
-	top:39px;
-	position: relative;
-    display: inline-block;
-    vertical-align: top;
-    width: 45%;
-    height: 500px;
-    overflow-y: scroll;
-    background: #fff;
-    z-index: 2;
+.allapply{	
+	padding: 5px 20px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width:360px; height: 265px;
+	margin-left: -220px;
+	margin-top: -170px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items:center;
 }
-#finalbusin{
-	background-color:#f7f7f7;
+.form{
+	witdh:300px;
 }
-
-#heart_img {
-	width:25px;
+.allapply>button{
+	width:85px;
+	float:right;
+	padding:3px;
+}
+.form>div>input{	
+	width:250px;
+	margin-left:15px;
+	padding:5px;
+}
+#alladdress{
+	display:block;
+}
+.allbutton>button{
+   display:inline-block;
+   width:100px;
+   height:25px;
+   margin-left:calc(50% - 100px - 10px);
 }
 </style>
-<script>
-
-</script>
 </head>
 <body>	
 		<div>
@@ -68,25 +102,82 @@
 				<select id="sigugun"><option value="">선택</option></select>
 			</div>	
 			
-			<div>
+			<div class="search-box">
 				<%-- 텍스트: <span id="dongName"></span><br/>--%>
-				<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-				<input type="button" id="searchBtn" value="검색">
+				<input type="text" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+				<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
+			</div>
+			<div id="cate" class="select">
+			<select id="catelist" onchange="catelist()">
+				<option value="">선택하세요</option>
+				<option value="review">후기 많은순</option>
+				<option value="high">높은 평점순</option>
+				<option value="low">낮은 평점순</option>
+			</select>
 			</div>
 		</div>		
-		<input type="hidden" class="list" id="list" name="list" value="${list }">
+		<input type="hidden" class="list" id="list" name="list" value="${list }">			
 		<div id="allbusiness">
-			<div id="map"></div>		
+			<div id="map"></div>				
 			<div id="blist"></div>				
 		</div>
+		<div id="modal">
+   
+		    <div class="modal_content">
+		        <h2>[헌옷 수거 신청]</h2>
+		       
+		        <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+		        
+		        <div class="allapply">
+		        <form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">		       
+			        <div>
+			        	<label>이름  </label>
+			        	<input type="text" id="aname" name="aname" placeholder="ex)홍길동">
+			        </div>
+			        <div>
+			        	<label>주소  </label>
+				        <input type="text" id="aaddress" name="aaddress" readonly onclick="findAddr()" placeholder="여기 클릭해주세요.">
+			        </div>
+			        <div>
+			            <label></label>
+			           	<input type="text" id="adetailaddress" name="adetailaddress" placeholder="ex)101동101호">			        	
+				
+			        </div>
+			        
+			        
+			        <div>
+			        	<label>옷 무게  </label>
+			        	<input type="text" id="weight" name="weight" placeholder="ex)30">
+			        </div>		  		  		             		      
+			        <div>
+			        	<label>전화 번호  </label>
+			        	<input type="text" id="aphone" name="aphone" placeholder="ex)-입력하지 마세요.">
+			        </div>
+			        <div>
+			        	<label>희망 날짜  </label>
+			        	<input type="text" id="apickup" name="apickup" placeholder="ex)시간 선택 조절 하세요">
+			        </div>
+		        	<div style="margin-top:10%" class="allbutton">     		       
+				        <button type="submit" form="form"id="applycloth">수거 신청</button>
+				        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+				    </div>		
+				    <input type="hidden" id="bno" name="bno" value="">	   
+			     </form>		        		
+		        </div>		      	       
+		    </div>
+		   
+		    <div class="modal_layer"></div>
+		</div>
+    
+		
+		
 	</div>
-	<script>
+	<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
         level: 8 // 지도의 확대 레벨
-    };
-	
+    };		
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
@@ -97,38 +188,31 @@
 	var markers2 = [];//마커 저장할 배열
 	var info = [];//인포윈도우 저장할 배열
 	var info2 = [];//인포윈도우 저장할 배열
-	var bdata = [];//판매업체 정보 저장할 배열
-	var listlist = [];
+	//var bdata = [];//판매업체 정보 저장할 배열
+	/* var listlist = [];
 	var list2 = $('.list');
 	for(var i=0;i<list2.length;i++){
 		listlist.push({
-			'bcheck' : $("input[name=list]").eq(i).val() //
+			'bcheck' : $("input[name=list]").eq(i).val() //			
 		});
-	}
-	var businlist = "${list}";		
+	} */
+	var businlist = "${list}";	
 	var	auth = "${authUser}";
 	var authsect = "${authUser.sect}";
-	console.log("auth  " + "${authUser.sect}");	
-	console.log("aaaaaaa" + auth);
-	console.log("aaaa : " + businlist);
+	//시도 변수 선언
+	let sido;
+	let sigugun;
+		
 	<%--검색 버튼 클릭시 --%>
 	$('#searchBtn').click(function(){
-		let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
-		let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
+		sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
+		sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
 		//도 -> 경상남도 => 경남
-		if(sido.length ==4){
-			sido = sido.charAt(0) + sido.charAt(2);
-		}
+		if(sido.length ==4){	sido = sido.charAt(0) + sido.charAt(2);	} 
 		//경기도 / 제주특별자치도 / 부산광역시 / 서울특별시 => 경기,제주,부산,서울
-		if(sido.length ==3 || sido.length==7 || sido.length==5){
-			sido = sido.substr(0,2);
-		}
-		
-		if(sido=="선택"||sigugun=="선택"){
-			alert("지역을 전부 설정해주세요"); //하나라도 미선택 시 alert창
-			return false;
-		}
-		var checkresult=0;
+		if(sido.length ==3 || sido.length==7 || sido.length==5){ 	sido = sido.substr(0,2);	}
+		//하나라도 미선택 시 alert창
+		if(sido=="선택"||sigugun=="선택"){ 	alert("지역을 전부 설정해주세요"); 		return false;	}				
 		//ajax로 selectbox 선택한 값 넘겨서 리스트 받아오기
 		 $.ajax({
 			type: 'post',
@@ -137,13 +221,10 @@
 			data: JSON.stringify({
 				"sido" : sido,
 				"sigugun" : sigugun				
-		}),
-		contentType: "application/json",
-		
+			}),
+		contentType: "application/json",		
 		<%--들어온 값을 지도 마커에 표시!--%>
-		success: function(data){
-			console.log(data.length);
-			console.log("값이 들어오나 " + bdata);
+		success: function(data){			
 			$('#blist').empty(); //리스트 나타나는 곳에 기존 데이터 있을 수 있으니 비우기
 			setMarkers2(null); //기존에 있는 마커 있으면 초기화
 			setInfo2(null); //기존에 있는 인포윈도우 초기화
@@ -152,45 +233,51 @@
 			bli += "<br>";		
 			bli += "<ul id='a'>"
 			
-				for(var i in data){				
-							
-				console.log("찍히나 " +data[i].baddress);
-				var bbno = data[i].bno;
-				console.log(bbno+"ㅇㅇㅇ");
-				bli += '<li class="listdnames">' ;
-				bli += '<p>' + data[i].bname + '</p>';
-				console.log("너냐" + auth);
+				//for(var i in data){				
+				data.forEach(function(data,i){	
+				//리스트 목록 보여주기					
+				console.log("찍히나 " +data.baddress);				
+				var bbno = data.bno;				
+				bli += '<li class="listdnames" id="listmove">' ;
+				bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
+				console.log("너냐" + bbno);
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<img src="/image/heart.png" id="heart_img" alt="찜신청전">';
+					bli += '<img src="/image/heart.png" id="heart_img">';
 					console.log("안뜬다");
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){					
-					<c:forEach items="${list}" var="listA">
-						console.log("data : " + data[i].bno);
+					<c:forEach items="${list}" var="listA">							
 						console.log("list : " +"${listA.bno}");
-						if("${listA.bno}" == data[i].bno){
-							checkresult =1;
-							if("${listA.likescheck}" == 1){
-								bli += '<img src="/image/redheart.png" id="heart_img" alt="찜신청 후">';
+						if("${listA.bno}" == data.bno){							
+							if(data.likescheck == 1){								
+								bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+							}else{
+								bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
 							}
-						}	
-					</c:forEach>					
-					var heartcheck = document.querySelectorAll("#redheart").innerHTML;
-					console.log("들어오긴들어오나" + heartcheck);
-					if(checkresult==0){
-						console.log("들어오긴들어오나");
-						bli += '<img src="/image/heart.png" id="heart_img" alt="찜신청전">'; 
-					}
+						}
+					</c:forEach>										
+					/* if(checkresult==){						
+						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">'; 
+					} */
 				}
-				
-				bli += '<p>' + data[i].baddress + ' ' + data[i].bdetailadd + '</p>';
+				console.log(data.bstar +"별점");
+				bli += '<div id="totalstar">';
+				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
+				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
+				bli += '</div>';
+				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
+				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+				if(authsect == 'users'){
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
+				}								
 				bli += '</li>' ;
-
-				var businaddress = data[i].baddress;
-				var businname = data[i].bname;
-				var businphone = data[i].bphone;
-				businbno = data[i].bno;
+				
+				var businaddress = data.baddress;
+				var businname = data.bname;
+				var businphone = data.bphone;
+				var businbno = data.bno;
 				var geocoder = new kakao.maps.services.Geocoder();
 				//리스트에 있는 위치들은 별도 마커로 표기
 				var imageSrc = "image/icons8-marker-100.png",
@@ -198,7 +285,7 @@
 					imageOption = {offset: new kakao.maps.Point(20,44)};
 				var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
 				
-				
+				//주소를 좌표로 전환
 				geocoder.addressSearch(businaddress, function(result, status){
 					if (status === kakao.maps.services.Status.OK) {
 				        var coords2 = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -215,7 +302,7 @@
 				     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 				        var iwContent = '<div style="width:100%; padding:5px;">' +
 				        				'<div>'+ businname + '</div>' + 
-				        				'<div>'+ businaddress + data[i].bdetailadd +'</div>' +
+				        				'<div>'+ businaddress + data.bdetailadd +'</div>' +
 				        				'<div>'+ businphone + '</div>' +
 				        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -230,32 +317,58 @@
 						    infowindow2.open(map, marker2);
 						}
 				      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
-				      kakao.maps.event.addListener(marker2, 'mouseover', function() {
-				    	map.panTo(marker2.getPosition());
+				        kakao.maps.event.addListener(marker2, 'mouseover', function() {
+				    		map.panTo(marker2.getPosition());
 		              	displayInfowindow2(marker2);
-		              });
-					  //마우스 아웃 시 인포윈도우 클로즈
-		              kakao.maps.event.addListener(marker2, 'mouseout', function() {
-		              	infowindow2.close();
-		              });
-		            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
-		            document.querySelectorAll("#a")[i].addEventListener('mouseenter', (event) =>{
-		            	this.map.panTo(marker2.getPosition());	 
-		            	infowindow2.open(map,marker2);
-		            });
+		              	});
+					  	//마우스 아웃 시 인포윈도우 클로즈
+		              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+		              		infowindow2.close();
+		              	});
+		            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
+		            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+		            		this.map.panTo(marker2.getPosition());	 
+		            		infowindow2.open(map,marker2);
+		           		});
 		            
-		            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
-		            document.querySelectorAll("#a")[i].addEventListener('mouseout', (event) =>{
-		            	infowindow2.close();
-		            });
-					}
-				})
-			}
+			            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+			            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
+			            	infowindow2.close();
+			            });	
+			            $(document).ready(function(){
+							
+							if (!Kakao.isInitialized()) {
+								// 사용할 앱의 JavaScript 키를 설정해 주세요.
+								Kakao.init('6c505216c8faffd1bf7690ddd222d68e');
+							};	 
+						    
+						    // 채널 1:1 채팅 버튼을 생성합니다.
+						    Kakao.Channel.createChatButton({
+						      container: '#kakao-talk-channel-chat-button'+data.bno+'',
+						      channelPublicId: data.bkakaoid,
+						      title: 'consult',
+						      size: 'small',
+						      color: 'yellow',
+						      shape: 'pc',
+						      supportMultipleDensities: true,
+						    });
+						});
+			            //모달 켜기
+			            $(".buttonapply"+data.bno+"").click(function(){
+			            	 document.getElementById("modal").style.display="block";
+			            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+			            	 document.getElementById("bno").value=bno;
+			            	 
+			            });
+			           
+			            
+			            	
+					}//status 상태
+				})//geocoder 
+			}); //data.forEach							
 			bli += "</ul>"
-			bli += "</div>"
-			
+			bli += "</div>"			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
-			console.log(markers2);
 			$(function () {
 				$("#heart_img").on("click", function(e) {
 					var logincheck = "${logincheck}"; //false
@@ -282,9 +395,9 @@
 						})
 					});
 				});	
-		},	
+			},	
 		error: function(){alert("조건 전송 오류");}
-		}); 
+		}); //ajax 
 
 		
 		geocoder.addressSearch($('#dongName').val(),function(result,status){
@@ -309,9 +422,7 @@
 				var contentfinal = '<div style="width:100%; padding:5px;">'+contentadd+'</div>';
 				var lat = result[0].y;
 				var lng = result[0].x;
-				var daddress = $('input[name=totaladdress]').val();
-				console.log("address"+ daddress);
-				console.log(contentadd);
+				var daddress = $('input[name=totaladdress]').val();								
 				console.log("lat: " + lat);	
 				console.log("lng: " + lng);
 				getAddr(lat,lng);
@@ -348,10 +459,42 @@
 				map.setCenter(coords);							
 			}
 			
+		});//geocoder 2
+	}); //검색버튼
+	
+	
+	 
+	//좋아요 간련 함수
+	$(function () {		
+		$(document).ready(function(){								
+		$(document).on("click","img[id='heart_img']",function(e) {
+			var logincheck = "${logincheck}"; //false
+			var targetElement = e.target;	
+			//let bno = businbno;
+			let bno = targetElement.getAttribute('alt');			
+			console.log(bno + "gnmng");					
+			if(logincheck == "false") {
+				alert("로그인 후 이용해주세요.");
+				location.href="/login";
+			}
+			$.ajax({
+					type: "post",
+					url: "/businessinfo/likes",
+					data: {bno:bno},
+					success: function(data) {
+						console.log("좋아요 수 : " + data);
+						if(data == 1) {
+							targetElement.setAttribute("src", "/image/redheart.png");							
+						} else {
+							targetElement.setAttribute("src", "/image/heart.png");							
+						}
+					}, error: function() {
+		                console.log('바보야!');
+					}
+				})
+			});			
 		});
-		
 	});
-
 	//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
@@ -374,10 +517,219 @@
 	        info2[i]?.setMap(map);
 	    }            
 	}		
+	
+	//카테고리별 리스트 출력
+	function catelist(){
+		let category = $("#catelist option:selected").val(); //selectbox에서 sido 선택값
+		console.log("마지막: " + category);
+		 $.ajax({
+				type: 'post',
+				url: 'categoryb',
+				dataType: 'json',
+				data: JSON.stringify({
+					"sido" : sido,
+					"sigugun" : sigugun,			
+					"category" : category
+				}),
+			contentType: "application/json",		
+			<%--들어온 값을 지도 마커에 표시!--%>
+			success: function(data){			
+				$('#blist').empty(); //리스트 나타나는 곳에 기존 데이터 있을 수 있으니 비우기
+				setMarkers2(null); //기존에 있는 마커 있으면 초기화
+				setInfo2(null); //기존에 있는 인포윈도우 초기화
+				var bli = "";
+				bli += "<div id='itl'>"
+				bli += "<br>";		
+				bli += "<ul id='a'>"
+				
+					//for(var i in data){				
+					data.forEach(function(data,i){	
+					//리스트 목록 보여주기					
+					console.log("찍히나 " +data.baddress);				
+					var bbno = data.bno;				
+					bli += '<li class="listdnames" id="listmove">' ;
+					bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
+					console.log("너냐" + bbno);
+					if(auth==""){ //둘 다 로그인 안했을 때 
+						bli += '<img src="/image/heart.png" id="heart_img">';
+						console.log("안뜬다");
+					}else if(authsect == 'business'){
+						bli += '';
+					}else if(authsect == 'users'){					
+						<c:forEach items="${list}" var="listA">							
+							console.log("list : " +"${listA.bno}");
+							if("${listA.bno}" == data.bno){							
+								if(data.likescheck == 1){								
+									bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+								}else{
+									bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+								}
+							}
+						</c:forEach>										
+						/* if(checkresult==){						
+							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">'; 
+						} */
+					}
+					console.log(data.bstar +"별점");
+					bli += '<div id="totalstar">';
+					bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
+					bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
+					bli += '</div>';
+					bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
+					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+					if(authsect == 'users'){
+						bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
+					}
+					bli += '</li>' ;
+					
+					
+					var businaddress = data.baddress;
+					var businname = data.bname;
+					var businphone = data.bphone;
+					var businbno = data.bno;
+					var geocoder = new kakao.maps.services.Geocoder();
+					//리스트에 있는 위치들은 별도 마커로 표기
+					var imageSrc = "image/icons8-marker-100.png",
+						imageSize = new kakao.maps.Size(40,44),
+						imageOption = {offset: new kakao.maps.Point(20,44)};
+					var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
+					
+					//주소를 좌표로 전환
+					geocoder.addressSearch(businaddress, function(result, status){
+						if (status === kakao.maps.services.Status.OK) {
+					        var coords2 = new kakao.maps.LatLng(result[0].y, result[0].x);
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker2 = new kakao.maps.Marker({
+					            map: map,
+					            position: coords2,
+					            image: markerImage,
+					            clickable: true
+					        });
+					        marker2.setMap(map);
+					        markers2.push(marker2); 
+					        
+					     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+					        var iwContent = '<div style="width:100%; padding:5px;">' +
+					        				'<div>'+ businname + '</div>' + 
+					        				'<div>'+ businaddress + data.bdetailadd +'</div>' +
+					        				'<div>'+ businphone + '</div>' +
+					        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+					     // 인포윈도우를 생성합니다
+					        var infowindow2 = new kakao.maps.InfoWindow({
+					            content : iwContent,
+					            removable : iwRemoveable
+					        });
+					        info2.push(infowindow2);
+					        //인포윈도우 열리는 function
+					        function displayInfowindow2(marker2) {
+							    infowindow2.open(map, marker2);
+							}
+					      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
+					        kakao.maps.event.addListener(marker2, 'mouseover', function() {
+					    		map.panTo(marker2.getPosition());
+			              	displayInfowindow2(marker2);
+			              	});
+						  	//마우스 아웃 시 인포윈도우 클로즈
+			              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+			              		infowindow2.close();
+			              	});
+			            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
+			            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+			            		this.map.panTo(marker2.getPosition());	 
+			            		infowindow2.open(map,marker2);
+			           		});
+			            
+				            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+				            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
+				            	infowindow2.close();
+				            });	
+				            $(document).ready(function(){
+								
+								if (!Kakao.isInitialized()) {
+									// 사용할 앱의 JavaScript 키를 설정해 주세요.
+									Kakao.init('6c505216c8faffd1bf7690ddd222d68e');
+								};	 
+							    
+							    // 채널 1:1 채팅 버튼을 생성합니다.
+							    Kakao.Channel.createChatButton({
+							      container: '#kakao-talk-channel-chat-button'+data.bno+'',
+							      channelPublicId: data.bkakaoid,
+							      title: 'consult',
+							      size: 'small',
+							      color: 'yellow',
+							      shape: 'pc',
+							      supportMultipleDensities: true,
+							    });
+							});
+				            //모달 켜기
+				            $(".buttonapply"+data.bno+"").click(function(){
+				            	 document.getElementById("modal").style.display="block";
+				            	 var bno = $(".buttonapply"+data.bno+"").data('value');
+				            	 document.getElementById("bno").value=bno;
+				            	 
+				            });
+						}//status 상태
+					})//geocoder 
+				}); //data.forEach							
+				bli += "</ul>"
+				bli += "</div>"			
+				$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
+				console.log(markers2);			
+			},	
+			error: function(){alert("구,동 검색 먼저해주세요.");}
+			});
+		}
+		 //모달 닫기
+		 $("#modal_close_btn").click(function(){
+			 document.getElementById("modal").style.display="none";
+	     });
+		 //날짜 
+		  $(function(){
+		 $("#apickup").datepicker({
+			    language: 'ko',
+			    timepicker: true,
+			    timeFormat: "hh:ii AA"
+			});	
+		  });
+		  
+		//주소 찾기
+		  function findAddr(){
+		  	new daum.Postcode({
+		          oncomplete: function(data) {
+		              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		              var roadAddr = data.roadAddress; // 도로명 주소 변수
+		              
+		              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		             
+		              if(roadAddr !== ''){
+		                  document.getElementById("aaddress").value = roadAddr;
+		                  
+		              } 
+		          }
+		      }).open();
+		  }
+		//msg 체크
+		var msg ="${msg}";
+		if(msg != ""){
+			alert(msg);
+		}
+		
+	
+
 	</script>
 	
 	<%--js 불러오기 --%>
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>    
+	<script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/businessinfo.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/validations.js'/>"></script>
 </body>
 </html>

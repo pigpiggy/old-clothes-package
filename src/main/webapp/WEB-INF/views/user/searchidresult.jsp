@@ -35,7 +35,7 @@
                     	<div class="card-body p-5">
                     	<!-- <h3 class="text-uppercase text-center mb-5">아이디 찾기</h3> -->
 
-                        <p>회원님의 정보와 일치하는 아이디입니다.</p><br>
+                        <p>회원님의 정보와 일치하는 아이디입니다.</p><br> <!-- 아이디 forEach로 출력 -->
 							<c:if test="${business != null}">
 								<h2 class="text-center mb-5">업체아이디:
 									<c:forEach var="bid" items="${business }" varStatus="status">

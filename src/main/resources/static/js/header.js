@@ -4,9 +4,6 @@ let headerMenuList = document.querySelectorAll('.headerMenuList');
 let headerMenuSpan = document.querySelectorAll('.headerMenuList span');
 let sideMenu = document.querySelectorAll('.sideMenu');
 
-hamburger.onclick = function() {
-  headerMenuBar[0].classList.toggle('toggle');
-}
 
 const body = document.querySelector("body");
 

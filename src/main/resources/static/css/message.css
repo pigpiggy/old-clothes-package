@@ -102,6 +102,10 @@ input[type="checkbox"] {
 	cursor: pointer;
 }
 
+.mtitle a{
+	color: black;
+}
+
 #modal__content {
 	height: 375px;
 }
@@ -152,8 +156,11 @@ ul.pagination li a.active {
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
 div.center {
-	text-align: center;
 	margin: 20px;
+	display: flex;
+	justify-content: center;
 }
+
+
 
 

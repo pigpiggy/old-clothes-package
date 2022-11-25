@@ -1,24 +1,22 @@
-/**
- * 
- */
- 
- 
+
 //회원가입 유효성 검사
 function Validation(){
 	//[개인]
 	var PPwd = document.getElementById("password");//비밀번호[개인]
 	var PPwd1 = document.getElementById("pcheckpassword")//비밀번호[개인]
 	var PAgree = document.getElementById("p_clause")//동의[업체]
+	
+	if($('#checkednickname').css("display")=="none"){
+		alert("닉네임 중복확인 확인부탁드립니다.");
+		return false;
+	}
 	 
 	if($('#checkeduserid').css("display")=="none"){
 		alert("아이디 중복확인 확인부탁드립니다.");
 		return false;
 	}
 	
-	if($('#checkednickname').css("display")=="none"){
-		alert("닉네임 중복확인 확인부탁드립니다.");
-		return false;
-	}
+	
 	/*최종때 주석 풀어야 해요!
 	if($('#checkedauthNumber').css("display")=="none"){
 	      alert("본인 인증 완료해주세요.");
@@ -110,5 +108,3 @@ function Valid(){
 	}
 	
 }
-
-

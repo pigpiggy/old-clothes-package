@@ -14,12 +14,33 @@ public class Business {
 	private String bphone; //업체대표 전화번호
 	private String bpassword; //업체 비밀번호
 	private String bnumber; //사업자 번호
-	private Long bstar; //별점
+	private Double bstar; //별점
 	private Date regDate; //날짜
 	private String sect;//개인과사업의 구분
-
+	private Long reviewcount;		
+	private Long likescheck;		
+	private String category; //카테고리 종류 	
 	
-
+	
+		
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public Long getReviewcount() {
+		return reviewcount;
+	}
+	public void setReviewcount(Long reviewcount) {
+		this.reviewcount = reviewcount;
+	}
+	public Long getLikescheck() {
+		return likescheck;
+	}
+	public void setLikescheck(Long likescheck) {
+		this.likescheck = likescheck;
+	}
 	public Integer getBno() {
 		return bno;
 	}
@@ -75,10 +96,10 @@ public class Business {
 		this.bnumber = bnumber;
 	}
 	
-	public Long getBstar() {
+	public Double getBstar() {
 		return bstar;
 	}
-	public void setBstar(Long bstar) {
+	public void setBstar(Double bstar) {
 		this.bstar = bstar;
 	}
 	public Date getRegDate() {
@@ -104,9 +125,12 @@ public class Business {
 	public void setSect(String sect) {
 		this.sect = sect;
 	}
+	
+	
+	
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
-			String bphone, String bpassword, String bnumber, Long bstar, Date regDate, String sect) {
-
+			String bphone, String bpassword, String bnumber, Double bstar, Date regDate, String sect, Long reviewcount,
+			String category, Long likescheck) {
 		super();
 		this.bno = bno;
 		this.bname = bname;
@@ -117,10 +141,12 @@ public class Business {
 		this.bphone = bphone;
 		this.bpassword = bpassword;
 		this.bnumber = bnumber;
-		this.sect = sect;
 		this.bstar = bstar;
 		this.regDate = regDate;
-
+		this.sect = sect;
+		this.reviewcount = reviewcount;
+		this.category = category;
+		this.likescheck = likescheck;
 	}
 	public Business() {
 		super();
@@ -131,8 +157,6 @@ public class Business {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress
 				+ ", bdetailadd=" + bdetailadd + ", bkakaoid=" + bkakaoid + ", bphone=" + bphone + ", bpassword="
 				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + ", sect=" + sect
-				+ "]";
+				+ ", reviewcount=" + reviewcount + ", category=" + category + ", likescheck=" + likescheck + "]";
 	}
-
-	
 }

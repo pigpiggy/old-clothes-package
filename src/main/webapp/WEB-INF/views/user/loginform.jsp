@@ -17,7 +17,12 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-
+<script>
+	var msg = "${msg}";
+	if(msg != ''){
+		alert(msg);
+	}
+</script>
 
 </head>
 <body>

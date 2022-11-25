@@ -12,16 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Donation;
 import com.kosta.clothes.bean.Likes;
-import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Trash;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.BusinessService;
@@ -34,8 +35,10 @@ import com.kosta.clothes.service.TrashService;
 public class InfoController {
 	@Autowired
 	TrashService trashService;
+	
 	@Autowired
 	ServletContext servletContext;
+	
 	@Autowired
 	DonationService donationService;
 
@@ -115,14 +118,15 @@ public class InfoController {
 	         Business bauthuser=new Business();
 	         String sect;
 	         Integer userno =0;
-	         Users uauthuser=new Users();	        
+	         Users uauthuser=new Users();	  
+				//사용자가 로그인 했을 때 
 	         if(session.getAttribute("authUser")!=null) {
 		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");
 		            sect = uauthuser.getSect(); 
 		            userno = uauthuser.getUserno();
 		            System.out.println("sect " + sect);
-		         } else{
+		         } else{//그 외라면~
 		        	 bauthuser = (Business) session.getAttribute("authUser");
 			         sect = bauthuser.getSect();
 			            //userno = bauthuser.getBno();
@@ -132,7 +136,7 @@ public class InfoController {
 	        	 model.addAttribute("logincheck","false");
 	         }
 			 //Business business = (Business) session.getAttribute("bauthUser");			 
-			if(userno!=null || userno !=0) { //개인이 로그인 했을떄 										
+			if(userno!=null || userno !=0) { //개인이 로그인 했을떄 	likescheck , bno 가져오기 like테이블에서									
 				List<Likes> list =  likesService.getbno(userno);
 				System.out.println("userslist : " + list);	
 				model.addAttribute("list",list);
@@ -147,16 +151,32 @@ public class InfoController {
 	@ResponseBody
 	@PostMapping("/businesslist")
 	public List<Business> businesslist(@RequestBody Map<String,Object> params,Model model) {
-		List<Business> business = null;
+		List<Business> business = null;		
 		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");		
-		String sigungu = (String) params.get("sigugun");		
-		
+		String sigungu = (String) params.get("sigugun");
+		Integer userno =0;
+        Users uauthuser=new Users();			
 		System.out.println("sido : " + sido);
 		System.out.println("sigungu : " + sigungu);
 		try {
-			business = businessService.allBusinessInfo(sido,sigungu);			
-
+			//사용자가 로그인 했을 때 
+			if(session.getAttribute("authUser")!=null) {
+				//사용자가 로그인했을 때 
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+		            uauthuser = (Users) session.getAttribute("authUser");	            
+		            userno = uauthuser.getUserno();	            
+		            business = businessService.allBusinessInfo1(sido, sigungu, userno);
+		            System.out.println("ㅁㅁ" + business);
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+					//업체가 로그인 했을 때 
+					business = businessService.allBusinessInfo(sido,sigungu);
+					System.out.println("bb" + business);
+				}
+			}else {// 그외
+				business = businessService.allBusinessInfo(sido,sigungu);
+				System.out.println("bb" + business);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -164,6 +184,8 @@ public class InfoController {
 	}
 
 	//판매업체 좋아요
+
+
 		@ResponseBody
 		@PostMapping("/businessinfo/likes")
 		public Long registLikes(@RequestParam("bno") Integer bno) {
@@ -197,4 +219,57 @@ public class InfoController {
 		}
 		
 	
+	
+	//카테코리 검색 결과 
+	@ResponseBody
+	@PostMapping("/categoryb")
+	public List<Business> categoryb(@RequestBody Map<String,Object> params,Model model) {
+		List<Business> business = null;		
+		//ajax로 데이터 받아온 것
+		String sido = (String) params.get("sido");		
+		String sigungu = (String) params.get("sigugun");
+		String category = (String) params.get("category");
+		Integer userno =0;
+        Users uauthuser=new Users();
+		System.out.println("sido : " + sido);
+		System.out.println("sigungu : " + sigungu);
+		System.out.println("category : " + category);
+		try {
+			//사용자가 로그인 했을 때 
+			if(session.getAttribute("authUser")!=null) {
+				//사용자가 로그인 했을 때
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+		            uauthuser = (Users) session.getAttribute("authUser");	            
+		            userno = uauthuser.getUserno();	            
+		            business = businessService.cateusers(sido, sigungu, userno,category);
+		            System.out.println("ㅁㅁ" + business);
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+					//업체가 로그인 했을 때 
+					business = businessService.cateException(sido,sigungu,category);
+					System.out.println("bb" + business);
+				}
+			}else {// 그외
+				business = businessService.cateException(sido,sigungu,category);
+				System.out.println("bb" + business);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return business;
+	}
+	
+	//신청 작성하기 
+	@PostMapping("/apply")
+	public String apply(@ModelAttribute Apply apply, Model model) {
+		System.out.println(apply.getBno());
+		try {
+			Users userno = (Users) session.getAttribute("authUser");
+			apply.setUserno(userno.getUserno());
+			businessService.registapply(apply);
+			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "info/businessinfo";
+	}		
 }

@@ -25,7 +25,7 @@
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
 	<div id="viewcontainer">
-		<div id="demo-modal" class="modal">
+		<div id="demo-modal" class="firstmodal">
       		<div class="modal__content">
       			<form action="smessage" method="post" id="messageform">
       				<input type="hidden" name="recvUserno" value="${uservo.userno }">
@@ -76,21 +76,43 @@
         		</div>
         	</c:when>
         	<c:otherwise>
-        		<c:if test="${authUser.userno ne sharing.userno }">
-	          		<div class="letterAndHeart">	
-		          		<a href="#demo-modal">
-		          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
-		          		</a>
-		          			<c:choose>
-		          				<c:when test="${likes eq 1}">
-		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-		          				</c:when>
-		          				<c:otherwise>
-		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-        						</c:otherwise>
-        					</c:choose>
-        			</div>
-        		</c:if>
+        		<c:choose>
+        			<c:when test="${authUser.sect eq 'users' }">
+        				<c:if test="${authUser.userno ne sharing.userno }">
+			          		<div class="letterAndHeart">	
+				          		<a href="#demo-modal">
+				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+				          		</a>
+				          			<c:choose>
+				          				<c:when test="${likes eq 1}">
+				          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+				          				</c:when>
+				          				<c:otherwise>
+				          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		        						</c:otherwise>
+		        					</c:choose>
+		        			</div>
+		        		</c:if>
+        			</c:when>
+        			<c:otherwise>
+        				<div class="letterAndHeart">	
+				          		<a href="#demo-modal">
+				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+				          		</a>
+				          			<c:choose>
+				          				<c:when test="${likes eq 1}">
+				          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+				          				</c:when>
+				          				<c:otherwise>
+				          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		        						</c:otherwise>
+		        					</c:choose>
+		        		</div>
+        			</c:otherwise>
+        			
+        		</c:choose>
+        		
+        		
          	</c:otherwise>
 		</c:choose>
         </div>
@@ -105,16 +127,18 @@
       <div class="scontent">
         <div id="modifydelete">
         	<h3>상품정보</h3>
-        	<c:if test="${authUser.userno eq sharing.userno}">    
-	        	<div id="modifydelete">
-					<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
-    	    			<i class="fa-solid fa-gear fa-lg"></i>
-    	    		</a>
-					<a href="javascript:void(0);" onclick="removeSharing();">	        	
-        				<span class="fa-solid fa-trash-can fa-lg"></span>
-        			</a>
-        		</div>
-        	</c:if>	 
+        	<c:if test="${authUser.sect eq 'users'}">
+	        	<c:if test="${authUser.userno eq sharing.userno}">    
+		        	<div id="modifydelete">
+						<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
+	    	    			<i class="fa-solid fa-gear fa-lg"></i>
+	    	    		</a>
+						<a href="javascript:void(0);" onclick="removeSharing();">	        	
+	        				<span class="fa-solid fa-trash-can fa-lg"></span>
+	        			</a>
+	        		</div>
+	        	</c:if>	
+	        </c:if>	
         </div>
         <div id=sdetail>${sharing.scontent}</div>
       </div>
@@ -155,17 +179,20 @@ $(function () {
 	$("#heart_img").on("click", function(e) {
 		var logincheck = "${logincheck}";
 		const sno =  $('#sno').val();
-		const userno = "${authUser.userno}";
+		 
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
 			console.log(sno);
 		}
+		let sect = "${sect}";
+		if(sect == 'users') {
+			alert(sect);
 			$.ajax({
 				type: "post",
 				url: "/sharingView/likes",
-				data: {sno:sno, userno:userno},
+				data: {sno:sno},
 				success: function(data) {
 					console.log(data);
 					if(data == 1) {
@@ -177,8 +204,8 @@ $(function () {
                     console.log('바보야!')
 				}
 			})
-		}
-	)
+		}	
+	})
 
 });
 
@@ -216,11 +243,15 @@ if(submitcheck == "true"){
 $("#wapply").on("click", function() {
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
-	const userno = "${authUser.userno}";
+	let userno = 0;
+	let sect = "${sect}";
+	if(sect == 'users') {
+		userno = "${authUser.userno}";
+	}
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
-	} else {
+	} else if(sect == 'users'){
 		console.log(sno);
 		$.ajax({
 			type: "post",

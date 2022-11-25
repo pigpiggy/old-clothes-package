@@ -59,6 +59,56 @@ div.contents {
 	padding:5px;	
 	border:1px solid black;	
 }
+.search-box {
+	padding-top:2%;
+  	width: 250px;
+  	position: relative;
+  	display: flex;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#dongName{
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 9px 45px 9px 9px;
+  background-color: #fff;
+  color: #6c6c6c;
+  border-radius: 6px;
+  border:1px solid #b8c6db;
+  transition: all .4s;
+}
+
+#searchBtn{
+  background-color: transparent;
+  font-size: 18px;
+  padding: 6px 9px;
+  margin-left:-45px;
+  border:none;
+  color: #6c6c6c;
+  transition: all .4s;
+  z-index: 1;	
+}
+
+#searchBtn:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  color: black;
+}
+
+#searchBtn:focus{
+  outline:none;
+  color:black;
+}
+#searchBtn:focus{
+  outline:none;
+  color:black;
+}
+.select{
+	margin-right:1%;
+}
+
 </style>
 
 </head>
@@ -68,7 +118,7 @@ div.contents {
 	</div>
 	
 	<div class="contents">
-		<div id="select" style="display:flex;">
+		<div id="selectbox" style="display:flex;">
 		<div class="select">
 		<select id="sido"><option value="">선택</option></select>
 		</div>
@@ -81,10 +131,10 @@ div.contents {
 		</div>
 		
 		
-		<div>
+		<div class="search-box">
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
 			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-			<input type="button" id="searchBtn" value="검색">
+			<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
 			
 		</div>		
 	</div>
@@ -100,7 +150,7 @@ div.contents {
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3c4f67ffd89ba5324a466e5a4f4bd0f5&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 

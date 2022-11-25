@@ -43,7 +43,7 @@ $(document).ready(function(){
     <div class="title">
       <div class="nicname">
         <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
-        <strong>알냥이의 옷장</strong>
+        <strong>${business.bname }의 옷장</strong>
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">          
@@ -75,19 +75,15 @@ $(document).ready(function(){
 			  <div>안녕하세요 알냥이의 옷장입니다. </div>
 				<img id="setting" src="/image/setting1.png" alt="소개수정">
 		  </div>
-  </div>
+  	</div>
 	</div>
 	
 	<div class="my_Tab">
 		<ul class="tabs">
-			<li class="on"><a href ="#a">판매 상품</a></li>
-			<li><a href ="#b">구매 상품</a></li>
-			<li><a href ="#c">신청 목록</a></li>
-			<li><a href ="#d">거래 후기</a></li>
+			<li class="on"><a href ="#a">신청 목록</a></li>
+			<li><a href ="#b">거래 후기</a></li>
 		</ul>
-		<div class="tab_con on">판매상품 목록 띄워주세요!</div>
-		<div class="tab_con">구매상품 목록 띄워주세요!</div>
-		<div class="tab_con">신청 목록 띄워주세요!</div>
+		<div class="tab_con on">신청 목록 띄워주세요!</div>
 		<div class="tab_con">
 		<div class="card border-light mb-3" style="max-width: 18rem;">
         <div class="card-body">

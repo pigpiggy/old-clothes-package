@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 
 @Mapper
@@ -23,5 +24,8 @@ public interface MessageDAO {
 	MessageVO bSendViewMessage(Integer mno) throws Exception;
 	Integer selectRmessageCount(Integer recvUserno) throws Exception;
 	Integer selectSmessageCount(Integer sendUserno) throws Exception;
+	
+	//업체
+	Business mypageBusiness(Integer bno)throws Exception;
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,8 +30,18 @@ public class MypageController {
 	@Autowired
 	HttpSession session;
 	
-	@GetMapping ("/mypage")
-	String main() {
+	/*
+	 * @GetMapping ("/mypage") String main() { return "/mypage/mypage"; }
+	 */
+	@GetMapping ("/mypage/{bno}")
+	String main(@PathVariable("bno") Integer bno,Model model) {
+		System.out.println("mypage" + bno);
+		try {
+			Business business = messageService.mypageBusiness(bno);
+			model.addAttribute("business",business);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "/mypage/mypage";
 	}
 	

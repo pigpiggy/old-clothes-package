@@ -37,16 +37,10 @@ public interface UsersDAO {
 
 	String checkupass(String id) throws Exception; //개인비밀번호 확인용
 	void updateuser(Users user) throws Exception; //개인 회원 정보 수정
+	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴
 	
-	//회원탈퇴
-	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴 (user)
-	void deletesharing(Integer userno) throws Exception; //개인 회원 탈퇴 (sharing)
-	void deletelikes(Integer userno) throws Exception; //개인 회원 탈퇴 (likes)
-	void deletefree(Integer userno) throws Exception; //개인 회원 탈퇴 (free)
-	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)
-	void deleteapply(Integer userno) throws Exception; //개인 회원 탈퇴 (apply)
-	void deletecommet(Integer userno) throws Exception; //개인 회원 탈퇴 (comment)
 	
 	String checkbpass(String id) throws Exception; //업체비밀번호 확인용
 	void updatebusiness(Business business) throws Exception; //업체 회원 정보 수정
+	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴
 }

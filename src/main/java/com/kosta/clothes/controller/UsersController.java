@@ -321,7 +321,11 @@ public class UsersController {
   
 //비밀번호 확인
   @GetMapping("/passcheck")
-  public String passcheck() {
+  public String passcheck(Model model) {
+	if(session.getAttribute("authUser")==null) { //로그인 안되어있다면 로그인 페이지로!
+		model.addAttribute("msg", "로그인이 필요합니다");
+		return "user/loginform";
+	}
   	return "user/checkpass";
   }
   
@@ -332,7 +336,7 @@ public class UsersController {
 		 
 		 Users uauthuser = (Users) session.getAttribute("authUser");
 		 String id = uauthuser.getUserid();
-		 String upass = usersService.checkupass(id);//개인창 패스워드 체크
+		 String upass = usersService.checkupass(id);//개인 패스워드 체크
 		 System.out.println("pass" + pass);
 		 System.out.println("upass" + upass);
 		 if(pass.equals(upass)) {			 		
@@ -353,7 +357,7 @@ public class UsersController {
 	  try {
 		  usersService.modifyuser(user);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","개인회원정보 수정 완료!");
+		  model.addAttribute("msg","회원정보 수정 완료!");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -369,7 +373,7 @@ public class UsersController {
 		  Integer userno = uauthuser.getUserno();
 		  usersService.deleteuser(userno);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","개인 탈퇴 완료!!");
+		  model.addAttribute("msg","탈퇴 완료");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -403,7 +407,7 @@ public class UsersController {
 	  try {
 		  usersService.modifybusiness(business); //업체 정보 수정
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","개인회원정보 수정 완료!");
+		  model.addAttribute("msg","회원정보 수정 완료");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -418,7 +422,7 @@ public class UsersController {
 		  Integer bno = bauthuser.getBno();
 		  usersService.deleteuser(bno);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","업체 탈퇴 완료!!");
+		  model.addAttribute("msg","탈퇴 완료");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }

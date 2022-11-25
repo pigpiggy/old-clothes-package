@@ -26,7 +26,7 @@ public class CertificationService implements UsersService {
 		Integer uIdCount = usersDao.countUserIdbyPN(phone); //개인 아이디 수
 		Integer bIdCount = usersDao.countBusinessIdbyPN(phone); //업체 아이디 수
 		if((uIdCount+bIdCount) >= 3) {
-			return true;//같은 번호로 가입한 아이디 3개 이상이면 true;
+			return true;//같은 번호로 가입한 아이디 3개 이상이면 true
 		}else {
 			return false;
 		}
@@ -40,7 +40,7 @@ public class CertificationService implements UsersService {
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         params.put("to", phone);    // 수신전화번호 
-        params.put("from", "01020564881");    // 발신전화번호 테스트 시에는 본인 번호 다 넣기 수신/발신 
+        params.put("from", "폰번호넣으세요");    // 발신전화번호 테스트 시에는 본인 번호 다 넣기 수신/발신 
         params.put("type", "SMS");
         params.put("text", "하우헌옷의 인증번호 : " + "["+cerNum+"]" + "입니다."); //문자 받을 때 문구 넣 을 곳 
         params.put("app_version", "test app 1.2"); // application name and version

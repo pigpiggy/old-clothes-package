@@ -283,7 +283,7 @@
 				baddress = #{baddress},
 				bdetailadd=#{bdetailadd},
 				bkakaoid=#{bkakaoid},
-				bnumber=#{bnumber
+				bnumber=#{bnumber}
 			where businessid = #{businessid}
 		]]>
 	</update>

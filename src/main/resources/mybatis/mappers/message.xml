@@ -32,8 +32,8 @@
 	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
-			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u 
-			where recvUserno=#{recvUserno} and m.sendUserno=u.userno)
+			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u, business b 
+			where recvUserno=#{recvUserno} and (m.sendUserno=u.userno or m.sendBno=b.bno)
 			where num between #{row} AND #{row}+9 
 		]]>
 	</select>

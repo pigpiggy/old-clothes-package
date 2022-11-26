@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,14 +180,20 @@ public class UsersController {
 
     //로그인창
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request) {
+    	String referer = request.getHeader("Referer");
+    	request.getSession().setAttribute("redirectURI", referer);
+    	System.out.println("referer:"+referer);
     	return "user/loginform";
     }
     //로그인
     @PostMapping("/login")
     public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
     					@RequestParam(value="password",required = true,defaultValue = "")String password,
-    					Model model) {
+    					Model model,
+    					HttpServletRequest request) {
+    	String url ="";
+    	String reurl =(String)request.getSession().getAttribute("redirectURI");
     	try {
     		Users authUser=null;
     		Business bauthUser = null;
@@ -215,7 +221,7 @@ public class UsersController {
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
-    	return "redirect:/";
+    	return "redirect:"+reurl;
     }
   //로그아웃
   @RequestMapping(value="/logout",method = RequestMethod.GET)

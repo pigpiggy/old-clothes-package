@@ -20,16 +20,14 @@
 		        <a href="/login">로그인</a>
 		    </c:when>
 		    <c:otherwise>
-		    	<c:choose>
-		    	<c:when test="${authUser.sect=='user' }">
+		    	<c:if test="${authUser.sect=='user' }">
 			        <a href="/mypage/${authUser.userno }">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
-		        </c:when>
-		        <c:otherwise>
+		        </c:if>
+		        <c:if test="${authUser.sect=='business' }">
 		        	<a href="/mypage/${authUser.bno }">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
-				</c:otherwise>			        
-		        </c:choose>
+				</c:if>			        
 		    </c:otherwise>
         </c:choose>
       </div>

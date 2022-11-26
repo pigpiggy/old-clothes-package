@@ -227,16 +227,6 @@
 			where businessid = #{businessid}
 		]]>
 	</update>
-
-	
-		<!--비밀번호 체크[업체] -->
-	<select id="checkbpass" parameterType="String" resultType="String">
-		<![CDATA[
-			SELECT bpassword
-			FROM business 
-			WHERE businessid=#{id}
-		]]>
-	</select>
 	
 	
 	<!-- 개인정보탈퇴 -->

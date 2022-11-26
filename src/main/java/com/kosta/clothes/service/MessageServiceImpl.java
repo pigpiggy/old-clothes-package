@@ -25,12 +25,12 @@ public class MessageServiceImpl implements MessageService{
 	
 	@Override
 	public String submitMessage(MessageVO message, String sect) throws Exception {
-		if(sect == "users") {
+		System.out.println("messageservice:" + sect);
+		if(sect.equals("users")) {
 			messageDAO.insertMessage(message);
 		} else {
 			messageDAO.insertSBMessage(message);
 		}
-		System.out.println("messageservice:" + message);
 		return "true";
 	}
 

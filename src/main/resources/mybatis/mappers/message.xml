@@ -10,8 +10,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into message (mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate)
-			values (#{mno},#{mtitle},#{mcontent},#{sendUserno},#{recvUserno},0,sysdate)
+			insert into message (mno,mtitle,mcontent,sendUserno,recvUserno,recvBno,readChk,regdate)
+			values (#{mno},#{mtitle},#{mcontent},#{sendUserno},#{recvUserno, jdbcType=INTEGER},#{recvBno, jdbcType=INTEGER},0,sysdate)
 		]]>
 	</insert>
 	
@@ -31,10 +31,10 @@
 	<!-- 받은쪽지 보낸쪽지 리스트 -->
 	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
-			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u, business b 
-			where recvUserno=#{recvUserno} and (m.sendUserno=u.userno or m.sendBno=b.bno)
-			where num between #{row} AND #{row}+9 
+			SELECT rownum, b.* FROM (SELECT a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE RECVUSERNO = #{recvUserno} AND m.SENDUSERNO = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE RECVUSERNO = #{recvUserno} AND m.SENDBNO = b.BNO) a ORDER BY mno DESC) b 
+			WHERE rownum BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
 	
@@ -49,28 +49,31 @@
 	
 	<select id="uSendMessage" parameterType="map" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
-			from (select row_number() over (order by mno desc) num, m.*,u.* from message m, users u
-			where sendUserno=#{sendUserno} and m.recvUserno=u.userno)
-			where num between #{row} AND #{row}+9
+			SELECT rownum, b.* FROM (SELECT a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE sendUserno=#{sendUserno} AND m.recvuserno = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE sendUserno=#{sendUserno} AND m.recvbno = b.BNO) a ORDER BY mno DESC) b 
+			WHERE rownum BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>	
 		
 	<select id="bSendMessage" parameterType="Integer" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,regdate,nickname
-			from (select row_number() over (order by mno desc) num, m.*,b.*,b.bname as nickname from message m, BUSINESS b 
-			where sendUserno=#{sendUserno} and m.recvUserno=b.bno)
-			where num between #{row} AND #{row}+9
+			SELECT rownum, b.* FROM (SELECT a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE sendBno=#{sendBno} AND m.recvuserno = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE sendBno=#{sendBno} AND m.recvbno = b.BNO) a ORDER BY mno DESC) b 
+			WHERE rownum BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>	
 	
 	<!-- 받은 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
 	<select id="uRecvViewMessage" parameterType="Integer" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
+			select mno,mtitle,mcontent,sendUserno,SENDBNO,u.NICKNAME 
 			from message m, users u
-			where mno=#{mno} and m.sendUserno=u.userno
+			where mno=#{mno} and m.sendUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,sendUserno,SENDBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.SENDBNO = b.BNO
 		]]>
 	</select>
 	
@@ -78,16 +81,19 @@
 		<![CDATA[
 			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,b.bname as nickname
 			from message m, business b
-			where mno=#{mno} and m.sendUserno=b.bno
+			where mno=#{mno} and m.sendBno=b.bno
 		]]>
 	</select>	
 
 	<!-- 보낸 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
 	<select id="uSendViewMessage" parameterType="Integer" resultType="MessageVO">
 		<![CDATA[
-			select mno,mtitle,mcontent,sendUserno,recvUserno,readChk,m.regdate,u.nickname
+			select mno,mtitle,mcontent,recvUserno,RECVBNO,u.nickname
 			from message m, users u
-			where mno=#{mno} and m.recvUserno=u.userno
+			where mno=#{mno} and m.recvUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,recvUserno,RECVBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.RECVBNO = b.BNO
 		]]>
 	</select>
 	

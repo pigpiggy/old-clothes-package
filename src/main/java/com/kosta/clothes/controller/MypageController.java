@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
@@ -32,6 +35,37 @@ public class MypageController {
 	@GetMapping ("/mypage")
 	String main() {
 		return "/mypage/mypage";
+	}
+	
+	@PostMapping("/mypage/smessage")
+	public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			String sect = "";
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				message.setSendUserno(users.getUserno());
+				sect = users.getSect();
+				System.out.println("답장:" + message);
+			} else {
+				Business bauthuser = (Business) session.getAttribute("authUser");
+				message.setSendBno(bauthuser.getBno());
+				sect = bauthuser.getSect();
+			}
+			System.out.println("messagecontroller:" + message);
+			String submitcheck = messageService.submitMessage(message, sect);
+			System.out.println("submitcheck:"+submitcheck);
+			if(submitcheck == "true") {
+				mav.addObject("submitcheck", "true");
+			}else {
+				mav.addObject("submitcheck", "false");
+			}
+			mav.setViewName("redirect:/mypage/message");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
 	}
 	
 	@GetMapping ("/mypage/message")
@@ -59,7 +93,6 @@ public class MypageController {
 	            model.addAttribute("rpageInfo", rpageInfo);
 	            model.addAttribute("spageInfo", spageInfo);
 	            model.addAttribute("select", select);
-	            
 	         } else {
 	            bauthuser = (Business) session.getAttribute("authUser");
 	            map.put("recvUserno", bauthuser.getBno());
@@ -88,6 +121,7 @@ public class MypageController {
 	         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 	            uauthuser = (Users) session.getAttribute("authUser");
 	            message = messageService.uRecvViewMessage(mno);
+	            System.out.println("뷰리시브" +message);
 	         } else {
 	            bauthuser = (Business) session.getAttribute("authUser");
 	            message = messageService.bRecvViewMessage(mno);

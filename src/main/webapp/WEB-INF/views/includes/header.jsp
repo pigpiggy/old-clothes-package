@@ -15,13 +15,21 @@
     <div id="topMenu">
       <div id="headerMenu">
       	<c:choose>
-      		<c:when test="${authUser == null && bauthUser==null }">
+      		<c:when test="${authUser == null}">
 	      		<a href="/joinform">회원가입</a>
 		        <a href="/login">로그인</a>
 		    </c:when>
 		    <c:otherwise>
-		        <a href="/mypage">마이페이지</a>
-		        <a href="/logout">로그아웃</a>
+		    	<c:choose>
+		    	<c:when test="${authUser.sect=='user' }">
+			        <a href="/mypage/${authUser.userno }">마이페이지</a>
+			        <a href="/logout">로그아웃</a>
+		        </c:when>
+		        <c:otherwise>
+		        	<a href="/mypage/${authUser.bno }">마이페이지</a>
+			        <a href="/logout">로그아웃</a>
+				</c:otherwise>			        
+		        </c:choose>
 		    </c:otherwise>
         </c:choose>
       </div>

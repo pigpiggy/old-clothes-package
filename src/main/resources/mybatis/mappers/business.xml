@@ -12,20 +12,32 @@
 		]]>
 	</select>
 	
-	<select id="selectBusiness1" resultType="Business" parameterType="map">
+	<select id="likecheck" resultType="Long" parameterType="map">
 		<![CDATA[
-			SELECT *
-			FROM BUSINESS b , LIKES l   
-			WHERE b.BNO = l.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND userno=#{userno}
+			SELECT likescheck
+			FROM likes
+			WHERE bno=${bno} and userno=${userno}
 		]]>
 	</select>
+	
+	<!-- <select id="selectBusiness1" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.* ,l.*
+			FROM BUSINESS b LEFT OUTER JOIN LIKES l ON b.bno = l.bno   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND userno=#{userno}
+			union
+			SELECT b.*,l.*
+			FROM BUSINESS b LEFT OUTER JOIN LIKES l ON b.bno = l.bno   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+		]]>
+	</select> -->
 	
 	<!-- 로그인 안 했을 때 카테고리 정렬 -->
 	<select id="selectCatereview" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
-			FROM BUSINESS b , review r
-			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
 			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
 			ORDER BY reviewcount desc			
 		]]>
@@ -35,8 +47,8 @@
 	<select id="selectCatehigh" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
-			FROM BUSINESS b , review r
-			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
 			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
 			ORDER BY bstar desc			
 		]]>
@@ -45,8 +57,8 @@
 	<select id="selectCatelow" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
-			FROM BUSINESS b , review r
-			WHERE b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
 			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
 			ORDER BY bstar asc			
 		]]>
@@ -55,8 +67,8 @@
 	<select id="selectUserCatereview" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b ,LIKES l, review r   
-			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO    
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
 			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
 			ORDER BY reviewcount desc
 		]]>
@@ -65,8 +77,8 @@
 	<select id="selectUserCatehigh" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b ,LIKES l, review r   
-			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO    
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
 			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
 			ORDER BY bstar desc
 		]]>
@@ -75,8 +87,8 @@
 	<select id="selectUserCatelow" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b ,LIKES l, review r   
-			WHERE b.BNO = l.BNO AND b.BNO = r.BNO AND baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
 			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
 			ORDER BY bstar asc
 		]]>

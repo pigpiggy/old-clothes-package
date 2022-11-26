@@ -127,6 +127,15 @@
 	</select>		
 	
 	
+	<select id="mypageBusiness" resultType="Business" parameterType="Integer">
+		<![CDATA[
+			select * 
+			from business
+			where bno=#{bno}
+			]]>
+	</select>		
+	
+	
 	
 	
 	

@@ -364,21 +364,9 @@ public class UsersController {
 	  return "user/loginform";
   }
   
-  //개인회원 탈퇴
-  
-  @PostMapping("uretire")
-  public String uretire(Model model) {
-	  try {
-		  Users uauthuser = (Users) session.getAttribute("authUser");
-		  Integer userno = uauthuser.getUserno();
-		  usersService.deleteuser(userno);
-		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","탈퇴 완료");
-	  }catch (Exception e) {
-		  e.printStackTrace();		  
-	  }
-	  return "user/loginform";
-  }
+
+
+
 //업체 회원정보 수정 jsp이동
   @PostMapping("bpasscheck")
   public String bpasscheck(@RequestParam("pass") String pass ,Model model){
@@ -429,6 +417,20 @@ public class UsersController {
 	  return "user/loginform";
   }
   
+ //개인회원 탈퇴
   
+  @PostMapping("uretire")
+  public String uretire(Model model) {
+	  try {
+		  Users uauthuser = (Users) session.getAttribute("authUser");
+		  Integer userno = uauthuser.getUserno();
+		  usersService.deleteuser(userno);
+		  session.removeAttribute("authUser");
+		  model.addAttribute("msg","개인 탈퇴 완료!!");
+	  }catch (Exception e) {
+		  e.printStackTrace();		  
+	  }
+	  return "user/loginform";
+  }
 }
 

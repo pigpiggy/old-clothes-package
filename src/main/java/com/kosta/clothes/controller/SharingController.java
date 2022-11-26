@@ -3,6 +3,7 @@ package com.kosta.clothes.controller;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -135,10 +136,8 @@ public class SharingController {
 			}
 			//개인
 			if (uauthuser.getUserno() == null && bauthuser.getBno() == null) {
-				System.out.println("로그인 안했을 때:"+uauthuser.getUserno() + bauthuser.getBno());
 				model.addAttribute("logincheck", "false");
 			}else if (uauthuser.getUserno() != null){
-				System.out.println("로그인 했을 때:"+uauthuser.getUserno() + bauthuser.getBno());
 				Likes likevo = new Likes();
 				likevo.setSno(sno);
 				likevo.setUserno(uauthuser.getUserno());
@@ -273,19 +272,33 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/sharingView/wapply")
-	public void sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing) {
+	public ModelAndView sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model) {
+		ModelAndView mav = new ModelAndView();
 		try {
 			Wapply apply = new Wapply();
 			apply.setSno(sno);
+			Map<String, Object> map = new HashMap<String, Object>();
 			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
 				Users users = (Users) session.getAttribute("authUser");
 				apply.setWuserno(users.getUserno());
+				map.put("wuserno", apply.getWuserno());
+				map.put("sno", apply.getSno());
+				System.out.println("applyselect: "+ applyService.selectSwapply(map));
+				if(applyService.selectSwapply(map) == null) {
+					String registcheck = applyService.registSwapply(apply);
+					sharingService.upApplycount(sharing);
+					if(registcheck == "true") {
+						mav.addObject("registcheck", "true");
+						System.out.println("registcheck:"+registcheck);
+					} else {
+						mav.addObject("registcheck", "false");
+					}
+				}
 			}
-			applyService.registSwapply(apply);
-			sharingService.upApplycount(sharing);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return mav;
 	}
 
 	/* commons에 필요한 애들 */

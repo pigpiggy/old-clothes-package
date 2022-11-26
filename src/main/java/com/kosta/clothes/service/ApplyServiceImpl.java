@@ -1,5 +1,7 @@
 package com.kosta.clothes.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,19 @@ public class ApplyServiceImpl implements ApplyService{
 	ApplyDAO applyDAO;
 	
 	@Override
-	public void registSwapply(Wapply wapply) throws Exception {
+	public String registSwapply(Wapply wapply) throws Exception {
 		applyDAO.insertSwapply(wapply);
+		return "true";
 	}
 
 	@Override
 	public void registIwapply(Wapply wapply) throws Exception {
 		applyDAO.insertIwapply(wapply);
+	}
+
+	@Override
+	public Wapply selectSwapply(Map map) throws Exception {
+		return applyDAO.getSapply(map);
 	}
 
 

@@ -19,4 +19,6 @@ public interface BusinessDAO {
 	List<Business> selectUserCatereview(Map<String, String> map) throws Exception; //카테고리 정렬 로그인 했을 때 (review)
 	List<Business> selectUserCatehigh(Map<String, String> map) throws Exception; //카테고리 정렬 로그인 했을 때 (high)
 	List<Business> selectUserCatelow(Map<String, String> map) throws Exception; //카테고리 정렬 로그인 했을 때 (low)
+	
+	Long likecheck(Map map) throws Exception;
 }

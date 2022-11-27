@@ -255,11 +255,18 @@ $("#wapply").on("click", function() {
 			data: {sno:sno},
 			success: function(data) {
 				console.log(data);
-				alert("신청이 완료되었습니다.");
 			}, error: function() {
                 console.log('바보야!')
 			}
 		})
+	var registcheck = "${registcheck}";
+	if(registcheck == "true") {
+		alert("신청완");
+	} else {
+		console.log(registcheck);
+		alert("신청안돼");
+	}
+
 	}
 		
 })

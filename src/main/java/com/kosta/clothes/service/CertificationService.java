@@ -188,14 +188,7 @@ public class CertificationService implements UsersService {
 		public void modifyuser(Users user) throws Exception {
 			usersDao.updateuser(user);
 			
-		}
-
-		//회원탈퇴
-		@Override
-		public void deleteuser(Integer userno) throws Exception {
-			usersDao.deleteuser(userno);
-			
-		}
+		}	
 
 		//업체비밀번호 확인용
 		@Override
@@ -210,11 +203,28 @@ public class CertificationService implements UsersService {
 			
 		}
 
+		
+		//회원탈퇴
+		@Override
+		public void deleteuser(Integer userno) throws Exception {
+			usersDao.deletecommet(userno);
+			usersDao.deletelikes(userno);
+			usersDao.deletereview(userno);
+			usersDao.deletemessage(userno);
+			usersDao.deletesharing(userno);
+			usersDao.deleteapply(userno);
+			usersDao.deletefree(userno);
+			usersDao.deleteindivi(userno);		
+			usersDao.deleteuser(userno);
+		}
+
+
 
 		@Override
 		public void deletebusiness(Integer bno) throws Exception {
 			usersDao.deletebusiness(bno);
 			
 		}
+
 
 }

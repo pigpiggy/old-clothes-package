@@ -54,7 +54,7 @@
     </div> 
                 </section>
                 <div class="cont" id="center">               
-                  ${article.fcontent }                                                
+                  <p id="contentp">${article.fcontent }</p>                                                
                 </div>              
                           <input type="hidden" name="fno" id="fno" value="${article.fno }">               
             <div class="bt_wrap">            

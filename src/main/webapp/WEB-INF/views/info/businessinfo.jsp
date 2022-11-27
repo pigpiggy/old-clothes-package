@@ -14,32 +14,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
-/* #name {
-	height: 25px;
-    width: 280px;
-    margin:15px;
-}
-#address {
-	height: 25px;
-    width: 280px;
-    margin:15px;
-}
-
-#weight{
-	height: 25px;
-    width: 280px;
-    margin:15px;
-}
- #phone{
- 	height: 25px;
-    width: 280px;
-    margin:15px;
- }
-#day{
-	height: 25px;
-    width: 280px;
-    margin:15px;
-} */
 label{
 	flex:1;
 	text-align: left;
@@ -86,6 +60,10 @@ label{
    height:25px;
    margin-left:calc(50% - 100px - 10px);
 }
+h2{
+	position: absolute;
+    left: 40%;    
+}
 </style>
 </head>
 <body>	
@@ -93,6 +71,7 @@ label{
 			<c:import url='/WEB-INF/views/includes/header.jsp' />
 		</div>
 	<div id="finalbusin">
+		<h2>[ 사업자 판매 안내 ]</h2>
 	<%--시,구,동  --%>
 		<div id="selectbox">
 			<div class="select" style="top:30px;">
@@ -239,27 +218,21 @@ label{
 				console.log("찍히나 " +data.baddress);				
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
+				bli += '<a href="/mypage/'+data.bno+'"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
 				console.log("너냐" + bbno);
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<img src="/image/heart.png" id="heart_img">';
+					bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
 					console.log("안뜬다");
 				}else if(authsect == 'business'){
 					bli += '';
-				}else if(authsect == 'users'){					
-					<c:forEach items="${list}" var="listA">							
-						console.log("list : " +"${listA.bno}");
-						if("${listA.bno}" == data.bno){							
-							if(data.likescheck == 1){								
-								bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
-							}else{
-								bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-							}
-						}
-					</c:forEach>										
-					/* if(checkresult==){						
-						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">'; 
-					} */
+				}else if(authsect == 'users'){	
+					if(data.likescheck == 1){								
+						bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+					}else if(data.likescheck == null){
+						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+					}else{
+						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+					}
 				}
 				console.log(data.bstar +"별점");
 				bli += '<div id="totalstar">';
@@ -368,33 +341,7 @@ label{
 			}); //data.forEach							
 			bli += "</ul>"
 			bli += "</div>"			
-			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
-			$(function () {
-				$("#heart_img").on("click", function(e) {
-					var logincheck = "${logincheck}"; //false
-					let bno = businbno;					
-					console.log(bno + "gnmng");					
-					if(logincheck == "false") {
-						alert("로그인 후 이용해주세요.")
-						location.href="/login";
-					}
-					$.ajax({
-							type: "post",
-							url: "/businessinfo/likes",
-							data: {bno:bno},
-							success: function(data) {
-								console.log(data);
-								if(data == 1) {
-									$("#heart_img").attr("src", "/image/redheart.png");
-								} else {
-				                    $("#heart_img").attr("src", "/image/heart.png");
-								}
-							}, error: function() {
-				                console.log('바보야!')
-							}
-						})
-					});
-				});	
+			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력			
 			},	
 		error: function(){alert("조건 전송 오류");}
 		}); //ajax 
@@ -551,7 +498,7 @@ label{
 					bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
 					console.log("너냐" + bbno);
 					if(auth==""){ //둘 다 로그인 안했을 때 
-						bli += '<img src="/image/heart.png" id="heart_img">';
+						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
 						console.log("안뜬다");
 					}else if(authsect == 'business'){
 						bli += '';

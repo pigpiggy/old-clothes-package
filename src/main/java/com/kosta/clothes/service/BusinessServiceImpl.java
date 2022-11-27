@@ -82,6 +82,14 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public void registapply(Apply apply) throws Exception {
 		applyDao.insertapply(apply);
+	}
+
+	@Override
+	public Long likecheck(Integer bno, Integer userno) throws Exception {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("bno", bno);
+		map.put("userno", userno);
+		return businessDao.likecheck(map);
 	}	
 	
 

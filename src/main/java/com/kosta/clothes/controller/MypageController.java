@@ -33,9 +33,6 @@ public class MypageController {
 	MessageService messageService;
 	
 	@Autowired
-	MypageService mypageService;
-	
-	@Autowired
 	HttpSession session;
 	
 	/*
@@ -50,7 +47,7 @@ public class MypageController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "/mypage/mypage";
+		return "/mypage/bmypage";
 	}
 	
 	@GetMapping ("/mypage/umypage/{userno}")
@@ -59,7 +56,7 @@ public class MypageController {
 		try {
 			/*판매목록*/
 			List<Sell> sellList;
-			sellList = mypageService.getSellList(userno);
+			//sellList = mypageService.getSellList(userno);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

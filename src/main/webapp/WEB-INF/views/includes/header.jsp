@@ -20,7 +20,7 @@
 		        <a href="/login">로그인</a>
 		    </c:when>
 		    <c:otherwise>
-		    	<c:if test="${authUser.sect=='user' }">
+		    	<c:if test="${authUser.sect=='users' }">
 			        <a href="/mypage/${authUser.userno }">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
 		        </c:if>

@@ -192,7 +192,7 @@ public class UsersController {
     					@RequestParam(value="password",required = true,defaultValue = "")String password,
     					Model model,
     					HttpServletRequest request) {
-    	String url ="";
+    	String url ="redirect:/";
     	String reurl =(String)request.getSession().getAttribute("redirectURI");
     	try {
     		Users authUser=null;
@@ -220,6 +220,9 @@ public class UsersController {
     		}
     	}catch(Exception e) {
     		e.printStackTrace();
+    	}
+    	if(reurl==null) {
+    		return url;
     	}
     	return "redirect:"+reurl;
     }

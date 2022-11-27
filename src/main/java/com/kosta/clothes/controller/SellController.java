@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
@@ -116,18 +117,45 @@ public class SellController {
 				String[] fidArr = sell.getIfileids().split(",");
 				mav.addObject("files", fidArr);
 			}
-			Users users = (Users) session.getAttribute("authUser");
-			if(users == null) {
+			Business bauthuser = new Business();
+			String sect;
+			Users uauthuser = new Users();
+			if(session.getAttribute("authUser") != null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+					uauthuser = (Users) session.getAttribute("authUser");
+					sect = uauthuser.getSect();
+				} else {
+					bauthuser = (Business) session.getAttribute("authUser");
+					sect = bauthuser.getSect();
+				}
+				model.addAttribute("sect", sect);
+			}	
+			//개인
+			if(uauthuser.getUserno() == null && bauthuser.getBno() == null) {
 				model.addAttribute("logincheck", "false");
-			}else {
+			} else if(uauthuser.getUserno() != null) {
 				Likes likevo = new Likes();
 				likevo.setIno(ino);
-				likevo.setUserno(users.getUserno());
+				likevo.setUserno(uauthuser.getUserno());
 				Long likeselect = likesService.getIlikescheck(likevo);
 				if(likeselect != null) {
 					mav.addObject("likes", likeselect);
 				}
+			} else {
+				
 			}
+//			Users users = (Users) session.getAttribute("authUser");
+//			if(users == null) {
+//				model.addAttribute("logincheck", "false");
+//			}else {
+//				Likes likevo = new Likes();
+//				likevo.setIno(ino);
+//				likevo.setUserno(users.getUserno());
+//				Long likeselect = likesService.getIlikescheck(likevo);
+//				if(likeselect != null) {
+//					mav.addObject("likes", likeselect);
+//				}
+//			}
 			Users uservo = new Users();
 			uservo = sellService.getInickname(ino);
 			model.addAttribute("uservo", uservo);
@@ -184,12 +212,15 @@ public class SellController {
 	
 	@ResponseBody
 	@PostMapping("/sellView/likes")
-	public Long registLikes(@RequestParam("ino") Integer ino, @RequestParam("userno") Integer userno) {
+	public Long registLikes(@RequestParam("ino") Integer ino) {
 		Likes likes = new Likes();
 		Long likescheck = null;
 		try {
 			likes.setIno(ino);
-			likes.setUserno(userno);
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users user = (Users) session.getAttribute("authUser");
+				likes.setUserno(user.getUserno());
+			}
 			Sell sell = new Sell();
 			sell.setIno(ino);
 			likescheck = likesService.getIlikescheck(likes);
@@ -217,16 +248,24 @@ public class SellController {
 			@RequestParam("ino") Integer ino) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			Users users = (Users) session.getAttribute("authUser");
-			message.setSendUserno(users.getUserno());
+			String sect = "";
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				message.setSendUserno(users.getUserno());
+				sect = users.getSect();
+			} else {
+				Business bauthuser = (Business) session.getAttribute("authUser");
+				message.setSendBno(bauthuser.getBno());
+				sect = bauthuser.getSect();
+			}
 			System.out.println("messagecontroller:" + message);
-			//String submitcheck = messageService.submitMessage(message);
-//			if(submitcheck == "true") {
-//				mav.addObject("submitcheck", "true");
-//			}else {
-//				mav.addObject("submitcheck", "false");
-//			}
-//			mav.setViewName("redirect:/sellView/"+ino);
+			String submitcheck = messageService.submitMessage(message, sect);
+			if(submitcheck == "true") {
+				mav.addObject("submitcheck", "true");
+			}else {
+				mav.addObject("submitcheck", "false");
+			}
+			mav.setViewName("redirect:/sellView/"+ino);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

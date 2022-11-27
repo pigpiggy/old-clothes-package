@@ -68,59 +68,75 @@
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
         <div class="letterAndHeart" id="sharingname">
           <span>${sharing.sname }</span>
-        <c:choose>
-        	<c:when test="${empty authUser }">
-        		<div class="letterAndHeart">	
-	          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-        		</div>
-        	</c:when>
-        	<c:otherwise>
-        		<c:choose>
-        			<c:when test="${authUser.sect eq 'users' }">
-        				<c:if test="${authUser.userno ne sharing.userno }">
-			          		<div class="letterAndHeart">	
+	        <c:choose>
+	        	<c:when test="${empty authUser }">
+	        		<div class="letterAndHeart">	
+		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
+		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+	        		</div>
+	        	</c:when>
+	        	<c:otherwise>
+	        		<c:choose>
+	        			<c:when test="${authUser.sect eq 'users' }">
+	        				<c:if test="${authUser.userno ne sharing.userno }">
+				          		<div class="letterAndHeart">	
+					          		<a href="#demo-modal">
+					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+					          		</a>
+					          			<c:choose>
+					          				<c:when test="${likes eq 1}">
+					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+					          				</c:when>
+					          				<c:otherwise>
+					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+			        						</c:otherwise>
+			        					</c:choose>
+			        			</div>
+			        		</c:if>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<div class="letterAndHeart">	
 				          		<a href="#demo-modal">
 				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
 				          		</a>
-				          			<c:choose>
-				          				<c:when test="${likes eq 1}">
-				          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-				          				</c:when>
-				          				<c:otherwise>
-				          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-		        						</c:otherwise>
-		        					</c:choose>
-		        			</div>
-		        		</c:if>
-        			</c:when>
-        			<c:otherwise>
-        				<div class="letterAndHeart">	
-				          		<a href="#demo-modal">
-				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
-				          		</a>
-				          			<c:choose>
-				          				<c:when test="${likes eq 1}">
-				          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-				          				</c:when>
-				          				<c:otherwise>
-				          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-		        						</c:otherwise>
-		        					</c:choose>
-		        		</div>
-        			</c:otherwise>
-        			
-        		</c:choose>
-        		
-        		
-         	</c:otherwise>
-		</c:choose>
+			          			<c:if test="${authUser.sect eq 'users' and authUser.userno ne sharing.userno}">
+		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+			          			</c:if>		
+			        		</div>
+	        			</c:otherwise>
+	        			
+	        		</c:choose>
+	        		
+	        		
+	         	</c:otherwise>
+			</c:choose>
         </div>
 		        <div id="sreview">거래후기: 12건</div>
 		        <span>신청 인원 : ${sharing.applycount }명</span>
 		        <div id="sbtn">
-		        	<input type="button" class="btn btn-info" value="옷장열기" />
-		        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+					<c:choose>
+						<c:when test="${empty authUser }">		        
+				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+				        </c:when>
+				        <c:otherwise>
+					        <c:choose>
+								<c:when test="${authUser.sect eq 'users' }">
+			        				<c:if test="${authUser.userno ne sharing.userno }">	
+			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        				</c:if>
+			        				<c:if test="${authUser.userno eq sharing.userno }">
+			        					<input type="button" class="btn btn-info" value="나의옷장" />
+			        				</c:if>
+			        			</c:when>
+			        			<c:otherwise>
+			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        			</c:otherwise>
+			        		</c:choose>	
+		        		</c:otherwise>
+		        	</c:choose>				
         		</div>
         <!-- Swiper JS -->
       </section>

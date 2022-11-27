@@ -8,7 +8,6 @@
 	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 </head>
 <body>
-
     <div class="card border-light mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <div id="reviewStar">
@@ -25,10 +24,10 @@
             </div>
             <p class="card-text">잘 입을게요~ 싸게 잘 샀네요 ㅎㅎㅎ</p>
         </div>
-            <div class="card-header">
-                <span>도라에몽</span>
-                <span>2022-11-18</span>
-            </div>
+        <div class="card-header">
+            <span>도라에몽</span>
+            <span>2022-11-18</span>
+        </div>
     </div>
 </body>
 </html>

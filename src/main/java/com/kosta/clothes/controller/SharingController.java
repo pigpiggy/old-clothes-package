@@ -272,7 +272,8 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/sharingView/wapply")
-	public ModelAndView sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model) {
+	public ModelAndView sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model,
+			@RequestParam(value = "registcheck", required = false) String registcheck) {
 		ModelAndView mav = new ModelAndView();
 		try {
 			Wapply apply = new Wapply();
@@ -285,7 +286,7 @@ public class SharingController {
 				map.put("sno", apply.getSno());
 				System.out.println("applyselect: "+ applyService.selectSwapply(map));
 				if(applyService.selectSwapply(map) == null) {
-					String registcheck = applyService.registSwapply(apply);
+					registcheck = applyService.registSwapply(apply);
 					sharingService.upApplycount(sharing);
 					if(registcheck == "true") {
 						mav.addObject("registcheck", "true");

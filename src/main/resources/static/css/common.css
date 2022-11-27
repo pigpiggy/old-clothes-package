@@ -11,7 +11,6 @@
     font-style: normal;
 }
 
-
 	* {
 		font-family:san
 		s-serif;
@@ -24,6 +23,10 @@
 	.title {
 		text-align: center;
 		font-weight: bold;
+	}
+	
+	a {
+		text-decoration: none;
 	}
 
 @font-face {
@@ -136,6 +139,7 @@ header {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 15px;
   letter-spacing: -1px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 10%);
 }
 
 #topMenu {
@@ -228,11 +232,15 @@ header {
  .sideMenu {
  	display:none;
     position: absolute;
-    text-align: left;
-    top: 45px;
     left: 0;
-    width:150px;
-    background-color: white;
+    top: calc(100%);
+    margin: 0;
+    padding: 10px 10px;
+    z-index: 99;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgb(127 137 161 / 25%);
+    transition: 0.3s;
+    border-radius: 4px;
   }
   
   .hederMenuList:hover {
@@ -241,7 +249,6 @@ header {
   
   .hederMenuList:hover .sideMenu {
 	display: block;
-	left: 0;
   }
 
 .sideMenu li {

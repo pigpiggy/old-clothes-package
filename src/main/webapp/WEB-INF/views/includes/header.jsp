@@ -21,11 +21,11 @@
 		    </c:when>
 		    <c:otherwise>
 		    	<c:if test="${authUser.sect=='users' }">
-			        <a href="/mypage/${authUser.userno }">마이페이지</a>
+			        <a href="/mypage/umypage/${authUser.userno }">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
 		        </c:if>
 		        <c:if test="${authUser.sect=='business' }">
-		        	<a href="/mypage/${authUser.bno }">마이페이지</a>
+		        	<a href="/mypage/bmypage/${authUser.bno }">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
 				</c:if>			        
 		    </c:otherwise>

@@ -193,7 +193,7 @@ header {
 .headerMenuBar {
     position: static;
     display: flex;
-    flex: 1;
+    flex: 0.8;
     top: 13px;
     background-color: rgba(0, 118, 190,0);
   	color: rgb(64, 64, 64);

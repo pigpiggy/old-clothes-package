@@ -204,7 +204,7 @@ public class CertificationService implements UsersService {
 		}
 
 		
-		//회원탈퇴
+		//개인회원탈퇴
 		@Override
 		public void deleteuser(Integer userno) throws Exception {
 			usersDao.deletecommet(userno);
@@ -219,9 +219,13 @@ public class CertificationService implements UsersService {
 		}
 
 
-
+		//업체회원탈퇴
 		@Override
 		public void deletebusiness(Integer bno) throws Exception {
+			usersDao.deleteblikes(bno);
+			usersDao.deletebreview(bno);
+			usersDao.deletebapply(bno);
+			usersDao.deletebfree(bno);
 			usersDao.deletebusiness(bno);
 			
 		}

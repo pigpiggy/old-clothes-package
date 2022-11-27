@@ -435,7 +435,7 @@ public class UsersController {
 		  Integer userno = uauthuser.getUserno();
 		  usersService.deleteuser(userno);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","개인 탈퇴 완료!!");
+		  model.addAttribute("msg","탈퇴 완료!!");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }

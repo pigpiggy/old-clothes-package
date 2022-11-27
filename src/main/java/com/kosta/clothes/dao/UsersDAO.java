@@ -52,6 +52,14 @@ public interface UsersDAO {
 	void deleteapply(Integer userno) throws Exception; //개인 회원 탈퇴 (apply)		
 	void deletefree(Integer userno) throws Exception; //개인 회원 탈퇴 (free)
 	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)	
-	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴
+	
+	
+	
+	
+	void deleteblikes(Integer bno) throws Exception;//업체 회원 탈퇴(likes)
+	void deletebreview(Integer bno) throws Exception;//업체 회원 탈퇴(review)
+	void deletebapply(Integer bno) throws Exception;//업체 회원 탈퇴(apply)
+	void deletebfree(Integer bno) throws Exception;//업체 회원 탈퇴(free)
+	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴(business)
 
 }

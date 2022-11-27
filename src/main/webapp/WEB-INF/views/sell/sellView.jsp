@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
-<title>무료나눔 상세</title>
+<title>개인판매 상세</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
@@ -25,7 +25,7 @@
 	<c:import url='/WEB-INF/views/includes/header.jsp' />
 </header>
 	<div id="viewcontainer">
-		<div id="demo-modal" class="modal">
+		<div id="demo-modal" class="firstmodal">
       		<div class="modal__content">
       			<form action="imessage" method="post" id="messageform">
       				<input type="hidden" name="recvUserno" value="${uservo.userno }">
@@ -68,53 +68,90 @@
         <input type="hidden" name="ino" id="ino" value="${sell.ino }">
         <div class="letterAndHeart" id="sellname">
           <span>${sell.iname}</span>
-        <c:choose>
-        	<c:when test="${empty authUser }">
-        		<div class="letterAndHeart">	
-	          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-	          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-        		</div>
-        	</c:when>
-        	<c:otherwise>
-        		<c:if test="${authUser.userno ne sell.userno }">
-	          		<div class="letterAndHeart">	
-		          		<a href="#demo-modal">
-		          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
-		          		</a>
-		          			<c:choose>
-		          				<c:when test="${likes eq 1}">
+	        <c:choose>
+	        	<c:when test="${empty authUser }">
+	        		<div class="letterAndHeart">	
+		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
+		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+	        		</div>
+	        	</c:when>
+	        	<c:otherwise>
+	        		<c:choose>
+	        			<c:when test="${authUser.sect eq 'users' }">
+			        		<c:if test="${authUser.userno ne sell.userno }">
+				          		<div class="letterAndHeart">	
+					          		<a href="#demo-modal">
+					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+					          		</a>
+					          			<c:choose>
+					          				<c:when test="${likes eq 1}">
+					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+					          				</c:when>
+					          				<c:otherwise>
+					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+			        						</c:otherwise>
+			        					</c:choose>
+			        			</div>
+			        		</c:if>
+	        			</c:when>
+		        		<c:otherwise>
+		        			<div class="letterAndHeart">	
+				          		<a href="#demo-modal">
+				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+				          		</a>
+		       					<c:if test="${authUser.sect eq 'users' and authUser.userno ne sell.userno}">
 		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-		          				</c:when>
-		          				<c:otherwise>
 		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
-        						</c:otherwise>
-        					</c:choose>
-        			</div>
-        		</c:if>
-         	</c:otherwise>
-		</c:choose>
+			          			</c:if>		
+				        	</div>
+		         		</c:otherwise>
+	         		</c:choose>
+	         	</c:otherwise>
+			</c:choose>
         </div>
 		        <div id="ireview">거래 후기: 12건</div>
 		      	<span>신청 인원 : ${sell.applycount }명</span>
 		        <div id="sbtn">
-		        	<input type="button" class="btn btn-info" value="옷장열기" />
-		        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+					<c:choose>
+						<c:when test="${empty authUser }">		        
+				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+				        </c:when>
+				        <c:otherwise>
+					        <c:choose>
+								<c:when test="${authUser.sect eq 'users' }">
+			        				<c:if test="${authUser.userno ne sell.userno }">	
+			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        				</c:if>
+			        				<c:if test="${authUser.userno eq sell.userno }">
+			        					<input type="button" class="btn btn-info" value="나의옷장" />
+			        				</c:if>
+			        			</c:when>
+			        			<c:otherwise>
+			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        			</c:otherwise>
+			        		</c:choose>	
+		        		</c:otherwise>
+		        	</c:choose>						        	
         		</div>
         <!-- Swiper JS -->
       </section>
       <div class="icontent">
         <div id="modifydelete">
         	<h3>상품정보</h3>
-        	<c:if test="${authUser.userno eq sell.userno}">    
-	        	<div id="modifydelete">
-					<a href="/sellModifyForm?ino=${sell.ino }">	        	
-    	    			<i class="fa-solid fa-gear fa-lg"></i>
-    	    		</a>
-					<a href="javascript:void(0);" onclick="removeSell();">	        	
-        				<span class="fa-solid fa-trash-can fa-lg"></span>
-        			</a>
-        		</div>
-        	</c:if>	 
+        	<c:if test="${authUser.sect eq 'users'}">
+	        	<c:if test="${authUser.userno eq sell.userno}">    
+		        	<div id="modifydelete">
+						<a href="/sellModifyForm?ino=${sell.ino }">	        	
+	    	    			<i class="fa-solid fa-gear fa-lg"></i>
+	    	    		</a>
+						<a href="javascript:void(0);" onclick="removeSell();">	        	
+	        				<span class="fa-solid fa-trash-can fa-lg"></span>
+	        			</a>
+	        		</div>
+	        	</c:if>
+	        </c:if>		 
         </div>
         <div id=idetail>${sell.icontent}</div>
       </div>
@@ -155,17 +192,19 @@ $(function () {
 	$("#heart_img").on("click", function(e) {
 		var logincheck = "${logincheck}";
 		const ino =  $('#ino').val();
-		const userno = "${authUser.userno}";
 		if(logincheck == "false") {
 			alert("로그인 후 이용해주세요.")
 			location.href="/login";
 		} else {
 			console.log(ino);
 		}
+		let sect = "${sect}";
+		console.log(sect);
+		if(sect == 'users') {
 			$.ajax({
 				type: "post",
 				url: "/sellView/likes",
-				data: {ino:ino, userno:userno},
+				data: {ino:ino},
 				success: function(data) {
 					console.log(data);
 					if(data == 1) {
@@ -178,7 +217,7 @@ $(function () {
 				}
 			})
 		}
-	)
+	})
 
 });
 
@@ -216,16 +255,15 @@ if(submitcheck == "true"){
 $("#wapply").on("click", function() {
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const ino =  $('#ino').val();
-	const userno = "${authUser.userno}";
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
-	} else {
+	} else if(sect == 'users'){
 		console.log(ino);
 		$.ajax({
 			type: "post",
 			url: "/sellView/wapply",
-			data: {ino:ino, userno:userno},
+			data: {ino:ino},
 			success: function(data) {
 				console.log(data);
 				alert("신청이 완료되었습니다.");

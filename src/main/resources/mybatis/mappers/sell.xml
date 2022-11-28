@@ -104,4 +104,11 @@
 			where rownum <= 6
 		]]>
 	</select>
+	
+	
+	<select id="sellcount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from individual where userno=#{userno}
+			]]>
+		</select>
 </mapper>	

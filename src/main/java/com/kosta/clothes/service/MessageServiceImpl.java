@@ -39,37 +39,64 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public List<MessageVO> uRecvMessage(Map map) throws Exception {
 		int listCount = messageDAO.selectRmessageCount((Integer)map.get("recvUserno")); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		listCount += messageDAO.selectBmessageCount((Integer)map.get("recvUserno"));
 		int maxPage = (int)Math.ceil((double)listCount/10);
 		PageInfo rpageInfo = new PageInfo();
 		rpageInfo = (PageInfo) map.get("pageInfo");
-		Integer rpage = (Integer) map.get("rpage");
-		int startPage = rpage/10 * 10 + 1; 
+		Integer page = (Integer) map.get("page");
+		int startPage = page/10 * 10 + 1; 
 		int endPage = startPage + 10 -1; 
 		if(endPage > maxPage) { 
 			endPage = maxPage; 
 		}
 		
 		//pageInfo에 데이터 전달
-		rpageInfo.setPage(rpage); 
+		rpageInfo.setPage(page); 
 		rpageInfo.setListCount(listCount);
 		rpageInfo.setMaxPage(maxPage);
 		rpageInfo.setStartPage(startPage);
 		rpageInfo.setEndPage(endPage);
 		
 		//검색한 페이지의 시작 페이지 값을 구한 변수 
-		int row = (rpage - 1) * 10 + 1; //ex) (5페이지 -1) * 10 + 1 => 41
+		int row = (page - 1) * 10 + 1; //ex) (5페이지 -1) * 10 + 1 => 41
+		System.out.println("row:"+row);
 		map.put("row", row);
 		return messageDAO.uRecvMessage(map);
 	}
 
 	@Override
 	public List<MessageVO> bRecvMessage(Map map) throws Exception {
+		int listCount = messageDAO.selectBRmessageCount((Integer)map.get("recvUserno")); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		listCount += messageDAO.selectBRBmessageCount((Integer)map.get("recvUserno"));
+		System.out.println("listcount"+listCount);
+		int maxPage = (int)Math.ceil((double)listCount/10);
+		PageInfo rpageInfo = new PageInfo();
+		rpageInfo = (PageInfo) map.get("pageInfo");
+		Integer page = (Integer) map.get("page");
+		int startPage = page/10 * 10 + 1; 
+		int endPage = startPage + 10 -1; 
+		if(endPage > maxPage) { 
+			endPage = maxPage; 
+		}
+		
+		//pageInfo에 데이터 전달
+		rpageInfo.setPage(page); 
+		rpageInfo.setListCount(listCount);
+		rpageInfo.setMaxPage(maxPage);
+		rpageInfo.setStartPage(startPage);
+		rpageInfo.setEndPage(endPage);
+		
+		//검색한 페이지의 시작 페이지 값을 구한 변수 
+		int row = (page - 1) * 10 + 1; //ex) (5페이지 -1) * 10 + 1 => 41
+		System.out.println("row:"+row);
+		map.put("row", row);
 		return messageDAO.bRecvMessage(map);
 	}
 
 	@Override
 	public List<MessageVO> uSendMessage(Integer sendUserno, Integer page, PageInfo spageInfo) throws Exception {
 		int listCount = messageDAO.selectSmessageCount(sendUserno); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		listCount += messageDAO.selectSBmessageCount(sendUserno);
 		int maxPage = (int)Math.ceil((double)listCount/10);  
 		int startPage = page/10 * 10 + 1; 
 		int endPage = startPage + 10 -1; 
@@ -89,6 +116,7 @@ public class MessageServiceImpl implements MessageService{
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("row", row);
+		System.out.println("srow:"+row);
 		map.put("sendUserno", sendUserno);
 		map.put("spageInfo", spageInfo);
 		return messageDAO.uSendMessage(map);
@@ -96,7 +124,9 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public List<MessageVO> bSendMessage(Integer sendUserno, Integer spage, PageInfo pageInfo) throws Exception {
-		int listCount = messageDAO.selectSmessageCount(sendUserno); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		int listCount = messageDAO.selectBSmessageCount(sendUserno); //전체 데이터 개수 가져오기 (전체 게시글 수)
+		listCount += messageDAO.selectBSBmessageCount(sendUserno);
+		System.out.println("bsendlistcount:"+listCount);
 		int maxPage = (int)Math.ceil((double)listCount/10);  
 		int startPage = spage/10 * 10 + 1; 
 		int endPage = startPage + 10 -1; 
@@ -116,8 +146,10 @@ public class MessageServiceImpl implements MessageService{
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("row", row);
+		System.out.println("bsend srow:"+row);
 		map.put("sendUserno", sendUserno);
-		return messageDAO.bSendMessage(sendUserno);
+		map.put("spageInfo", pageInfo);
+		return messageDAO.bSendMessage(map);
 	}
 
 	@Override

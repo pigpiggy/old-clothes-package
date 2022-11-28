@@ -53,7 +53,7 @@ $(document).ready(function(){
 		        <a href="/mypage/message">
 			      <img id="letter" src="/image/letter.png" alt="쪽지">
 		        </a>          
-		        <a href="#">
+		        <a href="/passcheck">
               <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정">
 		        </a>
         </div>

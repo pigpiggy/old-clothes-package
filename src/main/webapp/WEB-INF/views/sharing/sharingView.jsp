@@ -126,6 +126,7 @@
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
 			        					<input type="button" class="btn btn-info" value="옷장열기" />
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<input type="button" class="btn btn-info" value="나의옷장" />

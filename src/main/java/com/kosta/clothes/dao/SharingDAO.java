@@ -30,4 +30,8 @@ public interface SharingDAO {
 	void deleteLikes(Integer sno) throws Exception;
 	Users getSnickname(Integer sno) throws Exception;
 	void upApplycount(Sharing sharing) throws Exception;
+	
+	//
+	Integer sharingcount(Integer userno) throws Exception;
+	List<Sharing> sharingstatus() throws Exception;
 }

@@ -19,7 +19,7 @@ a {
   font-size: 10px;
 }
 
-.nicname {
+.nickname {
   margin-bottom: 30px;
   width: 40%;
   border-top: 5px solid navy;
@@ -28,7 +28,7 @@ a {
   position: absolute;
 }
 
-.nicname strong {
+.nickname strong {
   font-size: 3em;
   text-align: center;
 }

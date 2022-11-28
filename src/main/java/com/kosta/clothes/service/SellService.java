@@ -22,4 +22,6 @@ public interface SellService {
 	void upSellLikes(Sell sell) throws Exception;
 	void downSellLikes(Sell sell) throws Exception;
 	void upApplycount(Sell sell) throws Exception;
+	
+	Integer sellcount(Integer userno) throws Exception; //판매상품개수
 }

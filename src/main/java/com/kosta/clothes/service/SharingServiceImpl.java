@@ -168,4 +168,18 @@ public class SharingServiceImpl implements SharingService{
 		sharingDAO.upApplycount(sharing);
 	}
 
+	@Override
+	public Integer sharingcount(Integer userno) throws Exception {
+		
+		return  sharingDAO.sharingcount(userno);
+	}
+
+	@Override
+	public List<Sharing> sharingstatus() throws Exception {
+		
+		return sharingDAO.sharingstatus();
+	}
+
+	
+
 }

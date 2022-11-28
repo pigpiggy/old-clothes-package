@@ -161,5 +161,11 @@ public class SellServiceImpl implements SellService{
 	public void upApplycount(Sell sell) throws Exception {
 		sellDAO.upApplycount(sell);
 	}
+
+	@Override
+	public Integer sellcount(Integer userno) throws Exception {
+		return sellDAO.sellcount(userno);
+		
+	}
 	
 }

@@ -23,14 +23,24 @@ import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.MessageService;
+import com.kosta.clothes.service.SellService;
+import com.kosta.clothes.service.SharingService;
+import com.kosta.clothes.service.ReviewService;
 
 @Controller
 public class MypageController {
 
 	@Autowired 
 	MessageService messageService;
+	@Autowired
+	SharingService sharingService;
+	@Autowired
+	SellService sellService;
+	@Autowired
+	ReviewService reviewService;
 	
 	@Autowired
 	HttpSession session;
@@ -50,12 +60,31 @@ public class MypageController {
 		return "/mypage/bmypage";
 	}
 	
+
 	@GetMapping ("mypage/umypage/{userno}")
 	String umypage(@PathVariable("userno") Integer userno,Model model) {
 		System.out.println("mypage" + userno);
 		try {
 			/*판매목록*/
 			List<Sell> sellList;
+			
+			
+			 Integer sharingcount = sharingService.sharingcount(userno);
+			 System.out.println("sharingcount : " + sharingcount);
+			 Integer sellcount = sellService.sellcount(userno);
+			 System.out.println("sellcount:" + sellcount);
+			 Integer totalcount = sharingcount + sellcount;
+			 System.out.println("totalcount : " + totalcount);
+			 model.addAttribute("totalcount",totalcount);
+			 
+			 Integer reviewcount = reviewService.reviewcount(userno);
+			 model.addAttribute("reviewcount",reviewcount);
+			 
+			 List<Sharing> sharing = sharingService.sharingstatus();
+			 System.out.println(sharing.get(0).getSstatus());
+			 String status = sharing.get(0).getSstatus();
+			 System.out.println(status);
+			 
 			//sellList = mypageService.getSellList(userno);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -213,27 +242,5 @@ public class MypageController {
 		}
 		return "/mypage/review";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

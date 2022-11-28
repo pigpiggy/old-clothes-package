@@ -151,7 +151,8 @@ public class InfoController {
 	@ResponseBody
 	@PostMapping("/businesslist")
 	public List<Business> businesslist(@RequestBody Map<String,Object> params,Model model) {
-		List<Business> business = null;		
+		List<Business> business = null;	
+		List<Long> likescheck1= null;
 		//ajax로 데이터 받아온 것
 		String sido = (String) params.get("sido");		
 		String sigungu = (String) params.get("sigugun");
@@ -166,8 +167,11 @@ public class InfoController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            
-		            business = businessService.allBusinessInfo1(sido, sigungu, userno);
-		            System.out.println("ㅁㅁ" + business);
+		            business = businessService.allBusinessInfo(sido,sigungu);
+		            for(int i=0; i<business.size();i++) {
+		            	business.get(i).setLikescheck((businessService.likecheck(business.get(i).getBno(),userno)));
+		            }
+		            System.out.println("ㅁㅁ" + business.toString());
 				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					//업체가 로그인 했을 때 
 					business = businessService.allBusinessInfo(sido,sigungu);

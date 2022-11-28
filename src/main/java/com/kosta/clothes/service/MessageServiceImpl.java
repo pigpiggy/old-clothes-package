@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.dao.MessageDAO;
@@ -24,9 +25,14 @@ public class MessageServiceImpl implements MessageService{
 	ServletContext servletContext;
 	
 	@Override
-	public String submitMessage(MessageVO message) throws Exception {
-		messageDAO.insertMessage(message);
-		System.out.println("messageservice:" + message);
+	public String submitMessage(MessageVO message, String sect) throws Exception {
+
+		System.out.println("messageservice:" + sect);
+		if(sect.equals("users")) {
+			messageDAO.insertMessage(message);
+		} else {
+			messageDAO.insertSBMessage(message);
+		}
 		return "true";
 	}
 
@@ -137,6 +143,11 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public MessageVO bSendViewMessage(Integer mno) throws Exception {
 		return messageDAO.bSendViewMessage(mno);
+	}
+
+	@Override
+	public Business mypageBusiness(Integer bno) throws Exception {
+		return messageDAO.mypageBusiness(bno);
 	}
 
 

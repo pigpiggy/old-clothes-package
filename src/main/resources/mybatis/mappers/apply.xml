@@ -12,9 +12,17 @@
 	</selectKey>		
 		<![CDATA[
 			insert into wapply (wno,wuserno,sno)
-			values (#{wno},#{wuserno},#{sno})
+			values (wapply_seq.nextval,#{wuserno},#{sno})
 		]]>
 	</insert>
+	
+	<select id="getSapply" parameterType="map" resultType="Wapply">
+		<![CDATA[
+			select wuserno,sno
+			from wapply
+			where wuserno=#{wuserno} and sno=#{sno}
+		]]>
+	</select>
 	
 	<insert id="insertIwapply" parameterType="Wapply">
 	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">

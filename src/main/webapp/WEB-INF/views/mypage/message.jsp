@@ -58,7 +58,12 @@
               <td class="checkbox">     
                 <input type="checkbox" class="form-check-input1" id="checkcontent" name="option1" value="something" checked>
 	            <input type="hidden" name="mno" class="mno" value="${recvmessage.mno }" />
-	            <input type="hidden" name="sendUserno" class="sendUserno" value="${recvmessage.sendUserno }" />
+	            <c:if test="${!empty recvmessage.sendUserno}">
+		            <input type="hidden" name="sendUserno" class="sendUserno" value="${recvmessage.sendUserno }" />
+	            </c:if>
+	            <c:if test="${!empty recvmessage.sendBno }">
+					<input type="hidden" name="sendBno" class="sendBno" value="${recvmessage.sendBno }" />
+				</c:if>	            
               </td>
               <td class="sendUser">${recvmessage.nickname}</td>
               <td class="mtitle">
@@ -68,7 +73,7 @@
               </td>
               <td>${recvmessage.regDate }
               <a href="#demo-modal">
-		          <img src="/image/letter.png" id="letter_img" alt="쪽지" title="답장하기">
+		          <img src="/image/letter.png" class="letter_img" id="letter_img" alt="쪽지" title="답장하기">
 		      </a>
               </td>
             </tr>

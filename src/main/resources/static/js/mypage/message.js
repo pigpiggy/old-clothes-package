@@ -110,13 +110,22 @@ $(function () {
 	})
 	
 	/* 받은 쪽지 답장 보내기 */
-	$("#letter_img").click(function() {
-		var index = $('#letter_img').index(this);
+	$(".letter_img").off().on('click', function() {
+		alert("쪽지 클릭!");
+		var index = $('.letter_img').index(this);
 		var sendUser = $('.sendUser:eq('+index+')').html();
-		var sendUserno = $('.sendUserno:eq('+index+')').val();
+		var sendUserno = $('.checkbox:eq('+index+') .sendUserno').val();
+		console.log("index:" + index);
+		var sendBno = $('.checkbox:eq('+index+') .sendBno').val();
+		console.log("sendUserno:" + sendUserno);
+		console.log("sendBno:" + sendBno);
 		$("#messageform").empty();  
 		let modalcontext = "";
-		modalcontext += "<input type='hidden' name='recvUserno' value='"+sendUserno+"'>";
+		if(sendUserno != null) {
+			modalcontext += "<input type='hidden' name='recvUserno' value='"+sendUserno+"'>";
+		} else {
+			modalcontext += "<input type='hidden' name='recvBno' value='"+sendBno+"'>";
+		}
 		modalcontext += "<h5>받는 사람: "+ sendUser +"</h5>";
 		modalcontext += "<div class='modaltitle'><label class="+"'mcontext'"+" for="+"'mtitle'"+">제목 </label>";
 		modalcontext += "<input type='text' class='form-control' name='mtitle' id='mtitle' /><br></div>";
@@ -125,6 +134,15 @@ $(function () {
 		modalcontext += "<input type='submit' class='btn btn-warning center' value='보내기' />";
 		$("#messageform").append(modalcontext);
 	})
+	
+	/* 쪽지 확인 */
+	var submitcheck = "<c:out value='${submitcheck}'/>";
+	if(submitcheck == "true"){
+		alert("메시지가 성공적으로 발송되었습니다.");
+	} else if(submitcheck =="false"){
+		alert("메시지 발송에 실패하였습니다.");
+	} else{
+	}
 	
 	/* 삭제 */
 	$("#delete").click(function() {
@@ -194,6 +212,9 @@ $(function () {
 		
 		$(".rpaging").css('display','none');
 		$(".spaging").css('display','table');
+	} else {
+		$(".rpaging").css('display','table');
+		$(".spaging").css('display','none');
 	}
 	
 })

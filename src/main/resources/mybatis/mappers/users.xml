@@ -199,15 +199,9 @@
 			where userid = #{userid}
 		]]>
 	</update>
+
 	
-	<!-- 개인정보탈퇴 -->
-	<update id="deleteuser" parameterType="Integer">
-		<![CDATA[
-			update users
-			set nickname = null, userid=null, phone=null, password=null, joindate=null, sect=null 
-			where userno = #{userno}
-		]]>
-	</update>
+	
 	
 	
 		<!--비밀번호 체크[업체] -->
@@ -218,6 +212,7 @@
 			WHERE businessid=#{id}
 		]]>
 	</select>
+
 	<!-- 업체정보ㅎ수정 -->
 	<update id="updatebusiness" parameterType="business">
 		<![CDATA[
@@ -232,15 +227,140 @@
 			where businessid = #{businessid}
 		]]>
 	</update>
-	<!-- 업체정보탈퇴 -->
-	<update id="deletebusiness" parameterType="Integer">
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteuser" parameterType="Integer">
 		<![CDATA[
-			update business
-			set bname=null, businessid=null, baddress=null, bdetailadd=null, bkakaoid=null, 
-				bphone=null, bpassword=null, bnumber=null, bstar=null, regdate=null, sect=null 
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletesharing" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from sharing		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletelikes" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from likes		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletefree" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from free		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteindivi" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from individual		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from apply		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletecommet" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from comments		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletereview" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from review		 
+			where userno = #{userno}
+		]]>
+	</delete>	
+
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletemessage" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from message		 
+			where sendUserno = #{userno} and recvUserno = #{userno}
+		]]>
+	</delete>
+	
+	
+		
+	
+
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebusiness" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from business		 
 			where bno = #{bno}
 		]]>
-	</update>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebfree" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from free		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deleteblikes" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from likes		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from apply		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebreview" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from review		 
+			where bno = #{bno}
+		]]>
+	</delete>	
+
 </mapper>
 
 

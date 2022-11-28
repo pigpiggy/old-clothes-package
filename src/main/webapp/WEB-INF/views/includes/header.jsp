@@ -15,13 +15,19 @@
     <div id="topMenu">
       <div id="headerMenu">
       	<c:choose>
-      		<c:when test="${authUser == null && bauthUser==null }">
+      		<c:when test="${authUser == null}">
 	      		<a href="/joinform">회원가입</a>
 		        <a href="/login">로그인</a>
 		    </c:when>
 		    <c:otherwise>
-		        <a href="/mypage">마이페이지</a>
-		        <a href="/logout">로그아웃</a>
+		    	<c:if test="${authUser.sect=='users' }">
+			        <a href="/mypage/umypage/${authUser.userno }">마이페이지</a>
+			        <a href="/logout">로그아웃</a>
+		        </c:if>
+		        <c:if test="${authUser.sect=='business' }">
+		        	<a href="/mypage/bmypage/${authUser.bno }">마이페이지</a>
+			        <a href="/logout">로그아웃</a>
+				</c:if>			        
 		    </c:otherwise>
         </c:choose>
       </div>
@@ -36,14 +42,14 @@
       <ul>
         <li class="hederMenuList">
           <span>하우 헌옷</span>
-          <ul class="sideMenu">
+          <ul class="sideMenu dropdown-menu dropdown-menu-animated">
             <li><a href="#">하우 헌옷 소개</a></li>
             <li><a href="/noticeList">공지사항</a></li>
           </ul>
         </li>
         <li class="hederMenuList">
           <span>버리기/기부</span>
-          <ul class="sideMenu">
+          <ul class="sideMenu dropdown-menu dropdown-menu-animated">
             <li><a href="clothingbin">내 주변 헌옷수거함</a></li>
             <li><a href="information">기부처 안내</a></li>
           </ul>
@@ -53,14 +59,14 @@
         </li>
         <li class="hederMenuList">
           <span>헌옷 사고 팔기</span>
-          <ul class="sideMenu">
+          <ul class="sideMenu dropdown-menu dropdown-menu-animated">
             <li><a href="#">업체 판매</a></li>
             <li><a href="/sellList">개인 판매</a></li>
           </ul>
         </li>
         <li class="hederMenuList">
           <span>커뮤니티</span>
-          <ul class="sideMenu">
+          <ul class="sideMenu dropdown-menu dropdown-menu-animated">
             <li><a href="/freeList">자유게시판</a></li>
           </ul>
         </li>

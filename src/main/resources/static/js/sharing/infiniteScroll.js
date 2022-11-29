@@ -46,7 +46,7 @@ function surveyList(){
 		          			if(this.sfileids!=null && this.sfileids !=""){
 								str	+= "<img src="+"'upload/"+this.sfileids+"' alt="+"'무료나눔 옷'"+">";
 							} else {
-								str	+= "<img src="+"'upload/logo3.png'"+" alt="+"'로고'"+">";
+								str	+= "<img src="+"'image/logo3.png'"+" alt="+"'로고'"+">";
 							}
 		          			str	+= "</div>";
 		          			str	+= "<div class="+"'card-body'"+">";

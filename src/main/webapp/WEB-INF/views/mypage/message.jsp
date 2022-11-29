@@ -24,6 +24,7 @@
       		<div class="modal__content" id="modal__content">
       			<form action="smessage" method="post" id="messageform">
       				<input type="hidden" id="selectValue" value="${select }" />
+      				<input type="hidden" id="submitcheck" value="${submitcheck}" />
       			</form>
 				<a href="#" class="modal__close">&times;</a>
       		</div>

@@ -136,12 +136,12 @@ $(function () {
 	})
 	
 	/* 쪽지 확인 */
-	var submitcheck = "<c:out value='${submitcheck}'/>";
+	var submitcheck =$('#submitcheck').val();
+	console.log(submitcheck);
 	if(submitcheck == "true"){
 		alert("메시지가 성공적으로 발송되었습니다.");
 	} else if(submitcheck =="false"){
 		alert("메시지 발송에 실패하였습니다.");
-	} else{
 	}
 	
 	/* 삭제 */

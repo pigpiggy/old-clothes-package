@@ -252,11 +252,20 @@ public class MypageController {
 	@PostMapping("/mypage")
 	public String introduce(@RequestParam("introduce") String introduce) {
 		String introtext="";
-		try {
-			introtext=mypageService.introduce(introduce);
+		try { Business bauthuser = new Business();
+		         Users uauthuser = new Users();
+		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+		            uauthuser = (Users) session.getAttribute("authUser");
+		            introtext=mypageService.uintroduce(introduce,uauthuser.getUserno());
+		         } else {
+		            bauthuser = (Business) session.getAttribute("authUser");
+		            introtext=mypageService.bintroduce(introduce,bauthuser.getBno());
+		         }			
+			System.out.println("introtext"+introtext);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}return introtext;
+		}
+		return introtext;
 	}
 }

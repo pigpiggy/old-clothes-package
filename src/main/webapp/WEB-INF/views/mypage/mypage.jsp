@@ -65,7 +65,7 @@
 		  <div class="introduce">				 
 				<img id="setting" src="/image/setting1.png" alt="소개수정" >
 				
-  	</div>
+  		</div>
   	<div class="intro_check">  
 				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
 				</textarea>
@@ -78,26 +78,37 @@
   <script>
   		$('.intro_check').css('display','none');
 	  $('#setting').click(function(){ //설정버튼 클릭했을 때
-			$(this).toggleClass('display');
+			$(this).css('display','none');
 			$('.introduce').css('display','none');
 			$('.intro_check').css('display','flex');
 			});
 	  
 	  	$('.intro_btn').click(function(){
-	  		var introduce = $('.intro_text').text();
+	  		var introduce = $('.intro_text').val();
+	  		alert(introduce);
 	  		$.ajax({
 				type : "post",
 				url : "/mypage",
 				data : {introduce:introduce},
+				
 				success : function(data) {
-					
-					location.href="/freeList";
+					console.log(data);
+					var text ="";
+					text += "<p>"+data+"</p>";
+					$('.introduce').prepend(text);
 				},
 				error : function(err) {
 					console.log(err);
 				}
 			});
-	  	})
+	  	});
+	  	
+	  	$('.intro_btn').click(function(){
+	  		$('.introduce').css('display','block');
+			$('.intro_check').css('display','none');
+			$('#setting').css('display','block');
+	  	});
+	  	
   </script>
    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
 </body>

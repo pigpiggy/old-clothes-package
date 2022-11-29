@@ -1,6 +1,8 @@
 package com.kosta.clothes.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -22,6 +24,22 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Sell> getSellList(Integer userno) throws Exception {
 		return mypageDAO.getSellList(userno);
+	}
+
+
+	@Override
+	public String uintroduce(String introduce, Integer userno) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("introduce", introduce);
+		map.put("userno", userno);		
+		mypageDAO.uintroduce(map);
+		return mypageDAO.uintromyself(userno);
+	}
+
+	@Override
+	public String bintroduce(String introduce, Integer bno) throws Exception {
+		mypageDAO.bintroduce(introduce);
+		return mypageDAO.bintromyself(bno);
 	}
 
 }

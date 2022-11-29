@@ -33,5 +33,5 @@ public interface SharingDAO {
 	
 	//
 	Integer sharingcount(Integer userno) throws Exception;
-	List<Sharing> sharingstatus() throws Exception;
+	Integer statuscount(Integer userno)throws Exception;
 }

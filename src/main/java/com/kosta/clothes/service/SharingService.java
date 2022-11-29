@@ -26,8 +26,7 @@ public interface SharingService {
 	void upApplycount(Sharing sharing) throws Exception;
 	
 	Integer sharingcount(Integer userno) throws Exception; //무료나눔 개수 
-	
-	List<Sharing> sharingstatus() throws Exception;
+	Integer statuscount(Integer userno) throws Exception;//거래완료 개수
 	
 	
 }

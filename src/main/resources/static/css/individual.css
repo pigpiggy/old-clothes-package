@@ -19,7 +19,8 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: black
+  ;
 }
 
 #individualHtml {
@@ -447,5 +448,9 @@ svg {
 	margin-right: 15px;
 }
 
-
+.buyapplylist {
+	background: #0080ff;
+	text-align: center;
+	cursor: pointer;
+}
 

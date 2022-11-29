@@ -26,9 +26,10 @@ import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.MessageService;
+import com.kosta.clothes.service.MypageService;
+import com.kosta.clothes.service.ReviewService;
 import com.kosta.clothes.service.SellService;
 import com.kosta.clothes.service.SharingService;
-import com.kosta.clothes.service.ReviewService;
 
 @Controller
 public class MypageController {
@@ -41,6 +42,8 @@ public class MypageController {
 	SellService sellService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	MypageService mypageService;
 	
 	@Autowired
 	HttpSession session;
@@ -85,7 +88,8 @@ public class MypageController {
 			 String status = sharing.get(0).getSstatus();
 			 System.out.println(status);
 			 
-			//sellList = mypageService.getSellList(userno);
+			 sellList = mypageService.getSellList(userno);
+			 model.addAttribute("sellList", sellList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

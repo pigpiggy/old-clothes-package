@@ -24,4 +24,5 @@ public interface SellService {
 	void upApplycount(Sell sell) throws Exception;
 	
 	Integer sellcount(Integer userno) throws Exception; //판매상품개수
+	Integer statuscount(Integer userno) throws Exception;//거래완료 개수
 }

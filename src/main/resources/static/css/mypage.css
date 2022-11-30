@@ -112,7 +112,7 @@ a {
 .introduce {
 overflow-y: scroll;
   border-bottom: 2px solid #ddd;
-  padding: 50px;
+  padding: 60px;
   font-size: 17px;
 }
 
@@ -176,4 +176,24 @@ position: relative;
 	display: block;
 	
 	}
+	
+.display {
+	display : none;
+	
+}
+.intro_check{
+	display: flex;
+}
 
+.intro_text{
+	resize:none;
+	height: 160px;
+    width: 95%;
+    font-size: 16px;
+}
+.intro_btn{
+	width: 8%;
+    outline: none;
+    border: none;
+    height: 160px;
+}

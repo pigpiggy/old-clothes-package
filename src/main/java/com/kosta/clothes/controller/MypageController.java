@@ -23,7 +23,6 @@ import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
-import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
@@ -73,7 +72,7 @@ public class MypageController {
 			/* 판매 상품(무료나눔) */
 			List<Sharing> sharingList;
 			
-			
+			//상품등록
 			 Integer sharingcount = sharingService.sharingcount(userno);
 			 System.out.println("sharingcount : " + sharingcount);
 			 Integer sellcount = sellService.sellcount(userno);
@@ -82,13 +81,16 @@ public class MypageController {
 			 System.out.println("totalcount : " + totalcount);
 			 model.addAttribute("totalcount",totalcount);
 			 
+			 //거래후기
 			 Integer reviewcount = reviewService.reviewcount(userno);
-			 model.addAttribute("reviewcount",reviewcount);
-			 
-			 List<Sharing> sharing = sharingService.sharingstatus();
-			 System.out.println(sharing.get(0).getSstatus());
-			 String status = sharing.get(0).getSstatus();
-			 System.out.println(status);
+			 model.addAttribute("reviewcount",reviewcount);		 
+			
+			 //거래완료
+			Integer statuscount = sharingService.statuscount(userno);
+			System.out.println("statuscount:"+statuscount);
+			statuscount +=sellService.statuscount(userno);
+			System.out.println("statuscount:"+statuscount);
+			model.addAttribute("statuscount",statuscount);
 			 
 			 sellList = mypageService.getSellList(userno);
 			 model.addAttribute("sellList", sellList);
@@ -252,4 +254,23 @@ public class MypageController {
 		return "/mypage/review";
 	}
 	
+	@PostMapping("/mypage")
+	public String introduce(@RequestParam("introduce") String introduce) {
+		String introtext="";
+		try { Business bauthuser = new Business();
+		         Users uauthuser = new Users();
+		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+		            uauthuser = (Users) session.getAttribute("authUser");
+		            introtext=mypageService.uintroduce(introduce,uauthuser.getUserno());
+		         } else {
+		            bauthuser = (Business) session.getAttribute("authUser");
+		            introtext=mypageService.bintroduce(introduce,bauthuser.getBno());
+		         }			
+			System.out.println("introtext"+introtext);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return introtext;
+	}
 }

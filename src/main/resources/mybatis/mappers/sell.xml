@@ -111,4 +111,10 @@
 				select count(*) from individual where userno=#{userno}
 			]]>
 		</select>
+		
+		<select id="statuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from individual where userno=#{userno} and istatus='등록완료'
+			]]>
+		</select>
 </mapper>	

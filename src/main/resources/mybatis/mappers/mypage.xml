@@ -9,6 +9,7 @@
 		]]>
 	</select>
 	
+
 	<select id="getSharingList" parameterType="Integer" resultType="Sharing">
 		<![CDATA[
 			SELECT * FROM sharing WHERE userno=#{userno} ORDER BY sno DESC
@@ -18,6 +19,20 @@
 	<select id="getSellapplylist" parameterType="Integer" resultType="String">
 		<![CDATA[
 			SELECT * FROM wapply WHERE ino = #{ino}
+		]]>
+	</select>
+
+	<insert id="uintroduce" parameterType="map">
+		<![CDATA[
+			update users set
+			introduce = #{introduce} where userno = #{userno}
+		]]>
+		</insert>
+		
+		<select id="uintromyself" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT INTRODUCE FROM USERS WHERE userno=#{userno}
+
 		]]>
 	</select>
 </mapper>	

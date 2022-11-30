@@ -167,5 +167,11 @@ public class SellServiceImpl implements SellService{
 		return sellDAO.sellcount(userno);
 		
 	}
+
+	@Override
+	public Integer statuscount(Integer userno) throws Exception {
+		
+		return sellDAO.statuscount(userno);
+	}
 	
 }

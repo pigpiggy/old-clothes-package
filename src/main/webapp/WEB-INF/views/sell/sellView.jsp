@@ -52,11 +52,20 @@
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-			<c:forEach var="ifileids" items="${files }">
-            	<div class="swiper-slide">
-                	<img src="/upload/${ifileids}" alt="개인판매 옷">
-        		</div>
-        	</c:forEach>            
+          	<c:choose>
+          		<c:when test="${!empty files }">
+					<c:forEach var="ifileids" items="${files }">
+		            	<div class="swiper-slide">
+		                	<img src="/upload/${ifileids}" alt="개인판매 옷">
+		        		</div>
+        			</c:forEach>    
+        		 </c:when>
+				<c:otherwise>
+					<div class="swiper-slide">
+						<img src="/image/logo3.png" alt="하우헌옷"/>
+					</div>
+				</c:otherwise>        	
+        	</c:choose>          
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
@@ -114,14 +123,14 @@
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sell.userno }">	
-			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
@@ -129,7 +138,7 @@
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        				<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -255,6 +264,8 @@ if(submitcheck == "true"){
 $("#wapply").on("click", function() {
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const ino =  $('#ino').val();
+	sect = "${authUser.sect}";
+	console.log(sect);
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";

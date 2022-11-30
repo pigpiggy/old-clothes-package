@@ -8,4 +8,16 @@
 			SELECT * FROM INDIVIDUAL WHERE userno=#{userno} ORDER BY ino DESC
 		]]>
 	</select>
+	
+	<select id="getSharingList" parameterType="Integer" resultType="Sharing">
+		<![CDATA[
+			SELECT * FROM sharing WHERE userno=#{userno} ORDER BY sno DESC
+		]]>
+	</select>
+	
+	<select id="getSellapplylist" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT * FROM wapply WHERE ino = #{ino}
+		]]>
+	</select>
 </mapper>	

@@ -68,8 +68,10 @@ public class MypageController {
 	String umypage(@PathVariable("userno") Integer userno,Model model) {
 		System.out.println("mypage" + userno);
 		try {
-			/*판매목록*/
+			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
+			/* 판매 상품(무료나눔) */
+			List<Sharing> sharingList;
 			
 			
 			 Integer sharingcount = sharingService.sharingcount(userno);
@@ -90,6 +92,9 @@ public class MypageController {
 			 
 			 sellList = mypageService.getSellList(userno);
 			 model.addAttribute("sellList", sellList);
+			 System.out.println("sellList:"+sellList);
+			 sharingList = mypageService.getSharingList(userno);
+			 model.addAttribute("sharingList", sharingList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

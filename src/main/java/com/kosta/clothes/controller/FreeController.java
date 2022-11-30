@@ -118,11 +118,19 @@ public class FreeController {
 	public ModelAndView freeView(@PathVariable("fno") Integer fno,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 		System.out.println("들어옴");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();		
 		try {
-			Users users = (Users)session.getAttribute("authUser");
-			if(users==null) {
-				model.addAttribute("logincheck", "false");//로그인했는지 여부-?jsp로		
+			
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+				System.out.println("들어옴11");
+				Users users = (Users)session.getAttribute("authUser");
+				if(users==null) {
+					model.addAttribute("logincheck", "false");//로그인했는지 여부-?jsp로		
+				}
+			}else {
+				System.out.println("B들어옴");
+				Business bauthuser=new Business();
+				 bauthuser = (Business)session.getAttribute("authUser"); 
 			}
 			Free free1 = freeService.Freehit(fno);
 			Free free = freeService.getFree(fno);

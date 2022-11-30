@@ -448,7 +448,8 @@ svg {
 	margin-right: 15px;
 }
 
-.buyapplylist {
+.buyapplylist,
+.buysharingapplylist {
 	background: #0080ff;
 	text-align: center;
 	cursor: pointer;

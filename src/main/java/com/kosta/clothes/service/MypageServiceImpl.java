@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+
 import com.kosta.clothes.bean.Wapply;
+
 import com.kosta.clothes.dao.MypageDAO;
 
 @Service
@@ -57,8 +59,13 @@ public class MypageServiceImpl implements MypageService {
 
 
 	@Override
+
 	public List<Users> getSharingapplylist(Integer sno) throws Exception {
 		return mypageDAO.getSharingapplylist(sno);
+	}
+	public Users getMypage(Integer userno) throws Exception {		
+		return mypageDAO.getMypage(userno);
+
 	}
 
 }

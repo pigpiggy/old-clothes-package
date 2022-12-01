@@ -161,8 +161,8 @@ public class FreeController {
 				        mav.setViewName("/free/freeView");
 		         }
 	    	  }else {
-	    		  System.out.println("여기맞냐고오");
-	    		  Free free1 = freeService.Freehit(fno);
+	    		   System.out.println("여기맞냐고오");
+	    		   Free free1 = freeService.Freehit(fno);
 			        Free free = freeService.getFree(fno);
 			        List<Comments> comment = commentService.selectComments(fno);
 			        mav.addObject("comment",comment);
@@ -179,7 +179,7 @@ public class FreeController {
 	@PostMapping("/ufreeView/{fno}/{userno}")
 	public ModelAndView comments(@PathVariable("fno") Integer fno,
 			@PathVariable("userno") Integer userno,
-			@ModelAttribute Comments comments) {
+			@ModelAttribute Comments comments,Model model) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("U댓글");
 		try {
@@ -188,7 +188,7 @@ public class FreeController {
 			comments.setUserno(userno);
 			comments.setCsect(users.getSect());
 			comments.setCname(users.getNickname());
-			commentService.registUcomment(comments);
+			commentService.registUcomment(comments);					
 			mav.setViewName("redirect:/freeView/"+fno);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -203,7 +203,7 @@ public class FreeController {
 	@PostMapping("/bfreeView/{fno}/{bno}")
 	public ModelAndView bcomments(@PathVariable("fno") Integer fno,
 			@PathVariable("bno") Integer bno,
-			@ModelAttribute Comments comments) {
+			@ModelAttribute Comments comments,Model model) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("B댓글");
 		try {
@@ -214,7 +214,7 @@ public class FreeController {
 			comments.setBno(bno);
 			comments.setCsect(sect);
 			comments.setCname(business.getBname());
-			commentService.registBcomment(comments);
+			commentService.registBcomment(comments);			
 			mav.setViewName("redirect:/freeView/"+fno);
 		}catch(Exception e) {
 			e.printStackTrace();

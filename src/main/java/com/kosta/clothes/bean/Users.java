@@ -10,10 +10,9 @@ public class Users {
 	private String password; //비밀 번호
 	private String phone;//전화 번호
 	private Date joinDate; //날짜
-	private String sect;
+	private String introduce; //마이페이지 소개 수정
+	private String sect; //개인/사업자 구분
 
-
-	
 	public Integer getUserno() {
 		return userno;
 	}
@@ -38,6 +37,13 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -58,8 +64,13 @@ public class Users {
 		this.sect = sect;
 	}
 
+	public Users() {
+		super();
+	}
+	
+	
 	public Users(Integer userno, String userid, String nickname, String password, String phone, Date joinDate,
-			String sect) {
+			String introduce, String sect) {
 		super();
 		this.userno = userno;
 		this.userid = userid;
@@ -67,16 +78,15 @@ public class Users {
 		this.password = password;
 		this.phone = phone;
 		this.joinDate = joinDate;
+		this.introduce = introduce;
 		this.sect = sect;
-	}
-	public Users() {
-		super();
 	}
 	@Override
 	public String toString() {
 		return "Users [userno=" + userno + ", userid=" + userid + ", nickname=" + nickname + ", password=" + password
-				+ ", phone=" + phone + ", joinDate=" + joinDate + ", sect=" + sect + "]";
+				+ ", phone=" + phone + ", joinDate=" + joinDate + ", introduce=" + introduce + ", sect=" + sect + "]";
 	}
+	
 	
 
 }

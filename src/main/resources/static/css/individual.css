@@ -448,6 +448,7 @@ svg {
 	margin-right: 15px;
 }
 
+
 #totalsell{	
 	border: 1px solid;
     position: relative;
@@ -489,6 +490,8 @@ svg {
     left: 101%;
     bottom: 54px;
 }
+
+
 .buyapplylist,
 .buysharingapplylist {
 	background: #0080ff;

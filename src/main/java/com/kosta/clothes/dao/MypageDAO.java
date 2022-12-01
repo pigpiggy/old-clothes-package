@@ -24,5 +24,7 @@ public interface MypageDAO {
 	
 	String uintromyself(Integer userno) throws Exception;
 	String bintromyself(Integer bno) throws Exception;
+	
+	Users getMypage(Integer userno) throws Exception;
 }
 

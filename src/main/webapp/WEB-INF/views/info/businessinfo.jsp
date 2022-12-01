@@ -317,6 +317,7 @@ h2{
 							};	 
 						    
 						    // 채널 1:1 채팅 버튼을 생성합니다.
+						    if(data.bkakaoid != null){
 						    Kakao.Channel.createChatButton({
 						      container: '#kakao-talk-channel-chat-button'+data.bno+'',
 						      channelPublicId: data.bkakaoid,
@@ -326,6 +327,7 @@ h2{
 						      shape: 'pc',
 						      supportMultipleDensities: true,
 						    });
+						    }
 						});
 			            //모달 켜기
 			            $(".buttonapply"+data.bno+"").click(function(){
@@ -602,6 +604,7 @@ h2{
 								};	 
 							    
 							    // 채널 1:1 채팅 버튼을 생성합니다.
+							   if(data.bkakaoid != null){
 							    Kakao.Channel.createChatButton({
 							      container: '#kakao-talk-channel-chat-button'+data.bno+'',
 							      channelPublicId: data.bkakaoid,
@@ -611,6 +614,7 @@ h2{
 							      shape: 'pc',
 							      supportMultipleDensities: true,
 							    });
+							   }
 							});
 				            //모달 켜기
 				            $(".buttonapply"+data.bno+"").click(function(){

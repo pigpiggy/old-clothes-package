@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
+import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.MypageDAO;
 
 @Service
@@ -51,6 +52,12 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.bintroduce(introduce);
 		return mypageDAO.bintromyself(bno);
 
+	}
+
+
+	@Override
+	public Users getMypage(Integer userno) throws Exception {		
+		return mypageDAO.getMypage(userno);
 	}
 
 }

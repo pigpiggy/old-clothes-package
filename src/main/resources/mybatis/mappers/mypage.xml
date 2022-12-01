@@ -35,4 +35,11 @@
 
 		]]>
 	</select>
+	
+	<select id="getMypage" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT * FROM USERS WHERE userno=#{userno}
+
+		]]>
+	</select>
 </mapper>	

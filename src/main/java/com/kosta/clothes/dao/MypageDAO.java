@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
+import com.kosta.clothes.bean.Users;
 
 @Mapper
 @Repository
@@ -22,5 +23,7 @@ public interface MypageDAO {
 	
 	String uintromyself(Integer userno) throws Exception;
 	String bintromyself(Integer bno) throws Exception;
+	
+	Users getMypage(Integer userno) throws Exception;
 }
 

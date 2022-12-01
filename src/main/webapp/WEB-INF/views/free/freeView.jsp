@@ -19,6 +19,7 @@ function check(){
 		return false;
 	}
 }
+
 </script>  
 	<style>
 .deletecmt{
@@ -216,7 +217,7 @@ function check(){
 		}	
 	}
    
- //댓글 삭제[사용자]
+ //댓글 삭제[사용자
    function BcmtDelete(cmtcno) {
 		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
 		var cno = cmtcno;
@@ -239,7 +240,24 @@ function check(){
 			});
 		}	
 	}
-
+ //댓글 등록 = 사용자
+   $('#cmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
+   //댓글 등록 = 사업자
+   $('#bcmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
+   
+   
    </script>
 </body>
 </html>

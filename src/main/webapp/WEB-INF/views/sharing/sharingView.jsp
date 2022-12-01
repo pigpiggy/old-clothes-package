@@ -136,14 +136,14 @@ function check(){
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
@@ -152,7 +152,7 @@ function check(){
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        				<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -367,9 +367,17 @@ $("#wapply").on("click", function() {
 		alert("신청안돼");
 	}
 
-	}
-		
+	}		
 })
+
+//댓글 등록 = 사용자
+   $('#cmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
 </script>
 </body>
 </html>

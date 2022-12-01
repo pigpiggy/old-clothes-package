@@ -341,9 +341,10 @@ if(submitcheck == "true"){
 
 /* 신청하기 */
 $("#wapply").on("click", function() {
+	var apply="";
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
-	let sect = "${sect}";
+	let sect = "${authUser.sect}";
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
@@ -354,18 +355,19 @@ $("#wapply").on("click", function() {
 			url: "/sharingView/wapply",
 			data: {sno:sno},
 			success: function(data) {
+				apply = data;
 				console.log(data);
+				console.log("apply:"+apply);
+				if(apply == "true") {
+					alert("신청완");
+				} else {
+					alert("신청안돼");
+				}
 			}, error: function() {
                 console.log('바보야!')
 			}
 		})
-	var registcheck = "${registcheck}";
-	if(registcheck == "true") {
-		alert("신청완");
-	} else {
-		console.log(registcheck);
-		alert("신청안돼");
-	}
+	
 
 	}
 		

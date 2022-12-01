@@ -25,6 +25,7 @@ import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
@@ -273,5 +274,29 @@ public class MypageController {
 			e.printStackTrace();
 		}
 		return introtext;
+	}
+	
+	@ResponseBody
+	@GetMapping("/viewsellapply")
+	public List<Users> viewsellapply(@RequestParam("ino") Integer ino) {
+		List<Users> sellapplylist = null;
+		try {
+			sellapplylist = mypageService.getSellapplylist(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return sellapplylist;
+	}
+	
+	@ResponseBody
+	@GetMapping("/viewsharingapply")
+	public List<Users> viewsharingapply(@RequestParam("sno") Integer sno) {
+		List<Users> sharingapplylist = null;
+		try {
+			sharingapplylist = mypageService.getSharingapplylist(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return sharingapplylist;
 	}
 }

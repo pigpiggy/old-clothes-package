@@ -331,7 +331,7 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/sharingView/wapply")
-	public ModelAndView sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model,
+	public String sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model,
 			@RequestParam(value = "registcheck", required = false) String registcheck) {
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -345,7 +345,9 @@ public class SharingController {
 				map.put("sno", apply.getSno());
 				System.out.println("applyselect: "+ applyService.selectSwapply(map));
 				if(applyService.selectSwapply(map) == null) {
+					System.out.println("들어옴");
 					registcheck = applyService.registSwapply(apply);
+					System.out.println("registcheck:"+registcheck);
 					sharingService.upApplycount(sharing);
 					if(registcheck == "true") {
 						mav.addObject("registcheck", "true");
@@ -358,7 +360,7 @@ public class SharingController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return mav;
+		return registcheck;
 	}
 
 	/* commons에 필요한 애들 */

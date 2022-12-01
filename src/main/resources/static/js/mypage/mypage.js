@@ -17,7 +17,5 @@ $(document).ready(function(){
 		});
 	
 	
-	$('.buyapplylist').click(function(){
-		alert('hi');
-	});
+	
 });

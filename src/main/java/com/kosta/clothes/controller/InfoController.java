@@ -56,6 +56,7 @@ public class InfoController {
 	ModelAndView alladdress(Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
+			
 			List<Donation> dona = donationService.allDonationInfo();
 			//List<Donation> donation = donationService.DonationInfo(store,good,story);
 			System.out.println("dona" +dona.toString());

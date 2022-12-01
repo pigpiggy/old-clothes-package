@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<select>
@@ -17,7 +18,6 @@
     	<div class="card-list">
 		  <c:forEach var="sell" items="${sellList}">
 		  	<div class="sellList">
-		  		<div class="buyapplylist">구매 신청 목록</div>
 				     <a href="/sellView/${sell.ino}">
 					     <div class="card" data-sno=${sell.ino }>
 				          <div class="card-image">
@@ -57,13 +57,39 @@
 	    </div>
     </div>
     
+    <ul class="pagination">
+		<c:choose>
+			<c:when test="${pageInfo.page<=1}">
+				<li><a id="prev"><<</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			<c:choose>
+				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:otherwise>
+					<li><a href="freeList?page=${i}">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+				<li><a id="next">>></a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+    
     <div id="cards">
     	<div class="card-list">
 		  <c:forEach var="sharing" items="${sharingList}">
 		  <div class="sellList">
-		  <div class="buysharingapplylist">무료나눔 신청 목록</div>
-	     <a href="sharingView/${sharing.sno}">
-		     <div class="card" data-sno=${sharing.sno }>
+	     <a href="/sharingView/${sharing.sno}">
+		     <div class="card sharingcard" data-sno=${sharing.sno }>
 		          <div class="card-image">
 		          	<c:if test="${!'등록완료' eq sharing.sstatus}">
 		          		<div class="sharingStatus">${sharing.sstatus }</div>
@@ -100,6 +126,32 @@
 		  </c:forEach>
 	    </div>
     </div>
-    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+    
+    <ul class="pagination">
+		<c:choose>
+			<c:when test="${pageInfo.page<=1}">
+				<li><a id="prev"><<</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+			</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			<c:choose>
+				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:otherwise>
+					<li><a href="freeList?page=${i}">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+				<li><a id="next">>></a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
 </body>
 </html>

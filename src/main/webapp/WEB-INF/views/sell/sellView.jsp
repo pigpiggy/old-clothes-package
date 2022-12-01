@@ -161,7 +161,7 @@ function check(){
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        				<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -375,10 +375,21 @@ $("#wapply").on("click", function() {
 	}
 		
 })
+<<<<<<< HEAD
+//댓글 등록 = 사용자
+   $('#cmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
+=======
 
 function chatSubmit() {
 	document.getElementById('chatSubmit_form').submit();
 } 
+>>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 
 </script>
 

@@ -136,14 +136,14 @@ function check(){
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
@@ -152,7 +152,7 @@ function check(){
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        				<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -341,9 +341,10 @@ if(submitcheck == "true"){
 
 /* 신청하기 */
 $("#wapply").on("click", function() {
+	var apply="";
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
-	let sect = "${sect}";
+	let sect = "${authUser.sect}";
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
@@ -354,22 +355,31 @@ $("#wapply").on("click", function() {
 			url: "/sharingView/wapply",
 			data: {sno:sno},
 			success: function(data) {
+				apply = data;
 				console.log(data);
+				console.log("apply:"+apply);
+				if(apply == "true") {
+					alert("신청완");
+				} else {
+					alert("신청안돼");
+				}
 			}, error: function() {
                 console.log('바보야!')
 			}
 		})
-	var registcheck = "${registcheck}";
-	if(registcheck == "true") {
-		alert("신청완");
-	} else {
-		console.log(registcheck);
-		alert("신청안돼");
-	}
+	
 
-	}
-		
+	}		
 })
+
+//댓글 등록 = 사용자
+   $('#cmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
 </script>
 </body>
 </html>

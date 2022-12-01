@@ -27,7 +27,7 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.getSellList(userno);
 	}
 
-<<<<<<< HEAD
+
 	@Override
 	public List<Sharing> getSharingList(Integer userno) throws Exception {
 		return mypageDAO.getSharingList(userno);
@@ -36,8 +36,7 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public String getSellapplylist(Integer ino) throws Exception {
 		return mypageDAO.getSellapplylist(ino);
-=======
-
+	}
 	@Override
 	public String uintroduce(String introduce, Integer userno) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -51,7 +50,7 @@ public class MypageServiceImpl implements MypageService {
 	public String bintroduce(String introduce, Integer bno) throws Exception {
 		mypageDAO.bintroduce(introduce);
 		return mypageDAO.bintromyself(bno);
->>>>>>> 457d938a5b9c8260df2f9cc102557d11b0ad34c1
+
 	}
 
 }

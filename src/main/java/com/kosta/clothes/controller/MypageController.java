@@ -23,6 +23,7 @@ import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;

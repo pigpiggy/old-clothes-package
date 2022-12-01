@@ -13,10 +13,8 @@ import com.kosta.clothes.bean.Sharing;
 @Repository
 public interface MypageDAO {
 	List<Sell> getSellList(Integer userno) throws Exception;
-<<<<<<< HEAD
 	List<Sharing> getSharingList(Integer userno) throws Exception;
 	String getSellapplylist(Integer ino) throws Exception;
-=======
 
 	void uintroduce(Map map) throws Exception;
 	
@@ -24,6 +22,5 @@ public interface MypageDAO {
 	
 	String uintromyself(Integer userno) throws Exception;
 	String bintromyself(Integer bno) throws Exception;
->>>>>>> 457d938a5b9c8260df2f9cc102557d11b0ad34c1
 }
 

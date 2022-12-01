@@ -283,19 +283,13 @@ display: inline-block;
     border-bottom: 2px solid navy;
 } */
 
-#center {
-	/* display: flex;
-	width:1000px;
-	height:500px;
-	border-bottom: 2px solid navy;
-	justify-content: center; */
-	left: 6%;
-    position: relative;
-    width: 1100px;
-    height: 216px;
-    border-bottom: 2px solid navy;
-}
 
+
+div#registview.viewregist{
+	border-bottom: 2px solid navy;
+	position: relative;
+    top: -2px;
+}
 .board_write {
     border-top: 2px solid navy;
 }
@@ -445,11 +439,84 @@ ul.pagination li a.active {
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
-<<<<<<< HEAD
-=======
-div.center {
+
+div#viewlist.listview {	
 	text-align: center;
-	margin: 20px;
-	border-bottom: 2px solid navy;
+	margin: 20px;	
 }
->>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0
+
+/*댓글 */
+#cname{
+	background-color:aliceblue;
+	position:relative;
+	top:-12px;
+	width:100px;
+	height:30px;
+}
+
+#cmtbtn{
+	position:relative;
+	top:-12px;
+	width:100px;
+	height:30px;
+}
+
+div#totallist.listtotal{	
+    width: 1090px;
+    height: 50px;
+    position: relative;
+    left: 400px;
+}
+
+div#csectlist.listcsect{	
+    width: 84px;
+    height: 35px;
+    border: 1px solid;
+    position: relative;
+    top: 43px;
+    left: 100%;
+}
+
+
+div#cnamelist.listcname{
+	text-align: left;
+    width: 84px;
+    height: 35px;
+    border: 1px solid;
+    position: relative;
+    top: 6px;
+}
+
+div#ccontentlist.listccontent{
+	text-align: center;
+    bottom: 30px;
+    width: 764px;
+    height: 35px;
+    border: 1px solid;
+    position: relative;
+    left: 112px;
+}
+
+div#cdatelist.listcdate{
+	text-align: right;
+    width: 95px;
+    height: 35px;
+    border: 1px solid;
+    position: relative;
+    left: 895px;
+    bottom: 68px;
+}
+
+#modbtn{
+	position: relative;
+    bottom: 23px;
+    height: 27px;
+}
+
+#outbtn{
+	position: relative;
+    width: 56px;
+    height: 23px;
+    top: 9px;
+    right: 58px;
+}

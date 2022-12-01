@@ -477,3 +477,49 @@ svg {
 #modifydelete a {
 	margin-right: 15px;
 }
+/*무료나눔 댓글*/
+#totalsharing{	
+	border: 1px solid;
+    position: relative;
+    left: 9%;
+    width: 1191px;
+    bottom: -530px;
+}
+
+#snamelist{
+	position: relative;
+    left: 0%;
+    top: 4px;
+    width: 69px;
+}
+#scontentlist{
+	position: relative;
+    left: 7%;
+    bottom: 17px;
+    width: 700px;
+    height: 49px;
+}
+#sdatelist{
+	position: relative;
+    left: 85%;
+    bottom:68px;
+    width:150px;
+}
+#scmtmodify{
+	position: relative;
+	bottom: 95px;    
+    left: 101%
+}
+#scmtdelete{
+	position: relative;
+    left: 101%;
+    bottom: 95px;
+}
+.sharingtable{
+	width: 81%;
+    position: absolute;
+    text-align: center;
+    border: 3px solid black;
+    left: 9%;
+    bottom: -800px;
+}

@@ -23,6 +23,7 @@ import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
@@ -67,8 +68,10 @@ public class MypageController {
 	String umypage(@PathVariable("userno") Integer userno,Model model) {
 		System.out.println("mypage" + userno);
 		try {
-			/*판매목록*/
+			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
+			/* 판매 상품(무료나눔) */
+			List<Sharing> sharingList;
 			
 			//상품등록
 			 Integer sharingcount = sharingService.sharingcount(userno);
@@ -92,6 +95,9 @@ public class MypageController {
 			 
 			 sellList = mypageService.getSellList(userno);
 			 model.addAttribute("sellList", sellList);
+			 System.out.println("sellList:"+sellList);
+			 sharingList = mypageService.getSharingList(userno);
+			 model.addAttribute("sharingList", sharingList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

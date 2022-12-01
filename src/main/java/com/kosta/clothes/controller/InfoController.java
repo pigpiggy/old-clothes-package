@@ -164,13 +164,16 @@ public class InfoController {
 			//사용자가 로그인 했을 때 
 			if(session.getAttribute("authUser")!=null) {
 				//사용자가 로그인했을 때 
-				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){				
 		            uauthuser = (Users) session.getAttribute("authUser");	            
-		            userno = uauthuser.getUserno();	            
-		            business = businessService.allBusinessInfo(sido,sigungu);
+		            userno = uauthuser.getUserno();	            		            
+		            business = businessService.allBusinessInfo(sido,sigungu);		            
+		            System.out.println("kakaoID" + business.get(0).getBkakaoid());
+		            
 		            for(int i=0; i<business.size();i++) {
 		            	business.get(i).setLikescheck((businessService.likecheck(business.get(i).getBno(),userno)));
 		            }
+		            
 		            System.out.println("ㅁㅁ" + business.toString());
 				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					//업체가 로그인 했을 때 

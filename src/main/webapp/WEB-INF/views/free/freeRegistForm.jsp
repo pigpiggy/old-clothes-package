@@ -47,6 +47,7 @@ $(function() {
 					</div>
 					<textarea id="editor" name="fcontent"></textarea>
 				</div>
+				<div id="registview" class="viewregist"></div>
 				<div class="bt_wrap">
 					<input id="input1" type="submit" value="등록"> 
 					<a id="input2" href="freeList">취소</a>

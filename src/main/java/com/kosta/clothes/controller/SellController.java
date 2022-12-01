@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Business;
+import com.kosta.clothes.bean.Comments;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
@@ -30,6 +31,7 @@ import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.ApplyService;
+import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.SellService;
@@ -50,7 +52,8 @@ public class SellController {
 	
 	@Autowired
 	ServletContext servletContext;
-	
+	@Autowired
+	CommentService commentService;
 	@Autowired
 	HttpSession session;
 	
@@ -124,12 +127,43 @@ public class SellController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
 					uauthuser = (Users) session.getAttribute("authUser");
 					sect = uauthuser.getSect();
-				} else {
+					List<Comments> comment = commentService.selectCommentino(ino);
+					System.out.println("sellcmt" + comment.toString());
+					mav.addObject("commentsell",comment);
+					mav.setViewName("/sell/sellView");
+				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					bauthuser = (Business) session.getAttribute("authUser");
 					sect = bauthuser.getSect();
+					Users uservo = new Users();
+					uservo = sellService.getInickname(ino);
+					List<Comments> comment = commentService.selectCommentino(ino);
+					System.out.println("sellcmt" + comment.toString());
+					mav.addObject("commentsell",comment);									
+					model.addAttribute("sect", sect);					
+					model.addAttribute("uservo", uservo);
+					model.addAttribute("submitcheck", submitcheck);
+					mav.addObject("sell", sell);					
+					mav.setViewName("/sell/sellView");					
+				}else {
+					Users uservo = new Users();
+					uservo = sellService.getInickname(ino);
+					model.addAttribute("uservo", uservo);
+					model.addAttribute("submitcheck", submitcheck);
+					mav.addObject("sell", sell);
+					mav.setViewName("/sell/sellView");
 				}
-				model.addAttribute("sect", sect);
-			}	
+				
+			}else {
+				Users uservo = new Users();
+				uservo = sellService.getInickname(ino);
+				List<Comments> comment = commentService.selectCommentino(ino);
+				System.out.println("sellcmt" + comment.toString());
+				mav.addObject("commentsell",comment);
+				model.addAttribute("uservo", uservo);
+				model.addAttribute("submitcheck", submitcheck);
+				mav.addObject("sell", sell);
+				mav.setViewName("/sell/sellView");				
+			}
 			//개인
 			if(uauthuser.getUserno() == null && bauthuser.getBno() == null) {
 				model.addAttribute("logincheck", "false");
@@ -168,6 +202,28 @@ public class SellController {
 		
 		return mav;
 	}	
+	
+	//무료나눔 댓글등록
+		//댓글 등록하기
+	@PostMapping("/sellView/{ino}/{userno}")
+	public ModelAndView comments(@PathVariable("ino") Integer ino,
+			@PathVariable("userno") Integer userno,
+			@ModelAttribute Comments comments) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("개인판매댓글");
+		try {
+			Users users = (Users)session.getAttribute("authUser");
+			comments.setIno(ino);
+			comments.setUserno(userno);
+			comments.setCname(users.getNickname());
+			commentService.registCommentsell(comments);
+			mav.setViewName("redirect:/sellView/"+ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
+	}
 	
 	@GetMapping("/sellModifyForm")
 	public ModelAndView modifySharing(@RequestParam("ino") Integer ino) {
@@ -317,19 +373,62 @@ public class SellController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//무료나눔 댓글 삭제하기
+		@ResponseBody
+		@PostMapping("/sellcmtDelete/{cno}")
+		public ModelAndView cmtDelete(@RequestParam("cno") Integer cno,
+				@RequestParam("ino") Integer ino,Model model){
+			ModelAndView mav = new ModelAndView();
+			try {
+				System.out.println("삭제2 : " + ino);
+				System.out.println("삭제 : " + cno);
+				commentService.sellCmtDelete(cno,ino);
+				mav.setViewName("redirect:/sellView/"+ino);
+			}catch(Exception e) {
+				e.printStackTrace();
+				mav.addObject("err",e.getMessage());
+			}
+			return mav;
+		}
+		
+		//댓글 수정하기 form 이동
+		@GetMapping("/modifysellcmt/{ino}/{cno}")
+		public ModelAndView cmtModify(@PathVariable("ino") Integer ino,@PathVariable("cno") Integer cno,@ModelAttribute Comments comments) {
+			ModelAndView mav = new ModelAndView();
+			System.out.println("수정form이동중");
+			try {
+				Comments comment = commentService.getsellCmt(ino,cno);
+				System.out.println("cmt: " + comment.toString());
+				mav.addObject("cmt",comment);			
+				mav.setViewName("/sell/sellcmtModify");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return mav;
+		}
+			
+		
+		//댓글 수정하기 동작
+		@PostMapping("/sellcmtModify/{ino}")
+		public ModelAndView cmtModifys(@ModelAttribute Comments comments,
+									   @RequestParam("ccontent") String ccontent,
+									   @PathVariable("ino") Integer ino,
+									   @RequestParam("cno") Integer cno) {
+			System.out.println("수정 완료이동중");
+			ModelAndView mav = new ModelAndView();
+		    try {
+		    	comments.setIno(ino);
+		    	comments.setCno(cno);
+				comments.setCcontent(ccontent);	
+				commentService.modifysellCmt(comments);
+				mav.setViewName("redirect:/sellView/"+comments.getIno());
+					
+		    }catch(Exception e) {
+		    	e.printStackTrace();
+		    }
+			 
+			return mav;
+			}
 	
 	
 }

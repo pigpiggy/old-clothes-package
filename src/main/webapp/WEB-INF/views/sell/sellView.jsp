@@ -19,6 +19,15 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<script>
+function check(){
+	var comment = document.getElementById("ccontent");
+	if(comment.value == ''){
+		alert("댓글을 작성해주시기 바랍니다.");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 <header>
@@ -142,7 +151,9 @@
         	<h3>상품정보</h3>
         	<c:if test="${authUser.sect eq 'users'}">
 	        	<c:if test="${authUser.userno eq sell.userno}">    
-		        	<div id="modifydelete">
+		        	<div
+		        	
+		        	 id="modifydelete">
 						<a href="/sellModifyForm?ino=${sell.ino }">	        	
 	    	    			<i class="fa-solid fa-gear fa-lg"></i>
 	    	    		</a>
@@ -153,11 +164,52 @@
 	        	</c:if>
 	        </c:if>		 
         </div>
-        <div id=idetail>${sell.icontent}</div>
+        <div id=idetail>${sell.icontent} </div>
       </div>
       
     </section>
     </div>
+    <%--개인판매 댓글 --%>
+    <br><br>
+    <c:choose>
+    <c:when test="${authUser.sect eq 'users' }">
+    <div class="container">
+		<div class="form-group">
+			<form method="post" action="/sellView/${sell.ino }/${authUser.userno}" onsubmit="return check();">
+				<table class="individualtable">
+					<tr>
+						<td style="border-bottom:none;" valign="middle"><br><br><p id="cname" name="cname">${authUser.nickname }</p></td>
+							<td><input type="text" style="position:relative;height:100px;width:900px;left:0%" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." id="ccontent" name = "ccontent"></td>
+						<td><br><br><input type="submit" class="btn-primary pull" id="cmtbtn"value="댓글 작성"></td>
+					</tr>								
+				</table>
+			</form>
+		</div>
+	</div>
+	</c:when>
+	<c:otherwise>
+		<h3 style="position: relative;left: 30%; top: 59%;width: 722px;">댓글 작성은 개인로그인 및 로그인 후 사용이 가능합니다.</h3>
+	</c:otherwise>
+	</c:choose>           	
+    <br><br>
+     <%--댓글 리스트 --%>
+    <br><br>            
+    <div id="totalsell" class="selltotal">
+       	<c:forEach var="comment" items="${commentsell }">
+        	<div style="width:1000px;height:50px;">
+        	<div id="inamelist" name="inamelist" class="listiname">${comment.cname }</div>	
+        	<div id="icontentlist" name="icontentlist" class="listicontent">${comment.ccontent }</div>
+        	<div id="idatelist" name="idatelist" class="listidate">${comment.regdate }</div>
+        	<c:if test="${authUser.sect eq 'users' }">
+        	<c:if test="${authUser.userno eq comment.userno }">
+        		<a href="/modifysellcmt/${comment.ino}/${comment.cno}"><button id="icmtmodify">수정</button></a>
+        		<input id="icmtdelete" class="deleteicmt" onclick="removesellcmt(${comment.cno})" type="submit" value="삭제">	                		                
+        	</c:if>
+        	</c:if>
+        	</div>
+        	<input type="hidden" name="cno" id="cno"  value="${comment.cno }">
+       	</c:forEach>
+    </div>    
 <%-- <footer>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
@@ -233,6 +285,30 @@ function removeSell() {
 			success : function(data) {
 				alert("삭제가 완료되었습니다.");
 				location.href="/sellList";
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
+	}
+	
+}
+
+
+/* 댓글 삭제 처리 */
+function removesellcmt(cmtcno) {
+	var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
+	var ino =  $('#ino').val();
+	var cno =  cmtcno;
+	if(result) {
+		$.ajax({
+			type : "post",
+			url : "/sellcmtDelete/"+cno,
+			data : {ino:ino,
+					cno:cno},
+			success : function(data) {
+				alert("삭제가 완료되었습니다.");
+				location.href="/sellView/" + ino;
 			},
 			error : function(err) {
 				console.log(err);

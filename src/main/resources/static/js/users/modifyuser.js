@@ -14,7 +14,7 @@ $(function(){
       var checkPname = document.getElementById("nickname");
       var hidden = document.getElementById("check_nick").value;
       
-      console.log("texsst"+test);
+      
       console.log(nickname);
       $.ajax({
          type : "post",

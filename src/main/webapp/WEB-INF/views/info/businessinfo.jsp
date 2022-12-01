@@ -240,8 +240,9 @@ h2{
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
 				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
-				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';				
 				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+			
 				if(authsect == 'users'){
 					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
 				}								
@@ -524,7 +525,8 @@ h2{
 					bli += '</div>';
 					bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
 					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
-					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+					console.log(data.bkakaoid + "kakaoid");
+					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼					
 					if(authsect == 'users'){
 						bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
 					}

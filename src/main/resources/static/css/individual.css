@@ -447,5 +447,44 @@ svg {
 	margin-right: 15px;
 }
 
-
-
+#totalsell{	
+	border: 1px solid;
+    position: relative;
+    left: 17%;
+    width: 1191px;
+    bottom: -241px;
+    top: 480px;
+}
+.individualtable{
+	border: 1px solid;
+    width: 1530px;
+    position: relative;
+    left: -520px;
+    top: 502px;
+}
+#inamelist{
+	position: relative;
+    left: 0%;
+    top: 22px;
+}
+#icontentlist{
+	position: relative;
+    left: 7%;
+    bottom: 3px;
+}
+#idatelist{
+	position: relative;
+    left: 85%;
+    width: 152px;
+    bottom:26px;
+}
+#icmtmodify{
+	position: relative;
+	bottom: 54px;    
+    left: 101%
+}
+#icmtdelete{
+	position: relative;
+    left: 101%;
+    bottom: 54px;
+}

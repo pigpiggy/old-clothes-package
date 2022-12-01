@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
@@ -141,6 +142,19 @@ function check(){
 			        				<c:if test="${authUser.userno ne sell.userno }">	
 			        					<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+										<div class="buy_chat">
+										<form id="chatSubmit_form" action="/chatMessage" method="GET">
+											<a href="javascript:{}" onclick="chatSubmit()">
+												<input type="hidden" name="sellerName" value="${sell.iname}"/>
+												<input type="hidden" name="ino" value="${sell.ino}"/>
+												<input type="hidden" name="sellerno" value="${sell.userno}"/>
+												<input type="hidden" name="ititle" value="${sell.ititle}"/>
+												<button id="btn_chat">
+													채팅으로 거래하기
+												</button>
+											</a>
+										</form>
+										</div>			        			
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
 			        					<input type="button" class="btn btn-info" value="나의옷장" />
@@ -361,6 +375,7 @@ $("#wapply").on("click", function() {
 	}
 		
 })
+<<<<<<< HEAD
 //댓글 등록 = 사용자
    $('#cmtbtn').click(function(){
 		console.log("댓글 등록");
@@ -369,6 +384,12 @@ $("#wapply").on("click", function() {
 			alert("댓글 등록이 완료되었습니다.");	
 		}
 	});
+=======
+
+function chatSubmit() {
+	document.getElementById('chatSubmit_form').submit();
+} 
+>>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 
 </script>
 

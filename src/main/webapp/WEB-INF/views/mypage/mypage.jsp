@@ -29,6 +29,7 @@
     <div class="title">
  
       <div class="nickname">
+      <input type="hidden" value="${authUser.userno }" id="chatuserno"/>
       <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
      <c:choose>    
 	    	<c:when test="${users.sect eq 'users' }">
@@ -41,7 +42,11 @@
              
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
-      <div class="fname_closet">          
+      <div class="fname_closet">
+      			<a href="<c:url value="/chatList"/>">
+							<span>채팅</span>
+							<span id="messageAlert"></span><br>
+				</a>
 		        <a href="#">
 			      <img id="like" src="/image/redheart.png" alt="찜">
 		        </a>          
@@ -61,6 +66,7 @@
     </div>
     <div class="second">
 		  <div class= "myRecord">
+<<<<<<< HEAD
 		  <c:if test="${authUser.sect eq 'users' }">
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : ${statuscount } 건</span>
@@ -134,5 +140,59 @@
   		});
   </script>
    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+=======
+			  <span>상품등록 : ${totalcount } 개</span>
+			  <span>거래완료 : 19건</span>
+			  <span>받은 거래후기 : ${reviewcount }개</span>
+		  </div>		
+		  <div class="introduce">
+			  <div>안녕하세요 알냥이의 옷장입니다. </div>
+				<img id="setting" src="/image/setting1.png" alt="소개수정">
+		  </div>
+  	</div>
+	</div>
+  </div>
+ <script>
+var chatuserno = document.getElementById('chatuserno').value;
+	console.log("chatuserno: " + chatuserno);
+
+	$(document).ready(function() {
+	
+		if (chatuserno != null) {
+			getUnread();
+			getInfiniteUnread();
+		}
+	});
+
+ function getUnread() {
+		$.ajax({
+			url: "/chatUnreadAlert/ajax",
+			type: "POST",
+			data: JSON.stringify({
+				chatuserno: chatuserno
+			}) ,
+			dataType: "json",
+			contentType: "application/json",
+			success: function(result) {
+				if (result >= 1) {
+					showUnread(result);
+				} else {
+					showUnread('');
+				}
+			}
+		});
+	}
+	
+	function getInfiniteUnread() {
+		setInterval(() => {
+			getUnread();
+		}, 1000);
+	}
+	
+	function showUnread(result) {
+		$('#messageAlert').html(result);
+	}
+ </script> 
+>>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 </body>
 </html>

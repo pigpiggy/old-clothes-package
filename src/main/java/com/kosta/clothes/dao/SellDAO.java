@@ -26,4 +26,6 @@ public interface SellDAO {
 	void upIndividualLikes(Sell sell) throws Exception;
 	void downIndividualLikes(Sell sell) throws Exception;
 	void upApplycount(Sell sell) throws Exception;
+	Integer sellcount(Integer userno) throws Exception;
+	Integer statuscount(Integer userno)throws Exception;
 }

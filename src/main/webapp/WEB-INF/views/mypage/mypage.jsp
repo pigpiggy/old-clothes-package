@@ -14,6 +14,7 @@
 	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+	
 </script>
 </head>
 <body>
@@ -23,9 +24,18 @@
 	<div class="closet_wrap" >  
     
     <div class="title">
-      <div class="nicname">
-        <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
-        <strong>${business.bname }의 옷장</strong>
+ 
+      <div class="nickname">
+      <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
+     <c:choose>    
+	    	<c:when test="${authUser.sect eq 'users' }">
+	    			<strong>${authUser.nickname }의 옷장</strong>
+	    	</c:when>
+      <c:otherwise>
+      				<strong>${business.bname }의 옷장</strong>
+      </c:otherwise>
+      </c:choose>
+             
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">          
@@ -47,19 +57,59 @@
 			<img src="/image/closet.png" alt="옷장">
     </div>
     <div class="second">
-		  <div class= "myRecord">
-			  <span>상품등록 : 25개</span>
-			  <span>거래완료 : 19건</span>
-			  <span>받은 거래후기 : 12개</span>
+		  <div class= "myRecord"><c:if test="${authUser.sect eq 'users' }">
+			  <span>상품등록 : ${totalcount } 개</span>
+			  <span>거래완료 : ${statuscount } 건</span>
+			  <span>받은 거래후기 : ${reviewcount }개</span></c:if>
 		  </div>		
-		  <div class="introduce">
-			  <div>안녕하세요 알냥이의 옷장입니다. </div>
-				<img id="setting" src="/image/setting1.png" alt="소개수정">
+		  <div class="introduce">				 
+				<img id="setting" src="/image/setting1.png" alt="소개수정" >
+				
+  		</div>
+  	<div class="intro_check">  
+				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
+				</textarea>
+				<button class="intro_btn">확인</button>
 		  </div>
-  	</div>
 	</div>
 	
 		
   </div>
+  <script>
+  		$('.intro_check').css('display','none');
+	  $('#setting').click(function(){ //설정버튼 클릭했을 때
+			$(this).css('display','none');
+			$('.introduce').css('display','none');
+			$('.intro_check').css('display','flex');
+			});
+	  
+	  	$('.intro_btn').click(function(){
+	  		var introduce = $('.intro_text').val();
+	  		alert(introduce);
+	  		$.ajax({
+				type : "post",
+				url : "/mypage",
+				data : {introduce:introduce},
+				
+				success : function(data) {
+					console.log(data);
+					var text ="";
+					text += "<p>"+data+"</p>";
+					$('.introduce').prepend(text);
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+	  	});
+	  	
+	  	$('.intro_btn').click(function(){
+	  		$('.introduce').css('display','block');
+			$('.intro_check').css('display','none');
+			$('#setting').css('display','block');
+	  	});
+	  	
+  </script>
+   <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
 </body>
 </html>

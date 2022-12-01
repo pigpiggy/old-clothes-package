@@ -19,7 +19,8 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: black
+  ;
 }
 
 #individualHtml {
@@ -447,6 +448,7 @@ svg {
 	margin-right: 15px;
 }
 
+<<<<<<< HEAD
 #totalsell{	
 	border: 1px solid;
     position: relative;
@@ -488,3 +490,12 @@ svg {
     left: 101%;
     bottom: 54px;
 }
+=======
+.buyapplylist,
+.buysharingapplylist {
+	background: #0080ff;
+	text-align: center;
+	cursor: pointer;
+}
+
+>>>>>>> 6b2999a99f65bb3b4773d9d16cfa4683c53f49c3

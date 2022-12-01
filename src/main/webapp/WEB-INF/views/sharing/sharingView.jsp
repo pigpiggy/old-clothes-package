@@ -62,11 +62,20 @@ function check(){
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-			<c:forEach var="sfileids" items="${files }">
-            	<div class="swiper-slide">
-                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
-        		</div>
-        	</c:forEach>            
+          	<c:choose>
+          		<c:when test="${!empty files }">
+					<c:forEach var="sfileids" items="${files }">
+		            	<div class="swiper-slide">
+		                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
+		        		</div>
+		        	</c:forEach> 
+				</c:when>
+				<c:otherwise>
+					<div class="swiper-slide">
+						<img src="/image/logo3.png" alt="하우헌옷"/>
+					</div>
+				</c:otherwise>        	
+        	</c:choose>           
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
@@ -136,9 +145,10 @@ function check(){
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
 			        					<input type="button" class="btn btn-info" value="옷장열기" />
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
-			        					<input type="button" class="btn btn-info" value="나의옷장" />
+			        					<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="나의옷장" /></a>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>

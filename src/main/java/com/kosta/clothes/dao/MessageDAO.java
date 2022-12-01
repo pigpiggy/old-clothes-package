@@ -17,7 +17,7 @@ public interface MessageDAO {
 	List<MessageVO> uRecvMessage(Map map) throws Exception;
 	List<MessageVO> bRecvMessage(Map map) throws Exception;
 	List<MessageVO> uSendMessage(Map map) throws Exception;
-	List<MessageVO> bSendMessage(Integer mno) throws Exception;
+	List<MessageVO> bSendMessage(Map map) throws Exception;
 	void deleteMessage(Integer mno) throws Exception;
 	MessageVO uRecvViewMessage(Integer mno) throws Exception;
 	MessageVO bRecvViewMessage(Integer mno) throws Exception;
@@ -25,6 +25,13 @@ public interface MessageDAO {
 	MessageVO bSendViewMessage(Integer mno) throws Exception;
 	Integer selectRmessageCount(Integer recvUserno) throws Exception;
 	Integer selectSmessageCount(Integer sendUserno) throws Exception;
+	Integer selectBmessageCount(Integer recvUserno) throws Exception;
+	Integer selectSBmessageCount(Integer sendUserno) throws Exception;
+	Integer selectBRmessageCount(Integer recvUserno) throws Exception;
+	Integer selectBRBmessageCount(Integer recvUserno) throws Exception;
+	Integer selectBSmessageCount(Integer sendUserno) throws Exception;
+	Integer selectBSBmessageCount(Integer sendUserno) throws Exception;
+	
 	
 	//업체
 	Business mypageBusiness(Integer bno)throws Exception;

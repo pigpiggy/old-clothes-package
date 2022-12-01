@@ -16,7 +16,12 @@
 		<mapper resource="mybatis/mappers/business.xml"/>
 		<mapper resource="mybatis/mappers/sell.xml"/>
 		<mapper resource="mybatis/mappers/notice.xml"/>
+<<<<<<< HEAD
 		<mapper resource="mybatis/mappers/comments.xml"/>
+=======
+		<mapper resource="mybatis/mappers/review.xml"/>
+		<mapper resource="mybatis/mappers/mypage.xml"/>
+>>>>>>> 6b2999a99f65bb3b4773d9d16cfa4683c53f49c3
 	</mappers>
 </configuration>
 

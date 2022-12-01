@@ -132,11 +132,19 @@ function check(){
 			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
             <div class="bt_wrap">            
                 <a id="input4" href="/freeList" class="on">목록</a>
+<<<<<<< HEAD
                 <c:if test="${authUser.sect eq 'users'}">
 	                <c:if test="${authUser.userno eq article.userno}">                 
 	                   <a href="/modifyform/${article.fno }">수정</a>
 	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
 	                </c:if>
+=======
+               <c:if test="${ authUser.sect eq 'users' }">
+                <c:if test="${authUser.userno eq article.userno}">                 
+	                <a href="/modifyform/${article.fno }">수정</a>
+	                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+                </c:if>
+>>>>>>> 6b2999a99f65bb3b4773d9d16cfa4683c53f49c3
                 </c:if>
             </div>
             <%--댓글 리스트 --%>

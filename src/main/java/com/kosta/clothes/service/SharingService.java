@@ -25,5 +25,8 @@ public interface SharingService {
 	Users getSnickname(Integer sno) throws Exception;
 	void upApplycount(Sharing sharing) throws Exception;
 	
+	Integer sharingcount(Integer userno) throws Exception; //무료나눔 개수 
+	Integer statuscount(Integer userno) throws Exception;//거래완료 개수
+	
 	
 }

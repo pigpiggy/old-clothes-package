@@ -26,6 +26,7 @@
     <div class="title">
  
       <div class="nickname">
+      <input type="hidden" value="${authUser.userno }" id="chatuserno"/>
       <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
      <c:choose>    
 	    	<c:when test="${authUser.sect eq 'users' }">
@@ -38,7 +39,11 @@
              
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
-      <div class="fname_closet">          
+      <div class="fname_closet">
+      			<a href="<c:url value="/chatList"/>">
+							<span>채팅</span>
+							<span id="messageAlert"></span><br>
+				</a>
 		        <a href="#">
 			      <img id="like" src="/image/redheart.png" alt="찜">
 		        </a>          
@@ -57,59 +62,58 @@
 			<img src="/image/closet.png" alt="옷장">
     </div>
     <div class="second">
-		  <div class= "myRecord"><c:if test="${authUser.sect eq 'users' }">
+		  <div class= "myRecord">
 			  <span>상품등록 : ${totalcount } 개</span>
-			  <span>거래완료 : ${statuscount } 건</span>
-			  <span>받은 거래후기 : ${reviewcount }개</span></c:if>
+			  <span>거래완료 : 19건</span>
+			  <span>받은 거래후기 : ${reviewcount }개</span>
 		  </div>		
-		  <div class="introduce">				 
-				<img id="setting" src="/image/setting1.png" alt="소개수정" >
-				
-  		</div>
-  	<div class="intro_check">  
-				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
-				</textarea>
-				<button class="intro_btn">확인</button>
+		  <div class="introduce">
+			  <div>안녕하세요 알냥이의 옷장입니다. </div>
+				<img id="setting" src="/image/setting1.png" alt="소개수정">
 		  </div>
+  	</div>
 	</div>
-	
-		
   </div>
-  <script>
-  		$('.intro_check').css('display','none');
-	  $('#setting').click(function(){ //설정버튼 클릭했을 때
-			$(this).css('display','none');
-			$('.introduce').css('display','none');
-			$('.intro_check').css('display','flex');
-			});
-	  
-	  	$('.intro_btn').click(function(){
-	  		var introduce = $('.intro_text').val();
-	  		alert(introduce);
-	  		$.ajax({
-				type : "post",
-				url : "/mypage",
-				data : {introduce:introduce},
-				
-				success : function(data) {
-					console.log(data);
-					var text ="";
-					text += "<p>"+data+"</p>";
-					$('.introduce').prepend(text);
-				},
-				error : function(err) {
-					console.log(err);
+ <script>
+var chatuserno = document.getElementById('chatuserno').value;
+	console.log("chatuserno: " + chatuserno);
+
+	$(document).ready(function() {
+	
+		if (chatuserno != null) {
+			getUnread();
+			getInfiniteUnread();
+		}
+	});
+
+ function getUnread() {
+		$.ajax({
+			url: "/chatUnreadAlert/ajax",
+			type: "POST",
+			data: JSON.stringify({
+				chatuserno: chatuserno
+			}) ,
+			dataType: "json",
+			contentType: "application/json",
+			success: function(result) {
+				if (result >= 1) {
+					showUnread(result);
+				} else {
+					showUnread('');
 				}
-			});
-	  	});
-	  	
-	  	$('.intro_btn').click(function(){
-	  		$('.introduce').css('display','block');
-			$('.intro_check').css('display','none');
-			$('#setting').css('display','block');
-	  	});
-	  	
-  </script>
-   <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+			}
+		});
+	}
+	
+	function getInfiniteUnread() {
+		setInterval(() => {
+			getUnread();
+		}, 1000);
+	}
+	
+	function showUnread(result) {
+		$('#messageAlert').html(result);
+	}
+ </script> 
 </body>
 </html>

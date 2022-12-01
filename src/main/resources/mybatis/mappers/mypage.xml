@@ -9,6 +9,25 @@
 		]]>
 	</select>
 	
+
+	<select id="getSharingList" parameterType="Integer" resultType="Sharing">
+		<![CDATA[
+			SELECT * FROM sharing WHERE userno=#{userno} ORDER BY sno DESC
+		]]>
+	</select>
+	
+	<select id="getSellapplylist" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.nickname FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
+		]]>
+	</select>
+	
+	<select id="getSharingapplylist" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.nickname FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
+		]]>
+	</select>
+
 	<insert id="uintroduce" parameterType="map">
 		<![CDATA[
 			update users set
@@ -19,6 +38,14 @@
 		<select id="uintromyself" parameterType="Integer" resultType="String">
 		<![CDATA[
 			SELECT INTRODUCE FROM USERS WHERE userno=#{userno}
+
+		]]>
+	</select>
+	
+	<select id="getMypage" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT * FROM USERS WHERE userno=#{userno}
+
 		]]>
 	</select>
 </mapper>	

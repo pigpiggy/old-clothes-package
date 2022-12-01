@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.CommentsDAO">
+
+	 
+<!-- 자유게시판 -->
+	<!-- 개인이 댓글 -->
+	<insert id="insertComments" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,userno)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{userno})
+		]]>
+	</insert>
+	<!-- 사업자가 댓글 -->
+	<insert id="insertBcomments" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,bno)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{bno})
+		]]>
+	</insert>
+	
+	<select id="selectComments" parameterType="Integer" resultType="comments">
+		<![CDATA[
+			select * from comments where fno=#{fno}
+		]]>
+	</select>
+	
+	<delete id="CmtDelete" parameterType="map">
+		<![CDATA[
+			delete from comments where cno=#{cno} and fno=#{fno}
+		]]>
+	
+	</delete>
+	
+	<select id="getCmt" parameterType="map" resultType="comments">
+		<![CDATA[
+			select * from comments where fno=#{fno} and cno=#{cno}
+		]]>
+	</select>
+	
+	<update id="updateCmt" parameterType="comments">
+		<![CDATA[
+			UPDATE COMMENTS SET CCONTENT =#{ccontent} WHERE fno=#{fno} AND cno=#{cno}
+		]]>
+	</update>
+	
+	
+<!-- 무료게시판 -->
+	<insert id="insertCommentshar" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,regdate,sno,userno)
+			values (#{cno},#{cname},#{ccontent},sysdate,#{sno},#{userno})
+		]]>
+	</insert>
+	
+	<select id="selectCommentsno" parameterType="Integer" resultType="comments">
+		<![CDATA[
+			select * from comments where sno=#{sno}
+		]]>
+	</select>
+	
+	<delete id="sharingCmtDelete" parameterType="map">
+		<![CDATA[
+			delete from comments where cno=#{cno} and sno=#{sno}
+		]]>
+	
+	</delete>
+	
+	<select id="getsharingCmt" parameterType="map" resultType="comments">
+		<![CDATA[
+			select * from comments where sno=#{sno} and cno=#{cno}
+		]]>
+	</select>
+	
+	<update id="updatesharingCmt" parameterType="comments">
+		<![CDATA[
+			UPDATE COMMENTS SET CCONTENT =#{ccontent} WHERE sno=#{sno} AND cno=#{cno}
+		]]>
+	</update>
+	
+	
+	<!-- 개인판매 -->
+	<insert id="insertCommentsell" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,regdate,ino,userno)
+			values (#{cno},#{cname},#{ccontent},sysdate,#{ino},#{userno})
+		]]>
+	</insert>
+	
+	<select id="selectCommentino" parameterType="Integer" resultType="comments">
+		<![CDATA[
+			select * from comments where ino=#{ino}
+		]]>
+	</select>
+	
+	<delete id="sellCmtDelete" parameterType="map">
+		<![CDATA[
+			delete from comments where cno=#{cno} and ino=#{ino}
+		]]>
+	
+	</delete>
+	
+	<select id="getsellCmt" parameterType="map" resultType="comments">
+		<![CDATA[
+			select * from comments where ino=#{ino} and cno=#{cno}
+		]]>
+	</select>
+	
+	<update id="updatesellCmt" parameterType="comments">
+		<![CDATA[
+			UPDATE COMMENTS SET CCONTENT =#{ccontent} WHERE ino=#{ino} AND cno=#{cno}
+		]]>
+	</update>
+</mapper>	

@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.clothes.bean.Business;
+import com.kosta.clothes.bean.Comments;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
@@ -34,6 +35,7 @@ import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.ApplyService;
+import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.SharingService;
@@ -46,7 +48,9 @@ public class SharingController {
 
 	@Autowired
 	LikesService likesService;
-
+	
+	@Autowired
+	CommentService commentService;
 	
 	@Autowired 
 	MessageService messageService;
@@ -116,6 +120,7 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview" + sharing);
+			
 			if (sharing.getSfileids() != null) {
 				String[] fidArr = sharing.getSfileids().split(","); // 1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌
 				mav.addObject("files", fidArr);
@@ -127,12 +132,41 @@ public class SharingController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					uauthuser = (Users) session.getAttribute("authUser");
 					sect = uauthuser.getSect();
-				} else {
+					//무료나눔 댓글리스트
+					List<Comments> comment = commentService.selectCommentsno(sno);
+					System.out.println("sharingcmt" + comment.toString());
+					mav.addObject("commentsharing",comment);
+					mav.setViewName("/sharing/sharingView");
+				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					bauthuser = (Business) session.getAttribute("authUser");
 					sect = bauthuser.getSect();
+					model.addAttribute("sect", sect);
+					Users uservo = new Users();
+					List<Comments> comment = commentService.selectCommentsno(sno);
+					System.out.println("sharingcmt" + comment.toString());
+					mav.addObject("commentsharing",comment);
+					uservo = sharingService.getSnickname(sno);
+					System.out.println("sharingviewuservo"+uservo);
+					model.addAttribute("uservo", uservo);
+					model.addAttribute("submitcheck", submitcheck);
+					mav.addObject("sharing", sharing);
+					mav.setViewName("/sharing/sharingView");
+				}else {
+					
 				}
-				System.out.println(sect);
-				model.addAttribute("sect", sect);
+				
+
+			}else {
+				Users uservo = new Users();
+				List<Comments> comment = commentService.selectCommentsno(sno);
+				System.out.println("sharingcmt" + comment.toString());
+				mav.addObject("commentsharing",comment);
+				uservo = sharingService.getSnickname(sno);
+				System.out.println("sharingviewuservo"+uservo);
+				model.addAttribute("uservo", uservo);
+				model.addAttribute("submitcheck", submitcheck);
+				mav.addObject("sharing", sharing);
+				mav.setViewName("/sharing/sharingView");
 			}
 			//개인
 			if (uauthuser.getUserno() == null && bauthuser.getBno() == null) {
@@ -160,6 +194,31 @@ public class SharingController {
 		}
 		
 		return mav;
+	}
+	
+	//무료나눔 댓글등록
+	//댓글 등록하기
+	@PostMapping("/sharingView/{sno}/{userno}")
+	public ModelAndView comments(@PathVariable("sno") Integer sno,
+			@PathVariable("userno") Integer userno,
+			@ModelAttribute Comments comments,Model model) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("댓글");
+		try {
+			Users users = (Users)session.getAttribute("authUser");
+			comments.setSno(sno);
+			comments.setUserno(userno);
+			comments.setCname(users.getNickname());
+			if(comments.getCcontent()==null) {
+				model.addAttribute("msg","댓글을 작성해주세요.");
+			}
+			commentService.registCommentshar(comments);
+			mav.setViewName("redirect:/sharingView/"+sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+		
 	}
 
 	@GetMapping("/sharingModifyForm")
@@ -272,7 +331,7 @@ public class SharingController {
 	
 	@ResponseBody
 	@PostMapping("/sharingView/wapply")
-	public ModelAndView sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model,
+	public String sharingWapply(@RequestParam("sno") Integer sno, @ModelAttribute Sharing sharing, Model model,
 			@RequestParam(value = "registcheck", required = false) String registcheck) {
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -286,7 +345,9 @@ public class SharingController {
 				map.put("sno", apply.getSno());
 				System.out.println("applyselect: "+ applyService.selectSwapply(map));
 				if(applyService.selectSwapply(map) == null) {
+					System.out.println("들어옴");
 					registcheck = applyService.registSwapply(apply);
+					System.out.println("registcheck:"+registcheck);
 					sharingService.upApplycount(sharing);
 					if(registcheck == "true") {
 						mav.addObject("registcheck", "true");
@@ -299,7 +360,7 @@ public class SharingController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return mav;
+		return registcheck;
 	}
 
 	/* commons에 필요한 애들 */
@@ -364,4 +425,61 @@ public class SharingController {
 		return sharingList;
 
 	}
+	
+	//무료나눔 댓글 삭제하기
+	@ResponseBody
+	@PostMapping("/sharingcmtDelete/{cno}")
+	public ModelAndView cmtDelete(@RequestParam("cno") Integer cno,
+			@RequestParam("sno") Integer sno,Model model){
+		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("삭제2 : " + sno);
+			System.out.println("삭제 : " + cno);
+			commentService.sharingCmtDelete(cno,sno);
+			mav.setViewName("redirect:/sharingView/"+sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+			mav.addObject("err",e.getMessage());
+		}
+		return mav;
+	}
+	
+	//댓글 수정하기 form 이동
+	@GetMapping("/modifysharingcmt/{sno}/{cno}")
+	public ModelAndView cmtModify(@PathVariable("sno") Integer sno,@PathVariable("cno") Integer cno,@ModelAttribute Comments comments) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("수정form이동중");
+		try {
+			Comments comment = commentService.getsharingCmt(sno,cno);
+			System.out.println("cmt: " + comment.toString());
+			mav.addObject("cmt",comment);			
+			mav.setViewName("/sharing/sharingcmtModify");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+		
+	
+	//댓글 수정하기 동작
+	@PostMapping("/sharingcmtModify/{sno}")
+	public ModelAndView cmtModifys(@ModelAttribute Comments comments,
+								   @RequestParam("ccontent") String ccontent,
+								   @PathVariable("sno") Integer sno,
+								   @RequestParam("cno") Integer cno) {
+		System.out.println("수정 완료이동중");
+		ModelAndView mav = new ModelAndView();
+	    try {
+	    	comments.setSno(sno);
+	    	comments.setCno(cno);
+			comments.setCcontent(ccontent);	
+			commentService.modifysharingCmt(comments);
+			mav.setViewName("redirect:/sharingView/"+comments.getSno());
+				
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+		 
+		return mav;
+		}
 }

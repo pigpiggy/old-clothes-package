@@ -62,9 +62,9 @@
 			  <span>거래완료 : ${statuscount } 건</span>
 			  <span>받은 거래후기 : ${reviewcount }개</span></c:if>
 		  </div>		
-		  <div class="introduce">				 
+		  <div class="introduce" id="AAA">				 
 				<img id="setting" src="/image/setting1.png" alt="소개수정" >
-				
+			
   		</div>
   	<div class="intro_check">  
 				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
@@ -77,6 +77,7 @@
   </div>
   <script>
   		$('.intro_check').css('display','none');
+  		
 	  $('#setting').click(function(){ //설정버튼 클릭했을 때
 			$(this).css('display','none');
 			$('.introduce').css('display','none');
@@ -94,8 +95,10 @@
 				success : function(data) {
 					console.log(data);
 					var text ="";
-					text += "<p>"+data+"</p>";
-					$('.introduce').prepend(text);
+					text = data;
+					
+					document.getElementById("AAA").innerHTML = text;
+					$('#setting').css('display','block');
 				},
 				error : function(err) {
 					console.log(err);

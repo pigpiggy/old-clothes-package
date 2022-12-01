@@ -445,11 +445,8 @@ ul.pagination li a.active {
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
-<<<<<<< HEAD
-=======
 div.center {
 	text-align: center;
 	margin: 20px;
 	border-bottom: 2px solid navy;
 }
->>>>>>> 91042b93501441ca3664cc8b49e86b36e74e0fc0

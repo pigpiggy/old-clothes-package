@@ -40,7 +40,7 @@
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">
-      			<a href="<c:url value="/chatList"/>">
+      			<a href="javascript:openDetail('/chatList')">
 							<span>채팅</span>
 							<span id="messageAlert"></span><br>
 				</a>
@@ -75,6 +75,14 @@
 	</div>
   </div>
  <script>
+ function openDetail(url) {
+		var width = 850;
+		var height = 650;
+		var left = (window.screen.width - width) / 2;
+		var top = (window.screen.height - height) / 2;
+		window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
+	} 
+ 
 var chatuserno = document.getElementById('chatuserno').value;
 	console.log("chatuserno: " + chatuserno);
 

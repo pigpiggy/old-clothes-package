@@ -66,14 +66,12 @@
     </div>
     <div class="second">
 		  <div class= "myRecord">
-<<<<<<< HEAD
 		  <c:if test="${authUser.sect eq 'users' }">
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : ${statuscount } 건</span>
 			  <span>받은 거래후기 : ${reviewcount }개</span>
 		  </c:if>
 		  </div>		
-<<<<<<< HEAD
 		  <div class="introduce" id="AAA">				 
 				<img id="setting" src="/image/setting1.png" alt="소개수정" >
 			
@@ -91,7 +89,6 @@
   		$('.intro_check').css('display','none');
   		
 	  $('#setting').click(function(){ //설정버튼 클릭했을 때
-=======
 	    <div class="introduce" id="introduce">
 	    	<c:if test="${users.userno eq authUser.userno}">			 
 				<img id="setting" src="/image/setting1.png" alt="소개수정" >
@@ -122,7 +119,6 @@
   <script>
    	 $('.intro_check').css('display','none');   	 
    	 $('#setting').click(function(){ //설정버튼 클릭했을 때
->>>>>>> 9cbc836b87c04999b0e806df0d1a8a4a641d77c1
 			$(this).css('display','none');
 			$('.introduce').css('display','none');
 			$('.intro_check').css('display','flex');
@@ -138,13 +134,11 @@
 				
 				success : function(data) {
 					console.log(data);
-<<<<<<< HEAD
 					var text ="";
 					text = data;
 					
 					document.getElementById("AAA").innerHTML = text;
 					$('#setting').css('display','block');
-=======
 					var text ="";					
 					text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
 					text += "<p>"+data+"</p>";
@@ -153,7 +147,6 @@
 					/* location.reload(); */
 					//$('#introduce').html(data);
 								
->>>>>>> 9cbc836b87c04999b0e806df0d1a8a4a641d77c1
 				},
 				error : function(err) {
 					console.log(err);
@@ -168,7 +161,6 @@
   		});
   </script>
    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
-=======
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : 19건</span>
 			  <span>받은 거래후기 : ${reviewcount }개</span>
@@ -229,6 +221,5 @@ var chatuserno = document.getElementById('chatuserno').value;
 		$('#messageAlert').html(result);
 	}
  </script> 
->>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 </body>
 </html>

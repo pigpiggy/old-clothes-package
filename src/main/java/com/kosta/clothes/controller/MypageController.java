@@ -330,10 +330,7 @@ public class MypageController {
 		}
 		return "/mypage/review";
 	}
-<<<<<<< HEAD
-=======
 	//마이페이지 자기소개란 수정
->>>>>>> 9cbc836b87c04999b0e806df0d1a8a4a641d77c1
 	@ResponseBody
 	@PostMapping("/mypage")
 	public String introduce(@RequestParam("introduce") String introduce) {

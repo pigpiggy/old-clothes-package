@@ -19,6 +19,15 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<script>
+function check(){
+	var comment = document.getElementById("ccontent");
+	if(comment.value == ''){
+		alert("댓글을 작성해주시기 바랍니다.");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 <header>
@@ -30,6 +39,7 @@
       			<form action="smessage" method="post" id="messageform">
       				<input type="hidden" name="recvUserno" value="${uservo.userno }">
       				<input type="hidden" name="sno" value="${sharing.sno }">
+      				
       				<h5>받는 사람: ${uservo.nickname }</h5> 
 	      			<div>
 		      			<label class="mcontext" for="mtitle">제목 </label>
@@ -126,14 +136,14 @@
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<input type="button" class="btn btn-info" value="옷장열기" />
+				        	<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<input type="button" class="btn btn-info" value="옷장열기" />
+			        					<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
@@ -142,7 +152,7 @@
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<input type="button" class="btn btn-info" value="옷장열기" />
+			        				<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -171,6 +181,47 @@
       
     </section>
     </div>
+    <%--무료나눔 댓글 --%>
+    <br><br>
+    <c:choose>
+    <c:when test="${authUser.sect eq 'users' }">
+    <div class="container">
+		<div class="form-group">
+			<form method="post" action="/sharingView/${sharing.sno }/${authUser.userno}" onsubmit="return check();">
+				<table class="sharingtable">
+					<tr>
+						<td style="border-bottom:none;" valign="middle"><br><br><p id="cname" name="cname">${authUser.nickname }</p></td>
+							<td><input type="text" style="position:relative;height:100px;width:900px;left:0%" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." id= "ccontent" name = "ccontent"></td>
+						<td><br><br><input type="submit" class="btn-primary pull" id="cmtbtn"value="댓글 작성"></td>
+					</tr>								
+				</table>
+			</form>
+		</div>
+	</div>
+	</c:when>
+	<c:otherwise>
+	<h3 style="position: relative;left: 30%; top: 59%;width: 722px;">댓글 작성은 개인로그인 및 로그인 후 사용이 가능합니다.</h3>
+	</c:otherwise>    
+    </c:choose>
+    <br><br>
+     <%--댓글 리스트 --%>
+            <br><br>            
+            <div id="totalsharing" class="sharingtotal">
+               	<c:forEach var="comment" items="${commentsharing }">
+                	<div style="width:1000px;height:50px;">
+                	<div id="snamelist" name="snamelist" class="listsname">${comment.cname }</div>	
+                	<div id="scontentlist" name="scontentlist" class="listscontent">${comment.ccontent }</div>
+                	<div id="sdatelist" name="sdatelist" class="listsdate">${comment.regdate }</div>
+                	<c:if test="${authUser.sect eq 'users' }">
+                	<c:if test="${authUser.userno eq comment.userno }">
+                		<a href="/modifysharingcmt/${comment.sno}/${comment.cno}"><button id="scmtmodify">수정</button></a>
+                		<input id="scmtdelete" class="deletescmt" onclick="removeSharingcmt(${comment.cno})" type="submit" value="삭제">	                		                
+                	</c:if>
+                	</c:if>
+                	</div>
+                	<input type="hidden" name="cno" id="cno"  value="${comment.cno }">
+               	</c:forEach>
+            </div>       
 <%-- <footer>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
@@ -256,6 +307,29 @@ function removeSharing() {
 	
 }
 
+/* 댓글 삭제 처리 */
+function removeSharingcmt(cmtcno) {
+	var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
+	var sno =  $('#sno').val();
+	var cno =  cmtcno;
+	if(result) {
+		$.ajax({
+			type : "post",
+			url : "/sharingcmtDelete/"+cno,
+			data : {sno:sno,
+					cno:cno},
+			success : function(data) {
+				alert("삭제가 완료되었습니다.");
+				location.href="/sharingView/" + sno;
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
+	}
+	
+}
+
 /* 쪽지 확인 */
 var submitcheck = "<c:out value='${submitcheck}'/>";
 if(submitcheck == "true"){
@@ -267,9 +341,10 @@ if(submitcheck == "true"){
 
 /* 신청하기 */
 $("#wapply").on("click", function() {
+	var apply="";
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
-	let sect = "${sect}";
+	let sect = "${authUser.sect}";
 	if(logincheck == "false") {
 		alert("로그인 후 이용해주세요.");
 		location.href="/login";
@@ -280,22 +355,31 @@ $("#wapply").on("click", function() {
 			url: "/sharingView/wapply",
 			data: {sno:sno},
 			success: function(data) {
+				apply = data;
 				console.log(data);
+				console.log("apply:"+apply);
+				if(apply == "true") {
+					alert("신청완");
+				} else {
+					alert("신청안돼");
+				}
 			}, error: function() {
                 console.log('바보야!')
 			}
 		})
-	var registcheck = "${registcheck}";
-	if(registcheck == "true") {
-		alert("신청완");
-	} else {
-		console.log(registcheck);
-		alert("신청안돼");
-	}
+	
 
-	}
-		
+	}		
 })
+
+//댓글 등록 = 사용자
+   $('#cmtbtn').click(function(){
+		console.log("댓글 등록");
+		var comment = document.getElementById("ccontent");
+		if(comment.value != ''){
+			alert("댓글 등록이 완료되었습니다.");	
+		}
+	});
 </script>
 </body>
 </html>

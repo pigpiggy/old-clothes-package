@@ -121,9 +121,9 @@
 			]]>
 		</select>
 		
-		<select id="sharingstatus" resultType="sharing">
+		<select id="statuscount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
-				select * from sharing
+				select count(*) from sharing where userno=#{userno} and sstatus='등록완료'
 			]]>
 		</select>
 </mapper>

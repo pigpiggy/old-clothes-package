@@ -175,10 +175,12 @@ public class SharingServiceImpl implements SharingService{
 	}
 
 	@Override
-	public List<Sharing> sharingstatus() throws Exception {
+	public Integer statuscount(Integer userno) throws Exception {
 		
-		return sharingDAO.sharingstatus();
+		return sharingDAO.statuscount(userno);
 	}
+
+	
 
 	
 

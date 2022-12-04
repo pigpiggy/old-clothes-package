@@ -53,9 +53,10 @@
 					<div class="date">${free.regdate}</div>
 					<div class="count">${free.freadcount}</div>
 				</div>
+				
 				</c:forEach>						
 			</div>
-			<div class="center">
+			<div class="listview" id="viewlist">
 				<ul class="pagination">
 				<c:choose>
 					<c:when test="${pageInfo.page<=1}">

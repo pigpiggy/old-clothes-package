@@ -66,7 +66,6 @@
     </div>
     <div class="second">
 		  <div class= "myRecord">
-<<<<<<< HEAD
 		  <c:if test="${authUser.sect eq 'users' }">
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : ${statuscount } 건</span>
@@ -140,7 +139,6 @@
   		});
   </script>
    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
-=======
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : 19건</span>
 			  <span>받은 거래후기 : ${reviewcount }개</span>
@@ -201,6 +199,5 @@ var chatuserno = document.getElementById('chatuserno').value;
 		$('#messageAlert').html(result);
 	}
  </script> 
->>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 </body>
 </html>

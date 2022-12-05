@@ -3,28 +3,32 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
 <mapper namespace="com.kosta.clothes.dao.MypageDAO">
-	<select id="getSellList" parameterType="Integer" resultType="Sell">
+	<select id="getSellList" parameterType="map" resultType="Sell">
 		<![CDATA[
-			SELECT * FROM INDIVIDUAL WHERE userno=#{userno} ORDER BY ino DESC
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, i.* FROM INDIVIDUAL i WHERE userno=#{userno})
+			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
 	
 
-	<select id="getSharingList" parameterType="Integer" resultType="Sharing">
+	<select id="getSharingList" parameterType="map" resultType="Sharing">
 		<![CDATA[
-			SELECT * FROM sharing WHERE userno=#{userno} ORDER BY sno DESC
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, s.* FROM sharing s WHERE userno=#{userno})
+			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
 	
 	<select id="getSellapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
+			SELECT u.nickname, w.regdate as joindate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
 		]]>
 	</select>
 	
 	<select id="getSharingapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
+			SELECT u.nickname, w.regdate as joindate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
 		]]>
 	</select>
 
@@ -45,6 +49,20 @@
 	<select id="getMypage" parameterType="Integer" resultType="users">
 		<![CDATA[
 			SELECT * FROM USERS WHERE userno=#{userno}
+
+		]]>
+	</select>
+	
+	<select id="sellListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM individual where userno = #{userno}
+    
+		]]>
+	</select>
+	
+	<select id="sharingListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM sharing where userno = #{userno}
 
 		]]>
 	</select>

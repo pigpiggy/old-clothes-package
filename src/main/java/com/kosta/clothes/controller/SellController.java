@@ -34,6 +34,7 @@ import com.kosta.clothes.service.ApplyService;
 import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
+import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.SellService;
 
 @Controller
@@ -54,6 +55,10 @@ public class SellController {
 	ServletContext servletContext;
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	MypageService mypageService;
+	
 	@Autowired
 	HttpSession session;
 	
@@ -129,6 +134,8 @@ public class SellController {
 					sect = uauthuser.getSect();
 					List<Comments> comment = commentService.selectCommentino(ino);
 					System.out.println("sellcmt" + comment.toString());
+					List<Users> users = mypageService.getSellapplylist(ino);
+					mav.addObject("users",users);
 					mav.addObject("commentsell",comment);
 					mav.setViewName("/sell/sellView");
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){

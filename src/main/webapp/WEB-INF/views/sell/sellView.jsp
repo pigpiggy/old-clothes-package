@@ -158,6 +158,13 @@ function check(){
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
 			        					<input type="button" class="btn btn-info" value="나의옷장" />
+			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
+			        					<ul>
+											<c:forEach var="users" items="${users }">
+												<li>${users.ninkname }</li>
+												<li>${users.joindate }</li>
+											</c:forEach>			        					
+			        					</ul>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>

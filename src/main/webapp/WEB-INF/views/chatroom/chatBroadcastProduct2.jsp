@@ -44,6 +44,7 @@
 								<div class="message">
 									<span class="message__user-name" id="chatRoomSellerName">${chatRoomInfo.sellerName}</span><br>
 									<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+									<i class="fa fa-clock-o"></i>
 									<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
 								</div>
 							</div>

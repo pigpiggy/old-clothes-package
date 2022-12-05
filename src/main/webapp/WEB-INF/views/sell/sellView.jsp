@@ -379,6 +379,7 @@ $("#wapply").on("click", function() {
 				console.log("apply:"+apply);
 				if(apply == "true") {
 					alert("신청이 완료되었습니다.");
+					location.reload(true);
 				} else {
 					alert("신청할 수 없습니다.");
 				}

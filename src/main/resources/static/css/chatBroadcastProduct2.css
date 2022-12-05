@@ -250,6 +250,11 @@
   display: flex;
   align-items: flex-start;
   margin-bottom: 15px;
+  margin: 10px;
+}
+
+.chat-item-me {
+  justify-content: end;
 }
 
 .chat-item__img {
@@ -507,4 +512,4 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}  
+} 

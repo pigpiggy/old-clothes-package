@@ -51,7 +51,7 @@
 		        </a>          
       			<a href="javascript:openDetail('/chatList')">
 					<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
-					<span class="nav__notification nbadge" id="messageAlert"></span>
+						<span class="nav__notification nbadge" id="messageAlert"></span>
 				</a>
 		        <a href="/passcheck">
               	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
@@ -204,6 +204,7 @@ var chatuserno = document.getElementById('chatuserno').value;
 			success: function(result) {
 				if (result >= 1) {
 					showUnread(result);
+					console.log(result);
 				} else {
 					showUnread('');
 				}
@@ -219,6 +220,10 @@ var chatuserno = document.getElementById('chatuserno').value;
 	
 	function showUnread(result) {
 		$('#messageAlert').html(result);
+		if(result < 1) {
+			$("#messageAlert").css('display','none');
+		}else {
+		}
 	}
  </script> 
 </body>

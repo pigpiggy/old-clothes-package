@@ -38,6 +38,7 @@ import com.kosta.clothes.service.ApplyService;
 import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
+import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -57,6 +58,9 @@ public class SharingController {
 	 
 	@Autowired 
 	ApplyService applyService;
+	
+	@Autowired
+	MypageService mypageService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -133,6 +137,8 @@ public class SharingController {
 					uauthuser = (Users) session.getAttribute("authUser");
 					sect = uauthuser.getSect();
 					model.addAttribute("sect", sect);
+					List<Users> users = mypageService.getSharingapplylist(sno);
+					mav.addObject("users",users);
 					//무료나눔 댓글리스트
 					List<Comments> comment = commentService.selectCommentsno(sno);
 					System.out.println("sharingcmt" + comment.toString());

@@ -14,5 +14,6 @@ public interface ApplyDAO {
 	void insertSwapply(Wapply wapply) throws Exception;
 	Wapply getSapply(Map map) throws Exception;
 	void insertIwapply(Wapply wapply) throws Exception;
+	Wapply getIapply(Map map) throws Exception;
 	void insertapply(Apply apply) throws Exception; //업체에 신청한 form 등록
 }

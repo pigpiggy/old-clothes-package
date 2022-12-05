@@ -132,6 +132,7 @@ public class SharingController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					uauthuser = (Users) session.getAttribute("authUser");
 					sect = uauthuser.getSect();
+					model.addAttribute("sect", sect);
 					//무료나눔 댓글리스트
 					List<Comments> comment = commentService.selectCommentsno(sno);
 					System.out.println("sharingcmt" + comment.toString());

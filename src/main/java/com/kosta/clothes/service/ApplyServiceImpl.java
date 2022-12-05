@@ -21,13 +21,19 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 	@Override
-	public void registIwapply(Wapply wapply) throws Exception {
+	public String registIwapply(Wapply wapply) throws Exception {
 		applyDAO.insertIwapply(wapply);
+		return "true";
 	}
 
 	@Override
 	public Wapply selectSwapply(Map map) throws Exception {
 		return applyDAO.getSapply(map);
+	}
+
+	@Override
+	public Wapply selectIwapply(Map map) throws Exception {
+		return applyDAO.getIapply(map);
 	}
 
 

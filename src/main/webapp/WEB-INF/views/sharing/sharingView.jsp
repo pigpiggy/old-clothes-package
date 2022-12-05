@@ -145,7 +145,6 @@ function check(){
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
 			        					<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
-			        					<input type="button" id="chat" class="btn btn-warning" value="채팅" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="나의옷장" /></a>
@@ -359,9 +358,9 @@ $("#wapply").on("click", function() {
 				console.log(data);
 				console.log("apply:"+apply);
 				if(apply == "true") {
-					alert("신청완");
+					alert("신청이 완료되었습니다.");
 				} else {
-					alert("신청안돼");
+					alert("신청할 수 없습니다.");
 				}
 			}, error: function() {
                 console.log('바보야!')

@@ -502,3 +502,16 @@ svg {
 .none {
 	display: none;
 }
+
+#btn_chat {
+    border: 0;
+    background-color: white;
+}
+
+#chaticon_img {
+	margin-right: 5px;
+}
+
+#icons {
+	margin-left: 10px;
+}

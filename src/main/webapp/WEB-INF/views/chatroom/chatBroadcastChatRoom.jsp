@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Web socket STOMP SockJS Example</title>
+<title>채팅하기</title>
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 		<link href="<c:url value="/resources/css/chatBroadcastChatRoom.css"/>" rel='stylesheet' />

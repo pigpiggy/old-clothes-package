@@ -35,6 +35,14 @@
 			values (#{wno},#{wuserno},#{ino})
 		]]>
 	</insert>
+
+	<select id="getIapply" parameterType="map" resultType="Wapply">
+		<![CDATA[
+			select wuserno,ino
+			from wapply
+			where wuserno=#{wuserno} and ino=#{ino}
+		]]>
+	</select>
 	 
 <!-- 개인이 업체에게 수거신청(apply 테이블) -->
 	<insert id="insertapply" parameterType="apply">

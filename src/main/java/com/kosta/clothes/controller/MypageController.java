@@ -335,7 +335,8 @@ public class MypageController {
 	@PostMapping("/mypage")
 	public String introduce(@RequestParam("introduce") String introduce) {
 		String introtext="";
-		try { Business bauthuser = new Business();
+		try { 
+				Business bauthuser = new Business();
 		         Users uauthuser = new Users();
 		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");

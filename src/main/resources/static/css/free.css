@@ -439,11 +439,17 @@ ul.pagination li a.active {
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
+<<<<<<< HEAD
+div.center {
+=======
 
 div#viewlist.listview {	
+>>>>>>> 9cbc836b87c04999b0e806df0d1a8a4a641d77c1
 	text-align: center;
 	margin: 20px;	
 }
+<<<<<<< HEAD
+=======
 
 /*댓글 */
 #cname{
@@ -520,3 +526,4 @@ div#cdatelist.listcdate{
     top: 9px;
     right: 58px;
 }
+>>>>>>> 9cbc836b87c04999b0e806df0d1a8a4a641d77c1

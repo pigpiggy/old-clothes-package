@@ -100,6 +100,7 @@ h2{
 			<div id="map"></div>				
 			<div id="blist"></div>				
 		</div>
+		<!-- 헌옷 수거 신청 모달창 -->
 		<div id="modal">
    
 		    <div class="modal_content">

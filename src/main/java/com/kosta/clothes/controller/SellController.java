@@ -2,6 +2,7 @@ package com.kosta.clothes.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -137,6 +138,7 @@ public class SellController {
 					List<Users> users = mypageService.getSellapplylist(ino);
 					mav.addObject("users",users);
 					mav.addObject("commentsell",comment);
+					model.addAttribute("sect", sect);					
 					mav.setViewName("/sell/sellView");
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					bauthuser = (Business) session.getAttribute("authUser");
@@ -287,11 +289,14 @@ public class SellController {
 			Sell sell = new Sell();
 			sell.setIno(ino);
 			likescheck = likesService.getIlikescheck(likes);
+			System.out.println("sellcontroller1:" + likes);
 			if(likescheck == null) {
 				likesService.registIlikes(likes);
 				sellService.upSellLikes(sell);
+				System.out.println("sellcontroller2:" + likes);
 			}else if(likescheck == 1) {
 				likes.setLikescheck(likesService.getIlikescheck(likes));
+				System.out.println("sellcontroller3:" + likesService.getIlikescheck(likes));
 				likesService.updateIlikes(likes);
 				sellService.downSellLikes(sell);
 			}else {
@@ -338,17 +343,31 @@ public class SellController {
 
 	@ResponseBody
 	@PostMapping("/sellView/wapply")
-	public void sharingWapply(@RequestParam("ino") Integer ino, @ModelAttribute Sell sell) {
+	public String sharingWapply(@RequestParam("ino") Integer ino, @ModelAttribute Sell sell, Model model,
+			@RequestParam(value = "registcheck", required = false) String registcheck) {
 		try {
-			Users users = (Users) session.getAttribute("authUser");
 			Wapply apply = new Wapply();
-			apply.setWuserno(users.getUserno());
 			apply.setIno(ino);
-			applyService.registIwapply(apply);
-			sellService.upApplycount(sell);
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				apply.setWuserno(users.getUserno());
+				map.put("wuserno", apply.getWuserno());
+				map.put("ino", apply.getIno());
+				if(applyService.selectIwapply(map) == null) {
+					registcheck = applyService.registIwapply(apply);
+					sellService.upApplycount(sell);
+					if(registcheck == "true") {
+						model.addAttribute("registcheck", "true");
+					}else {
+						model.addAttribute("registcheck", "false");
+					}
+				}
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return registcheck;
 	}
 	
 	@ResponseBody

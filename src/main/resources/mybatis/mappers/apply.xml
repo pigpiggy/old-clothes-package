@@ -11,8 +11,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into wapply (wno,wuserno,sno)
-			values (wapply_seq.nextval,#{wuserno},#{sno})
+			insert into wapply (wno,wuserno,sno,regdate)
+			values (wapply_seq.nextval,#{wuserno},#{sno},sysdate)
 		]]>
 	</insert>
 	
@@ -31,8 +31,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into wapply (wno,wuserno,ino)
-			values (#{wno},#{wuserno},#{ino})
+			insert into wapply (wno,wuserno,ino,regdate)
+			values (#{wno},#{wuserno},#{ino},sysdate)
 		]]>
 	</insert>
 

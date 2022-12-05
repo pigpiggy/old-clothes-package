@@ -9,7 +9,7 @@ public class Users {
 	private String nickname; //닉네임
 	private String password; //비밀 번호
 	private String phone;//전화 번호
-	private Date joinDate; //날짜
+	private String joinDate; //날짜
 	private String introduce; //마이페이지 소개 수정
 	private String sect; //개인/사업자 구분
 
@@ -50,10 +50,10 @@ public class Users {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
 
@@ -69,7 +69,7 @@ public class Users {
 	}
 	
 	
-	public Users(Integer userno, String userid, String nickname, String password, String phone, Date joinDate,
+	public Users(Integer userno, String userid, String nickname, String password, String phone, String joinDate,
 			String introduce, String sect) {
 		super();
 		this.userno = userno;

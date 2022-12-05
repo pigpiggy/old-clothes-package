@@ -15,13 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.security.Auth;
 import com.kosta.clothes.service.CertificationService;
 import com.kosta.clothes.service.UsersService;
 @Controller
@@ -186,52 +185,66 @@ public class UsersController {
     	System.out.println("referer:"+referer);
     	return "user/loginform";
     }
-    //로그인
-    @PostMapping("/login")
-    public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
-    					@RequestParam(value="password",required = true,defaultValue = "")String password,
-    					Model model,
-    					HttpServletRequest request) {
-    	String url ="redirect:/";
-    	String reurl =(String)request.getSession().getAttribute("redirectURI");
-    	try {
-    		Users authUser=null;
-    		Business bauthUser = null;
-    		String userid = id;
-    		System.out.println("id:"+userid);
-    		System.out.println("password:"+password);
-    		authUser = usersService.login(userid,password);
-    		
-    		System.out.println("너냐11 : " +authUser);
-    		if(authUser == null) { //개인이 아닐 경우
-    			String businessid = id;
-    			String bpassword = password;
-    			System.out.println("bid:"+businessid);
-        		System.out.println("password:"+bpassword);
-        		bauthUser = usersService.blogin(businessid,bpassword);
-    		}
-    		if(authUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
-    			model.addAttribute("result", "fail");
-				return "/user/loginform";
-    		}else if(authUser != null){
-    			session.setAttribute("authUser", authUser);
-    		}else {
-    		session.setAttribute("authUser", bauthUser);
-    		}
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	if(reurl==null) {
-    		return url;
-    	}
-    	return "redirect:"+reurl;
+    //로그인 실패
+    @GetMapping("/loginfail")
+    public String loginfail(Model model) {
+    	model.addAttribute("result", "fail");
+    	return "user/loginform";
     }
+    @PostMapping("/loginaction")
+    public void loginaction() {
+    	
+    }
+    @GetMapping("/logout")
+    public void logout() {
+    	
+    }
+    //로그인
+//    @PostMapping("/login")
+//    public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
+//    					@RequestParam(value="password",required = true,defaultValue = "")String password,
+//    					Model model,
+//    					HttpServletRequest request) {
+//    	String url ="redirect:/";
+//    	String reurl =(String)request.getSession().getAttribute("redirectURI");
+//    	try {
+//    		Users authUser=null;
+//    		Business bauthUser = null;
+//    		String userid = id;
+//    		System.out.println("id:"+userid);
+//    		System.out.println("password:"+password);
+//    		authUser = usersService.login(userid,password);
+//    		
+//    		System.out.println("너냐11 : " +authUser);
+//    		if(authUser == null) { //개인이 아닐 경우
+//    			String businessid = id;
+//    			String bpassword = password;
+//    			System.out.println("bid:"+businessid);
+//        		System.out.println("password:"+bpassword);
+//        		bauthUser = usersService.blogin(businessid,bpassword);
+//    		}
+//    		if(authUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
+//    			model.addAttribute("result", "fail");
+//				return "/user/loginform";
+//    		}else if(authUser != null){
+//    			session.setAttribute("authUser", authUser);
+//    		}else {
+//    		session.setAttribute("authUser", bauthUser);
+//    		}
+//    	}catch(Exception e) {
+//    		e.printStackTrace();
+//    	}
+//    	if(reurl==null) {
+//    		return url;
+//    	}
+//    	return "redirect:"+reurl;
+//    }
   //로그아웃
-  @RequestMapping(value="/logout",method = RequestMethod.GET)
-  public String logout(HttpSession session) {
-	  session.removeAttribute("authUser");
-	  return "redirect:/";
-  }
+//  @RequestMapping(value="/logout",method = RequestMethod.GET)
+//  public String logout(HttpSession session) {
+//	  session.removeAttribute("authUser");
+//	  return "redirect:/";
+//  }
   //아이디찾기창
   @GetMapping("/searchid")
   public String searchId() {
@@ -339,6 +352,7 @@ public class UsersController {
   }
   
   //회원정보 수정 jsp이동
+  @Auth
   @PostMapping("upasscheck")
   public String upasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {
@@ -377,6 +391,7 @@ public class UsersController {
 
 
 //업체 회원정보 수정 jsp이동
+  @Auth
   @PostMapping("bpasscheck")
   public String bpasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {

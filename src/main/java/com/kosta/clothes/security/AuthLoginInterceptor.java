@@ -18,7 +18,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		Users uauthUser=null;
 		Business bauthUser = null;
-		String url = "";
+		String url = "/";
     	String reurl =(String)request.getSession().getAttribute("redirectURI");
     	
     	String id = request.getParameter("id");
@@ -36,7 +36,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     		bauthUser = usersService.blogin(businessid,bpassword);
     	}
 		
-    	HttpSession session = request.getSession(false);
+    	HttpSession session = request.getSession();
     	if(uauthUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
 			response.sendRedirect("/loginfail");
 			return false;
@@ -45,8 +45,18 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		}else {
 		session.setAttribute("authUser", bauthUser);
 		}
-    	response.sendRedirect(reurl);
     	
+    	if("http://localhost:8088/joinform".equals(reurl)) {
+    		response.sendRedirect(url);
+    	}else if("http://localhost:8088/login".equals(reurl)) {
+    		response.sendRedirect(url);
+    	}else if("http://localhost:8088/searchid".equals(reurl)) {
+    		response.sendRedirect(url);
+    	}else if("http://localhost:8088/checkidnphone".equals(reurl)) {
+    		response.sendRedirect(url);
+    	}else {
+    	response.sendRedirect(reurl);
+    	}
     	return false;
 	}
 

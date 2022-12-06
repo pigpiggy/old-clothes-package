@@ -44,6 +44,10 @@ dependencies {
 	implementation 'org.json:json:20160810'
 	// https://mvnrepository.com/artifact/org.springframework/spring-tx
 	implementation 'org.springframework:spring-tx:5.3.22'
+	//비밀번호 암호화
+	// https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+	implementation 'org.mindrot:jbcrypt:0.4'
+	
 
 }
 

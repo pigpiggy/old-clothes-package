@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import lombok.Data;
 
-public @Data class ChatRoom {
+public class ChatRoom {
 
 	private Integer chatno;
 	private Integer ino;
@@ -47,6 +47,126 @@ public @Data class ChatRoom {
 		this.buyerName = buyerName;
 		this.chatReadBuy = chatReadBuy;
 		this.chatReadSell = chatReadSell;
+	}
+
+	public Integer getChatno() {
+		return chatno;
+	}
+
+	public void setChatno(Integer chatno) {
+		this.chatno = chatno;
+	}
+
+	public Integer getIno() {
+		return ino;
+	}
+
+	public void setIno(Integer ino) {
+		this.ino = ino;
+	}
+
+	public Integer getSellerno() {
+		return sellerno;
+	}
+
+	public void setSellerno(Integer sellerno) {
+		this.sellerno = sellerno;
+	}
+
+	public Integer getBuyerno() {
+		return buyerno;
+	}
+
+	public void setBuyerno(Integer buyerno) {
+		this.buyerno = buyerno;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public int getChatReadBuy() {
+		return chatReadBuy;
+	}
+
+	public void setChatReadBuy(int chatReadBuy) {
+		this.chatReadBuy = chatReadBuy;
+	}
+
+	public int getChatReadSell() {
+		return chatReadSell;
+	}
+
+	public void setChatReadSell(int chatReadSell) {
+		this.chatReadSell = chatReadSell;
+	}
+
+	public String getItitle() {
+		return ititle;
+	}
+
+	public void setItitle(String ititle) {
+		this.ititle = ititle;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(String sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+
+	public String getSenderId() {
+		return senderId;
+	}
+
+	public void setSenderId(String senderId) {
+		this.senderId = senderId;
 	}
 	
 	

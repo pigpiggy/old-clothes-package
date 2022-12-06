@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.clothes.bean.Business;
-
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.UsersDAO;
+import com.kosta.clothes.security.EncryptHelper;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
 public class CertificationService implements UsersService {
-
+	@Autowired
+	EncryptHelper encryptHelper;
 	@Autowired
 	UsersDAO usersDao;
 
@@ -98,6 +99,9 @@ public class CertificationService implements UsersService {
 	//회원가입[개인]
 	@Override
 	public void insertUsers(Users users) throws Exception {
+		String password = users.getPassword();
+		String encryptedPw=encryptHelper.encrypt(password);
+		users.setPassword(encryptedPw);
 		System.out.println("users : " + users.toString());
 		usersDao.insertUsers(users);
 	}
@@ -105,6 +109,9 @@ public class CertificationService implements UsersService {
 	//회원가입[업체]
 	@Override
 	public void insertBusiness(Business business) throws Exception {
+		String password = business.getBpassword();
+		String encryptedPw=encryptHelper.encrypt(password);
+		business.setBpassword(encryptedPw);
 		System.out.println("business : " + business.toString());
 		usersDao.insertBusiness(business);
 	}
@@ -112,23 +119,34 @@ public class CertificationService implements UsersService {
 	//로그인[개인]
 		@Override
 		public Users login(String userid, String password) throws Exception {
+			Users uauthUser= null;
 			System.out.println("개인 : " + userid);
 			System.out.println("개인 : " + password);
-			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
-			map.put("userid", userid);
-			map.put("password", password);
-			System.out.println("결과값 : " + map);
-			return usersDao.selectAccount(map);
+			String hashpw = usersDao.checkupass(userid);
+			boolean passcheck = encryptHelper.isMatch(password, hashpw);
+			if(passcheck) {
+				return usersDao.selectAccount(userid);
+			}
+//			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
+//			map.put("userid", userid);
+//			map.put("password", password);
+			return uauthUser;
 		}
 		//로그인[업체]
 		@Override
 		public Business blogin(String businessid, String bpassword) throws Exception {
+			Business bauthUser = null;
 			System.out.println(businessid);
 			System.out.println(bpassword);
-			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
-			map.put("businessid", businessid);
-			map.put("bpassword", bpassword);
-			return usersDao.selectbAccount(map);
+			String hashpw = usersDao.checkbpass(businessid);
+			boolean passcheck = encryptHelper.isMatch(bpassword, hashpw);
+			if(passcheck) {
+				return usersDao.selectbAccount(businessid);
+			}
+//			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
+//			map.put("businessid", businessid);
+//			map.put("bpassword", bpassword);
+			return bauthUser;
 		}
 
 		@Override
@@ -156,49 +174,61 @@ public class CertificationService implements UsersService {
 			map.put("bphone", bphone);
 			return usersDao.checkBusinessIdnPhone(map); //아이디와 전화번호로 업체 체크
 		}
-
+		//비밀번호 변경
 		@Override
 		public void changePass(String userid, String password) throws Exception {
 			System.out.println("userid:"+userid);
 			System.out.println("password:"+password);
+			String encryptedPw=encryptHelper.encrypt(password);
 			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("userid", userid);
-			map.put("password", password);
+			map.put("password", encryptedPw);
 			usersDao.updatepassword(map); //개인비밀번호 변경
 		}
-
+		//비밀번호 변경
 		@Override
 		public void changebPass(String businessid, String bpassword) throws Exception {
 			System.out.println("businessid:"+businessid);
 			System.out.println("bpassword:"+bpassword);
+			String encryptedPw=encryptHelper.encrypt(bpassword);
 			Map<String,String> map = new HashMap<String, String>(); //아이디와 패스워드를 map으로 담았음
 			map.put("businessid", businessid);
-			map.put("bpassword", bpassword);
+			map.put("bpassword", encryptedPw);
 			usersDao.updatebpassword(map); //업체비밀번호 변경
 		}
 
 		//개인비밀번호 확인용
 		@Override
-		public String checkupass(String id) throws Exception {
-			return usersDao.checkupass(id);
+		public boolean checkupass(String id, String pass) throws Exception {
+			String hashpw = usersDao.checkupass(id);
+			boolean passcheck = encryptHelper.isMatch(pass, hashpw);
+			return passcheck;
 		}
 
 		//개인회원정보수정
 		@Override
 		public void modifyuser(Users user) throws Exception {
+			String password = user.getPassword();
+			String encryptedPw=encryptHelper.encrypt(password);
+			user.setPassword(encryptedPw);
 			usersDao.updateuser(user);
 			
 		}	
 
 		//업체비밀번호 확인용
 		@Override
-		public String checkbpass(String id) throws Exception {
-			return usersDao.checkbpass(id);
+		public boolean checkbpass(String id, String pass) throws Exception {
+			String hashpw = usersDao.checkbpass(id);
+			boolean passcheck = encryptHelper.isMatch(pass, hashpw);
+			return passcheck;
 		}
 
-		//개인회원정보수정
+		//업체회원정보수정
 		@Override
 		public void modifybusiness(Business business) throws Exception {
+			String password = business.getBpassword();
+			String encryptedPw=encryptHelper.encrypt(password);
+			business.setBpassword(encryptedPw);
 			usersDao.updatebusiness(business);
 			
 		}
@@ -228,6 +258,18 @@ public class CertificationService implements UsersService {
 			usersDao.deletebfree(bno);
 			usersDao.deletebusiness(bno);
 			
+		}
+
+		//넘버로 개인 모든 정보 가져오기
+		@Override
+		public Users selectuAll(Integer userno) throws Exception {
+			return usersDao.selectuAll(userno);
+		}
+
+		//넘버로 업체 모든 정보 가져오기
+		@Override
+		public Business selectbAll(Integer bno) throws Exception {
+			return usersDao.selectbAll(bno);
 		}
 
 

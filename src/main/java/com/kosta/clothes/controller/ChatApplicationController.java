@@ -74,7 +74,7 @@ public class ChatApplicationController {
 			//chatRoom 객체 Model에 저장해 view로 전달
 			model.addAttribute("chatRoomInfo", chatRoom);
 		
-		return "chatroom/chatBroadcastProduct";
+		return "chatroom/chatBroadcastProduct2";
 	}
 	
 	@MessageMapping("/broadcast")
@@ -121,10 +121,8 @@ public class ChatApplicationController {
 		
 	}
 	
-	
 	@RequestMapping(value="/chatList", method=RequestMethod.GET)
 	public String getChatList(Model model, HttpSession session) {
-
 		 return "chatroom/chatList";
 	}
 	

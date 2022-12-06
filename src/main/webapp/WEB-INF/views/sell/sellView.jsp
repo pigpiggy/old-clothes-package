@@ -20,15 +20,6 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
-<script>
-function check(){
-	var comment = document.getElementById("ccontent");
-	if(comment.value == ''){
-		alert("댓글을 작성해주시기 바랍니다.");
-		return false;
-	}
-}
-</script>
 </head>
 <body>
 <header>
@@ -89,38 +80,52 @@ function check(){
           <span>${sell.iname}</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
-	        		<div class="letterAndHeart">	
-		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+	        		<div class="letterAndHeart" id="icons">
+	        			<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+		          		<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
+		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 	        		</div>
 	        	</c:when>
 	        	<c:otherwise>
 	        		<c:choose>
 	        			<c:when test="${authUser.sect eq 'users' }">
 			        		<c:if test="${authUser.userno ne sell.userno }">
-				          		<div class="letterAndHeart">	
+				          		<div class="letterAndHeart" id="icons">
+										<div class="buy_chat">
+											<form id="chatSubmit_form" action="/chatMessage" method="GET">
+												<a href="javascript:{}" onclick="chatSubmit()">
+													<input type="hidden" name="sellerName" value="${sell.iname}"/>
+													<input type="hidden" name="ino" value="${sell.ino}"/>
+													<input type="hidden" name="sellerno" value="${sell.userno}"/>
+													<input type="hidden" name="ititle" value="${sell.ititle}"/>
+													<button id="btn_chat">
+					          							<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+													</button>
+												</a>
+											</form>
+										</div>				          		
 					          		<a href="#demo-modal">
-					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+					          			<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 					          		</a>
 					          			<c:choose>
 					          				<c:when test="${likes eq 1}">
-					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
 					          				</c:when>
 					          				<c:otherwise>
-					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 			        						</c:otherwise>
 			        					</c:choose>
 			        			</div>
 			        		</c:if>
 	        			</c:when>
 		        		<c:otherwise>
-		        			<div class="letterAndHeart">	
+		        			<div class="letterAndHeart" id="icons">
 				          		<a href="#demo-modal">
-				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+				          			<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 				          		</a>
 		       					<c:if test="${authUser.sect eq 'users' and authUser.userno ne sell.userno}">
-		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
+		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 			          			</c:if>		
 				        	</div>
 		         		</c:otherwise>
@@ -142,22 +147,17 @@ function check(){
 			        				<c:if test="${authUser.userno ne sell.userno }">	
 			        					<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
-										<div class="buy_chat">
-										<form id="chatSubmit_form" action="/chatMessage" method="GET">
-											<a href="javascript:{}" onclick="chatSubmit()">
-												<input type="hidden" name="sellerName" value="${sell.iname}"/>
-												<input type="hidden" name="ino" value="${sell.ino}"/>
-												<input type="hidden" name="sellerno" value="${sell.userno}"/>
-												<input type="hidden" name="ititle" value="${sell.ititle}"/>
-												<button id="btn_chat">
-													채팅으로 거래하기
-												</button>
-											</a>
-										</form>
-										</div>			        			
+			        			
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
 			        					<input type="button" class="btn btn-info" value="나의옷장" />
+			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
+			        					<ul>
+											<c:forEach var="users" items="${users }">
+												<li>${users.nickname }</li>
+												<li>${users.joinDate }</li>
+											</c:forEach>			        					
+			        					</ul>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
@@ -257,6 +257,13 @@ $(function() {
 
 $(function () {
 	//로그인 확인
+	$("#chaticon_img").on("click", function() {
+		var logincheck = "<c:out value='${logincheck}'/>";
+		if(logincheck == "false") {
+			alert("로그인 후 이용해주세요.");
+			location.href="/login";
+		}
+	})	
 	$("#letter_img").on("click", function() {
 		var logincheck = "<c:out value='${logincheck}'/>";
 		if(logincheck == "false") {
@@ -265,6 +272,7 @@ $(function () {
 		}
 	})	
 	$("#heart_img").on("click", function(e) {
+		console.log('들어오니?');
 		var logincheck = "${logincheck}";
 		const ino =  $('#ino').val();
 		if(logincheck == "false") {
@@ -366,8 +374,15 @@ $("#wapply").on("click", function() {
 			url: "/sellView/wapply",
 			data: {ino:ino},
 			success: function(data) {
+				apply = data;
 				console.log(data);
-				alert("신청이 완료되었습니다.");
+				console.log("apply:"+apply);
+				if(apply == "true") {
+					alert("신청이 완료되었습니다.");
+					location.reload(true);
+				} else {
+					alert("신청할 수 없습니다.");
+				}
 			}, error: function() {
                 console.log('바보야!')
 			}
@@ -375,7 +390,6 @@ $("#wapply").on("click", function() {
 	}
 		
 })
-<<<<<<< HEAD
 //댓글 등록 = 사용자
    $('#cmtbtn').click(function(){
 		console.log("댓글 등록");
@@ -384,12 +398,23 @@ $("#wapply").on("click", function() {
 			alert("댓글 등록이 완료되었습니다.");	
 		}
 	});
-=======
 
+function check(){
+	var comment = document.getElementById("ccontent");
+	if(comment.value == ''){
+		alert("댓글을 작성해주시기 바랍니다.");
+		return false;
+	}
+}
+
+/* 채팅신청 */
 function chatSubmit() {
-	document.getElementById('chatSubmit_form').submit();
+	//새 창으로 채팅창 띄우기
+	var w = window.open('', 'newPopup','scrollbars=yes, width=470, height=650');
+	var chatSubmitForm = document.getElementById('chatSubmit_form');
+	chatSubmitForm.target = 'newPopup';
+	chatSubmitForm.submit();
 } 
->>>>>>> 06af56a7f831f14dc696c001e47a16c3aaaf836c
 
 </script>
 

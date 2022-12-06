@@ -15,13 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.security.Auth;
 import com.kosta.clothes.service.CertificationService;
 import com.kosta.clothes.service.UsersService;
 @Controller
@@ -186,52 +185,66 @@ public class UsersController {
     	System.out.println("referer:"+referer);
     	return "user/loginform";
     }
-    //로그인
-    @PostMapping("/login")
-    public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
-    					@RequestParam(value="password",required = true,defaultValue = "")String password,
-    					Model model,
-    					HttpServletRequest request) {
-    	String url ="redirect:/";
-    	String reurl =(String)request.getSession().getAttribute("redirectURI");
-    	try {
-    		Users authUser=null;
-    		Business bauthUser = null;
-    		String userid = id;
-    		System.out.println("id:"+userid);
-    		System.out.println("password:"+password);
-    		authUser = usersService.login(userid,password);
-    		
-    		System.out.println("너냐11 : " +authUser);
-    		if(authUser == null) { //개인이 아닐 경우
-    			String businessid = id;
-    			String bpassword = password;
-    			System.out.println("bid:"+businessid);
-        		System.out.println("password:"+bpassword);
-        		bauthUser = usersService.blogin(businessid,bpassword);
-    		}
-    		if(authUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
-    			model.addAttribute("result", "fail");
-				return "/user/loginform";
-    		}else if(authUser != null){
-    			session.setAttribute("authUser", authUser);
-    		}else {
-    		session.setAttribute("authUser", bauthUser);
-    		}
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	if(reurl==null) {
-    		return url;
-    	}
-    	return "redirect:"+reurl;
+    //로그인 실패
+    @GetMapping("/loginfail")
+    public String loginfail(Model model) {
+    	model.addAttribute("result", "fail");
+    	return "user/loginform";
     }
+    @PostMapping("/loginaction")
+    public void loginaction() {
+    	
+    }
+    @GetMapping("/logout")
+    public void logout() {
+    	
+    }
+    //로그인
+//    @PostMapping("/login")
+//    public String login(@RequestParam(value="id",required = true,defaultValue = "")String id, 
+//    					@RequestParam(value="password",required = true,defaultValue = "")String password,
+//    					Model model,
+//    					HttpServletRequest request) {
+//    	String url ="redirect:/";
+//    	String reurl =(String)request.getSession().getAttribute("redirectURI");
+//    	try {
+//    		Users authUser=null;
+//    		Business bauthUser = null;
+//    		String userid = id;
+//    		System.out.println("id:"+userid);
+//    		System.out.println("password:"+password);
+//    		authUser = usersService.login(userid,password);
+//    		
+//    		System.out.println("너냐11 : " +authUser);
+//    		if(authUser == null) { //개인이 아닐 경우
+//    			String businessid = id;
+//    			String bpassword = password;
+//    			System.out.println("bid:"+businessid);
+//        		System.out.println("password:"+bpassword);
+//        		bauthUser = usersService.blogin(businessid,bpassword);
+//    		}
+//    		if(authUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
+//    			model.addAttribute("result", "fail");
+//				return "/user/loginform";
+//    		}else if(authUser != null){
+//    			session.setAttribute("authUser", authUser);
+//    		}else {
+//    		session.setAttribute("authUser", bauthUser);
+//    		}
+//    	}catch(Exception e) {
+//    		e.printStackTrace();
+//    	}
+//    	if(reurl==null) {
+//    		return url;
+//    	}
+//    	return "redirect:"+reurl;
+//    }
   //로그아웃
-  @RequestMapping(value="/logout",method = RequestMethod.GET)
-  public String logout(HttpSession session) {
-	  session.removeAttribute("authUser");
-	  return "redirect:/";
-  }
+//  @RequestMapping(value="/logout",method = RequestMethod.GET)
+//  public String logout(HttpSession session) {
+//	  session.removeAttribute("authUser");
+//	  return "redirect:/";
+//  }
   //아이디찾기창
   @GetMapping("/searchid")
   public String searchId() {
@@ -339,17 +352,18 @@ public class UsersController {
   }
   
   //회원정보 수정 jsp이동
+  @Auth
   @PostMapping("upasscheck")
   public String upasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {
-		 
 		 Users uauthuser = (Users) session.getAttribute("authUser");
 		 String id = uauthuser.getUserid();
-		 String upass = usersService.checkupass(id);//개인 패스워드 체크
-		 System.out.println("pass" + pass);
-		 System.out.println("upass" + upass);
-		 if(pass.equals(upass)) {			 		
-			 model.addAttribute("Uauthuser", uauthuser);			 
+		 Integer userno= uauthuser.getUserno();
+		 uauthuser = usersService.selectuAll(userno);
+		 uauthuser.setPassword(null);
+		 boolean check = usersService.checkupass(id, pass);
+		 if(check) {
+			 model.addAttribute("Uauthuser", uauthuser);
 		 }else {
 			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
 			 return "user/checkpass";
@@ -377,17 +391,18 @@ public class UsersController {
 
 
 //업체 회원정보 수정 jsp이동
+  @Auth
   @PostMapping("bpasscheck")
   public String bpasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {
-		 
 		 Business bauthuser = (Business) session.getAttribute("authUser");
 		 String id = bauthuser.getBusinessid();
-		 String bpass = usersService.checkbpass(id);//업체 패스워드 체크
-		 System.out.println("pass" + pass);
-		 System.out.println("bpass" + bpass);
-		 if(pass.equals(bpass)) {			 		
-			 model.addAttribute("Bauthuser", bauthuser);			 
+		 Integer bno = bauthuser.getBno();
+		 bauthuser = usersService.selectbAll(bno);
+		 bauthuser.setBpassword(null);
+		 boolean check = usersService.checkbpass(id, pass);//업체 패스워드 체크
+		 if(check) {
+			 model.addAttribute("Bauthuser", bauthuser);
 		 }else {
 			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
 			 return "user/checkpass";

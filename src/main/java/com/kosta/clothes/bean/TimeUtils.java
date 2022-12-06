@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeUtils {
 	
-	private static final String timeFormat = "HH:mm:ss";
+	private static final String timeFormat = "HH:mm yy-MM-dd";
 	
 	public static String getCurrentTimeStamp() {
 		

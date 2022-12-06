@@ -38,7 +38,7 @@
                 	<div class="card" style="border-radius: 15px;">
                     	<div class="card-body p-5">
                     	<h3 class="text-uppercase text-center mb-5">로그인</h3>
-                    		<form action="login" method="post">               			
+                    		<form action="loginaction" method="post">               			
 								<div id=loginform>
 			                        <div class="form-outline mb-4" style="display:flex;">
 				                        <label class="form-label" for="id" style="position:absolute; margin:2.5%;"><img src="image/icons8-user-40.png" style="width:65%; margin-bottom:15%;"></label>

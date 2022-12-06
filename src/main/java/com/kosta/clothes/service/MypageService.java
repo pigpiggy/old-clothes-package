@@ -14,6 +14,8 @@ import com.kosta.clothes.bean.Wapply;
 public interface MypageService {
 	List<Sell> getSellList(Integer userno, int page, PageInfo pageInfo) throws Exception;
 	List<Sharing> getSharingList(Integer userno, int spage, PageInfo spageInfo) throws Exception;
+	List<Sell> getBuySellList(Integer userno, int bspage, PageInfo bspageInfo) throws Exception;
+	List<Sharing> getBuySharingList(Integer userno, int ppage, PageInfo ppageInfo) throws Exception;
 
 	List<Users> getSellapplylist(Integer ino) throws Exception;
 	List<Users> getSharingapplylist(Integer sno) throws Exception;
@@ -26,6 +28,8 @@ public interface MypageService {
 	
 	void cancelDeal(Integer ino) throws Exception;
 	void cancelSharingDeal(Integer sno) throws Exception;
+	void completeDeal(Integer ino) throws Exception;
+	void completeSharingDeal(Integer sno) throws Exception;
 	//
 	Users getMypage(Integer userno) throws Exception;
 }

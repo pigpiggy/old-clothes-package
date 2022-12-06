@@ -175,8 +175,11 @@ public class SellServiceImpl implements SellService{
 	}
 
 	@Override
-	public void alterStatus(Integer ino) throws Exception {
-		sellDAO.alterStatus(ino);
+	public void alterStatus(Integer userno, Integer ino) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("ino", ino);
+		sellDAO.alterStatus(map);
 	}
 	
 }

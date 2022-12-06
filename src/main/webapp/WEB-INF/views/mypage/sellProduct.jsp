@@ -186,6 +186,7 @@
 		
 		$('.complete').click(function(){
 			var index = $(this).parent().index();
+			$(this).attr("disabled", true);
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -209,6 +210,26 @@
 			$.ajax({
 				type : "get",
 				url : "/cancelSharingDeal",
+				data : {sno:sno},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+
+		})
+		
+		$('.complete1').click(function(){
+			var index = $(this).parent().index();
+			$(this).attr("disabled", true);
+			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/completeSharingDeal",
 				data : {sno:sno},
 				success : function(data) {
 					console.log(data);

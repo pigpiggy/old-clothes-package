@@ -28,5 +28,5 @@ public interface SellDAO {
 	void upApplycount(Sell sell) throws Exception;
 	Integer sellcount(Integer userno) throws Exception;
 	Integer statuscount(Integer userno)throws Exception;
-	void alterStatus(Integer ino) throws Exception;
+	void alterStatus(Map map) throws Exception;
 }

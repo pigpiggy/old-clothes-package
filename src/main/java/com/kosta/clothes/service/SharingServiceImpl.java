@@ -181,8 +181,11 @@ public class SharingServiceImpl implements SharingService{
 	}
 
 	@Override
-	public void alterStatus(Integer sno) throws Exception {
-		sharingDAO.alterSharingStatus(sno);
+	public void alterStatus(Integer userno, Integer sno) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("sno", sno);
+		sharingDAO.alterSharingStatus(map);
 	}
 
 	

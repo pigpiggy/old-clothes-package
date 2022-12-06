@@ -120,7 +120,7 @@
 		
 	<update id="alterStatus" parameterType="Integer">
 		<![CDATA[
-			update individual set istatus='거래중'
+			update individual set (istatus, selectedno)=(select '거래중', #{userno} from dual)
 			where ino=#{ino}
 		]]>
 	</update>

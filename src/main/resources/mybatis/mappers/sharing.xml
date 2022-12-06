@@ -129,7 +129,7 @@
 		
 	<update id="alterSharingStatus" parameterType="Integer">
 		<![CDATA[
-			update sharing set sstatus='거래중'
+			update sharing set (sstatus, selectedno)=(select '거래중', #{userno} from dual)
 			where sno=#{sno}
 		]]>
 	</update>

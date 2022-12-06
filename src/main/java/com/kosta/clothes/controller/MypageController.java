@@ -68,9 +68,13 @@ public class MypageController {
 	@GetMapping ("mypage/umypage/{userno}")
 	String umypage(@PathVariable("userno") Integer userno,Model model, 
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
+			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage,
+			@RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
+			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		PageInfo bspageInfo = new PageInfo();
+		PageInfo ppageInfo = new PageInfo();
 		System.out.println("mypage" + userno);
 		try {
 			System.out.println("여기기기기기기");
@@ -78,6 +82,10 @@ public class MypageController {
 			List<Sell> sellList;
 			/* 판매 상품(무료나눔) */
 			List<Sharing> sharingList;
+			/* 구매 상품(개인판매) */
+			List<Sell> buysellList;
+			/* 구매 상품(무료나눔) */
+			List<Sharing> buysharingList;
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 				  Users users1 = (Users) session.getAttribute("authUser");
@@ -109,6 +117,14 @@ public class MypageController {
 				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
 				 model.addAttribute("spageInfo", spageInfo);
 				 model.addAttribute("sharingList", sharingList);
+				 
+				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+				 model.addAttribute("bspageInfo", bspageInfo);
+				 model.addAttribute("buysellList", buysellList);
+				 
+				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 model.addAttribute("ppageInfo", ppageInfo);
+				 model.addAttribute("buysharingList", buysharingList);
 				 
 				 //users 값을 가져온다
 				 Users users = mypageService.getMypage(userno);
@@ -393,7 +409,7 @@ public class MypageController {
 		System.out.println("userno:"+list);
 		try {
 			mypageService.selectSellApply(list,ino);
-			sellService.alterStatus(ino);
+			sellService.alterStatus(list, ino);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -405,7 +421,7 @@ public class MypageController {
 		System.out.println("userno:"+list);
 		try {
 			mypageService.selectSharingApply(list,sno);
-			sharingService.alterStatus(sno);
+			sharingService.alterStatus(list,sno);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -427,6 +443,26 @@ public class MypageController {
 	public void cancelSharingDeal(@RequestParam("sno") Integer sno) {
 		try {
 			mypageService.cancelSharingDeal(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/completeDeal")
+	public void completeDeal(@RequestParam("ino") Integer ino) {
+		try {
+			mypageService.completeDeal(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/completeSharingDeal")
+	public void completeSharingDeal(@RequestParam("sno") Integer sno) {
+		try {
+			mypageService.completeSharingDeal(sno);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

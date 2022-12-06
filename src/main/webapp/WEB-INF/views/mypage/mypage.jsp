@@ -29,7 +29,7 @@
     <div class="title">
  
       <div class="nickname">
-      <input type="hidden" value="${authUser.userno }" id="chatuserno"/>
+      	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>
       <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
      <c:choose>    
 	    	<c:when test="${users.sect eq 'users' }">
@@ -38,8 +38,7 @@
       <c:otherwise>
       				<strong>${business.bname }의 옷장</strong>
       </c:otherwise>
-      </c:choose>
-             
+      </c:choose>            
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">
@@ -63,7 +62,7 @@
 	<div class="self_Introduction">
 		<div class="closetImage">
 			<img src="/image/closet.png" alt="옷장">
-    </div>
+    	</div>
     <div class="second">
 		  <div class= "myRecord">
 		  <c:if test="${authUser.sect eq 'users' }">
@@ -72,27 +71,10 @@
 			  <span>받은 거래후기 : ${reviewcount }개</span>
 		  </c:if>
 		  </div>		
-		  <div class="introduce" id="AAA">				 
-				<img id="setting" src="/image/setting1.png" alt="소개수정" >
-			
-  		</div>
-  	<div class="intro_check">  
-				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
-				</textarea>
-				<button class="intro_btn">확인</button>
-		  </div>
-	</div>
-	
-		
-  </div>
-  <script>
-  		$('.intro_check').css('display','none');
-  		
-	  $('#setting').click(function(){ //설정버튼 클릭했을 때
-	    <div class="introduce" id="introduce">
-	    	<c:if test="${users.userno eq authUser.userno}">			 
-				<img id="setting" src="/image/setting1.png" alt="소개수정" >
-			</c:if>
+		  <div class="introduce" id="introduce">		
+		  		<c:if test="${users.userno eq authUser.userno}">			 
+					<img id="setting" src="/image/setting1.png" alt="소개수정" >
+				</c:if>
 			<c:choose>
 				<c:when test="${users.introduce eq null }">
 					<c:choose>
@@ -116,7 +98,9 @@
 		</div>
   	</div>
   	</div>
+  		  
   <script>
+  		
    	 $('.intro_check').css('display','none');   	 
    	 $('#setting').click(function(){ //설정버튼 클릭했을 때
 			$(this).css('display','none');
@@ -132,13 +116,7 @@
 				url : "/mypage",
 				data : {introduce:introduce},
 				
-				success : function(data) {
-					console.log(data);
-					var text ="";
-					text = data;
-					
-					document.getElementById("AAA").innerHTML = text;
-					$('#setting').css('display','block');
+				success : function(data) {																			
 					var text ="";					
 					text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
 					text += "<p>"+data+"</p>";
@@ -160,18 +138,7 @@
 			$('#setting').css('display','block');			
   		});
   </script>
-   <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
-			  <span>상품등록 : ${totalcount } 개</span>
-			  <span>거래완료 : 19건</span>
-			  <span>받은 거래후기 : ${reviewcount }개</span>
-		  </div>		
-		  <div class="introduce">
-			  <div>안녕하세요 알냥이의 옷장입니다. </div>
-				<img id="setting" src="/image/setting1.png" alt="소개수정">
-		  </div>
-  	</div>
-	</div>
-  </div>
+   
  <script>
  function openDetail(url) {
 		var width = 850;

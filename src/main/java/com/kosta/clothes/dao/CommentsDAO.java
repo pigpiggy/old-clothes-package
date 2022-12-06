@@ -17,7 +17,7 @@ public interface CommentsDAO {
 	List<Comments> selectComments(Integer fno) throws Exception; //댓글 모든 값
 	void CmtDelete(Map<String, Integer> map) throws Exception; //댓글 삭제
 	Comments getCmt(Map<String, Integer> map) throws Exception; //리스트 값 하나만 가져오기
-	void updateCmt(Comments comments) throws Exception; //댓글 수정
+	void updateCmt(Comments comments) throws Exception; //댓글 수정	
 	
 	//무료나눔
 	void insertCommentshar(Comments comments) throws Exception; //업체에 신청한 form 등록

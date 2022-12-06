@@ -19,21 +19,22 @@
 		<div class="chat-header">
 			<h1 class="chat-header__name">${chatRoomInfo.ititle}</h1>
         </div>
-
+		<div class="row">
 				<%--chatHistory와 member가 실시간 입력하는 메시지 출력 --%>
-				<div id="chat-history">
+				
+				<div id="content" class="chat-history">
 					<c:if test="${chatHistory == null}">
 						<span> 메시지를 등록해주세요. </span>
 					</c:if>
 					<c:forEach var="chatRoom" items="${chatHistory}">
 						<c:choose>
-							<c:when test="${chatRoom.senderName eq authUser.getNickname()}">
+							<c:when test="${chatRoom.senderName eq authUser.nickname}">
 								<div class="chat-item chat-item-me">
 									<div class="message">
-										<span class="message__user-name" id="chatRoomSenderName">${chatRoom.senderName}</span><br>
-										<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
-										<i class="fa fa-clock-o"></i>
-										<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
+											<span class="message__user-name" id="chatRoomSenderName">${chatRoom.senderName}</span><br>
+											<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+											<i class="fa fa-clock-o"></i>
+											<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
 									</div>
 									<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar">
 								</div>
@@ -42,7 +43,7 @@
 							<div class="chat-item chat-item-other">
 								<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/matthew.png" alt="avatar">
 								<div class="message">
-									<span class="message__user-name" id="chatRoomSellerName">${chatRoomInfo.sellerName}</span><br>
+									<span class="message__user-name" id="chatRoomSenderName">${chatRoom.senderName}</span><br>
 									<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
 									<i class="fa fa-clock-o"></i>
 									<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
@@ -51,9 +52,11 @@
 						</c:otherwise>
 						</c:choose>
 					</c:forEach>
+				</div>
 				<%--메시지 입력창과 보내기 버튼 --%>
-					<div class="chat-controls" id="sendMessage">
-						<input type="text" placeholder="Message" id="message" class="form_control"/>
+				<div class="row_3">
+					<div class="input_group chat-controls" id="sendMessage">
+						<input type="text" class="chat-controls__textarea" id="message" placeholder="message" />
 						<div class="input_group_append">
 							<button id="send" class="chat-controls-buttons__send" onclick="send()">보내기</button>
 							<input type="hidden" value="${authUser.getNickname()}" id="buyerName"/>
@@ -63,8 +66,9 @@
 							<input type="hidden" value="${chatRoomInfo.sellerName}" id="sellerName"/>						
 							<input type="hidden" value="${chatRoomInfo.chatno}" id="chatno"/>						
 						</div>					
-					</div>				
-			</div>
+					</div>
+				</div>					
+		</div>	
 	</div>
 	
 	<%-- STOMP와 sockjs webjars import --%>
@@ -126,9 +130,11 @@
 			var content = $('#message').val();
 			sendBroadcast({
 				'chatno': chatno,
-				'buyerName': buyerName, 'content': content,
+				'buyerName': buyerName, 
+				'content': content,
 				'sellerName': sellerName,
-				'buyerno': buyerno, 'sellerno': sellerno,
+				'buyerno': buyerno, 
+				'sellerno': sellerno,
 				'ino': ino,
 				'senderName': senderName,
 				'senderId': buyerno
@@ -153,22 +159,37 @@
 		function createTextNode(messageObj) {
 			console.log("createTextNode");
 			console.log("messageObj: " + messageObj.content);
-            return '<p><div class="row alert alert-info"><div class="col_8">' +
-            messageObj.senderName +
-            '</div><div class="col_4 text-right">' +
-            messageObj.content+
-            '</div><div>[' +
-            messageObj.sendTime +
-            ']</div></p>';
+			console.log("buyername:" + buyerName);
+			console.log("sellername:" + sellerName);
+			console.log("senderName:" + senderName);
+			if(messageObj.senderName==sellerName) {
+				return '<div class="chat-item chat-item-other"><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/matthew.png">'+
+	            '<div class="message"><span class="message__user-name" id="chatRoomSellerName">'+ 
+	            messageObj.senderName + 
+	            '</span><br><span class="message__text" id="chatRoomContent">' + 
+	            messageObj.content+
+	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            messageObj.sendTime +
+				'</span><br></div></div>';
+			} else{
+				return '<div class="chat-item chat-item-me"><div class="message"><span class="message__user-name" id="chatRoomSenderName">' +
+	            messageObj.senderName +
+	            '</span><br><span class="message__text" id="chatRoomContent">' +
+	            messageObj.content+
+	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            messageObj.sendTime +
+	            ']</span><br></div><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar"></div>';
+			}
         }
 		
 		<%-- HTML 형태의 메시지를 화면에 출력해줌 --%>
 		<%-- 해당되는 id 태그의 모든 하위 내용들을 message가 추가된 내용으로 갱신해줌 --%>
 		function showBroadcastMessage(message) {
-            $("#content").html($("#content").html() + message);
+			$("#content").html($("#content").html() + message);
         }
 		
 
+		
 		<%-- 읽음처리 --%>
 		function ajaxChatRead() {
 

@@ -205,7 +205,9 @@ var chatuserno = document.getElementById('chatuserno').value;
 				if (result >= 1) {
 					showUnread(result);
 					console.log(result);
+					$("#messageAlert").show();
 				} else {
+					$("#messageAlert").css('display','none');
 					showUnread('');
 				}
 			}
@@ -220,10 +222,10 @@ var chatuserno = document.getElementById('chatuserno').value;
 	
 	function showUnread(result) {
 		$('#messageAlert').html(result);
-		if(result < 1) {
+		/*if(result < 1) {
 			$("#messageAlert").css('display','none');
 		}else {
-		}
+		}*/
 	}
  </script> 
 </body>

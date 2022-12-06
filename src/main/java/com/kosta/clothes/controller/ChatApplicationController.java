@@ -152,7 +152,7 @@ public class ChatApplicationController {
 		model.addAttribute("ititle", ititle);
 		model.addAttribute("buyername", buyername);
 		model.addAttribute("sellername", sellername);
-		return "chatroom/chatBroadcastChatRoom";
+		return "chatroom/chatBroadcastChatRoom2";
 	}
 	
 	

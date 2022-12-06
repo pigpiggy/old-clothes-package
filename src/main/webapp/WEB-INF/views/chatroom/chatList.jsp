@@ -6,15 +6,14 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <head>
 <title>ChatList</title>
 <link href="<c:url value="/resources/css/chatList.css"/>" rel='stylesheet' />
 
 </head>
 <body>
-	<div>
-		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
-	</div>	
+	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>	
 	<div class="wrapper">
 	
 	</div>
@@ -24,7 +23,9 @@
 	 //home.jsp에 있는 email 정보를 받아줌
 	 	var chatuserno = document.getElementById('chatuserno').value;
 	 //html(JSP)파일이 로드되면 바로 initialize() 메서드를 실행시킴
-		$(document).ready(initialize());
+		$(document).ready(function (){
+			initialize();
+		})
 		
 		function initialize() {
 			getChatList();

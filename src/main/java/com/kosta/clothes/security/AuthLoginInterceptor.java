@@ -54,6 +54,8 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     		response.sendRedirect(url);
     	}else if("http://localhost:8088/checkidnphone".equals(reurl)) {
     		response.sendRedirect(url);
+    	}else if(reurl==null) {
+    		response.sendRedirect(url);
     	}else {
     	response.sendRedirect(reurl);
     	}

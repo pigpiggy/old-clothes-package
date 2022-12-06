@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>나의 옷장</title>
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 <script>
 	var auth = "${authUser.userno}";
 	var aa = "${users.userno}";
@@ -43,18 +43,18 @@
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">
-      			<a href="javascript:openDetail('/chatList')">
-							<span>채팅</span>
-							<span id="messageAlert"></span><br>
-				</a>
 		        <a href="#">
-			      <img id="like" src="/image/redheart.png" alt="찜">
+			      <img id="like" src="/image/redheart.png" alt="찜" title="나의 찜목록">
 		        </a>          
 		        <a href="/mypage/message">
-			      <img id="letter" src="/image/letter.png" alt="쪽지">
+			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>          
+      			<a href="javascript:openDetail('/chatList')">
+					<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+						<span class="nav__notification nbadge" id="messageAlert"></span>
+				</a>
 		        <a href="/passcheck">
-              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정">
+              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
 		        </a>
         </div>
       </div>        	    
@@ -204,6 +204,7 @@ var chatuserno = document.getElementById('chatuserno').value;
 			success: function(result) {
 				if (result >= 1) {
 					showUnread(result);
+					console.log(result);
 				} else {
 					showUnread('');
 				}
@@ -219,6 +220,10 @@ var chatuserno = document.getElementById('chatuserno').value;
 	
 	function showUnread(result) {
 		$('#messageAlert').html(result);
+		if(result < 1) {
+			$("#messageAlert").css('display','none');
+		}else {
+		}
 	}
  </script> 
 </body>

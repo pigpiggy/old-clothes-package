@@ -66,7 +66,11 @@ public class MypageController {
 	
 
 	@GetMapping ("mypage/umypage/{userno}")
-	String umypage(@PathVariable("userno") Integer userno,Model model) {
+	String umypage(@PathVariable("userno") Integer userno,Model model, 
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
+		PageInfo pageInfo = new PageInfo();
+		PageInfo spageInfo = new PageInfo();
 		System.out.println("mypage" + userno);
 		try {
 			System.out.println("여기기기기기기");
@@ -98,10 +102,12 @@ public class MypageController {
 				 System.out.println("statuscount:"+statuscount);
 				 model.addAttribute("statuscount",statuscount);
 				 
-				 sellList = mypageService.getSellList(userno);
+				 sellList = mypageService.getSellList(userno,page,pageInfo);
+				 model.addAttribute("pageInfo", pageInfo);
 				 model.addAttribute("sellList", sellList);
 				 System.out.println("sellList:"+sellList);
-				 sharingList = mypageService.getSharingList(userno);
+				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				 model.addAttribute("spageInfo", spageInfo);
 				 model.addAttribute("sharingList", sharingList);
 				 
 				 //users 값을 가져온다
@@ -129,10 +135,12 @@ public class MypageController {
 					 System.out.println("statuscount:"+statuscount);
 					 model.addAttribute("statuscount",statuscount);
 					 
-					 sellList = mypageService.getSellList(userno);
+					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					 model.addAttribute("pageInfo", pageInfo);
 					 model.addAttribute("sellList", sellList);
 					 System.out.println("sellList:"+sellList);
-					 sharingList = mypageService.getSharingList(userno);
+					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					 model.addAttribute("spageInfo", spageInfo);
 					 model.addAttribute("sharingList", sharingList);
 					 
 					 //users 값을 가져온다
@@ -163,10 +171,12 @@ public class MypageController {
 				System.out.println("statuscount:"+statuscount);
 				model.addAttribute("statuscount",statuscount);
 				 
-				 sellList = mypageService.getSellList(userno);
+				 sellList = mypageService.getSellList(userno,page,pageInfo);
+				 model.addAttribute("pageInfo", pageInfo);
 				 model.addAttribute("sellList", sellList);
 				 System.out.println("sellList:"+sellList);
-				 sharingList = mypageService.getSharingList(userno);
+				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				 model.addAttribute("spageInfo", spageInfo);
 				 model.addAttribute("sharingList", sharingList);
 				 
 				 //users 값을 가져온다

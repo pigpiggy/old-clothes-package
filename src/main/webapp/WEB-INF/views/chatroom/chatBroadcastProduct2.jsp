@@ -7,36 +7,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <title>채팅하기</title>
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<link href="<c:url value="/resources/css/chatBroadcastProduct.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/resources/css/chatBroadcastProduct2.css"/>" rel='stylesheet' />
 	
-	
-
 </head>
 <body>
 	<div class="container">
-		<div class="title_text">
-			<h2>${chatRoomInfo.ititle}</h2>
-		</div>
-		<div class="row">	
+		<div class="chat-header">
+			<h1 class="chat-header__name">${chatRoomInfo.ititle}</h1>
+        </div>
+
 				<%--chatHistory와 member가 실시간 입력하는 메시지 출력 --%>
-				<div id="content">
+				<div id="chat-history">
+					<c:if test="${chatHistory == null}">
+						<span> 메시지를 등록해주세요. </span>
+					</c:if>
 					<c:forEach var="chatRoom" items="${chatHistory}">
-						<p>
-							<span id="chatRoomSenderName">${chatRoom.senderName}</span><br>
-							<span id="chatRoomContent">${chatRoom.content}</span><br>
-							<span id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
-						</p>	
+						<c:choose>
+							<c:when test="${chatRoom.senderName eq authUser.getNickname()}">
+								<div class="chat-item chat-item-me">
+									<div class="message">
+										<span class="message__user-name" id="chatRoomSenderName">${chatRoom.senderName}</span><br>
+										<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+										<i class="fa fa-clock-o"></i>
+										<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
+									</div>
+									<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar">
+								</div>
+							</c:when>
+						<c:otherwise>		
+							<div class="chat-item chat-item-other">
+								<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/matthew.png" alt="avatar">
+								<div class="message">
+									<span class="message__user-name" id="chatRoomSellerName">${chatRoomInfo.sellerName}</span><br>
+									<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+									<i class="fa fa-clock-o"></i>
+									<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
+								</div>
+							</div>
+						</c:otherwise>
+						</c:choose>
 					</c:forEach>
-				</div>
 				<%--메시지 입력창과 보내기 버튼 --%>
-				<div class="row_3">
-					<div class="input_group" id="sendMessage">
+					<div class="chat-controls" id="sendMessage">
 						<input type="text" placeholder="Message" id="message" class="form_control"/>
 						<div class="input_group_append">
-							<button id="send" class="btn btn-primary" onclick="send()">보내기</button>
+							<button id="send" class="chat-controls-buttons__send" onclick="send()">보내기</button>
 							<input type="hidden" value="${authUser.getNickname()}" id="buyerName"/>
 							<input type="hidden" value="${authUser.getUserno()}" id="buyerno"/>
 							<input type="hidden" value="${chatRoomInfo.ino}" id="ino"/>
@@ -45,7 +64,6 @@
 							<input type="hidden" value="${chatRoomInfo.chatno}" id="chatno"/>						
 						</div>					
 					</div>				
-				</div>
 			</div>
 	</div>
 	

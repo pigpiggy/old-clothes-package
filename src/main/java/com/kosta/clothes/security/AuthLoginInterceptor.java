@@ -35,6 +35,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     		System.out.println("password:"+bpassword);
     		bauthUser = usersService.blogin(businessid,bpassword);
     	}
+		
     	HttpSession session = request.getSession(false);
     	if(uauthUser == null && bauthUser==null) { //개인 업체 둘 다 아닐 경우
 			response.sendRedirect("/loginfail");

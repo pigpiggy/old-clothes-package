@@ -129,27 +129,27 @@
     
     <ul class="pagination">
 		<c:choose>
-			<c:when test="${pageInfo.page<=1}">
+			<c:when test="${spageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="freeList?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
 			<c:choose>
-				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?page=${i}">${i }</a></li>
+					<li><a href="freeList?spage=${i}">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+			<c:when test="${spageInfo.page>=spageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+				<li><a href="freeList?spage=${spageInfo.page+1}" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

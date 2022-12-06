@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.security.Auth;
-import com.kosta.clothes.security.AuthUser;
 import com.kosta.clothes.service.CertificationService;
 import com.kosta.clothes.service.UsersService;
 @Controller

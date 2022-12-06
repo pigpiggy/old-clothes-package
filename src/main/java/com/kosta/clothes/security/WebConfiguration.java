@@ -42,5 +42,10 @@ public class WebConfiguration implements WebMvcConfigurer{
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(new AuthUserHandlerMethodArgumentResolver());
 	}
+	
+	@Bean
+	public EncryptHelper encryptConfigure() {
+		return new BCryptImpl();
+	}
 
 }

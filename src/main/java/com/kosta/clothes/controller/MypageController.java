@@ -340,6 +340,7 @@ public class MypageController {
 		}
 		return "/mypage/review";
 	}
+
 	//마이페이지 자기소개란 수정
 	@ResponseBody
 	@PostMapping("/mypage")

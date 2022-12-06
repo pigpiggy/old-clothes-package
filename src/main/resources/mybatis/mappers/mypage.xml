@@ -22,13 +22,13 @@
 	
 	<select id="getSellapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
+			SELECT u.nickname, w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
 		]]>
 	</select>
 	
 	<select id="getSharingapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
+			SELECT u.nickname,  w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
 		]]>
 	</select>
 
@@ -66,4 +66,34 @@
 
 		]]>
 	</select>
+	
+	<delete id="selectSellApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where ino = #{ino} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<delete id="selectSharingApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where sno = #{sno} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<update id="cancelDeal" parameterType="Integer">
+		<![CDATA[
+			update individual set istatus='거래 실패'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="cancelSharingDeal" parameterType="Integer">
+		<![CDATA[
+			update sharing set sstatus='거래 실패'
+			where sno=#{sno}
+		]]>
+	</update>
 </mapper>	

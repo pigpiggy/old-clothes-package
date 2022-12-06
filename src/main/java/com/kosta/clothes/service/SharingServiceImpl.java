@@ -180,6 +180,11 @@ public class SharingServiceImpl implements SharingService{
 		return sharingDAO.statuscount(userno);
 	}
 
+	@Override
+	public void alterStatus(Integer sno) throws Exception {
+		sharingDAO.alterSharingStatus(sno);
+	}
+
 	
 
 	

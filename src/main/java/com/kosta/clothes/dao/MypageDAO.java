@@ -29,5 +29,11 @@ public interface MypageDAO {
 	
 	Integer sellListCount(Integer userno) throws Exception;
 	Integer sharingListCount(Integer userno) throws Exception;
+	
+	void selectSellApply(Map map) throws Exception;
+	void selectSharingApply(Map map) throws Exception;
+	void cancelDeal(Integer ino) throws Exception;
+	void cancelSharingDeal(Integer sno) throws Exception;
+
 }
 

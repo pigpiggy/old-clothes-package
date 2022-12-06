@@ -117,4 +117,11 @@
 				select count(*) from individual where userno=#{userno} and istatus='등록완료'
 			]]>
 		</select>
+		
+	<update id="alterStatus" parameterType="Integer">
+		<![CDATA[
+			update individual set istatus='거래중'
+			where ino=#{ino}
+		]]>
+	</update>
 </mapper>	

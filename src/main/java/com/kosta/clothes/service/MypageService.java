@@ -18,11 +18,14 @@ public interface MypageService {
 	List<Users> getSellapplylist(Integer ino) throws Exception;
 	List<Users> getSharingapplylist(Integer sno) throws Exception;
 
-
+	void selectSellApply(Integer userno, Integer ino) throws Exception;
+	void selectSharingApply(Integer userno, Integer sno) throws Exception;
 
 	String uintroduce(String introduce,Integer userno) throws Exception;
 	String bintroduce(String introduce, Integer bno) throws Exception;
-
+	
+	void cancelDeal(Integer ino) throws Exception;
+	void cancelSharingDeal(Integer sno) throws Exception;
 	//
 	Users getMypage(Integer userno) throws Exception;
 }

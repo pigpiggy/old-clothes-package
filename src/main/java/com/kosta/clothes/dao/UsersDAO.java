@@ -20,8 +20,8 @@ public interface UsersDAO {
 	Users selectuserid(String checkuserid) throws Exception;//아이디 중복확인[개인]
 	Business selectbusinessid(String businessidCheck) throws Exception;//아이디 중복확인[업체]
 
-	Users selectAccount(Map<String, String> map) throws Exception;//로그인[개인]
-	Business selectbAccount(Map<String, String> map) throws Exception;//로그인[업체]
+	Users selectAccount(String userid) throws Exception;//로그인[개인]
+	Business selectbAccount(String businessid) throws Exception;//로그인[업체]
 	
 	List<String> findUserId(String phone) throws Exception;//아이디 조회[개인]
 	List<String> findBusinessId(String bphone) throws Exception;//아이디 조회[업체]
@@ -61,5 +61,8 @@ public interface UsersDAO {
 	void deletebapply(Integer bno) throws Exception;//업체 회원 탈퇴(apply)
 	void deletebfree(Integer bno) throws Exception;//업체 회원 탈퇴(free)
 	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴(business)
+	
+	Users selectuAll(Integer userno) throws Exception;//userno로 모든 정보 가져오기
+	Business selectbAll(Integer bno) throws Exception;//bno로 모든 정보 가져오기
 
 }

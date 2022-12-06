@@ -340,6 +340,7 @@ public class MypageController {
 		}
 		return "/mypage/review";
 	}
+
 	//마이페이지 자기소개란 수정
 	@ResponseBody
 	@PostMapping("/mypage")
@@ -385,5 +386,49 @@ public class MypageController {
 			e.printStackTrace();
 		}
 		return sharingapplylist;
+	}
+	
+	@GetMapping("/selectSellApply")
+	public String selectSellApply(@RequestParam("list") Integer list, @RequestParam("ino") Integer ino) {
+		System.out.println("userno:"+list);
+		try {
+			mypageService.selectSellApply(list,ino);
+			sellService.alterStatus(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/sellView/"+ino;
+	}
+	
+	@GetMapping("/selectSharingApply")
+	public String selectSharingApply(@RequestParam("list") Integer list, @RequestParam("sno") Integer sno) {
+		System.out.println("userno:"+list);
+		try {
+			mypageService.selectSharingApply(list,sno);
+			sharingService.alterStatus(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/sharingView/"+sno;
+	}
+	
+	@ResponseBody
+	@GetMapping("/cancelDeal")
+	public void cancelDeal(@RequestParam("ino") Integer ino) {
+		try {
+			mypageService.cancelDeal(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/cancelSharingDeal")
+	public void cancelSharingDeal(@RequestParam("sno") Integer sno) {
+		try {
+			mypageService.cancelSharingDeal(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

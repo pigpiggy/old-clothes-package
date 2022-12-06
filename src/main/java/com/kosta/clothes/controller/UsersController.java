@@ -356,14 +356,14 @@ public class UsersController {
   @PostMapping("upasscheck")
   public String upasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {
-		 
 		 Users uauthuser = (Users) session.getAttribute("authUser");
 		 String id = uauthuser.getUserid();
-		 String upass = usersService.checkupass(id);//개인 패스워드 체크
-		 System.out.println("pass" + pass);
-		 System.out.println("upass" + upass);
-		 if(pass.equals(upass)) {			 		
-			 model.addAttribute("Uauthuser", uauthuser);			 
+		 Integer userno= uauthuser.getUserno();
+		 uauthuser = usersService.selectuAll(userno);
+		 uauthuser.setPassword(null);
+		 boolean check = usersService.checkupass(id, pass);
+		 if(check) {
+			 model.addAttribute("Uauthuser", uauthuser);
 		 }else {
 			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
 			 return "user/checkpass";
@@ -395,14 +395,14 @@ public class UsersController {
   @PostMapping("bpasscheck")
   public String bpasscheck(@RequestParam("pass") String pass ,Model model){
 	 try {
-		 
 		 Business bauthuser = (Business) session.getAttribute("authUser");
 		 String id = bauthuser.getBusinessid();
-		 String bpass = usersService.checkbpass(id);//업체 패스워드 체크
-		 System.out.println("pass" + pass);
-		 System.out.println("bpass" + bpass);
-		 if(pass.equals(bpass)) {			 		
-			 model.addAttribute("Bauthuser", bauthuser);			 
+		 Integer bno = bauthuser.getBno();
+		 bauthuser = usersService.selectbAll(bno);
+		 bauthuser.setBpassword(null);
+		 boolean check = usersService.checkbpass(id, pass);//업체 패스워드 체크
+		 if(check) {
+			 model.addAttribute("Bauthuser", bauthuser);
 		 }else {
 			 model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
 			 return "user/checkpass";

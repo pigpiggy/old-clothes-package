@@ -149,12 +149,16 @@ function check(){
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="나의옷장" /></a>
 			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
-			        					<ul>
-											<c:forEach var="users" items="${users }">
-												<li>${users.nickname }</li>
-												<li>${users.joinDate }</li>
-											</c:forEach>			        					
-			        					</ul>
+			        					<form action="/selectSharingApply" method="get">
+				        					<ul>
+												<c:forEach var="users" items="${users }">
+													<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
+													<li>${users.joinDate }</li>
+												</c:forEach>			        					
+				        					</ul>
+				        					<input type="hidden" name="sno" value="${sharing.sno }">
+				        					<input type="submit" value="확인"/>
+				        				</form>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>

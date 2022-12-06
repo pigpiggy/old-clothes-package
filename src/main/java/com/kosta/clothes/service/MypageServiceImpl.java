@@ -110,4 +110,35 @@ public class MypageServiceImpl implements MypageService {
 
 	}
 
+
+	@Override
+	public void selectSellApply(Integer userno, Integer ino) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("ino", ino);
+		mypageDAO.selectSellApply(map);
+		
+	}
+
+
+	@Override
+	public void selectSharingApply(Integer userno, Integer sno) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("sno", sno);
+		mypageDAO.selectSharingApply(map);
+	}
+
+
+	@Override
+	public void cancelDeal(Integer ino) throws Exception {
+		mypageDAO.cancelDeal(ino);
+	}
+
+
+	@Override
+	public void cancelSharingDeal(Integer sno) throws Exception {
+		mypageDAO.cancelSharingDeal(sno);
+	}
+
 }

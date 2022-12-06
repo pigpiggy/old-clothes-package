@@ -38,7 +38,7 @@
      <a href="sellView/${sell.ino}">
 	     <div class="card" data-sno=${sell.ino }>
 	          <div class="card-image">
-	          	<c:if test="${!'등록완료' eq sell.istatus}">
+	          	<c:if test="${'등록완료' != sell.istatus}">
 	          		<div class="individualStatus">${sell.istatus }</div>
 	          	</c:if>
 	          	<c:choose>

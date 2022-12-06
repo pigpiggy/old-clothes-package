@@ -173,5 +173,10 @@ public class SellServiceImpl implements SellService{
 		
 		return sellDAO.statuscount(userno);
 	}
+
+	@Override
+	public void alterStatus(Integer ino) throws Exception {
+		sellDAO.alterStatus(ino);
+	}
 	
 }

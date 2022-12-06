@@ -89,6 +89,10 @@
   		$('.intro_check').css('display','none');
   		
 	  $('#setting').click(function(){ //설정버튼 클릭했을 때
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
 	    <div class="introduce" id="introduce">
 	    	<c:if test="${users.userno eq authUser.userno}">			 
 				<img id="setting" src="/image/setting1.png" alt="소개수정" >
@@ -134,11 +138,19 @@
 				
 				success : function(data) {
 					console.log(data);
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
 					var text ="";
 					text = data;
 					
 					document.getElementById("AAA").innerHTML = text;
 					$('#setting').css('display','block');
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
 					var text ="";					
 					text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
 					text += "<p>"+data+"</p>";
@@ -161,17 +173,16 @@
   		});
   </script>
    <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+<<<<<<< HEAD
+
+			
+=======
 			  <span>상품등록 : ${totalcount } 개</span>
 			  <span>거래완료 : 19건</span>
 			  <span>받은 거래후기 : ${reviewcount }개</span>
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
 		  </div>		
-		  <div class="introduce">
-			  <div>안녕하세요 알냥이의 옷장입니다. </div>
-				<img id="setting" src="/image/setting1.png" alt="소개수정">
-		  </div>
-  	</div>
-	</div>
-  </div>
+		 
  <script>
  function openDetail(url) {
 		var width = 850;

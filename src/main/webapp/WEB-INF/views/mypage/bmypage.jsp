@@ -6,45 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
+
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div class="my_Tab">
 			<ul class="tabs">
-				<li class="on"><a href ="#a">신청 목록</a></li>
-				<div class="modal">
-            <ul>
-                <li class="item">
-                    <div class="title">
-                        <strong>[ 헌옷 수거 신청 ]</strong>
-                    </div>
-                    <div class="allapply">
-                        <form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
-                    <div class="cont">
-                        <input type="text" id="aname" name="aname" placeholder="이름">
-                        <div class="adre">
-                            <input type="text" id="aadress" name="aadress" placeholder="주소(동 까지만 입력)">
-                        </div>
-                        <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력)">
-                        <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜">
-                        <div class="wei">
-                            <input type="text" id="weight" name="weight" placeholder="옷 무게">
-                            <p>kg</p>
-                        </div>
-                    </div>
-                    <div class="btn">
-                        <button type="button" id="modal_close_btn">수거거절</button>
-                        <button type="submit" form="form" id="applycloth">수거대기</button>
-                     </div>
-                     <input type="hidden" id="bno" name="bno" value="">
-                     </form>
-                     </div>
-                </li>
-            </ul>
-        </div>
+				<li class="on"><a href ="#a">신청 목록</a></li>				
 				<li><a href ="#b">거래 후기</a></li>
 			</ul>
-			<div class="tab_con on">신청 목록 띄워주세요!</div>
+			<div class="tab_con on"> 
+			<div class="applyList">
+        <ul>
+            <li class="item">
+            <strong>[ 헌옷 수거 신청 ]</strong>
+                <div class="title">
+                </div>                  
+                
+                <div class="allapply">
+                    <div class="cont">
+                        <div class="aname"><p>김갑동</p></div>
+                        <div class="aphone"><p>01033334444</p></div>                        
+                         <div class="aadress"><p>서울특별시 금청구 가산동</p></div>
+                         <div class="apickup"><p>2022-12-07 11:00pm</p></div>                                          
+                        <div class="wei">
+                            <div class="weight"><p>25</p></div>                        
+                        <p>kg</p>
+                        </div>
+                     </div>
+                    <div class="btn">
+                        <button type="button" id="apply_close_btn">수거거절</button>
+                        <button type="submit" form="form" id="applying">수거대기</button>
+                    </div>                   
+                 </div>
+            </li>
+        </ul>
+    </div>
+    </div>
 			<div class="tab_con">
 				<div>
 					<c:import url='/WEB-INF/views/mypage/review.jsp' />

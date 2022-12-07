@@ -36,6 +36,11 @@ public class ApplyServiceImpl implements ApplyService{
 		return applyDAO.getIapply(map);
 	}
 
+	@Override
+	public Integer applycount(Integer bno) throws Exception {
+		return  applyDAO.applycount(bno);
+	}
+
 
 
 }

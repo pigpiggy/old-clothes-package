@@ -25,7 +25,7 @@ import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
-import com.kosta.clothes.bean.Wapply;
+import com.kosta.clothes.service.ApplyService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
@@ -45,6 +45,8 @@ public class MypageController {
 	ReviewService reviewService;
 	@Autowired
 	MypageService mypageService;
+	@Autowired
+	ApplyService applyService;
 	
 	@Autowired
 	HttpSession session;
@@ -56,9 +58,42 @@ public class MypageController {
 	String main(@PathVariable("bno") Integer bno,Model model) {
 		System.out.println("bmypage" + bno);
 		try {
-			Business business = messageService.mypageBusiness(bno);
-			System.out.println("business mypage" +  business.toString());
-			model.addAttribute("business",business);
+			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
+	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+	                 System.out.println("bmypage 사용자");
+	                 Business business = messageService.mypageBusiness(bno);
+	                  System.out.println("business mypage" +  business.toString());         
+	                  model.addAttribute("business",business);
+	                  
+	                  //신청목록
+	                  Integer applycount = applyService.applycount(bno);
+	                  System.out.println("applycount : " + applycount);
+	                  model.addAttribute("applycount",applycount);
+	                  
+	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
+	                 System.out.println("bmypage 사업자");
+	                 Business business = messageService.mypageBusiness(bno);
+	                  System.out.println("business mypage" +  business.toString());         
+	                  model.addAttribute("business",business);
+	                  
+	                  Integer applycount = applyService.applycount(bno);
+	                  System.out.println("applycount : " + applycount);
+	                  model.addAttribute("applycount",applycount);
+	              
+	                  
+	              }else {//로그인 안했을 때
+	                 System.out.println("bmypage 무무");
+	               Business business = messageService.mypageBusiness(bno);
+	               System.out.println("business mypage" +  business.toString());         
+	               model.addAttribute("business",business);         
+	              }
+	         }else {
+	            System.out.println("bmypage 무무무");
+	            Business business = messageService.mypageBusiness(bno);
+	             System.out.println("business mypage" +  business.toString());         
+	             model.addAttribute("business",business);
+	         }
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -111,6 +146,7 @@ public class MypageController {
 				 System.out.println("statuscount:"+statuscount);
 				 model.addAttribute("statuscount",statuscount);
 				 
+				 //
 				 sellList = mypageService.getSellList(userno,page,pageInfo);
 				 model.addAttribute("pageInfo", pageInfo);
 				 model.addAttribute("sellList", sellList);
@@ -152,6 +188,7 @@ public class MypageController {
 					 System.out.println("statuscount:"+statuscount);
 					 model.addAttribute("statuscount",statuscount);
 					 
+					 //
 					 sellList = mypageService.getSellList(userno,page,pageInfo);
 					 model.addAttribute("pageInfo", pageInfo);
 					 model.addAttribute("sellList", sellList);
@@ -187,7 +224,8 @@ public class MypageController {
 				statuscount +=sellService.statuscount(userno);
 				System.out.println("statuscount:"+statuscount);
 				model.addAttribute("statuscount",statuscount);
-				 
+				
+				 //
 				 sellList = mypageService.getSellList(userno,page,pageInfo);
 				 model.addAttribute("pageInfo", pageInfo);
 				 model.addAttribute("sellList", sellList);

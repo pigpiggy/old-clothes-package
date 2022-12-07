@@ -56,4 +56,11 @@
 			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress},#{adetailaddress}, #{apickup},#{userno},#{bno})
 		]]>
 	</insert>
+	
+	<!-- 신청 폼 개수 -->
+	<select id="applycount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno}
+			]]>
+		</select>
 </mapper>	

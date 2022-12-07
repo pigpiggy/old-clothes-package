@@ -74,7 +74,7 @@
 			  <span>받은 거래후기 : ${reviewcount }개</span>
 			 </c:when>
 			 <c:otherwise>
-			 <span>신청목록 : 10 개</span>
+			 <span>신청목록 : ${applycount} 개</span>
 			 <span>수거 중 : 3 개</span>
 			 <span>수거완료 : 5 개</span>
 			 <span>수거거절 : 2 개</span>

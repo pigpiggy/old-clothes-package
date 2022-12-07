@@ -24,7 +24,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     	String id = request.getParameter("id");
     	String password = request.getParameter("password");
     	
-    	if(id==null||password==null) {
+    	if("null".equals(id)||"".equals(id)||"null".equals(password)||"".equals(password)) {
     		response.sendRedirect("/loginfail");
 			return false;
     	}

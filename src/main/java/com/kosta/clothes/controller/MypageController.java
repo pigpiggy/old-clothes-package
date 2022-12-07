@@ -32,6 +32,8 @@ import com.kosta.clothes.service.ReviewService;
 import com.kosta.clothes.service.SellService;
 import com.kosta.clothes.service.SharingService;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 @Controller
 public class MypageController {
 
@@ -469,12 +471,19 @@ public class MypageController {
 		}
 	}
 	
-	@GetMapping("/likelist/{userno}")
+	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {
 		try {
-			List<Sharing> sList = mypageService.getLikeSharingList(userno);
+			List<Sharing> sList = null;
+			sList = mypageService.getLikeSharingList(userno);
+			for (int i = 0; i < sList.size(); i++) {
+				if (sList.get(i).getSfileids() != null) {
+					sList.get(i).setSfileids(sList.get(i).getSfileids().split(",")[0]);
+				}
+			}
 			model.addAttribute("sharing", sList);
-			System.out.println("sList:"+sList);
+			System.out.println("SLIST:"+sList);
+			
 //			List<Likes> lList = mypageService.getLikeList(userno);
 //			List<Likes> tList = new ArrayList<Likes>();
 //			List<Sharing> sList = new ArrayList<Sharing>();

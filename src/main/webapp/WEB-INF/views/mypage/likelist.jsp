@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,7 +18,11 @@
 		</select>
 	</div>
 	<div id="list" class="list">
-		
+		<table>
+			<tr>
+				
+			</tr>
+		</table>
 	</div>	
 
 

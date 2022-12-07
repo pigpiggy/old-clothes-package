@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
@@ -216,5 +217,17 @@ public class MypageServiceImpl implements MypageService {
 		map.put("row", row);
 		return mypageDAO.getBuySharingList(map);
 	}
+
+
+	@Override
+	public List<Sharing> getLikeSharingList(Integer userno) throws Exception {
+		return mypageDAO.getLikeSharingList(userno);
+	}
+
+
+	
+
+
+
 
 }

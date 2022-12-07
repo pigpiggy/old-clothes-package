@@ -20,12 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosta.clothes.bean.Business;
+import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
-import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
@@ -466,5 +466,36 @@ public class MypageController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GetMapping("/likelist/{userno}")
+	public String likelist(@PathVariable("userno") Integer userno, Model model) {
+		try {
+			List<Sharing> sList = mypageService.getLikeSharingList(userno);
+			model.addAttribute("sharing", sList);
+			System.out.println("sList:"+sList);
+//			List<Likes> lList = mypageService.getLikeList(userno);
+//			List<Likes> tList = new ArrayList<Likes>();
+//			List<Sharing> sList = new ArrayList<Sharing>();
+//			List<Sell> iList = new ArrayList<Sell>();
+//			List<Business> bList = new ArrayList<Business>();
+//			for(int i=0; i<lList.size() ;i++) {
+//				if(lList.get(i).getSno()!=null&&lList.get(i).getLikescheck()==1) {//무료나눔 좋아요만 찾기
+//					tList.add(lList.get(i));
+//				}
+//			}
+//			for(int j=0; j<tList.size(); j++) {
+//				Integer sno = tList.get(j).getSno();
+//				Sharing sharing = mypageService.getSharing(sno);
+//				sList.add(sharing);
+//				System.out.println("sharing:"+sharing);
+//			}
+//			model.addAttribute("sharing", sList);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/mypage/likelist";
 	}
 }

@@ -16,7 +16,9 @@
 			<option value="busi">업체판매</option>
 		</select>
 	</div>
-	<input type=checkbox>
+	<div id="list" class="list">
+		
+	</div>	
 
 
 <script>

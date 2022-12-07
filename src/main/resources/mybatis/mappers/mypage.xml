@@ -168,4 +168,11 @@
     
 		]]>
 	</select>
+	<select id="getLikeSharingList" resultType="Integer">
+		<![CDATA[
+			SELECT * FROM sharing WHERE sno = (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	
 </mapper>	

@@ -17,7 +17,7 @@
 		  <c:forEach var="buysell" items="${buysellList}">
 		  	<div class="sellList">
 				     <a href="/sellView/${buysell.ino}">
-					     <div class="card" data-sno=${buysell.ino }>
+					     <div class="card2" data-sno=${buysell.ino }>
 				          <div class="card-image">
 				          	<c:if test="${'등록완료' != buysell.istatus}">
 				          		<div class="individualStatus">${buysell.istatus }</div>
@@ -51,8 +51,8 @@
 				      </div>
 			     </a>
 			     <c:if test="${'거래중' eq buysell.istatus}">
-	          		<button class="cancel">거래 취소</button>
-	          		<button class="complete">거래 완료</button>
+	          		<button class="cancel3">거래 취소</button>
+	          		<button class="complete3">거래 완료</button>
 	          	</c:if>
 		  	</div>
 	 	 </c:forEach>
@@ -91,7 +91,7 @@
 		  <c:forEach var="buysharing" items="${buysharingList}">
 		  <div class="sellList">
 	     <a href="/sharingView/${buysharing.sno}">
-		     <div class="card sharingcard" data-sno=${buysharing.sno }>
+		     <div class="card sharingcard2" data-sno=${buysharing.sno }>
 		          <div class="card-image">
 		          	<input type="hidden" name="sstatus" value="${buysharing.sstatus}">
 		          	<c:if test="${'등록완료' != buysharing.sstatus}">
@@ -126,8 +126,8 @@
 		      </div>
 	     		</a>
 	     		<c:if test="${'거래중' eq buysharing.sstatus}">
-	          		<button class="cancel1">거래 취소</button>
-	          		<button class="complete1">거래 완료</button>
+	          		<button class="cancel4">거래 취소</button>
+	          		<button class="complete4">거래 완료</button>
 	          	</c:if>
 	     	 </div>
 		  </c:forEach>
@@ -160,5 +160,85 @@
 			</c:otherwise>
 		</c:choose>
 	</ul>
+	<script>
+		$('.cancel3').click(function(){
+			var index = $(this).parent().index();
+			var ino = $(".card2:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/cancelDeal",
+				data : {ino:ino},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+	
+		})
+		
+		$('.cancel4').click(function(){
+			var index = $(this).parent().index();
+			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/cancelSharingDeal",
+				data : {sno:sno},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+
+		})
+		
+		$('.complete3').click(function(){
+			var index = $(this).parent().index();
+			$(this).attr("disabled", true);
+			var ino = $(".card2:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/completeDeal",
+				data : {ino:ino},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+
+		})
+		
+		$('.complete4').click(function(){
+			var index = $(this).parent().index();
+			$(this).attr("disabled", true);
+			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/completeSharingDeal",
+				data : {sno:sno},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+
+		})
+		
+	</script>
 </body>
 </html>

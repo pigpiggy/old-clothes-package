@@ -173,5 +173,13 @@ public class SellServiceImpl implements SellService{
 		
 		return sellDAO.statuscount(userno);
 	}
+
+	@Override
+	public void alterStatus(Integer userno, Integer ino) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("ino", ino);
+		sellDAO.alterStatus(map);
+	}
 	
 }

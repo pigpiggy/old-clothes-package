@@ -6,9 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 </head>
 <body>
 	<select>
@@ -17,45 +14,45 @@
     </select>
 	<div id="cards">
     	<div class="card-list">
-		  <c:forEach var="sell" items="${sellList}">
+		  <c:forEach var="buysell" items="${buysellList}">
 		  	<div class="sellList">
-				     <a href="/sellView/${sell.ino}">
-					     <div class="card" data-sno=${sell.ino }>
+				     <a href="/sellView/${buysell.ino}">
+					     <div class="card2" data-sno=${buysell.ino }>
 				          <div class="card-image">
-				          	<c:if test="${'등록완료' != sell.istatus}">
-				          		<div class="individualStatus">${sell.istatus }</div>
+				          	<c:if test="${'등록완료' != buysell.istatus}">
+				          		<div class="individualStatus">${buysell.istatus }</div>
 				          	</c:if>
 				          	<c:choose>
-				          		<c:when test="${empty sell.ifileids }">
+				          		<c:when test="${empty buysell.ifileids }">
 				          			<img src="/image/logo3.png" alt="로고">
 				          		</c:when>
 				          		<c:otherwise>
-				              		<img src="/upload/${ sell.ifileids}" alt="무료나눔 옷">
+				              		<img src="/upload/${ buysell.ifileids}" alt="무료나눔 옷">
 				          		</c:otherwise>
 				          	</c:choose>
 				          </div>
 				          <div class="card-body">
-				              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
-				              <h2 class="sharingTitle">${sell.ititle }</h2>
-				              <p>${sell.addressCity} ${sell.addressTown }</p>
+				              <div class="priceAndDate"><span class="price">${buysell.price}원</span><span class="date">${buysell.regDate}</span></div>
+				              <h2 class="sharingTitle">${buysell.ititle }</h2>
+				              <p>${buysell.addressCity} ${buysell.addressTown }</p>
 				          </div>
 				          <c:choose>
-				          	<c:when test="${empty sell.addressCity}">
+				          	<c:when test="${empty buysell.addressCity}">
 				          		<div class="card-footer">
-				          			${sell.idealType}
+				          			${buysell.idealType}
 				          		</div>
 				          	</c:when>
 				          	<c:otherwise>
 					          <div class="card-footer">
-					              ${sell.idealType} 
+					              ${buysell.idealType} 
 					          </div>
 				          	</c:otherwise>
 				          </c:choose>
 				      </div>
 			     </a>
-			     <c:if test="${'거래중' eq sell.istatus}">
-	          		<button class="cancel">거래 취소</button>
-	          		<button class="complete">거래 완료</button>
+			     <c:if test="${'거래중' eq buysell.istatus}">
+	          		<button class="cancel3">거래 취소</button>
+	          		<button class="complete3">거래 완료</button>
 	          	</c:if>
 		  	</div>
 	 	 </c:forEach>
@@ -64,73 +61,73 @@
     
     <ul class="pagination">
 		<c:choose>
-			<c:when test="${pageInfo.page<=1}">
+			<c:when test="${bspageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="freeList?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		<c:forEach var="i" begin="${bspageInfo.startPage }" end="${bspageInfo.endPage }">
 			<c:choose>
-				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${bspageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?page=${i}">${i }</a></li>
+					<li><a href="freeList?bspage=${i}">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+			<c:when test="${bspageInfo.page>=bspageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+				<li><a href="freeList?bspage=${bspageInfo.page+1}" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
     
     <div id="cards">
     	<div class="card-list">
-		  <c:forEach var="sharing" items="${sharingList}">
+		  <c:forEach var="buysharing" items="${buysharingList}">
 		  <div class="sellList">
-	     <a href="/sharingView/${sharing.sno}">
-		     <div class="card sharingcard" data-sno=${sharing.sno }>
+	     <a href="/sharingView/${buysharing.sno}">
+		     <div class="card sharingcard2" data-sno=${buysharing.sno }>
 		          <div class="card-image">
-		          	<input type="hidden" name="sstatus" value="${sharing.sstatus}">
-		          	<c:if test="${'등록완료' != sharing.sstatus}">
-		          		<div class="sharingStatus">${sharing.sstatus}</div>
+		          	<input type="hidden" name="sstatus" value="${buysharing.sstatus}">
+		          	<c:if test="${'등록완료' != buysharing.sstatus}">
+		          		<div class="sharingStatus">${buysharing.sstatus}</div>
 		          	</c:if>
 		          	<c:choose>
-		          		<c:when test="${empty sharing.sfileids }">
+		          		<c:when test="${empty buysharing.sfileids }">
 		          			<img src="/image/logo3.png" alt="로고">
 		          		</c:when>
 		          		<c:otherwise>
-		              		<img src="/upload/${ sharing.sfileids}" alt="무료나눔 옷">
+		              		<img src="/upload/${ buysharing.sfileids}" alt="무료나눔 옷">
 		          		</c:otherwise>
 		          	</c:choose>
 		          </div>
 		          <div class="card-body">
-		              <span class="date">${sharing.regDate}</span>
-		              <h2 class="sharingTitle">${sharing.stitle }</h2>
-		              <p>${sharing.addressCity} ${sharing.addressTown }</p>
+		              <span class="date">${buysharing.regDate}</span>
+		              <h2 class="sharingTitle">${buysharing.stitle }</h2>
+		              <p>${buysharing.addressCity} ${buysharing.addressTown }</p>
 		          </div>
 		          <c:choose>
-		          	<c:when test="${empty sharing.addressCity}">
+		          	<c:when test="${empty buysharing.addressCity}">
 		          		<div class="card-footer">
-		          			${sharing.sdealType}
+		          			${buysharing.sdealType}
 		          		</div>
 		          	</c:when>
 		          	<c:otherwise>
 			          <div class="card-footer">
-			              ${sharing.sdealType} 
+			              ${buysharing.sdealType} 
 			          </div>
 		          	</c:otherwise>
 		          </c:choose>
 		      </div>
 	     		</a>
-	     		<c:if test="${'거래중' eq sharing.sstatus}">
-	          		<button class="cancel1">거래 취소</button>
-	          		<button class="complete1">거래 완료</button>
+	     		<c:if test="${'거래중' eq buysharing.sstatus}">
+	          		<button class="cancel4">거래 취소</button>
+	          		<button class="complete4">거래 완료</button>
 	          	</c:if>
 	     	 </div>
 		  </c:forEach>
@@ -139,35 +136,34 @@
     
     <ul class="pagination">
 		<c:choose>
-			<c:when test="${spageInfo.page<=1}">
+			<c:when test="${ppageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="freeList?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
+		<c:forEach var="i" begin="${ppageInfo.startPage }" end="${ppageInfo.endPage }">
 			<c:choose>
-				<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${ppageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?spage=${i}">${i }</a></li>
+					<li><a href="freeList?ppage=${i}">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${spageInfo.page>=spageInfo.maxPage }">
+			<c:when test="${ppageInfo.page>=ppageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?spage=${spageInfo.page+1}" id="next">>></a></li>
+				<li><a href="freeList?ppage=${ppageInfo.page+1}" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
-	
 	<script>
-		$('.cancel').click(function(){
+		$('.cancel3').click(function(){
 			var index = $(this).parent().index();
-			var ino = $(".card:eq("+index+")").attr("data-sno");
+			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
 				url : "/cancelDeal",
@@ -181,32 +177,12 @@
 					console.log(err);
 				}
 			});
-
+	
 		})
 		
-		$('.complete').click(function(){
+		$('.cancel4').click(function(){
 			var index = $(this).parent().index();
-			$(this).attr("disabled", true);
-			var ino = $(".card:eq("+index+")").attr("data-sno");
-			$.ajax({
-				type : "get",
-				url : "/completeDeal",
-				data : {ino:ino},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
-					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-
-		})
-		
-		$('.cancel1').click(function(){
-			var index = $(this).parent().index();
-			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
+			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
 				url : "/cancelSharingDeal",
@@ -223,10 +199,30 @@
 
 		})
 		
-		$('.complete1').click(function(){
+		$('.complete3').click(function(){
 			var index = $(this).parent().index();
 			$(this).attr("disabled", true);
-			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
+			var ino = $(".card2:eq("+index+")").attr("data-sno");
+			$.ajax({
+				type : "get",
+				url : "/completeDeal",
+				data : {ino:ino},
+				success : function(data) {
+					console.log(data);
+					console.log("성공");
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+
+		})
+		
+		$('.complete4').click(function(){
+			var index = $(this).parent().index();
+			$(this).attr("disabled", true);
+			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
 				url : "/completeSharingDeal",
@@ -242,6 +238,7 @@
 			});
 
 		})
+		
 	</script>
 </body>
 </html>

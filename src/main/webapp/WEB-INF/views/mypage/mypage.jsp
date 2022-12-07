@@ -25,7 +25,11 @@
  
       <div class="nickname">
       <c:if test="${authUser.sect eq 'users' }">
+<<<<<<< HEAD
       <input type="hidden" value="${authUser.userno }" id="chatuserno"/>
+=======
+      	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>
+>>>>>>> 6872da84b2855c1c74e296eabb9fd8eea06c0f1e
       </c:if>
       <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
      <c:choose>    
@@ -44,11 +48,15 @@
 		        </a>          
 		        <a href="/mypage/message">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
-		        </a>          
-      			<a href="javascript:openDetail('/chatList')">
-					<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
-						<span class="nav__notification nbadge" id="messageAlert"></span>
-				</a>
+		        </a>
+		        <c:if test="${authUser.sect eq 'users'}">
+		        	<c:if test="${users.userno eq authUser.userno}">          
+		      			<a href="javascript:openDetail('/chatList')">
+							<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+								<span class="nav__notification nbadge" id="messageAlert"></span>
+						</a>
+					</c:if>	
+				</c:if>				
 		        <a href="/passcheck">
               	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
 		        </a>
@@ -77,6 +85,7 @@
 			</c:choose>	   
       	  
 		  </div>		
+<<<<<<< HEAD
 		  <div class="introduce" id="introduce"> 		
 		  		<c:if test="${users.sect eq 'users'&& users.userno eq authUser.userno}">			 
 					<img id="setting" src="/image/setting1.png" alt="소개수정" >
@@ -84,6 +93,33 @@
 				<c:if test="${business.sect eq 'business'&& business.bno eq authUser.bno}">			 
 					<img id="setting" src="/image/setting1.png" alt="소개수정" >
 				</c:if>
+=======
+		  <div class="introduce" id="AAA">				 
+				<img id="setting" src="/image/setting1.png" alt="소개수정" >
+			
+  		</div>
+  	<div class="intro_check">  
+				<textarea class="intro_text">안녕하세요,<c:choose><c:when test="${authUser.sect eq 'users' }"> ${authUser.nickname }의 옷장입니다. </c:when> <c:otherwise> ${business.bname }의 옷장입니다. </c:otherwise> </c:choose>
+				</textarea>
+				<button class="intro_btn">확인</button>
+		  </div>
+	</div>
+	
+		
+  </div>
+  <script>
+  		$('.intro_check').css('display','none');
+  		
+	  $('#setting').click(function(){ //설정버튼 클릭했을 때
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
+	    <div class="introduce" id="introduce">
+	    	<c:if test="${users.userno eq authUser.userno}">			 
+				<img id="setting" src="/image/setting1.png" alt="소개수정" >
+			</c:if>
+>>>>>>> 6872da84b2855c1c74e296eabb9fd8eea06c0f1e
 			<c:choose>
 				<c:when test="${users.introduce eq null && business.bintroduce eq null}">
 					<c:choose>
@@ -138,7 +174,25 @@
 				url : "/mypage",
 				data : {introduce:introduce},
 				
+<<<<<<< HEAD
 				success : function(data) {																			
+=======
+				success : function(data) {
+					console.log(data);
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
+					var text ="";
+					text = data;
+					
+					document.getElementById("AAA").innerHTML = text;
+					$('#setting').css('display','block');
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
+>>>>>>> 6872da84b2855c1c74e296eabb9fd8eea06c0f1e
 					var text ="";					
 					text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
 					text += "<p>"+data+"</p>";
@@ -160,7 +214,21 @@
 			$('#setting').css('display','block');			
   		});
   </script>
+<<<<<<< HEAD
    
+=======
+   <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+<<<<<<< HEAD
+
+			
+=======
+			  <span>상품등록 : ${totalcount } 개</span>
+			  <span>거래완료 : 19건</span>
+			  <span>받은 거래후기 : ${reviewcount }개</span>
+>>>>>>> f4d770fc953646f4cadce8d7c65e713c71c31e4a
+		  </div>		
+		 
+>>>>>>> 6872da84b2855c1c74e296eabb9fd8eea06c0f1e
  <script>
  function openDetail(url) {
 		var width = 850;
@@ -194,7 +262,9 @@ var chatuserno = document.getElementById('chatuserno').value;
 				if (result >= 1) {
 					showUnread(result);
 					console.log(result);
+					$("#messageAlert").show();
 				} else {
+					$("#messageAlert").css('display','none');
 					showUnread('');
 				}
 			}
@@ -209,10 +279,10 @@ var chatuserno = document.getElementById('chatuserno').value;
 	
 	function showUnread(result) {
 		$('#messageAlert').html(result);
-		if(result < 1) {
+		/*if(result < 1) {
 			$("#messageAlert").css('display','none');
 		}else {
-		}
+		}*/
 	}
  </script> 
 </body>

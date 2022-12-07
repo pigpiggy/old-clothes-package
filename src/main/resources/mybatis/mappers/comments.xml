@@ -57,7 +57,8 @@
 	</update>
 	
 	
-<!-- 무료게시판 -->
+	
+<!-- 무료나눔 -->
 	<insert id="insertCommentshar" parameterType="Comments">
 	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
 		<![CDATA[

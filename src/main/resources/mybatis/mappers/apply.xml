@@ -52,8 +52,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into apply (ano,aname,aphone,weight,aaddress,adetailaddress,apickup,userno,bno)
-			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress},#{adetailaddress}, #{apickup},#{userno},#{bno})
+			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno)
+			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno})
 		]]>
 	</insert>
 </mapper>	

@@ -10,17 +10,7 @@
     <title>자유게시판 글보기</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-	<script>
-function check(){
-	var comment = document.getElementById("ccontent");
-	if(comment.value == ''){
-		alert("댓글을 작성해주시기 바랍니다.");
-		return false;
-	}
-}
-
-</script>  
+	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' /> 
 	<style>
 .deletecmt{
 	position: relative;
@@ -89,52 +79,20 @@ function check(){
                 </section>
                 <div class="viewcont" id="freeview">               
                   <p id="contentp">${article.fcontent }</p>                                                
-                </div>                
-                <br><br>
-                <br><br>
-                <%--댓글 작성 --%> 
-                <c:choose>
-                <c:when test="${authUser.sect eq 'users' }">
-                <div class="container">
-					<div class="form-group">					
-						<form method="post" action="/ufreeView/${article.fno }/${authUser.userno}" onsubmit="return check();">
-							<table class="table table-striped" style="position: relative;width: 1040px;left: 80%;text-align: center; border: 1px solid #dddddd">
-								<tr>
-									<td style="border-bottom:none;" valign="middle"><br><br><p id="csect">${authUser.sect }</p></td>
-									<td style="border-bottom:none;" valign="middle"><br><br><p id="cname">${authUser.nickname }</p></td>
-										<td><input type="text" style="position:relative;height:100px;width:900px;left:0%" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." id="ccontent" name = "ccontent"></td>
-									<td><br><br><input type="submit" class="btn-primary pull" id="cmtbtn"value="댓글 작성"></td>
-								</tr>								
-							</table>
-						</form>
-					</div>
-				</div>	
-				</c:when>
-				<c:otherwise>
-				<c:if test="${authUser.sect eq 'business' }">
-				<div class="container">
-					<div class="form-group">					
-						<form method="post" action="/bfreeView/${article.fno }/${authUser.bno}" onsubmit="return check();">
-							<table class="table table-striped" style="position: relative;width: 1040px;left: 80%;text-align: center; border: 1px solid #dddddd">
-								<tr>
-									<td style="border-bottom:none;" valign="middle"><br><br><p id="bsect">${authUser.sect }</p></td>
-									<td style="border-bottom:none;" valign="middle"><br><br><p id="bname">${authUser.bname }</p></td>
-										<td><input type="text" style="position:relative;height:100px;width:900px;left:0%" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." id="ccontent" name = "ccontent"></td>
-									<td><br><br><input type="submit" class="btn-primary pull" id="bcmtbtn"value="댓글 작성"></td>
-								</tr>								
-							</table>
-						</form>
-					</div>
-				</div>	
-				</c:if>
-				</c:otherwise>
-				</c:choose>							
-                <br><br>            
+                </div>                                
+                <br><br>                
+            <c:if test="${authUser.sect eq 'business' }">                            
+				<input type="hidden" name="bno" id="bno" value="${authUser.bno }">
+			</c:if>                
+			<c:if test="${authUser.sect eq 'users' }">
+				<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
+			</c:if>
+			<input type="hidden" name="cno" id="cno" value="${comment.cno }">
 			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
             <div class="bt_wrap">            
                 <a id="input4" href="/freeList" class="on">목록</a>
-                <c:if test="${authUser.sect eq 'users'}">
-	                <c:if test="${authUser.userno eq article.userno}">                 
+                <c:if test="${authUser.sect eq 'users'}">                
+	                <c:if test="${authUser.userno eq article.userno}">	                                  
 	                   <a href="/modifyform/${article.fno }">수정</a>
 	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
 	                </c:if>               
@@ -142,38 +100,207 @@ function check(){
             </div>
             <%--댓글 리스트 --%>
             <br><br>                    
-            <div id="totallist" class="listtotal">
-               	<c:forEach var="comment" items="${comment }">
-                	<div style="width:1000px;height:50px;">
-                	<div id="csectlist" name="csectlist" class="listcsect">${comment.csect }</div>
-                	<div id="cnamelist" name="cnamelist" class="listcname">${comment.cname }</div>	
-                	<div id="ccontentlist" name="ccontentlist" class="listccontent">${comment.ccontent }</div>
-                	<div id="cdatelist" name="cdatelist" class="listcdate">${comment.regdate }</div>
-                	<c:choose>
-                	<c:when test="${authUser.sect eq 'users' }">                	
-	                	<c:if test="${authUser.userno eq comment.userno }">
-	                		<a href="/modifycmt/${comment.fno}/${comment.cno}"><button id="cmtmodify">수정</button></a>
-	                		<input id="cmtdelete" class="deletecmt" onclick="cmtDelete(${comment.cno})" type="submit" value="삭제">	                		                
-	                	</c:if>
-                	</c:when>
-                	<c:otherwise>
-                		<c:if test="${authUser.sect eq 'business' }">
-	                	<c:if test="${authUser.bno eq comment.bno }">
-	                		<a href="/modifycmt/${comment.fno}/${comment.cno}"><button id="cmtmodify">수정</button></a>
-	                		<input id="cmtdelete" class="deletecmt" onclick="BcmtDelete(${comment.cno})" type="submit" value="삭제">	                		                
-	                	</c:if>
-	                	</c:if>
-                	</c:otherwise>
-                	</c:choose>
-                	</div>
-                	<input type="hidden" name="cno" id="cno"  value="${comment.cno }">
-               	</c:forEach>
-            </div>
+            <!--  댓글  -->
+            <label class="blabel" for="content">댓글 등록</label>
+            <c:if test="${authUser ne null }">                 
+            	<c:choose>
+                <c:when test="${authUser.sect eq 'users' }"> 	
+				    <div class="container">				        
+				        <form name="commentInsertForm" onsubmit="return check();">
+				            <div class="input-group">
+				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
+				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+				               <span class="input-group-btn">
+				                    <button id="ubtn" class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+				               </span>
+				              </div>
+				        </form>
+				    </div>
+			    </c:when>
+			    <c:otherwise>
+				    <div class="container">				        
+				        <form name="commentInsertForm">
+				            <div class="input-group">
+				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
+				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+				               <span class="input-group-btn">
+				                    <button id="bbtn" class="btn btn-default" type="button" name="bcommentInsertBtn">등록</button>
+				               </span>
+				              </div>
+				        </form>
+				    </div>
+			    </c:otherwise>
+			    </c:choose>
+		    </c:if>
+		    <br><br>
+		    <div class="container">
+		        <div class="commentList"></div>
+		    </div>
                                 
             <%--댓글 수정창 --%>
             
    <script>
-      
+   <%--댓글테스트--%>
+   var fno = $('#fno').val();
+   var auth = "${authUser.sect}";
+   var userno = $('#userno').val();
+   var bno = $('#bno').val();
+   var cno = $('#cno').val();
+   console.log("로그인한 유저 : " + auth);
+   console.log("자유게시판 번호 : " + fno);
+   console.log("사용자 로그인 한 번호 : " + userno);
+   console.log("사업자 로그인 한 번호 : " + bno);
+   console.log("댓글 번호 : " + cno);
+ //리스트 미리 뿌려주기
+   $(document).ready(function(){
+	  commentList(); 
+   });
+   
+   //사용자
+   $('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
+	    var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+	    if($('input[name=ccontent]').val() == '' ){
+	    	alert("댓글을 입력해 주시기 바랍니다.");
+	    	return false;
+	    }
+	    commentInsert(insertData); //Insert 함수호출(아래)
+	});
+   
+   //사업자
+   $('[name=bcommentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
+	    var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+	    if($('input[name=ccontent]').val() == '' ){
+	    	alert("댓글을 입력해 주시기 바랍니다.");
+	    	return false;
+	    }
+	    bcommentInsert(insertData); //Insert 함수호출(아래)
+	});
+   
+	   
+   
+	 //댓글 등록[사용자]
+	 function commentInsert(insertData){
+		 var userno = $('#userno').val();
+		 console.log("댓글 등록");
+		    $.ajax({
+		        url : '/ufreeView/'+fno+'/'+userno,
+		        type : 'post',
+		        data : insertData,
+		        success : function(data){		            
+		            commentList(); //댓글 작성 후 댓글 목록 reload
+					$('[name=ccontent]').val('');
+		            
+		        }
+		    });
+		}
+	 
+	 //댓글 등록 [사업자]
+	 function bcommentInsert(insertData){
+		 console.log("댓글 등록");
+		    $.ajax({
+		        url : '/bfreeView/'+fno+'/'+bno,
+		        type : 'post',
+		        data : insertData,
+		        success : function(data){
+		            
+		                commentList(); //댓글 작성 후 댓글 목록 reload
+		                $('[name=ccontent]').val('');
+		            
+		        }
+		    });
+		}
+	 
+	 //댓글 목록 
+	 function commentList(){
+		 console.log("댓글리스트");
+	     $.ajax({
+	         url : '/list/'+fno,
+	         type : 'get',
+	         data : {'fno':fno},
+	         success : function(data){
+	             var a =''; 
+	             $.each(data, function(key, value){ 
+	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+	                 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+	                 if(auth != ''){
+	                	 if(auth =='users' && userno == value.userno){
+	                		 console.log("사용자 수정 삭제");
+			                 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
+	                	 }else if(auth == 'business' && bno == value.bno){
+	                		 console.log("사업자 수정 삭제");
+	                		 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
+	                	 }
+	                 }
+	                 a += '';
+	                 a += '';
+	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss"> 내용 : '+value.ccontent +'</p>';
+	                 a += '</div></div>';
+	             });
+	             
+	             $(".commentList").html(a);
+	         }
+	     });
+	 }
+	 
+	 
+	//댓글 삭제 
+	 function commentDelete(cno){
+		console.log("삭제할 번호 : " + cno);
+		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
+		if(result){
+		     $.ajax({
+		         url : "/cmtDelete/"+cno + "/" + fno,
+		         type : "post",
+		         success : function(data){
+		        	 alert("삭제가 완료되었습니다.");
+		        	 commentList(fno);
+		         }
+		     });
+		}
+	 }
+	
+	
+	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+	 function commentUpdate(cno, ccontent){
+	     var a ='';
+	     
+	     a += '<div class="input-group">';
+	     a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
+	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
+	     a += '</div>';
+	     
+	     $('.commentContent'+cno).html(a);
+	     
+	 }
+	//댓글 수정
+	 function commentUpdateProc(cno){
+	     var updateContent = $('[name=ccontent_'+cno+']').val();
+	     var result = confirm("수정하시겠습니까??");
+	     console.log("수정할 cno : " + cno);
+	     console.log("수정할 내용 : " + updateContent);
+	     if(result){
+		     $.ajax({
+		         url : "/update/"+cno + "/" +fno,
+		         type : "post",
+		         data : {'ccontent' : updateContent, 'cno' : cno},
+		         success : function(data){
+		            
+		             alert("수정이 완료되었습니다.");
+		             commentList(fno);
+		         }
+		     });
+	     }
+	 }
+	
+   <%--댓글테스트--%>
+   
+   
+ 
+   
+ 
    function freeRemove() {
 		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
 		var fno =  $('#fno').val();
@@ -192,72 +319,7 @@ function check(){
 				}
 			});
 		}	
-	}
-   //댓글 삭제[개인]
-   function cmtDelete(cmtcno) {
-		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
-		var cno = cmtcno;
-		var fno =  $('#fno').val();		
-		console.log("댓글 번호 : " + cno);
-		console.log("댓글 번호 : " + fno);
-		if(result) {
-			$.ajax({
-				type : "post",
-				url : "/cmtDelete/"+cno,
-				data : {cno:cno,
-						fno:fno},
-				success : function(data) {
-					alert("삭제가 완료되었습니다.");
-					location.href="/freeView/" + fno;
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-		}	
-	}
-   
- //댓글 삭제[사용자
-   function BcmtDelete(cmtcno) {
-		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
-		var cno = cmtcno;
-		var fno =  $('#fno').val();		
-		console.log("댓글 번호 : " + cno);
-		console.log("댓글 번호 : " + fno);
-		if(result) {
-			$.ajax({
-				type : "post",
-				url : "/cmtDelete/"+cno,
-				data : {cno:cno,
-						fno:fno},
-				success : function(data) {
-					alert("삭제가 완료되었습니다.");
-					location.href="/freeView/" + fno;
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-		}	
-	}
- //댓글 등록 = 사용자
-   $('#cmtbtn').click(function(){
-		console.log("댓글 등록");
-		var comment = document.getElementById("ccontent");
-		if(comment.value != ''){
-			alert("댓글 등록이 완료되었습니다.");	
-		}
-	});
-   //댓글 등록 = 사업자
-   $('#bcmtbtn').click(function(){
-		console.log("댓글 등록");
-		var comment = document.getElementById("ccontent");
-		if(comment.value != ''){
-			alert("댓글 등록이 완료되었습니다.");	
-		}
-	});
-   
-   
+	} 
    </script>
 </body>
 </html>

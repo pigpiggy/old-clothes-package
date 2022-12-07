@@ -55,13 +55,25 @@
 		]]>
 		</insert>
 		
+	<insert id="bintroduce" parameterType="map">
+		<![CDATA[
+			update business set
+			bintroduce = #{bintroduce} where bno = #{bno}
+		]]>
+		</insert>		
+		
 		<select id="uintromyself" parameterType="Integer" resultType="String">
 		<![CDATA[
 			SELECT INTRODUCE FROM USERS WHERE userno=#{userno}
-
 		]]>
 	</select>
 	
+	<select id="bintromyself" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT BINTRODUCE FROM BUSINESS WHERE bno=#{bno}
+		]]>
+	</select>
+		
 	<select id="getMypage" parameterType="Integer" resultType="users">
 		<![CDATA[
 			SELECT * FROM USERS WHERE userno=#{userno}

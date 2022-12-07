@@ -23,7 +23,7 @@ public interface MypageDAO {
 
 	void uintroduce(Map map) throws Exception;
 	
-	void bintroduce(String introduce) throws Exception;
+	void bintroduce(Map map) throws Exception;
 	
 	String uintromyself(Integer userno) throws Exception;
 	String bintromyself(Integer bno) throws Exception;

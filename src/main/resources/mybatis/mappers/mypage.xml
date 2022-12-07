@@ -180,9 +180,9 @@
     
 		]]>
 	</select>
-	<select id="getLikeSharingList" parameterType="Integer" resultType="Sharing">
+	<select id="getLikeSharingList" parameterType="map" resultType="Sharing">
 		<![CDATA[
-			SELECT * FROM sharing WHERE sno = (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+			SELECT rownum, s.* FROM sharing s WHERE sno in (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
     
 		]]>
 	</select>

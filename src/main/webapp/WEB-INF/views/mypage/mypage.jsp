@@ -83,9 +83,12 @@
       	  
 		  </div>		
 
-		  <div class="introduce" id="introduce"> 		
-		  		<c:if test="${users.sect eq 'users'&& users.userno eq authUser.userno}">			 
-					<img id="setting" src="/image/setting1.png" alt="소개수정" >
+		  <div class="introduce" id="introduce">
+		  	 		
+		  		<c:if test="${authUser.sect eq 'users'}">
+			  		<c:if test="${users.userno eq authUser.userno }">			 
+						<img id="setting" src="/image/setting1.png" alt="소개수정" >
+					</c:if>
 				</c:if>
 				<c:if test="${business.sect eq 'business'&& business.bno eq authUser.bno}">			 
 					<img id="setting" src="/image/setting1.png" alt="소개수정" >
@@ -105,23 +108,28 @@
 				</c:when>
 				
 				<c:otherwise>
-					<c:choose>
-						<c:when test="${users.sect eq 'users'&& users.userno eq authUser.userno}">						
-							<p>${users.introduce }</p>					
-						</c:when>
-						<c:otherwise> 	
+					
+						<c:if test="${users.sect eq 'users'}">											
+								<p>${users.introduce }</p>
+						</c:if >
+						<c:if test="${business.sect eq 'business'}"> 	
 							<p>${business.bintroduce}</p>
-						</c:otherwise>										
-					</c:choose>
-				</c:otherwise>
+						</c:if>
+				</c:otherwise>										
 			</c:choose>
+			
+			
 		  </div>	
 		<div class="intro_check">  
-	  			<c:if test="${users.sect eq 'users'&& users.userno eq authUser.userno}">
-					<textarea class="intro_text">${users.introduce }</textarea>
+	  			<c:if test="${authUser.sect eq 'users'}">
+	  				<c:if test="${users.userno eq authUser.userno}">
+						<textarea class="intro_text">${users.introduce }</textarea>
+					</c:if>
 				</c:if>
-				<c:if test="${business.sect eq 'business'&& business.bno eq authUser.bno}">	
-					<textarea class="intro_text">${business.bintroduce }</textarea>
+				<c:if test="${authUser.sect eq 'business'}">	
+					<c:if test="${ business.bno eq authUser.bno}">
+						<textarea class="intro_text">${business.bintroduce }</textarea>
+					</c:if>
 				</c:if>		
 
 					<button class="intro_btn">확인</button>

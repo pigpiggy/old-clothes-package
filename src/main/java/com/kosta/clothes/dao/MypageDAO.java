@@ -17,10 +17,12 @@ public interface MypageDAO {
 	List<Sharing> getSharingList(Map map) throws Exception;
 	List<Users> getSellapplylist(Integer ino) throws Exception;
 	List<Users> getSharingapplylist(Integer sno) throws Exception;
+	List<Sell> getBuySellList(Map map) throws Exception;
+	List<Sharing> getBuySharingList(Map map) throws Exception;
 
 	void uintroduce(Map map) throws Exception;
 	
-	void bintroduce(String introduce) throws Exception;
+	void bintroduce(Map map) throws Exception;
 	
 	String uintromyself(Integer userno) throws Exception;
 	String bintromyself(Integer bno) throws Exception;
@@ -29,5 +31,20 @@ public interface MypageDAO {
 	
 	Integer sellListCount(Integer userno) throws Exception;
 	Integer sharingListCount(Integer userno) throws Exception;
+	
+	Integer buySellListCount(Integer userno) throws Exception;
+	Integer buySharingListCount(Integer userno) throws Exception;
+	
+	void selectSellApply(Map map) throws Exception;
+	void selectSharingApply(Map map) throws Exception;
+	void cancelDeal(Integer ino) throws Exception;
+	void cancelSharingDeal(Integer sno) throws Exception;
+	Integer completedCount(Integer ino) throws Exception;
+	void upDealCount(Integer ino) throws Exception;
+	void completeDeal(Integer ino) throws Exception;
+	
+	Integer completedSharingCount(Integer sno) throws Exception;
+	void upSharingDealCount(Integer sno) throws Exception;
+	void completeSharingDeal(Integer sno) throws Exception;
 }
 

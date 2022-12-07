@@ -126,6 +126,13 @@
 				select count(*) from sharing where userno=#{userno} and sstatus='등록완료'
 			]]>
 		</select>
+		
+	<update id="alterSharingStatus" parameterType="Integer">
+		<![CDATA[
+			update sharing set (sstatus, selectedno)=(select '거래중', #{userno} from dual)
+			where sno=#{sno}
+		]]>
+	</update>
 </mapper>
 
 

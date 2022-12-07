@@ -180,6 +180,14 @@ public class SharingServiceImpl implements SharingService{
 		return sharingDAO.statuscount(userno);
 	}
 
+	@Override
+	public void alterStatus(Integer userno, Integer sno) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userno", userno);
+		map.put("sno", sno);
+		sharingDAO.alterSharingStatus(map);
+	}
+
 	
 
 	

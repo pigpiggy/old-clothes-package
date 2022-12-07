@@ -54,9 +54,10 @@ public class MypageController {
 	 */
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
-		System.out.println("mypage" + bno);
+		System.out.println("bmypage" + bno);
 		try {
 			Business business = messageService.mypageBusiness(bno);
+			System.out.println("business mypage" +  business.toString());
 			model.addAttribute("business",business);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -68,9 +69,13 @@ public class MypageController {
 	@GetMapping ("mypage/umypage/{userno}")
 	String umypage(@PathVariable("userno") Integer userno,Model model, 
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
+			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage,
+			@RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
+			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		PageInfo bspageInfo = new PageInfo();
+		PageInfo ppageInfo = new PageInfo();
 		System.out.println("mypage" + userno);
 		try {
 			System.out.println("여기기기기기기");
@@ -78,6 +83,10 @@ public class MypageController {
 			List<Sell> sellList;
 			/* 판매 상품(무료나눔) */
 			List<Sharing> sharingList;
+			/* 구매 상품(개인판매) */
+			List<Sell> buysellList;
+			/* 구매 상품(무료나눔) */
+			List<Sharing> buysharingList;
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 				  Users users1 = (Users) session.getAttribute("authUser");
@@ -109,6 +118,14 @@ public class MypageController {
 				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
 				 model.addAttribute("spageInfo", spageInfo);
 				 model.addAttribute("sharingList", sharingList);
+				 
+				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+				 model.addAttribute("bspageInfo", bspageInfo);
+				 model.addAttribute("buysellList", buysellList);
+				 
+				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 model.addAttribute("ppageInfo", ppageInfo);
+				 model.addAttribute("buysharingList", buysharingList);
 				 
 				 //users 값을 가져온다
 				 Users users = mypageService.getMypage(userno);
@@ -340,6 +357,7 @@ public class MypageController {
 		}
 		return "/mypage/review";
 	}
+
 	//마이페이지 자기소개란 수정
 	@ResponseBody
 	@PostMapping("/mypage")
@@ -385,5 +403,69 @@ public class MypageController {
 			e.printStackTrace();
 		}
 		return sharingapplylist;
+	}
+	
+	@GetMapping("/selectSellApply")
+	public String selectSellApply(@RequestParam("list") Integer list, @RequestParam("ino") Integer ino) {
+		System.out.println("userno:"+list);
+		try {
+			mypageService.selectSellApply(list,ino);
+			sellService.alterStatus(list, ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/sellView/"+ino;
+	}
+	
+	@GetMapping("/selectSharingApply")
+	public String selectSharingApply(@RequestParam("list") Integer list, @RequestParam("sno") Integer sno) {
+		System.out.println("userno:"+list);
+		try {
+			mypageService.selectSharingApply(list,sno);
+			sharingService.alterStatus(list,sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/sharingView/"+sno;
+	}
+	
+	@ResponseBody
+	@GetMapping("/cancelDeal")
+	public void cancelDeal(@RequestParam("ino") Integer ino) {
+		try {
+			mypageService.cancelDeal(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/cancelSharingDeal")
+	public void cancelSharingDeal(@RequestParam("sno") Integer sno) {
+		try {
+			mypageService.cancelSharingDeal(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/completeDeal")
+	public void completeDeal(@RequestParam("ino") Integer ino) {
+		try {
+			mypageService.completeDeal(ino);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/completeSharingDeal")
+	public void completeSharingDeal(@RequestParam("sno") Integer sno) {
+		try {
+			mypageService.completeSharingDeal(sno);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

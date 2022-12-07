@@ -1,6 +1,7 @@
 package com.kosta.clothes.controller;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
@@ -50,31 +52,31 @@ public class UsersController {
 
 	//회원가입[개인]
 	@PostMapping("/personnal")
-	public String personnal(@ModelAttribute Users users, Model model) {
+	public String personnal(@ModelAttribute Users users, RedirectAttributes re) {
 	
 		System.out.println("usersController:" + users.toString());
 		try {
 			certificationService.insertUsers(users); //사용자가 입력한 정보를 DB에 전달[Service에]
-			model.addAttribute("msg", "개인회원가입이 완료되었습니다.");
+			re.addFlashAttribute("msg", "개인회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "user/loginform";
+		return "redirect:/login";
 	}
 	
 	
 
 	//회원가입[업체]
 	@PostMapping("/businesss")
-	public String business(@ModelAttribute Business business, Model model) {
+	public String business(@ModelAttribute Business business, RedirectAttributes re) {
 		System.out.println("usersController:" + business.toString());
 		try {
 			certificationService.insertBusiness(business); //사용자가 입력한 정보를 DB에 전달[Service에]
-			model.addAttribute("msg", "업체회원가입이 완료되었습니다.");
+			re.addFlashAttribute("msg", "업체회원가입이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "user/loginform";
+		return "redirect:/login";
 	}
 	
 	//동일 번호로 아이디 3개 이상 여부 체크

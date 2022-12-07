@@ -20,15 +20,31 @@
 		]]>
 	</select>
 	
+	<select id="getBuySellList" parameterType="map" resultType="Sell">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, i.* FROM INDIVIDUAL i WHERE selectedno=#{userno})
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<select id="getBuySharingList" parameterType="map" resultType="Sharing">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, s.* FROM sharing s WHERE selectedno=#{userno})
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
 	<select id="getSellapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
+			SELECT u.nickname, w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
 		]]>
 	</select>
 	
 	<select id="getSharingapplylist" parameterType="Integer" resultType="users">
 		<![CDATA[
-			SELECT u.nickname, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
+			SELECT u.nickname,  w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
 		]]>
 	</select>
 
@@ -39,13 +55,25 @@
 		]]>
 		</insert>
 		
+	<insert id="bintroduce" parameterType="map">
+		<![CDATA[
+			update business set
+			bintroduce = #{bintroduce} where bno = #{bno}
+		]]>
+		</insert>		
+		
 		<select id="uintromyself" parameterType="Integer" resultType="String">
 		<![CDATA[
 			SELECT INTRODUCE FROM USERS WHERE userno=#{userno}
-
 		]]>
 	</select>
 	
+	<select id="bintromyself" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT BINTRODUCE FROM BUSINESS WHERE bno=#{bno}
+		]]>
+	</select>
+		
 	<select id="getMypage" parameterType="Integer" resultType="users">
 		<![CDATA[
 			SELECT * FROM USERS WHERE userno=#{userno}
@@ -64,6 +92,92 @@
 		<![CDATA[
 			SELECT count(*) FROM sharing where userno = #{userno}
 
+		]]>
+	</select>
+	
+	<delete id="selectSellApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where ino = #{ino} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<delete id="selectSharingApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where sno = #{sno} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<update id="cancelDeal" parameterType="Integer">
+		<![CDATA[
+			update individual set istatus='거래 실패'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="cancelSharingDeal" parameterType="Integer">
+		<![CDATA[
+			update sharing set sstatus='거래 실패'
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<select id="completedCount" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			SELECT completedCount FROM individual where ino=#{ino}
+
+		]]>
+	</select>
+	
+	<update id="upDealCount" parameterType="Integer">
+		<![CDATA[
+			update individual set completedCount=completedCount+1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="completeDeal" parameterType="Integer">
+		<![CDATA[
+			update individual set (completedCount,istatus)=(select 2,'거래 완료' from dual)
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<select id="completedSharingCount" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			SELECT completedCount FROM sharing where sno=#{sno}
+
+		]]>
+	</select>
+	
+	<update id="upSharingDealCount" parameterType="Integer">
+		<![CDATA[
+			update sharing set completedCount=completedCount+1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="completeSharingDeal" parameterType="Integer">
+		<![CDATA[
+			update sharing set (completedCount,sstatus)=(select 2,'거래 완료' from dual)
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<select id="buySellListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM individual where selectedno = #{userno}
+    
+		]]>
+	</select>
+	
+	<select id="buySharingListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM sharing where selectedno = #{userno}
+    
 		]]>
 	</select>
 </mapper>	

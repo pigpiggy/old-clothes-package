@@ -463,7 +463,7 @@ h2{
 	
 	//카테고리별 리스트 출력
 	function catelist(){
-		let category = $("#catelist option:selected").val(); //selectbox에서 sido 선택값
+		let category = $("#catelist option:selected").val(); //selectbox에서 category 선택값
 		console.log("마지막: " + category);
 		 $.ajax({
 				type: 'post',

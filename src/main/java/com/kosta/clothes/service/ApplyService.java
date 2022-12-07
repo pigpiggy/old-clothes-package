@@ -13,11 +13,9 @@ public interface ApplyService {
 	Wapply selectIwapply(Map map) throws Exception;
 	//String submitSwapply(Wapply wapply) throws Exception;
 	
-<<<<<<< HEAD
 	Integer applycount(Integer bno) throws Exception; //신청목록 개수
 	
-=======
+
 	
 	List<Apply> getBapply(Integer bno) throws Exception;//사용자->사업자 신청목로
->>>>>>> 55e962001fbb87ebc14908d4fe182be1f0b6bb3a
 }

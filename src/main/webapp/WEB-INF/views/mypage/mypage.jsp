@@ -198,7 +198,7 @@
 		window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
 	} 
  
-var chatuserno = document.getElementById('chatuserno').value;
+	var chatuserno = document.getElementById('chatuserno').value;
 	console.log("chatuserno: " + chatuserno);
 
 	$(document).ready(function() {

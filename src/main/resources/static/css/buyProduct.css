@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.star {
+	background: url('/image/graystar.png') no-repeat;
+	background-size: 32px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+	color: transparent;
+}
+.star.yellow {
+	background: url('/image/yellowstar.png') no-repeat;
+	background-size: 32px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+	color: transparent;
+}
+
+.stars {
+	display: flex;
+}

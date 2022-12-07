@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,22 +133,16 @@ public class SellController {
 			if(session.getAttribute("authUser") != null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
 					uauthuser = (Users) session.getAttribute("authUser");
-					sect = uauthuser.getSect();
-					List<Comments> comment = commentService.selectCommentino(ino);
-					System.out.println("sellcmt" + comment.toString());
+					sect = uauthuser.getSect();					
 					List<Users> users = mypageService.getSellapplylist(ino);
-					mav.addObject("users",users);
-					mav.addObject("commentsell",comment);
+					mav.addObject("users",users);					
 					model.addAttribute("sect", sect);					
 					mav.setViewName("/sell/sellView");
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					bauthuser = (Business) session.getAttribute("authUser");
 					sect = bauthuser.getSect();
 					Users uservo = new Users();
-					uservo = sellService.getInickname(ino);
-					List<Comments> comment = commentService.selectCommentino(ino);
-					System.out.println("sellcmt" + comment.toString());
-					mav.addObject("commentsell",comment);									
+					uservo = sellService.getInickname(ino);									
 					model.addAttribute("sect", sect);					
 					model.addAttribute("uservo", uservo);
 					model.addAttribute("submitcheck", submitcheck);
@@ -164,10 +159,7 @@ public class SellController {
 				
 			}else {
 				Users uservo = new Users();
-				uservo = sellService.getInickname(ino);
-				List<Comments> comment = commentService.selectCommentino(ino);
-				System.out.println("sellcmt" + comment.toString());
-				mav.addObject("commentsell",comment);
+				uservo = sellService.getInickname(ino);				
 				model.addAttribute("uservo", uservo);
 				model.addAttribute("submitcheck", submitcheck);
 				mav.addObject("sell", sell);
@@ -401,9 +393,9 @@ public class SellController {
 	
 	//무료나눔 댓글 삭제하기
 		@ResponseBody
-		@PostMapping("/sellcmtDelete/{cno}")
-		public ModelAndView cmtDelete(@RequestParam("cno") Integer cno,
-				@RequestParam("ino") Integer ino,Model model){
+		@PostMapping("/sellcmtDelete/{cno}/{ino}")
+		public ModelAndView cmtDelete(@PathVariable("cno") Integer cno,
+				@PathVariable("ino") Integer ino,Model model){
 			ModelAndView mav = new ModelAndView();
 			try {
 				System.out.println("삭제2 : " + ino);
@@ -417,29 +409,15 @@ public class SellController {
 			return mav;
 		}
 		
-		//댓글 수정하기 form 이동
-		@GetMapping("/modifysellcmt/{ino}/{cno}")
-		public ModelAndView cmtModify(@PathVariable("ino") Integer ino,@PathVariable("cno") Integer cno,@ModelAttribute Comments comments) {
-			ModelAndView mav = new ModelAndView();
-			System.out.println("수정form이동중");
-			try {
-				Comments comment = commentService.getsellCmt(ino,cno);
-				System.out.println("cmt: " + comment.toString());
-				mav.addObject("cmt",comment);			
-				mav.setViewName("/sell/sellcmtModify");
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return mav;
-		}
+		
 			
 		
 		//댓글 수정하기 동작
-		@PostMapping("/sellcmtModify/{ino}")
+		@PostMapping("/sellcmtModify/{cno}/{ino}")
 		public ModelAndView cmtModifys(@ModelAttribute Comments comments,
 									   @RequestParam("ccontent") String ccontent,
 									   @PathVariable("ino") Integer ino,
-									   @RequestParam("cno") Integer cno) {
+									   @PathVariable("cno") Integer cno) {
 			System.out.println("수정 완료이동중");
 			ModelAndView mav = new ModelAndView();
 		    try {
@@ -455,6 +433,13 @@ public class SellController {
 			 
 			return mav;
 			}
-	
+		
+		//댓글 리스트
+		@RequestMapping("/Ilist/{ino}") //댓글 리스트
+	    @ResponseBody
+	    private List<Comments> ICommentServiceList(@PathVariable("ino") Integer ino, Model model) throws Exception{
+	        System.out.println("댓글리스트 ");
+	        return commentService.selectCommentino(ino);
+	    }
 	
 }

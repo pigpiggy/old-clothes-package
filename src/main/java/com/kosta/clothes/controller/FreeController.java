@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -117,45 +119,37 @@ public class FreeController {
 	
 	
 	
-	 //글 상세보기(조회수증가)
+	   //글 상세보기(조회수증가)
 	   @GetMapping("freeView/{fno}")
 	   public ModelAndView freeView(@PathVariable("fno") Integer fno,
 	         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 	      System.out.println("들어옴");
 	      ModelAndView mav = new ModelAndView();      
 	      try {
-	    	  if(session.getAttribute("authUser")!=null) {
+	    	  if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 		         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 			            System.out.println("들어옴11");
 			            Users users = (Users)session.getAttribute("authUser");
 			            if(users==null) {
 			               model.addAttribute("logincheck", "false");//로그인했는지 여부-?jsp로      
-			            }
-			            
+			            }			            
 			            Free free1 = freeService.Freehit(fno);
-				        Free free = freeService.getFree(fno);
-				        List<Comments> comment = commentService.selectComments(fno);
-				        mav.addObject("comment",comment);
+				        Free free = freeService.getFree(fno);				        				        
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
 				        mav.setViewName("/free/freeView");
-		         }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+		         }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){ //사업자가 로그인 했을 때 
 			            System.out.println("B들어옴");
 			            Business bauthuser=new Business();			            
 			            bauthuser = (Business)session.getAttribute("authUser");
 			            Free free1 = freeService.Freehit(fno);
-				        Free free = freeService.getFree(fno);
-				        List<Comments> comment = commentService.selectComments(fno);
-				        System.out.println("bcomment :" + comment.toString());
-				        mav.addObject("comment",comment);
+				        Free free = freeService.getFree(fno);				       
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
 				        mav.setViewName("/free/freeView");
 		         }else {
 		        	    Free free1 = freeService.Freehit(fno);
-				        Free free = freeService.getFree(fno);
-				        List<Comments> comment = commentService.selectComments(fno);
-				        mav.addObject("comment",comment);
+				        Free free = freeService.getFree(fno);				     
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
 				        mav.setViewName("/free/freeView");
@@ -163,9 +157,7 @@ public class FreeController {
 	    	  }else {
 	    		   System.out.println("여기맞냐고오");
 	    		   Free free1 = freeService.Freehit(fno);
-			        Free free = freeService.getFree(fno);
-			        List<Comments> comment = commentService.selectComments(fno);
-			        mav.addObject("comment",comment);
+			        Free free = freeService.getFree(fno);			        
 			        mav.addObject("article", free);
 			        mav.addObject("page", page);
 			        mav.setViewName("/free/freeView");
@@ -175,54 +167,7 @@ public class FreeController {
 	      }
 	      return mav;
 	   }   
-	//댓글 등록하기[사용자]
-	@PostMapping("/ufreeView/{fno}/{userno}")
-	public ModelAndView comments(@PathVariable("fno") Integer fno,
-			@PathVariable("userno") Integer userno,
-			@ModelAttribute Comments comments,Model model) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("U댓글");
-		try {
-			Users users = (Users)session.getAttribute("authUser");
-			comments.setFno(fno);
-			comments.setUserno(userno);
-			comments.setCsect(users.getSect());
-			comments.setCname(users.getNickname());
-			commentService.registUcomment(comments);					
-			mav.setViewName("redirect:/freeView/"+fno);
-		}catch(Exception e) {
-			e.printStackTrace();
-			
-		}
-		return mav;
-		
-	}
 	
-	
-	//댓글 등록하기[사업자]
-	@PostMapping("/bfreeView/{fno}/{bno}")
-	public ModelAndView bcomments(@PathVariable("fno") Integer fno,
-			@PathVariable("bno") Integer bno,
-			@ModelAttribute Comments comments,Model model) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("B댓글");
-		try {
-			Business business = (Business)session.getAttribute("authUser");
-			System.out.println("sect : " + business.getSect());
-			String sect = business.getSect();
-			comments.setFno(fno);
-			comments.setBno(bno);
-			comments.setCsect(sect);
-			comments.setCname(business.getBname());
-			commentService.registBcomment(comments);			
-			mav.setViewName("redirect:/freeView/"+fno);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-		
-	}
-		
 		
 		
 	//as CK에디터
@@ -298,44 +243,8 @@ public class FreeController {
 		return mav;
 	}
 	
-	//댓글 수정하기 form 
-	@GetMapping("/modifycmt/{fno}/{cno}")
-	public ModelAndView cmtModify(@PathVariable("fno") Integer fno,@PathVariable("cno") Integer cno,@ModelAttribute Comments comments) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("수정form이동중");
-		try {
-			Comments comment = commentService.getCmt(fno,cno);
-			System.out.println("cmt: " + comment.toString());
-			mav.addObject("cmt",comment);			
-			mav.setViewName("/free/cmtModify");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
-		
-	//댓글 수정하기 동작
-	@PostMapping("/cmtModify/{fno}")
-	public ModelAndView cmtModifys(@ModelAttribute Comments comments,
-								   @RequestParam("ccontent") String ccontent,
-								   @PathVariable("fno") Integer fno,
-								   @RequestParam("cno") Integer cno) {
-		System.out.println("수정 완료이동중");
-		ModelAndView mav = new ModelAndView();
-	    try {
-	    	comments.setFno(fno);
-	    	comments.setCno(cno);
-			comments.setCcontent(ccontent);	
-			commentService.modifyCmt(comments);
-			mav.setViewName("redirect:/freeView/"+comments.getFno());
-				
-	    }catch(Exception e) {
-	    	e.printStackTrace();
-	    }
-		 
-		return mav;
-		}
-		
+	
+	
 	//글 삭제하기
 	@ResponseBody
 	@PostMapping("/freeDelete")
@@ -352,11 +261,89 @@ public class FreeController {
 		return mav;
 	}
 	
+
+	//자유게시판 댓글
+	
+	//댓글 등록하기[사용자]
+		@PostMapping("/ufreeView/{fno}/{userno}")
+		public ModelAndView comments(@PathVariable("fno") Integer fno,
+				@PathVariable("userno") Integer userno,
+				@ModelAttribute Comments comments,Model model) {
+			ModelAndView mav = new ModelAndView();
+			System.out.println("U댓글");
+			try {
+				Users users = (Users)session.getAttribute("authUser");
+				comments.setFno(fno);
+				comments.setUserno(userno);
+				comments.setCsect(users.getSect());
+				comments.setCname(users.getNickname());
+				commentService.registUcomment(comments);					
+				mav.setViewName("redirect:/freeView/"+fno);
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}
+			return mav;	
+			
+		}
+		
+		
+		//댓글 등록하기[사업자]
+		@PostMapping("/bfreeView/{fno}/{bno}")
+		public ModelAndView bcomments(@PathVariable("fno") Integer fno,
+				@PathVariable("bno") Integer bno,
+				@ModelAttribute Comments comments,Model model) {
+			ModelAndView mav = new ModelAndView();
+			System.out.println("B댓글");
+			try {
+				Business business = (Business)session.getAttribute("authUser");
+				System.out.println("sect : " + business.getSect());
+				String sect = business.getSect();
+				comments.setFno(fno);
+				comments.setBno(bno);
+				comments.setCsect(sect);
+				comments.setCname(business.getBname());
+				commentService.registBcomment(comments);			
+				mav.setViewName("redirect:/freeView/"+fno);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return mav;
+			
+		}
+			
+		
+		
+	//댓글 수정하기 동작	
+	@PostMapping("/update/{cno}/{fno}")
+	@ResponseBody
+	public ModelAndView cmtModifys(@ModelAttribute Comments comments,
+								   @RequestParam("ccontent") String ccontent,
+								   @PathVariable("fno") Integer fno,
+								   @PathVariable("cno") Integer cno) {
+		System.out.println("수정 완료이동중");
+		ModelAndView mav = new ModelAndView();
+	    try {
+	    	comments.setFno(fno);
+	    	comments.setCno(cno);
+			comments.setCcontent(ccontent);	
+			commentService.modifyCmt(comments);
+			mav.setViewName("redirect:/freeView/"+comments.getFno());
+				
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+		 
+		return mav;
+		}
+		
+	
 	//댓글 삭제하기
 	@ResponseBody
-	@PostMapping("/cmtDelete/{cno}")
-	public ModelAndView cmtDelete(@RequestParam("cno") Integer cno,
-			@RequestParam("fno") Integer fno,Model model){
+	@PostMapping("/cmtDelete/{cno}/{fno}")
+	public ModelAndView cmtDelete(@PathVariable("cno") Integer cno,
+			@PathVariable("fno") Integer fno,Model model){
+		System.out.println("댓글 삭제 : ");
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("삭제2 : " + fno);
@@ -364,11 +351,17 @@ public class FreeController {
 			commentService.CmtDelete(cno,fno);
 			mav.setViewName("redirect:/freeView/"+fno);
 		}catch(Exception e) {
-			e.printStackTrace();
-			mav.addObject("err",e.getMessage());
+			e.printStackTrace();			
 		}
 		return mav;
 	}
 	
+	//댓글 리스트
+	@RequestMapping("/list/{fno}") //댓글 리스트
+    @ResponseBody
+    private List<Comments> mCommentServiceList(@PathVariable("fno") Integer fno, Model model) throws Exception{
+        System.out.println("댓글리스트 ");
+        return commentService.selectComments(fno);
+    }
 	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosta.clothes.bean.Business;
+import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Review;
@@ -31,6 +32,8 @@ import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
 import com.kosta.clothes.service.SellService;
 import com.kosta.clothes.service.SharingService;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 @Controller
 public class MypageController {
@@ -54,9 +57,10 @@ public class MypageController {
 	 */
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
-		System.out.println("mypage" + bno);
+		System.out.println("bmypage" + bno);
 		try {
 			Business business = messageService.mypageBusiness(bno);
+			System.out.println("business mypage" +  business.toString());
 			model.addAttribute("business",business);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -469,5 +473,43 @@ public class MypageController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@GetMapping("/mypage/likelist/{userno}")
+	public String likelist(@PathVariable("userno") Integer userno, Model model) {
+		try {
+			List<Sharing> sList = null;
+			sList = mypageService.getLikeSharingList(userno);
+			for (int i = 0; i < sList.size(); i++) {
+				if (sList.get(i).getSfileids() != null) {
+					sList.get(i).setSfileids(sList.get(i).getSfileids().split(",")[0]);
+				}
+			}
+			model.addAttribute("sharing", sList);
+			System.out.println("SLIST:"+sList);
+			
+//			List<Likes> lList = mypageService.getLikeList(userno);
+//			List<Likes> tList = new ArrayList<Likes>();
+//			List<Sharing> sList = new ArrayList<Sharing>();
+//			List<Sell> iList = new ArrayList<Sell>();
+//			List<Business> bList = new ArrayList<Business>();
+//			for(int i=0; i<lList.size() ;i++) {
+//				if(lList.get(i).getSno()!=null&&lList.get(i).getLikescheck()==1) {//무료나눔 좋아요만 찾기
+//					tList.add(lList.get(i));
+//				}
+//			}
+//			for(int j=0; j<tList.size(); j++) {
+//				Integer sno = tList.get(j).getSno();
+//				Sharing sharing = mypageService.getSharing(sno);
+//				sList.add(sharing);
+//				System.out.println("sharing:"+sharing);
+//			}
+//			model.addAttribute("sharing", sList);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/mypage/likelist";
 	}
 }

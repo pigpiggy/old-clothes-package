@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,7 +17,13 @@
 			<option value="busi">업체판매</option>
 		</select>
 	</div>
-	<input type=checkbox>
+	<div id="list" class="list">
+		<table>
+			<tr>
+				
+			</tr>
+		</table>
+	</div>	
 
 
 <script>

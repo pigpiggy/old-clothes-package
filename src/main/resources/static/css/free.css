@@ -439,11 +439,22 @@ ul.pagination li a.active {
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
+<<<<<<< HEAD
+
+
+div#viewlist.listview {	
+
+	text-align: center;
+	margin: 20px;	
+}
+
+=======
 
 div.center {
 	text-align: center;
 	margin: 20px;	
 }
+>>>>>>> eef237f136b69c26230b02bbebb2ae3ed17662e0
 
 /*댓글 */
 #cname{
@@ -519,4 +530,53 @@ div#cdatelist.listcdate{
     height: 23px;
     top: 9px;
     right: 58px;
+<<<<<<< HEAD
 }
+
+.blabel{
+	position: relative;
+    height: 30px;
+    bottom: 1%;
+    left: 22%;
+}
+
+#ccontent{
+	position: relative;
+    left: 80%;
+    height: 91px;
+    width: 189%;
+}
+
+#bbtn{
+	position: relative;
+    left: 270%;
+    height: 95px;
+    width: 17%;
+    bottom: 95px;
+}
+
+#ubtn{
+	position: relative;
+    left: 270%;
+    height: 95px;
+    width: 17%;
+    bottom: 95px;
+}
+
+#writer{
+	position: relative;
+    left: 79%;
+    bottom: 76px;
+    font-size: x-large;
+}
+
+#contentss{
+	position: relative;
+    padding: 2%;
+    left: 78%;
+    bottom: 74px;
+    font-size: xx-large;
+}
+=======
+}
+>>>>>>> eef237f136b69c26230b02bbebb2ae3ed17662e0

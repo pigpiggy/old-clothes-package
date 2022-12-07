@@ -51,7 +51,7 @@
 					          </div>
 				          	</c:otherwise>
 				          </c:choose>
-				      </div>
+				      </div>				      
 			     </a>
 			     <c:if test="${'거래중' eq sell.istatus}">
 	          		<button class="cancel">거래 취소</button>

@@ -30,15 +30,19 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     	}
     	
     	boolean ucheck = usersService.checkuserid(id);
+    	boolean bcheck = usersService.businessidCheck(id);
     	if(ucheck) {
     		String userid = id;
     		uauthUser = usersService.login(userid, password);
-    	}else {
+    	}else if(bcheck){
     		String businessid = id;
 			String bpassword = password;
 			System.out.println("bid:"+businessid);
     		System.out.println("password:"+bpassword);
     		bauthUser = usersService.blogin(businessid,bpassword);
+    	}else {
+    		response.sendRedirect("/loginfail");
+			return false;
     	}
 		
     	HttpSession session = request.getSession();

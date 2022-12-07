@@ -10,7 +10,12 @@ public class Review {
 	private Integer bno;
 	private Integer ino;
 	private Long rstar;
-	private Date regDate;
+	private Date regdate;
+	private String stitle;
+	private String sdealtype;
+	private String ititle;
+	private String idealtype;
+	private String nickname;
 	public Integer getRno() {
 		return rno;
 	}
@@ -53,17 +58,47 @@ public class Review {
 	public void setRstar(Long rstar) {
 		this.rstar = rstar;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public String getStitle() {
+		return stitle;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setStitle(String stitle) {
+		this.stitle = stitle;
+	}
+	public String getItitle() {
+		return ititle;
+	}
+	public void setItitle(String ititle) {
+		this.ititle = ititle;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public String getSdealtype() {
+		return sdealtype;
+	}
+	public void setSdealtype(String sdealtype) {
+		this.sdealtype = sdealtype;
+	}
+	public String getIdealtype() {
+		return idealtype;
+	}
+	public void setIdealtype(String idealtype) {
+		this.idealtype = idealtype;
 	}
 	public Review() {
 		super();
 	}
 	public Review(Integer rno, String rcontent, Integer userno, Integer sno, Integer bno, Integer ino, Long rstar,
-			Date regDate) {
+			Date regdate, String stitle, String sdealtype, String ititle, String idealtype, String nickname) {
 		super();
 		this.rno = rno;
 		this.rcontent = rcontent;
@@ -72,13 +107,18 @@ public class Review {
 		this.bno = bno;
 		this.ino = ino;
 		this.rstar = rstar;
-		this.regDate = regDate;
+		this.regdate = regdate;
+		this.stitle = stitle;
+		this.sdealtype = sdealtype;
+		this.ititle = ititle;
+		this.idealtype = idealtype;
+		this.nickname = nickname;
 	}
 	@Override
 	public String toString() {
 		return "Review [rno=" + rno + ", rcontent=" + rcontent + ", userno=" + userno + ", sno=" + sno + ", bno=" + bno
-				+ ", ino=" + ino + ", rstar=" + rstar + ", regDate=" + regDate + "]";
+				+ ", ino=" + ino + ", rstar=" + rstar + ", regdate=" + regdate + ", stitle=" + stitle + ", sdealtype="
+				+ sdealtype + ", ititle=" + ititle + ", idealtype=" + idealtype + ", nickname=" + nickname + "]";
 	}
-	
-	
+
 }

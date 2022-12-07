@@ -23,6 +23,7 @@ import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
+import com.kosta.clothes.bean.Review;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
@@ -73,11 +74,13 @@ public class MypageController {
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage,
 			@RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
-			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage) {
+			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage,
+			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
 		PageInfo bspageInfo = new PageInfo();
 		PageInfo ppageInfo = new PageInfo();
+		PageInfo rpageInfo = new PageInfo();
 		System.out.println("mypage" + userno);
 		try {
 			System.out.println("여기기기기기기");
@@ -89,6 +92,8 @@ public class MypageController {
 			List<Sell> buysellList;
 			/* 구매 상품(무료나눔) */
 			List<Sharing> buysharingList;
+			/* 후기 목록 */
+			List<Review> reviewList;
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 				  Users users1 = (Users) session.getAttribute("authUser");
@@ -105,7 +110,11 @@ public class MypageController {
 				 //거래후기
 				 Integer reviewcount = reviewService.reviewcount(userno);
 				 model.addAttribute("reviewcount",reviewcount);		 
-				
+				 /* 거래후기 section (해나) */
+				 reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
+				 System.out.println("reviewpage:" + reviewList + rpageInfo);
+				 model.addAttribute("rpageInfo", rpageInfo);
+				 model.addAttribute("reviewList", reviewList);
 				 //거래완료
 				 Integer statuscount = sharingService.statuscount(userno);
 				 System.out.println("statuscount:"+statuscount);
@@ -182,7 +191,9 @@ public class MypageController {
 				 //거래후기
 				 Integer reviewcount = reviewService.reviewcount(userno);
 				 model.addAttribute("reviewcount",reviewcount);		 
-				
+				 reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
+				 model.addAttribute("rpageInfo", rpageInfo);
+				 model.addAttribute("reviewList", reviewList);
 				 //거래완료
 				Integer statuscount = sharingService.statuscount(userno);
 				System.out.println("statuscount:"+statuscount);
@@ -351,14 +362,7 @@ public class MypageController {
 		}
 	}
 	
-	@GetMapping("/mypage/review")
-	public String review() {
-		try {
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "/mypage/review";
-	}
+
 
 	//마이페이지 자기소개란 수정
 	@ResponseBody

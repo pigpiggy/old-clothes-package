@@ -9,5 +9,38 @@
 			select count (*) from review where userno=#{userno}
 		]]>
 	</select>
+
+	<!-- 개인이 받은 모든 후기 -->
+	<select id="getReviewList" parameterType="map" resultType="Review">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.rno desc) num, a.* 
+			FROM (SELECT r.rno, r.RCONTENT, r.REGDATE, r.RSTAR, i.ITITLE, i.IDEALTYPE, u.NICKNAME 
+					FROM REVIEW r, USERS u, INDIVIDUAL i
+					WHERE u.USERNO = r.USERNO AND r.INO = i.INO AND i.USERNO = #{userno} UNION 
+					SELECT r.rno, r.RCONTENT, r.REGDATE, r.RSTAR, s.STITLE, s.SDEALTYPE, u.NICKNAME 
+					FROM REVIEW r, USERS u, SHARING s 
+					WHERE u.USERNO = r.USERNO AND r.SNO = s.SNO AND s.USERNO = #{userno}) a ORDER BY regdate DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9					
+		]]>
+	</select>
+	
+	<!-- 무료나눔 상품 후기 개수(페이징) -->
+	<select id="sReviewListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*)
+			FROM REVIEW r, USERS u, SHARING s 
+			WHERE u.USERNO = r.USERNO AND r.SNO = s.SNO AND s.USERNO = #{userno}   
+		]]>
+	</select>
+	
+	<!-- 개인판매 상품 후기 개수(페이징) -->
+	<select id="iReviewListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*)  
+			FROM REVIEW r, USERS u, INDIVIDUAL i
+			WHERE u.USERNO = r.USERNO AND r.INO = i.INO AND i.USERNO = #{userno}    
+		]]>
+	</select>
+
 	
 </mapper>

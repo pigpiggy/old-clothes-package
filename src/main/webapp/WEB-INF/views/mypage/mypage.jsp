@@ -40,9 +40,13 @@
         <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
       </div>   
       <div class="fname_closet">
-		        <a href="#">
-			      <img id="like" src="/image/redheart.png" alt="찜" title="나의 찜목록">
-		        </a>          
+      			<c:if test="${authUser.sect eq 'users' }">
+      				<c:if test = "${authUser.userno eq users.userno }">
+				        <a href="/mypage/likelist/${authUser.userno }">
+					      <img id="like" src="/image/redheart.png" alt="찜" title="나의 찜목록">
+				        </a>
+		        	</c:if>
+		        </c:if>          
 		        <a href="/mypage/message">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>
@@ -190,7 +194,7 @@
 		window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
 	} 
  
-var chatuserno = document.getElementById('chatuserno').value;
+	var chatuserno = document.getElementById('chatuserno').value;
 	console.log("chatuserno: " + chatuserno);
 
 	$(document).ready(function() {

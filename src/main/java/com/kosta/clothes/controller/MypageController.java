@@ -54,9 +54,10 @@ public class MypageController {
 	 */
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
-		System.out.println("mypage" + bno);
+		System.out.println("bmypage" + bno);
 		try {
 			Business business = messageService.mypageBusiness(bno);
+			System.out.println("business mypage" +  business.toString());
 			model.addAttribute("business",business);
 		}catch(Exception e) {
 			e.printStackTrace();

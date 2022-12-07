@@ -19,7 +19,8 @@ public class Business {
 	private String sect;//개인과사업의 구분
 	private Long reviewcount;		
 	private Long likescheck;		
-	private String category; //카테고리 종류 	
+	private String category; //카테고리 종류
+	private String bintroduce; //옷장소개
 	
 	
 		
@@ -108,6 +109,13 @@ public class Business {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getBintroduce() {
+		return bintroduce;
+	}
+	public void setBintroduce(String bintroduce) {
+		this.bintroduce = bintroduce;
+	}
 
 	
 	
@@ -126,11 +134,9 @@ public class Business {
 		this.sect = sect;
 	}
 	
-	
-	
 	public Business(Integer bno, String bname, String businessid, String baddress, String bdetailadd, String bkakaoid,
 			String bphone, String bpassword, String bnumber, Double bstar, Date regDate, String sect, Long reviewcount,
-			String category, Long likescheck) {
+			Long likescheck, String category, String bintroduce) {
 		super();
 		this.bno = bno;
 		this.bname = bname;
@@ -145,18 +151,22 @@ public class Business {
 		this.regDate = regDate;
 		this.sect = sect;
 		this.reviewcount = reviewcount;
-		this.category = category;
 		this.likescheck = likescheck;
+		this.category = category;
+		this.bintroduce = bintroduce;
 	}
+	
+	
 	public Business() {
 		super();
-
 	}
 	@Override
 	public String toString() {
 		return "Business [bno=" + bno + ", bname=" + bname + ", businessid=" + businessid + ", baddress=" + baddress
 				+ ", bdetailadd=" + bdetailadd + ", bkakaoid=" + bkakaoid + ", bphone=" + bphone + ", bpassword="
 				+ bpassword + ", bnumber=" + bnumber + ", bstar=" + bstar + ", regDate=" + regDate + ", sect=" + sect
-				+ ", reviewcount=" + reviewcount + ", category=" + category + ", likescheck=" + likescheck + "]";
+				+ ", reviewcount=" + reviewcount + ", likescheck=" + likescheck + ", category=" + category
+				+ ", bintroduce=" + bintroduce + "]";
 	}
+	
 }

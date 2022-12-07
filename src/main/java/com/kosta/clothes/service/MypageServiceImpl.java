@@ -93,8 +93,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public String bintroduce(String introduce, Integer bno) throws Exception {
-		mypageDAO.bintroduce(introduce);
+	public String bintroduce(String bintroduce, Integer bno) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bintroduce", bintroduce);
+		map.put("bno", bno);
+		mypageDAO.bintroduce(map);
 		return mypageDAO.bintromyself(bno);
 
 	}

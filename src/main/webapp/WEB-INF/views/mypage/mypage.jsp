@@ -29,7 +29,9 @@
     <div class="title">
  
       <div class="nickname">
-      <input type="hidden" value="${authUser.userno }" id="chatuserno"/>
+      <c:if test="${authUser.sect eq 'users' }">
+      	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>
+      </c:if>
       <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
      <c:choose>    
 	    	<c:when test="${users.sect eq 'users' }">
@@ -48,11 +50,15 @@
 		        </a>          
 		        <a href="/mypage/message">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
-		        </a>          
-      			<a href="javascript:openDetail('/chatList')">
-					<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
-						<span class="nav__notification nbadge" id="messageAlert"></span>
-				</a>
+		        </a>
+		        <c:if test="${authUser.sect eq 'users'}">
+		        	<c:if test="${users.userno eq authUser.userno}">          
+		      			<a href="javascript:openDetail('/chatList')">
+							<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+								<span class="nav__notification nbadge" id="messageAlert"></span>
+						</a>
+					</c:if>	
+				</c:if>				
 		        <a href="/passcheck">
               	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
 		        </a>

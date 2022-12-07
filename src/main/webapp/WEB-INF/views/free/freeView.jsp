@@ -101,7 +101,7 @@
             <%--댓글 리스트 --%>
             <br><br>                    
             <!--  댓글  -->
-            <label for="content">댓글 등록</label>
+            <label class="blabel" for="content">댓글 등록</label>
             <c:if test="${authUser ne null }">                 
             	<c:choose>
                 <c:when test="${authUser.sect eq 'users' }"> 	
@@ -111,7 +111,7 @@
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
 				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
 				               <span class="input-group-btn">
-				                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+				                    <button id="ubtn" class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
 				               </span>
 				              </div>
 				        </form>
@@ -124,7 +124,7 @@
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
 				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
 				               <span class="input-group-btn">
-				                    <button class="btn btn-default" type="button" name="bcommentInsertBtn">등록</button>
+				                    <button id="bbtn" class="btn btn-default" type="button" name="bcommentInsertBtn">등록</button>
 				               </span>
 				              </div>
 				        </form>
@@ -221,7 +221,7 @@
 	             var a =''; 
 	             $.each(data, function(key, value){ 
 	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                 a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+	                 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
 	                 if(auth != ''){
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
@@ -235,7 +235,7 @@
 	                 }
 	                 a += '';
 	                 a += '';
-	                 a += '<div class="commentContent'+value.cno+'"> <p> 내용 : '+value.ccontent +'</p>';
+	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss"> 내용 : '+value.ccontent +'</p>';
 	                 a += '</div></div>';
 	             });
 	             

@@ -50,7 +50,7 @@
 					          </div>
 				          	</c:otherwise>
 				          </c:choose>
-				      </div>
+				      </div>				      
 			     </a>
 		  	</div>
 	 	 </c:forEach>

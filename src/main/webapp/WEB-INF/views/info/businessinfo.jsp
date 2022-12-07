@@ -101,51 +101,43 @@ h2{
 			<div id="blist"></div>				
 		</div>
 		<!-- 헌옷 수거 신청 모달창 -->
-		<div id="modal">
+		<div id="modal" class="modal">
    
 		    <div class="modal_content">
-		        <h2>[헌옷 수거 신청]</h2>
-		       
-		        <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
-		        
-		        <div class="allapply">
-		        <form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">		       
-			        <div>
-			        	<label>이름  </label>
-			        	<input type="text" id="aname" name="aname" placeholder="ex)홍길동">
-			        </div>
-			        <div>
-			        	<label>주소  </label>
-				        <input type="text" id="aaddress" name="aaddress" readonly onclick="findAddr()" placeholder="여기 클릭해주세요.">
-			        </div>
-			        <div>
-			            <label></label>
-			           	<input type="text" id="adetailaddress" name="adetailaddress" placeholder="ex)101동101호">			        	
-				
-			        </div>
-			        
-			        
-			        <div>
-			        	<label>옷 무게  </label>
-			        	<input type="text" id="weight" name="weight" placeholder="ex)30">
-			        </div>		  		  		             		      
-			        <div>
-			        	<label>전화 번호  </label>
-			        	<input type="text" id="aphone" name="aphone" placeholder="ex)-입력하지 마세요.">
-			        </div>
-			        <div>
-			        	<label>희망 날짜  </label>
-			        	<input type="text" id="apickup" name="apickup" placeholder="ex)시간 선택 조절 하세요">
-			        </div>
-		        	<div style="margin-top:10%" class="allbutton">     		       
-				        <button type="submit" form="form"id="applycloth">수거 신청</button>
-				        <button type="button" id="modal_close_btn">모달 창 닫기</button>
-				    </div>		
-				    <input type="hidden" id="bno" name="bno" value="">	   
-			     </form>		        		
-		        </div>		      	       
+		    	<ul>
+		    		<li class="item">
+		    			 <div class="title">
+				             <strong>[ 헌옷 수거 신청 ]</strong>
+				             <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+				             <hr class="hr1">
+				         </div>
+				         <div class="allapply">
+			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
+			         	 		<div class="cont">
+						              <input type="text" id="aname" name="aname" placeholder="이름">
+						              <div class="adre">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(상세주소전까지)">
+						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						              </div>
+							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+						              <div class="wei">
+						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
+						                  <p>kg</p>
+						              </div>
+						          </div>	
+						          <hr class="hr2">		         	 	
+			         	 	<div class="btn">			         	 	  
+				              <button type="button" id="modal_close_btn">Close</button>
+				              <button type="submit" form="form" id="applycloth">수거신청</button>
+				           </div>
+				           	  <input type="hidden" id="bno" name="bno" value="">
+			         	 	</form>
+				         </div>
+		    		</li>
+		    	</ul>
 		    </div>
-		   
+		    
 		    <div class="modal_layer"></div>
 		</div>
     
@@ -471,7 +463,7 @@ h2{
 	
 	//카테고리별 리스트 출력
 	function catelist(){
-		let category = $("#catelist option:selected").val(); //selectbox에서 category 선택값
+		let category = $("#catelist option:selected").val(); //selectbox에서 sido 선택값
 		console.log("마지막: " + category);
 		 $.ajax({
 				type: 'post',

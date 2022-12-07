@@ -52,15 +52,25 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into apply (ano,aname,aphone,weight,aaddress,adetailaddress,apickup,userno,bno)
-			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress},#{adetailaddress}, #{apickup},#{userno},#{bno})
+			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno)
+			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno})
 		]]>
 	</insert>
 	
+<<<<<<< HEAD
 	<!-- 신청 폼 개수 -->
 	<select id="applycount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
 				select count(*) from apply where bno=#{bno}
 			]]>
 		</select>
+=======
+	
+	<!-- 사용자 -> 사업자에게 신청한 목록 리스트  -->
+	<select id="getBapply" parameterType="Integer" resultType="apply">
+		<![CDATA[
+			SELECT * FROM apply WHERE bno = #{bno}
+		]]>
+	</select>
+>>>>>>> 55e962001fbb87ebc14908d4fe182be1f0b6bb3a
 </mapper>	

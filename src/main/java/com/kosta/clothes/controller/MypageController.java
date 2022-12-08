@@ -64,6 +64,7 @@ public class MypageController {
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
 		System.out.println("bmypage" + bno);
+		List<Apply> apply = null;
 		try {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
@@ -78,11 +79,16 @@ public class MypageController {
 	                  model.addAttribute("applycount",applycount);
 	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
-	                 System.out.println("bmypage 사업자");
-	                 Business business = messageService.mypageBusiness(bno);
+	                  System.out.println("bmypage 사업자");
+	                  Business business = messageService.mypageBusiness(bno);
 	                  System.out.println("business mypage" +  business.toString());         
 	                  model.addAttribute("business",business);
 	                  
+	                  //사용자->사업자 신청
+	                  apply = applyService.getBapply(bno);
+	                  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  //
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);

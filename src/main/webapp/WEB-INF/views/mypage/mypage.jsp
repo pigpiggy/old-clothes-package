@@ -110,8 +110,7 @@
 					</c:choose>
 				</c:when>
 				
-				<c:otherwise>
-					
+				<c:otherwise>					
 						<c:if test="${users.sect eq 'users'}">											
 								<p>${users.introduce }</p>
 						</c:if >

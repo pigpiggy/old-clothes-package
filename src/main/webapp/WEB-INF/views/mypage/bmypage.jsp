@@ -13,48 +13,14 @@
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div class="my_Tab">
 			<ul class="tabs">
-<<<<<<< HEAD
 				<li class="on"><a href ="#a">신청 목록</a></li>				
 				<li><a href ="#b">거래 후기</a></li>
-			</ul>
-			<div class="tab_con on"> 
-			<div class="applyList">
-        <ul>
-            <li class="item">
-            <strong>[ 헌옷 수거 신청 ]</strong>
-                <div class="title">
-                </div>                  
-                
-                <div class="allapply">
-                    <div class="cont">
-                        <div class="aname"><p>김갑동</p></div>
-                        <div class="aphone"><p>01033334444</p></div>                        
-                         <div class="aadress"><p>서울특별시 금청구 가산동</p></div>
-                         <div class="apickup"><p>2022-12-07 11:00pm</p></div>                                          
-                        <div class="wei">
-                            <div class="weight"><p>25</p></div>                        
-                        <p>kg</p>
-                        </div>
-                     </div>
-                    <div class="btn">
-                        <button type="button" id="apply_close_btn">수거거절</button>
-                        <button type="submit" form="form" id="applying">수거대기</button>
-                    </div>                   
-                 </div>
-            </li>
-        </ul>
-    </div>
-    </div>
-=======
-				<li class="on"><a href ="#a">신청 목록</a></li>		
-				<li><a href ="#b">거래 후기</a></li>
-			</ul>
+			</ul>			
 			<div class="tab_con on">
 				<div>
 					<c:import url='/WEB-INF/views/mypage/bapplylist.jsp' />
 				</div>
 			</div>
->>>>>>> 55e962001fbb87ebc14908d4fe182be1f0b6bb3a
 			<div class="tab_con">
 				<div>
 					<c:import url='/WEB-INF/views/mypage/review.jsp' />

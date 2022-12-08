@@ -79,9 +79,9 @@
 			 </c:when>
 			 <c:otherwise>
 			 <span>신청목록 : ${applycount} 개</span>
-			 <span>수거 중 : 3 개</span>
-			 <span>수거완료 : 5 개</span>
-			 <span>수거거절 : 2 개</span>
+			 <span>수거 중 : ${acount} 개</span>
+			 <span>수거완료 : ${ccount} 개</span>
+			 <span>수거거절 : ${bcount} 개</span>
 			 </c:otherwise>
 			</c:choose>	   
       	  

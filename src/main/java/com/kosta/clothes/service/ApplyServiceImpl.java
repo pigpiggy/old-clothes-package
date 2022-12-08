@@ -1,5 +1,6 @@
 package com.kosta.clothes.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,16 +39,29 @@ public class ApplyServiceImpl implements ApplyService{
 		return applyDAO.getIapply(map);
 	}
 
-<<<<<<< HEAD
+
 	@Override
 	public Integer applycount(Integer bno) throws Exception {
 		return  applyDAO.applycount(bno);
-=======
+	}
+
 	//사용자 -> 사업자 신청목록
 	@Override
 	public List<Apply> getBapply(Integer bno) throws Exception {
 		return applyDAO.getBapply(bno);
->>>>>>> 55e962001fbb87ebc14908d4fe182be1f0b6bb3a
+
+	}
+
+	@Override
+	public Map astatuscount(Integer bno) throws Exception { 
+		Integer a=applyDAO.astatuscount(bno);
+		Integer b=applyDAO.bstatuscount(bno);
+		Integer c=applyDAO.cstatuscount(bno);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("수거중", a);
+		map.put("수거거절", b);
+		map.put("수거완료", c);
+		return  map;
 	}
 
 

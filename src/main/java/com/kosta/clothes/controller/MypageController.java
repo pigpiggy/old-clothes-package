@@ -279,7 +279,7 @@ public class MypageController {
       
    }
    
-   @GetMapping ("/mypage/message")
+   @GetMapping ("/mypage/message/{usreno}")
    String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
          @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
          @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
@@ -494,6 +494,7 @@ public class MypageController {
    @GetMapping("/completeDeal")
    public void completeDeal(@RequestParam("ino") Integer ino) {
       try {
+    	  System.out.println("들어옴");
          mypageService.completeDeal(ino);
       }catch(Exception e) {
          e.printStackTrace();
@@ -508,7 +509,25 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-   }     
+   } 
+   
+   @ResponseBody
+   @GetMapping("/sendIReview")
+   public void sendIReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("ino") Integer ino) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("ino", ino);
+    	  map.put("userno", userno);
+         mypageService.sendIReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
    	
 	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {

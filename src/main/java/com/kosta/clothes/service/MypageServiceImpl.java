@@ -228,6 +228,13 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 
+	@Override
+	public void sendIReview(Map map) throws Exception {
+		mypageDAO.sendIReview(map);
+		
+	}
+
+
 	
 
 

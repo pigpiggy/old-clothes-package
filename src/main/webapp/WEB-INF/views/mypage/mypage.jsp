@@ -47,7 +47,7 @@
 				        </a>
 		        	</c:if>
 		        </c:if>          
-		        <a href="/mypage/message">
+		        <a href="/mypage/message/${authUser.userno }">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>
 		        <c:if test="${authUser.sect eq 'users'}">

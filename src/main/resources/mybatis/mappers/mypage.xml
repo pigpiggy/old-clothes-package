@@ -187,4 +187,17 @@
 		]]>
 	</select>
 	
+	<insert id="sendIReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, ino)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{ino})
+		]]>
+	</insert>
+	
 </mapper>	

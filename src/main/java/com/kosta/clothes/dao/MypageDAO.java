@@ -48,6 +48,8 @@ public interface MypageDAO {
 	void upSharingDealCount(Integer sno) throws Exception;
 	void completeSharingDeal(Integer sno) throws Exception;
 	
+	void sendIReview(Map map) throws Exception;
+	
 	List<Sharing> getLikeSharingList(Integer userno) throws Exception;
 }
 

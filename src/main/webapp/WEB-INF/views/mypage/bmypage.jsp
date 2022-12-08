@@ -13,6 +13,7 @@
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div class="my_Tab">
 			<ul class="tabs">
+<<<<<<< HEAD
 
 				<li class="on"><a href ="#a">신청 목록</a></li>				
 				<li><a href ="#b">거래 후기</a></li>
@@ -46,6 +47,11 @@
     </div>
     </div>
 
+=======
+				<li class="on"><a href ="#a">신청 목록</a></li>				
+				<li><a href ="#b">거래 후기</a></li>
+			</ul>			
+>>>>>>> fc2f86aef0289dc8b2666abcda59e2cfb6dfd23c
 			<div class="tab_con on">
 				<div>
 					<c:import url='/WEB-INF/views/mypage/bapplylist.jsp' />

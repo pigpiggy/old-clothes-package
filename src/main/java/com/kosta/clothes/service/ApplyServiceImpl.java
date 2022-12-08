@@ -43,12 +43,17 @@ public class ApplyServiceImpl implements ApplyService{
 	@Override
 	public Integer applycount(Integer bno) throws Exception {
 		return  applyDAO.applycount(bno);
+<<<<<<< HEAD
 	}
+=======
+		}
+>>>>>>> fc2f86aef0289dc8b2666abcda59e2cfb6dfd23c
 
 	//사용자 -> 사업자 신청목록
 	@Override
 	public List<Apply> getBapply(Integer bno) throws Exception {
 		return applyDAO.getBapply(bno);
+<<<<<<< HEAD
 
 	}
 
@@ -62,6 +67,8 @@ public class ApplyServiceImpl implements ApplyService{
 		map.put("수거거절", b);
 		map.put("수거완료", c);
 		return  map;
+=======
+>>>>>>> fc2f86aef0289dc8b2666abcda59e2cfb6dfd23c
 	}
 
 

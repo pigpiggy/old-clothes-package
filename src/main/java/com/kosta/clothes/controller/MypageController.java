@@ -14,30 +14,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
-import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.PageInfo;
-import com.kosta.clothes.bean.Review;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
-
+import com.kosta.clothes.security.Auth;
 import com.kosta.clothes.service.ApplyService;
-
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
 import com.kosta.clothes.service.SellService;
 import com.kosta.clothes.service.SharingService;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 @Controller
 public class MypageController {
@@ -509,43 +504,50 @@ public class MypageController {
          e.printStackTrace();
       }
    }     
-   	
 	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {
 		try {
-			List<Sharing> sList = null;
-			sList = mypageService.getLikeSharingList(userno);
-			for (int i = 0; i < sList.size(); i++) {
-				if (sList.get(i).getSfileids() != null) {
-					sList.get(i).setSfileids(sList.get(i).getSfileids().split(",")[0]);
-				}
-			}
-			model.addAttribute("sharing", sList);
-			System.out.println("SLIST:"+sList);
-			
-//			List<Likes> lList = mypageService.getLikeList(userno);
-//			List<Likes> tList = new ArrayList<Likes>();
-//			List<Sharing> sList = new ArrayList<Sharing>();
-//			List<Sell> iList = new ArrayList<Sell>();
-//			List<Business> bList = new ArrayList<Business>();
-//			for(int i=0; i<lList.size() ;i++) {
-//				if(lList.get(i).getSno()!=null&&lList.get(i).getLikescheck()==1) {//무료나눔 좋아요만 찾기
-//					tList.add(lList.get(i));
-//				}
-//			}
-//			for(int j=0; j<tList.size(); j++) {
-//				Integer sno = tList.get(j).getSno();
-//				Sharing sharing = mypageService.getSharing(sno);
-//				sList.add(sharing);
-//				System.out.println("sharing:"+sharing);
-//			}
-//			model.addAttribute("sharing", sList);
-			
+			Users users = mypageService.getMypage(userno);
+			model.addAttribute("users", users);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "/mypage/likelist";
 	}
+	@ResponseBody
+	@PostMapping("/mypage/likelist/likelistaj")
+	public List<?> likelistaj (@RequestBody Map<String,Object> params, Model model){
+		String category = (String) params.get("category");
+		System.out.println("category : " + category);
+		List<Sharing> sList = new ArrayList<Sharing>();
+		List<Sell> iList = new ArrayList<Sell>();
+		List<Business> bList = new ArrayList<Business>();
+		Users users = (Users)session.getAttribute("authUser");
+		Integer userno = users.getUserno();
+		try {
+			if("free".equals(category)) {
+				sList = mypageService.getLikeSharingList(userno);
+				for (int i = 0; i < sList.size(); i++) {
+					if (sList.get(i).getSfileids() != null) {
+						sList.get(i).setSfileids(sList.get(i).getSfileids().split(",")[0]);
+					}
+				}
+				System.out.println("SLIST:"+sList);
+				return sList;
+			}else if("indi".equals(category)) {
+				iList = mypageService.getLikeSellList(userno);
+				System.out.println("ILIST:"+iList);
+				return iList;
+			}else {
+				bList = mypageService.getLikeBusinessList(userno);
+				System.out.println("BLIST:"+bList);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return bList;
+	}
+	
 }
 

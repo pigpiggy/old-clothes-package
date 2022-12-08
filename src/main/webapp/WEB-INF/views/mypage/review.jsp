@@ -105,7 +105,7 @@
 						<li><a id="prev"><<</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${users.userno }?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+						<li><a href="/mypage/umypage/${users.userno }?rpage=${rpageInfo.page-1}&select=1&" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">

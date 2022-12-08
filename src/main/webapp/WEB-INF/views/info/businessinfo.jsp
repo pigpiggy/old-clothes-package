@@ -21,7 +21,6 @@ label{
 .form>div {
 	display:flex;
 	margin-bottom: 20px;
-	justify-content: center;
 	padding-bottm:7px;
 	align-items:center;	
 }
@@ -105,18 +104,19 @@ h2{
    
 		    <div class="modal_content">
 		    	<ul>
-		    		<li class="item">
-		    			 <div class="title">
-				             <strong>[ 헌옷 수거 신청 ]</strong>
+		    		<li class="item">		    			 
+				            
+				             <div class="title">
+				               <strong>[ 헌옷 수거 신청 ]</strong>
 				             <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
-				             <hr class="hr1">
 				         </div>
+				        
 				         <div class="allapply">
 			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
 			         	 		<div class="cont">
 						              <input type="text" id="aname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(상세주소전까지)">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
 						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">

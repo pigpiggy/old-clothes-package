@@ -1,32 +1,81 @@
 @charset "UTF-8";
 * {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
+}
+.rcard {
+	background: #fff;
+	border-radius: 2px;
+	display: inline-block;
+	height: 300px;
+	margin: 1rem;
+	position: relative;
+	width: 300px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
- #reviewStar {
-    margin-bottom: 10px;
-    padding: 5px;
+.rcard-2 {
+  	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.card-title {
-	font-weight: bold;
+.rCard-list {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.card-text {
-    margin-right: 10px;
+.eachstar {
+	display: flex;
 }
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
+.eachstar img {
+	width: 20px;
+	line-height: 1;
+	margin: 1.5px;
 }
 
 #reviewStar {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 10px;
 }
 
-.reviewcontent {
-    display: flex;
+.reviewCenter {
+	text-align: left;
+	margin-left: 20px;
 }
+.reviewTitle {
+	margin: 20px 0 10px 0;	
+}
+
+.reviewDealType {
+    font-size: 17.5px;
+    margin-bottom: 10px;	
+}
+.reviewContent {
+	font-size: 16px;
+}
+#reviewWriter {
+	border-top: 1px solid #ddd;
+	width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+}
+#reviewWriter img {
+	width: 20px;
+}
+.rNickname {
+	display: flex;
+	align-items: center;
+}
+.rNickname img {
+	margin-right: 5px;
+}
+.cardheader {
+	font-size: 16px;
+}
+

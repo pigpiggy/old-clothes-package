@@ -20,15 +20,16 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Override
 	public Integer reviewcount(Integer userno) throws Exception {
-
-		return reviewDAO.reviewcount(userno);
+		Integer slistcount = reviewDAO.sReviewListCount(userno);
+		Integer ilistcount = reviewDAO.iReviewListCount(userno);
+		return slistcount + ilistcount;
 	}
 
 	@Override
 	public List<Review> getReviewList(Integer userno, int rpage, PageInfo rpageInfo) throws Exception {
-		int rlistCount = reviewDAO.sReviewListCount(userno);
-		int slistCount = reviewDAO.iReviewListCount(userno);
-		int listCount = rlistCount + slistCount;
+		int slistCount = reviewDAO.sReviewListCount(userno);
+		int ilistCount = reviewDAO.iReviewListCount(userno);
+		int listCount = slistCount + ilistCount;
 		System.out.print("ReviewRow:" + listCount);
 		int maxPage = (int)Math.ceil((double)listCount/10);  
 		int startPage = rpage/10 * 10 + 1; 

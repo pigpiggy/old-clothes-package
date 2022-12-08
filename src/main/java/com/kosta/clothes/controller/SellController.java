@@ -205,7 +205,7 @@ public class SellController {
 	}	
 	
 	//무료나눔 댓글등록
-		//댓글 등록하기
+	//댓글 등록하기
 	@PostMapping("/sellView/{ino}/{userno}")
 	public ModelAndView comments(@PathVariable("ino") Integer ino,
 			@PathVariable("userno") Integer userno,

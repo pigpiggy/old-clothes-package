@@ -3,6 +3,7 @@ package com.kosta.clothes.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
@@ -36,6 +37,10 @@ public interface MypageService {
 	
 	//userno 조건으로 좋아요 누른 무료나눔글 정보 조회
 	List<Sharing> getLikeSharingList(Integer userno) throws Exception;
+	//userno 조건으로 좋아요 누른 개인판매글 정보 조회
+	List<Sell> getLikeSellList(Integer userno) throws Exception;
+	//userno 조건으로 좋아요 누른 업체 정보 조회
+	List<Business> getLikeBusinessList(Integer userno) throws Exception;
 }
 
 

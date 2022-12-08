@@ -42,5 +42,12 @@
 		]]>
 	</select>
 
-	
+	<!-- 사업자가 받은 모든 후기 -->
+	<select id="getBReviewList" parameterType="map" resultType="Review">
+		<![CDATA[
+			SELECT r.RNO, r.RCONTENT, r.REGDATE, r.RSTAR, r.BNO, b.BNAME, u.NICKNAME  
+			FROM REVIEW r, BUSINESS b, USERS u  
+			WHERE r.BNO = b.BNO AND u.USERNO = r.USERNO AND b.BNO = #{bno}
+		]]>
+	</select>
 </mapper>

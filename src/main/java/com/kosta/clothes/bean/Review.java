@@ -16,6 +16,7 @@ public class Review {
 	private String ititle;
 	private String idealtype;
 	private String nickname;
+	private String bname;
 	public Integer getRno() {
 		return rno;
 	}
@@ -93,6 +94,12 @@ public class Review {
 	}
 	public void setIdealtype(String idealtype) {
 		this.idealtype = idealtype;
+	}
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 	public Review() {
 		super();

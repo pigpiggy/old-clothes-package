@@ -23,7 +23,7 @@
 			</div>
 			<div class="tab_con">
 				<div>
-					<c:import url='/WEB-INF/views/mypage/review.jsp' />
+					<c:import url='/WEB-INF/views/mypage/breview.jsp' />
 				</div>
 			</div>
 		</div>

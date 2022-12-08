@@ -11,6 +11,15 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
+	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
+	<div class="my_Tab">
+			<ul class="tabs">
+				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+				<li class="on"><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
+				<li><a href ="#a">신청 목록</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+			</ul>
+	</div>
 	<select>
     	<option value="개인 판매">개인 판매</option>
     	<option value="무료 나눔">무료 나눔</option>

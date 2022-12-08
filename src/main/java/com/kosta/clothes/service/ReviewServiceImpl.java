@@ -51,4 +51,11 @@ public class ReviewServiceImpl implements ReviewService{
 		map.put("row", row);
 		return reviewDAO.getReviewList(map);
 	}
+
+	@Override
+	public List<Review> getBReviewList(Integer bno) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bno", bno);
+		return reviewDAO.getBReviewList(map);
+	}
 }

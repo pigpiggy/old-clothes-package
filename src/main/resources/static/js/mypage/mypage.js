@@ -2,7 +2,6 @@ $(document).ready(function(){
 	var index = 0;
 	
 		$('.my_Tab .tabs a').on('click',function(e){ //탭 메뉴에 있는 링크를 클릭했을 때	
-			e.preventDefault();
 			var idx = $(this).parent().index(); //현재 클릭한 링크의 부모가 몇번째 인지 idx 변수에 넣는다.
 			
 			$(this).parent().siblings().removeClass('on'); //현재 클릭한 링크의 부모를 제외 한 나머지 li에 on클래스를 제거하고

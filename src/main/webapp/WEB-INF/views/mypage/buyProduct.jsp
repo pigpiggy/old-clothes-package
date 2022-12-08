@@ -28,6 +28,7 @@
     	<div class="card-list">
 		  <c:forEach var="buysell" items="${buysellList}">
 		  	<div class="sellList">
+		  			<input type="hidden" value="${buysell.ino}" class="selectedIno"/>
 				     <a href="/sellView/${buysell.ino}">
 					     <div class="card2" data-sno=${buysell.ino }>
 				          <div class="card-image">
@@ -67,7 +68,7 @@
 	          		<button class="complete3">거래 완료</button>
 	          	</c:if>
 	          	<c:if test="${'거래 완료' eq buysell.istatus}">
-	          		<button class="review"><a href="#demo-modal">거래 후기</a></button>
+	          		<button class="review1"><a href="#demo-modal">거래 후기</a></button>
 	          	</c:if>
 		  	</div>
 	 	 </c:forEach>
@@ -76,10 +77,16 @@
     
     <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
-      			<form action="smessage" method="post" id="messageform">
-      				<input type="hidden" id="selectValue" value="${select }" />
-      				<input type="hidden" id="submitcheck" value="${submitcheck}" />
-      			</form>
+   				<div class="stars">
+     				<button class="star1">1</button>
+     				<button class="star1">2</button>
+     				<button class="star1">3</button>
+     				<button class="star1">4</button>
+     				<button class="star1">5</button>
+     				<label for="content1">거래 후기</label>
+				</div>
+   				<textarea name="content1" class="content1"></textarea>
+   				<button id="reviewcomplete1">작성완료</button>	
 				<a href="#" class="modal__close">&times;</a>
       		</div>
   	</div>
@@ -115,6 +122,7 @@
     	<div class="card-list">
 		  <c:forEach var="buysharing" items="${buysharingList}">
 		  <div class="sellList">
+		  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 	     <a href="/sharingView/${buysharing.sno}">
 		     <div class="card sharingcard2" data-sno=${buysharing.sno }>
 		          <div class="card-image">
@@ -155,7 +163,7 @@
 	          		<button class="complete4">거래 완료</button>
 	          	</c:if>
 	          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-	          		<button class="review1"><a href="#demo-modal2">거래 후기</a></button>
+	          		<button class="review"><a href="#demo-modal2">거래 후기</a></button>
 	          	</c:if>
 	     	 </div>
 		  </c:forEach>
@@ -174,6 +182,7 @@
 	      				<label for="content">거래 후기</label>
 	      			</div>
       				<textarea name="content" class="content"></textarea>
+      				<button id="reviewcomplete">작성완료</button>	
       			</form>
 				<a href="#" class="modal__close">&times;</a>
       		</div>
@@ -248,13 +257,13 @@
 			var index = $(this).parent().index();
 			$(this).attr("disabled", true);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
+			alert(ino);
 			$.ajax({
 				type : "get",
 				url : "/completeDeal",
 				data : {ino:ino},
 				success : function(data) {
 					console.log(data);
-					console.log("성공");
 					location.reload();
 				},
 				error : function(err) {
@@ -283,7 +292,7 @@
 			});
 
 		})
-		
+		var star = 0;
 		$(".star").mouseover(function(){
 			for(var j=0;j<=4;j++){
 				document.getElementsByClassName('star')[j].classList.remove('yellow');
@@ -292,9 +301,67 @@
 			for(var j=0;j<=starindex;j++){
 				document.getElementsByClassName('star')[j].classList.add('yellow');
 			}
+			star = starindex + 1;
+		})
+		var star1 = 0;
+		$(".star1").mouseover(function(){
+			for(var j=0;j<=4;j++){
+				document.getElementsByClassName('star1')[j].classList.remove('yellow');
+			}
+			var starindex = $(".star1").index(this);
+			for(var j=0;j<=starindex;j++){
+				document.getElementsByClassName('star1')[j].classList.add('yellow');
+			}
+			star1 = starindex+1;
 		})
 		
+		var ino=0;
+		$('.review1').click(function(){
+			var reviewIndex = $(this).prev('.selectedIno').index()+1;
+			ino = $(".card2:eq("+reviewIndex+")").attr("data-sno");
+		})
 		
+		$("#reviewcomplete1").click(function(){
+			var content = $('.content1').val();
+			$.ajax({
+				type : "get",
+				url : "/sendIReview",
+				data : {star:star1,
+						content:content,
+						ino:ino},
+				success : function(data) {
+					console.log(data);
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+		})
+		
+		var sno=0;
+		$('.review').click(function(){
+			var reviewIndex = $(this).prev('.selectedSno').index()+1;
+			sno = $(".sharingcard2:eq("+reviewIndex+")").attr("data-sno");
+		})
+		
+		$("#reviewcomplete").click(function(){
+			var content = $('.content').val();
+			$.ajax({
+				type : "get",
+				url : "/sendSReview",
+				data : {star:star,
+						content:content,
+						sno:sno},
+				success : function(data) {
+					console.log(data);
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+		})
 		
 	</script>
 </body>

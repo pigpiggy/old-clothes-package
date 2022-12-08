@@ -1,5 +1,6 @@
 @charset "UTF-8";
-.star {
+.star,
+.star1 {
 	background: url('/image/graystar.png') no-repeat;
 	background-size: 32px;
 	width: 32px;
@@ -8,7 +9,8 @@
 	cursor: pointer;
 	color: transparent;
 }
-.star.yellow {
+.star.yellow,
+.star1.yellow {
 	background: url('/image/yellowstar.png') no-repeat;
 	background-size: 32px;
 	width: 32px;

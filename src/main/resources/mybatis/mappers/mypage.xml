@@ -182,9 +182,34 @@
 	</select>
 	<select id="getLikeSharingList" parameterType="map" resultType="Sharing">
 		<![CDATA[
-			SELECT rownum, s.* FROM sharing s WHERE sno in (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+			SELECT s.* FROM sharing s WHERE sno in (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
     
 		]]>
 	</select>
+	<select id="getLikeSellList" parameterType="map" resultType="sell">
+		<![CDATA[
+			SELECT i.* FROM INDIVIDUAL i WHERE ino in (SELECT ino FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	<select id="getLikeBusinessList" parameterType="map" resultType="business">
+		<![CDATA[
+			SELECT b.* FROM BUSINESS b WHERE bno in (SELECT bno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	
+	<insert id="sendIReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, ino)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{ino})
+		]]>
+	</insert>
 	
 </mapper>	

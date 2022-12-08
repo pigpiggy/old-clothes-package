@@ -46,7 +46,8 @@
 				        </a>
 		        	</c:if>
 		        </c:if>          
-		        <a href="/mypage/message">
+		        <a href="/mypage/message/${authUser.userno }">
+		        <a href="/mypage/message/${users.userno }">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>
 		        <c:if test="${authUser.sect eq 'users'}">
@@ -78,9 +79,9 @@
 			 </c:when>
 			 <c:otherwise>
 			 <span>신청목록 : ${applycount} 개</span>
-			 <span>수거 중 : 3 개</span>
-			 <span>수거완료 : 5 개</span>
-			 <span>수거거절 : 2 개</span>
+			 <span>수거 중 : ${acount} 개</span>
+			 <span>수거완료 : ${ccount} 개</span>
+			 <span>수거거절 : ${bcount} 개</span>
 			 </c:otherwise>
 			</c:choose>	   
       	  
@@ -93,10 +94,11 @@
 						<img id="setting" src="/image/setting1.png" alt="소개수정" >
 					</c:if>
 				</c:if>
-				<c:if test="${business.sect eq 'business'&& business.bno eq authUser.bno}">			 
-					<img id="setting" src="/image/setting1.png" alt="소개수정" >
+				<c:if test="${authUser.sect eq 'business'}">
+					<c:if test="${business.bno eq authUser.bno}">			 
+						<img id="setting" src="/image/setting1.png" alt="소개수정" >
+					</c:if>
 				</c:if>
-				
 				<c:choose>
 				
 				<c:when test="${users.introduce eq null && business.bintroduce eq null}">

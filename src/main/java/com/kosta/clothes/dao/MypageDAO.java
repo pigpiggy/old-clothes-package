@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
@@ -48,6 +49,10 @@ public interface MypageDAO {
 	void upSharingDealCount(Integer sno) throws Exception;
 	void completeSharingDeal(Integer sno) throws Exception;
 	
+	void sendIReview(Map map) throws Exception;
+	
 	List<Sharing> getLikeSharingList(Integer userno) throws Exception;
+	List<Sell> getLikeSellList(Integer userno)throws Exception;
+	List<Business> getLikeBusinessList(Integer userno)throws Exception;
 }
 

@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
@@ -225,6 +226,21 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Sharing> getLikeSharingList(Integer userno) throws Exception {
 		return mypageDAO.getLikeSharingList(userno);
+	}
+
+
+	@Override
+	public void sendIReview(Map map) throws Exception {
+		mypageDAO.sendIReview(map);
+	}
+	public List<Sell> getLikeSellList(Integer userno) throws Exception {
+		return mypageDAO.getLikeSellList(userno);
+	}
+
+
+	@Override
+	public List<Business> getLikeBusinessList(Integer userno) throws Exception {
+		return mypageDAO.getLikeBusinessList(userno);
 	}
 
 

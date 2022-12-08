@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/buyProduct.css"/>" rel='stylesheet' />
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 	<select>
@@ -54,10 +57,23 @@
 	          		<button class="cancel3">거래 취소</button>
 	          		<button class="complete3">거래 완료</button>
 	          	</c:if>
+	          	<c:if test="${'거래 완료' eq buysell.istatus}">
+	          		<button class="review"><a href="#demo-modal">거래 후기</a></button>
+	          	</c:if>
 		  	</div>
 	 	 </c:forEach>
 	    </div>
     </div>
+    
+    <div id="demo-modal" class="firstmodal">
+      		<div class="modal__content" id="modal__content">
+      			<form action="smessage" method="post" id="messageform">
+      				<input type="hidden" id="selectValue" value="${select }" />
+      				<input type="hidden" id="submitcheck" value="${submitcheck}" />
+      			</form>
+				<a href="#" class="modal__close">&times;</a>
+      		</div>
+  	</div>
     
     <ul class="pagination">
 		<c:choose>
@@ -65,14 +81,14 @@
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<c:forEach var="i" begin="${bspageInfo.startPage }" end="${bspageInfo.endPage }">
 			<c:choose>
 				<c:when test="${bspageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?bspage=${i}">${i }</a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}?bspage=${i}">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -81,7 +97,7 @@
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?bspage=${bspageInfo.page+1}" id="next">>></a></li>
+				<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page+1}" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
@@ -129,10 +145,30 @@
 	          		<button class="cancel4">거래 취소</button>
 	          		<button class="complete4">거래 완료</button>
 	          	</c:if>
+	          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
+	          		<button class="review1"><a href="#demo-modal2">거래 후기</a></button>
+	          	</c:if>
 	     	 </div>
 		  </c:forEach>
 	    </div>
     </div>
+    
+    <div id="demo-modal2" class="firstmodal">
+      		<div class="modal__content" id="modal__content">
+      			<form action="smessage" method="post" id="messageform">
+      				<div class="stars">
+	      				<button class="star">1</button>
+	      				<button class="star">2</button>
+	      				<button class="star">3</button>
+	      				<button class="star">4</button>
+	      				<button class="star">5</button>
+	      				<label for="content">거래 후기</label>
+	      			</div>
+      				<textarea name="content" class="content"></textarea>
+      			</form>
+				<a href="#" class="modal__close">&times;</a>
+      		</div>
+  	</div>
     
     <ul class="pagination">
 		<c:choose>
@@ -140,14 +176,14 @@
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<c:forEach var="i" begin="${ppageInfo.startPage }" end="${ppageInfo.endPage }">
 			<c:choose>
 				<c:when test="${ppageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?ppage=${i}">${i }</a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}?ppage=${i}">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -156,7 +192,7 @@
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?ppage=${ppageInfo.page+1}" id="next">>></a></li>
+				<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page+1}" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
@@ -238,6 +274,18 @@
 			});
 
 		})
+		
+		$(".star").mouseover(function(){
+			for(var j=0;j<=4;j++){
+				document.getElementsByClassName('star')[j].classList.remove('yellow');
+			}
+			var starindex = $(".star").index(this);
+			for(var j=0;j<=starindex;j++){
+				document.getElementsByClassName('star')[j].classList.add('yellow');
+			}
+		})
+		
+		
 		
 	</script>
 </body>

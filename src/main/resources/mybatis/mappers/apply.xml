@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
-<mapper namespace="com.kosta.clothes.dao.ApplyDAO">
+	<mapper namespace="com.kosta.clothes.dao.ApplyDAO">
 <!-- 개인이 개인에게 무료나눔/개인판매 신청(wapply 테이블) -->
 	<insert id="insertSwapply" parameterType="Wapply">
 	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">
@@ -56,4 +56,19 @@
 			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno})
 		]]>
 	</insert>
+
+	<!-- 신청 폼 개수 -->
+	<select id="applycount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno}
+			]]>
+		</select>
+
+	
+	<!-- 사용자 -> 사업자에게 신청한 목록 리스트  -->
+	<select id="getBapply" parameterType="Integer" resultType="apply">
+		<![CDATA[
+			SELECT * FROM apply WHERE bno = #{bno}
+		]]>
+	</select>
 </mapper>	

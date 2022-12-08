@@ -1,10 +1,12 @@
 package com.kosta.clothes.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.dao.ApplyDAO;
 
@@ -34,6 +36,18 @@ public class ApplyServiceImpl implements ApplyService{
 	@Override
 	public Wapply selectIwapply(Map map) throws Exception {
 		return applyDAO.getIapply(map);
+	}
+
+
+	@Override
+	public Integer applycount(Integer bno) throws Exception {
+		return  applyDAO.applycount(bno);
+		}
+
+	//사용자 -> 사업자 신청목록
+	@Override
+	public List<Apply> getBapply(Integer bno) throws Exception {
+		return applyDAO.getBapply(bno);
 	}
 
 

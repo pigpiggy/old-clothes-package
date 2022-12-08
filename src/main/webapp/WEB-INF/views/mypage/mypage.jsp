@@ -13,7 +13,6 @@
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
-
 </head>
 <body>
 	<div>
@@ -79,9 +78,9 @@
 			 </c:when>
 			 <c:otherwise>
 			 <span>신청목록 : ${applycount} 개</span>
-			 <span>수거 중 : 3 개</span>
-			 <span>수거완료 : 5 개</span>
-			 <span>수거거절 : 2 개</span>
+			 <span>수거 중 : ${acount} 개</span>
+			 <span>수거완료 : ${ccount} 개</span>
+			 <span>수거거절 : ${bcount} 개</span>
 			 </c:otherwise>
 			</c:choose>	   
       	  
@@ -111,8 +110,7 @@
 					</c:choose>
 				</c:when>
 				
-				<c:otherwise>
-					
+				<c:otherwise>					
 						<c:if test="${users.sect eq 'users'}">											
 								<p>${users.introduce }</p>
 						</c:if >
@@ -181,65 +179,65 @@
 			$('.intro_check').css('display','none');
 			$('#setting').css('display','block');			
   		});
-  </script>
+	  	
+	 /* 마이페이지에서 채팅 */
+	 // 채팅 아이콘 클릭했을 때 새 창으로
+	 function openDetail(url) {
+			var width = 850;
+			var height = 650;
+			var left = (window.screen.width - width) / 2;
+			var top = (window.screen.height - height) / 2;
+			window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
+		} 
+	 
+		var chatuserno = document.getElementById('chatuserno').value;
+		console.log("chatuserno: " + chatuserno);
 
- <script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
-
- <script>
- function openDetail(url) {
-		var width = 850;
-		var height = 650;
-		var left = (window.screen.width - width) / 2;
-		var top = (window.screen.height - height) / 2;
-		window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
-	} 
- 
-	var chatuserno = document.getElementById('chatuserno').value;
-	console.log("chatuserno: " + chatuserno);
-
-	$(document).ready(function() {
-	
-		if (chatuserno != null) {
-			getUnread();
-			getInfiniteUnread();
-		}
-	});
-
- function getUnread() {
-		$.ajax({
-			url: "/chatUnreadAlert/ajax",
-			type: "POST",
-			data: JSON.stringify({
-				chatuserno: chatuserno
-			}) ,
-			dataType: "json",
-			contentType: "application/json",
-			success: function(result) {
-				if (result >= 1) {
-					showUnread(result);
-					console.log(result);
-					$("#messageAlert").show();
-				} else {
-					$("#messageAlert").css('display','none');
-					showUnread('');
-				}
+		$(document).ready(function() {
+		
+			if (chatuserno != null) {
+				getUnread();
+				getInfiniteUnread();
 			}
 		});
-	}
-	
-	function getInfiniteUnread() {
-		setInterval(() => {
-			getUnread();
-		}, 1000);
-	}
-	
-	function showUnread(result) {
-		$('#messageAlert').html(result);
-		/*if(result < 1) {
-			$("#messageAlert").css('display','none');
-		}else {
-		}*/
-	}
- </script> 
+	 // 안읽은 채팅방 개수
+	 function getUnread() {
+			$.ajax({
+				url: "/chatUnreadAlert/ajax",
+				type: "POST",
+				data: JSON.stringify({
+					chatuserno: chatuserno
+				}) ,
+				dataType: "json",
+				contentType: "application/json",
+				success: function(result) {
+					if (result >= 1) {
+						showUnread(result);
+						console.log(result);
+						$("#messageAlert").show();
+					} else {
+						$("#messageAlert").css('display','none');
+						showUnread('');
+					}
+				}
+			});
+		}
+		
+		function getInfiniteUnread() {
+			setInterval(() => {
+				getUnread();
+			}, 1000);
+		}
+		
+		function showUnread(result) {
+			$('#messageAlert').html(result);
+			/*if(result < 1) {
+				$("#messageAlert").css('display','none');
+			}else {
+			}*/
+		}
+  </script>
+<script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+
 </body>
 </html>

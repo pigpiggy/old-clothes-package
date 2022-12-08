@@ -19,7 +19,9 @@ public interface ApplyDAO {
 	void insertapply(Apply apply) throws Exception; //업체에 신청한 form 등록
 
 	Integer applycount(Integer bno)throws Exception;//신청목록 개수
-
+	Integer astatuscount(Integer bno)throws Exception;//수거상태 카운트
+	Integer bstatuscount(Integer bno)throws Exception;
+	Integer cstatuscount(Integer bno)throws Exception;
 	
 	List<Apply> getBapply(Integer bno) throws Exception; //사용자 -> 사업자 신청목록
 }

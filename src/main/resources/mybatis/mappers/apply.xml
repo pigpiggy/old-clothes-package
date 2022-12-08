@@ -53,11 +53,8 @@
 	</selectKey>		
 		<![CDATA[
 			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno,astatus)
-<<<<<<< HEAD
 			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno},#{astatus})
-=======
-			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno},'수거대기')
->>>>>>> ecccd0b54fed8e653088a1afd8454deab1c2a04b
+
 		]]>
 	</insert>
 	
@@ -96,7 +93,7 @@
 			SELECT * FROM apply WHERE bno = #{bno}
 		]]>
 	</select>
-<<<<<<< HEAD
+
 	
 	<!-- 사용자가 신청한 목록 -->
 	<select id="getUapply" parameterType="Integer" resultType="apply">
@@ -106,7 +103,5 @@
 		]]>
 	</select>
 	
-=======
 
->>>>>>> ecccd0b54fed8e653088a1afd8454deab1c2a04b
 </mapper>	

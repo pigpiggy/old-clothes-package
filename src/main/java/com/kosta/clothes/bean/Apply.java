@@ -10,6 +10,7 @@ public class Apply {
 	private String apickup; //신청 희망날짜
 	private Integer userno; //신청자 번호
 	private Integer bno; //업체 번호
+	private String bname; //상호명
 	public Integer getAno() {
 		return ano;
 	}
@@ -66,8 +67,22 @@ public class Apply {
 	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
+	
+	
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+	
+	public Apply() {
+		super();
+	}
+	
+	
 	public Apply(Integer ano, String aname, String aphone, Long weight, String aaddress, String adetailaddress,
-			String apickup, Integer userno, Integer bno) {
+			String apickup, Integer userno, Integer bno, String bname) {
 		super();
 		this.ano = ano;
 		this.aname = aname;
@@ -78,16 +93,15 @@ public class Apply {
 		this.apickup = apickup;
 		this.userno = userno;
 		this.bno = bno;
-	}
-	public Apply() {
-		super();
+		this.bname = bname;
 	}
 	@Override
 	public String toString() {
 		return "Apply [ano=" + ano + ", aname=" + aname + ", aphone=" + aphone + ", weight=" + weight + ", aaddress="
 				+ aaddress + ", adetailaddress=" + adetailaddress + ", apickup=" + apickup + ", userno=" + userno
-				+ ", bno=" + bno + "]";
+				+ ", bno=" + bno + ", bname=" + bname + "]";
 	}
+	
 	
 	
 	

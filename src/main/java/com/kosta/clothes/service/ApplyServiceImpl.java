@@ -49,6 +49,12 @@ public class ApplyServiceImpl implements ApplyService{
 	public List<Apply> getBapply(Integer bno) throws Exception {
 		return applyDAO.getBapply(bno);
 	}
+	//사용자가 신청한 목록
+	@Override
+	public List<Apply> getUapply(Integer userno) throws Exception {
+		// TODO Auto-generated method stub
+		return applyDAO.getUapply(userno);
+	}
 
 
 

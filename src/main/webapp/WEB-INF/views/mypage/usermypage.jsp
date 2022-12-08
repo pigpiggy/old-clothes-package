@@ -28,7 +28,11 @@
 					<c:import url='/WEB-INF/views/mypage/buyProduct.jsp' />
 				</div>
 			</div>
-			<div class="tab_con">신청 목록 띄워주세요!</div>
+			<div class="tab_con">
+				<div>
+					<c:import url='/WEB-INF/views/mypage/uapplylist.jsp' />
+				</div>
+			</div>
 			
 			<div class="tab_con">
 				<div>

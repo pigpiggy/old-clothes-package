@@ -52,8 +52,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno)
-			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno})
+			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno,astatus)
+			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno},#{astatus})
 		]]>
 	</insert>
 
@@ -71,4 +71,13 @@
 			SELECT * FROM apply WHERE bno = #{bno}
 		]]>
 	</select>
+	
+	<!-- 사용자가 신청한 목록 -->
+	<select id="getUapply" parameterType="Integer" resultType="apply">
+		<![CDATA[
+			SELECT * FROM apply a, business b 
+			WHERE a.bno = b.bno and userno = #{userno}
+		]]>
+	</select>
+	
 </mapper>	

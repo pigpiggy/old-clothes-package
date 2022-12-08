@@ -47,7 +47,7 @@
 				        </a>
 		        	</c:if>
 		        </c:if>          
-		        <a href="/mypage/message">
+		        <a href="/mypage/message/${users.userno }">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>
 		        <c:if test="${authUser.sect eq 'users'}">
@@ -94,10 +94,11 @@
 						<img id="setting" src="/image/setting1.png" alt="소개수정" >
 					</c:if>
 				</c:if>
-				<c:if test="${business.sect eq 'business'&& business.bno eq authUser.bno}">			 
-					<img id="setting" src="/image/setting1.png" alt="소개수정" >
+				<c:if test="${authUser.sect eq 'business'}">
+					<c:if test="${business.bno eq authUser.bno}">			 
+						<img id="setting" src="/image/setting1.png" alt="소개수정" >
+					</c:if>
 				</c:if>
-				
 				<c:choose>
 				
 				<c:when test="${users.introduce eq null && business.bintroduce eq null}">

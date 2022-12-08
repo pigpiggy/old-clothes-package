@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사업자신청목록</title>
+<title>사용자신청목록</title>
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
 <style>
 .item{	
 	width:100%;
 }
-#bcards{
+#ucards{
 	display: flex;    
     flex-wrap: wrap;
     justify-content: center;
@@ -19,26 +19,26 @@
 </style>
 </head>
 <body>	
-<div id="bcards">
-	<c:forEach var="apply" items="${apply }">	  
+<div id="ucards">
+	<c:forEach var="wapply" items="${wapply }">	  
 		<div class="applyList">	        
 	            <div class="item" style="width:100%;">		            
-	            <strong>[ 헌옷 수거 신청 ]</strong>		
+	            <strong>[ ${wapply.bname } ]</strong>		
 	            	<div class="title"></div>                                 		                
 	                <div class="allapply" style="padding: 2%;">		                
 	                    <div class="cont">
-	                        <div class="aname"><p>${apply.aname }</p></div>
-	                        <div class="aphone"><p>${apply.aphone }</p></div>                        
-	                        <div class="aadress"><p>${apply.aaddress }</p></div>
-	                        <div class="apickup"><p>${apply.apickup }</p></div>                                          
+	                        <div class="aname"><p>${wapply.aname }</p></div>
+	                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
+	                        <div class="aadress"><p>${wapply.aaddress }</p></div>
+	                        <div class="apickup"><p>${wapply.apickup }</p></div>                                          
 	                        <div class="wei">
-	                            <div class="weight"><p>${apply.weight }</p></div>                        
+	                            <div class="weight"><p>${wapply.weight }</p></div>                        
 	                        	<p>kg</p>
 	                        </div>		                    
 	                     </div>		                     
 	                    <div class="btn">
-	                        <button type="button" id="apply_close_btn">수거거절</button>
-	                        <button type="submit" form="form" id="applying">수거승인</button>
+	                        <button type="button" id="apply_close_btn">신청취소</button>
+	                        <button type="submit" form="form" id="applying">수거대기</button>
 	                    </div>                   
 	                 </div>		               	            
 	        </div>		        

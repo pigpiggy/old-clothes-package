@@ -64,7 +64,7 @@ public class MypageController {
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
 		System.out.println("bmypage" + bno);
-		List<Apply> apply = null;
+		List<Apply> apply = null;		
 		try {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
@@ -123,6 +123,7 @@ public class MypageController {
       PageInfo spageInfo = new PageInfo();
       PageInfo bspageInfo = new PageInfo();
       PageInfo ppageInfo = new PageInfo();
+      List<Apply> wapply = null;
       System.out.println("mypage" + userno);
       try {
          System.out.println("여기기기기기기");
@@ -173,6 +174,11 @@ public class MypageController {
              buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
              model.addAttribute("ppageInfo", ppageInfo);
              model.addAttribute("buysharingList", buysharingList);
+             
+             //개인이 신청한 목록 리스트
+             wapply = applyService.getUapply(userno);
+             model.addAttribute("wapply",wapply);
+             System.out.println("Umypage apply : " + wapply.toString());
              
              //users 값을 가져온다
              Users users = mypageService.getMypage(userno);
@@ -285,16 +291,17 @@ public class MypageController {
       
    }
    
-   @GetMapping ("/mypage/message")
+   @GetMapping ("/mypage/message/{userno}")
    String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
          @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
          @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
-         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck) {
+         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
+         @PathVariable("userno") Integer userno) {
       List<MessageVO> rmessageList = new ArrayList<>();
       List<MessageVO> smessageList = new ArrayList<>();
       Map<String, Object> map = new HashMap<String, Object>();
       PageInfo rpageInfo = new PageInfo();
-      PageInfo spageInfo = new PageInfo();
+      PageInfo spageInfo = new PageInfo();      
       try {
             Business bauthuser = new Business();
             String sect;
@@ -306,12 +313,36 @@ public class MypageController {
                map.put("pageInfo", rpageInfo);
                rmessageList = messageService.uRecvMessage(map);//사용자의 받은편지함
                smessageList = messageService.uSendMessage(uauthuser.getUserno(),spage,spageInfo);//사용자의 보낸편지함
+               //
+               Users users = mypageService.getMypage(userno);
+               //상품등록
+               Integer sharingcount = sharingService.sharingcount(userno);
+               System.out.println("sharingcount : " + sharingcount);
+               Integer sellcount = sellService.sellcount(userno);
+               System.out.println("sellcount:" + sellcount);
+               Integer totalcount = sharingcount + sellcount;
+               System.out.println("totalcount : " + totalcount);
+               model.addAttribute("totalcount",totalcount);
+               
+               //거래후기
+               Integer reviewcount = reviewService.reviewcount(userno);
+               model.addAttribute("reviewcount",reviewcount);       
+              
+               //거래완료
+               Integer statuscount = sharingService.statuscount(userno);
+               System.out.println("statuscount:"+statuscount);
+               statuscount +=sellService.statuscount(userno);
+               System.out.println("statuscount:"+statuscount);
+               model.addAttribute("statuscount",statuscount);
+              
                model.addAttribute("recvmessage", rmessageList);
                model.addAttribute("sendmessage", smessageList);
                model.addAttribute("rpageInfo", rpageInfo);
                model.addAttribute("spageInfo", spageInfo);
                model.addAttribute("select", select);
                model.addAttribute("submitcheck", submitcheck);
+               model.addAttribute("users", users);
+               
             } else {
                bauthuser = (Business) session.getAttribute("authUser");
                map.put("recvUserno", bauthuser.getBno());

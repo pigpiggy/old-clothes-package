@@ -5,39 +5,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
+<title>사업자신청목록</title>
+<link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
+<style>
+.item{	
+	width:100%;
+}
+#cards{
+	display: flex;    
+    flex-wrap: wrap;
+    justify-content: center;
+}
+</style>
 </head>
-<body>
-	<div id="cards">
-    	<div class="card-list">
-		  <c:forEach var="apply" items="${apply}">
-		  	<div class="card border-light mb-3" style="max-width: 18rem;">
-        		<div class="card-body">
-            		<div id="reviewStar">
-                		<h5 class="card-title">${apply.aname }</h5>                		
-            		</div>
-            		<div class="reviewcontent" id="reviewTitle">
-                		<span class="card-text">글제목: ${apply.aaddress }</span> 
-                		<p>좋아요</p>
-            		</div>
-            		<div class="reviewcontent" id="reviewDealType">
-                		<span class="card-text">휴: ${apply.aphone }</span>
-                		<p> 직거래</p>
-            		</div>
-            		<p class="card-text">${apply.apickup }</p>
-        		</div>
-        			<div class="card-header">
-            			<span>${apply.aname }</span>
-            			<span>${apply.apickup }</span>
-        			</div>
-    		</div>
-			
-	 	 </c:forEach>
-	    </div>
-    </div>
+<body>	
+<div id="cards">
+	<c:forEach var="apply" items="${apply }">	  
+		<div class="applyList">	        
+	            <div class="item" style="width:100%;">		            
+	            <strong>[ 헌옷 수거 신청 ]</strong>		
+	            	<div class="title"></div>                                 		                
+	                <div class="allapply" style="padding: 2%;">		                
+	                    <div class="cont">
+	                        <div class="aname"><p>${apply.aname }</p></div>
+	                        <div class="aphone"><p>${apply.aphone }</p></div>                        
+	                        <div class="aadress"><p>${apply.aaddress }</p></div>
+	                        <div class="apickup"><p>${apply.apickup }</p></div>                                          
+	                        <div class="wei">
+	                            <div class="weight"><p>${apply.weight }</p></div>                        
+	                        	<p>kg</p>
+	                        </div>		                    
+	                     </div>		                     
+	                    <div class="btn">
+	                        <button type="button" id="apply_close_btn">수거거절</button>
+	                        <button type="submit" form="form" id="applying">수거대기</button>
+	                    </div>                   
+	                 </div>		               	            
+	        </div>		        
+	    </div>	 
+	</c:forEach>	 
+</div>
     
     <ul class="pagination">
 		<c:choose>

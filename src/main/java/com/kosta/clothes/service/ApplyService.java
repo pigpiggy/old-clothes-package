@@ -17,5 +17,5 @@ public interface ApplyService {
 	
 
 	
-	List<Apply> getBapply(Integer bno) throws Exception;//사용자->사업자 신청목로
+	List<Apply> getBapply(Integer bno) throws Exception;//사용자->사업자 신청목록
 }

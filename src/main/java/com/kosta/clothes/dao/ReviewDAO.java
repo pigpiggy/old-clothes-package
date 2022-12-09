@@ -17,5 +17,6 @@ public interface ReviewDAO {
 	Integer iReviewListCount(Integer userno) throws Exception;
 	//사업자 거래후기
 	List<Review> getBReviewList(Map map) throws Exception;
+	Integer bReviewListCount(Integer bno) throws Exception;
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -1021,7 +1022,7 @@ public class MypageController {
 	}
 	@ResponseBody
 	@PostMapping("/mypage/likelist/likelistaj")
-	public List<?> likelistaj (@RequestBody Map<String,Object> params, Model model){
+	public List<?> likelistaj (@RequestBody Map<String,Object> params){
 		String category = (String) params.get("category");
 		System.out.println("category : " + category);
 		List<Sharing> sList = new ArrayList<Sharing>();
@@ -1053,6 +1054,7 @@ public class MypageController {
 		}
 		return bList;
 	}
+<<<<<<< HEAD
 	//수거 승인
 		@GetMapping("/bapply/{ano}/{userno}")
 		@ResponseBody
@@ -1112,5 +1114,35 @@ public class MypageController {
 				}
 				return "신청 취소 하였습니다.";
 			}
+=======
+	@ResponseBody
+	@PostMapping("/mypage/likelist/deletelike")
+	public boolean deletelikle(@RequestBody Map<String,Object> params) {
+		Integer no = Integer.parseInt((String)params.get("deleteno"));
+		String category = (String) params.get("category");
+		Users users = (Users)session.getAttribute("authUser");
+		Integer userno = users.getUserno();
+		try {
+			if("free".equals(category)) {
+				Integer sno = no;
+				mypageService.deletesLike(userno, sno);
+				return true;
+			}else if("indi".equals(category)) {
+				Integer ino = no;
+				mypageService.deleteiLike(userno, ino);
+				return true;
+			}else if("busi".equals(category)) {
+				Integer bno = no;
+				mypageService.deletebLike(userno, bno);
+				return true;
+			}
+			
+		}catch(Exception e) {
+			
+		}
+		return false;
+	}
+	
+>>>>>>> a5bc58998f0c540b0c6e46553e9fa6dad2e85803
 }
 

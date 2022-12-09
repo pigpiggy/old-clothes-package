@@ -199,4 +199,34 @@
 		]]>
 	</select>
 	
+	<update id="deletesLike" parameterType="map">
+		<![CDATA[
+			update like set likescheck=0
+			where sno=#{sno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deleteiLike" parameterType="map">
+		<![CDATA[
+			update like set likescheck=0
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletebLike" parameterType="map">
+		<![CDATA[
+			update like set likescheck=0
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletesLikecount" parameterType="map">
+		<![CDATA[
+			update sharing set likes=likes-1
+			where sno=#{sno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deleteiLikecount" parameterType="map">
+		<![CDATA[
+			update individual set likes=likes-1
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
 </mapper>	

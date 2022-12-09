@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -739,7 +740,7 @@ public class MypageController {
 	}
 	@ResponseBody
 	@PostMapping("/mypage/likelist/likelistaj")
-	public List<?> likelistaj (@RequestBody Map<String,Object> params, Model model){
+	public List<?> likelistaj (@RequestBody Map<String,Object> params){
 		String category = (String) params.get("category");
 		System.out.println("category : " + category);
 		List<Sharing> sList = new ArrayList<Sharing>();
@@ -770,6 +771,34 @@ public class MypageController {
 			e.printStackTrace();
 		}
 		return bList;
+	}
+	@Transactional
+	@ResponseBody
+	@PostMapping("/mypage/likelist/deletelike")
+	public boolean deletelikle(@RequestBody Map<String,Object> params) {
+		Integer no = (Integer) params.get("deleteno");
+		String category = (String) params.get("category");
+		Users users = (Users)session.getAttribute("authUser");
+		Integer userno = users.getUserno();
+		try {
+			if("free".equals(category)) {
+				Integer sno = no;
+				mypageService.deletesLike(userno, sno);
+				return true;
+			}else if("indi".equals(category)) {
+				Integer ino = no;
+				mypageService.deleteiLike(userno, ino);
+				return true;
+			}else if("busi".equals(category)) {
+				Integer bno = no;
+				mypageService.deletebLike(userno, bno);
+				return true;
+			}
+			
+		}catch(Exception e) {
+			
+		}
+		return false;
 	}
 	
 }

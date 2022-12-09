@@ -96,7 +96,6 @@
 			SELECT * FROM apply WHERE bno = #{bno}
 		]]>
 	</select>
-<<<<<<< HEAD
 	
 	<!-- 사용자가 신청한 목록 -->
 	<select id="getUapply" parameterType="Integer" resultType="apply">
@@ -105,8 +104,4 @@
 			WHERE a.bno = b.bno and userno = #{userno}
 		]]>
 	</select>
-	
-=======
-
->>>>>>> ecccd0b54fed8e653088a1afd8454deab1c2a04b
 </mapper>	

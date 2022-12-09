@@ -45,6 +45,38 @@
 	width: 6%;
 	margin-top:10%;
 }
+.form{
+	witdh:300px;
+}
+.allapply{	
+	padding: 5px 20px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width:360px; height: 265px;
+	margin-left: -220px;
+	margin-top: -170px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items:center;
+}
+.form>div {
+	display:flex;
+	margin-bottom: 20px;
+	padding-bottm:7px;
+	align-items:center;	
+}
+.allapply>button{
+	width:85px;
+	float:right;
+	padding:3px;
+}
+.form>div>input{	
+	width:250px;
+	margin-left:15px;
+	padding:5px;
+}
 
 </style>
 </head>
@@ -61,7 +93,48 @@
 		<div id="list" class="list">
 			
 		</div>
-	</div>	
+	</div>
+	<!-- 헌옷 수거 신청 모달창 -->
+		<div id="modal" class="modal">
+   
+		    <div class="modal_content">
+		    	<ul>
+		    		<li class="item">		    			 
+				            
+				             <div class="title">
+				               <strong>[ 헌옷 수거 신청 ]</strong>
+				             <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+				         </div>
+				        
+				         <div class="allapply">
+			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
+			         	 		<div class="cont">
+						              <input type="text" id="aname" name="aname" placeholder="이름">
+						              <div class="adre">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
+						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						              </div>
+							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+						              <div class="wei">
+						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
+						                  <p>kg</p>
+						              </div>
+						          </div>	
+						          <hr class="hr2">		         	 	
+			         	 	<div class="btn">			         	 	  
+				              <button type="button" id="modal_close_btn">Close</button>
+				              <button type="submit" form="form" id="applycloth">수거신청</button>
+				           </div>
+				           	  <input type="hidden" id="bno" name="bno" value="">
+			         	 	</form>
+				         </div>
+		    		</li>
+		    	</ul>
+		    </div>
+		    
+		    <div class="modal_layer"></div>
+		</div>	
 
 
 <script>
@@ -76,12 +149,12 @@ $(document).ready(function(){
 	console.log(category);
 	var line = "";
 	 $.ajax({
-			type: 'post',
-			url: 'likelistaj',
-			dataType: 'json',
-			data: JSON.stringify({		
-				"category" : category
-			}),
+		type: 'post',
+		url: 'likelistaj',
+		dataType: 'json',
+		data: JSON.stringify({		
+			"category" : category
+		}),
 		contentType: "application/json",
 		success: function(data){
 			$('#list').empty();
@@ -130,7 +203,7 @@ $(document).ready(function(){
 							chartHtml +='</div>'
 							chartHtml +='<div>'
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<input type="button" value="삭제">'
+							chartHtml +='<button id="sdelete'+data.sno+'" class="sdelete" data-value="'+data.sno+'">취소</button>'
 							chartHtml +='</div>'	
 							chartHtml +='</div>'	
 							chartHtml +='</div>'
@@ -198,8 +271,47 @@ $(document).ready(function(){
 					displayData(selectedPage, dataPerPage);
 				})
 			}
+			/*
+			$(document).on("click",".delete",function(e){
+				let category = "";
+				var targetElement = e.target;
+				let deleteno = targetElement.getAttribute('data-value');
+				let deleteclass = targetElement.getAttribute('class');
+				if(deleteclass=="sdelete"){
+					category = "free"
+				}else if(deleteclass=="idelete"){
+					category = "indi"
+				}else if(deleteclass=="bdelete"){
+					category = "busi"
+				}
+				console.log("삭제:"+deleteno);
+				$.ajax({
+					type: 'post',
+					url: 'deletelike',
+					dataType: 'json',
+					data: JSON.stringify({	
+						"category" : category,
+						"deleteno" : deleteno
+					}),
+					contentType: "application/json",
+					success: function(result){
+						console.log(result);
+						if(result=="true"){
+							alert("좋아요 취소되었습니다");
+							//페이징 표시 재호출
+							paging(totalData, dataPerPage, pageCount, globalCurrentPage);
+							//글 목록 표시 재호출
+							displayData(globalCurrentPage, dataPerPage);
+						}else{
+							alert("에러입니다");
+						}
+					},
+					error:function(){alert("에러입니다");}
+				})
+			})
+			*/
 		},
-		error:function(){alert("에러입니다.");},
+		error:function(){alert("에러입니다.");}
 	})
 })
 
@@ -214,14 +326,14 @@ function catelist(){
 	console.log(category);
 	var line = "";
 	 $.ajax({
-			type: 'post',
-			url: 'likelistaj',
-			dataType: 'json',
-			data: JSON.stringify({		
-				"category" : category
-			}),
+		type: 'post',
+		url: 'likelistaj',
+		dataType: 'json',
+		data: JSON.stringify({		
+			"category" : category
+		}),
 		contentType: "application/json",
-		success: function(data){
+			success: function(data){
 			$('#list').empty();
 			totalData= data.length;
 			console.log(data);
@@ -268,7 +380,7 @@ function catelist(){
 							chartHtml +='</div>'
 							chartHtml +='<div>'
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<input type="button" value="삭제">'
+							chartHtml +='<button id="sdelete'+data.sno+'" class="sdelete" data-value="'+data.sno+'">취소</button>'
 							chartHtml +='</div>'	
 							chartHtml +='</div>'	
 							chartHtml +='</div>'
@@ -289,7 +401,7 @@ function catelist(){
 							chartHtml +='</div>'
 							chartHtml +='<div>'
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<input type="button" value="삭제">'
+							chartHtml +='<button id="idelete'+data.ino+'" class="idelete" data-value="'+data.ino+'">취소</button>'
 							chartHtml +='</div>'	
 							chartHtml +='</div>'	
 							chartHtml +='</div>'
@@ -306,10 +418,10 @@ function catelist(){
 							chartHtml +='</div>'
 							chartHtml +='<div>'
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<input type="button" value="삭제">'
+							chartHtml +='<button id="bdelete'+data.bno+'" class="bdelete" data-value="'+data.bno+'">취소</button>';
 							chartHtml +='</div>'	
 							chartHtml +='<div style="margin-top:10%;">'
-							chartHtml +='<input type="button" value="신청하기">'
+							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]
 							chartHtml +='</div>'
 							chartHtml +='</div>'	
 									
@@ -380,9 +492,47 @@ function catelist(){
 				})
 			}
 		},
-		error:function(){alert("에러입니다.");},
+		error:function(){alert("에러입니다.");}
 	})
 }
+$(document).on("click",".delete",function(e){
+	let category = "";
+	console.log("globalCurrentPage:"+globalCurrentPage);
+	var targetElement = e.target;
+	let deleteno = targetElement.getAttribute('data-value');
+	let deleteclass = targetElement.getAttribute('class');
+	if(deleteclass=="sdelete"){
+		category = "free"
+	}else if(deleteclass=="idelete"){
+		category = "indi"
+	}else if(deleteclass=="bdelete"){
+		category = "busi"
+	}
+	console.log("삭제:"+deleteno);
+	$.ajax({
+		type: 'post',
+		url: 'deletelike',
+		dataType: 'json',
+		data: JSON.stringify({	
+			"category" : category,
+			"deleteno" : deleteno
+		}),
+		contentType: "application/json",
+		success: function(result){
+			console.log(result);
+			if(result=="true"){
+				alert("좋아요 취소되었습니다");
+				//페이징 표시 재호출
+				paging(totalData, dataPerPage, pageCount, globalCurrentPage);
+				//글 목록 표시 재호출
+				displayData(globalCurrentPage, dataPerPage);
+			}else{
+				alert("에러입니다");
+			}
+		},
+		error:function(){alert("에러입니다");}
+	})
+})
 </script>
 
 

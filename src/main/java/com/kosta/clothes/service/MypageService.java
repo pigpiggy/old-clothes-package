@@ -38,6 +38,13 @@ public interface MypageService {
 	List<Sell> getLikeSellList(Integer userno) throws Exception;
 	//userno 조건으로 좋아요 누른 업체 정보 조회
 	List<Business> getLikeBusinessList(Integer userno) throws Exception;
+	
+	//무료나눔 좋아요 취소
+	void deletesLike(Integer userno, Integer sno) throws Exception;
+	//개인판매 좋아요 취소
+	void deleteiLike(Integer userno, Integer ino) throws Exception;
+	//업체 좋아요 취소
+	void deletebLike(Integer userno, Integer bno) throws Exception;
 }
 
 

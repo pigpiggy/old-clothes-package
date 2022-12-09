@@ -57,7 +57,7 @@ public interface MypageDAO {
 	void deletesLike(@Param("userno") Integer userno, @Param("sno") Integer sno) throws Exception;
 	void deleteiLike(@Param("userno")Integer userno, @Param("ino")Integer ino) throws Exception;
 	void deletebLike(@Param("userno")Integer userno, @Param("bno")Integer bno) throws Exception;
-	void deletesLikecount(@Param("userno") Integer userno, @Param("sno") Integer sno) throws Exception;
-	void deleteiLikecount(@Param("userno")Integer userno, @Param("ino")Integer ino) throws Exception;
+	void deletesLikecount(Integer sno) throws Exception;
+	void deleteiLikecount(Integer ino) throws Exception;
 }
 

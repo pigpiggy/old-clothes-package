@@ -201,32 +201,32 @@
 	
 	<update id="deletesLike" parameterType="map">
 		<![CDATA[
-			update like set likescheck=0
+			update likes set likescheck=0
 			where sno=#{sno} and userno=#{userno}
 		]]>
 	</update>
 	<update id="deleteiLike" parameterType="map">
 		<![CDATA[
-			update like set likescheck=0
+			update likes set likescheck=0
 			where ino=#{ino} and userno=#{userno}
 		]]>
 	</update>
 	<update id="deletebLike" parameterType="map">
 		<![CDATA[
-			update like set likescheck=0
+			update likes set likescheck=0
 			where bno=#{bno} and userno=#{userno}
 		]]>
 	</update>
-	<update id="deletesLikecount" parameterType="map">
+	<update id="deletesLikecount" parameterType="Integer">
 		<![CDATA[
 			update sharing set likes=likes-1
-			where sno=#{sno} and userno=#{userno}
+			where sno=#{sno}
 		]]>
 	</update>
-	<update id="deleteiLikecount" parameterType="map">
+	<update id="deleteiLikecount" parameterType="Integer">
 		<![CDATA[
 			update individual set likes=likes-1
-			where ino=#{ino} and userno=#{userno}
+			where ino=#{ino}
 		]]>
 	</update>
 	<insert id="sendIReview" parameterType="map">

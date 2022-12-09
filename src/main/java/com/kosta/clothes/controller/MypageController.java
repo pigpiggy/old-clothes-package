@@ -890,11 +890,10 @@ public class MypageController {
 		}
 		return bList;
 	}
-	@Transactional
 	@ResponseBody
 	@PostMapping("/mypage/likelist/deletelike")
 	public boolean deletelikle(@RequestBody Map<String,Object> params) {
-		Integer no = (Integer) params.get("deleteno");
+		Integer no = Integer.parseInt((String)params.get("deleteno"));
 		String category = (String) params.get("category");
 		Users users = (Users)session.getAttribute("authUser");
 		Integer userno = users.getUserno();

@@ -8,16 +8,13 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.clothes.bean.Business;
-import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
-
-import com.kosta.clothes.bean.Wapply;
-
 import com.kosta.clothes.dao.MypageDAO;
 
 @Service
@@ -242,18 +239,19 @@ public class MypageServiceImpl implements MypageService {
 	public List<Business> getLikeBusinessList(Integer userno) throws Exception {
 		return mypageDAO.getLikeBusinessList(userno);//업체 좋아요 리스트 불러오기
 	}
-
-
+	@Transactional
 	@Override
 	public void deletesLike(Integer userno, Integer sno) throws Exception {
-		mypageDAO.deletesLikecount(userno, sno);//무료나눔 테이블에 있는 좋아요 카운트 -1
+		System.out.println("userno"+userno);
+		System.out.println("sno"+sno);
+		mypageDAO.deletesLikecount(sno);//무료나눔 테이블에 있는 좋아요 카운트 -1
 		mypageDAO.deletesLike(userno, sno);//좋아요 테이블에 있는 likescheck 0
 	}
 
 
 	@Override
 	public void deleteiLike(Integer userno, Integer ino) throws Exception {
-		mypageDAO.deleteiLikecount(userno, ino);//개인판매 테이블에 있는 좋아요 카운트 -1
+		mypageDAO.deleteiLikecount(ino);//개인판매 테이블에 있는 좋아요 카운트 -1
 		mypageDAO.deleteiLike(userno, ino);	//좋아요 테이블에 있는 likescheck 0
 	}
 

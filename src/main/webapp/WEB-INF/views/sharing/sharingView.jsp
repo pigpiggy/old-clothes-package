@@ -148,7 +148,7 @@
 												</c:forEach>			        					
 				        					</ul>
 				        					<input type="hidden" name="sno" value="${sharing.sno }">
-				        					<input type="submit" value="확인"/>
+				        					<input type="submit" value="확인" class="submitButton"/>
 				        				</form>
 			        				</c:if>
 			        			</c:when>
@@ -465,6 +465,11 @@ $("#wapply").on("click", function() {
 
 	}		
 })
+
+var sstatus = "${sharing.sstatus}";
+if(sstatus == '거래 실패'){
+	$('.submitButton').attr("disabled", true);
+}
 
 
 </script>

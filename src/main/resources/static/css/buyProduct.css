@@ -23,3 +23,8 @@
 .stars {
 	display: flex;
 }
+
+.buyProductWrap {
+	width: 1000px;
+	margin: 0 auto;
+}

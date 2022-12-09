@@ -53,7 +53,7 @@
 	</selectKey>		
 		<![CDATA[
 			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno,astatus)
-			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress}, #{apickup},#{userno},#{bno},#{astatus})
+			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress},#{apickup},#{userno},#{bno},#{astatus})
 
 		]]>
 	</insert>
@@ -102,6 +102,45 @@
 			WHERE a.bno = b.bno and userno = #{userno}
 		]]>
 	</select>
+	
+	<!-- 수거 승인시 -->
+
+
+
+	<update parameterType="map" id="updateApply">
+	
+	<![CDATA[
+				UPDATE APPLY 
+				SET ASTATUS = #{astatus}
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</update>
+	
+	<!-- 수거 거절 -->
+	
+	
+	
+	<update parameterType="map" id="deleteApply">
+	
+	<![CDATA[
+				UPDATE APPLY 
+				SET ASTATUS = #{astatus}
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</update>
+	
+	<!-- 신청 취소 -->
+	
+	
+	
+	<delete parameterType="map" id="deletewApply">
+	
+	<![CDATA[
+				delete
+				from apply
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</delete>
 	
 
 </mapper>	

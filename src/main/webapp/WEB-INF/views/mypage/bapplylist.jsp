@@ -26,13 +26,14 @@
 				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 			</ul>			
 	</div>	
-	<div id="bcards">
-		<c:forEach var="apply" items="${apply }">	  
-			<div class="applyList">	        
-		            <div class="item" style="width:100%;">		            
-		            <strong>[ 헌옷 수거 신청 ]</strong>		
-		            	<div class="title"></div>                                 		                
-		                <div class="allapply" style="padding: 2%;">		                
+	<div id="bcards">		
+	<c:forEach var="apply" items="${apply }">		 
+		<div class="applyList">	        
+	            <div class="item" style="width:100%;">		            
+	            <strong>[ 헌옷 수거 신청 ]</strong>		
+	            	<div class="title"></div>                                 		                
+	                <div class="allapply" style="padding: 2%;">		                
+	                    <form name="bapply" method="post">
 		                    <div class="cont">
 		                        <div class="aname"><p>${apply.aname }</p></div>
 		                        <div class="aphone"><p>${apply.aphone }</p></div>                        
@@ -41,17 +42,47 @@
 		                        <div class="wei">
 		                            <div class="weight"><p>${apply.weight }</p></div>                        
 		                        	<p>kg</p>
-		                        </div>		                    
-		                     </div>		                     
-		                    <div class="btn">
-		                        <button type="button" id="apply_close_btn">수거거절</button>
-		                        <button type="submit" form="form" id="applying">수거승인</button>
-		                    </div>                   
-		                 </div>		               	            
-		        </div>		        
-		    </div>	 
-		</c:forEach>	 
-	</div>
+		                        </div>	
+		                        <input type="hidden" id="astatus" name="astatus" value="${apply.astatus }">	                    
+		                     </div>	
+		                     <c:if test="${apply.astatus eq '신청중' }">
+			                    <div class="btn1">
+			                    	<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
+			                    	<input type="hidden" id="ano" name="ano" value="${apply.ano }">
+			                    	<button type="button" id="apply_close_btn" name="cancel" data-abtn4="${apply.astatus }" data-abtn5="${apply.userno }" data-abtn6="${apply.ano }">수거거절</button>
+			                    </div>  		                                    
+			                    <div class="btn">		       
+			                    	<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
+			                    	<input type="hidden" id="ano" name="ano" value="${apply.ano }">
+			                        <button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="applying" name="applying" >수거승인</button>
+			                    </div>
+		                    </c:if>		 
+		                    <c:if test="${apply.astatus eq '신청완료' }">                   			                   
+	                    	<c:choose>
+	                    		<c:when test="${apply.astatus eq '신청완료' }">
+		                    		<div class="btn">		      
+		                    			<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
+		                    			<input type="hidden" id="ano" name="ano" value="${apply.ano }">										
+		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="applyend" name="applyend">수거중</button>
+	                        		</div>
+	                        	</c:when>	                        	
+	                        </c:choose>				                   
+	                        </c:if>
+	                        <c:choose>
+	                        <c:when test="${apply.astatus eq '수거완료' }">
+	                        		<div class="btn">		      
+			                    		<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
+			                    		<input type="hidden" id="ano" name="ano" value="${apply.ano }">
+		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end" disabled >수거완료</button>
+	                        		</div>
+	                        	</c:when>
+	                        </c:choose>
+	                    </form>                   
+	                 </div>		               	            
+	        </div>		        
+	    </div>		    
+	</c:forEach>		
+</div>
     
     <ul class="pagination">
 		<c:choose>
@@ -82,83 +113,109 @@
     
 	
 	<script>
-		$('.cancel').click(function(){
-			var index = $(this).parent().index();
-			var ino = $(".card:eq("+index+")").attr("data-sno");
-			$.ajax({
-				type : "get",
-				url : "/cancelDeal",
-				data : {ino:ino},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
+	var anos;
+	var usernos;	
+	var status;
+	
+	var cano;
+	var cuserno;
+	var cstatus;
+	//수거 승인 
+	$('[name=applying]').click(function(e){ //수거승인 등록 버튼 클릭시 
+		 var updateData = $('[name=astatus]').val(); //bapply의 내용을 가져옴
+		 var targetElement = e.target;
+		 status = targetElement.getAttribute("data-abtn1");
+		 usernos = targetElement.getAttribute("data-abtn2");
+		 anos = targetElement.getAttribute("data-abtn3");
+		 console.log("status11 : " + status);
+		 console.log("usernos : " + usernos);
+		 console.log("anos : " + anos);
+	     applyupdate(status); //Insert 함수호출(아래)
+	});
+   	
+	
+	function applyupdate(status){		
+		 console.log("수거 신청");		 
+		    $.ajax({
+		        url : '/bapply/'+anos+'/'+usernos,
+		        type : 'get',
+		        data : {"astatus":status},
+		        success : function(data){		            		            
+					if(data == '신청완료'){
+						alert("수거 승인 완료");
+					}else if(data == '수거완료'){
+						alert("수거 완료");
+					}
+					
 					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-
-		})
+		        },
+		        error :function(){
+		        	alert("수거 승인 오류");
+		        }
+		    });
+		}
+	
+	//수거 거절
+	$('[name=cancel]').click(function(e){ //수거승인 등록 버튼 클릭시 
+		 var updateData = $('[name=astatus]').val(); //bapply의 내용을 가져옴
+		 var targetElement = e.target;
+		 cstatus = targetElement.getAttribute("data-abtn4");
+		 cuserno = targetElement.getAttribute("data-abtn5");
+		 cano = targetElement.getAttribute("data-abtn6");
+		 console.log("cstatus : " + cstatus);
+		 console.log("cuserno : " + cuserno);
+		 console.log("cano : " + cano);
+	     applydelete(cstatus); //Insert 함수호출(아래)
+	});
+  	
+	
+	function applydelete(cstatus){		
+		 console.log("수거 거절");		 
+		    $.ajax({
+		        url : '/bapplydelete/'+cano+'/'+cuserno,
+		        type : 'get',
+		        data : {"astatus":cstatus},
+		        success : function(data){		            		            
+					alert(data);				
+					location.reload();
+		        },
+		        error :function(){
+		        	alert("수거 거절 오류");
+		        }
+		    });
+		}
+	
+	
+	//수거완료
+	$('[name=applyend]').click(function(e){ //수거승인 등록 버튼 클릭시 
+		 var updateData = $('[name=astatus]').val(); //bapply의 내용을 가져옴
+		 var targetElement = e.target;
+		 status = targetElement.getAttribute("data-abtn1");
+		 usernos = targetElement.getAttribute("data-abtn2");
+		 anos = targetElement.getAttribute("data-abtn3");
+		 console.log("status11 : " + status);
+		 console.log("usernos : " + usernos);
+		 console.log("anos : " + anos);
+	     applyend(status); //Insert 함수호출(아래)
+	});
+  
+	function applyend(status){
 		
-		$('.complete').click(function(){
-			var index = $(this).parent().index();
-			$(this).attr("disabled", true);
-			var ino = $(".card:eq("+index+")").attr("data-sno");
-			$.ajax({
-				type : "get",
-				url : "/completeDeal",
-				data : {ino:ino},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
-					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-
-		})
 		
-		$('.cancel1').click(function(){
-			var index = $(this).parent().index();
-			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
-			$.ajax({
-				type : "get",
-				url : "/cancelSharingDeal",
-				data : {sno:sno},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
+		 console.log("수거 완료");		 
+		    $.ajax({
+		        url : '/bapply/'+anos+'/'+usernos,
+		        type : 'get',
+		        data : {"astatus":status},
+		        success : function(data){		            		            
+					alert(data);		
 					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-
-		})
-		
-		$('.complete1').click(function(){
-			var index = $(this).parent().index();
-			$(this).attr("disabled", true);
-			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
-			$.ajax({
-				type : "get",
-				url : "/completeSharingDeal",
-				data : {sno:sno},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
-					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-
-		})
+		        },
+		        error :function(){
+		        	alert("수거 완료 오류");
+		        }
+		    });
+		}
 	</script>
 </body>
 </html>

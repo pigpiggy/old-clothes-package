@@ -68,4 +68,22 @@ public class ApplyServiceImpl implements ApplyService{
 		map.put("수거완료", c);
 		return  map;
 	}
+
+	//수거승인시 	
+
+		@Override
+		public void updateApply(Integer ano, Integer userno, String astatus) throws Exception{
+			applyDAO.updateApply(ano,userno,astatus);
+		}
+
+		@Override
+		public void deleteApply(Integer ano, Integer userno,String astatus) throws Exception {
+			applyDAO.deleteApply(ano,userno,astatus);
+		}
+
+		@Override
+		public void deletewApply(Integer ano, Integer userno) throws Exception {
+			applyDAO.deletewApply(ano,userno);
+			
+		}
 }

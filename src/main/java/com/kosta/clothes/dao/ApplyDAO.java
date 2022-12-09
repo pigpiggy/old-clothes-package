@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.kosta.clothes.bean.Apply;
@@ -25,4 +26,8 @@ public interface ApplyDAO {
 	
 	List<Apply> getBapply(Integer bno) throws Exception; //사용자 -> 사업자 신청목록
 	List<Apply> getUapply(Integer userno) throws Exception; //사용자가 신청한 목록
+	
+	void updateApply(@Param("ano") Integer ano, @Param("userno") Integer userno, @Param("astatus") String astatus) throws Exception;//수거 승인
+	void deleteApply(@Param("ano") Integer ano, @Param("userno") Integer userno, @Param("astatus") String astatus) throws Exception;//수거 거절
+	void deletewApply(@Param("ano") Integer ano, @Param("userno") Integer userno) throws Exception;//신청 취소
 }

@@ -69,12 +69,12 @@ public class MypageController {
 	                  System.out.println("business mypage" +  business.toString());         
 	                  model.addAttribute("business",business);
 	                  
-	                  //신청목록
+	                  //신청목록개수
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
 	                  
-	                  //수거상태
+	                  //수거상태개수
 	                  Map astatuscount= applyService.astatuscount(bno);
 	                  Integer acount= (Integer) astatuscount.get("수거중");
 	                  Integer bcount= (Integer) astatuscount.get("수거거절");
@@ -95,11 +95,12 @@ public class MypageController {
 	                  apply = applyService.getBapply(bno);
 	                  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
-	                  //
+	                  //개수
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
 	              
+	                  //개수
 	                  Map astatuscount= applyService.astatuscount(bno);
 	                  Integer acount= (Integer) astatuscount.get("수거중");
 	                  Integer bcount= (Integer) astatuscount.get("수거거절");
@@ -1052,6 +1053,64 @@ public class MypageController {
 		}
 		return bList;
 	}
-	
+	//수거 승인
+		@GetMapping("/bapply/{ano}/{userno}")
+		@ResponseBody
+		public String bapply(@PathVariable("ano") Integer ano, 
+								   @PathVariable("userno") Integer userno,
+								   @RequestParam("astatus") String astatus) {
+			System.out.println("수거 승인 이동중");
+			System.out.println("status " + astatus);		
+			try {			
+				if(astatus.equals("신청중")) {
+					astatus = "신청완료";	
+					
+				}else if(astatus.equals("신청완료")) {
+					astatus = "수거완료";
+					
+				}
+				System.out.println("ast" + astatus);
+				applyService.updateApply(ano,userno,astatus);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return astatus;
+		}
+
+		
+		//수거 거절
+		@GetMapping("/bapplydelete/{ano}/{userno}")
+		@ResponseBody
+		public String bapplydel(@PathVariable("ano") Integer ano, 
+								   @PathVariable("userno") Integer userno,
+								   @RequestParam("astatus") String astatus) {
+			System.out.println("수거 삭제 이동중");			
+			try {			
+				if(astatus.equals("신청중")) {
+					astatus = "신청거절";
+				}
+				System.out.println("신청 거절 : " + astatus);
+				applyService.deleteApply(ano,userno,astatus);
+							
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "신청 거절 하였습니다.";
+		}
+		
+			//신청 취소
+			@GetMapping("/wapplydelete/{ano}/{userno}")
+			@ResponseBody
+			public String wapplydel(@PathVariable("ano") Integer ano,
+									   @PathVariable("userno") Integer userno) {
+				System.out.println("신청 삭제 이동중");			
+				try {							
+					applyService.deletewApply(ano,userno);
+								
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				return "신청 취소 하였습니다.";
+			}
 }
 

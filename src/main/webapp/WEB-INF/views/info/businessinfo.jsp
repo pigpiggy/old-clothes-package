@@ -125,7 +125,7 @@ h2{
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
 						                  <p>kg</p>
 						              	</div>						              	
-						              <input type="hidden" id="astatus" name="astatus" value="수거신청">
+						              <input type="hidden" id="astatus" name="astatus" value="신청중">
 						          </div>	
 						          <hr class="hr2">		         	 	
 			         	 	<div class="btn">			         	 	  

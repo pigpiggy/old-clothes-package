@@ -21,4 +21,10 @@ public interface ApplyService {
 	List<Apply> getBapply(Integer bno) throws Exception;//사용자->사업자 신청목록
 	List<Apply> getUapply(Integer userno) throws Exception;//사용자가 신청한 목록
 
+	
+	//
+	public void updateApply(Integer ano, Integer userno, String astatus) throws Exception; //수거/수거중/완료
+	public void deleteApply(Integer ano, Integer userno, String astatus) throws Exception; //수거 거절
+	
+	public void deletewApply(Integer ano, Integer userno) throws Exception; //신청 취소
 }

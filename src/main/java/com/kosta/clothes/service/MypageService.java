@@ -29,7 +29,9 @@ public interface MypageService {
 	void cancelDeal(Integer ino) throws Exception;
 	void cancelSharingDeal(Integer sno) throws Exception;
 	void completeDeal(Integer ino) throws Exception;
+	void completeSeDeal(Integer ino) throws Exception;
 	void completeSharingDeal(Integer sno) throws Exception;
+	void completeShDeal(Integer sno) throws Exception;
 	
 	void sendIReview(Map map) throws Exception;
 	//

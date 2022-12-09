@@ -17,6 +17,8 @@ public class Sharing {
 	private Long applycount;
 	private Integer userno;
 	private Date regDate;
+	private Long sellCompletedCount;
+	private Long buyCompletedCount;
 	public Integer getSno() {
 		return sno;
 	}
@@ -103,6 +105,18 @@ public class Sharing {
 	}
 	public Sharing() {
 		super();
+	}
+	public Long getSellCompletedCount() {
+		return sellCompletedCount;
+	}
+	public void setSellCompletedCount(Long sellCompletedCount) {
+		this.sellCompletedCount = sellCompletedCount;
+	}
+	public Long getBuyCompletedCount() {
+		return buyCompletedCount;
+	}
+	public void setBuyCompletedCount(Long buyCompletedCount) {
+		this.buyCompletedCount = buyCompletedCount;
 	}
 	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sname, String sfileids,
 			String sdealType, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,

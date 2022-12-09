@@ -23,9 +23,6 @@
 				<%--chatHistory와 member가 실시간 입력하는 메시지 출력 --%>
 				
 				<div id="content" class="chat-history">
-					<c:if test="${chatHistory == null}">
-						<span> 메시지를 등록해주세요. </span>
-					</c:if>
 					<c:forEach var="chatRoom" items="${chatHistory}">
 						<c:choose>
 							<c:when test="${chatRoom.senderName eq authUser.nickname}">

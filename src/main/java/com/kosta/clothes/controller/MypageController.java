@@ -1054,7 +1054,7 @@ public class MypageController {
 		}
 		return bList;
 	}
-<<<<<<< HEAD
+
 	//수거 승인
 		@GetMapping("/bapply/{ano}/{userno}")
 		@ResponseBody
@@ -1114,7 +1114,7 @@ public class MypageController {
 				}
 				return "신청 취소 하였습니다.";
 			}
-=======
+
 	@ResponseBody
 	@PostMapping("/mypage/likelist/deletelike")
 	public boolean deletelikle(@RequestBody Map<String,Object> params) {
@@ -1143,6 +1143,6 @@ public class MypageController {
 		return false;
 	}
 	
->>>>>>> a5bc58998f0c540b0c6e46553e9fa6dad2e85803
+
 }
 

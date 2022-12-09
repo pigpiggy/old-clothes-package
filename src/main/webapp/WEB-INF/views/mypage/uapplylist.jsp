@@ -19,32 +19,41 @@
 </style>
 </head>
 <body>	
-<div id="ucards">
-	<c:forEach var="wapply" items="${wapply }">	  
-		<div class="applyList">	        
-	            <div class="item" style="width:100%;">		            
-	            <strong>[ ${wapply.bname } ]</strong>		
-	            	<div class="title"></div>                                 		                
-	                <div class="allapply" style="padding: 2%;">		                
-	                    <div class="cont">
-	                        <div class="aname"><p>${wapply.aname }</p></div>
-	                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
-	                        <div class="aadress"><p>${wapply.aaddress }</p></div>
-	                        <div class="apickup"><p>${wapply.apickup }</p></div>                                          
-	                        <div class="wei">
-	                            <div class="weight"><p>${wapply.weight }</p></div>                        
-	                        	<p>kg</p>
-	                        </div>		                    
-	                     </div>		                     
-	                    <div class="btn">
-	                        <button type="button" id="apply_close_btn">신청취소</button>
-	                        <button type="submit" form="form" id="applying">수거대기</button>
-	                    </div>                   
-	                 </div>		               	            
-	        </div>		        
-	    </div>	 
-	</c:forEach>	 
-</div>
+	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
+	<div class="my_Tab">
+			<ul class="tabs">
+				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
+				<li class="on"><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+			</ul>
+	</div>
+	<div id="ucards">
+		<c:forEach var="wapply" items="${wapply }">	  
+			<div class="applyList">	        
+		            <div class="item" style="width:100%;">		            
+		            <strong>[ ${wapply.bname } ]</strong>		
+		            	<div class="title"></div>                                 		                
+		                <div class="allapply" style="padding: 2%;">		                
+		                    <div class="cont">
+		                        <div class="aname"><p>${wapply.aname }</p></div>
+		                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
+		                        <div class="aadress"><p>${wapply.aaddress }</p></div>
+		                        <div class="apickup"><p>${wapply.apickup }</p></div>                                          
+		                        <div class="wei">
+		                            <div class="weight"><p>${wapply.weight }</p></div>                        
+		                        	<p>kg</p>
+		                        </div>		                    
+		                     </div>		                     
+		                    <div class="btn">
+		                        <button type="button" id="apply_close_btn">신청취소</button>
+		                        <button type="submit" form="form" id="applying">수거대기</button>
+		                    </div>                   
+		                 </div>		               	            
+		        </div>		        
+		    </div>	 
+		</c:forEach>	 
+	</div>
     
     <ul class="pagination">
 		<c:choose>

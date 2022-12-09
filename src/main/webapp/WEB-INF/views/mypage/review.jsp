@@ -4,10 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 </head>
 <body>
+	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
+	<div class="my_Tab">
+			<ul class="tabs">
+				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
+				<li class="on"><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+			</ul>
+	</div>
 	<div id="rCards">
 		<div class="rCard-list">
 			<c:forEach var="review" items="${reviewList }">
@@ -163,14 +173,14 @@
 						<li><a id="prev"><<</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${users.userno }?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+						<li><a href="/mypage/umypage/${users.userno }/review?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
 					<c:choose>
 						<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 						<c:otherwise>
-							<li><a href="/mypage/umypage/${users.userno }?rpage=${i}&select=1">${i }</a></li>
+							<li><a href="/mypage/umypage/${users.userno }/review?rpage=${i}&select=1">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -179,49 +189,11 @@
 						<li><a id="next">>></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${users.userno }?rpage=${rpageInfo.page+1}&select=1" id="next">>></a></li>
+						<li><a href="/mypage/umypage/${users.userno }/review?rpage=${rpageInfo.page+1}&select=1" id="next">>></a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>		
-		</div>		
-		
-		<script>
-			$(document).ready(function(){
-				var index = 0;
-				
-					$('.my_Tab .tabs a').on('click',function(e){ //탭 메뉴에 있는 링크를 클릭했을 때	
-						e.preventDefault();
-						var idx = $(this).parent().index(); //현재 클릭한 링크의 부모가 몇번째 인지 idx 변수에 넣는다.
-						
-						$(this).parent().siblings().removeClass('on'); //현재 클릭한 링크의 부모를 제외 한 나머지 li에 on클래스를 제거하고
-						
-						$(this).parent().addClass('on'); //현재 클릭한 링크의 부모 li에 on클래스를 넣는다.
-						
-						$(this).parent().parent().siblings('.tab_con').removeClass('on'); 
-						//현재 클릭한 부모 li의 부모 ul을 제외한 나머지 클래스 .tab_con에 클래스 on을 지워준다
-						
-						$(this).parent().parent().siblings('.tab_con').eq(idx).addClass('on');
-						//현재 클릭한 부모 li의 부모 ul을 제외한 나머지 클래스 .tab_con을 선택하고 그 중  eq번째에 클래스 on을 넣는다.
-						index = idx;
-						
-					});
-					
-					
-			});
-			
-			$.ajax({
-				type : "get",
-				url : "/cancelDeal",
-				data : {index:index},
-				success : function(data) {
-					console.log(data);
-					console.log("성공");
-					location.reload();
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-		</script>							   
+	</div>	
+    <script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

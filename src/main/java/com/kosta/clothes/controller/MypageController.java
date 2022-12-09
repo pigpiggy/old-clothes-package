@@ -61,7 +61,8 @@ public class MypageController {
 	@GetMapping ("/mypage/bmypage/{bno}")
 	String main(@PathVariable("bno") Integer bno,Model model) {
 		System.out.println("bmypage" + bno);
-		List<Apply> apply = null;		
+		List<Apply> apply = null;
+		List<Review> reviewList = null;
 		try {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
@@ -75,6 +76,9 @@ public class MypageController {
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
 	                  
+	                  //거래후기
+	                  reviewList = reviewService.getBReviewList(bno);
+	                  model.addAttribute("reviewList", reviewList);
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
 	                  Integer acount= (Integer) astatuscount.get("수거중");
@@ -101,6 +105,9 @@ public class MypageController {
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
 	              
+	                  //거래후기
+	                  reviewList = reviewService.getBReviewList(bno);
+	                  model.addAttribute("reviewList", reviewList);
 	                  Map astatuscount= applyService.astatuscount(bno);
 	                  Integer acount= (Integer) astatuscount.get("수거중");
 	                  Integer bcount= (Integer) astatuscount.get("수거거절");
@@ -114,6 +121,11 @@ public class MypageController {
 	                 System.out.println("bmypage 무무");
 	               Business business = messageService.mypageBusiness(bno);
 	               System.out.println("business mypage" +  business.toString());         
+	               model.addAttribute("business",business);  
+	               
+	               //거래후기
+	               reviewList = reviewService.getBReviewList(bno);
+	               model.addAttribute("reviewList", reviewList);
 	               model.addAttribute("business",business);
 	               
 	               Integer applycount = applyService.applycount(bno);
@@ -134,6 +146,9 @@ public class MypageController {
 	            Business business = messageService.mypageBusiness(bno);
 	             System.out.println("business mypage" +  business.toString());         
 	             model.addAttribute("business",business);
+                 //거래후기
+                 reviewList = reviewService.getBReviewList(bno);
+                 model.addAttribute("reviewList", reviewList);	
 	         }
 			
 		}catch(Exception e) {
@@ -141,80 +156,152 @@ public class MypageController {
 		}
 		return "/mypage/bmypage";
 	}
-	
-   @GetMapping ("mypage/umypage/{userno}")
-   String umypage(@PathVariable("userno") Integer userno,Model model, 
-         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage,
-         @RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
-         @RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage) {
-      PageInfo pageInfo = new PageInfo();
-      PageInfo spageInfo = new PageInfo();
-      PageInfo bspageInfo = new PageInfo();
-      PageInfo ppageInfo = new PageInfo();
-      List<Apply> wapply = null;
-      System.out.println("mypage" + userno);
-      try {
-         System.out.println("여기기기기기기");
-         /*판매 상품(개인판매)*/
-         List<Sell> sellList;
-         /* 판매 상품(무료나눔) */
-         List<Sharing> sharingList;
-         /* 구매 상품(개인판매) */
-         List<Sell> buysellList;
-         /* 구매 상품(무료나눔) */
-         List<Sharing> buysharingList;
-         if(session.getAttribute("authUser")!=null) {
-            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
-              Users users1 = (Users) session.getAttribute("authUser");
-              System.out.println("userssss241" + users1.toString());
-            //상품등록
-             Integer sharingcount = sharingService.sharingcount(userno);
-             System.out.println("sharingcount : " + sharingcount);
-             Integer sellcount = sellService.sellcount(userno);
-             System.out.println("sellcount:" + sellcount);
-             Integer totalcount = sharingcount + sellcount;
-             System.out.println("totalcount : " + totalcount);
-             model.addAttribute("totalcount",totalcount);
-             
-             //거래후기
-             Integer reviewcount = reviewService.reviewcount(userno);
-             model.addAttribute("reviewcount",reviewcount);       
-            
-             //거래완료
-             Integer statuscount = sharingService.statuscount(userno);
-             System.out.println("statuscount:"+statuscount);
-             statuscount +=sellService.statuscount(userno);
-             System.out.println("statuscount:"+statuscount);
-             model.addAttribute("statuscount",statuscount);
-             
-             sellList = mypageService.getSellList(userno,page,pageInfo);
-             model.addAttribute("pageInfo", pageInfo);
-             model.addAttribute("sellList", sellList);
-             System.out.println("sellList:"+sellList);
-             sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-             model.addAttribute("spageInfo", spageInfo);
-             model.addAttribute("sharingList", sharingList);
-             
-             buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
-             model.addAttribute("bspageInfo", bspageInfo);
-             model.addAttribute("buysellList", buysellList);
-             
-             buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
-             model.addAttribute("ppageInfo", ppageInfo);
-             model.addAttribute("buysharingList", buysharingList);
-             
-             //개인이 신청한 목록 리스트
-             wapply = applyService.getUapply(userno);
-             model.addAttribute("wapply",wapply);
-             System.out.println("Umypage apply : " + wapply.toString());
-             
-             //users 값을 가져온다
-             Users users = mypageService.getMypage(userno);
-             System.out.println("userssss" + users.toString());
-             model.addAttribute("users",users);
-            }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
-               //상품등록
+	   @GetMapping ("mypage/umypage/{userno}")
+	   String umypage(@PathVariable("userno") Integer userno,Model model) {
+	      System.out.println("mypage" + userno);
+	      try {
+	         System.out.println("여기기기기기기");
+	         if(session.getAttribute("authUser")!=null) {
+	            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+	              Users users1 = (Users) session.getAttribute("authUser");
+	              System.out.println("userssss241" + users1.toString());
+	            //상품등록
+	             Integer sharingcount = sharingService.sharingcount(userno);
+	             System.out.println("sharingcount : " + sharingcount);
+	             Integer sellcount = sellService.sellcount(userno);
+	             System.out.println("sellcount:" + sellcount);
+	             Integer totalcount = sharingcount + sellcount;
+	             System.out.println("totalcount : " + totalcount);
+	             model.addAttribute("totalcount",totalcount);
+
+	             //거래후기
+	             Integer reviewcount = reviewService.reviewcount(userno);
+	             model.addAttribute("reviewcount",reviewcount);       
+	            
+	             //users 값을 가져온다
+	             Users users = mypageService.getMypage(userno);
+	             System.out.println("userssss" + users.toString());
+	             model.addAttribute("users",users);
+	            }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+	               //상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+	                //users 값을 가져온다
+	                Users users = mypageService.getMypage(userno);
+	                System.out.println("userssss" + users.toString());
+	                model.addAttribute("users",users);
+	            }else {
+
+	            }
+	         }else {
+	            //상품등록
+	             Integer sharingcount = sharingService.sharingcount(userno);
+	             System.out.println("sharingcount : " + sharingcount);
+	             Integer sellcount = sellService.sellcount(userno);
+	             System.out.println("sellcount:" + sellcount);
+	             Integer totalcount = sharingcount + sellcount;
+	             System.out.println("totalcount : " + totalcount);
+	             model.addAttribute("totalcount",totalcount);
+
+	             //거래후기
+	             Integer reviewcount = reviewService.reviewcount(userno);
+	             model.addAttribute("reviewcount",reviewcount);       
+	             //거래완료
+	            Integer statuscount = sharingService.statuscount(userno);
+	            System.out.println("statuscount:"+statuscount);
+	            statuscount +=sellService.statuscount(userno);
+	            System.out.println("statuscount:"+statuscount);
+	            model.addAttribute("statuscount",statuscount);
+
+
+	             //users 값을 가져온다
+	              Users users = mypageService.getMypage(userno);
+	              System.out.println("userssss" + users.toString());
+	              model.addAttribute("users",users);
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return "/mypage/usermypage";
+	   }
+
+	@GetMapping ("mypage/umypage/{userno}/review")
+	public String umypage(@PathVariable("userno") Integer userno, Model model,
+			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
+		PageInfo rpageInfo = new PageInfo();
+		List<Review> reviewList;
+		try {
+			if(session.getAttribute("authUser")!=null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+					reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
+					System.out.println("reviewpage:" + reviewList + rpageInfo);
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+					model.addAttribute("rpageInfo", rpageInfo);
+					model.addAttribute("reviewList", reviewList);					
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
+					System.out.println("reviewpage:" + reviewList + rpageInfo);
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+					model.addAttribute("rpageInfo", rpageInfo);
+					model.addAttribute("reviewList", reviewList);	
+				}
+			}else {
+				//상품등록
                 Integer sharingcount = sharingService.sharingcount(userno);
                 System.out.println("sharingcount : " + sharingcount);
                 Integer sellcount = sellService.sellcount(userno);
@@ -222,228 +309,313 @@ public class MypageController {
                 Integer totalcount = sharingcount + sellcount;
                 System.out.println("totalcount : " + totalcount);
                 model.addAttribute("totalcount",totalcount);
-                
+
                 //거래후기
                 Integer reviewcount = reviewService.reviewcount(userno);
                 model.addAttribute("reviewcount",reviewcount);       
-               
+
                 //거래완료
                 Integer statuscount = sharingService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 statuscount +=sellService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 model.addAttribute("statuscount",statuscount);
-                
-                sellList = mypageService.getSellList(userno,page,pageInfo);
-                model.addAttribute("pageInfo", pageInfo);
-                model.addAttribute("sellList", sellList);
-                System.out.println("sellList:"+sellList);
-                sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-                model.addAttribute("spageInfo", spageInfo);
-                model.addAttribute("sharingList", sharingList);
-                
-                //users 값을 가져온다
-                Users users = mypageService.getMypage(userno);
-                System.out.println("userssss" + users.toString());
-                model.addAttribute("users",users);
-            }else {
-               
-            }
-         }else {
-            //상품등록
-             Integer sharingcount = sharingService.sharingcount(userno);
-             System.out.println("sharingcount : " + sharingcount);
-             Integer sellcount = sellService.sellcount(userno);
-             System.out.println("sellcount:" + sellcount);
-             Integer totalcount = sharingcount + sellcount;
-             System.out.println("totalcount : " + totalcount);
-             model.addAttribute("totalcount",totalcount);
-             
-             //거래후기
-             Integer reviewcount = reviewService.reviewcount(userno);
-             model.addAttribute("reviewcount",reviewcount);       
-            
-             //거래완료
-            Integer statuscount = sharingService.statuscount(userno);
-            System.out.println("statuscount:"+statuscount);
-            statuscount +=sellService.statuscount(userno);
-            System.out.println("statuscount:"+statuscount);
-            model.addAttribute("statuscount",statuscount);
-             
-             sellList = mypageService.getSellList(userno,page,pageInfo);
-             model.addAttribute("pageInfo", pageInfo);
-             model.addAttribute("sellList", sellList);
-             System.out.println("sellList:"+sellList);
-             sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-             model.addAttribute("spageInfo", spageInfo);
-             model.addAttribute("sharingList", sharingList);
-             
-             //users 값을 가져온다
-              Users users = mypageService.getMypage(userno);
-              System.out.println("userssss" + users.toString());
-              model.addAttribute("users",users);
-         }
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
-      return "/mypage/usermypage";
-   }
-	@GetMapping ("mypage/umypage/{userno}")
-	String umypage(@PathVariable("userno") Integer userno,Model model, 
+
+				reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
+				System.out.println("reviewpage:" + reviewList + rpageInfo);
+				model.addAttribute("rpageInfo", rpageInfo);
+				model.addAttribute("reviewList", reviewList);		
+			}
+			 Users users = mypageService.getMypage(userno);
+			 System.out.println("userssss" + users.toString());
+			 model.addAttribute("users",users);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/mypage/review";
+	}
+			
+	@GetMapping ("mypage/umypage/{userno}/sell")
+	public String umypagesell(@PathVariable("userno") Integer userno, Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage,
-			@RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
-			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage,
-			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
+			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
-		PageInfo bspageInfo = new PageInfo();
-		PageInfo ppageInfo = new PageInfo();
-		PageInfo rpageInfo = new PageInfo();
-		System.out.println("mypage" + userno);
 		try {
-			System.out.println("여기기기기기기");
 			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
 			/* 판매 상품(무료나눔) */
 			List<Sharing> sharingList;
-			/* 구매 상품(개인판매) */
-			List<Sell> buysellList;
-			/* 구매 상품(무료나눔) */
-			List<Sharing> buysharingList;
-			/* 후기 목록 */
-			List<Review> reviewList;
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
-				  Users users1 = (Users) session.getAttribute("authUser");
-				  System.out.println("userssss241" + users1.toString());
-				//상품등록
-				 Integer sharingcount = sharingService.sharingcount(userno);
-				 System.out.println("sharingcount : " + sharingcount);
-				 Integer sellcount = sellService.sellcount(userno);
-				 System.out.println("sellcount:" + sellcount);
-				 Integer totalcount = sharingcount + sellcount;
-				 System.out.println("totalcount : " + totalcount);
-				 model.addAttribute("totalcount",totalcount);
-
-				 //거래후기
-				 Integer reviewcount = reviewService.reviewcount(userno);
-				 model.addAttribute("reviewcount",reviewcount);		 
-				 /* 거래후기 section (해나) */
-				 reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
-				 System.out.println("reviewpage:" + reviewList + rpageInfo);
-				 model.addAttribute("rpageInfo", rpageInfo);
-				 model.addAttribute("reviewList", reviewList);
-				 //거래완료
-				 Integer statuscount = sharingService.statuscount(userno);
-				 System.out.println("statuscount:"+statuscount);
-				 statuscount +=sellService.statuscount(userno);
-				 System.out.println("statuscount:"+statuscount);
-				 model.addAttribute("statuscount",statuscount);
-
-				 //
-				 sellList = mypageService.getSellList(userno,page,pageInfo);
-				 model.addAttribute("pageInfo", pageInfo);
-				 model.addAttribute("sellList", sellList);
-				 System.out.println("sellList:"+sellList);
-				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-				 model.addAttribute("spageInfo", spageInfo);
-				 model.addAttribute("sharingList", sharingList);
-
-				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
-				 model.addAttribute("bspageInfo", bspageInfo);
-				 model.addAttribute("buysellList", buysellList);
-
-				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
-				 model.addAttribute("ppageInfo", ppageInfo);
-				 model.addAttribute("buysharingList", buysharingList);
-
-				 //users 값을 가져온다
-				 Users users = mypageService.getMypage(userno);
-				 System.out.println("userssss" + users.toString());
-				 model.addAttribute("users",users);
-				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					Users users1 = (Users) session.getAttribute("authUser");
+					sellList = mypageService.getSellList(userno,page,pageInfo);
 					//상품등록
-					 Integer sharingcount = sharingService.sharingcount(userno);
-					 System.out.println("sharingcount : " + sharingcount);
-					 Integer sellcount = sellService.sellcount(userno);
-					 System.out.println("sellcount:" + sellcount);
-					 Integer totalcount = sharingcount + sellcount;
-					 System.out.println("totalcount : " + totalcount);
-					 model.addAttribute("totalcount",totalcount);
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
 
-					 //거래후기
-					 Integer reviewcount = reviewService.reviewcount(userno);
-					 model.addAttribute("reviewcount",reviewcount);		 
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
 
-					 //거래완료
-					 Integer statuscount = sharingService.statuscount(userno);
-					 System.out.println("statuscount:"+statuscount);
-					 statuscount +=sellService.statuscount(userno);
-					 System.out.println("statuscount:"+statuscount);
-					 model.addAttribute("statuscount",statuscount);
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
 
-					 //
+					model.addAttribute("pageInfo", pageInfo);
+					model.addAttribute("sellList", sellList);
+					System.out.println("sellList:"+sellList);
+					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					model.addAttribute("spageInfo", spageInfo);
+					model.addAttribute("sharingList", sharingList);
+				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
 					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					//상품등록
+		                Integer sharingcount = sharingService.sharingcount(userno);
+		                System.out.println("sharingcount : " + sharingcount);
+		                Integer sellcount = sellService.sellcount(userno);
+		                System.out.println("sellcount:" + sellcount);
+		                Integer totalcount = sharingcount + sellcount;
+		                System.out.println("totalcount : " + totalcount);
+		                model.addAttribute("totalcount",totalcount);
+
+		                //거래후기
+		                Integer reviewcount = reviewService.reviewcount(userno);
+		                model.addAttribute("reviewcount",reviewcount);       
+
+		                //거래완료
+		                Integer statuscount = sharingService.statuscount(userno);
+		                System.out.println("statuscount:"+statuscount);
+		                statuscount +=sellService.statuscount(userno);
+		                System.out.println("statuscount:"+statuscount);
+		                model.addAttribute("statuscount",statuscount);
+
 					 model.addAttribute("pageInfo", pageInfo);
 					 model.addAttribute("sellList", sellList);
 					 System.out.println("sellList:"+sellList);
 					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
 					 model.addAttribute("spageInfo", spageInfo);
 					 model.addAttribute("sharingList", sharingList);
-
-					 //users 값을 가져온다
-					 Users users = mypageService.getMypage(userno);
-					 System.out.println("userssss" + users.toString());
-					 model.addAttribute("users",users);
-				}else {
-
 				}
 			}else {
+				sellList = mypageService.getSellList(userno,page,pageInfo);
 				//상품등록
-				 Integer sharingcount = sharingService.sharingcount(userno);
-				 System.out.println("sharingcount : " + sharingcount);
-				 Integer sellcount = sellService.sellcount(userno);
-				 System.out.println("sellcount:" + sellcount);
-				 Integer totalcount = sharingcount + sellcount;
-				 System.out.println("totalcount : " + totalcount);
-				 model.addAttribute("totalcount",totalcount);
+                Integer sharingcount = sharingService.sharingcount(userno);
+                System.out.println("sharingcount : " + sharingcount);
+                Integer sellcount = sellService.sellcount(userno);
+                System.out.println("sellcount:" + sellcount);
+                Integer totalcount = sharingcount + sellcount;
+                System.out.println("totalcount : " + totalcount);
+                model.addAttribute("totalcount",totalcount);
 
-				 //거래후기
-				 Integer reviewcount = reviewService.reviewcount(userno);
-				 model.addAttribute("reviewcount",reviewcount);		 
-				 reviewList = reviewService.getReviewList(userno, rpage, rpageInfo);
-				 model.addAttribute("rpageInfo", rpageInfo);
-				 model.addAttribute("reviewList", reviewList);
-				 //거래완료
-				Integer statuscount = sharingService.statuscount(userno);
-				System.out.println("statuscount:"+statuscount);
-				statuscount +=sellService.statuscount(userno);
-				System.out.println("statuscount:"+statuscount);
-				model.addAttribute("statuscount",statuscount);
+                //거래후기
+                Integer reviewcount = reviewService.reviewcount(userno);
+                model.addAttribute("reviewcount",reviewcount);       
 
-				 //
-				 sellList = mypageService.getSellList(userno,page,pageInfo);
-				 model.addAttribute("pageInfo", pageInfo);
-				 model.addAttribute("sellList", sellList);
-				 System.out.println("sellList:"+sellList);
-				 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-				 model.addAttribute("spageInfo", spageInfo);
-				 model.addAttribute("sharingList", sharingList);
+                //거래완료
+                Integer statuscount = sharingService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                statuscount +=sellService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                model.addAttribute("statuscount",statuscount);
 
-				 //users 값을 가져온다
-				  Users users = mypageService.getMypage(userno);
-				  System.out.println("userssss" + users.toString());
-				  model.addAttribute("users",users);
+				model.addAttribute("pageInfo", pageInfo);
+				model.addAttribute("sellList", sellList);
+				System.out.println("sellList:"+sellList);
+				sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				model.addAttribute("spageInfo", spageInfo);
+				model.addAttribute("sharingList", sharingList);				
 			}
+			Users users = mypageService.getMypage(userno);
+			 System.out.println("userssss" + users.toString());
+			 model.addAttribute("users",users);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "/mypage/usermypage";
+		return "/mypage/sellProduct";
 	}
-   
-   @PostMapping("/mypage/smessage")
-   public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {
+	
+	@GetMapping ("mypage/umypage/{userno}/buy")
+	public String umypagebuy(@PathVariable("userno") Integer userno,Model model, 
+			@RequestParam(value = "bspage", required = false, defaultValue = "1") Integer bspage,
+			@RequestParam(value = "ppage", required = false, defaultValue = "1") Integer ppage) {
+		PageInfo bspageInfo = new PageInfo();
+		PageInfo ppageInfo = new PageInfo();
+		try {
+			/* 구매 상품(개인판매) */
+			List<Sell> buysellList;
+			/* 구매 상품(무료나눔) */
+			List<Sharing> buysharingList;
+			if(session.getAttribute("authUser")!=null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+				  Users users1 = (Users) session.getAttribute("authUser");
+				//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+				 model.addAttribute("bspageInfo", bspageInfo);
+				 model.addAttribute("buysellList", buysellList);
+				
+				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 model.addAttribute("ppageInfo", ppageInfo);
+				 model.addAttribute("buysharingList", buysharingList);
+			
+				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+				}
+			}else {
+				
+			}
+			 //users 값을 가져온다
+			 Users users = mypageService.getMypage(userno);
+			 System.out.println("userssss" + users.toString());
+			 model.addAttribute("users",users);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/mypage/buyProduct";
+	}
+
+	@GetMapping ("mypage/umypage/{userno}/apply")
+	public String umypageapply(@PathVariable("userno") Integer userno, Model model) {
+		List<Apply> wapply = null;
+		 
+        try {
+			if(session.getAttribute("authUser")!=null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+					//개인이 신청한 목록 리스트
+					wapply = applyService.getUapply(userno);
+					model.addAttribute("wapply",wapply);
+					System.out.println("Umypage apply : " + wapply.toString());		
+					
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					//개인이 신청한 목록 리스트
+					wapply = applyService.getUapply(userno);
+					model.addAttribute("wapply",wapply);
+					System.out.println("Umypage apply : " + wapply.toString());	
+					
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+				}
+			}else {
+				//개인이 신청한 목록 리스트
+				wapply = applyService.getUapply(userno);
+				model.addAttribute("wapply",wapply);
+				System.out.println("Umypage apply : " + wapply.toString());	
+				
+				//상품등록
+                Integer sharingcount = sharingService.sharingcount(userno);
+                System.out.println("sharingcount : " + sharingcount);
+                Integer sellcount = sellService.sellcount(userno);
+                System.out.println("sellcount:" + sellcount);
+                Integer totalcount = sharingcount + sellcount;
+                System.out.println("totalcount : " + totalcount);
+                model.addAttribute("totalcount",totalcount);
+
+                //거래후기
+                Integer reviewcount = reviewService.reviewcount(userno);
+                model.addAttribute("reviewcount",reviewcount);       
+
+                //거래완료
+                Integer statuscount = sharingService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                statuscount +=sellService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                model.addAttribute("statuscount",statuscount);
+			}
+			 Users users = mypageService.getMypage(userno);
+			 System.out.println("userssss" + users.toString());
+			 model.addAttribute("users",users);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/mypage/uapplylist";
+	}	
+	
+	
+	@PostMapping("/mypage/smessage")
+    public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {
       ModelAndView mav = new ModelAndView();
       try {
          String sect = "";
@@ -473,80 +645,7 @@ public class MypageController {
       
    }
    
-   @GetMapping ("/mypage/message/{userno}")
-   String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
-         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
-         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
-         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
-         @PathVariable("userno") Integer userno) {
-      List<MessageVO> rmessageList = new ArrayList<>();
-      List<MessageVO> smessageList = new ArrayList<>();
-      Map<String, Object> map = new HashMap<String, Object>();
-      PageInfo rpageInfo = new PageInfo();
-      PageInfo spageInfo = new PageInfo();      
-      try {
-            Business bauthuser = new Business();
-            String sect;
-            Users uauthuser = new Users();
-            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
-               uauthuser = (Users) session.getAttribute("authUser");
-               map.put("recvUserno", uauthuser.getUserno());
-               map.put("page", rpage);
-               map.put("pageInfo", rpageInfo);
-               rmessageList = messageService.uRecvMessage(map);//사용자의 받은편지함
-               smessageList = messageService.uSendMessage(uauthuser.getUserno(),spage,spageInfo);//사용자의 보낸편지함
-               //
-               Users users = mypageService.getMypage(userno);
-               //상품등록
-               Integer sharingcount = sharingService.sharingcount(userno);
-               System.out.println("sharingcount : " + sharingcount);
-               Integer sellcount = sellService.sellcount(userno);
-               System.out.println("sellcount:" + sellcount);
-               Integer totalcount = sharingcount + sellcount;
-               System.out.println("totalcount : " + totalcount);
-               model.addAttribute("totalcount",totalcount);
-               
-               //거래후기
-               Integer reviewcount = reviewService.reviewcount(userno);
-               model.addAttribute("reviewcount",reviewcount);       
-              
-               //거래완료
-               Integer statuscount = sharingService.statuscount(userno);
-               System.out.println("statuscount:"+statuscount);
-               statuscount +=sellService.statuscount(userno);
-               System.out.println("statuscount:"+statuscount);
-               model.addAttribute("statuscount",statuscount);
-              
-               model.addAttribute("recvmessage", rmessageList);
-               model.addAttribute("sendmessage", smessageList);
-               model.addAttribute("rpageInfo", rpageInfo);
-               model.addAttribute("spageInfo", spageInfo);
-               model.addAttribute("select", select);
-               model.addAttribute("submitcheck", submitcheck);
-               model.addAttribute("users", users);
-               
-            } else {
-               bauthuser = (Business) session.getAttribute("authUser");
-               map.put("recvUserno", bauthuser.getBno());
-               System.out.println("businessno:"+bauthuser.getBno());
-               map.put("page", rpage);
-               map.put("pageInfo", rpageInfo);
-               rmessageList = messageService.bRecvMessage(map);
-               System.out.println("spage:"+spage);
-               smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
-               System.out.println(smessageList);
-               model.addAttribute("recvmessage", rmessageList);
-               model.addAttribute("sendmessage", smessageList);
-               model.addAttribute("rpageInfo", rpageInfo);
-               model.addAttribute("spageInfo", spageInfo);
-               model.addAttribute("select", select);
-               model.addAttribute("submitcheck", submitcheck);
-            }
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
-      return "/mypage/message";
-   }
+
    
    @ResponseBody
    @GetMapping("/viewRecvMessage")
@@ -635,7 +734,6 @@ public class MypageController {
                }         
          System.out.println("introtext"+introtext);
       } catch (Exception e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       return introtext;
@@ -713,6 +811,7 @@ public class MypageController {
    @GetMapping("/completeDeal")
    public void completeDeal(@RequestParam("ino") Integer ino) {
       try {
+    	  System.out.println("들어옴");
          mypageService.completeDeal(ino);
       }catch(Exception e) {
          e.printStackTrace();
@@ -727,7 +826,26 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-   }     
+   } 
+   
+   @ResponseBody
+   @GetMapping("/sendIReview")
+   public void sendIReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("ino") Integer ino) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("ino", ino);
+    	  map.put("userno", userno);
+         mypageService.sendIReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   	
 	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {
 		try {

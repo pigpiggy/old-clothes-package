@@ -46,9 +46,13 @@
 				        </a>
 		        	</c:if>
 		        </c:if>          
-		        <a href="/mypage/message/${users.userno }">
+		        <c:if test="${authUser.sect eq 'users' }">
+      				<c:if test = "${authUser.userno eq users.userno }">
+		        <a href="/mypage/message/${authUser.userno }">
 			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
 		        </a>
+		        </c:if>
+		        </c:if>
 		        <c:if test="${authUser.sect eq 'users'}">
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">

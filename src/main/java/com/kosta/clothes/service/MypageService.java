@@ -1,6 +1,7 @@
 package com.kosta.clothes.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.PageInfo;
@@ -29,6 +30,8 @@ public interface MypageService {
 	void cancelSharingDeal(Integer sno) throws Exception;
 	void completeDeal(Integer ino) throws Exception;
 	void completeSharingDeal(Integer sno) throws Exception;
+	
+	void sendIReview(Map map) throws Exception;
 	//
 	Users getMypage(Integer userno) throws Exception;
 	

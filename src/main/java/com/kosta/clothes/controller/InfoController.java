@@ -273,6 +273,9 @@ public class InfoController {
 		try {
 			Users userno = (Users) session.getAttribute("authUser");
 			apply.setUserno(userno.getUserno());
+			if(apply.getAstatus() == null) {
+				apply.setAstatus("수거신청");
+			}
 			businessService.registapply(apply);
 			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
 		}catch(Exception e) {

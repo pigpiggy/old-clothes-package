@@ -199,6 +199,36 @@
 		]]>
 	</select>
 	
+	<update id="deletesLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where sno=#{sno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deleteiLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletebLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletesLikecount" parameterType="Integer">
+		<![CDATA[
+			update sharing set likes=likes-1
+			where sno=#{sno}
+		]]>
+	</update>
+	<update id="deleteiLikecount" parameterType="Integer">
+		<![CDATA[
+			update individual set likes=likes-1
+			where ino=#{ino}
+		]]>
+	</update>
 	<insert id="sendIReview" parameterType="map">
 		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
 			<![CDATA[

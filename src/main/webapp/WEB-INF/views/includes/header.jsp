@@ -25,7 +25,7 @@
 			        <a href="/logout">로그아웃</a>
 		        </c:if>
 		        <c:if test="${authUser.sect=='business' }">
-		        	<a href="/mypage/bmypage/${authUser.bno }">마이페이지</a>
+		        	<a href="/mypage/bmypage/${authUser.bno }/apply">마이페이지</a>
 			        <a href="/logout">로그아웃</a>
 				</c:if>			        
 		    </c:otherwise>

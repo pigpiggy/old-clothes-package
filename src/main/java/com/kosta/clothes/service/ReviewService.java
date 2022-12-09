@@ -9,5 +9,5 @@ public interface ReviewService {
 
 	Integer reviewcount(Integer userno) throws Exception ;
 	List<Review> getReviewList(Integer userno, int rpage, PageInfo rpageInfo) throws Exception;
-	List<Review> getBReviewList(Integer bno) throws Exception;
+	List<Review> getBReviewList(Integer bno, int rpage, PageInfo rapeInfo) throws Exception;
 }

@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.kosta.clothes.bean.Business;
-import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
@@ -54,5 +54,10 @@ public interface MypageDAO {
 	List<Sharing> getLikeSharingList(Integer userno) throws Exception;
 	List<Sell> getLikeSellList(Integer userno)throws Exception;
 	List<Business> getLikeBusinessList(Integer userno)throws Exception;
+	void deletesLike(@Param("userno") Integer userno, @Param("sno") Integer sno) throws Exception;
+	void deleteiLike(@Param("userno")Integer userno, @Param("ino")Integer ino) throws Exception;
+	void deletebLike(@Param("userno")Integer userno, @Param("bno")Integer bno) throws Exception;
+	void deletesLikecount(Integer sno) throws Exception;
+	void deleteiLikecount(Integer ino) throws Exception;
 }
 

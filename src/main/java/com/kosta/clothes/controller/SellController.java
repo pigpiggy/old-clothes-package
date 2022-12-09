@@ -37,6 +37,8 @@ import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
+import com.kosta.clothes.service.ReviewService;
+import com.kosta.clothes.service.ReviewServiceImpl;
 import com.kosta.clothes.service.SellService;
 
 @Controller
@@ -55,11 +57,15 @@ public class SellController {
 	
 	@Autowired
 	ServletContext servletContext;
+	
 	@Autowired
 	CommentService commentService;
 	
 	@Autowired
 	MypageService mypageService;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@Autowired
 	HttpSession session;
@@ -123,6 +129,8 @@ public class SellController {
 		try {
 			Sell sell = sellService.viewSell(ino);
 			System.out.println("sellview:" + sell);
+			Integer reviewcount = reviewService.reviewcount(sell.getUserno());
+			model.addAttribute("reviewcount", reviewcount);
 			if(sell.getIfileids() != null) {
 				String[] fidArr = sell.getIfileids().split(",");
 				mav.addObject("files", fidArr);

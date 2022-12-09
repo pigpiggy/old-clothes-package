@@ -37,7 +37,7 @@
 	
 	<update id="updateSfileids" parameterType="sharing">
 		<![CDATA[
-			update sharing set sfileids=#{sfileids}
+			update sharing set sfileids=#{sfileids, jdbcType=VARCHAR}
 			where sno=#{sno}
 		]]>
 	</update>

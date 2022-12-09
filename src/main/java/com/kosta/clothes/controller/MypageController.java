@@ -777,6 +777,80 @@ public class MypageController {
 		return "/mypage/uapplylist";
 	}	
 	
+	 @GetMapping ("/mypage/message/{userno}")
+	   String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
+	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
+	         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
+	         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
+	         @PathVariable("userno") Integer userno) {
+	      List<MessageVO> rmessageList = new ArrayList<>();
+	      List<MessageVO> smessageList = new ArrayList<>();
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      PageInfo rpageInfo = new PageInfo();
+	      PageInfo spageInfo = new PageInfo();      
+	      try {
+	            Business bauthuser = new Business();
+	            String sect;
+	            Users uauthuser = new Users();
+	            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+	               uauthuser = (Users) session.getAttribute("authUser");
+	               map.put("recvUserno", uauthuser.getUserno());
+	               map.put("page", rpage);
+	               map.put("pageInfo", rpageInfo);
+	               rmessageList = messageService.uRecvMessage(map);//사용자의 받은편지함
+	               smessageList = messageService.uSendMessage(uauthuser.getUserno(),spage,spageInfo);//사용자의 보낸편지함
+	               //
+	               Users users = mypageService.getMypage(userno);
+	               //상품등록
+	               Integer sharingcount = sharingService.sharingcount(userno);
+	               System.out.println("sharingcount : " + sharingcount);
+	               Integer sellcount = sellService.sellcount(userno);
+	               System.out.println("sellcount:" + sellcount);
+	               Integer totalcount = sharingcount + sellcount;
+	               System.out.println("totalcount : " + totalcount);
+	               model.addAttribute("totalcount",totalcount);
+
+	               //거래후기
+	               Integer reviewcount = reviewService.reviewcount(userno);
+	               model.addAttribute("reviewcount",reviewcount);       
+
+	               //거래완료
+	               Integer statuscount = sharingService.statuscount(userno);
+	               System.out.println("statuscount:"+statuscount);
+	               statuscount +=sellService.statuscount(userno);
+	               System.out.println("statuscount:"+statuscount);
+	               model.addAttribute("statuscount",statuscount);
+
+	               model.addAttribute("recvmessage", rmessageList);
+	               model.addAttribute("sendmessage", smessageList);
+	               model.addAttribute("rpageInfo", rpageInfo);
+	               model.addAttribute("spageInfo", spageInfo);
+	               model.addAttribute("select", select);
+	               model.addAttribute("submitcheck", submitcheck);
+	               model.addAttribute("users", users);
+
+	            } else {
+	               bauthuser = (Business) session.getAttribute("authUser");
+	               map.put("recvUserno", bauthuser.getBno());
+	               System.out.println("businessno:"+bauthuser.getBno());
+	               map.put("page", rpage);
+	               map.put("pageInfo", rpageInfo);
+	               rmessageList = messageService.bRecvMessage(map);
+	               System.out.println("spage:"+spage);
+	               smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
+	               System.out.println(smessageList);
+	               model.addAttribute("recvmessage", rmessageList);
+	               model.addAttribute("sendmessage", smessageList);
+	               model.addAttribute("rpageInfo", rpageInfo);
+	               model.addAttribute("spageInfo", spageInfo);
+	               model.addAttribute("select", select);
+	               model.addAttribute("submitcheck", submitcheck);
+	            }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return "/mypage/message";
+	   }
 	
 	@PostMapping("/mypage/smessage")
     public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {

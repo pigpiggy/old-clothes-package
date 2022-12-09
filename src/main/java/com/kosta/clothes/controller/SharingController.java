@@ -40,6 +40,7 @@ import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
+import com.kosta.clothes.service.ReviewService;
 import com.kosta.clothes.service.SharingService;
 
 @Controller
@@ -62,6 +63,9 @@ public class SharingController {
 	
 	@Autowired
 	MypageService mypageService;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -125,7 +129,8 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview" + sharing);
-			
+			Integer reviewcount = reviewService.reviewcount(sharing.getUserno());
+			model.addAttribute("reviewcount", reviewcount);
 			if (sharing.getSfileids() != null) {
 				String[] fidArr = sharing.getSfileids().split(","); // 1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌
 				mav.addObject("files", fidArr);

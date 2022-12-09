@@ -146,24 +146,46 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public void completeDeal(Integer ino) throws Exception {
-		int count = mypageDAO.completedCount(ino);
-		if(count == 0) {
-			mypageDAO.upDealCount(ino);
-		} else {
+		mypageDAO.upDealCount(ino);
+		Sell sell = mypageDAO.completedCount(ino);
+		Long count1 = sell.getSellCompletedCount();
+		Long count2 = sell.getBuyCompletedCount();
+		if(count1 == 1 && count2 == 1) {
+			mypageDAO.completeDeal(ino);
+		}
+	}
+	
+	@Override
+	public void completeSeDeal(Integer ino) throws Exception {
+		mypageDAO.upSeDealCount(ino);
+		Sell sell = mypageDAO.completedCount(ino);
+		Long count1 = sell.getSellCompletedCount();
+		Long count2 = sell.getBuyCompletedCount();
+		if(count1 == 1 && count2 == 1) {
 			mypageDAO.completeDeal(ino);
 		}
 	}
 
-
 	@Override
 	public void completeSharingDeal(Integer sno) throws Exception {
-		int count = mypageDAO.completedSharingCount(sno);
-		if(count == 0) {
-			mypageDAO.upSharingDealCount(sno);
-		} else {
+		mypageDAO.upSharingDealCount(sno);
+		Sharing sharing = mypageDAO.completedSharingCount(sno);
+		Long count1 = sharing.getSellCompletedCount();
+		Long count2 = sharing.getBuyCompletedCount();
+		if(count1 == 1 && count2 == 1) {
 			mypageDAO.completeSharingDeal(sno);
 		}
-		
+	}
+	
+	@Override
+	public void completeShDeal(Integer sno) throws Exception {
+		mypageDAO.upShDealCount(sno);
+		Sharing sharing = mypageDAO.completedSharingCount(sno);
+		Long count1 = sharing.getSellCompletedCount();
+		Long count2 = sharing.getBuyCompletedCount();
+		if(count1 == 1 && count2 == 1) {
+			mypageDAO.completeSharingDeal(sno);
+		}
 	}
 
 
@@ -260,6 +282,9 @@ public class MypageServiceImpl implements MypageService {
 	public void deletebLike(Integer userno, Integer bno) throws Exception {
 		mypageDAO.deletebLike(userno, bno); //좋아요 테이블에 있는 likescheck 0
 	}
+
+
+	
 
 
 	

@@ -18,6 +18,8 @@ public class Sell {
 	private Long applycount;
 	private Integer userno;
 	private Long price;
+	private Long sellCompletedCount;
+	private Long buyCompletedCount;
 	public Integer getIno() {
 		return ino;
 	}
@@ -111,6 +113,18 @@ public class Sell {
 	}
 	public Sell() {
 		super();
+	}
+	public Long getSellCompletedCount() {
+		return sellCompletedCount;
+	}
+	public void setSellCompletedCount(Long sellCompletedCount) {
+		this.sellCompletedCount = sellCompletedCount;
+	}
+	public Long getBuyCompletedCount() {
+		return buyCompletedCount;
+	}
+	public void setBuyCompletedCount(Long buyCompletedCount) {
+		this.buyCompletedCount = buyCompletedCount;
 	}
 	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
 			String addressCity, String addressTown, String idealType, Date regDate, Long likes, Long selectedno,

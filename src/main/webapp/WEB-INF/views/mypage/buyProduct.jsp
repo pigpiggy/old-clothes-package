@@ -16,7 +16,7 @@
 			<ul class="tabs">
 				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
 				<li class="on"><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
-				<li><a href ="#a">신청 목록</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
 				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
 			</ul>
 	</div>

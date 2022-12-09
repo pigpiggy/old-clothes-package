@@ -246,7 +246,6 @@ public class MypageController {
 			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
 		PageInfo rpageInfo = new PageInfo();
 		List<Review> reviewList;
-		
 		try {
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
@@ -519,6 +518,100 @@ public class MypageController {
 		}
 		return "/mypage/buyProduct";
 	}
+
+	@GetMapping ("mypage/umypage/{userno}/apply")
+	public String umypageapply(@PathVariable("userno") Integer userno, Model model) {
+		List<Apply> wapply = null;
+		 
+        try {
+			if(session.getAttribute("authUser")!=null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+					//개인이 신청한 목록 리스트
+					wapply = applyService.getUapply(userno);
+					model.addAttribute("wapply",wapply);
+					System.out.println("Umypage apply : " + wapply.toString());		
+					
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+
+				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					//개인이 신청한 목록 리스트
+					wapply = applyService.getUapply(userno);
+					model.addAttribute("wapply",wapply);
+					System.out.println("Umypage apply : " + wapply.toString());	
+					
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+				}
+			}else {
+				//개인이 신청한 목록 리스트
+				wapply = applyService.getUapply(userno);
+				model.addAttribute("wapply",wapply);
+				System.out.println("Umypage apply : " + wapply.toString());	
+				
+				//상품등록
+                Integer sharingcount = sharingService.sharingcount(userno);
+                System.out.println("sharingcount : " + sharingcount);
+                Integer sellcount = sellService.sellcount(userno);
+                System.out.println("sellcount:" + sellcount);
+                Integer totalcount = sharingcount + sellcount;
+                System.out.println("totalcount : " + totalcount);
+                model.addAttribute("totalcount",totalcount);
+
+                //거래후기
+                Integer reviewcount = reviewService.reviewcount(userno);
+                model.addAttribute("reviewcount",reviewcount);       
+
+                //거래완료
+                Integer statuscount = sharingService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                statuscount +=sellService.statuscount(userno);
+                System.out.println("statuscount:"+statuscount);
+                model.addAttribute("statuscount",statuscount);
+			}
+			 Users users = mypageService.getMypage(userno);
+			 System.out.println("userssss" + users.toString());
+			 model.addAttribute("users",users);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/mypage/uapplylist";
+	}	
+	
 	
 	@PostMapping("/mypage/smessage")
     public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {

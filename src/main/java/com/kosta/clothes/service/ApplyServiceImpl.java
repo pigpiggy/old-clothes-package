@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosta.clothes.bean.Apply;
+import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.dao.ApplyDAO;
 
@@ -63,8 +64,8 @@ public class ApplyServiceImpl implements ApplyService{
 		Integer b=applyDAO.bstatuscount(bno);
 		Integer c=applyDAO.cstatuscount(bno);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("수거중", a);
-		map.put("수거거절", b);
+		map.put("신청완료", a);
+		map.put("신청거절", b);
 		map.put("수거완료", c);
 		return  map;
 	}
@@ -85,5 +86,42 @@ public class ApplyServiceImpl implements ApplyService{
 		public void deletewApply(Integer ano, Integer userno) throws Exception {
 			applyDAO.deletewApply(ano,userno);
 			
+		}
+
+		@Override
+		public List<Apply> getApplyList(Integer userno, int apage, PageInfo apageInfo) throws Exception {
+			int applyCount = applyDAO.applyListCount(userno);
+			System.out.print("ReviewRow:" + applyCount);
+			int maxPage = (int)Math.ceil((double)applyCount/10);  
+			System.out.println("maxPage : " + maxPage);
+			int startPage = apage/10 * 10 + 1;
+			System.out.println("startPage : " + startPage);
+			int endPage = startPage + 10 -1; 
+			System.out.println("endPage : " + endPage);
+			if(endPage > maxPage) { 
+				endPage = maxPage; 
+			}		
+			//pageInfo에 데이터 전달
+			apageInfo.setPage(apage); 
+			apageInfo.setListCount(applyCount);
+			apageInfo.setMaxPage(maxPage);
+			apageInfo.setStartPage(startPage);
+			apageInfo.setEndPage(endPage);
+			
+			//검색한 페이지의 시작 페이지 값을 구한 변수 
+			Integer row = (apage - 1) * 10 + 1;
+			System.out.println("row : " + row);
+			Map<String, Object> map = new HashMap<String, Object>();
+			System.out.println("userno : " + userno);
+			map.put("userno", userno);
+			map.put("row", row);
+			return applyDAO.getApplyList(map);
+			
+		}
+
+		@Override
+		public List<Apply> bgetApplyList(Integer bno, int bapage, PageInfo bapageInfo) throws Exception {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

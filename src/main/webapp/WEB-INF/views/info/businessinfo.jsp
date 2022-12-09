@@ -64,6 +64,12 @@ h2{
     left: 40%;    
 }
 </style>
+<script>
+//유효성 검사
+
+
+
+</script>
 </head>
 <body>	
 		<div>
@@ -119,7 +125,7 @@ h2{
 						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
 						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
-							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
+							              <input type="text" id="aphone" name="aphone" placeholder="(- 제외 (01012341234 )">
 							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
 						              <div class="wei">
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">

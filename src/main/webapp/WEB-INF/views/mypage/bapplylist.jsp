@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>사업자신청목록</title>
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
 .item{	
 	width:100%;
@@ -26,6 +27,7 @@
 				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 			</ul>			
 	</div>	
+	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="bcards">		
 	<c:forEach var="apply" items="${apply }">		 
 		<div class="applyList">	        
@@ -73,7 +75,7 @@
 	                        		<div class="btn">		      
 			                    		<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
 			                    		<input type="hidden" id="ano" name="ano" value="${apply.ano }">
-		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end" disabled >수거완료</button>
+		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end">수거완료</button>
 	                        		</div>
 	                        	</c:when>
 	                        </c:choose>
@@ -83,34 +85,35 @@
 	    </div>		    
 	</c:forEach>		
 </div>
-    
-    <ul class="pagination">
+</div>
+   <div class="center">
+    <ul class="pagination bapaging">
 		<c:choose>
-			<c:when test="${pageInfo.page<=1}">
+			<c:when test="${bapageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${bapageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		<c:forEach var="i" begin="${bapageInfo.startPage }" end="${bapageInfo.endPage }">
 			<c:choose>
-				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${bapageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?page=${i}">${i }</a></li>
+					<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${i}&select=1">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+			<c:when test="${bapageInfo.page>=bapageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+				<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${bapageInfo.page+1}&select=1" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
-    
+    </div>
 	
 	<script>
 	var anos;
@@ -216,6 +219,9 @@
 		        }
 		    });
 		}
+	
+	
 	</script>
+	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

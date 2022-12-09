@@ -162,8 +162,36 @@
     height: 30px;
     display: flex;
 }
-
-
+#applyend{
+	display: inline-block;
+    margin-top: -15px;
+    margin-left: 96px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#end{
+	display: inline-block;
+    margin-top: -15px;
+    margin-left: 96px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
 #applying{
     display: inline-block;
     margin-top: -15px;

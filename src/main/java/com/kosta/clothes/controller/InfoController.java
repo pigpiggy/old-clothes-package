@@ -270,6 +270,7 @@ public class InfoController {
 	@PostMapping("/apply")
 	public String apply(@ModelAttribute Apply apply, Model model) {
 		System.out.println(apply.getBno());
+		
 		try {
 			Users userno = (Users) session.getAttribute("authUser");
 			apply.setUserno(userno.getUserno());
@@ -277,6 +278,7 @@ public class InfoController {
 			if(apply.getAstatus() == null) {
 				apply.setAstatus("신청중");
 			}
+			
 			businessService.registapply(apply);
 			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
 		}catch(Exception e) {

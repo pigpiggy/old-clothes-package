@@ -18,33 +18,40 @@
 }
 </style>
 </head>
-<body>	
-<div id="bcards">
-	<c:forEach var="apply" items="${apply }">	  
-		<div class="applyList">	        
-	            <div class="item" style="width:100%;">		            
-	            <strong>[ 헌옷 수거 신청 ]</strong>		
-	            	<div class="title"></div>                                 		                
-	                <div class="allapply" style="padding: 2%;">		                
-	                    <div class="cont">
-	                        <div class="aname"><p>${apply.aname }</p></div>
-	                        <div class="aphone"><p>${apply.aphone }</p></div>                        
-	                        <div class="aadress"><p>${apply.aaddress }</p></div>
-	                        <div class="apickup"><p>${apply.apickup }</p></div>                                          
-	                        <div class="wei">
-	                            <div class="weight"><p>${apply.weight }</p></div>                        
-	                        	<p>kg</p>
-	                        </div>		                    
-	                     </div>		                     
-	                    <div class="btn">
-	                        <button type="button" id="apply_close_btn">수거거절</button>
-	                        <button type="submit" form="form" id="applying">수거승인</button>
-	                    </div>                   
-	                 </div>		               	            
-	        </div>		        
-	    </div>	 
-	</c:forEach>	 
-</div>
+<body>
+	<c:import url='/WEB-INF/views/mypage/bmypage.jsp' />
+	<div class="my_Tab">
+			<ul class="tabs">
+				<li class="on"><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
+				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
+			</ul>			
+	</div>	
+	<div id="bcards">
+		<c:forEach var="apply" items="${apply }">	  
+			<div class="applyList">	        
+		            <div class="item" style="width:100%;">		            
+		            <strong>[ 헌옷 수거 신청 ]</strong>		
+		            	<div class="title"></div>                                 		                
+		                <div class="allapply" style="padding: 2%;">		                
+		                    <div class="cont">
+		                        <div class="aname"><p>${apply.aname }</p></div>
+		                        <div class="aphone"><p>${apply.aphone }</p></div>                        
+		                        <div class="aadress"><p>${apply.aaddress }</p></div>
+		                        <div class="apickup"><p>${apply.apickup }</p></div>                                          
+		                        <div class="wei">
+		                            <div class="weight"><p>${apply.weight }</p></div>                        
+		                        	<p>kg</p>
+		                        </div>		                    
+		                     </div>		                     
+		                    <div class="btn">
+		                        <button type="button" id="apply_close_btn">수거거절</button>
+		                        <button type="submit" form="form" id="applying">수거승인</button>
+		                    </div>                   
+		                 </div>		               	            
+		        </div>		        
+		    </div>	 
+		</c:forEach>	 
+	</div>
     
     <ul class="pagination">
 		<c:choose>

@@ -53,9 +53,26 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<Review> getBReviewList(Integer bno) throws Exception {
+	public List<Review> getBReviewList(Integer bno, int rpage, PageInfo rpageInfo) throws Exception {
+		int listCount = reviewDAO.bReviewListCount(bno);
+		int maxPage = (int)Math.ceil((double)listCount/10);  
+		int startPage = rpage/10 * 10 + 1; 
+		int endPage = startPage + 10 -1; 
+		if(endPage > maxPage) { 
+			endPage = maxPage; 
+		}		
+		//pageInfo에 데이터 전달
+		rpageInfo.setPage(rpage); 
+		rpageInfo.setListCount(listCount);
+		rpageInfo.setMaxPage(maxPage);
+		rpageInfo.setStartPage(startPage);
+		rpageInfo.setEndPage(endPage);
+		
+		//검색한 페이지의 시작 페이지 값을 구한 변수 
+		Integer row = (rpage - 1) * 10 + 1;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("bno", bno);
+		map.put("row", row);
 		return reviewDAO.getBReviewList(map);
 	}
 }

@@ -125,44 +125,58 @@
 		]]>
 	</update>
 	
-	<select id="completedCount" resultType="Integer" parameterType="Integer">
+	<select id="completedCount" resultType="Integer" parameterType="Sell">
 		<![CDATA[
-			SELECT completedCount FROM individual where ino=#{ino}
+			SELECT sellCompletedCount, buyCompletedCount FROM individual where ino=#{ino}
 
 		]]>
 	</select>
 	
 	<update id="upDealCount" parameterType="Integer">
 		<![CDATA[
-			update individual set completedCount=completedCount+1
+			update individual set sellCompletedCount=sellCompletedCount+1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="upSeDealCount" parameterType="Integer">
+		<![CDATA[
+			update individual set buyCompletedCount=buyCompletedCount+1
 			where ino=#{ino}
 		]]>
 	</update>
 	
 	<update id="completeDeal" parameterType="Integer">
 		<![CDATA[
-			update individual set (completedCount,istatus)=(select 2,'거래 완료' from dual)
+			update individual set istatus='거래 완료'
 			where ino=#{ino}
 		]]>
 	</update>
 	
-	<select id="completedSharingCount" resultType="Integer" parameterType="Integer">
+	<select id="completedSharingCount" resultType="Integer" parameterType="Sharing">
 		<![CDATA[
-			SELECT completedCount FROM sharing where sno=#{sno}
+			SELECT sellCompletedCount, buyCompletedCount FROM sharing where sno=#{sno}
 
 		]]>
 	</select>
 	
 	<update id="upSharingDealCount" parameterType="Integer">
 		<![CDATA[
-			update sharing set completedCount=completedCount+1
+			update sharing set sellCompletedCount=sellCompletedCount+1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="upShDealCount" parameterType="Integer">
+		<![CDATA[
+			update sharing set buyCompletedCount=buyCompletedCount+1
 			where sno=#{sno}
 		]]>
 	</update>
 	
 	<update id="completeSharingDeal" parameterType="Integer">
 		<![CDATA[
-			update sharing set (completedCount,sstatus)=(select 2,'거래 완료' from dual)
+			update sharing set sstatus='거래 완료'
 			where sno=#{sno}
 		]]>
 	</update>

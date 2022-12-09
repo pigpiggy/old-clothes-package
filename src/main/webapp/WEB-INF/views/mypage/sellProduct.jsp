@@ -68,8 +68,10 @@
 					      </div>				      
 				     </a>
 				     <c:if test="${'거래중' eq sell.istatus}">
-		          		<button class="cancel">거래 취소</button>
-		          		<button class="complete">거래 완료</button>
+				     	<c:if test="${sell.sellCompletedCount eq 0}">
+		          			<button class="cancel">거래 취소</button>
+		          			<button class="complete">거래 완료</button>
+		          		</c:if>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -143,8 +145,10 @@
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq sharing.sstatus}">
-		          		<button class="cancel1">거래 취소</button>
-		          		<button class="complete1">거래 완료</button>
+		     			<c:if test="${sharing.sellCompletedCount eq 0}">
+		          			<button class="cancel1">거래 취소</button>
+		          			<button class="complete1">거래 완료</button>
+		          		</c:if>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>
@@ -205,7 +209,7 @@
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
-				url : "/completeDeal",
+				url : "/completeSellDeal",
 				data : {ino:ino},
 				success : function(data) {
 					console.log(data);

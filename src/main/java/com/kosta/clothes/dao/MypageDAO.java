@@ -41,12 +41,14 @@ public interface MypageDAO {
 	void selectSharingApply(Map map) throws Exception;
 	void cancelDeal(Integer ino) throws Exception;
 	void cancelSharingDeal(Integer sno) throws Exception;
-	Integer completedCount(Integer ino) throws Exception;
+	Sell completedCount(Integer ino) throws Exception;
 	void upDealCount(Integer ino) throws Exception;
+	void upSeDealCount(Integer ino) throws Exception;
 	void completeDeal(Integer ino) throws Exception;
 	
-	Integer completedSharingCount(Integer sno) throws Exception;
+	Sharing completedSharingCount(Integer sno) throws Exception;
 	void upSharingDealCount(Integer sno) throws Exception;
+	void upShDealCount(Integer sno) throws Exception;
 	void completeSharingDeal(Integer sno) throws Exception;
 	
 	void sendIReview(Map map) throws Exception;

@@ -68,8 +68,10 @@
 					      </div>
 				     </a>
 				     <c:if test="${'거래중' eq buysell.istatus}">
-		          		<button class="cancel3">거래 취소</button>
-		          		<button class="complete3">거래 완료</button>
+				     	<c:if test="${buysell.buyCompletedCount eq 0}">
+		          			<button class="cancel3">거래 취소</button>
+		          			<button class="complete3">거래 완료</button>
+		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
 		          		<button class="review1"><a href="#demo-modal">거래 후기</a></button>
@@ -163,8 +165,10 @@
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq buysharing.sstatus}">
-		          		<button class="cancel4">거래 취소</button>
-		          		<button class="complete4">거래 완료</button>
+		     			<c:if test="${buysharing.buyCompletedCount eq 0}">
+		          			<button class="cancel4">거래 취소</button>
+		          			<button class="complete4">거래 완료</button>
+		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
 		          		<button class="review"><a href="#demo-modal2">거래 후기</a></button>
@@ -262,10 +266,9 @@
 			var index = $(this).parent().index();
 			$(this).attr("disabled", true);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
-			alert(ino);
 			$.ajax({
 				type : "get",
-				url : "/completeDeal",
+				url : "/completeSeDeal",
 				data : {ino:ino},
 				success : function(data) {
 					console.log(data);
@@ -284,7 +287,7 @@
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
-				url : "/completeSharingDeal",
+				url : "/completeShDeal",
 				data : {sno:sno},
 				success : function(data) {
 					console.log(data);

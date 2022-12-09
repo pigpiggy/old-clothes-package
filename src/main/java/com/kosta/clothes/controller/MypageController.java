@@ -1046,11 +1046,22 @@ public class MypageController {
    }
    
    @ResponseBody
-   @GetMapping("/completeDeal")
+   @GetMapping("/completeSellDeal")
    public void completeDeal(@RequestParam("ino") Integer ino) {
       try {
     	  System.out.println("들어옴");
          mypageService.completeDeal(ino);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
+   @GetMapping("/completeSeDeal")
+   public void completeSeDeal(@RequestParam("ino") Integer ino) {
+      try {
+    	  System.out.println("들어옴");
+         mypageService.completeSeDeal(ino);
       }catch(Exception e) {
          e.printStackTrace();
       }
@@ -1065,6 +1076,16 @@ public class MypageController {
          e.printStackTrace();
       }
    } 
+   
+   @ResponseBody
+   @GetMapping("/completeShDeal")
+   public void completeShDeal(@RequestParam("sno") Integer sno) {
+      try {
+         mypageService.completeShDeal(sno);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
    
    @ResponseBody
    @GetMapping("/sendIReview")

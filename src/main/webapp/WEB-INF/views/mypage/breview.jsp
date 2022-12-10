@@ -11,7 +11,7 @@
 	<c:import url='/WEB-INF/views/mypage/bmypage.jsp' />
 	<div class="my_Tab">
 			<ul class="tabs">
-				<li><a href ="/mypage/bmypage/${business.bno }/apply" class="applyTab">신청 목록</a></li>				
+				<li><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
 				<li class="on"><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 			</ul>			
 	</div>
@@ -121,13 +121,6 @@
 			</ul>		
 		</div>		
 		
-		<script>
-			if(${authUser.sect} == 'users'){
-				$('.applyTab').click(function(){
-					return false;
-				})
-			}
-		</script>
 		<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

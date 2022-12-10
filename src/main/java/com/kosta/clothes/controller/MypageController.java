@@ -564,6 +564,7 @@ public class MypageController {
 			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		System.out.println("여기까지 들어ㅇ오긴하냐");
 		try {
 			/*판매 상품(개인판매)*/
 			List<Sell> sellList;

@@ -49,9 +49,12 @@
 				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
 			</ul>
 	</div>
+	 <c:if test="${authUser.sect eq 'users' }">
 	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="ucards">
-	<c:forEach var="wapply" items="${wapply }">	  
+	<c:forEach var="wapply" items="${wapply }">
+	<input type="hidden" id="bno" name="bno" value="${wapply.bno }">
+	<c:if test="${authUser.userno eq wapply.userno }">	  
 		<div class="applyList">
 			<c:choose>	        
 				<c:when test="${'신청중' != wapply.astatus}">
@@ -75,6 +78,8 @@
 	                        	<p>kg</p>
 	                        </div>		                    
 	                     </div>
+	                  
+	                    
 	                    <c:choose>                     
 	                    <c:when test="${wapply.astatus eq '신청중' }">
 		                     <div class="btn">
@@ -93,7 +98,7 @@
 	                    <c:choose> 
 	                    <c:when test="${wapply.astatus eq '수거완료' }">
 			                    <div class="btn">	                        
-			                        <button type="submit" form="form" id="applying">수거완료</button>
+			                        <button type="submit" form="form" id="applying" class="complete">수거완료</button>
 			                    </div>                   
 		                 </c:when>
 		                 <c:otherwise>
@@ -101,12 +106,25 @@
 								<!-- 버튼 안 나옴 거절 당했을 시 -->
 							</c:if>
 		                 </c:otherwise>	
-		                 </c:choose> 
+		                 </c:choose> 	                 
 	                 </div>		               	            
-	        </div>		        
-	    </div>	 
+	        	</div>		        
+	    	</div>
+	    	<div id="modal" class="modal">
+   				<div class="modal_content">
+   				
+   				
+   					<div class="modal_layer"></div>
+   				</div>
+   			</div>
+	    		
+	    </c:if> 
 	</c:forEach>	 
+	</div>
 </div>
+
+</c:if>
+
 
 	<div id="demo-modal2" class="firstmodal">
       		<div class="modal__content" id="modal__content">
@@ -127,8 +145,7 @@
   	</div>
 	
     
-    <ul class="pagination">
-<%--페이징 --%>
+
     <div class="center">
     <ul class="pagination apaging">
 		<c:choose>
@@ -157,10 +174,15 @@
 		</c:choose>
 	</ul>
     </div>
-</div>
+
 
 	 
 	<script>
+	var bnoo = $('#bno').val();
+	console.log("bnoo :" + bnoo);
+	//모달 켜기
+    
+	
 	var cano;
 	var cuserno;
 	//수거 거절

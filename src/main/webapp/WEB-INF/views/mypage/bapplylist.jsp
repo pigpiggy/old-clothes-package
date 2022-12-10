@@ -17,6 +17,25 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.aindividualStatus {
+    position: absolute;
+    left: 51%;
+    top: 27%;
+    transform: translate(-50%, -50%);
+    background: black;
+    opacity: 0.4;
+    color: white;
+    width: 45%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 2;
+    border-radius: 2px;
+}
+.applyList{
+	position: relative;
+    display: block;
+}
 </style>
 </head>
 <body>
@@ -26,11 +45,29 @@
 				<li class="on"><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
 				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 			</ul>			
-	</div>	
+	</div>
+	<c:if test="${authUser.sect eq 'business' }">	
 	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="bcards">		
-	<c:forEach var="apply" items="${apply }">		 
-		<div class="applyList">	        
+	<c:forEach var="apply" items="${apply }">	
+	<c:if test="${authUser.bno eq apply.bno }">		 
+		<div class="applyList">	       
+		<c:choose>	        
+				<c:when test="${'신청중' == apply.astatus}">
+	          			<div class="aindividualStatus">신청대기</div>
+	          	</c:when>
+	          	<c:when test="${apply.astatus == '신청완료'}">
+	          			<div class="aindividualStatus">수거대상</div>
+	          	</c:when>
+	          	<c:when test="${apply.astatus == '수거완료'}">
+	          			<div class="aindividualStatus">수거완료</div>
+	          	</c:when>
+	          	<c:otherwise>
+	          		<c:if test="${apply.astatus == '신청거절' }">
+	          			<div class="aindividualStatus">수거거절</div>
+	          		</c:if>
+	          	</c:otherwise>
+			</c:choose>	  
 	            <div class="item" style="width:100%;">		            
 	            <strong>[ 헌옷 수거 신청 ]</strong>		
 	            	<div class="title"></div>                                 		                
@@ -82,10 +119,12 @@
 	                    </form>                   
 	                 </div>		               	            
 	        </div>		        
-	    </div>		    
+	    </div>	
+	    </c:if>	    
 	</c:forEach>		
 </div>
 </div>
+</c:if>
    <div class="center">
     <ul class="pagination bapaging">
 		<c:choose>

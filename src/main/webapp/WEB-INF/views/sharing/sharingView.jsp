@@ -138,7 +138,7 @@
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}/sesll"><input type="button" class="btn btn-info" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
 			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
 			        					<form action="/selectSharingApply" method="get">
 				        					<ul>

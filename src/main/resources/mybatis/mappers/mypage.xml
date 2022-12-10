@@ -125,7 +125,7 @@
 		]]>
 	</update>
 	
-	<select id="completedCount" resultType="Integer" parameterType="Sell">
+	<select id="completedCount" resultType="Sell" parameterType="Integer">
 		<![CDATA[
 			SELECT sellCompletedCount, buyCompletedCount FROM individual where ino=#{ino}
 
@@ -153,7 +153,7 @@
 		]]>
 	</update>
 	
-	<select id="completedSharingCount" resultType="Integer" parameterType="Sharing">
+	<select id="completedSharingCount" resultType="Sharing" parameterType="Integer">
 		<![CDATA[
 			SELECT sellCompletedCount, buyCompletedCount FROM sharing where sno=#{sno}
 

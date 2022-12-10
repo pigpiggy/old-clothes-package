@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>사용자신청목록</title>
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 .item{	
 	width:100%;
@@ -104,6 +106,24 @@
 	    </div>	 
 	</c:forEach>	 
 </div>
+
+	<div id="demo-modal2" class="firstmodal">
+      		<div class="modal__content" id="modal__content">
+      			<form action="smessage" method="post" id="messageform">
+      				<div class="stars">
+	      				<button class="star">1</button>
+	      				<button class="star">2</button>
+	      				<button class="star">3</button>
+	      				<button class="star">4</button>
+	      				<button class="star">5</button>
+	      				<label for="content">거래 후기</label>
+	      			</div>
+      				<textarea name="content" class="content"></textarea>
+      				<button id="reviewcomplete">작성완료</button>	
+      			</form>
+				<a href="#" class="modal__close">&times;</a>
+      		</div>
+  	</div>
 	
     
     <ul class="pagination">
@@ -133,7 +153,7 @@
 		</c:choose>
 	</ul>
     </div>
-	
+	<script src="<c:url value='/resources/js/mypage/message.js'/>"></script>
 	<script>
 	var cano;
 	var cuserno;
@@ -162,6 +182,31 @@
 		        }
 		    });
 		}
+	
+	$('#applying').click(function(){
+		$('.firstmodal').css('visibility','visible');
+		$('.firstmodal').css('opacity','1');
+		$('.firstmodal').css('z-index','2');
+	})
+	
+	$('.modal__close').click(function(e){
+		e.preventDefault();
+		$('.firstmodal').css('visibility','hidden');
+		$('.firstmodal').css('opacity','0');
+		$('.firstmodal').css('z-index','0');
+	})
+	
+	var star = 0;
+		$(".star").mouseover(function(){
+			for(var j=0;j<=4;j++){
+				document.getElementsByClassName('star')[j].classList.remove('yellow');
+			}
+			var starindex = $(".star").index(this);
+			for(var j=0;j<=starindex;j++){
+				document.getElementsByClassName('star')[j].classList.add('yellow');
+			}
+			star = starindex + 1;
+		})
 	
 	</script>
 </body>

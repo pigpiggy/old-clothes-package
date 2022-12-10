@@ -30,4 +30,11 @@ public interface ApplyDAO {
 	void updateApply(@Param("ano") Integer ano, @Param("userno") Integer userno, @Param("astatus") String astatus) throws Exception;//수거 승인
 	void deleteApply(@Param("ano") Integer ano, @Param("userno") Integer userno, @Param("astatus") String astatus) throws Exception;//수거 거절
 	void deletewApply(@Param("ano") Integer ano, @Param("userno") Integer userno) throws Exception;//신청 취소
+	
+	//apply 페이징 사용자
+	List<Apply> getApplyList(Map map) throws Exception; 
+	Integer applyListCount(Integer userno) throws Exception;
+	//apply 페이징 사업자
+	List<Apply> bgetApplyList(Map map) throws Exception;
+	Integer bapplyListCount(Integer userno) throws Exception;
 }

@@ -143,10 +143,12 @@ public class SharingServiceImpl implements SharingService{
 					
 					fileids += nfileVo.getTno()+",";
 					sharing.setSfileids(fileids);
+				} else {
 				}
 				
 			}
-		}
+		} 
+		sharing.setSfileids(sharing.getSfileids());
 		sharingDAO.updateSfileids(sharing);
 	}
 

@@ -2,6 +2,8 @@
 //신청서 유효성 검사
 function Valids(){	
 	//개인
+	var check = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	var regex = /[^0-9]/gi;
 	var aname = document.getElementById("aname");//신청자 이름
 	var aaddress = document.getElementById("aaddress")//신청자 주소
 	var weight = document.getElementById("weight")//신청자 옷 무게	
@@ -22,9 +24,18 @@ function Valids(){
 		alert("무게를 입력해주세요.");
 		return false;
 	}
-	
+	/*if(regex.test(weight.value)){
+		alert("숫자로 입력해주세요.");
+		return false;
+	}*/
+
 	if(aphone.value==''){
 		alert("전화번호를 입력해주세요.");
+		return false;
+	}
+	if(!check.test(aphone.value)){
+		
+		alert("번호를 제대로 입력해주세요.");
 		return false;
 	}
 	
@@ -32,6 +43,7 @@ function Valids(){
 		alert("희망날짜를 입력해주세요.");
 		return false;
 	}
+	
 	
 }
 

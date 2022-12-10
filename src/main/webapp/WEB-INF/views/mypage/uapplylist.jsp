@@ -9,6 +9,7 @@
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
 .item{	
 	width:100%;
@@ -57,7 +58,7 @@
 	          			<div class="aindividualStatus">${wapply.astatus }</div>
 	          	</c:when>
 	          	<c:when test="${wapply.astatus == '신청중'}">
-	          			<div class="aindividualStatus">신청완료</div>
+	          			<div class="aindividualStatus">신청중</div>
 	          	</c:when>
 			</c:choose>	          	
 	            <div class="item" style="width:100%;">		            
@@ -97,7 +98,7 @@
 		                 </c:when>
 		                 <c:otherwise>
 		                 	<c:if test="${wapply.astatus eq '신청거절' }">
-
+								<!-- 버튼 안 나옴 거절 당했을 시 -->
 							</c:if>
 		                 </c:otherwise>	
 		                 </c:choose> 
@@ -127,33 +128,38 @@
 	
     
     <ul class="pagination">
+<%--페이징 --%>
+    <div class="center">
+    <ul class="pagination apaging">
 		<c:choose>
-			<c:when test="${pageInfo.page<=1}">
+			<c:when test="${apageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		<c:forEach var="i" begin="${apageInfo.startPage }" end="${apageInfo.endPage }">
 			<c:choose>
-				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${apageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?page=${i}">${i }</a></li>
+					<li><a href="/mypage/umypage/${users.userno }/apply?apage=${i}&select=1">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+			<c:when test="${apageInfo.page>=apageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+				<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page+1}&select=1" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
     </div>
-	<script src="<c:url value='/resources/js/mypage/message.js'/>"></script>
+</div>
+
+	 
 	<script>
 	var cano;
 	var cuserno;
@@ -209,5 +215,6 @@
 		})
 	
 	</script>
+<script src="<c:url value='/resources/js/free/paging.js'/>"></script>	
 </body>
 </html>

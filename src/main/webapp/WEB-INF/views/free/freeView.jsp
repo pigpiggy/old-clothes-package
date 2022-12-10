@@ -221,7 +221,7 @@
 	             var a =''; 
 	             $.each(data, function(key, value){ 
 	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                 
+
 	                 if(value.csect =='users'){
 	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
 	                 }else if(value.csect == 'business'){

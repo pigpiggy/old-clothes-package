@@ -85,7 +85,6 @@ public class MypageController {
 	                  model.addAttribute("bcount",bcount);
 	                  model.addAttribute("ccount",ccount);
 	                  
-	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
 	                  System.out.println("bmypage 사업자");
 	                  Business business = messageService.mypageBusiness(bno);

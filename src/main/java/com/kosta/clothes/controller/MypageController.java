@@ -565,6 +565,7 @@ public class MypageController {
 			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		System.out.println("여기까지 들어ㅇ오긴하냐");
 		try {
 			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
@@ -574,6 +575,11 @@ public class MypageController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					Users users1 = (Users) session.getAttribute("authUser");
 					sellList = mypageService.getSellList(userno,page,pageInfo);
+					for (int i = 0; i < sellList.size(); i++) {
+						if (sellList.get(i).getIfileids() != null) {
+							sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+						}
+					}
 					//상품등록
 	                Integer sharingcount = sharingService.sharingcount(userno);
 	                System.out.println("sharingcount : " + sharingcount);
@@ -598,10 +604,20 @@ public class MypageController {
 					model.addAttribute("sellList", sellList);
 					System.out.println("sellList:"+sellList);
 					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					for (int i = 0; i < sharingList.size(); i++) {
+						if (sharingList.get(i).getSfileids() != null) {
+							sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+						}
+					}
 					model.addAttribute("spageInfo", spageInfo);
 					model.addAttribute("sharingList", sharingList);
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
 					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					 for (int i = 0; i < sellList.size(); i++) {
+							if (sellList.get(i).getIfileids() != null) {
+								sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+							}
+						}
 					//상품등록
 		                Integer sharingcount = sharingService.sharingcount(userno);
 		                System.out.println("sharingcount : " + sharingcount);
@@ -626,11 +642,21 @@ public class MypageController {
 					 model.addAttribute("sellList", sellList);
 					 System.out.println("sellList:"+sellList);
 					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					 for (int i = 0; i < sharingList.size(); i++) {
+							if (sharingList.get(i).getSfileids() != null) {
+								sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+							}
+						}
 					 model.addAttribute("spageInfo", spageInfo);
 					 model.addAttribute("sharingList", sharingList);
 				}
 			}else {
 				sellList = mypageService.getSellList(userno,page,pageInfo);
+				for (int i = 0; i < sellList.size(); i++) {
+					if (sellList.get(i).getIfileids() != null) {
+						sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+					}
+				}
 				//상품등록
                 Integer sharingcount = sharingService.sharingcount(userno);
                 System.out.println("sharingcount : " + sharingcount);
@@ -655,6 +681,11 @@ public class MypageController {
 				model.addAttribute("sellList", sellList);
 				System.out.println("sellList:"+sellList);
 				sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				for (int i = 0; i < sharingList.size(); i++) {
+					if (sharingList.get(i).getSfileids() != null) {
+						sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+					}
+				}
 				model.addAttribute("spageInfo", spageInfo);
 				model.addAttribute("sharingList", sharingList);				
 			}
@@ -702,10 +733,20 @@ public class MypageController {
 	                model.addAttribute("statuscount",statuscount);
 
 				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+				 for (int i = 0; i < buysellList.size(); i++) {
+						if (buysellList.get(i).getIfileids() != null) {
+							buysellList.get(i).setIfileids(buysellList.get(i).getIfileids().split(",")[0]);
+						}
+					}
 				 model.addAttribute("bspageInfo", bspageInfo);
 				 model.addAttribute("buysellList", buysellList);
 				
 				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 for (int i = 0; i < buysharingList.size(); i++) {
+						if (buysharingList.get(i).getSfileids() != null) {
+							buysharingList.get(i).setSfileids(buysharingList.get(i).getSfileids().split(",")[0]);
+						}
+					}
 				 model.addAttribute("ppageInfo", ppageInfo);
 				 model.addAttribute("buysharingList", buysharingList);
 			

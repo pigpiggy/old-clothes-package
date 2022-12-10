@@ -221,7 +221,11 @@
 	             var a =''; 
 	             $.each(data, function(key, value){ 
 	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+	                 if(value.csect =='users'){
+	                       a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';    
+	                    }else if(value.csect == 'business'){
+	                       a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                    }
 	                 if(auth != ''){
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");

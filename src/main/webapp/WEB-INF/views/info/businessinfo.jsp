@@ -240,7 +240,12 @@ h2{
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
 				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
-				bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';				
+				if(data.bphone != null){
+					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+				}else{
+					bli += '<p id="btotalphone">' + "전화 번호 : 없음"+'</p>';
+				}
+				
 				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
 			
 				if(authsect == 'users'){
@@ -526,7 +531,11 @@ h2{
 					bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 					bli += '</div>';
 					bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
-					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+					if(data.bphone != null){
+						bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+					}else{
+						bli += '<p id="btotalphone">' + "전화 번호 : 없음"+'</p>';
+					}
 					console.log(data.bkakaoid + "kakaoid");
 					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼					
 					if(authsect == 'users'){

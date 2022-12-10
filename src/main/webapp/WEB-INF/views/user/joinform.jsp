@@ -125,7 +125,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="password" style="position:absolute; margin:2.5%;">비밀번호<span class="req">*</span></label>
 					                        <input type="password" id="password" name="password" onchange="isSame()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;"
-					                        placeholder="6~10로 입력하세요."/>
+					                        placeholder="10이하로 입력하세요."/>
 				                        </div>
 		
 				                        <div class="form-outline mb-4" style="display:flex;">

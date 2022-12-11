@@ -121,7 +121,31 @@ public class ApplyServiceImpl implements ApplyService{
 
 		@Override
 		public List<Apply> bgetApplyList(Integer bno, int bapage, PageInfo bapageInfo) throws Exception {
-			// TODO Auto-generated method stub
-			return null;
+			int applyCount = applyDAO.bapplyListCount(bno);
+			System.out.print("ReviewRow:" + applyCount);
+			int maxPage = (int)Math.ceil((double)applyCount/10);  
+			System.out.println("maxPage : " + maxPage);
+			int startPage = bapage/10 * 10 + 1;
+			System.out.println("startPage : " + startPage);
+			int endPage = startPage + 10 -1; 
+			System.out.println("endPage : " + endPage);
+			if(endPage > maxPage) { 
+				endPage = maxPage; 
+			}		
+			//pageInfo에 데이터 전달
+			bapageInfo.setPage(bapage); 
+			bapageInfo.setListCount(applyCount);
+			bapageInfo.setMaxPage(maxPage);
+			bapageInfo.setStartPage(startPage);
+			bapageInfo.setEndPage(endPage);
+			
+			//검색한 페이지의 시작 페이지 값을 구한 변수 
+			Integer row = (bapage - 1) * 10 + 1;
+			System.out.println("row : " + row);
+			Map<String, Object> map = new HashMap<String, Object>();
+			System.out.println("userno : " + bno);
+			map.put("bno", bno);
+			map.put("row", row);
+			return applyDAO.bgetApplyList(map);
 		}
 }

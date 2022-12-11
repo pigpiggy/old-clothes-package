@@ -53,7 +53,7 @@
 	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="ucards">
 	<c:forEach var="wapply" items="${wapply }">
-	<input type="hidden" id="bno" name="bno" value="${wapply.bno }">
+	<input type="hidden" id="bno" name="bno" value="${wapply.bno }" data-sno="${wapply.bno }">
 	<c:if test="${authUser.userno eq wapply.userno }">	  
 		<div class="applyList">
 			<c:choose>	        
@@ -68,7 +68,9 @@
 	            <strong>[ ${wapply.bname } ]</strong>		
 	            	<div class="title"></div>                                 		                
 	                <div class="allapply" style="padding: 2%;">		                
-	                    <div class="cont">	                    	
+	                    <div class="cont">	
+	                    	<input type="hidden" class="bnoContent" name="bnoContent" value="${wapply.bno }" data-sno="${wapply.bno }">
+	                    	<input type="hidden" class="anoContent" name="anoContent" value="${wapply.ano }" data-sno="${wapply.ano }">                    	
 	                        <div class="aname"><p>${wapply.aname }</p></div>
 	                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
 	                        <div class="aadress"><p>${wapply.aaddress }</p></div>
@@ -128,7 +130,6 @@
 
 	<div id="demo-modal2" class="firstmodal">
       		<div class="modal__content" id="modal__content">
-      			<form action="smessage" method="post" id="messageform">
       				<div class="stars">
 	      				<button class="star">1</button>
 	      				<button class="star">2</button>
@@ -138,8 +139,7 @@
 	      				<label for="content">거래 후기</label>
 	      			</div>
       				<textarea name="content" class="content"></textarea>
-      				<button id="reviewcomplete">작성완료</button>	
-      			</form>
+      				<button id="uapplyReviewcomplete">작성완료</button>	
 				<a href="#" class="modal__close">&times;</a>
       		</div>
   	</div>
@@ -210,11 +210,14 @@
 		        }
 		    });
 		}
-	
+	var bno;
+	var uapplyIndex;
 	$('#applying').click(function(){
 		$('.firstmodal').css('visibility','visible');
 		$('.firstmodal').css('opacity','1');
 		$('.firstmodal').css('z-index','2');
+		console.log($(this).parent().parent());
+		uapplyIndex = $('.applyList').index($(this).parent().parent())+1;
 	})
 	
 	$('.modal__close').click(function(e){
@@ -234,6 +237,30 @@
 				document.getElementsByClassName('star')[j].classList.add('yellow');
 			}
 			star = starindex + 1;
+		})
+		
+	$("#uapplyReviewcomplete").click(function(){
+			alert(uapplyIndex);
+			console.log($('.bno:eq('+uapplyIndex+')'));
+			bno = $('.bnoContent:eq('+uapplyIndex+')').attr("data-sno");
+			var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
+			alert(bno);
+			var content = $('.content').val();
+			$.ajax({
+				type : "get",
+				url : "/sendUapplyReview",
+				data : {star:star,
+						content:content,
+						bno:bno,
+						ano:ano},
+				success : function(data) {
+					console.log(data);
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
 		})
 	
 	</script>

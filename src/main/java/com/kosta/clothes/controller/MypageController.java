@@ -1218,6 +1218,26 @@ public class MypageController {
          e.printStackTrace();
       }
    }
+   
+   @ResponseBody
+   @GetMapping("/sendUapplyReview")
+   public void sendUapplyReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("bno") Integer bno, @RequestParam("ano") Integer ano) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("bno", bno);
+    	  map.put("userno", userno);
+    	  map.put("ano", ano);
+    	  System.out.println("ano:"+ano);
+         mypageService.sendUapplyReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
    	
 	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {

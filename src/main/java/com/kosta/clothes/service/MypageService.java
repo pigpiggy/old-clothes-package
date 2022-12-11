@@ -34,6 +34,7 @@ public interface MypageService {
 	void completeShDeal(Integer sno) throws Exception;
 	
 	void sendIReview(Map map) throws Exception;
+	void sendUapplyReview(Map map) throws Exception;
 	//
 	Users getMypage(Integer userno) throws Exception;
 	

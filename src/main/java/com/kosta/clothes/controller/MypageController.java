@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
@@ -574,6 +575,18 @@ public class MypageController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					Users users1 = (Users) session.getAttribute("authUser");
 					sellList = mypageService.getSellList(userno,page,pageInfo);
+					/* 주소 띄우기(개인판매) */
+					for(int i = 0; i < sellList.size(); i++) {
+						String addr = sellList.get(i).getIaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sellList.get(i).setIaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sellList.get(i).setIaddress(join2);
+						}
+					}
 					//상품등록
 	                Integer sharingcount = sharingService.sharingcount(userno);
 	                System.out.println("sharingcount : " + sharingcount);
@@ -598,10 +611,34 @@ public class MypageController {
 					model.addAttribute("sellList", sellList);
 					System.out.println("sellList:"+sellList);
 					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					/* 주소 띄우기(무료나눔) */
+					for(int i = 0; i < sharingList.size(); i++) {
+						String addr = sharingList.get(i).getSaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sharingList.get(i).setSaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sharingList.get(i).setSaddress(join2);
+						}
+					}
 					model.addAttribute("spageInfo", spageInfo);
 					model.addAttribute("sharingList", sharingList);
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
-					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					 	sellList = mypageService.getSellList(userno,page,pageInfo);
+						/* 주소 띄우기(개인판매) */
+						for(int i = 0; i < sellList.size(); i++) {
+							String addr = sellList.get(i).getIaddress();
+							String[] addChange = addr.split(" "); //주소 공백으로 분
+							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+								sellList.get(i).setIaddress(join1);
+							} else {
+								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+								sellList.get(i).setIaddress(join2);
+							}
+						}
 					//상품등록
 		                Integer sharingcount = sharingService.sharingcount(userno);
 		                System.out.println("sharingcount : " + sharingcount);
@@ -622,15 +659,39 @@ public class MypageController {
 		                System.out.println("statuscount:"+statuscount);
 		                model.addAttribute("statuscount",statuscount);
 
-					 model.addAttribute("pageInfo", pageInfo);
-					 model.addAttribute("sellList", sellList);
-					 System.out.println("sellList:"+sellList);
-					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-					 model.addAttribute("spageInfo", spageInfo);
-					 model.addAttribute("sharingList", sharingList);
-				}
+						model.addAttribute("pageInfo", pageInfo);
+						model.addAttribute("sellList", sellList);
+						System.out.println("sellList:"+sellList);
+						sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					 /* 주소 띄우기(무료나눔) */
+						for(int i = 0; i < sharingList.size(); i++) {
+							String addr = sharingList.get(i).getSaddress();
+							String[] addChange = addr.split(" "); //주소 공백으로 분
+							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+								sharingList.get(i).setSaddress(join1);
+							} else {
+								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+								sharingList.get(i).setSaddress(join2);
+							}
+						}
+						model.addAttribute("spageInfo", spageInfo);
+						model.addAttribute("sharingList", sharingList);
+					}
 			}else {
 				sellList = mypageService.getSellList(userno,page,pageInfo);
+				/* 주소 띄우기(개인판매) */
+				for(int i = 0; i < sellList.size(); i++) {
+					String addr = sellList.get(i).getIaddress();
+					String[] addChange = addr.split(" "); //주소 공백으로 분
+					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+						sellList.get(i).setIaddress(join1);
+					} else {
+						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+						sellList.get(i).setIaddress(join2);
+					}
+				}
 				//상품등록
                 Integer sharingcount = sharingService.sharingcount(userno);
                 System.out.println("sharingcount : " + sharingcount);
@@ -655,6 +716,18 @@ public class MypageController {
 				model.addAttribute("sellList", sellList);
 				System.out.println("sellList:"+sellList);
 				sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				/* 주소 띄우기(무료나눔) */
+				for(int i = 0; i < sharingList.size(); i++) {
+					String addr = sharingList.get(i).getSaddress();
+					String[] addChange = addr.split(" "); //주소 공백으로 분
+					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+						sharingList.get(i).setSaddress(join1);
+					} else {
+						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+						sharingList.get(i).setSaddress(join2);
+					}
+				}
 				model.addAttribute("spageInfo", spageInfo);
 				model.addAttribute("sharingList", sharingList);				
 			}
@@ -702,10 +775,34 @@ public class MypageController {
 	                model.addAttribute("statuscount",statuscount);
 
 				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+					/* 주소 띄우기(개인판매) */
+					for(int i = 0; i < buysellList.size(); i++) {
+						String addr = buysellList.get(i).getIaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							buysellList.get(i).setIaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							buysellList.get(i).setIaddress(join2);
+						}
+					}
 				 model.addAttribute("bspageInfo", bspageInfo);
 				 model.addAttribute("buysellList", buysellList);
 				
 				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 /* 주소 띄우기(무료나눔) */
+					for(int i = 0; i < buysharingList.size(); i++) {
+						String addr = buysharingList.get(i).getSaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							buysharingList.get(i).setSaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							buysharingList.get(i).setSaddress(join2);
+						}
+					}
 				 model.addAttribute("ppageInfo", ppageInfo);
 				 model.addAttribute("buysharingList", buysharingList);
 			

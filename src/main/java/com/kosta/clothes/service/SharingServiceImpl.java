@@ -1,9 +1,11 @@
 package com.kosta.clothes.service;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.servlet.ServletContext;
 
@@ -18,6 +20,8 @@ import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.LikesDAO;
 import com.kosta.clothes.dao.SharingDAO;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 @Service
 public class SharingServiceImpl implements SharingService{
@@ -67,8 +71,7 @@ public class SharingServiceImpl implements SharingService{
 		}
 		sharingvo.setSfileids(fileids);
 		sharingvo.setSdealType(sharing.getSdealType());
-		sharingvo.setAddressCity(sharing.getAddressCity());
-		sharingvo.setAddressTown(sharing.getAddressTown());
+		sharingvo.setSaddress(sharing.getSaddress());
 		
 		sharingDAO.insertSharing(sharingvo);
 		System.out.println(sharing);
@@ -85,8 +88,24 @@ public class SharingServiceImpl implements SharingService{
 	}
 	@Override
 	public List<Sharing> getSharingList() throws Exception {
-		// TODO Auto-generated method stub
-		return sharingDAO.selectSharingList();
+		List<Sharing> sharingList = sharingDAO.selectSharingList();
+		for(int i = 0; i < sharingList.size(); i++) {
+			String addr = sharingList.get(i).getSaddress();
+			String[] addChange = addr.split(" "); //주소 공백으로 분
+			if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+				sharingList.get(i).setSaddress(join1);
+				System.out.println("join1:" + join1);
+
+			} else {
+				String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+				sharingList.get(i).setSaddress(join2);
+				System.out.println("join2:" + join2);
+			}
+			System.out.println("join:");
+			System.out.println("string:" + addr);			
+		}
+		return sharingList;
 	}
 
 	@Override

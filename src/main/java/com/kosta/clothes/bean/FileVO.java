@@ -62,6 +62,11 @@ public class FileVO {
 	public FileVO() {
 		super();
 	}
+	
+	public FileVO(String tname) {
+		super();
+		this.tname = tname;
+	}
 	public FileVO(Integer tno, String directory_name, String tname, Long tsize, Integer sno, Integer ino,
 			String content_type, Date upload_date) {
 		super();

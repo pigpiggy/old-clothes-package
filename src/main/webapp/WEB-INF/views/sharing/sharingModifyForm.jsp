@@ -41,8 +41,6 @@
 						거래지역: 
 						<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
 						<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
-						<input type="hidden" name="addressCity" id="jibun_si" />
-						<input type="hidden" name="addressTown" id="jibun_dong" />
 					</div>
 				</div>
 

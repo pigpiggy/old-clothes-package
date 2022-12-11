@@ -47,8 +47,6 @@ dependencies {
 	//비밀번호 암호화
 	// https://mvnrepository.com/artifact/org.mindrot/jbcrypt
 	implementation 'org.mindrot:jbcrypt:0.4'
-	
-
 }
 
 tasks.named('test') {

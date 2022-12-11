@@ -12,4 +12,5 @@ public interface FileDAO {
 	void modifyFileInfo(FileVO fileVo) throws Exception;
 	void deleteSfileInfo(Integer sno) throws Exception;
 	void deleteIfileInfo(Integer ino) throws Exception;
+	FileVO selectSfileInfo(Integer sno) throws Exception;
 }

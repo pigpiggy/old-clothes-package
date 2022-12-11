@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.servlet.ServletContext;
 
@@ -67,8 +68,7 @@ public class SellServiceImpl implements SellService{
 		sellvo.setIfileids(fileids);
 		sellvo.setIdealType(sell.getIdealType());
 		sellvo.setPrice(sell.getPrice());
-		sellvo.setAddressCity(sell.getAddressCity());
-		sellvo.setAddressTown(sell.getAddressTown());
+		sellvo.setIaddress(sell.getIaddress());
 		
 		sellDAO.insertIndividual(sellvo);
 	}
@@ -80,8 +80,24 @@ public class SellServiceImpl implements SellService{
 
 	@Override
 	public List<Sell> getSellList() throws Exception {
-		// TODO Auto-generated method stub
-		return sellDAO.getSellList();
+		List<Sell> sellList = sellDAO.getSellList();
+		for(int i = 0; i < sellList.size(); i++) {
+			String addr = sellList.get(i).getIaddress();
+			String[] addChange = addr.split(" ");
+			if(addChange[2].matches("^+구$")) {
+				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+				sellList.get(i).setIaddress(join1);
+				System.out.println("join1:" + join1);
+
+			} else {
+				String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+				sellList.get(i).setIaddress(join2);
+				System.out.println("join2:" + join2);
+			}
+			System.out.println("join:");
+			System.out.println("string:" + addr);			
+		}
+		return sellList;
 	}
 
 	@Override

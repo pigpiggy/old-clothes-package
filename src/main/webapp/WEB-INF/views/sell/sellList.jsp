@@ -53,10 +53,10 @@
 	          <div class="card-body">
 	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <p>${sell.addressCity} ${sell.addressTown }</p>
+	              <p>${sell.iaddress}</p>
 	          </div>
 	          <c:choose>
-	          	<c:when test="${empty sell.addressCity}">
+	          	<c:when test="${empty sell.iaddress}">
 	          		<div class="card-footer">
 	          			${sell.idealType}
 	          		</div>

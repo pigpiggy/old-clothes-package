@@ -121,7 +121,7 @@
 			          			<img src="/image/logo3.png" alt="로고">
 			          		</c:when>
 			          		<c:otherwise>
-			              		<img src="/upload/${ sharing.sfileids}" alt="무료나눔 옷">
+			              		<img src="/upload/${sharing.sfileids}" alt="무료나눔 옷">
 			          		</c:otherwise>
 			          	</c:choose>
 			          </div>

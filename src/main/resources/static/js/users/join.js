@@ -304,7 +304,9 @@ function isSame(){
 		}
 	}else if(checkPwd.value.search(" ") != -1 && checkPwd1.value.search(" ") != -1 ){ 
  	   alert("공백이 포함되면 안됩니다.");
-    }
+    }else if(checkPwd.value.length >= 10){
+	   alert("비밀번호가 길어요.");
+	}
 	
 }
 
@@ -327,7 +329,9 @@ function isSame1(){
 		}
 	}else if(checkPwd2.value.search(" ") != -1 && checkPwd3.value.search(" ") != -1 ){ 
  	   alert("공백이 포함되면 안됩니다.");
-    }
+    }else if(checkPwd2.value.length >= 10){
+	   alert("비밀번호가 길어요.");
+	}
 }
 
 //주소 찾기

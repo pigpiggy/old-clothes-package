@@ -284,6 +284,19 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 
+	@Override
+	public void sendUapplyReview(Map map) throws Exception {
+		mypageDAO.uapplyReviewCompleted(map);
+		mypageDAO.sendUapplyReview(map);
+	}
+
+
+	@Override
+	public void uapplyReviewStatus(Integer ano) throws Exception {
+		mypageDAO.uapplyReviewStatus(ano);
+	}
+
+
 	
 
 

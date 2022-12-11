@@ -86,7 +86,6 @@ public class MypageController {
 	                  model.addAttribute("bcount",bcount);
 	                  model.addAttribute("ccount",ccount);
 	                  
-	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
 	                  System.out.println("bmypage 사업자");
 	                  Business business = messageService.mypageBusiness(bno);
@@ -170,7 +169,7 @@ public class MypageController {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 	            	  //페이징
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
 	            	  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
 	                  model.addAttribute("bapageInfo", bapageInfo);
@@ -197,18 +196,18 @@ public class MypageController {
 	                  
 	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
-						
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+	            	  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  model.addAttribute("bapageInfo", bapageInfo);
+	                	
 	                  System.out.println("bmypage 사업자");
 	                  Business business = messageService.mypageBusiness(bno);
 	                  System.out.println("business mypage" +  business.toString());         
 	                  model.addAttribute("business",business);
 	                  
-	                  //사용자->사업자 신청
-	                 // apply = applyService.getBapply(bno);
-	                  model.addAttribute("apply",apply);
-	                  System.out.println("Bmypage apply : " + apply.toString());
-	                  model.addAttribute("bapageInfo", bapageInfo);
+	                 
 	                  //신청목록
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
@@ -225,11 +224,12 @@ public class MypageController {
 	                  model.addAttribute("ccount",ccount);
 	                      
 	              }else {//로그인 안했을 때
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
 	            	  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
 	                  model.addAttribute("bapageInfo", bapageInfo);
-	            	  
+	                	            	  
 	            	  System.out.println("bmypage 무무");
 		              Business business = messageService.mypageBusiness(bno);
 		              System.out.println("business mypage" +  business.toString());         
@@ -253,10 +253,12 @@ public class MypageController {
 	                  
 	              }
 	         }else {
-	        	 apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	        	  //페이징
+           	     apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
            	  	 model.addAttribute("apply",apply);
                  System.out.println("Bmypage apply : " + apply.toString());
                  model.addAttribute("bapageInfo", bapageInfo);
+               
                  
                  
 	             System.out.println("bmypage 무무무");
@@ -566,6 +568,7 @@ public class MypageController {
 			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		System.out.println("여기까지 들어ㅇ오긴하냐");
 		try {
 			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
@@ -575,16 +578,19 @@ public class MypageController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					Users users1 = (Users) session.getAttribute("authUser");
 					sellList = mypageService.getSellList(userno,page,pageInfo);
-					/* 주소 띄우기(개인판매) */
-					for(int i = 0; i < sellList.size(); i++) {
+					for (int i = 0; i < sellList.size(); i++) {
+						/* 주소 띄우기 */
 						String addr = sellList.get(i).getIaddress();
-						String[] addChange = addr.split(" "); //주소 공백으로 분
-						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						String[] addChange = addr.split(" ");
+						if(addChange[2].matches("^+구$")) {
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							sellList.get(i).setIaddress(join1);
 						} else {
 							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 							sellList.get(i).setIaddress(join2);
+						}
+						if (sellList.get(i).getIfileids() != null) {
+							sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
 						}
 					}
 					//상품등록
@@ -595,24 +601,21 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 					model.addAttribute("pageInfo", pageInfo);
 					model.addAttribute("sellList", sellList);
 					System.out.println("sellList:"+sellList);
 					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-					/* 주소 띄우기(무료나눔) */
-					for(int i = 0; i < sharingList.size(); i++) {
+					for (int i = 0; i < sharingList.size(); i++) {
+						/* 주소 띄우기*/
 						String addr = sharingList.get(i).getSaddress();
 						String[] addChange = addr.split(" "); //주소 공백으로 분
 						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
@@ -622,21 +625,27 @@ public class MypageController {
 							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 							sharingList.get(i).setSaddress(join2);
 						}
+						if (sharingList.get(i).getSfileids() != null) {
+							sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+						}
 					}
 					model.addAttribute("spageInfo", spageInfo);
 					model.addAttribute("sharingList", sharingList);
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
-					 	sellList = mypageService.getSellList(userno,page,pageInfo);
-						/* 주소 띄우기(개인판매) */
-						for(int i = 0; i < sellList.size(); i++) {
+					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					 for (int i = 0; i < sellList.size(); i++) {
+						 /* 주소 띄우기 */
 							String addr = sellList.get(i).getIaddress();
-							String[] addChange = addr.split(" "); //주소 공백으로 분
-							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String[] addChange = addr.split(" ");
+							if(addChange[2].matches("^+구$")) {
 								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 								sellList.get(i).setIaddress(join1);
 							} else {
 								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 								sellList.get(i).setIaddress(join2);
+							}
+							if (sellList.get(i).getIfileids() != null) {
+								sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
 							}
 						}
 					//상품등록
@@ -647,24 +656,21 @@ public class MypageController {
 		                Integer totalcount = sharingcount + sellcount;
 		                System.out.println("totalcount : " + totalcount);
 		                model.addAttribute("totalcount",totalcount);
-
 		                //거래후기
 		                Integer reviewcount = reviewService.reviewcount(userno);
 		                model.addAttribute("reviewcount",reviewcount);       
-
 		                //거래완료
 		                Integer statuscount = sharingService.statuscount(userno);
 		                System.out.println("statuscount:"+statuscount);
 		                statuscount +=sellService.statuscount(userno);
 		                System.out.println("statuscount:"+statuscount);
 		                model.addAttribute("statuscount",statuscount);
-
-						model.addAttribute("pageInfo", pageInfo);
-						model.addAttribute("sellList", sellList);
-						System.out.println("sellList:"+sellList);
-						sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-					 /* 주소 띄우기(무료나눔) */
-						for(int i = 0; i < sharingList.size(); i++) {
+					 model.addAttribute("pageInfo", pageInfo);
+					 model.addAttribute("sellList", sellList);
+					 System.out.println("sellList:"+sellList);
+					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					 for (int i = 0; i < sharingList.size(); i++) {
+							/* 주소 띄우기*/
 							String addr = sharingList.get(i).getSaddress();
 							String[] addChange = addr.split(" "); //주소 공백으로 분
 							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
@@ -674,22 +680,28 @@ public class MypageController {
 								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 								sharingList.get(i).setSaddress(join2);
 							}
+							if (sharingList.get(i).getSfileids() != null) {
+								sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+							}
 						}
-						model.addAttribute("spageInfo", spageInfo);
-						model.addAttribute("sharingList", sharingList);
-					}
+					 model.addAttribute("spageInfo", spageInfo);
+					 model.addAttribute("sharingList", sharingList);
+				}
 			}else {
 				sellList = mypageService.getSellList(userno,page,pageInfo);
-				/* 주소 띄우기(개인판매) */
-				for(int i = 0; i < sellList.size(); i++) {
+				for (int i = 0; i < sellList.size(); i++) {
+					/* 주소 띄우기 */
 					String addr = sellList.get(i).getIaddress();
-					String[] addChange = addr.split(" "); //주소 공백으로 분
-					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+					String[] addChange = addr.split(" ");
+					if(addChange[2].matches("^+구$")) {
 						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 						sellList.get(i).setIaddress(join1);
 					} else {
 						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 						sellList.get(i).setIaddress(join2);
+					}
+					if (sellList.get(i).getIfileids() != null) {
+						sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
 					}
 				}
 				//상품등록
@@ -700,24 +712,21 @@ public class MypageController {
                 Integer totalcount = sharingcount + sellcount;
                 System.out.println("totalcount : " + totalcount);
                 model.addAttribute("totalcount",totalcount);
-
                 //거래후기
                 Integer reviewcount = reviewService.reviewcount(userno);
                 model.addAttribute("reviewcount",reviewcount);       
-
                 //거래완료
                 Integer statuscount = sharingService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 statuscount +=sellService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 model.addAttribute("statuscount",statuscount);
-
 				model.addAttribute("pageInfo", pageInfo);
 				model.addAttribute("sellList", sellList);
 				System.out.println("sellList:"+sellList);
 				sharingList = mypageService.getSharingList(userno,spage,spageInfo);
-				/* 주소 띄우기(무료나눔) */
-				for(int i = 0; i < sharingList.size(); i++) {
+				for (int i = 0; i < sharingList.size(); i++) {
+					/* 주소 띄우기*/
 					String addr = sharingList.get(i).getSaddress();
 					String[] addChange = addr.split(" "); //주소 공백으로 분
 					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
@@ -726,6 +735,9 @@ public class MypageController {
 					} else {
 						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 						sharingList.get(i).setSaddress(join2);
+					}
+					if (sharingList.get(i).getSfileids() != null) {
+						sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
 					}
 				}
 				model.addAttribute("spageInfo", spageInfo);
@@ -762,37 +774,37 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
-					/* 주소 띄우기(개인판매) */
-					for(int i = 0; i < buysellList.size(); i++) {
+				 for (int i = 0; i < buysellList.size(); i++) {
+					 /* 주소 띄우기 */
 						String addr = buysellList.get(i).getIaddress();
-						String[] addChange = addr.split(" "); //주소 공백으로 분
-						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						String[] addChange = addr.split(" ");
+						if(addChange[2].matches("^+구$")) {
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							buysellList.get(i).setIaddress(join1);
 						} else {
 							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 							buysellList.get(i).setIaddress(join2);
 						}
+						if (buysellList.get(i).getIfileids() != null) {
+							buysellList.get(i).setIfileids(buysellList.get(i).getIfileids().split(",")[0]);
+						}
 					}
 				 model.addAttribute("bspageInfo", bspageInfo);
 				 model.addAttribute("buysellList", buysellList);
 				
 				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
-				 /* 주소 띄우기(무료나눔) */
-					for(int i = 0; i < buysharingList.size(); i++) {
+				 for (int i = 0; i < buysharingList.size(); i++) {
+						/* 주소 띄우기*/
 						String addr = buysharingList.get(i).getSaddress();
 						String[] addChange = addr.split(" "); //주소 공백으로 분
 						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
@@ -801,6 +813,9 @@ public class MypageController {
 						} else {
 							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
 							buysharingList.get(i).setSaddress(join2);
+						}
+						if (buysharingList.get(i).getSfileids() != null) {
+							buysharingList.get(i).setSfileids(buysharingList.get(i).getSfileids().split(",")[0]);
 						}
 					}
 				 model.addAttribute("ppageInfo", ppageInfo);
@@ -815,18 +830,15 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 				}
 			}else {
 				
@@ -1271,6 +1283,36 @@ public class MypageController {
     	  map.put("ino", ino);
     	  map.put("userno", userno);
          mypageService.sendIReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
+   @GetMapping("/sendUapplyReview")
+   public void sendUapplyReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("bno") Integer bno, @RequestParam("ano") Integer ano) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("bno", bno);
+    	  map.put("userno", userno);
+    	  map.put("ano", ano);
+    	  System.out.println("ano:"+ano);
+         mypageService.sendUapplyReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
+   @GetMapping("/uapplyReviewStatus")
+   public void uapplyReviewStatus(@RequestParam("ano") Integer ano) {
+      try {
+         mypageService.uapplyReviewStatus(ano);
       }catch(Exception e) {
          e.printStackTrace();
       }

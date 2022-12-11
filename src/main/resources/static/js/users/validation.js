@@ -2,10 +2,11 @@
 //회원가입 유효성 검사
 function Validation(){
 	//[개인]
+	var pcheck = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 	var PPwd = document.getElementById("password");//비밀번호[개인]
 	var PPwd1 = document.getElementById("pcheckpassword")//비밀번호[개인]
 	var PAgree = document.getElementById("p_clause")//동의[업체]
-	
+	var Pphone = document.getElementById("phone");//전화번호
 	if($('#checkednickname').css("display")=="none"){
 		alert("닉네임 중복확인 확인부탁드립니다.");
 		return false;
@@ -16,6 +17,10 @@ function Validation(){
 		return false;
 	}
 	
+	if(!pcheck.test(Pphone.value)){
+		alert("전화번호를 예시에 맞게 입력해주세요.");
+		return false;
+	}
 	
 	/*최종때 주석 풀어야 해요!
 	if($('#checkedauthNumber').css("display")=="none"){
@@ -37,6 +42,12 @@ function Validation(){
 		alert("비밀번호가 일치하지 않습니다!!")
 		return false;
 	}
+	
+	if(PPwd.value.length >= 10){
+	   alert("비밀번호가 길어요.");
+	   return false;
+	}
+
 	if(PAgree.checked==false){
 		alert("약관 동의 체크해주세요.");
 		return false;
@@ -54,6 +65,8 @@ function Valid(){
 	var BAddress = document.getElementById("baddress")//주소[업체]]
 	var BDetailadd = document.getElementById("bdetailadd")//상세주소[업체]
 	var BAgree = document.getElementById("b_clause")//동의[업체]
+	var BPhone = document.getElementById("bphone");//전화번호[업체]
+	var Bcheck = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 	if(BNumber.value==''){
 		alert("사업자 번호를 입력해주세요.");
 		return false;
@@ -73,7 +86,11 @@ function Valid(){
 		alert("상호명 중복확인 확인부탁드립니다.");
 		return false;
 	}
-	
+	if(!Bcheck.test(BPhone.value)){
+		alert("전화번호를 예시에 맞게 입력해주세요.");
+		return false;
+	}
+
 	/* 최종때 주석 풀어야 해요!
 	if($('#bcheckedauthNumber').css("display")=="none"){
 	      alert("본인 인증 완료해주세요.");
@@ -94,7 +111,11 @@ function Valid(){
 		alert("비밀번호가 일치하지 않습니다!!")
 		return false;
 	}
-	
+	if(BPwd.value.length >= 10){
+	   alert("비밀번호가 길어요.");
+	   return false;
+	}
+
 	
 	
 	if(BAddress.value=='' || BDetailadd.value==''){

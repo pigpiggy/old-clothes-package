@@ -302,7 +302,9 @@ function commentList(){
             var a =''; 
             $.each(data, function(key, value){ 
                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                
+                //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';
                 if(auth != ''){
                 	if(auth == 'users'){
 		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';

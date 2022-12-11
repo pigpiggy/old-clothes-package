@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+#full{
+	padding-left:24%; 
+	padding-right:24%;
+}
+
+#list{
+	width:100%; padding:3%;
+}
+#big {
+	display:flex;
+	width: 100%; 
+	height: 20%;
+	border: 2px solid gray;
+	border-radius:2%;
+	margin-bottom:1%;
+	
+}
+#pic{
+	width: 15%; 
+	height: 40%; 
+	margin-right:5%;
+	margin-left:2%;
+}
+#content{
+	width:80%; 
+	margin:2%;
+}
+#title{
+	margin-bottom: 5%;
+}
+#deletebu{
+	width: 6%;
+	margin-top:10%;
+}
+
+/* 개인 찜목록 */
+.sidebar {
+  list-style: none;
+  font-family: "Roboto";
+  background: #4b3e38;
+  color: black;
+  font-weight: 500;
+  padding: 0;
+}
+.sidebar-item {
+  height: 50px;
+  padding-left: 40px;
+  border-top: 1px solid #2d3b3e;
+}
+.user-list {
+  background: white;
+  font-family: "Roboto", sans-serif;
+}
+.user {
+  border-top: 1px solid #ebebeb;
+  padding-left: 20px;
+  list-style-type: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: background-color 100ms, border-left 50ms;
+}
+.user:hover:not(.selected) {
+  background-color: #ebebeb;
+}
+.user.selected {
+  background-color: #edf4fd;
+}
+.user > div,
+.user .info {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-weight: 500;
+  width: 200px;
+  color: #504944;
+  margin-right: 100px;
+}
+.date {
+  margin-right: 100px;
+  width: 100px;
+  color: #7c7475;
+}
+.remove {
+  width: 15px;
+  height: 15px;
+  outline: none;
+}
+
+.user .productimg {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  transition: height 50ms, width 50ms;
+}
+.user .img-wrap {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EXPANDING */
+.user:not(.expanded) .expand {
+  max-height: 0%;
+  overflow: hidden;
+  transition: max-height 1s;
+}
+.user.expanded .expand {
+  max-height: 100%;
+}
+
+/* 사업자 찜목록 */
+.bname {
+  font-weight: bold;
+}
+
+.address {
+  margin-right: 100px;
+  width: 30%;
+  color: #7c7475;
+}
+#address {
+  font-size: 13px;
+  width: auto;
+}
+.icons {
+  display: flex;
+  align-items: center;
+}
+.icons img {
+  margin-right: 5px;
+}
+.apply {
+  width: 40px;
+}
+.nameandadd {
+  margin-right: 15%;
+}
+

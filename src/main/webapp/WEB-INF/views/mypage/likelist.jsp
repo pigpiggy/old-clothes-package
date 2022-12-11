@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/resources/css/likelist.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
@@ -21,32 +22,7 @@
 #list{
 	width:100%; padding:3%;
 }
-#big {
-	display:flex;
-	width: 100%; 
-	height: 20%;
-	border: 2px solid gray;
-	border-radius:2%;
-	margin-bottom:1%;
-	
-}
-#pic{
-	width: 15%; 
-	height: 40%; 
-	margin-right:5%;
-	margin-left:2%;
-}
-#content{
-	width:80%; 
-	margin:2%;
-}
-#title{
-	margin-bottom: 5%;
-}
-#deletebu{
-	width: 6%;
-	margin-top:10%;
-}
+
 .form{
 	witdh:300px;
 }
@@ -288,6 +264,118 @@
     letter-spacing: -1px;
     cursor: pointer;
 }
+/* 개인 찜목록 */
+.sidebar {
+  list-style: none;
+  font-family: "Roboto";
+  background: #4b3e38;
+  color: black;
+  font-weight: 500;
+  padding: 0;
+}
+.sidebar-item {
+  height: 50px;
+  padding-left: 40px;
+  border-top: 1px solid #2d3b3e;
+}
+.user-list {
+  background: white;
+  font-family: "Roboto", sans-serif;
+}
+.user {
+  border-top: 1px solid #ebebeb;
+  padding-left: 20px;
+  list-style-type: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: background-color 100ms, border-left 50ms;
+}
+.user:hover:not(.selected) {
+  background-color: #ebebeb;
+}
+.user.selected {
+  background-color: #edf4fd;
+}
+.user > div,
+.user .info {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-weight: 500;
+  width: 200px;
+  color: #504944;
+  margin-right: 100px;
+}
+.date {
+  margin-right: 100px;
+  width: 100px;
+  color: #7c7475;
+}
+.remove {
+  width: 15px;
+  height: 15px;
+  outline: none;
+}
+
+.user .productimg {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  transition: height 50ms, width 50ms;
+}
+.user .img-wrap {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EXPANDING */
+.user:not(.expanded) .expand {
+  max-height: 0%;
+  overflow: hidden;
+  transition: max-height 1s;
+}
+.user.expanded .expand {
+  max-height: 100%;
+}
+
+/* 사업자 찜목록 */
+.bname {
+  font-weight: bold;
+}
+
+.address {
+  margin-right: 100px;
+  width: 30%;
+  color: #7c7475;
+}
+#address {
+  font-size: 13px;
+  width: auto;
+}
+.icons {
+  display: flex;
+  align-items: center;
+}
+.icons img {
+  margin-right: 5px;
+}
+.apply {
+  width: 40px;
+}
+.nameandadd {
+  margin-right: 15%;
+}
+
+#delete{
+	border: 0px;
+    background-color: white;
+}
 
 </style>
 </head>
@@ -391,7 +479,7 @@ $(document).ready(function(){
 				console.log(dataPerPage);
 				//var i = (currentPage-1)*dataPerPage
 				//console.log("i1:"+i);
-				
+				chartHtml +='<div class="user-list">';
 				data.forEach(function(data,i){
 					console.log("i2:"+i);
 					console.log(data);
@@ -400,26 +488,25 @@ $(document).ready(function(){
 					}
 					if(i>=(currentPage-1)*dataPerPage){
 						if(category=="free"){
-							chartHtml +='<div id="big">';
+							chartHtml +='<div class="user">';
+							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/image/logo3.png" alt="로고" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" class="productimg">';
 								chartHtml +='</div>';
 							}
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></div>';
-							chartHtml +='<div>'+data.regDate+'</div>'
-							chartHtml +='</div>'
-							chartHtml +='<div>'
-							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="sdelete" data-value="'+data.sno+'">취소</button>'
-							chartHtml +='</div>'	
-							chartHtml +='</div>'	
-							chartHtml +='</div>'
+							chartHtml +='<div class="info">';
+							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
+							chartHtml +='<span class="date">'+data.regDate+'</span>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='</div>';
+							chartHtml +='</div>';
+							chartHtml +='<div class="expand"></div>';
+							chartHtml +='</div>';
 						}
 					}
 					i++
@@ -566,6 +653,7 @@ function catelist(){
 				console.log(dataPerPage);
 				//var i = (currentPage-1)*dataPerPage
 				//console.log("i1:"+i);
+				chartHtml +='<div class="user-list">';
 				data.forEach(function(data,i){
 					console.log("i2:"+i);
 					console.log(data);
@@ -574,78 +662,71 @@ function catelist(){
 					}
 					if(i>=(currentPage-1)*dataPerPage){
 						if(category=="free"){
-							chartHtml +='<div id="big">';
+							chartHtml +='<div class="user">';
+							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/image/logo3.png" alt="로고" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" class="productimg">';
 								chartHtml +='</div>';
 							}
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></div>';
-							chartHtml +='<div>'+data.regDate+'</div>'
-							chartHtml +='</div>'
-							chartHtml +='<div>'
-							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="sdelete" data-value="'+data.sno+'">취소</button>'
-							chartHtml +='</div>'	
-							chartHtml +='</div>'	
-							chartHtml +='</div>'
-						}else if(category=="indi"){
-							chartHtml +='<div id="big">';
-							if(data.ifileids==null){
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/image/logo3.png" alt="로고" style="width:100%; height:100%;">';
-								chartHtml +='</div>';
-							}else{
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/upload/'+data.ifileids+'" alt="무료나눔 옷" style="width:100%; height:100%;">';
-								chartHtml +='</div>';
-							}
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></div>';
-							chartHtml +='<div>'+data.regDate+'</div>'
-							chartHtml +='</div>'
-							chartHtml +='<div>'
-							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="idelete" data-value="'+data.ino+'">취소</button>'
-							chartHtml +='</div>'	
-							chartHtml +='</div>'	
-							chartHtml +='</div>'
-						
-							
-						}else if(category=="busi"){
-							chartHtml +='<div id="big">';
-							chartHtml +='<div id="pic">';
-							chartHtml +='<img src="/image/logo1.png" alt="로고" style="width:100%; height:100%;">';
+							chartHtml +='<div class="info">';
+							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
+							chartHtml +='<span class="date">'+data.regDate+'</span>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
 							chartHtml +='</div>';
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
-							chartHtml +='<div>'+data.baddress+' '+data.bdetailadd+'</div>'
+							chartHtml +='</div>';
+							chartHtml +='<div class="expand"></div>';
+							chartHtml +='</div>';
+						}else if(category=="indi"){
+								chartHtml +='<div class="user">';
+								chartHtml +='<div class="eachuser">';
+								if(data.ifileids==null){
+									chartHtml +='<div class="img-wrap">';
+									chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+									chartHtml +='</div>';
+								}else{
+									chartHtml +='<div class="img-wrap">';
+									chartHtml +='<img src="/upload/'+data.ifileids+'" alt="개인판매 옷" class="productimg">';
+									chartHtml +='</div>';
+								}
+								chartHtml +='<div class="info">';
+								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="date">'+data.regDate+'</span>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/x.png" /></button>';
+								chartHtml +='</div>';
+								chartHtml +='</div>';
+								chartHtml +='<div class="expand"></div>';
+								chartHtml +='</div>';
+						}else if(category=="busi"){
+							chartHtml +='<div class="user">';
+							chartHtml +='<div class="eachuser">';
+							chartHtml +='<div class="img-wrap">';
+							chartHtml +='<img src="/image/market.png" alt="업체로고" class="productimg">';
+							chartHtml +='</div>';
+							chartHtml +=' <div class="nameandadd">';
+							chartHtml +=' <div class="name bname"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
+							chartHtml +='<div id="address" class="address">'+data.baddress+' '+data.bdetailadd+'</div>'
 							chartHtml +='</div>'
-							chartHtml +='<div>'
+							chartHtml +='<span class="icons">'
+							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'">취소</button>';
-							chartHtml +='</div>'	
-							chartHtml +='<div style="margin-top:10%;">'
-							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='</span>'	
 							chartHtml +='</div>'
-							chartHtml +='</div>'	
-									
-							chartHtml +='</div>'
-							
+							chartHtml +='<div class="expand"></div>';
+							chartHtml +='</div>';	
 						}
 					}
 					i++
 				})
+				chartHtml +='</div>'
 				chartHtml +='<ul id="pagingul"></ul>'
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);
-				
-				
 			}
 			function paging(totalData, dataPerPage, pageCount, currentPage){
 				console.log("currentPage:" +currentPage);
@@ -805,73 +886,68 @@ function refreshlist(category,globalCurrentPage){
 					}
 					if(i>=(currentPage-1)*dataPerPage){
 						if(category=="free"){
-							chartHtml +='<div id="big">';
+							chartHtml +='<div class="user">';
+							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/image/logo3.png" alt="로고" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" style="width:100%; height:100%;">';
+								chartHtml +='<div class="img-wrap">';
+								chartHtml +='<img src="/upload/'+data.sfileids+'" alt="무료나눔 옷" class="productimg">';
 								chartHtml +='</div>';
 							}
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></div>';
-							chartHtml +='<div>'+data.regDate+'</div>'
-							chartHtml +='</div>'
-							chartHtml +='<div>'
-							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="sdelete" data-value="'+data.sno+'">취소</button>'
-							chartHtml +='</div>'	
-							chartHtml +='</div>'	
-							chartHtml +='</div>'
-						}else if(category=="indi"){
-							chartHtml +='<div id="big">';
-							if(data.ifileids==null){
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/image/logo3.png" alt="로고" style="width:100%; height:100%;">';
-								chartHtml +='</div>';
-							}else{
-								chartHtml +='<div id="pic">';
-								chartHtml +='<img src="/upload/'+data.ifileids+'" alt="무료나눔 옷" style="width:100%; height:100%;">';
-								chartHtml +='</div>';
-							}
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></div>';
-							chartHtml +='<div>'+data.regDate+'</div>'
-							chartHtml +='</div>'
-							chartHtml +='<div>'
-							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="idelete" data-value="'+data.ino+'">취소</button>'
-							chartHtml +='</div>'	
-							chartHtml +='</div>'	
-							chartHtml +='</div>'
-						
-							
-						}else if(category=="busi"){
-							chartHtml +='<div id="big">';
-							chartHtml +='<div id="pic">';
-							chartHtml +='<img src="/image/logo1.png" alt="로고" style="width:100%; height:100%;">';
+							chartHtml +='<div class="info">';
+							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
+							chartHtml +='<span class="date">'+data.regDate+'</span>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
 							chartHtml +='</div>';
-							chartHtml +='<div id="content">';
-							chartHtml +='<div id="title"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
-							chartHtml +='<div>'+data.baddress+' '+data.bdetailadd+'</div>'
+							chartHtml +='</div>';
+							chartHtml +='<div class="expand"></div>';
+							chartHtml +='</div>';
+						}else if(category=="indi"){
+								chartHtml +='<div class="user">';
+								chartHtml +='<div class="eachuser">';
+								if(data.ifileids==null){
+									chartHtml +='<div class="img-wrap">';
+// 									chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+									chartHtml +='</div>';
+								}else{
+									chartHtml +='<div class="img-wrap">';
+									chartHtml +='<img src="/upload/'+data.ifileids+'" alt="개인판매 옷" class="productimg">';
+									chartHtml +='</div>';
+								}
+								chartHtml +='<div class="info">';
+								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="date">'+data.regDate+'</span>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/x.png" /></button>';
+								chartHtml +='</div>';
+								chartHtml +='</div>';
+								chartHtml +='<div class="expand"></div>';
+								chartHtml +='</div>';
+						}else if(category=="busi"){
+							chartHtml +='<div class="user">';
+							chartHtml +='<div class="eachuser">';
+							chartHtml +='<div class="img-wrap">';
+							chartHtml +='<img src="/image/market.png" alt="업체로고" class="productimg">';
+							chartHtml +='</div>';
+							chartHtml +=' <div class="nameandadd">';
+							chartHtml +=' <div class="name bname"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
+							chartHtml +='<div id="address" class="address">'+data.baddress+' '+data.bdetailadd+'</div>'
 							chartHtml +='</div>'
-							chartHtml +='<div>'
+							chartHtml +='<span class="icons">'
+							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'">취소</button>';
-							chartHtml +='</div>'	
-							chartHtml +='<div style="margin-top:10%;">'
-							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='</span>'	
 							chartHtml +='</div>'
-							chartHtml +='</div>'	
-									
-							chartHtml +='</div>'
-							
+							chartHtml +='<div class="expand"></div>';
+							chartHtml +='</div>';	
 						}
 					}
 					i++
 				})
+				chartHtml +='</div>'
 				chartHtml +='<ul id="pagingul"></ul>'
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);

@@ -260,8 +260,8 @@ div.contents {
 						var bli = "";
 						bli += "<ul id='itl'>"
 						bli += "<br>";
-						data.forEach(function(item){
-							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' data-value='"+item+"' onclick='listCheck(this)'>["+item+"]</a></li>";
+						data.forEach(function(item,i){
+							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -305,6 +305,13 @@ div.contents {
 					              kakao.maps.event.addListener(marker2, 'mouseout', function() {
 					              	infowindow2.close();
 					              });
+								  $(document).on("mouseover",".bin",function(e){
+									  event.target.map.panTo(marker2.getPosition());
+									  displayInfowindow2(marker2, item);
+								  })
+								   $(document).on("mouseout",".bin",function(){
+									  infowindow2.close();
+								  })
 								}
 							})
 						})
@@ -340,6 +347,8 @@ div.contents {
 		        info2[i]?.setMap(map);
 		    }            
 		}
+		
+		/*
 		//a태그에 클릭 시 해당 리스트의 마커 위치로 이동시키는 function
 		function listCheck(e){
 			data = $(e).attr('data-value');
@@ -352,7 +361,7 @@ div.contents {
 				}
 			})	
 		}
-		
+		*/
 	</script>
 	
 <%--js 불러와서 사용하기. --%>	

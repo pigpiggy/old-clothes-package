@@ -168,7 +168,7 @@ public class MypageController {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 	            	  //페이징
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
 	            	  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
 	                  model.addAttribute("bapageInfo", bapageInfo);
@@ -195,18 +195,18 @@ public class MypageController {
 	                  
 	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
-						
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+	            	  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  model.addAttribute("bapageInfo", bapageInfo);
+	                	
 	                  System.out.println("bmypage 사업자");
 	                  Business business = messageService.mypageBusiness(bno);
 	                  System.out.println("business mypage" +  business.toString());         
 	                  model.addAttribute("business",business);
 	                  
-	                  //사용자->사업자 신청
-	                 // apply = applyService.getBapply(bno);
-	                  model.addAttribute("apply",apply);
-	                  System.out.println("Bmypage apply : " + apply.toString());
-	                  model.addAttribute("bapageInfo", bapageInfo);
+	                 
 	                  //신청목록
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
@@ -223,11 +223,12 @@ public class MypageController {
 	                  model.addAttribute("ccount",ccount);
 	                      
 	              }else {//로그인 안했을 때
-	            	  apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
 	            	  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
 	                  model.addAttribute("bapageInfo", bapageInfo);
-	            	  
+	                	            	  
 	            	  System.out.println("bmypage 무무");
 		              Business business = messageService.mypageBusiness(bno);
 		              System.out.println("business mypage" +  business.toString());         
@@ -251,10 +252,12 @@ public class MypageController {
 	                  
 	              }
 	         }else {
-	        	 apply = applyService.getApplyList(bno, bapage, bapageInfo);
+	        	  //페이징
+           	     apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
            	  	 model.addAttribute("apply",apply);
                  System.out.println("Bmypage apply : " + apply.toString());
                  model.addAttribute("bapageInfo", bapageInfo);
+               
                  
                  
 	             System.out.println("bmypage 무무무");

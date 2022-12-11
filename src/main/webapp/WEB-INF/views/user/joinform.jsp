@@ -110,7 +110,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="phone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="phone" name="phone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없이 입력해주세요."/>
+					                 		placeholder="'-'없이입력 ex)01012344321."/>
 						                    <input type="button" id="goSMS" class="btn btn-light" value="본인인증" style="margin-left:2%;">
 				                        </div>
 				                        
@@ -197,7 +197,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="bphone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없어도 됩니다."/>
+					                 		placeholder="'-'없이입력 ex)01012344321"/>
 						                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" >
 				                        </div>
 				                        
@@ -212,7 +212,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="bpassword" style="position:absolute; margin:2.5%;">비밀번호<span class="req">*</span></label>
 					                        <input type="password" id="bpassword" name="bpassword" onchange="isSame1()" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                        placeholder="6~10로 입력하세요."/>
+					                        placeholder="10이하로 입력하세요."/>
 				                        </div>
 		
 				                        <div class="form-outline mb-4" style="display:flex;">

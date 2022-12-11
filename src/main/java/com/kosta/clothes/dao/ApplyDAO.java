@@ -36,5 +36,5 @@ public interface ApplyDAO {
 	Integer applyListCount(Integer userno) throws Exception;
 	//apply 페이징 사업자
 	List<Apply> bgetApplyList(Map map) throws Exception;
-	Integer bapplyListCount(Integer userno) throws Exception;
+	Integer bapplyListCount(Integer bno) throws Exception;
 }

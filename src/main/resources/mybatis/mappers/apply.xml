@@ -161,7 +161,7 @@
 	<!-- 개인 마이페이지 개수(페이징) -->
 	<select id="bapplyListCount" resultType="Integer">
 		<![CDATA[
-			SELECT COUNT(*) FROM apply WHERE USERNO =#{userno}
+			SELECT COUNT(*) FROM apply WHERE BNO =#{bno}
 		]]>
 	</select>
 	

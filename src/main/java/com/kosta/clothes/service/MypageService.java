@@ -35,6 +35,7 @@ public interface MypageService {
 	
 	void sendIReview(Map map) throws Exception;
 	void sendUapplyReview(Map map) throws Exception;
+	void uapplyReviewStatus(Integer ano) throws Exception;
 	//
 	Users getMypage(Integer userno) throws Exception;
 	

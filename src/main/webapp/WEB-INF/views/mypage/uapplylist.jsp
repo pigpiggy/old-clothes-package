@@ -108,7 +108,10 @@
 								<!-- 버튼 안 나옴 거절 당했을 시 -->
 							</c:if>
 		                 </c:otherwise>	
-		                 </c:choose> 	                 
+		                 </c:choose> 
+		                 <c:if test="${wapply.astatus eq '후기대기' }">
+			                  <button type="button" id="applying1">후기작성</button>
+		                 </c:if>	                 
 	                 </div>		               	            
 	        	</div>		        
 	    	</div>
@@ -218,6 +221,30 @@
 		$('.firstmodal').css('z-index','2');
 		console.log($(this).parent().parent());
 		uapplyIndex = $('.applyList').index($(this).parent().parent())+1;
+		var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
+		$('.modal__close').click(function(){
+			$.ajax({
+				type : "get",
+				url : "/uapplyReviewStatus",
+				data : {ano:ano},
+				success : function(data) {
+					console.log(data);
+					location.reload();
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+		})
+	})
+	
+	$('#applying1').click(function(){
+		$('.firstmodal').css('visibility','visible');
+		$('.firstmodal').css('opacity','1');
+		$('.firstmodal').css('z-index','2');
+		console.log($(this).parent().parent());
+		uapplyIndex = $('.applyList').index($(this).parent().parent())+1;
+		var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
 	})
 	
 	$('.modal__close').click(function(e){

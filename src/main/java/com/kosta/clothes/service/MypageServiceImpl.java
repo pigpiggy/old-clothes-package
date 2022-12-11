@@ -291,6 +291,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 
+	@Override
+	public void uapplyReviewStatus(Integer ano) throws Exception {
+		mypageDAO.uapplyReviewStatus(ano);
+	}
+
+
 	
 
 

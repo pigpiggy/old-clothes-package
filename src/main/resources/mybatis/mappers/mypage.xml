@@ -276,4 +276,11 @@
 		]]>
 	</update>
 	
+	<update id="uapplyReviewStatus" parameterType="Integer">
+		<![CDATA[
+			update apply set astatus='후기대기'
+			where ano=#{ano}
+		]]>
+	</update>
+	
 </mapper>	

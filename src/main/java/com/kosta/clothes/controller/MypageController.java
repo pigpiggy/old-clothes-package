@@ -1241,6 +1241,16 @@ public class MypageController {
          e.printStackTrace();
       }
    }
+   
+   @ResponseBody
+   @GetMapping("/uapplyReviewStatus")
+   public void uapplyReviewStatus(@RequestParam("ano") Integer ano) {
+      try {
+         mypageService.uapplyReviewStatus(ano);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
    	
 	@GetMapping("/mypage/likelist/{userno}")
 	public String likelist(@PathVariable("userno") Integer userno, Model model) {

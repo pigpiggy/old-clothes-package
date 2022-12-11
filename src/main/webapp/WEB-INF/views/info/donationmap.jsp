@@ -138,7 +138,7 @@ input[type=radio] {
 		<%--온라인 사이트 안내 --%>
 		<div id="onlineview">
 			<h1 id=donationsite>기부사이트 안내</h1>
-			<a href="https://www.beautifulstore.org/donation" target="_blank"><button class="storebtn">신청서 작성</button></a>
+			<a href="https://www.beautifulstore.org/donation" target="_blank"><button style="cursor:pointer;" class="storebtn">신청서 작성</button></a>
 			<c:forEach var="online" items="${donation }">	
 				<c:if test="${online.dname eq '굿윌스토어 굿윌본부' || online.dname eq '아름다운 가게 서울본부' || online.dname eq '숲스토리 의정부본점'}">			
 					<hr width="1000px;">									
@@ -150,8 +150,8 @@ input[type=radio] {
 					</div>											
 				</c:if>				
 			</c:forEach>
-			<a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button class="storybtn">신청서 작성</button></a>
-			<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button class="goodbtn">신청서 작성</button></a>
+			<a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button style="cursor:pointer;" class="storybtn">신청서 작성</button></a>
+			<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a>
 		</div>
 
 	<script>

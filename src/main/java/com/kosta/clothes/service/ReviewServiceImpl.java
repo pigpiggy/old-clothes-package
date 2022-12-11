@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Review;
 import com.kosta.clothes.dao.ReviewDAO;
@@ -75,4 +76,6 @@ public class ReviewServiceImpl implements ReviewService{
 		map.put("row", row);
 		return reviewDAO.getBReviewList(map);
 	}
+	
+	
 }

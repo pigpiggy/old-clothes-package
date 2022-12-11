@@ -30,7 +30,6 @@
       			<form action="smessage" method="post" id="messageform">
       				<input type="hidden" name="recvUserno" value="${uservo.userno }">
       				<input type="hidden" name="sno" value="${sharing.sno }">
-      				
       				<h5>받는 사람: ${uservo.nickname }</h5> 
 	      			<div>
 		      			<label class="mcontext" for="mtitle">제목 </label>
@@ -41,15 +40,17 @@
 		      			<textarea class="form-control" rows="3" cols="50" name="mcontent" id="mcontent"> </textarea><br>
 	      			</div>
 	      			<input type="submit" class="btn btn-warning center" value="보내기" />
-	      			
       			</form>
-      			
-      			
 				<a href="#" class="modal__close">&times;</a>
       		</div>
   		</div>
     <section class="content_main">
       <section id="content_left">
+			<div id="myModal" class="modal">
+			  <span class="close">&times;</span>
+			  <img class="modal-content" id="img01">
+			  <div id="caption"></div>
+			</div>
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
@@ -57,9 +58,9 @@
           		<c:when test="${!empty files }">
 					<c:forEach var="sfileids" items="${files }">
 		            	<div class="swiper-slide">
-		                	<img src="/upload/${sfileids}" alt="무료나눔 옷">
+		                	<img id="myImg" src="/upload/${sfileids}" alt="무료나눔 옷">
 		        		</div>
-		        	</c:forEach> 
+		        	</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<div class="swiper-slide">
@@ -122,23 +123,23 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		        <div id="sreview">거래후기: 12건</div>
+		        <div id="sreview">거래후기: ${reviewcount }건</div>
 		        <span>신청 인원 : ${sharing.applycount }명</span>
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+				        	<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        					<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
 			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
 			        					<form action="/selectSharingApply" method="get">
 				        					<ul>
@@ -153,7 +154,7 @@
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<a href="/mypage/umypage/${sharing.userno }"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        				<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -221,6 +222,35 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
 <script>
+
+//Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+if(img != null) {
+	img.onclick = function(){
+		alert("사진클");
+	  modal.style.display = "block";
+	  console.log("modalImg.src :"+modalImg.src);
+	  modalImg.src = this.src;
+	  console.log("this.src :"+modalImg.src);
+	  captionText.innerHTML = this.alt;
+	}
+}
+var files = "${files[1]}";
+console.log(modalImg);
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+
 var auth = "${authUser.sect}";
 var userno = $('#userno').val();
 var sno = $('#sno').val();
@@ -272,7 +302,9 @@ function commentList(){
             var a =''; 
             $.each(data, function(key, value){ 
                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                
+                //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';
                 if(auth != ''){
                 	if(auth == 'users'){
 		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
@@ -378,9 +410,7 @@ $(function () {
 			console.log(sno);
 		}
 		let sect = "${sect}";
-		console.log(sect);
 		if(sect == 'users') {
-			alert(sect);
 			$.ajax({
 				type: "post",
 				url: "/sharingView/likes",

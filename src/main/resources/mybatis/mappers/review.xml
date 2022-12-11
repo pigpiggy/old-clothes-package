@@ -28,7 +28,7 @@
 	<select id="sReviewListCount" resultType="Integer">
 		<![CDATA[
 			SELECT count(*)
-			FROM REVIEW r, USERS u, SHARING s 
+			FROM  review r, USERS u, SHARING s 
 			WHERE u.USERNO = r.USERNO AND r.SNO = s.SNO AND s.USERNO = #{userno}   
 		]]>
 	</select>
@@ -41,6 +41,8 @@
 			WHERE u.USERNO = r.USERNO AND r.INO = i.INO AND i.USERNO = #{userno}    
 		]]>
 	</select>
+	
+	
 
 	<!-- 사업자가 받은 모든 후기 -->
 	<select id="getBReviewList" parameterType="map" resultType="Review">

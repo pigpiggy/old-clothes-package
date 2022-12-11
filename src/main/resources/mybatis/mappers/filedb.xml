@@ -33,4 +33,10 @@
 			delete from tfile where ino=#{ino}
 		]]>
 	</delete>
+	
+	<select id="selectSfileInfo" parameterType="Integer" resultType="FileVO">
+		<![CDATA[
+			SELECT * FROM TFILE WHERE sno = #{sno}	
+		]]>
+	</select>
 </mapper>							

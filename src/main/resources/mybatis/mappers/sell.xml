@@ -12,16 +12,16 @@
 	<insert id="insertIndividual" parameterType="Sell">
 		<![CDATA[
 			insert into individual(ino,ititle,icontent,istatus,ifileids,idealType,
-			addressCity,addressTown,userno,price,regDate)
+			iaddress,userno,price,regDate)
 			values (#{ino},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
-			#{idealType},#{addressCity},#{addressTown},#{userno},#{price},sysdate)
+			#{idealType},#{iaddress},#{userno},#{price},sysdate)
 	
 		]]>
 	</insert>
 	
 	<select id="selectIndividual" parameterType="Integer" resultType="Sell">
 		<![CDATA[
-			select u.nickname as iname, ino, ititle, icontent, ifileids, likes, applycount, i.userno 
+			select u.nickname as iname, i.*
 			from users u, individual i 
 			where u.userno = i.userno and ino = #{ino}		
 		]]>
@@ -37,7 +37,7 @@
 	
 	<update id="updateIfileids" parameterType="Sell">
 		<![CDATA[
-			update individual set ifileids=#{ifileids}
+			update individual set ifileids=#{ifileids, jdbcType=VARCHAR}
 			where ino=#{ino}
 		]]>
 	</update>

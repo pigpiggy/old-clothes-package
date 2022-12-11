@@ -10,8 +10,7 @@ public class Sharing {
 	private String sname;
 	private String sfileids;
 	private String sdealType;
-	private String addressCity;
-	private String addressTown;
+	private String saddress;
 	private Long likes;
 	private Long selectedno;
 	private Long applycount;
@@ -61,17 +60,11 @@ public class Sharing {
 	public void setSdealType(String sdealType) {
 		this.sdealType = sdealType;
 	}
-	public String getAddressCity() {
-		return addressCity;
+	public String getSaddress() {
+		return saddress;
 	}
-	public void setAddressCity(String addressCity) {
-		this.addressCity = addressCity;
-	}
-	public String getAddressTown() {
-		return addressTown;
-	}
-	public void setAddressTown(String addressTown) {
-		this.addressTown = addressTown;
+	public void setSaddress(String saddress) {
+		this.saddress = saddress;
 	}
 	public Long getLikes() {
 		return likes;
@@ -119,8 +112,8 @@ public class Sharing {
 		this.buyCompletedCount = buyCompletedCount;
 	}
 	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sname, String sfileids,
-			String sdealType, String addressCity, String addressTown, Long likes, Long selectedno, Long applycount,
-			Integer userno, Date regDate) {
+			String sdealType, String saddress, Long likes, Long selectedno, Long applycount, Integer userno,
+			Date regDate, Long sellCompletedCount, Long buyCompletedCount) {
 		super();
 		this.sno = sno;
 		this.stitle = stitle;
@@ -129,20 +122,22 @@ public class Sharing {
 		this.sname = sname;
 		this.sfileids = sfileids;
 		this.sdealType = sdealType;
-		this.addressCity = addressCity;
-		this.addressTown = addressTown;
+		this.saddress = saddress;
 		this.likes = likes;
 		this.selectedno = selectedno;
 		this.applycount = applycount;
 		this.userno = userno;
 		this.regDate = regDate;
+		this.sellCompletedCount = sellCompletedCount;
+		this.buyCompletedCount = buyCompletedCount;
 	}
 	@Override
 	public String toString() {
 		return "Sharing [sno=" + sno + ", stitle=" + stitle + ", scontent=" + scontent + ", sstatus=" + sstatus
-				+ ", sname=" + sname + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", addressCity="
-				+ addressCity + ", addressTown=" + addressTown + ", likes=" + likes + ", selectedno=" + selectedno
-				+ ", applycount=" + applycount + ", userno=" + userno + ", regDate=" + regDate + "]";
+				+ ", sname=" + sname + ", sfileids=" + sfileids + ", sdealType=" + sdealType + ", saddress=" + saddress
+				+ ", likes=" + likes + ", selectedno=" + selectedno + ", applycount=" + applycount + ", userno="
+				+ userno + ", regDate=" + regDate + ", sellCompletedCount=" + sellCompletedCount
+				+ ", buyCompletedCount=" + buyCompletedCount + "]";
 	}
 
 		

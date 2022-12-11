@@ -125,7 +125,7 @@
 		]]>
 	</update>
 	
-	<select id="completedCount" resultType="Integer" parameterType="Sell">
+	<select id="completedCount" resultType="Sell" parameterType="Integer">
 		<![CDATA[
 			SELECT sellCompletedCount, buyCompletedCount FROM individual where ino=#{ino}
 
@@ -153,7 +153,7 @@
 		]]>
 	</update>
 	
-	<select id="completedSharingCount" resultType="Integer" parameterType="Sharing">
+	<select id="completedSharingCount" resultType="Sharing" parameterType="Integer">
 		<![CDATA[
 			SELECT sellCompletedCount, buyCompletedCount FROM sharing where sno=#{sno}
 
@@ -255,5 +255,32 @@
 					values(#{rno},#{content},sysdate,#{userno},#{star},#{ino})
 		]]>
 	</insert>
+	
+	<insert id="sendUapplyReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, bno)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{bno})
+		]]>
+	</insert>
+	
+	<update id="uapplyReviewCompleted" parameterType="map">
+		<![CDATA[
+			update apply set astatus='후기등록완료'
+			where ano=#{ano}
+		]]>
+	</update>
+	
+	<update id="uapplyReviewStatus" parameterType="Integer">
+		<![CDATA[
+			update apply set astatus='후기대기'
+			where ano=#{ano}
+		]]>
+	</update>
 	
 </mapper>	

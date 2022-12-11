@@ -70,13 +70,13 @@
 	<!-- 거래 상태 카운트 -->
 	<select id="astatuscount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
-				select count(*) from apply where bno=#{bno} and astatus='수거중'
+				select count(*) from apply where bno=#{bno} and astatus='신청완료'
 			]]>
 		</select>
 		
 	<select id="bstatuscount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
-				select count(*) from apply where bno=#{bno} and astatus='수거거절'
+				select count(*) from apply where bno=#{bno} and astatus='신청거절'
 			]]>
 		</select>
 		
@@ -142,5 +142,35 @@
 			]]>
 	</delete>
 	
+	
+	<!-- 개인 마이페이지 개수(페이징) -->
+	<select id="applyListCount" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM apply WHERE USERNO =#{userno}
+		]]>
+	</select>
+	
+	<select id="getApplyList" parameterType="map" resultType="Apply">
+		<![CDATA[
+			SELECT * 
+			FROM (SELECT ROW_NUMBER() OVER(ORDER BY apickup) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,b.bno,b.BNAME  FROM apply a , business b WHERE userno=${userno} AND a.BNO = b.BNO) a) 
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<!-- 개인 마이페이지 개수(페이징) -->
+	<select id="bapplyListCount" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM apply WHERE BNO =#{bno}
+		]]>
+	</select>
+	
+	<select id="bgetApplyList" parameterType="map" resultType="Apply">
+		<![CDATA[
+			SELECT * 
+			FROM (SELECT ROW_NUMBER() OVER(ORDER BY apickup) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,bno FROM apply WHERE bno=#{bno})a) 
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
 
 </mapper>	

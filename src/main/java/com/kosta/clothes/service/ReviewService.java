@@ -2,6 +2,7 @@ package com.kosta.clothes.service;
 
 import java.util.List;
 
+import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.PageInfo;
 import com.kosta.clothes.bean.Review;
 

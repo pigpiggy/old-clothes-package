@@ -9,8 +9,7 @@ public class Sell {
 	private String icontent;
 	private String istatus;
 	private String ifileids;
-	private String addressCity;
-	private String addressTown;
+	private String iaddress;
 	private String idealType;
 	private Date regDate;
 	private Long likes;
@@ -57,17 +56,11 @@ public class Sell {
 	public void setIfileids(String ifileids) {
 		this.ifileids = ifileids;
 	}
-	public String getAddressCity() {
-		return addressCity;
+	public String getIaddress() {
+		return iaddress;
 	}
-	public void setAddressCity(String addressCity) {
-		this.addressCity = addressCity;
-	}
-	public String getAddressTown() {
-		return addressTown;
-	}
-	public void setAddressTown(String addressTown) {
-		this.addressTown = addressTown;
+	public void setIaddress(String iaddress) {
+		this.iaddress = iaddress;
 	}
 	public String getIdealType() {
 		return idealType;
@@ -127,8 +120,8 @@ public class Sell {
 		this.buyCompletedCount = buyCompletedCount;
 	}
 	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
-			String addressCity, String addressTown, String idealType, Date regDate, Long likes, Long selectedno,
-			Long applycount, Integer userno, Long price) {
+			String iaddress, String idealType, Date regDate, Long likes, Long selectedno, Long applycount,
+			Integer userno, Long price, Long sellCompletedCount, Long buyCompletedCount) {
 		super();
 		this.ino = ino;
 		this.iname = iname;
@@ -136,8 +129,7 @@ public class Sell {
 		this.icontent = icontent;
 		this.istatus = istatus;
 		this.ifileids = ifileids;
-		this.addressCity = addressCity;
-		this.addressTown = addressTown;
+		this.iaddress = iaddress;
 		this.idealType = idealType;
 		this.regDate = regDate;
 		this.likes = likes;
@@ -145,13 +137,16 @@ public class Sell {
 		this.applycount = applycount;
 		this.userno = userno;
 		this.price = price;
+		this.sellCompletedCount = sellCompletedCount;
+		this.buyCompletedCount = buyCompletedCount;
 	}
 	@Override
 	public String toString() {
 		return "Sell [ino=" + ino + ", iname=" + iname + ", ititle=" + ititle + ", icontent=" + icontent + ", istatus="
-				+ istatus + ", ifileids=" + ifileids + ", addressCity=" + addressCity + ", addressTown=" + addressTown
-				+ ", idealType=" + idealType + ", regDate=" + regDate + ", likes=" + likes + ", selectedno="
-				+ selectedno + ", applycount=" + applycount + ", userno=" + userno + ", price=" + price + "]";
+				+ istatus + ", ifileids=" + ifileids + ", iaddress=" + iaddress + ", idealType=" + idealType
+				+ ", regDate=" + regDate + ", likes=" + likes + ", selectedno=" + selectedno + ", applycount="
+				+ applycount + ", userno=" + userno + ", price=" + price + ", sellCompletedCount=" + sellCompletedCount
+				+ ", buyCompletedCount=" + buyCompletedCount + "]";
 	}
 
 	

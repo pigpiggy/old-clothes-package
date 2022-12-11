@@ -56,10 +56,10 @@
 		          <div class="card-body">
 		              <span class="date">${sharing.regDate}</span>
 		              <h2 class="sharingTitle">${sharing.stitle }</h2>
-		              <p>${sharing.addressCity} ${sharing.addressTown }</p>
+		              <p>${sharing.saddress}</p>
 		          </div>
 		          <c:choose>
-		          	<c:when test="${empty sharing.addressCity}">
+		          	<c:when test="${empty sharing.saddress}">
 		          		<div class="card-footer">
 		          			${sharing.sdealType}
 		          		</div>

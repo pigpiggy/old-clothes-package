@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/buyProduct.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
@@ -51,10 +51,10 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${buysell.price}원</span><span class="date">${buysell.regDate}</span></div>
 					              <h2 class="sharingTitle">${buysell.ititle }</h2>
-					              <p>${buysell.addressCity} ${buysell.addressTown }</p>
+					              <p>${buysell.iaddress}</p>
 					          </div>
 					          <c:choose>
-					          	<c:when test="${empty buysell.addressCity}">
+					          	<c:when test="${empty buysell.iaddress}">
 					          		<div class="card-footer">
 					          			${buysell.idealType}
 					          		</div>
@@ -148,10 +148,10 @@
 			          <div class="card-body">
 			              <span class="date">${buysharing.regDate}</span>
 			              <h2 class="sharingTitle">${buysharing.stitle }</h2>
-			              <p>${buysharing.addressCity} ${buysharing.addressTown }</p>
+			              <p>${buysharing.saddress}</p>
 			          </div>
 			          <c:choose>
-			          	<c:when test="${empty buysharing.addressCity}">
+			          	<c:when test="${empty buysharing.saddress}">
 			          		<div class="card-footer">
 			          			${buysharing.sdealType}
 			          		</div>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>사업자신청목록</title>
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
 .item{	
 	width:100%;
@@ -15,6 +16,25 @@
 	display: flex;    
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.aindividualStatus {
+    position: absolute;
+    left: 51%;
+    top: 27%;
+    transform: translate(-50%, -50%);
+    background: black;
+    opacity: 0.4;
+    color: white;
+    width: 45%;
+    text-align: center;
+    font-size: 30px;
+    line-height: 2;
+    border-radius: 2px;
+}
+.applyList{
+	position: relative;
+    display: block;
 }
 </style>
 </head>
@@ -25,10 +45,29 @@
 				<li class="on"><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
 				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 			</ul>			
-	</div>	
+	</div>
+	<c:if test="${authUser.sect eq 'business' }">	
+	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="bcards">		
-	<c:forEach var="apply" items="${apply }">		 
-		<div class="applyList">	        
+	<c:forEach var="apply" items="${apply }">	
+	<c:if test="${authUser.bno eq apply.bno }">		 
+		<div class="applyList">	       
+		<c:choose>	        
+				<c:when test="${'신청중' == apply.astatus}">
+	          			<div class="aindividualStatus">신청대기</div>
+	          	</c:when>
+	          	<c:when test="${apply.astatus == '신청완료'}">
+	          			<div class="aindividualStatus">수거대상</div>
+	          	</c:when>
+	          	<c:when test="${apply.astatus == '수거완료'}">
+	          			<div class="aindividualStatus">수거완료</div>
+	          	</c:when>
+	          	<c:otherwise>
+	          		<c:if test="${apply.astatus == '신청거절' }">
+	          			<div class="aindividualStatus">수거거절</div>
+	          		</c:if>
+	          	</c:otherwise>
+			</c:choose>	  
 	            <div class="item" style="width:100%;">		            
 	            <strong>[ 헌옷 수거 신청 ]</strong>		
 	            	<div class="title"></div>                                 		                
@@ -73,44 +112,47 @@
 	                        		<div class="btn">		      
 			                    		<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
 			                    		<input type="hidden" id="ano" name="ano" value="${apply.ano }">
-		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end" disabled >수거완료</button>
+		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end">수거완료</button>
 	                        		</div>
 	                        	</c:when>
 	                        </c:choose>
 	                    </form>                   
 	                 </div>		               	            
 	        </div>		        
-	    </div>		    
+	    </div>	
+	    </c:if>	    
 	</c:forEach>		
 </div>
-    
-    <ul class="pagination">
+</div>
+</c:if>
+   <div class="center">
+    <ul class="pagination bapaging">
 		<c:choose>
-			<c:when test="${pageInfo.page<=1}">
+			<c:when test="${bapageInfo.page<=1}">
 				<li><a id="prev"><<</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+				<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${bapageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		<c:forEach var="i" begin="${bapageInfo.startPage }" end="${bapageInfo.endPage }">
 			<c:choose>
-				<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+				<c:when test="${bapageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 				<c:otherwise>
-					<li><a href="freeList?page=${i}">${i }</a></li>
+					<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${i}&select=1">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
-			<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+			<c:when test="${bapageInfo.page>=bapageInfo.maxPage }">
 				<li><a id="next">>></a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+				<li><a href="/mypage/bmypage/${business.bno }/apply?bapage=${bapageInfo.page+1}&select=1" id="next">>></a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
-    
+    </div>
 	
 	<script>
 	var anos;
@@ -216,6 +258,9 @@
 		        }
 		    });
 		}
+	
+	
 	</script>
+	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

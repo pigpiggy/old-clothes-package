@@ -133,24 +133,24 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		        <div id="ireview">거래 후기: 12건</div>
+		        <div id="ireview">거래 후기: ${reviewcount }건</div>
 		      	<span>신청 인원 : ${sell.applycount }명</span>
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+				        	<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sell.userno }">	
-			        					<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        					<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        			
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}"><input type="button" class="btn btn-info" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
 			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
 			        					<form action="/selectSellApply" method="get">
 				        					<ul>
@@ -165,7 +165,7 @@
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<a href="/mypage/umypage/${sell.userno}"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        				<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -290,7 +290,8 @@ function commentList(){
             var a =''; 
             $.each(data, function(key, value){ 
                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+               //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
                 if(auth != ''){
                 	if(auth == 'users'){
 		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
@@ -404,7 +405,6 @@ $(function () {
 			console.log(ino);
 		}
 		let sect = "${sect}";
-		console.log(sect);
 		if(sect == 'users') {
 			$.ajax({
 				type: "post",

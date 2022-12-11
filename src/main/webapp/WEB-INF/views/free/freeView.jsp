@@ -221,7 +221,12 @@
 	             var a =''; 
 	             $.each(data, function(key, value){ 
 	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-	                 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+
+	                 if(value.csect =='users'){
+	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
+	                 }else if(value.csect == 'business'){
+	                 	a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/apply">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                 }
 	                 if(auth != ''){
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
@@ -266,7 +271,7 @@
 	 function commentUpdate(cno, ccontent){
 	     var a ='';
 	     
-	     a += '<div class="input-group">';
+	     a += '<div class="input-group" style="position: relative;left: 82%; bottom: 63px;">';
 	     a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
 	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
 	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';

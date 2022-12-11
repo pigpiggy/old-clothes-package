@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,14 +78,13 @@ public class MypageController {
 	                  
 	                  //수거상태개수
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("bcount",bcount);
 	                  model.addAttribute("ccount",ccount);
-	                  
 	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
 	                  System.out.println("bmypage 사업자");
@@ -96,15 +96,15 @@ public class MypageController {
 	                  apply = applyService.getBapply(bno);
 	                  model.addAttribute("apply",apply);
 	                  System.out.println("Bmypage apply : " + apply.toString());
-	                  //개수
+	                  //사업자 신청목록개수
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
 	              
-	                  //개수
+	                  //사업자개수개수
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
@@ -121,9 +121,10 @@ public class MypageController {
 	               System.out.println("applycount : " + applycount);
 	               model.addAttribute("applycount",applycount);
 	               
+	               //사업자 개수
 	               Map astatuscount= applyService.astatuscount(bno);
-	               Integer acount= (Integer) astatuscount.get("수거중");
-	               Integer bcount= (Integer) astatuscount.get("수거거절");
+	               Integer acount= (Integer) astatuscount.get("신청완료");
+	               Integer bcount= (Integer) astatuscount.get("신청거절");
 	               Integer ccount= (Integer) astatuscount.get("수거완료");
 	               System.out.println("astatuscount:"+astatuscount);
 	               model.addAttribute("acount",acount);
@@ -134,6 +135,22 @@ public class MypageController {
 	            Business business = messageService.mypageBusiness(bno);
 	             System.out.println("business mypage" +  business.toString());         
 	             model.addAttribute("business",business);
+
+                 //신청목록
+                 Integer applycount = applyService.applycount(bno);
+                 System.out.println("applycount : " + applycount);
+                 model.addAttribute("applycount",applycount);
+                 
+                 //수거상태
+                 Map astatuscount= applyService.astatuscount(bno);
+                 Integer acount= (Integer) astatuscount.get("신청완료");
+                 Integer bcount= (Integer) astatuscount.get("신청거절");
+                 Integer ccount= (Integer) astatuscount.get("수거완료");
+                 System.out.println("astatuscount:"+astatuscount);
+                 model.addAttribute("acount",acount);
+                 model.addAttribute("bcount",bcount);
+                 model.addAttribute("ccount",ccount);
+                 
 	         }
 			
 		}catch(Exception e) {
@@ -143,12 +160,20 @@ public class MypageController {
 	}
 	
 	@GetMapping ("/mypage/bmypage/{bno}/apply")
-	String bmypageapply(@PathVariable("bno") Integer bno, Model model) {
+	String bmypageapply(@PathVariable("bno") Integer bno, Model model,
+			@RequestParam(value = "bapage", required = false, defaultValue = "1") Integer bapage) {
+		PageInfo bapageInfo = new PageInfo();
 		System.out.println("bmypage" + bno);
 		List<Apply> apply = null;
 		try {
 			if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
 	              if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+	            	  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  model.addAttribute("bapageInfo", bapageInfo);
+	                  
 	                 System.out.println("bmypage 사용자");
 	                 Business business = messageService.mypageBusiness(bno);
 	                  System.out.println("business mypage" +  business.toString());         
@@ -161,8 +186,8 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
@@ -171,53 +196,91 @@ public class MypageController {
 	                  
 	                  
 	              }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {//사업자가 로그인 했을 때
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+	            	  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  model.addAttribute("bapageInfo", bapageInfo);
+	                	
 	                  System.out.println("bmypage 사업자");
 	                  Business business = messageService.mypageBusiness(bno);
 	                  System.out.println("business mypage" +  business.toString());         
 	                  model.addAttribute("business",business);
 	                  
-	                  //사용자->사업자 신청
-	                  apply = applyService.getBapply(bno);
-	                  model.addAttribute("apply",apply);
-	                  System.out.println("Bmypage apply : " + apply.toString());
-	                  //
+	                 
+	                  //신청목록
 	                  Integer applycount = applyService.applycount(bno);
 	                  System.out.println("applycount : " + applycount);
 	                  model.addAttribute("applycount",applycount);
-	              
+	                  
+	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("bcount",bcount);
 	                  model.addAttribute("ccount",ccount);
-	                  
+	                      
 	              }else {//로그인 안했을 때
+	            	  //페이징
+	            	  apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+	            	  model.addAttribute("apply",apply);
+	                  System.out.println("Bmypage apply : " + apply.toString());
+	                  model.addAttribute("bapageInfo", bapageInfo);
+	                	            	  
 	            	  System.out.println("bmypage 무무");
 		              Business business = messageService.mypageBusiness(bno);
 		              System.out.println("business mypage" +  business.toString());         
 		              model.addAttribute("business",business);  
 	               
-		              Integer applycount = applyService.applycount(bno);
-		              System.out.println("applycount : " + applycount);
-		              model.addAttribute("applycount",applycount);
+
+	                  //신청목록
+	                  Integer applycount = applyService.applycount(bno);
+	                  System.out.println("applycount : " + applycount);
+	                  model.addAttribute("applycount",applycount);
 	                  
-		              Map astatuscount= applyService.astatuscount(bno);
-		              Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  //수거상태
+	                  Map astatuscount= applyService.astatuscount(bno);
+	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("bcount",bcount);
 	                  model.addAttribute("ccount",ccount);
+	                  
 	              }
 	         }else {
+	        	  //페이징
+           	     apply = applyService.bgetApplyList(bno, bapage, bapageInfo);
+           	  	 model.addAttribute("apply",apply);
+                 System.out.println("Bmypage apply : " + apply.toString());
+                 model.addAttribute("bapageInfo", bapageInfo);
+               
+                 
+                 
 	             System.out.println("bmypage 무무무");
 	             Business business = messageService.mypageBusiness(bno);
 	             System.out.println("business mypage" +  business.toString());         
 	             model.addAttribute("business",business);
+
+                 //신청목록
+                 Integer applycount = applyService.applycount(bno);
+                 System.out.println("applycount : " + applycount);
+                 model.addAttribute("applycount",applycount);
+                 
+                 //수거상태
+                 Map astatuscount= applyService.astatuscount(bno);
+                 Integer acount= (Integer) astatuscount.get("신청완료");
+                 Integer bcount= (Integer) astatuscount.get("신청거절");
+                 Integer ccount= (Integer) astatuscount.get("수거완료");
+                 System.out.println("astatuscount:"+astatuscount);
+                 model.addAttribute("acount",acount);
+                 model.addAttribute("bcount",bcount);
+                 model.addAttribute("ccount",ccount);
+                 
 	         }
 			
 		}catch(Exception e) {
@@ -505,6 +568,7 @@ public class MypageController {
 			@RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage) {
 		PageInfo pageInfo = new PageInfo();
 		PageInfo spageInfo = new PageInfo();
+		System.out.println("여기까지 들어ㅇ오긴하냐");
 		try {
 			/*판매 상품(개인판매)*/
 			List<Sell> sellList;
@@ -514,6 +578,21 @@ public class MypageController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 					Users users1 = (Users) session.getAttribute("authUser");
 					sellList = mypageService.getSellList(userno,page,pageInfo);
+					for (int i = 0; i < sellList.size(); i++) {
+						/* 주소 띄우기 */
+						String addr = sellList.get(i).getIaddress();
+						String[] addChange = addr.split(" ");
+						if(addChange[2].matches("^+구$")) {
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sellList.get(i).setIaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sellList.get(i).setIaddress(join2);
+						}
+						if (sellList.get(i).getIfileids() != null) {
+							sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+						}
+					}
 					//상품등록
 	                Integer sharingcount = sharingService.sharingcount(userno);
 	                System.out.println("sharingcount : " + sharingcount);
@@ -522,26 +601,53 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 					model.addAttribute("pageInfo", pageInfo);
 					model.addAttribute("sellList", sellList);
 					System.out.println("sellList:"+sellList);
 					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					for (int i = 0; i < sharingList.size(); i++) {
+						/* 주소 띄우기*/
+						String addr = sharingList.get(i).getSaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sharingList.get(i).setSaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sharingList.get(i).setSaddress(join2);
+						}
+						if (sharingList.get(i).getSfileids() != null) {
+							sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+						}
+					}
 					model.addAttribute("spageInfo", spageInfo);
 					model.addAttribute("sharingList", sharingList);
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
 					 sellList = mypageService.getSellList(userno,page,pageInfo);
+					 for (int i = 0; i < sellList.size(); i++) {
+						 /* 주소 띄우기 */
+							String addr = sellList.get(i).getIaddress();
+							String[] addChange = addr.split(" ");
+							if(addChange[2].matches("^+구$")) {
+								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+								sellList.get(i).setIaddress(join1);
+							} else {
+								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+								sellList.get(i).setIaddress(join2);
+							}
+							if (sellList.get(i).getIfileids() != null) {
+								sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+							}
+						}
 					//상품등록
 		                Integer sharingcount = sharingService.sharingcount(userno);
 		                System.out.println("sharingcount : " + sharingcount);
@@ -550,27 +656,54 @@ public class MypageController {
 		                Integer totalcount = sharingcount + sellcount;
 		                System.out.println("totalcount : " + totalcount);
 		                model.addAttribute("totalcount",totalcount);
-
 		                //거래후기
 		                Integer reviewcount = reviewService.reviewcount(userno);
 		                model.addAttribute("reviewcount",reviewcount);       
-
 		                //거래완료
 		                Integer statuscount = sharingService.statuscount(userno);
 		                System.out.println("statuscount:"+statuscount);
 		                statuscount +=sellService.statuscount(userno);
 		                System.out.println("statuscount:"+statuscount);
 		                model.addAttribute("statuscount",statuscount);
-
 					 model.addAttribute("pageInfo", pageInfo);
 					 model.addAttribute("sellList", sellList);
 					 System.out.println("sellList:"+sellList);
 					 sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					 for (int i = 0; i < sharingList.size(); i++) {
+							/* 주소 띄우기*/
+							String addr = sharingList.get(i).getSaddress();
+							String[] addChange = addr.split(" "); //주소 공백으로 분
+							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+								sharingList.get(i).setSaddress(join1);
+							} else {
+								String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+								sharingList.get(i).setSaddress(join2);
+							}
+							if (sharingList.get(i).getSfileids() != null) {
+								sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+							}
+						}
 					 model.addAttribute("spageInfo", spageInfo);
 					 model.addAttribute("sharingList", sharingList);
 				}
 			}else {
 				sellList = mypageService.getSellList(userno,page,pageInfo);
+				for (int i = 0; i < sellList.size(); i++) {
+					/* 주소 띄우기 */
+					String addr = sellList.get(i).getIaddress();
+					String[] addChange = addr.split(" ");
+					if(addChange[2].matches("^+구$")) {
+						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+						sellList.get(i).setIaddress(join1);
+					} else {
+						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+						sellList.get(i).setIaddress(join2);
+					}
+					if (sellList.get(i).getIfileids() != null) {
+						sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+					}
+				}
 				//상품등록
                 Integer sharingcount = sharingService.sharingcount(userno);
                 System.out.println("sharingcount : " + sharingcount);
@@ -579,22 +712,34 @@ public class MypageController {
                 Integer totalcount = sharingcount + sellcount;
                 System.out.println("totalcount : " + totalcount);
                 model.addAttribute("totalcount",totalcount);
-
                 //거래후기
                 Integer reviewcount = reviewService.reviewcount(userno);
                 model.addAttribute("reviewcount",reviewcount);       
-
                 //거래완료
                 Integer statuscount = sharingService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 statuscount +=sellService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 model.addAttribute("statuscount",statuscount);
-
 				model.addAttribute("pageInfo", pageInfo);
 				model.addAttribute("sellList", sellList);
 				System.out.println("sellList:"+sellList);
 				sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+				for (int i = 0; i < sharingList.size(); i++) {
+					/* 주소 띄우기*/
+					String addr = sharingList.get(i).getSaddress();
+					String[] addChange = addr.split(" "); //주소 공백으로 분
+					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+						sharingList.get(i).setSaddress(join1);
+					} else {
+						String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+						sharingList.get(i).setSaddress(join2);
+					}
+					if (sharingList.get(i).getSfileids() != null) {
+						sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+					}
+				}
 				model.addAttribute("spageInfo", spageInfo);
 				model.addAttribute("sharingList", sharingList);				
 			}
@@ -629,23 +774,50 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 				 buysellList = mypageService.getBuySellList(userno,bspage,bspageInfo);
+				 for (int i = 0; i < buysellList.size(); i++) {
+					 /* 주소 띄우기 */
+						String addr = buysellList.get(i).getIaddress();
+						String[] addChange = addr.split(" ");
+						if(addChange[2].matches("^+구$")) {
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							buysellList.get(i).setIaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							buysellList.get(i).setIaddress(join2);
+						}
+						if (buysellList.get(i).getIfileids() != null) {
+							buysellList.get(i).setIfileids(buysellList.get(i).getIfileids().split(",")[0]);
+						}
+					}
 				 model.addAttribute("bspageInfo", bspageInfo);
 				 model.addAttribute("buysellList", buysellList);
 				
 				 buysharingList = mypageService.getBuySharingList(userno,ppage,ppageInfo);
+				 for (int i = 0; i < buysharingList.size(); i++) {
+						/* 주소 띄우기*/
+						String addr = buysharingList.get(i).getSaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							buysharingList.get(i).setSaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							buysharingList.get(i).setSaddress(join2);
+						}
+						if (buysharingList.get(i).getSfileids() != null) {
+							buysharingList.get(i).setSfileids(buysharingList.get(i).getSfileids().split(",")[0]);
+						}
+					}
 				 model.addAttribute("ppageInfo", ppageInfo);
 				 model.addAttribute("buysharingList", buysharingList);
 			
@@ -658,18 +830,15 @@ public class MypageController {
 	                Integer totalcount = sharingcount + sellcount;
 	                System.out.println("totalcount : " + totalcount);
 	                model.addAttribute("totalcount",totalcount);
-
 	                //거래후기
 	                Integer reviewcount = reviewService.reviewcount(userno);
 	                model.addAttribute("reviewcount",reviewcount);       
-
 	                //거래완료
 	                Integer statuscount = sharingService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
 				}
 			}else {
 				
@@ -683,16 +852,22 @@ public class MypageController {
 		}
 		return "/mypage/buyProduct";
 	}
-
+//개인페이지 신청목록
 	@GetMapping ("mypage/umypage/{userno}/apply")
-	public String umypageapply(@PathVariable("userno") Integer userno, Model model) {
+	public String umypageapply(@PathVariable("userno") Integer userno, Model model,
+			@RequestParam(value = "apage", required = false, defaultValue = "1") Integer apage) {
+		PageInfo apageInfo = new PageInfo();
+		
 		List<Apply> wapply = null;
 		 
         try {
 			if(session.getAttribute("authUser")!=null) {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+					wapply = applyService.getApplyList(userno, apage, apageInfo);
+					System.out.println("reviewpage:" + wapply + apageInfo);
+					
 					//개인이 신청한 목록 리스트
-					wapply = applyService.getUapply(userno);
+					//wapply = applyService.getUapply(userno);
 					model.addAttribute("wapply",wapply);
 					System.out.println("Umypage apply : " + wapply.toString());		
 					
@@ -715,10 +890,13 @@ public class MypageController {
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
-
+	                model.addAttribute("apageInfo", apageInfo);
 				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")) {
+					wapply = applyService.getApplyList(userno, apage, apageInfo);
+					System.out.println("reviewpage:" + wapply + apageInfo);
+					
 					//개인이 신청한 목록 리스트
-					wapply = applyService.getUapply(userno);
+					//wapply = applyService.getUapply(userno);
 					model.addAttribute("wapply",wapply);
 					System.out.println("Umypage apply : " + wapply.toString());	
 					
@@ -741,12 +919,17 @@ public class MypageController {
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
+	                model.addAttribute("apageInfo", apageInfo);
 				}
 			}else {
+				wapply = applyService.getApplyList(userno, apage, apageInfo);
+				System.out.println("reviewpage:" + wapply + apageInfo);
+				
 				//개인이 신청한 목록 리스트
-				wapply = applyService.getUapply(userno);
+				//wapply = applyService.getUapply(userno);
 				model.addAttribute("wapply",wapply);
-				System.out.println("Umypage apply : " + wapply.toString());	
+				System.out.println("Umypage apply : " + wapply.toString());
+					
 				
 				//상품등록
                 Integer sharingcount = sharingService.sharingcount(userno);
@@ -767,6 +950,7 @@ public class MypageController {
                 statuscount +=sellService.statuscount(userno);
                 System.out.println("statuscount:"+statuscount);
                 model.addAttribute("statuscount",statuscount);
+                model.addAttribute("apageInfo", apageInfo);
 			}
 			 Users users = mypageService.getMypage(userno);
 			 System.out.println("userssss" + users.toString());
@@ -777,6 +961,80 @@ public class MypageController {
 		return "/mypage/uapplylist";
 	}	
 	
+	 @GetMapping ("/mypage/message/{userno}")
+	   String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
+	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
+	         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
+	         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
+	         @PathVariable("userno") Integer userno) {
+	      List<MessageVO> rmessageList = new ArrayList<>();
+	      List<MessageVO> smessageList = new ArrayList<>();
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      PageInfo rpageInfo = new PageInfo();
+	      PageInfo spageInfo = new PageInfo();      
+	      try {
+	            Business bauthuser = new Business();
+	            String sect;
+	            Users uauthuser = new Users();
+	            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+	               uauthuser = (Users) session.getAttribute("authUser");
+	               map.put("recvUserno", uauthuser.getUserno());
+	               map.put("page", rpage);
+	               map.put("pageInfo", rpageInfo);
+	               rmessageList = messageService.uRecvMessage(map);//사용자의 받은편지함
+	               smessageList = messageService.uSendMessage(uauthuser.getUserno(),spage,spageInfo);//사용자의 보낸편지함
+	               //
+	               Users users = mypageService.getMypage(userno);
+	               //상품등록
+	               Integer sharingcount = sharingService.sharingcount(userno);
+	               System.out.println("sharingcount : " + sharingcount);
+	               Integer sellcount = sellService.sellcount(userno);
+	               System.out.println("sellcount:" + sellcount);
+	               Integer totalcount = sharingcount + sellcount;
+	               System.out.println("totalcount : " + totalcount);
+	               model.addAttribute("totalcount",totalcount);
+
+	               //거래후기
+	               Integer reviewcount = reviewService.reviewcount(userno);
+	               model.addAttribute("reviewcount",reviewcount);       
+
+	               //거래완료
+	               Integer statuscount = sharingService.statuscount(userno);
+	               System.out.println("statuscount:"+statuscount);
+	               statuscount +=sellService.statuscount(userno);
+	               System.out.println("statuscount:"+statuscount);
+	               model.addAttribute("statuscount",statuscount);
+
+	               model.addAttribute("recvmessage", rmessageList);
+	               model.addAttribute("sendmessage", smessageList);
+	               model.addAttribute("rpageInfo", rpageInfo);
+	               model.addAttribute("spageInfo", spageInfo);
+	               model.addAttribute("select", select);
+	               model.addAttribute("submitcheck", submitcheck);
+	               model.addAttribute("users", users);
+
+	            } else {
+	               bauthuser = (Business) session.getAttribute("authUser");
+	               map.put("recvUserno", bauthuser.getBno());
+	               System.out.println("businessno:"+bauthuser.getBno());
+	               map.put("page", rpage);
+	               map.put("pageInfo", rpageInfo);
+	               rmessageList = messageService.bRecvMessage(map);
+	               System.out.println("spage:"+spage);
+	               smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
+	               System.out.println(smessageList);
+	               model.addAttribute("recvmessage", rmessageList);
+	               model.addAttribute("sendmessage", smessageList);
+	               model.addAttribute("rpageInfo", rpageInfo);
+	               model.addAttribute("spageInfo", spageInfo);
+	               model.addAttribute("select", select);
+	               model.addAttribute("submitcheck", submitcheck);
+	            }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return "/mypage/message";
+	   }
 	
 	@PostMapping("/mypage/smessage")
     public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {
@@ -808,7 +1066,6 @@ public class MypageController {
       return mav;
       
    }
-   
 
    
    @ResponseBody
@@ -1026,6 +1283,36 @@ public class MypageController {
     	  map.put("ino", ino);
     	  map.put("userno", userno);
          mypageService.sendIReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
+   @GetMapping("/sendUapplyReview")
+   public void sendUapplyReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("bno") Integer bno, @RequestParam("ano") Integer ano) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("bno", bno);
+    	  map.put("userno", userno);
+    	  map.put("ano", ano);
+    	  System.out.println("ano:"+ano);
+         mypageService.sendUapplyReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
+   @GetMapping("/uapplyReviewStatus")
+   public void uapplyReviewStatus(@RequestParam("ano") Integer ano) {
+      try {
+         mypageService.uapplyReviewStatus(ano);
       }catch(Exception e) {
          e.printStackTrace();
       }

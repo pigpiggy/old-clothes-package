@@ -363,7 +363,7 @@ h1 {
 	text-align: center;
 	font-size: 18px;
 	background: #fff;
-	height: 400px;
+	height: 290px;
 	/* Center slide text vertically */
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -425,6 +425,10 @@ h1 {
 }
 #letter_img {
 	margin-right: 5px;
+	cursor: pointer;
+}
+#heart_img {
+	cursor: pointer;
 }
 #ireview {
 	margin-bottom: 5px;
@@ -510,6 +514,7 @@ svg {
 
 #chaticon_img {
 	margin-right: 5px;
+	cursor: pointer;
 }
 
 #icons {

@@ -52,6 +52,9 @@ public interface MypageDAO {
 	void completeSharingDeal(Integer sno) throws Exception;
 	
 	void sendIReview(Map map) throws Exception;
+	void sendUapplyReview(Map map) throws Exception;
+	void uapplyReviewCompleted(Map map) throws Exception;
+	void uapplyReviewStatus(Integer ano) throws Exception;
 	
 	List<Sharing> getLikeSharingList(Integer userno) throws Exception;
 	List<Sell> getLikeSellList(Integer userno)throws Exception;

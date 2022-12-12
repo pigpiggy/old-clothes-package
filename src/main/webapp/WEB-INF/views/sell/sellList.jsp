@@ -21,7 +21,9 @@
     <div id="buttonAndSelect">
       <div class="bt_wrap">
 	    <c:if test="${!empty authUser}">    
-		  	<a href="sellRegistForm" class="on">글쓰기</a>
+	    	<c:if test="${'users' eq authUser.sect}">
+		  		<a href="sellRegistForm" class="on">글쓰기</a>
+		  	</c:if>
       	</c:if>
       </div>
       <div class="search-box">

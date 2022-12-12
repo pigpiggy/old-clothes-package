@@ -24,11 +24,11 @@
 			</ul>
 	</div>
 	<div class="buyProductWrap">
-		<select>
+		<select class="buyProductSelect">
 	    	<option value="개인 판매">개인 판매</option>
 	    	<option value="무료 나눔">무료 나눔</option>
 	    </select>
-		<div id="cards">
+		<div id="cards" class="sellCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysell" items="${buysellList}">
 			  	<div class="sellList">
@@ -97,7 +97,7 @@
 	      		</div>
 	  	</div>
 	    
-	    <ul class="pagination">
+	    <ul class="pagination sellPage1">
 			<c:choose>
 				<c:when test="${bspageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
@@ -124,7 +124,7 @@
 			</c:choose>
 		</ul>
 	    
-	    <div id="cards">
+	    <div id="cards" class="sharingCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysharing" items="${buysharingList}">
 			  <div class="sellList">
@@ -196,7 +196,7 @@
 	      		</div>
 	  	</div>
 	    
-	    <ul class="pagination">
+	    <ul class="pagination sharingPage1">
 			<c:choose>
 				<c:when test="${ppageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
@@ -369,6 +369,28 @@
 					console.log(err);
 				}
 			});
+		})
+		
+		$('.sharingCards1').hide();
+		$('.sharingPage1').hide();
+		
+		$(".buyProductSelect").change(function() {
+			var sect = $(".buyProductSelect option:selected").val();
+			console.log(sect);
+			if(sect == "개인 판매") {
+				$('.sharingCards1').hide();
+				$('.sharingPage1').hide();
+				
+				$('.sellCards1').show();
+				$('.sellPage1').show();
+				
+			} else {
+				$('.sellCards1').hide();
+				$('.sellPage1').hide();
+				
+				$('.sharingCards1').show();
+				$('.sharingPage1').show();
+			}
 		})
 		
 	</script>

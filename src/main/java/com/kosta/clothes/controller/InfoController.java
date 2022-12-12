@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kosta.clothes.bean.Apply;
 import com.kosta.clothes.bean.Business;
@@ -169,7 +170,7 @@ public class InfoController {
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            		            
 		            business = businessService.allBusinessInfo(sido,sigungu);		            
-		            System.out.println("kakaoID" + business.get(0).getBkakaoid());
+//		            System.out.println("kakaoID" + business.get(0).getBkakaoid());
 		            
 		            for(int i=0; i<business.size();i++) {
 		            	business.get(i).setLikescheck((businessService.likecheck(business.get(i).getBno(),userno)));
@@ -250,6 +251,9 @@ public class InfoController {
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            
 		            business = businessService.cateusers(sido, sigungu, userno,category);
+		            for(int i=0; i<business.size();i++) {
+		            	business.get(i).setLikescheck((businessService.likecheck(business.get(i).getBno(),userno)));
+		            }
 		            System.out.println("ㅁㅁ" + business);
 				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					//업체가 로그인 했을 때 
@@ -268,7 +272,7 @@ public class InfoController {
 	
 	//신청 작성하기 
 	@PostMapping("/apply")
-	public String apply(@ModelAttribute Apply apply, Model model) {
+	public String apply(@ModelAttribute Apply apply, RedirectAttributes re) {
 		System.out.println(apply.getBno());
 		
 		try {
@@ -280,10 +284,10 @@ public class InfoController {
 			}
 			
 			businessService.registapply(apply);
-			model.addAttribute("msg", "수거 신청이 완료되었습니다.");
+			re.addFlashAttribute("msg", "수거 신청이 완료되었습니다.");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "info/businessinfo";
+		return "redirect:/businessinfo";
 	}		
 }

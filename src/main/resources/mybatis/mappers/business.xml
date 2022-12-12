@@ -6,9 +6,10 @@
 <mapper namespace="com.kosta.clothes.dao.BusinessDAO">
 	<select id="selectBusiness" resultType="Business" parameterType="map">
 		<![CDATA[
-			SELECT *
-			FROM business 
-			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
 		]]>
 	</select>
 	
@@ -66,30 +67,46 @@
 	<!-- 로그인 했을 때 카테고리 정렬 -->
 	<select id="selectUserCatereview" resultType="Business" parameterType="map">
 		<![CDATA[
-			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO    
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER,l.userno, l.LIKESCHECK 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO    
 			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
-			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno
+			union
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER,l.userno, l.LIKESCHECK 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO    
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno
 			ORDER BY reviewcount desc
+			
 		]]>
 	</select>
 	
 	<select id="selectUserCatehigh" resultType="Business" parameterType="map">
 		<![CDATA[
-			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO    
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.userno,l.LIKESCHECK 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO    
 			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
-			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno
+			union
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER,l.userno, l.LIKESCHECK 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO    
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK, l.userno
 			ORDER BY bstar desc
 		]]>
 	</select>
 	
 	<select id="selectUserCatelow" resultType="Business" parameterType="map">
 		<![CDATA[
-			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK 
-			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO JOIN likes l ON b.BNO = l.BNO   
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO   
 			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND l.userno =#{userno}
-			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno
+			union
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO LEFT OUTER JOIN likes l ON b.BNO = l.BNO   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			GROUP BY b.BNO,b.BNAME,r.bno,l.BNO, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER, l.LIKESCHECK,l.userno
 			ORDER BY bstar asc
 		]]>
 	</select>

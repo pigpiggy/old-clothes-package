@@ -580,9 +580,11 @@ $(document).ready(function(){
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
+				console.log("deleteno:"+deleteno);
+				console.log("deleteclass:"+deleteclass);
 				if(deleteclass=="sdelete"){
 					category = "free"
 				}else if(deleteclass=="idelete"){
@@ -793,7 +795,7 @@ function catelist(){
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
 				if(deleteclass=="sdelete"){
@@ -1025,7 +1027,7 @@ function refreshlist(category,globalCurrentPage){
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
 				if(deleteclass=="sdelete"){

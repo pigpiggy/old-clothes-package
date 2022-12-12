@@ -376,6 +376,13 @@
 	border: 0px;
     background-color: white;
 }
+#pagingul{
+	list-style-type:none;
+}
+#pagingul>li{
+	float:left;
+}
+
 
 </style>
 </head>
@@ -441,7 +448,7 @@ $(document).ready(function(){
 	let category = "free";
 	let totalData; //총 데이터 수
 	let dataPerPage=2; //한 페이지에 나타낼 글 수
-	let pageCount=10; //페이징에 나타낼 페이지 수
+	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
 	
@@ -615,7 +622,7 @@ function catelist(){
 	let category = $("#catelist option:selected").val();
 	let totalData; //총 데이터 수
 	let dataPerPage=2; //한 페이지에 나타낼 글 수
-	let pageCount=10; //페이징에 나타낼 페이지 수
+	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
 	

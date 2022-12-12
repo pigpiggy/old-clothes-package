@@ -363,7 +363,7 @@ position: relative;
 .nav__notification {
   position: absolute;
   bottom: 15px;
-  right: 26px;
+  right: 23%;
   animation: notificationAnimation 2s ease-in-out infinite;
 }
 
@@ -382,5 +382,5 @@ position: relative;
 .fname_closet span {
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 }

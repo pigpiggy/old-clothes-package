@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
 * {
+	background-color: aliceblue;
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;	
 }
@@ -47,7 +48,12 @@ div[class^="wrapSellerTitle"]{
 	color: red;
 }
 
-
+#chatHeader {
+	font-size: 2em;
+    padding: 1.5%;
+    margin-left: 1%;
+    border-bottom: 1px solid #ddd;
+}
 
 
 

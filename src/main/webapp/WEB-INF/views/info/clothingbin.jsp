@@ -372,6 +372,5 @@ div.contents {
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 </body>
 </html>

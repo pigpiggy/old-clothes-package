@@ -1323,6 +1323,25 @@ public class MypageController {
 		try {
 			Users users = mypageService.getMypage(userno);
 			model.addAttribute("users", users);
+			 //상품등록
+            Integer sharingcount = sharingService.sharingcount(userno);
+            System.out.println("sharingcount : " + sharingcount);
+            Integer sellcount = sellService.sellcount(userno);
+            System.out.println("sellcount:" + sellcount);
+            Integer totalcount = sharingcount + sellcount;
+            System.out.println("totalcount : " + totalcount);
+            model.addAttribute("totalcount",totalcount);
+            
+            //거래후기
+            Integer reviewcount = reviewService.reviewcount(userno);
+            model.addAttribute("reviewcount",reviewcount);       
+           
+            //거래완료
+            Integer statuscount = sharingService.statuscount(userno);
+            System.out.println("statuscount:"+statuscount);
+            statuscount +=sellService.statuscount(userno);
+            System.out.println("statuscount:"+statuscount);
+            model.addAttribute("statuscount",statuscount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

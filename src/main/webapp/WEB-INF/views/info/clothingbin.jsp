@@ -133,8 +133,8 @@ div.contents {
 		
 		<div class="search-box">
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
-			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-			<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
+			<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+			<!--<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>-->
 			
 		</div>		
 	</div>
@@ -169,8 +169,8 @@ div.contents {
 		
 		
 		<%--검색 버튼 클릭시 --%>
-		$('#searchBtn').click(function(){
-			
+		//$('#searchBtn').click(function(){
+			$(document).on("change","#dong",function(){
 			var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
@@ -229,9 +229,11 @@ div.contents {
 				
 			});
 		});
+		
 		<%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
 		$(function(){
-			$('#searchBtn').click(function(){
+			//$('#searchBtn').click(function(){
+			$('#dong').change(function(){	
 				let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
 				let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
 				let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값
@@ -261,7 +263,7 @@ div.contents {
 						bli += "<ul id='itl'>"
 						bli += "<br>";
 						data.forEach(function(item,i){
-							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
+							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -305,13 +307,17 @@ div.contents {
 					              kakao.maps.event.addListener(marker2, 'mouseout', function() {
 					              	infowindow2.close();
 					              });
-								  $(document).on("mouseover",".bin",function(e){
-									  event.target.map.panTo(marker2.getPosition());
-									  displayInfowindow2(marker2, item);
-								  })
-								   $(document).on("mouseout",".bin",function(){
-									  infowindow2.close();
-								  })
+					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
+				            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+				            		//this.map.panTo(marker2.getPosition());
+				            		map.setCenter(marker2.getPosition())
+				            		infowindow2.open(map,marker2);
+				           		});
+				            
+					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+					            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
+					            	infowindow2.close();
+					            });	
 								}
 							})
 						})
@@ -366,6 +372,5 @@ div.contents {
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 </body>
 </html>

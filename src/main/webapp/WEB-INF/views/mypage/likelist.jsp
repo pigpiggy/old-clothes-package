@@ -376,6 +376,32 @@
 	border: 0px;
     background-color: white;
 }
+#pagingul{
+	margin-top:1%;
+	list-style-type:none;
+}
+
+#pagingul li {
+float:left;
+display: inline;
+}
+
+#pagingul li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+#pagingul li a.active {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #2196f3;;
+}
+
+#pagingul li a:hover:not(.active) {background-color: #ddd;}
+
 
 </style>
 </head>
@@ -441,7 +467,7 @@ $(document).ready(function(){
 	let category = "free";
 	let totalData; //총 데이터 수
 	let dataPerPage=2; //한 페이지에 나타낼 글 수
-	let pageCount=10; //페이징에 나타낼 페이지 수
+	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
 	
@@ -536,17 +562,17 @@ $(document).ready(function(){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
-						pageHtml +="<li class='on'><a href='#' id='"+i+"'>"+i+"</a></li>";
+						pageHtml +="<li class='on'><a href='#' class='active' id='"+i+"'>"+i+"</a></li>";
 					}else{
 						pageHtml +="<li><a href='#' id='"+i+"'>"+i+"</a></li>";
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);
@@ -557,7 +583,6 @@ $(document).ready(function(){
 					let $id = $(this).attr("id");
 					selectedPage=$(this).text();
 					console.log("선택페이지:"+selectedPage);
-					
 					if($id=="next"){
 						selectedPage = next;
 					}if($id=="prev"){
@@ -570,12 +595,15 @@ $(document).ready(function(){
 					//글 목록 표시 재호출
 					displayData(selectedPage, dataPerPage);
 				})
+				
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
+				console.log("deleteno:"+deleteno);
+				console.log("deleteclass:"+deleteclass);
 				if(deleteclass=="sdelete"){
 					category = "free"
 				}else if(deleteclass=="idelete"){
@@ -606,6 +634,7 @@ $(document).ready(function(){
 					error:function(){alert("에러입니다");}
 				})
 			})
+			
 		},
 		error:function(){alert("에러입니다.");}
 	})
@@ -615,7 +644,7 @@ function catelist(){
 	let category = $("#catelist option:selected").val();
 	let totalData; //총 데이터 수
 	let dataPerPage=2; //한 페이지에 나타낼 글 수
-	let pageCount=10; //페이징에 나타낼 페이지 수
+	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
 	
@@ -749,7 +778,7 @@ function catelist(){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
@@ -759,7 +788,7 @@ function catelist(){
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);
@@ -786,7 +815,7 @@ function catelist(){
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
 				if(deleteclass=="sdelete"){
@@ -981,7 +1010,7 @@ function refreshlist(category,globalCurrentPage){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
@@ -991,7 +1020,7 @@ function refreshlist(category,globalCurrentPage){
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);
@@ -1018,7 +1047,7 @@ function refreshlist(category,globalCurrentPage){
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
-				var targetElement = e.target;
+				var targetElement = e.target.parentElement;
 				let deleteno = targetElement.getAttribute('data-value');
 				let deleteclass = targetElement.getAttribute('class');
 				if(deleteclass=="sdelete"){
@@ -1067,6 +1096,33 @@ $("#apickup").datepicker({
 	    timeFormat: "hh:ii AA"
 	});	
  });
+ $('#pagingul').on('click', 'a', function() { // listen for click on pagination link
+	  if($(this).hasClass('active')) return false;
+
+	  var active_elm = $('#pagingul a.active');
+
+	  if(this.id == 'next'){
+	    var _next = active_elm.parent().next().children('a');
+	    if($(_next).attr('id') == 'next') {
+	      this.removeClass('active');  
+	      active_elm.addClass('active');
+
+	      return; 
+	    }
+	    
+	  }
+	  else if(this.id == 'prev') {
+		var _prev = active_elm.parent().prev().children('a');
+	    if($(_prev).attr('id') == 'prev') {
+			this.removeClass('active');
+	    	active_elm.addClass('active');
+	    };
+	  } else {
+	    $(this).addClass('active');
+	  }
+	  active_elm.removeClass('active');
+
+	});
 </script>
 <script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
 <script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>

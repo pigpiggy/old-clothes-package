@@ -512,6 +512,18 @@ if(sstatus != '등록완료'){
 	}
 }
 
+function valid() {
+	var title = document.getElementById("mtitle");
+	var content = document.getElementById("mcontent");
+	if(title.value == "") {
+		alert("내용을 입력해주세요.");
+		return false;
+	}
+	if(content.value == "") {
+		alert("내용을 입력해주세요.");
+		return false;
+	}
+}
 
 </script>
 </body>

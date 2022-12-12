@@ -110,7 +110,7 @@
 		                 </c:otherwise>	
 		                 </c:choose> 
 		                 <c:if test="${wapply.astatus eq '후기대기' }">
-			                  <button type="button" id="applying1">후기작성</button>
+			                  <button type="button" class="applying1">후기작성</button>
 		                 </c:if>	                 
 	                 </div>		               	            
 	        	</div>		        
@@ -219,8 +219,9 @@
 		$('.firstmodal').css('visibility','visible');
 		$('.firstmodal').css('opacity','1');
 		$('.firstmodal').css('z-index','2');
-		console.log($(this).parent().parent());
-		uapplyIndex = $('.applyList').index($(this).parent().parent())+1;
+		console.log($(this).parent().parent().parent().parent());
+		uapplyIndex = $('.applyList').index($(this).parent().parent().parent().parent());
+		console.log(uapplyIndex);
 		var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
 		$('.modal__close').click(function(){
 			$.ajax({
@@ -238,12 +239,13 @@
 		})
 	})
 	
-	$('#applying1').click(function(){
+	$('.applying1').click(function(){
 		$('.firstmodal').css('visibility','visible');
 		$('.firstmodal').css('opacity','1');
 		$('.firstmodal').css('z-index','2');
-		console.log($(this).parent().parent());
-		uapplyIndex = $('.applyList').index($(this).parent().parent())+1;
+		console.log($(this).parent().parent().parent().attr('class'));
+		uapplyIndex = $('.applyList').index($(this).parent().parent().parent());
+		console.log("uaaply:"+uapplyIndex);
 		var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
 	})
 	
@@ -267,11 +269,9 @@
 		})
 		
 	$("#uapplyReviewcomplete").click(function(){
-			alert(uapplyIndex);
 			console.log($('.bno:eq('+uapplyIndex+')'));
 			bno = $('.bnoContent:eq('+uapplyIndex+')').attr("data-sno");
 			var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");
-			alert(bno);
 			var content = $('.content').val();
 			$.ajax({
 				type : "get",

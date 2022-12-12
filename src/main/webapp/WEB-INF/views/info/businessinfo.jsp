@@ -510,20 +510,14 @@ h2{
 						console.log("안뜬다");
 					}else if(authsect == 'business'){
 						bli += '';
-					}else if(authsect == 'users'){					
-						<c:forEach items="${list}" var="listA">							
-							console.log("list : " +"${listA.bno}");
-							if("${listA.bno}" == data.bno){							
-								if(data.likescheck == 1){								
-									bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
-								}else{
-									bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-								}
-							}
-						</c:forEach>										
-						/* if(checkresult==){						
-							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">'; 
-						} */
+					}else if(authsect == 'users'){	
+						if(data.likescheck == 1){								
+							bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+						}else if(data.likescheck == null){
+							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						}else{
+							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						}
 					}
 					console.log(data.bstar +"별점");
 					bli += '<div id="totalstar">';

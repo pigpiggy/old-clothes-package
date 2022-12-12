@@ -133,8 +133,8 @@ div.contents {
 		
 		<div class="search-box">
 			<%-- 텍스트: <span id="dongName"></span><br/>--%>
-			<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-			<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
+			<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+			<!--<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>-->
 			
 		</div>		
 	</div>
@@ -169,8 +169,8 @@ div.contents {
 		
 		
 		<%--검색 버튼 클릭시 --%>
-		$('#searchBtn').click(function(){
-			
+		//$('#searchBtn').click(function(){
+			$(document).on("change","#dong",function(){
 			var geocoder = new kakao.maps.services.Geocoder();//주소-좌표 변환 객체 생성
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
@@ -229,9 +229,11 @@ div.contents {
 				
 			});
 		});
+		
 		<%--검색 버튼 클릭 시 selectbox 데이터 넘기기--%>
 		$(function(){
-			$('#searchBtn').click(function(){
+			//$('#searchBtn').click(function(){
+			$('#dong').change(function(){	
 				let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
 				let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
 				let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값
@@ -370,6 +372,5 @@ div.contents {
 	
 <%--js 불러와서 사용하기. --%>	
 	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 </body>
 </html>

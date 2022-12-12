@@ -95,7 +95,7 @@
 	
 	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
 		<![CDATA[
-			select * from ( select * from sharing where (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
+			select * from ( select * from sharing where (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
 			where rownum <= 6
 		]]>
 	</select>

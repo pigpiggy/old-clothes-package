@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.clothes.bean.Business;
 import com.kosta.clothes.bean.Users;
@@ -235,6 +236,7 @@ public class CertificationService implements UsersService {
 
 		
 		//개인회원탈퇴
+		@Transactional
 		@Override
 		public void deleteuser(Integer userno) throws Exception {
 			usersDao.deletecommet(userno);
@@ -250,6 +252,7 @@ public class CertificationService implements UsersService {
 
 
 		//업체회원탈퇴
+		@Transactional
 		@Override
 		public void deletebusiness(Integer bno) throws Exception {
 			usersDao.deleteblikes(bno);

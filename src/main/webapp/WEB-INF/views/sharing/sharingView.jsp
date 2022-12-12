@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,17 +140,19 @@
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
-			        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
-			        					<form action="/selectSharingApply" method="get">
-				        					<ul>
-												<c:forEach var="users" items="${users }">
-													<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-													<li>${users.joinDate }</li>
-												</c:forEach>			        					
-				        					</ul>
-				        					<input type="hidden" name="sno" value="${sharing.sno }">
-				        					<input type="submit" value="확인" class="submitButton"/>
-				        				</form>
+			        					<c:if test="${fn:length(users) > 0}">
+			        						<input type="button" class="btn btn-info" value="구매 신청 목록" />
+				        					<form action="/selectSharingApply" method="get">
+					        					<ul>
+													<c:forEach var="users" items="${users }">
+														<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
+														<li>${users.joinDate }</li>
+													</c:forEach>			        					
+					        					</ul>
+					        					<input type="hidden" name="sno" value="${sharing.sno }">
+					        					<input type="submit" value="확인" class="submitButton"/>
+					        				</form>
+				        				</c:if>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
@@ -463,6 +465,11 @@ if(submitcheck == "true"){
 
 /* 신청하기 */
 $("#wapply").on("click", function() {
+	var status = "${sharing.sstatus}";
+	if(status != '등록완료'){
+		alert(status+'이므로 신청할 수 없습니다.');
+		return false;
+	}
 	var apply="";
 	var logincheck = "<c:out value='${logincheck}'/>";
 	const sno =  $('#sno').val();
@@ -495,9 +502,14 @@ $("#wapply").on("click", function() {
 	}		
 })
 
+/* 신청확인 버튼 비활성화 */
 var sstatus = "${sharing.sstatus}";
-if(sstatus == '거래 실패'){
+if(sstatus != '등록완료'){
 	$('.submitButton').attr("disabled", true);
+} else {
+	if(${fn:length(users) } == 0){
+		$('.submitButton').attr("disabled", true);
+	}
 }
 
 

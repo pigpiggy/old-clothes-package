@@ -63,4 +63,16 @@
 			WHERE r.BNO = b.BNO AND u.USERNO = r.USERNO AND b.BNO = #{bno}
 		]]>
 	</select>
+	
+	<delete id="deleteSReview" parameterType="Integer">
+		<![CDATA[
+			delete from review where sno=#{sno}
+		]]>
+	</delete>
+	
+	<delete id="deleteIReview" parameterType="Integer">
+		<![CDATA[
+			delete from review where ino=#{ino}
+		]]>
+	</delete>
 </mapper>

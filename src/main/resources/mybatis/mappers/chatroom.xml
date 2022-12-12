@@ -92,5 +92,11 @@
    		(buyerno = #{chatuserno} AND CHATREADBUY = 0)
    		]]>
    </select>
+   
+   	<delete id="deleteChat" parameterType="map">
+		<![CDATA[
+			delete from chatroom where ino=#{ino} and sellerno=#{sellerno}
+		]]>
+	</delete>
     
 </mapper>

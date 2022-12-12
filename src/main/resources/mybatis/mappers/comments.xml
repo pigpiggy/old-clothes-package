@@ -56,8 +56,6 @@
 		]]>
 	</update>
 	
-	
-	
 <!-- 무료나눔 -->
 	<insert id="insertCommentshar" parameterType="Comments">
 	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
@@ -81,7 +79,6 @@
 		<![CDATA[
 			delete from comments where cno=#{cno} and sno=#{sno}
 		]]>
-	
 	</delete>
 	
 	<select id="getsharingCmt" parameterType="map" resultType="comments">
@@ -96,7 +93,12 @@
 		]]>
 	</update>
 	
-	
+	<delete id="commentSDelete" parameterType="Integer">
+		<![CDATA[
+			delete from comments where sno=#{sno}
+		]]>
+	</delete>
+		
 	<!-- 개인판매 -->
 	<insert id="insertCommentsell" parameterType="Comments">
 	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
@@ -120,7 +122,6 @@
 		<![CDATA[
 			delete from comments where cno=#{cno} and ino=#{ino}
 		]]>
-	
 	</delete>
 	
 	<select id="getsellCmt" parameterType="map" resultType="comments">
@@ -134,4 +135,11 @@
 			UPDATE COMMENTS SET CCONTENT =#{ccontent} WHERE ino=#{ino} AND cno=#{cno}
 		]]>
 	</update>
+
+	<delete id="commentIDelete" parameterType="Integer">
+		<![CDATA[
+			delete from comments where ino=#{ino}
+		]]>
+	</delete>	
+	
 </mapper>	

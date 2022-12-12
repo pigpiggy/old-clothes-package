@@ -33,12 +33,12 @@ import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.ApplyService;
+import com.kosta.clothes.service.ChatRoomService;
 import com.kosta.clothes.service.CommentService;
 import com.kosta.clothes.service.LikesService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
-import com.kosta.clothes.service.ReviewServiceImpl;
 import com.kosta.clothes.service.SellService;
 
 @Controller
@@ -67,6 +67,8 @@ public class SellController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	ChatRoomService chatRoomService;
 	@Autowired
 	HttpSession session;
 	
@@ -267,6 +269,13 @@ public class SellController {
 	public ModelAndView deleteSharing(@RequestParam(value = "ino", required = false) Integer ino, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
+			if(session.getAttribute("authUser")!=null) {
+				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+					Users users = (Users) session.getAttribute("authUser");
+					Integer sellerno = users.getUserno();
+					chatRoomService.deleteChat(sellerno, ino);
+				}
+			}
 			sellService.deleteSell(ino);
 			mav.setViewName("redirect:/sellList");
 		} catch (Exception e) {

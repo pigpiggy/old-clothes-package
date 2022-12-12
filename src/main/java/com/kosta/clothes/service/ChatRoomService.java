@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.clothes.bean.ChatList;
 import com.kosta.clothes.bean.ChatRoom;
+import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.dao.ChatRoomDAO;
 
 
@@ -31,6 +35,8 @@ public class ChatRoomService implements ChatRoomDAO {
 	@Autowired
 	ServletContext servletContext;
 	
+	@Autowired
+	HttpSession session;
 
 	@Override
 	public void addChatRoom(ChatRoom chatRoom) throws IOException {
@@ -179,6 +185,20 @@ public class ChatRoomService implements ChatRoomDAO {
 	public List<Integer> getUnreadChatRoom(String chatuserno) {
 		List<Integer> unread = chatRoomDAO.getUnreadChatRoom(chatuserno); 
 		return unread;
+	}
+
+	@Override
+	public void deleteChat(Integer sellerno, Integer ino) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(session.getAttribute("authUser")!=null) {
+			if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+				Users users = (Users) session.getAttribute("authUser");
+				sellerno = users.getUserno();
+			}
+		}
+		map.put("sellerno", sellerno);
+		map.put("ino", ino);
+		chatRoomDAO.deleteChat(sellerno, ino);
 	}
 
 

@@ -130,11 +130,7 @@
 	</update>
 	
 	<!-- 신청 취소 -->
-	
-	
-	
-	<delete parameterType="map" id="deletewApply">
-	
+	<delete id="deletewApply" parameterType="map" >
 	<![CDATA[
 				delete
 				from apply

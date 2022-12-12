@@ -38,7 +38,7 @@
 						</select> <br>
 						<div id="priceAndAI">
 							<span class="sellfont price">가격:</span> 
-							<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
+							<input type="number" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
 							<span class="sellfont price">원</span> 
 						</div>
 					</div>

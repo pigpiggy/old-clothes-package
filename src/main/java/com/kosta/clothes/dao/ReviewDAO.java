@@ -15,10 +15,11 @@ public interface ReviewDAO {
 	Integer reviewcount(Integer userno) throws Exception;
 	List<Review> getReviewList(Map map) throws Exception;
 	
-	
 	Integer sReviewListCount(Integer userno) throws Exception;
 	Integer iReviewListCount(Integer userno) throws Exception;
 	
+	void deleteSReview(Integer sno) throws Exception;
+	void deleteIReview(Integer ino) throws Exception;
 	List<Apply> getApplyList(Map map) throws Exception;
 	Integer applyListCount(Integer userno) throws Exception;
 	//사업자 거래후기

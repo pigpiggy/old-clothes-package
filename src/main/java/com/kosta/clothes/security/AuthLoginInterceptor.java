@@ -65,8 +65,10 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
     		response.sendRedirect(url);
     	}else if(reurl==null) {
     		response.sendRedirect(url);
+    	}else if(reurl.contains("mypage")) {
+    		response.sendRedirect(url);
     	}else {
-    	response.sendRedirect(reurl);
+    		response.sendRedirect(reurl);
     	}
     	return false;
 	}

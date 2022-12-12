@@ -261,7 +261,7 @@ div.contents {
 						bli += "<ul id='itl'>"
 						bli += "<br>";
 						data.forEach(function(item,i){
-							bli += "<li style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
+							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -305,13 +305,17 @@ div.contents {
 					              kakao.maps.event.addListener(marker2, 'mouseout', function() {
 					              	infowindow2.close();
 					              });
-								  $(document).on("mouseover",".bin",function(e){
-									  event.target.map.panTo(marker2.getPosition());
-									  displayInfowindow2(marker2, item);
-								  })
-								   $(document).on("mouseout",".bin",function(){
-									  infowindow2.close();
-								  })
+					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
+				            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+				            		//this.map.panTo(marker2.getPosition());
+				            		map.setCenter(marker2.getPosition())
+				            		infowindow2.open(map,marker2);
+				           		});
+				            
+					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+					            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
+					            	infowindow2.close();
+					            });	
 								}
 							})
 						})

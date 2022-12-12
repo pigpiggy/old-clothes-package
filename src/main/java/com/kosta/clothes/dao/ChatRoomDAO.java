@@ -3,6 +3,7 @@ package com.kosta.clothes.dao;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -37,4 +38,6 @@ public interface ChatRoomDAO {
 	public int getUnreadMessages(String chatuserno);
 	
 	public List<Integer> getUnreadChatRoom(String chatuserno);
+	
+	public void deleteChat(@Param("sellerno") Integer sellerno, @Param("ino") Integer ino);
 }

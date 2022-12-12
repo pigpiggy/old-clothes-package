@@ -29,8 +29,8 @@
 	
 	<update id="updateSharing" parameterType="sharing">
 		<![CDATA[
-			update sharing set stitle=#{stitle},scontent=#{scontent},addressCity=#{addressCity},
-			addressTown=#{addressTown},sfileids=null
+			update sharing set stitle=#{stitle},scontent=#{scontent},saddress=#{saddress},
+			sdealType=#{sdealType},sfileids=null
 			where sno=#{sno}
 		]]>
 	</update>
@@ -95,7 +95,7 @@
 	
 	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
 		<![CDATA[
-			select * from ( select * from sharing where (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
+			select * from ( select * from sharing where (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
 			where rownum <= 6
 		]]>
 	</select>

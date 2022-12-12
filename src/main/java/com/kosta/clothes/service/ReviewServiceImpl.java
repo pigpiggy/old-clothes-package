@@ -76,6 +76,16 @@ public class ReviewServiceImpl implements ReviewService{
 		map.put("row", row);
 		return reviewDAO.getBReviewList(map);
 	}
+
+	@Override
+	public void deleteSReview(Integer sno) throws Exception {
+		reviewDAO.deleteSReview(sno);
+	}
+
+	@Override
+	public void deleteIReview(Integer ino) throws Exception {
+		reviewDAO.deleteIReview(ino);
+	}
 	
 	
 }

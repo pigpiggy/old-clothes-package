@@ -16,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.dao.CommentsDAO;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.LikesDAO;
+import com.kosta.clothes.dao.ReviewDAO;
 import com.kosta.clothes.dao.SellDAO;
 
 @Service
@@ -30,6 +32,12 @@ public class SellServiceImpl implements SellService{
 	
 	@Autowired
 	LikesDAO likesDAO;
+	
+	@Autowired
+	ReviewDAO reviewDAO;	
+	
+	@Autowired
+	CommentsDAO commentsDAO;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -75,7 +83,24 @@ public class SellServiceImpl implements SellService{
 
 	@Override
 	public List<Sell> getSellList(String kwd) throws Exception {
-		return sellDAO.getSellSearchedList(kwd);
+		List<Sell> sellList = sellDAO.getSellSearchedList(kwd);
+		for(int i = 0; i < sellList.size(); i++) {
+			String addr = sellList.get(i).getIaddress();
+			String[] addChange = addr.split(" ");
+			if(addChange[2].matches("^+구$")) {
+				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+				sellList.get(i).setIaddress(join1);
+				System.out.println("join1:" + join1);
+
+			} else {
+				String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+				sellList.get(i).setIaddress(join2);
+				System.out.println("join2:" + join2);
+			}
+			System.out.println("join:");
+			System.out.println("string:" + addr);			
+		}
+		return sellList;
 	}
 
 	@Override
@@ -159,6 +184,8 @@ public class SellServiceImpl implements SellService{
 	@Override
 	public void deleteSell(Integer ino) throws Exception {
 		likesDAO.deleteIlikes(ino);
+		reviewDAO.deleteIReview(ino);
+		commentsDAO.commentIDelete(ino);
 		sellDAO.deleteIndividual(ino);
 		fileDAO.deleteIfileInfo(ino);
 	}
@@ -186,7 +213,6 @@ public class SellServiceImpl implements SellService{
 
 	@Override
 	public Integer statuscount(Integer userno) throws Exception {
-		
 		return sellDAO.statuscount(userno);
 	}
 

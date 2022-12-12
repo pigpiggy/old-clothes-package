@@ -31,6 +31,8 @@ public interface ApplyDAO {
 	void deleteApply(@Param("ano") Integer ano, @Param("userno") Integer userno, @Param("astatus") String astatus) throws Exception;//수거 거절
 	void deletewApply(@Param("ano") Integer ano, @Param("userno") Integer userno) throws Exception;//신청 취소
 	
+	void deleteSwapply(Integer sno) throws Exception;
+	void deleteIwapply(Integer ino) throws Exception;
 	//apply 페이징 사용자
 	List<Apply> getApplyList(Map map) throws Exception; 
 	Integer applyListCount(Integer userno) throws Exception;

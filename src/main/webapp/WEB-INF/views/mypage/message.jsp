@@ -22,7 +22,7 @@
     <h2><strong>쪽지함</strong></h2>
     <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
-      			<form action="smessage" method="post" id="messageform">
+      			<form action="/mypage/smessage" method="post" id="messageform">
       				<input type="hidden" id="selectValue" value="${select }" />
       				<input type="hidden" id="submitcheck" value="${submitcheck}" />
       			</form>

@@ -961,8 +961,8 @@ public class MypageController {
 		return "/mypage/uapplylist";
 	}	
 	
-	 @GetMapping ("/mypage/message/{userno}")
-	   String myMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
+	 @GetMapping ("/mypage/umessage/{userno}")
+	   String myuMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
 	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
 	         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
 	         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
@@ -973,7 +973,6 @@ public class MypageController {
 	      PageInfo rpageInfo = new PageInfo();
 	      PageInfo spageInfo = new PageInfo();      
 	      try {
-	            Business bauthuser = new Business();
 	            String sect;
 	            Users uauthuser = new Users();
 	            if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
@@ -1012,29 +1011,51 @@ public class MypageController {
 	               model.addAttribute("select", select);
 	               model.addAttribute("submitcheck", submitcheck);
 	               model.addAttribute("users", users);
-
 	            } else {
-	               bauthuser = (Business) session.getAttribute("authUser");
-	               map.put("recvUserno", bauthuser.getBno());
-	               System.out.println("businessno:"+bauthuser.getBno());
-	               map.put("page", rpage);
-	               map.put("pageInfo", rpageInfo);
-	               rmessageList = messageService.bRecvMessage(map);
-	               System.out.println("spage:"+spage);
-	               smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
-	               System.out.println(smessageList);
-	               model.addAttribute("recvmessage", rmessageList);
-	               model.addAttribute("sendmessage", smessageList);
-	               model.addAttribute("rpageInfo", rpageInfo);
-	               model.addAttribute("spageInfo", spageInfo);
-	               model.addAttribute("select", select);
-	               model.addAttribute("submitcheck", submitcheck);
+
 	            }
 	      }catch(Exception e) {
 	         e.printStackTrace();
 	      }
 	      return "/mypage/message";
 	   }
+	 
+	 @GetMapping ("/mypage/bmessage/{bno}")
+	   String mybMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
+	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
+	         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
+	         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
+	         @PathVariable("bno") Integer bno) {
+		 	List<MessageVO> rmessageList = new ArrayList<>();
+			List<MessageVO> smessageList = new ArrayList<>();
+			Map<String, Object> map = new HashMap<String, Object>();
+			PageInfo rpageInfo = new PageInfo();
+			PageInfo spageInfo = new PageInfo();   
+	      try {
+	    	  	Business bauthuser = new Business();
+	          	String sect;
+				if(session.getAttribute("authUser")!=null) {
+		               bauthuser = (Business) session.getAttribute("authUser");
+		               map.put("recvUserno", bauthuser.getBno());
+		               System.out.println("businessno:"+bauthuser.getBno());
+		               map.put("page", rpage);
+		               map.put("pageInfo", rpageInfo);
+		               rmessageList = messageService.bRecvMessage(map);
+		               System.out.println("spage:"+spage);
+		               smessageList = messageService.bSendMessage(bauthuser.getBno(),spage,spageInfo);
+		               System.out.println(smessageList);
+		               model.addAttribute("recvmessage", rmessageList);
+		               model.addAttribute("sendmessage", smessageList);
+		               model.addAttribute("rpageInfo", rpageInfo);
+		               model.addAttribute("spageInfo", spageInfo);
+		               model.addAttribute("select", select);
+		               model.addAttribute("submitcheck", submitcheck);
+				}
+	      }catch(Exception e) {
+	    	  e.printStackTrace();
+	      }
+	      return "/mypage/message";
+	   }	 
 	
 	@PostMapping("/mypage/smessage")
     public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {
@@ -1042,7 +1063,7 @@ public class MypageController {
       try {
          String sect = "";
          if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
-            Users users = (Users) session.getAttribute("authUser");
+           Users users = (Users) session.getAttribute("authUser");
             message.setSendUserno(users.getUserno());
             sect = users.getSect();
             System.out.println("답장:" + message);
@@ -1059,7 +1080,15 @@ public class MypageController {
          }else {
             r.addAttribute("submitcheck", "false");
          }
-         mav.setViewName("redirect:/mypage/message");
+         if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")) {
+        	 Users users = (Users) session.getAttribute("authUser");
+        	 Integer userno = users.getUserno();
+        	 mav.setViewName("redirect:/mypage/umessage/"+userno);
+         } else {
+             Business bauthuser = (Business) session.getAttribute("authUser");
+        	 Integer bno = bauthuser.getBno();
+             mav.setViewName("redirect:/mypage/bmessage/"+bno);
+         }
       }catch(Exception e) {
          e.printStackTrace();
       }

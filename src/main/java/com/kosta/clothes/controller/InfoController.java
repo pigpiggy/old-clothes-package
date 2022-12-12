@@ -250,7 +250,7 @@ public class InfoController {
 				if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 		            uauthuser = (Users) session.getAttribute("authUser");	            
 		            userno = uauthuser.getUserno();	            
-		            business = businessService.cateusers(sido, sigungu, userno,category);
+		            business = businessService.cateusers(sido, sigungu, category);
 		            for(int i=0; i<business.size();i++) {
 		            	business.get(i).setLikescheck((businessService.likecheck(business.get(i).getBno(),userno)));
 		            }

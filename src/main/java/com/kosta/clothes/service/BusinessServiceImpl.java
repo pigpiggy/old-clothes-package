@@ -60,13 +60,11 @@ public class BusinessServiceImpl implements BusinessService {
 
 	//카테고리 정렬 리스트
 	@Override
-	public List<Business> cateusers(String sido, String sigungu, Integer userno, String category)
+	public List<Business> cateusers(String sido, String sigungu, String category)
 			throws Exception {
 		Map<String,String> map = new HashMap<String,String>();
-		String userno1=Integer.toString(userno);
 		map.put("sido", sido);
 		map.put("sigungu", sigungu);
-		map.put("userno", userno1);		
 		if(category.equals("review")) {
 			System.out.println("review들어옴");
 			return businessDao.selectUserCatereview(map);

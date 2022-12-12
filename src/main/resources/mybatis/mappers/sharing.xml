@@ -29,8 +29,8 @@
 	
 	<update id="updateSharing" parameterType="sharing">
 		<![CDATA[
-			update sharing set stitle=#{stitle},scontent=#{scontent},addressCity=#{addressCity},
-			addressTown=#{addressTown},sfileids=null
+			update sharing set stitle=#{stitle},scontent=#{scontent},saddress=#{saddress},
+			sdealType=#{sdealType},sfileids=null
 			where sno=#{sno}
 		]]>
 	</update>

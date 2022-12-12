@@ -16,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.dao.CommentsDAO;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.LikesDAO;
+import com.kosta.clothes.dao.ReviewDAO;
 import com.kosta.clothes.dao.SellDAO;
 
 @Service
@@ -30,6 +32,12 @@ public class SellServiceImpl implements SellService{
 	
 	@Autowired
 	LikesDAO likesDAO;
+	
+	@Autowired
+	ReviewDAO reviewDAO;	
+	
+	@Autowired
+	CommentsDAO commentsDAO;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -176,6 +184,8 @@ public class SellServiceImpl implements SellService{
 	@Override
 	public void deleteSell(Integer ino) throws Exception {
 		likesDAO.deleteIlikes(ino);
+		reviewDAO.deleteIReview(ino);
+		commentsDAO.commentIDelete(ino);
 		sellDAO.deleteIndividual(ino);
 		fileDAO.deleteIfileInfo(ino);
 	}
@@ -203,7 +213,6 @@ public class SellServiceImpl implements SellService{
 
 	@Override
 	public Integer statuscount(Integer userno) throws Exception {
-		
 		return sellDAO.statuscount(userno);
 	}
 

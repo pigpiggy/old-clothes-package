@@ -38,9 +38,9 @@
 						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
 					</div> <br>
 					<div id="dealarea">
-						거래지역: 
-						<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
-						<input name="jibunAddress" id="jibunAddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
+						<input type="button" onclick="findAddr()" value="주소검색" />
+						<input id="member_post" type="hidden" readonly> 
+						<input class="postarea" name="saddress" id="saddress" type="text" placeholder="'동'을 입력하세요." readonly value="${sharing.saddress }"><br> 
 					</div>
 				</div>
 
@@ -122,7 +122,7 @@
 	/* 유효성 검사 */
 	function valid() {
 		var titleCheck = document.getElementById("title");
-		var addCheck = document.getElementById("member_post");
+		var addCheck = document.getElementById("saddress");
 		var contentCheck = document.getElementById("scontent");
 		
 		if(titleCheck.value == "") {
@@ -143,42 +143,26 @@
 	}
 	
 	/* 주소 검색 */
-	function findAddr() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							console.log(data);
-
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var roadAddr = data.roadAddress; // 도로명 주소 변수
-							var jibunAddr = data.jibunAddress; // 지번 주소 변수
-							console.log(jibunAddr);
-							let si = [];
-							si = jibunAddr.split(" ")[0];
-							console.log(si);
-							let dong = jibunAddr.split(" ")[1].concat(" ",jibunAddr.split(" ")[2]);
-							console.log(dong);
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('member_post').value = data.zonecode;
-							//document.getElementById("roadAddress").value = roadAddr;
-							document.getElementById("jibunAddress").value = data.jibunAddress;
-							document.getElementById("jibun_si").value = si;
-							document.getElementById("jibun_dong").value = dong;
-							console.log(si);
-							if (jibunAddr !== '') {
-								document.getElementById("jibunAddress").value = jibunAddr;
-							}
-
-							//if (roadAddr !== '') {
-							//document.getElementById("roadAddress").value = roadAddr;
-							//} else if (jibunAddr !== '') {
-							//document.getElementById("jibunAddress").value = jibunAddr;
-							//}
-						}
-					}).open();
-		}
+	function findAddr(){
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var jibunAddr = data.jibunAddress;
+	            document.getElementById('member_post').value = data.zonecode;
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	           
+	          	if(jibunAddr !== '') {
+	                document.getElementById("saddress").value = jibunAddr;
+	            } else {
+	                document.getElementById("saddress").value = roadAddr;
+	            } 
+	         
+	        }
+	    }).open();
+	}
 		
 	</script>
 </body>

@@ -233,14 +233,13 @@ var img = document.getElementById("myImg");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 if(img != null) {
-	img.onclick = function(){
-		alert("사진클");
-	  modal.style.display = "block";
-	  console.log("modalImg.src :"+modalImg.src);
-	  modalImg.src = this.src;
-	  console.log("this.src :"+modalImg.src);
-	  captionText.innerHTML = this.alt;
-	}
+	$(document).on("click","#myImg",function(){
+		modal.style.display = "block";
+		console.log("modalImg.src :"+modalImg.src);
+		modalImg.src = this.src;
+		console.log("this.src :"+modalImg.src);
+		captionText.innerHTML = this.alt;
+	})
 }
 var files = "${files[1]}";
 console.log(modalImg);

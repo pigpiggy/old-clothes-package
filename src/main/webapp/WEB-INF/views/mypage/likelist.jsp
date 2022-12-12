@@ -377,11 +377,30 @@
     background-color: white;
 }
 #pagingul{
+	margin-top:1%;
 	list-style-type:none;
 }
-#pagingul>li{
-	float:left;
+
+#pagingul li {
+float:left;
+display: inline;
 }
+
+#pagingul li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+#pagingul li a.active {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #2196f3;;
+}
+
+#pagingul li a:hover:not(.active) {background-color: #ddd;}
 
 
 </style>
@@ -543,7 +562,7 @@ $(document).ready(function(){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
@@ -553,7 +572,7 @@ $(document).ready(function(){
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);
@@ -758,7 +777,7 @@ function catelist(){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
@@ -768,7 +787,7 @@ function catelist(){
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);
@@ -990,7 +1009,7 @@ function refreshlist(category,globalCurrentPage){
 				let prev = first -1;
 				pageHtml ="";
 				if(prev>0){
-					pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+					pageHtml += "<li><a href='#' id='prev'><<</a></li>";
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
@@ -1000,7 +1019,7 @@ function refreshlist(category,globalCurrentPage){
 					}	
 				}
 				if(last<totalPage){
-					pageHtml +="<li><a href='#' id='next'>다음</a></li>";
+					pageHtml +="<li><a href='#' id='next'>>></a></li>";
 				}
 				console.log(pageHtml);
 				$("#pagingul").html(pageHtml);

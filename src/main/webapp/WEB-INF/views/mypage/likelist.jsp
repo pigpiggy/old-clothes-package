@@ -566,7 +566,7 @@ $(document).ready(function(){
 				}
 				for(var i = first; i<=last; i++){
 					if(currentPage == i){
-						pageHtml +="<li class='on'><a href='#' id='"+i+"'>"+i+"</a></li>";
+						pageHtml +="<li class='on'><a href='#' class='active' id='"+i+"'>"+i+"</a></li>";
 					}else{
 						pageHtml +="<li><a href='#' id='"+i+"'>"+i+"</a></li>";
 					}	
@@ -583,7 +583,6 @@ $(document).ready(function(){
 					let $id = $(this).attr("id");
 					selectedPage=$(this).text();
 					console.log("선택페이지:"+selectedPage);
-					
 					if($id=="next"){
 						selectedPage = next;
 					}if($id=="prev"){
@@ -596,6 +595,7 @@ $(document).ready(function(){
 					//글 목록 표시 재호출
 					displayData(selectedPage, dataPerPage);
 				})
+				
 			}
 			$(document).off("click","#delete").on("click","#delete",function(e){
 				let category = "";
@@ -634,6 +634,7 @@ $(document).ready(function(){
 					error:function(){alert("에러입니다");}
 				})
 			})
+			
 		},
 		error:function(){alert("에러입니다.");}
 	})
@@ -1095,6 +1096,33 @@ $("#apickup").datepicker({
 	    timeFormat: "hh:ii AA"
 	});	
  });
+ $('#pagingul').on('click', 'a', function() { // listen for click on pagination link
+	  if($(this).hasClass('active')) return false;
+
+	  var active_elm = $('#pagingul a.active');
+
+	  if(this.id == 'next'){
+	    var _next = active_elm.parent().next().children('a');
+	    if($(_next).attr('id') == 'next') {
+	      this.removeClass('active');  
+	      active_elm.addClass('active');
+
+	      return; 
+	    }
+	    
+	  }
+	  else if(this.id == 'prev') {
+		var _prev = active_elm.parent().prev().children('a');
+	    if($(_prev).attr('id') == 'prev') {
+			this.removeClass('active');
+	    	active_elm.addClass('active');
+	    };
+	  } else {
+	    $(this).addClass('active');
+	  }
+	  active_elm.removeClass('active');
+
+	});
 </script>
 <script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
 <script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>

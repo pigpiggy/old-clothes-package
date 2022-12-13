@@ -34,7 +34,7 @@
 	</select> -->
 	
 	<!-- 로그인 안 했을 때 카테고리 정렬 -->
-	<select id="selectCatereview" resultType="Business" parameterType="map">
+	<!-- <select id="selectCatereview" resultType="Business" parameterType="map">
 		<![CDATA[
 			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
 			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
@@ -63,7 +63,7 @@
 			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
 			ORDER BY bstar asc nulls first			
 		]]>
-	</select>
+	</select> -->
 	<!-- 로그인 했을 때 카테고리 정렬 -->
 	<select id="selectUserCatereview" resultType="Business" parameterType="map">
 		<![CDATA[

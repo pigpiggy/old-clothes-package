@@ -166,7 +166,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="bnumber" style="position:absolute; margin:2.5%;" >사업자 번호<span class="req">*</span></label>
 					                 		<input type="text" id="bnumber" name="bnumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없이 입력해주세요."/>
+					                 		placeholder="ex) 123-12-12345"/>
 				                        </div>
 										<%--[업체]이메일
 				                        <div class="form-outline mb-4" style="display:flex;">
@@ -189,7 +189,7 @@
 						                        <label class="form-label" for="bkakaoid" style="position:absolute; margin:2.5%;" >카카오ID</label>
 						                 		<input type="text" id="bkakaoid" name="bkakaoid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
 						                 		title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다." placeholder="카카오 ID(오픈채팅)"/>					                 		
-						                 		<img class="my_img" src="../../resources/image/kakaopre.png" title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다.">
+						                 		<img class="my_img" src="../../resources/image/kakaoid.png" title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다.">
 					                 		</div>
 				                        </div>
 				                        

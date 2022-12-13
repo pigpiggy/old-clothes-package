@@ -220,7 +220,7 @@ h2{
 				console.log("찍히나 " +data.baddress);				
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<a href="/mypage/bmypage/'+data.bno+'/apply"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
+				bli += '<a href="/mypage/bmypage/'+data.bno+'/review"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
 				console.log("너냐" + bbno);
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
@@ -510,7 +510,7 @@ h2{
 					console.log("찍히나 " +data.baddress);				
 					var bbno = data.bno;				
 					bli += '<li class="listdnames" id="listmove">' ;
-					bli += '<a href="/mypage/bmypage/'+data.bno+'/apply"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
+					bli += '<a href="/mypage/bmypage/'+data.bno+'/review"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
 					console.log("너냐" + bbno);
 					if(auth==""){ //둘 다 로그인 안했을 때 
 						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';

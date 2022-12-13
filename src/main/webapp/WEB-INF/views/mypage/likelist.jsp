@@ -37,32 +37,32 @@
    
 		    <div class="modal_content">
 		    	<ul>
-		    		<li class="item">		    			 
+		    		<li class="item" id="item">		    			 
 				            
 				             <div class="title">
-				               <strong>[ 헌옷 수거 신청 ]</strong>
-				             <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
-				         </div>
-				        
+				                 <strong id="strong">[ 헌옷 수거 신청 ]</strong>
+				            	 <p id="p">※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+				       	     </div>
+				         <hr class="hr1">
 				         <div class="allapply">
 			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
 			         	 		<div class="cont">
-						              <input type="text" id="aname" name="aname" placeholder="이름">
+						              <input type="text" id="lname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
-						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						                  <input type="text" id="laddress" name="aaddress" placeholder="주소(동 까지만 입력)">
+						                  <input type="button" id="lad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
-							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="lphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
+							              <input type="text" id="lpickup" name="apickup" placeholder="수거 희망 날짜[시간]">
 						              <div class="wei">
-						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
-						                  <p>kg</p>
+						                  <input type="text" id="lweight" name="weight" placeholder="옷 무게">
+						                  <p id="kg">kg</p>
 						              </div>
 						          </div>	
 						          <hr class="hr2">		         	 	
 			         	 	<div class="btn">			         	 	  
-				              <button type="button" id="modal_close_btn">Close</button>
-				              <button type="submit" form="form" id="applycloth">수거신청</button>
+				              <button type="button" id="lmodal_close_btn">Close</button>
+				              <button type="submit" form="form" id="lapplycloth">수거신청</button>
 				           </div>
 				           	  <input type="hidden" id="bno" name="bno" value="">
 			         	 	</form>
@@ -701,12 +701,12 @@ function refreshlist(category,globalCurrentPage){
 	})
 }
 //모달 닫기
-$("#modal_close_btn").click(function(){
+$("#lmodal_close_btn").click(function(){
 	 document.getElementById("modal").style.display="none";
 });
 //날짜 
  $(function(){
-$("#apickup").datepicker({
+$("#lpickup").datepicker({
 	    language: 'ko',
 	    timepicker: true,
 	    timeFormat: "hh:ii AA"
@@ -739,6 +739,25 @@ $("#apickup").datepicker({
 	  active_elm.removeClass('active');
 
 	});
+ 
+//주소 찾기
+ function findAddr(){
+ 	new daum.Postcode({
+         oncomplete: function(data) {
+             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+             var roadAddr = data.roadAddress; // 도로명 주소 변수
+             
+             // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            
+             if(roadAddr !== ''){
+                 document.getElementById("laddress").value = roadAddr;
+                 
+             } 
+         }
+     }).open();
+ }
 </script>
 <script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
 <script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>

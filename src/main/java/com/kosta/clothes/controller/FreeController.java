@@ -84,14 +84,13 @@ public class FreeController {
 	//글 등록 동작
 	@PostMapping("/freeInsert")
 	public ModelAndView boardwrite(@ModelAttribute Free free,
-			@RequestParam("fcontent") String content,HttpSession session ) {//값을 전부 받아온다.
+			HttpSession session ) {//값을 전부 받아온다.
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
 		try {
-			Users users = (Users)session.getAttribute("authUser");
-			System.out.println("users:"+users);
-			String sect = users.getSect();
-			if (sect.equals("users")) {
+			
+			if (session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+				Users users = (Users) session.getAttribute("authUser");
 				free.setUserno(users.getUserno());
 				String nickname=users.getNickname();
 				free.setFname(nickname);
@@ -104,10 +103,6 @@ public class FreeController {
 				System.out.println("business"+free);
 			}
 				
-			System.out.println("content"  + content.trim());
-			String nickname=users.getNickname();
-			free.setFname(nickname);
-			free.setFcontent(content);
 			freeService.registFree(free); // board에 저장된 값을 Service에 있는 registBoard에 넘겨준다
 			mav.setViewName("redirect:/freeList"); // 아래로 간다 글 쓰고 페이지 목록 보여주기 위해서
 		} catch (Exception e) {
@@ -116,7 +111,6 @@ public class FreeController {
 
 		return mav;
 	}
-	
 	
 	
 	   //글 상세보기(조회수증가)

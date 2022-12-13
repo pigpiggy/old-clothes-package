@@ -40,12 +40,24 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/bmypage.jsp' />
-	<div class="my_Tab">
-			<ul class="tabs">
-				<li class="on"><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
-				<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
-			</ul>			
-	</div>
+	<c:if test="${authUser.sect eq 'business' }">
+		<c:if test="${authUser.bno eq business.bno }">
+			<div class="my_Tab">
+					<ul class="tabs">
+						<li class="on"><a href ="/mypage/bmypage/${business.bno }/apply">신청 목록</a></li>				
+						<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
+					</ul>			
+			</div>
+		</c:if>
+	</c:if>
+	<c:if test="${authUser.bno ne business.bno }">
+		<c:if test="${authUser. }"></c:if>
+			<div class="my_Tab">
+					<ul class="tabs">
+						<li><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
+					</ul>			
+			</div>
+	</c:if>
 	<c:if test="${authUser.sect eq 'business' }">	
 	<div id="total" style="width:1000px; margin:0 auto;">
 	<div id="bcards">		

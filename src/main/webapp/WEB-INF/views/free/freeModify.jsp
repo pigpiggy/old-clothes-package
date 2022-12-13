@@ -13,6 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function() {
 		ClassicEditor.create(document.querySelector("#editor"),{
@@ -26,6 +29,17 @@
 			console.error(error);
 		})
 	});
+	
+	/*유효성검사*/
+	 function valid() {
+				
+				var contentCheck = document.getElementById("editor");				
+				
+				if(contentCheck.value == "") {
+					alert("내용을 입력해주세요.");
+					return false;
+				}
+			}
 </script>
 
 </head>
@@ -38,7 +52,7 @@
 		<div class="board_title">
 			<strong>글 수정</strong>
 		</div>
-		<form action="/freeModify/${article.fno }" method="post">
+		<form action="/freeModify/${article.fno }" method="post" onsubmit="return valid();">
 			<input type="hidden" name="fno" value="${article.fno }" />
 			<div class="board_write_wrap">
 				<div class="board_write">
@@ -46,7 +60,7 @@
 						<dl>
 							<dt>제목</dt>
 							<dd>
-								<input type="text" name="ftitle" value="${article.ftitle}">
+								<input type="text" name="ftitle" value="${article.ftitle}" required>
 							</dd>
 						</dl>
 					</div>

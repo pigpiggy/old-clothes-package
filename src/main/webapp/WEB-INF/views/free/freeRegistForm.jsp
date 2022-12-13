@@ -12,7 +12,13 @@
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
+
+/*ck에디터*/
 $(function() {
 	ClassicEditor.create(document.querySelector("#editor"), {
 		ckfinder : {
@@ -24,6 +30,17 @@ $(function() {
 		console.error(error);
 	});
 });
+
+/*유효성검사*/
+ function valid() {
+			
+			var contentCheck = document.getElementById("editor");		
+			
+			if(contentCheck.value == "") {
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+		}
 </script>
 </head>
 <body>
@@ -34,14 +51,14 @@ $(function() {
 		<div class="board_title">
 			<strong>글 등록</strong>
 		</div>
-		<form action="freeInsert" method="post">
+		<form action="freeInsert" method="post" onsubmit="return valid();">
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="title">
 						<dl>
 							<dt>제목</dt>
 							<dd>
-								<input type="text" name="ftitle" placeholder="제목 입력">
+								<input type="text" name="ftitle" id="ftitle" placeholder="제목 입력" required>
 							</dd>
 						</dl>
 					</div>

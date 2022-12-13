@@ -82,10 +82,11 @@
                 </div>                                
                 <br><br>                
             <c:if test="${authUser.sect eq 'business' }">                            
-				<input type="hidden" name="bno" id="bno" value="${authUser.bno }">
+				<input type="hidden" name="bno" id="bno" value="${authUser.bno }">				
 			</c:if>                
 			<c:if test="${authUser.sect eq 'users' }">
 				<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
+				
 			</c:if>
 			<input type="hidden" name="cno" id="cno" value="${comment.cno }">
 			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
@@ -139,7 +140,7 @@
                                 
             <%--댓글 수정창 --%>
             
-   <script>
+   <script>   
    <%--댓글테스트--%>
    var fno = $('#fno').val();
    var auth = "${authUser.sect}";

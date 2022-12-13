@@ -92,7 +92,7 @@
 	     				<label for="content1">거래 후기</label>
 					</div>
 	   				<textarea name="content1" class="content1"></textarea>
-	   				<button id="reviewcomplete1">개인판매 후기 작성완료</button>	
+	   				<button id="reviewcomplete1">작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>
@@ -127,7 +127,7 @@
 	    <div id="cards" class="sharingCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysharing" items="${buysharingList}">
-			  <div class="sellList">
+			  <div class="sellList sharingList">
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 		     <a href="/sharingView/${buysharing.sno}">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
@@ -189,7 +189,7 @@
 		      				<label for="content">거래 후기</label>
 		      			</div>
 	      				<textarea name="content" class="content"></textarea>
-	      				<button id="reviewcomplete">무료나눔 후기 작성완료</button>	
+	      				<button id="reviewcomplete">작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>
@@ -325,7 +325,9 @@
 		
 		var ino=0;
 		$('.review1').click(function(){
-			var reviewIndex = $(this).prev('.selectedIno').index()+1;
+			var reviewIndex = $('.sellList').index($(this).parent());
+			console.log($(this).parent());
+			console.log(reviewIndex);
 			ino = $(".card2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal').css('visibility','visible');
 			$('#demo-modal').css('opacity','1');
@@ -362,7 +364,9 @@
 		
 		var sno=0;
 		$('.review').click(function(){
-			var reviewIndex = $(this).prev('.selectedSno').index()+1;
+			var reviewIndex = $('.sharingList').index($(this).parent());
+			console.log($(this).parent());
+			console.log(reviewIndex);
 			sno = $(".sharingcard2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal2').css('visibility','visible');
 			$('#demo-modal2').css('opacity','1');

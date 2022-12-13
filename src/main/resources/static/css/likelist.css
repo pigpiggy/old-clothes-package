@@ -63,6 +63,7 @@ h2 {
 	padding:5px;
 }
 
+<!--찜목록 신청서-->
  #modal {
     display: none;
     position:absolute;
@@ -75,8 +76,8 @@ h2 {
         
  
  #modal .modal_content {
-   width: 285px;
-   height: 354px;
+   width: 289px;
+   height: 368px;
    top: 50%;
    left: 50%;
    margin:100px auto;
@@ -104,7 +105,7 @@ h2 {
     margin-top: -10%;
 }
 
-.modal .item .title:after {
+/* .modal .item .title:after {
 	content: '';
     display: block;
     width: 307px;
@@ -113,16 +114,30 @@ h2 {
     margin-bottom: -14%;
     margin-right: auto;
     margin-left: -10%;
-}
+} */
 .hr2{
  	position: relative;
     background-color: gray;
     width: 70%;
-    bottom: 26%;
+    bottom: 15%;
     height: 1px;
     width: 84%;
-    left: 6%;
+    left: 21%;
  } 
+ 
+ .hr1{
+	position: relative;
+    background-color: navy;
+    width: 70%;
+    bottom: 23%;
+    height: 1px;
+    width: 109%;
+    left: -8%;
+}
+ 
+ input:focus{
+ 	z-index:5;
+ }
 .modal ul {
   font-size: 0;
 }
@@ -134,7 +149,23 @@ h2 {
   margin-left: 0;
 }
 
+.modal .modal_content #item{
+	position: relative;
+    /* width: 139%; */
+    /* height: 48px; */
+    /* left: -6%; */
+    display: contents;
+}
 
+.modal .modal_content .item .title #strong{
+	position: fixed;
+}
+.modal .modal_content .item .title #p{
+	position: fixed;
+	font-size: 11px;
+    top: -7%;
+    left: -6%;
+}
 .modal .modal_content .item .title p {
    font-size: 12px;
     text-align: center;
@@ -177,10 +208,11 @@ h2 {
   background: #ddd;
 }
 
-#aname {
-     position: relative;
+#lname {
+    position: relative;
     left: 11%;
-    height: 24px;
+    top: 21%;
+    height: 28px;
     width: 30%;
     margin-top: -38px;
 }
@@ -191,14 +223,17 @@ h2 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-#aaddress{
+#laddress{
    position: relative;
-   left: 15%;
-   width: 58%;
+    left: 17%;
+    width: 58%;
+    height: 158%;
+    bottom: -72%;
 }
-#aad_bt{
-  	width: 19%;
-    margin-left: 57px;
+#lad_bt{
+    position: relative;
+    width: 23%;
+    margin-left: 45px;
     border: 1.5px solid #ddd;
     border-radius: 9px;
     font-size: 0.7rem;
@@ -206,13 +241,22 @@ h2 {
     background-color: #ddd;
     cursor: pointer;
     text-align: center;
+    top: 79%;
+    height: 131%;
 }
-#aphone{
-  position: relative;
-  height: 25px;
-  width: 56%;
-  left: 11%;
+#lphone{
+   position: relative;
+   height: 27px;
+   top: 15%;
+    width: 58%;
+    left: 11%;
 }
+
+.modal .modal_content .item .allapply .form .cont .wei #kg{
+	position: relative;
+    top: 515%;
+}
+
 .modal .modal_content .item .allapply .form .cont .wei{
   display: flex;
   height: 28px;
@@ -221,10 +265,12 @@ h2 {
   padding-bottom: 8px;
   justify-content: space-evenly;	
 }
-#weight{
-  	position: relative;
-    width: 30%;
-    left: 27%;
+#lweight{
+	position: fixed;
+    height: 26px;
+    width: 3%;
+    left: 44%;
+    top: 46%;
 }
 .modal .modal_content .item .allapply .form .cont .wei p {
   	margin-left: -29px;
@@ -233,34 +279,39 @@ h2 {
     position: relative;
     left: 23%;
 }
-#apickup{
-   position: relative;
-   height: 22px;
-   width: 57%;
-   margin-top: 8px;
-   left: 11%;
+#lpickup{
+  position: relative;
+    height: 27px;
+    width: 58%;
+    margin-top: 8px;
+    left: 11%;
+    top: 16%;
 }
-#applycloth{
-  display: inline-block;
-    margin-top: 13px;
-    margin-left: 179px;
-    margin-bottom: 9px;
-    padding: 6px;
+#lapplycloth{
+    position: relative;
+    /* display: inline-block; */
+    /* margin-top: 10px; */
+    margin-left: 140px;
+    /* margin-bottom: 10px; */
+    padding: 8px;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
     border-radius: 0.25rem;
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    left: 6%;
+    top: 18px;
 }
-#modal_close_btn{
- display: inline-block;
-    margin-top: 14px;
-    margin-left: 52px;
-    margin-bottom: 9px;
-    padding: 6px;
+#lmodal_close_btn{
+    position: relative;
+    /* display: inline-block; */
+    /* margin-top: 10px; */
+    /* margin-left: 20px; */
+    /* margin-bottom: 10px; */
+    padding: 8px;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
@@ -269,6 +320,9 @@ h2 {
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    left: 22%;
+    /* bottom: 27%; */
+    top: 20px;
 }
 
 #applymodal {

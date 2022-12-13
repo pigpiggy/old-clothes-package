@@ -13,443 +13,56 @@
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>Insert title here</title>
-<style>
-#full{
-	padding-left:24%; 
-	padding-right:24%;
-}
-
-#list{
-	width:100%; padding:3%;
-}
-
-.form{
-	witdh:300px;
-}
-.allapply{	
-	padding: 5px 20px;
-	position: absolute;
-	top: 50%;
-	left:50%;
-	width:360px; height: 265px;
-	margin-left: -220px;
-	margin-top: -170px;
-	display:flex;
-	flex-direction:column;
-	justify-content: center;
-	align-items:center;
-}
-.form>div {
-	display:flex;
-	margin-bottom: 20px;
-	padding-bottm:7px;
-	align-items:center;	
-}
-.allapply>button{
-	width:85px;
-	float:right;
-	padding:3px;
-}
-.form>div>input{	
-	width:250px;
-	margin-left:15px;
-	padding:5px;
-}
-
- #modal {
-    display: none;
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px;
-    z-index:1;
-}
-        
- 
- #modal .modal_content {
-   width: 285px;
-   height: 354px;
-   top: 50%;
-   left: 50%;
-   margin:100px auto;
-   padding: 40px;
-   text-align: center;
-   background:#fff;
-   border-radius: 10px;
-   border:2px solid #666;
- }
- 
- #modal .modal_layer {
-   position:fixed;
-   top:0;
-   left:0;
-   width:100%;
-   height:100%;
-   background:rgba(0, 0, 0, 0.5);
-   z-index:-1;
- }  
- 
-.modal .item .title {
-    padding: 15px;
-    height: 50px;
-    position: relative;
-    margin-top: -10%;
-}
-
-.modal .item .title:after {
-	content: '';
-    display: block;
-    width: 307px;
-    border-top: 2px solid navy;
-    margin: 16px 0px;
-    margin-bottom: -14%;
-    margin-right: auto;
-    margin-left: -10%;
-}
-.hr2{
- 	position: relative;
-    background-color: gray;
-    width: 70%;
-    bottom: 26%;
-    height: 1px;
-    width: 84%;
-    left: 6%;
- } 
-.modal ul {
-  font-size: 0;
-}
-
-
-.modal .modal_content .item:nth-child(-n+3){
-  margin-top: 0;
-}
-.modal .modal_content .item:nth-child(3n-2){
-  margin-left: 0;
-}
-
-
-.modal .modal_content .item .title p {
-   font-size: 12px;
-    text-align: center;
-    padding-top: 17%;
-    width: 114%;
-    margin-left: -18px;
-}
-.modal .item strong {
-    display: block;
-    margin: 0 0 -25px 0;
-    font-size: 17px;
-    letter-spacing: -1px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: -35px;
-}
-.modal .modal_content .item .allapply .form .cont {
- 	padding: 11px;
-    height: 56%;
-    display: flex;
-    margin-bottom: 75px;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.modal .modal_content .item .allapply .form .btn{
-  top: -27%;  
-  position: relative;
-}
-.modal .modal_content .item .allapply .form .btn ::before{
-  content: '';
-  left: 20;
-  right: 20;
-  top: 0;
-  position: absolute;
-  height: 1.5px;
-  width: auto 230px;
-  background: #ddd;
-}
-
-#aname {
-     position: relative;
-    left: 11%;
-    height: 24px;
-    width: 30%;
-    margin-top: -38px;
-}
-.modal .modal_content .item .allapply .form .cont .adre {
-  display: flex;
-  height: 37px;
-  width: 122%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#aaddress{
-   position: relative;
-   left: 15%;
-   width: 58%;
-}
-#aad_bt{
-  	width: 19%;
-    margin-left: 57px;
-    border: 1.5px solid #ddd;
-    border-radius: 9px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    background-color: #ddd;
-    cursor: pointer;
-    text-align: center;
-}
-#aphone{
-  position: relative;
-  height: 25px;
-  width: 56%;
-  left: 11%;
-}
-.modal .modal_content .item .allapply .form .cont .wei{
-  display: flex;
-  height: 28px;
-  padding-top: 9px;
-  margin-left: -21px;
-  padding-bottom: 8px;
-  justify-content: space-evenly;	
-}
-#weight{
-  	position: relative;
-    width: 30%;
-    left: 27%;
-}
-.modal .modal_content .item .allapply .form .cont .wei p {
-  	margin-left: -29px;
-    font-size: 1.1rem;
-    margin-top: 0px;
-    position: relative;
-    left: 23%;
-}
-#apickup{
-   position: relative;
-   height: 22px;
-   width: 57%;
-   margin-top: 8px;
-   left: 11%;
-}
-#applycloth{
-  display: inline-block;
-    margin-top: 13px;
-    margin-left: 179px;
-    margin-bottom: 9px;
-    padding: 6px;
-    background: rgb(23,162,184);
-    border: 1px solid rgb(23,162,184);
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    cursor: pointer;
-}
-#modal_close_btn{
- display: inline-block;
-    margin-top: 14px;
-    margin-left: 52px;
-    margin-bottom: 9px;
-    padding: 6px;
-    background: #ddd;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    cursor: pointer;
-}
-/* 개인 찜목록 */
-.sidebar {
-  list-style: none;
-  font-family: "Roboto";
-  background: #4b3e38;
-  color: black;
-  font-weight: 500;
-  padding: 0;
-}
-.sidebar-item {
-  height: 50px;
-  padding-left: 40px;
-  border-top: 1px solid #2d3b3e;
-}
-.user-list {
-  background: white;
-  font-family: "Roboto", sans-serif;
-}
-.user {
-  border-top: 1px solid #ebebeb;
-  padding-left: 20px;
-  list-style-type: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  transition: background-color 100ms, border-left 50ms;
-}
-.user:hover:not(.selected) {
-  background-color: #ebebeb;
-}
-.user.selected {
-  background-color: #edf4fd;
-}
-.user > div,
-.user .info {
-  display: flex;
-  align-items: center;
-}
-
-.name {
-  font-weight: 500;
-  width: 200px;
-  color: #504944;
-  margin-right: 100px;
-}
-.date {
-  margin-right: 100px;
-  width: 100px;
-  color: #7c7475;
-}
-.remove {
-  width: 15px;
-  height: 15px;
-  outline: none;
-}
-
-.user .productimg {
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  transition: height 50ms, width 50ms;
-}
-.user .img-wrap {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* EXPANDING */
-.user:not(.expanded) .expand {
-  max-height: 0%;
-  overflow: hidden;
-  transition: max-height 1s;
-}
-.user.expanded .expand {
-  max-height: 100%;
-}
-
-/* 사업자 찜목록 */
-.bname {
-  font-weight: bold;
-}
-
-.address {
-  margin-right: 100px;
-  width: 30%;
-  color: #7c7475;
-}
-#address {
-  font-size: 13px;
-  width: auto;
-}
-.icons {
-  display: flex;
-  align-items: center;
-}
-.icons img {
-  margin-right: 5px;
-}
-.apply {
-  width: 40px;
-}
-.nameandadd {
-  margin-right: 15%;
-}
-
-#delete{
-	border: 0px;
-    background-color: white;
-}
-#pagingul{
-	margin-top:1%;
-	list-style-type:none;
-}
-
-#pagingul li {
-float:left;
-display: inline;
-}
-
-#pagingul li a {
-  color: black;
-  padding: 6px 11px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-}
-
-#pagingul li a.active {
-  background-color: #2196f3;
-  color: white;
-  border: 1px solid #2196f3;;
-}
-
-#pagingul li a:hover:not(.active) {background-color: #ddd;}
-
-
-</style>
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div id="full">
+	<h2><strong>찜 목록</strong></h2>
 		<div id="cate" class="select" >
-			<select id="catelist" onchange="catelist()">
-				<option value="free">무료나눔</option>
-				<option value="indi">개인판매</option>
-				<option value="busi">업체판매</option>
-			</select>
+			<div id="selectbox">
+				<select id="catelist" onchange="catelist()">
+					<option value="free">무료나눔</option>
+					<option value="indi">개인판매</option>
+					<option value="busi">업체판매</option>
+				</select>
+			</div>
 		</div>
-		<div id="list" class="list">
-			
+		<div id="likeContainer">
+			<div id="list" class="list">
+				
+			</div>
 		</div>
-	</div>
 	<!-- 헌옷 수거 신청 모달창 -->
 		<div id="modal" class="modal">
    
 		    <div class="modal_content">
 		    	<ul>
-		    		<li class="item">		    			 
+		    		<li class="item" id="item">		    			 
 				            
 				             <div class="title">
-				               <strong>[ 헌옷 수거 신청 ]</strong>
-				             <p>※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
-				         </div>
-				        
+				                 <strong id="strong">[ 헌옷 수거 신청 ]</strong>
+				            	 <p id="p">※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
+				       	     </div>
+				         <hr class="hr1">
 				         <div class="allapply">
 			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
 			         	 		<div class="cont">
-						              <input type="text" id="aname" name="aname" placeholder="이름">
+						              <input type="text" id="lname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
-						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						                  <input type="text" id="laddress" name="aaddress" placeholder="주소(동 까지만 입력)">
+						                  <input type="button" id="lad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
-							              <input type="text" id="aphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="lphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
+							              <input type="text" id="lpickup" name="apickup" placeholder="수거 희망 날짜[시간]">
 						              <div class="wei">
-						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
-						                  <p>kg</p>
+						                  <input type="text" id="lweight" name="weight" placeholder="옷 무게">
+						                  <p id="kg">kg</p>
 						              </div>
 						          </div>	
 						          <hr class="hr2">		         	 	
 			         	 	<div class="btn">			         	 	  
-				              <button type="button" id="modal_close_btn">Close</button>
-				              <button type="submit" form="form" id="applycloth">수거신청</button>
+				              <button type="button" id="lmodal_close_btn">Close</button>
+				              <button type="submit" form="form" id="lapplycloth">수거신청</button>
 				           </div>
 				           	  <input type="hidden" id="bno" name="bno" value="">
 			         	 	</form>
@@ -461,7 +74,7 @@ display: inline;
 		    <div class="modal_layer"></div>
 		</div>	
 
-
+	</div>
 <script>
 $(document).ready(function(){
 	let category = "free";
@@ -528,7 +141,7 @@ $(document).ready(function(){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -537,7 +150,8 @@ $(document).ready(function(){
 					}
 					i++
 				})
-				chartHtml +='<ul id="pagingul"></ul>'
+				chartHtml +='<div id="paging">'
+				chartHtml +='<ul id="pagingul"></ul></div>'
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);
 			}
@@ -705,7 +319,7 @@ function catelist(){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -725,7 +339,7 @@ function catelist(){
 								chartHtml +='<div class="info">';
 								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
-								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/x.png" /></button>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
 								chartHtml +='</div>';
 								chartHtml +='</div>';
 								chartHtml +='<div class="expand"></div>';
@@ -743,7 +357,7 @@ function catelist(){
 							chartHtml +='<span class="icons">'
 							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/close.png" /></button>';
 							chartHtml +='</span>'	
 							chartHtml +='</div>'
 							chartHtml +='<div class="expand"></div>';
@@ -753,7 +367,8 @@ function catelist(){
 					i++
 				})
 				chartHtml +='</div>'
-				chartHtml +='<ul id="pagingul"></ul>'
+				chartHtml += '<div id="paging">'
+				chartHtml +='<ul id="pagingul"></ul></div>'
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);
 			}
@@ -929,7 +544,7 @@ function refreshlist(category,globalCurrentPage){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -949,7 +564,7 @@ function refreshlist(category,globalCurrentPage){
 								chartHtml +='<div class="info">';
 								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
-								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/x.png" /></button>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
 								chartHtml +='</div>';
 								chartHtml +='</div>';
 								chartHtml +='<div class="expand"></div>';
@@ -967,7 +582,7 @@ function refreshlist(category,globalCurrentPage){
 							chartHtml +='<span class="icons">'
 							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/x.png" /></button>';
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/close.png" /></button>';
 							chartHtml +='</span>'	
 							chartHtml +='</div>'
 							chartHtml +='<div class="expand"></div>';
@@ -977,7 +592,8 @@ function refreshlist(category,globalCurrentPage){
 					i++
 				})
 				chartHtml +='</div>'
-				chartHtml +='<ul id="pagingul"></ul>'
+				chartHtml +='<div id="paging">'
+				chartHtml +='<ul id="pagingul"></ul></div>'
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);
 				
@@ -1085,12 +701,12 @@ function refreshlist(category,globalCurrentPage){
 	})
 }
 //모달 닫기
-$("#modal_close_btn").click(function(){
+$("#lmodal_close_btn").click(function(){
 	 document.getElementById("modal").style.display="none";
 });
 //날짜 
  $(function(){
-$("#apickup").datepicker({
+$("#lpickup").datepicker({
 	    language: 'ko',
 	    timepicker: true,
 	    timeFormat: "hh:ii AA"
@@ -1123,6 +739,25 @@ $("#apickup").datepicker({
 	  active_elm.removeClass('active');
 
 	});
+ 
+//주소 찾기
+ function findAddr(){
+ 	new daum.Postcode({
+         oncomplete: function(data) {
+             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+             var roadAddr = data.roadAddress; // 도로명 주소 변수
+             
+             // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            
+             if(roadAddr !== ''){
+                 document.getElementById("laddress").value = roadAddr;
+                 
+             } 
+         }
+     }).open();
+ }
 </script>
 <script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
 <script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>

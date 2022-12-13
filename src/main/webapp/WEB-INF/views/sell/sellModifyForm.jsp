@@ -25,15 +25,27 @@
 			<input type="hidden" name="ino" value="${sell.ino }">
 			<div>
 				<input type="text" class="form-control" placeholder="제목" id="title" name="ititle" value="${sell.ititle }">
+				<input type="hidden" id="dealType" value="${sell.idealType }">
 			</div>
 			<br>
 			<div id="dealcontainer">
 				<div class="form-group">
-					<select class="form-control" name="sdealType" id="sel1">
-						<option>직거래</option>
-						<option>택배거래</option>
-						<option>모두가능</option>
-					</select> <br>
+					<div id="selectbox">
+						<select class="form-control" name="sdealType" id="sel1">
+							<option id="d">직거래</option>
+							<option id="p">택배거래</option>
+							<option id="ev">모두가능</option>
+						</select>
+					</div><br>
+					
+					<div id="priceAndAI">
+						<div id="modifyprice">
+							<span class="sellfont price">가격:</span> 
+							<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
+							<span class="sellfont price">원</span>
+						</div> 				
+					</div>
+					
 					<div id="dealarea">
 						거래지역: 
 						<input id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
@@ -43,11 +55,6 @@
 					</div>
 				</div>
 
-				<div id="priceAndAI">
-					<span class="sellfont price">가격:</span> 
-					<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
-					<span class="sellfont price">원</span> 				
-				</div>
 			</div>
 
 			<div class="form-group">
@@ -97,30 +104,9 @@
     // 첨부파일 개수 확인
     	if (curFileCnt > remainFileCnt) {
         	alert("첨부파일은 최대 " + 5 + "개 까지 첨부 가능합니다.");
-    		} else {
-        		for (const file of obj.files) {// 첨부파일 검증
-            		if (validation(file)) {// 파일 배열에 담기
-                		var reader = new FileReader();
-                		reader.onload = function () {
-                    	filesArr.push(file);
-                		};
-                	reader.readAsDataURL(file);
-
-                // 목록 추가
-                let htmlData = '';
-                htmlData += '<div id="file' + fileNo + '" class="filebox">';
-                htmlData += '   <p class="name">' + file.name + '</p>';
-                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
-                htmlData += '</div>';
-                $('#imglist').append(htmlData);
-                fileNo++;
-            		} else {
-                		continue;
-            		}
-        		}
-    		}
-   // 초기화
-    	document.querySelector("input[type=file]").value = "";
+    	} else {
+    	
+    	}
 	}
 
 	/* 유효성 검사 */
@@ -188,6 +174,17 @@
 						}
 					}).open();
 		}
+	
+	$(document).ready(function(){
+		var type = $('#dealType').attr('value');
+		if(type=="직거래"){
+			$('#d').attr('selected', true);
+		}else if(type=="택배거래"){
+			$('#p').attr('selected', true);
+		}else if(type="모두가능"){
+			$('#ev').attr('selected', true);
+		}
+	})
 		
 	</script>
 </body>

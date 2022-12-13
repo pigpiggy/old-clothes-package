@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.dao.ApplyDAO;
 import com.kosta.clothes.dao.CommentsDAO;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.LikesDAO;
@@ -39,6 +40,10 @@ public class SharingServiceImpl implements SharingService{
 	
 	@Autowired
 	CommentsDAO commentsDAO;
+	
+	@Autowired
+	ApplyDAO applyDAO;
+	
 	@Autowired
 	ServletContext servletContext;
 	
@@ -158,6 +163,7 @@ public class SharingServiceImpl implements SharingService{
 		likesDAO.deleteSlikes(sno);
 		reviewDAO.deleteSReview(sno);
 		commentsDAO.commentSDelete(sno);
+		applyDAO.deleteSwapply(sno);
 		sharingDAO.deleteSharing(sno);
 		fileDAO.deleteSfileInfo(sno);
 	}

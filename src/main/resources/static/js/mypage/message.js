@@ -111,7 +111,6 @@ $(function () {
 	
 	/* 받은 쪽지 답장 보내기 */
 	$(".letter_img").off().on('click', function() {
-		alert("쪽지 클릭!");
 		var index = $('.letter_img').index(this);
 		var sendUser = $('.sendUser:eq('+index+')').html();
 		var sendUserno = $('.checkbox:eq('+index+') .sendUserno').val();
@@ -128,18 +127,21 @@ $(function () {
 		}
 		modalcontext += "<h5>받는 사람: "+ sendUser +"</h5>";
 		modalcontext += "<div class='modaltitle'><label class="+"'mcontext'"+" for="+"'mtitle'"+">제목 </label>";
-		modalcontext += "<input type='text' class='form-control' name='mtitle' id='mtitle' /><br></div>";
+		modalcontext += "<input type='text' class='form-control' name='mtitle' id='mtitle' required /><br></div>";
 		modalcontext += "<div><label class='mcontext' for='mcontent'>내용 </label>";
-		modalcontext += "<textarea class='form-control' rows='3' cols='50' name='mcontent' id='mcontent'></textarea><br></div>";
-		modalcontext += "<input type='submit' class='btn btn-warning center' value='보내기' />";
+		modalcontext += "<textarea class='form-control' rows='3' cols='50' name='mcontent' id='mcontent' required></textarea><br></div>";
+		modalcontext += "<input type='submit' class='btn btn-warning center' value='보내기' />";		
 		$("#messageform").append(modalcontext);
 	})
 	
 	/* 쪽지 확인 */
 	var submitcheck =$('#submitcheck').val();
+	var muserno = $('#muserno').val();
 	console.log(submitcheck);
 	if(submitcheck == "true"){
 		alert("메시지가 성공적으로 발송되었습니다.");
+		console.log(muserno +"  메시지");			
+		window.location.href="redirect:/mypage/umessage/"+ muserno ;
 	} else if(submitcheck =="false"){
 		alert("메시지 발송에 실패하였습니다.");
 	}
@@ -213,8 +215,26 @@ $(function () {
 		$(".rpaging").css('display','none');
 		$(".spaging").css('display','table');
 	} else {
+		$("#recvtable").css('display','table');
+		$("#sendtable").css('display','none');
+		
 		$(".rpaging").css('display','table');
 		$(".spaging").css('display','none');
 	}
 	
+	//답장 보내기 쪽지 유효성
+	function valid(){
+		var sname = document.getElementById("mtitle");
+		var scontent = document.getElementById("mcontent");
+		if(sname.value != ''){
+			alert("제목을 입력해주세요.");
+			return false;
+		}
+		
+		if(scontent.value == ''){
+			alert("내용을 입력해주세요.");
+			return false;
+		}
+	
+	}
 })

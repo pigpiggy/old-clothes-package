@@ -15,7 +15,11 @@
 <body>
 	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>	
 	<div class="wrapper">
-	
+		<div class="chatHeader" id="chatHeader">
+			채팅
+		</div>
+		<div id="chatRoom">
+		</div>
 	</div>
 	 
 	 <script type="text/javascript">

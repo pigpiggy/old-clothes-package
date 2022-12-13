@@ -25,14 +25,15 @@
 			<input type="hidden" name="sno" value="${sharing.sno }">
 			<div>
 				<input type="text" class="form-control" placeholder="제목" id="title" name="stitle" value="${sharing.stitle }">
+				<input type="hidden" id="dealType" value="${sharing.sdealType }">
 			</div>
 			<br>
 			<div id="dealcontainer">
 				<div class="form-group">
 					<select class="form-control" name="sdealType" id="sel1">
-						<option>직거래</option>
-						<option>택배거래</option>
-						<option>모두가능</option>
+						<option id="d">직거래</option>
+						<option id="p">택배거래</option>
+						<option id="ev">모두가능</option>
 					</select> <br>
 					<div id="priceAndAI">
 						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
@@ -163,6 +164,16 @@
 	        }
 	    }).open();
 	}
+	$(document).ready(function(){
+		var type = $('#dealType').attr('value');
+		if(type=="직거래"){
+			$('#d').attr('selected', true);
+		}else if(type=="택배거래"){
+			$('#p').attr('selected', true);
+		}else if(type="모두가능"){
+			$('#ev').attr('selected', true);
+		}
+	})
 		
 	</script>
 </body>

@@ -239,14 +239,16 @@ public class CertificationService implements UsersService {
 		@Transactional
 		@Override
 		public void deleteuser(Integer userno) throws Exception {
-			usersDao.deletecommet(userno);
+			usersDao.deletecomment(userno);
+			usersDao.deletechatroom(userno);
 			usersDao.deletelikes(userno);
 			usersDao.deletereview(userno);
 			usersDao.deletemessage(userno);
-			usersDao.deletesharing(userno);
+			usersDao.deletewapply(userno);
 			usersDao.deleteapply(userno);
 			usersDao.deletefree(userno);
-			usersDao.deleteindivi(userno);		
+			usersDao.deleteindivi(userno);	
+			usersDao.deletesharing(userno);
 			usersDao.deleteuser(userno);
 		}
 
@@ -256,6 +258,7 @@ public class CertificationService implements UsersService {
 		@Override
 		public void deletebusiness(Integer bno) throws Exception {
 			usersDao.deleteblikes(bno);
+			usersDao.deletebcomments(bno);
 			usersDao.deletebreview(bno);
 			usersDao.deletebapply(bno);
 			usersDao.deletebfree(bno);

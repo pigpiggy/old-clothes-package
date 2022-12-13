@@ -22,9 +22,10 @@
     <h2><strong>쪽지함</strong></h2>
     <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
-      			<form action="smessage" method="post" id="messageform">
+      			<form action="/mypage/smessage" method="post" id="messageform" onsubmit="alert("홍소미");">
       				<input type="hidden" id="selectValue" value="${select }" />
       				<input type="hidden" id="submitcheck" value="${submitcheck}" />
+      				<input type="hidden" id="muserno" value="${users.userno}" />
       			</form>
 				<a href="#" class="modal__close">&times;</a>
       		</div>

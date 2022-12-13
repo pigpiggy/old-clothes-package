@@ -88,8 +88,8 @@ h2{
 			
 			<div class="search-box">
 				<%-- 텍스트: <span id="dongName"></span><br/>--%>
-				<input type="text" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-				<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>
+				<input type="hidden" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+				<!-- <button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button> -->
 			</div>
 			<div id="cate" class="select">
 			<select id="catelist" onchange="catelist()">
@@ -182,8 +182,10 @@ h2{
 	let sido;
 	let sigugun;
 		
+	
 	<%--검색 버튼 클릭시 --%>
-	$('#searchBtn').click(function(){
+	$(document).on("change","#sigugun",function(){
+	/* $('#searchBtn').click(function(){ */
 		sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
 		sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
 		//도 -> 경상남도 => 경남
@@ -218,7 +220,7 @@ h2{
 				console.log("찍히나 " +data.baddress);				
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<a href="/mypage/'+data.bno+'"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
+				bli += '<a href="/mypage/bmypage/'+data.bno+'/apply"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
 				console.log("너냐" + bbno);
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
@@ -248,7 +250,7 @@ h2{
 				
 				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
 			
-				if(authsect == 'users'){
+				if(authsect != 'business'){
 					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
 				}								
 				bli += '</li>' ;
@@ -336,10 +338,15 @@ h2{
 						});
 			            //모달 켜기
 			            $(".buttonapply"+data.bno+"").click(function(){
+			            	var logincheck = "${logincheck}"; //false
+			    			if(logincheck == "false") {
+			    				alert("로그인 후 이용해주세요.");
+			    				location.href="/login";
+			    			}else{		            
 			            	 document.getElementById("modal").style.display="block";
 			            	 var bno = $(".buttonapply"+data.bno+"").data('value');
 			            	 document.getElementById("bno").value=bno;
-			            	 
+			    			}
 			            });
 			           
 			            
@@ -503,27 +510,21 @@ h2{
 					console.log("찍히나 " +data.baddress);				
 					var bbno = data.bno;				
 					bli += '<li class="listdnames" id="listmove">' ;
-					bli += '<p id="bnames">' + "상호명 : "+ data.bname + '</p>';
+					bli += '<a href="/mypage/bmypage/'+data.bno+'/apply"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
 					console.log("너냐" + bbno);
 					if(auth==""){ //둘 다 로그인 안했을 때 
 						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
 						console.log("안뜬다");
 					}else if(authsect == 'business'){
 						bli += '';
-					}else if(authsect == 'users'){					
-						<c:forEach items="${list}" var="listA">							
-							console.log("list : " +"${listA.bno}");
-							if("${listA.bno}" == data.bno){							
-								if(data.likescheck == 1){								
-									bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
-								}else{
-									bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-								}
-							}
-						</c:forEach>										
-						/* if(checkresult==){						
-							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">'; 
-						} */
+					}else if(authsect == 'users'){	
+						if(data.likescheck == 1){								
+							bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+						}else if(data.likescheck == null){
+							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						}else{
+							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						}
 					}
 					console.log(data.bstar +"별점");
 					bli += '<div id="totalstar">';

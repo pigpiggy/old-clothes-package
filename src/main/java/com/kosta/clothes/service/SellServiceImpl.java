@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Users;
+import com.kosta.clothes.dao.ApplyDAO;
 import com.kosta.clothes.dao.CommentsDAO;
 import com.kosta.clothes.dao.FileDAO;
 import com.kosta.clothes.dao.LikesDAO;
@@ -38,6 +39,9 @@ public class SellServiceImpl implements SellService{
 	
 	@Autowired
 	CommentsDAO commentsDAO;
+	
+	@Autowired
+	ApplyDAO applyDAO;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -186,6 +190,7 @@ public class SellServiceImpl implements SellService{
 		likesDAO.deleteIlikes(ino);
 		reviewDAO.deleteIReview(ino);
 		commentsDAO.commentIDelete(ino);
+		applyDAO.deleteIwapply(ino);
 		sellDAO.deleteIndividual(ino);
 		fileDAO.deleteIfileInfo(ino);
 	}

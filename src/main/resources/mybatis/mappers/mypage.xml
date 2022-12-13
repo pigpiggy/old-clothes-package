@@ -256,6 +256,19 @@
 		]]>
 	</insert>
 	
+	<insert id="sendSReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, sno)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{sno})
+		]]>
+	</insert>
+	
 	<insert id="sendUapplyReview" parameterType="map">
 		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
 			<![CDATA[
@@ -280,6 +293,20 @@
 		<![CDATA[
 			update apply set astatus='후기대기'
 			where ano=#{ano}
+		]]>
+	</update>
+	
+	<update id="changeIReviewStatus" parameterType="map">
+		<![CDATA[
+			update INDIVIDUAL set istatus='후기등록완료'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="changeSReviewStatus" parameterType="map">
+		<![CDATA[
+			update sharing set sstatus='후기등록완료'
+			where sno=#{sno}
 		]]>
 	</update>
 	

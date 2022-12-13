@@ -40,33 +40,24 @@ public class BusinessServiceImpl implements BusinessService {
 		return businessDao.selectBusiness1(map);
 	}
 	//카테고리 정렬 리스트
-	@Override
-	public List<Business> cateException(String sido, String sigungu, String category) throws Exception {
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("sido", sido);
-		map.put("sigungu", sigungu);	
-		System.out.println("category: " + category + "이다");
-		if(category.equals("review")) {
-			System.out.println("review들어옴");
-			return businessDao.selectCatereview(map);
-		}else if(category.equals("high")) {
-			System.out.println("high들어옴");
-			return businessDao.selectCatehigh(map);
-		}else {
-			System.out.println("low들어옴");
-			return businessDao.selectCatelow(map);
-		}
-	}
+	/*
+	 * @Override public List<Business> cateException(String sido, String sigungu,
+	 * String category) throws Exception { Map<String,String> map = new
+	 * HashMap<String,String>(); map.put("sido", sido); map.put("sigungu", sigungu);
+	 * System.out.println("category: " + category + "이다");
+	 * if(category.equals("review")) { System.out.println("review들어옴"); return
+	 * businessDao.selectCatereview(map); }else if(category.equals("high")) {
+	 * System.out.println("high들어옴"); return businessDao.selectCatehigh(map); }else
+	 * { System.out.println("low들어옴"); return businessDao.selectCatelow(map); } }
+	 */
 
 	//카테고리 정렬 리스트
 	@Override
-	public List<Business> cateusers(String sido, String sigungu, Integer userno, String category)
+	public List<Business> cateusers(String sido, String sigungu, String category)
 			throws Exception {
 		Map<String,String> map = new HashMap<String,String>();
-		String userno1=Integer.toString(userno);
 		map.put("sido", sido);
 		map.put("sigungu", sigungu);
-		map.put("userno", userno1);		
 		if(category.equals("review")) {
 			System.out.println("review들어옴");
 			return businessDao.selectUserCatereview(map);

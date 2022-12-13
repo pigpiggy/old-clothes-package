@@ -45,14 +45,23 @@
 					      <img id="like" src="/image/redheart.png" alt="찜" title="나의 찜목록">
 				        </a>
 		        	</c:if>
-		        </c:if>          
-		        <c:if test="${authUser.sect eq 'users' }">
-      				<c:if test = "${authUser.userno eq users.userno }">
-		        <a href="/mypage/message/${authUser.userno }">
-			      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
-		        </a>
-		        </c:if>
-		        </c:if>
+		        </c:if>   
+			        <c:if test="${authUser.sect eq 'users' }">
+	      				<c:if test = "${authUser.userno eq users.userno }">
+					        <a href="/mypage/umessage/${authUser.userno }">
+					          <input type="hidden" id="muserno" name="muserno" value="${users.userno }">
+						      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
+					        </a>
+				        </c:if>
+			        </c:if>
+			        <c:if test="${authUser.sect eq 'business' }">
+			        	<c:if test="${authUser.bno eq business.bno }">
+					        <a href="/mypage/bmessage/${authUser.bno }">
+					         <input type="hidden" id="muserno" name="muserno" value="${business.bno }">
+						      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
+					        </a>			        		
+			        	</c:if>
+			        </c:if>	
 		        <c:if test="${authUser.sect eq 'users'}">
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">
@@ -60,10 +69,22 @@
 								<span class="nav__notification nbadge" id="messageAlert"></span>
 						</a>
 					</c:if>	
-				</c:if>				
-		        <a href="/passcheck">
-              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
-		        </a>
+				</c:if>
+				<c:if test="${authUser.sect eq 'users' }">	
+					<c:if test="${authUser.userno eq users.userno }">			
+			        <a href="/passcheck">
+	              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
+			        </a>
+			        </c:if>
+		        </c:if>
+		        
+		        <c:if test="${authUser.sect eq 'business' }">	
+					<c:if test="${authUser.bno eq business.bno }">			
+			        <a href="/passcheck">
+	              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
+			        </a>
+			        </c:if>
+		        </c:if>
         </div>
       </div>        	    
   	
@@ -160,8 +181,7 @@
 	  		$.ajax({
 				type : "post",
 				url : "/mypage",
-				data : {introduce:introduce},
-				
+				data : {introduce:introduce},				
 				success : function(data) {
 					console.log(data);
 					var text ="";					

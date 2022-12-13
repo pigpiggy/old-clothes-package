@@ -37,30 +37,34 @@ public interface UsersDAO {
 
 	String checkupass(String id) throws Exception; //개인비밀번호 확인용
 	void updateuser(Users user) throws Exception; //개인 회원 정보 수정
-	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴
 	
 
 	String checkbpass(String id) throws Exception; //업체비밀번호 확인용
 	void updatebusiness(Business business) throws Exception; //업체 회원 정보 수정
 	
 	//회원탈퇴
-	void deletecommet(Integer userno) throws Exception; //개인 회원 탈퇴 (comment)
+	void deletecomment(Integer userno) throws Exception; //개인 회원 탈퇴 (comment)
+	void deletechatroom(Integer userno) throws Exception; //개인 회원 탈퇴 (chatroom)
 	void deletelikes(Integer userno) throws Exception; //개인 회원 탈퇴 (likes)
 	void deletereview(Integer userno) throws Exception; //개인 회원 탈퇴 (review)
 	void deletemessage(Integer userno) throws Exception; //개인 회원 탈퇴 (message)
-	void deletesharing(Integer userno) throws Exception; //개인 회원 탈퇴 (sharing)
+	void deletewapply(Integer userno) throws Exception;//개인 회원 탈퇴 (wapply)	
 	void deleteapply(Integer userno) throws Exception; //개인 회원 탈퇴 (apply)		
 	void deletefree(Integer userno) throws Exception; //개인 회원 탈퇴 (free)
-	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)	
+	void deleteindivi(Integer userno) throws Exception; //개인 회원 탈퇴 (individual)
+	void deletesharing(Integer userno) throws Exception; //개인 회원 탈퇴 (sharing)
+	void deleteuser(Integer userno) throws Exception; //개인 회원 탈퇴(users)
 	
 	
 	
 	
 	void deleteblikes(Integer bno) throws Exception;//업체 회원 탈퇴(likes)
+	void deletebcomments(Integer bno) throws Exception;//업체 회원 탈퇴(comments)
 	void deletebreview(Integer bno) throws Exception;//업체 회원 탈퇴(review)
 	void deletebapply(Integer bno) throws Exception;//업체 회원 탈퇴(apply)
 	void deletebfree(Integer bno) throws Exception;//업체 회원 탈퇴(free)
 	void deletebusiness(Integer bno) throws Exception; //업체 회원 탈퇴(business)
+	
 	
 	Users selectuAll(Integer userno) throws Exception;//userno로 모든 정보 가져오기
 	Business selectbAll(Integer bno) throws Exception;//bno로 모든 정보 가져오기

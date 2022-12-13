@@ -123,7 +123,6 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		        <div id="sreview">거래후기: ${reviewcount }건</div>
 		        <span>신청 인원 : ${sharing.applycount }명</span>
 		        <div id="sbtn">
 					<c:choose>
@@ -224,7 +223,23 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
 <script>
+/* 이미지 슬라이드 */
+$(function() {	
+	 var swiper = new Swiper(".mySwiper", {
+	        cssMode: true,
+	        navigation: {
+	          nextEl: ".swiper-button-next",
+	          prevEl: ".swiper-button-prev",
+	        },
+	        pagination: {
+	          el: ".swiper-pagination",
+	        },
+	        mousewheel: true,
+	        keyboard: true,
+	      }); 
+});
 
+/* 사진 확대 기능(모달) */
 //Get the modal
 var modal = document.getElementById("myModal");
 
@@ -252,146 +267,7 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
-var auth = "${authUser.sect}";
-var userno = $('#userno').val();
-var sno = $('#sno').val();
-var cno = $('#cno').val();
-console.log("댓글 번호 : " + cno);
-console.log("무료나눔 번호 : " + sno);
-console.log("로그인한 유저 : " + auth);
-console.log("사용자 로그인 한 번호 : " + userno);
-
-//리스트 뿌려주기 
-$(document).ready(function(){
-	  commentList(); 
-});
-//사용자
-$('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
-	    var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
-	    if($('input[name=ccontent]').val() == '' ){
-	    	alert("댓글을 입력해 주시기 바랍니다.");
-	    	return false;
-	    }
-	    commentInsert(insertData); //Insert 함수호출(아래)
-	});
-
-//댓글 등록[사용자]
-function commentInsert(insertData){
-	 var userno = $('#userno').val();
-	 console.log("댓글 등록");
-	    $.ajax({
-	        url : '/sharingView/'+sno+'/'+userno,
-	        type : 'post',
-	        data : insertData,
-	        success : function(data){		            
-	            commentList(); //댓글 작성 후 댓글 목록 reload
-				$('[name=ccontent]').val('');
-	            
-	        }
-	    });
-	}
-
-
-//댓글 목록 
-function commentList(){
-	 console.log("댓글리스트");
-    $.ajax({
-        url : '/Slist/'+sno,
-        type : 'get',
-        data : {'sno':sno},
-        success : function(data){
-            var a =''; 
-            $.each(data, function(key, value){ 
-                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                
-                //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
-                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';
-                if(auth != ''){
-                	if(auth == 'users'){
-		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
-		                a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
-                	}
-                }
-                a += '<div class="commentContent'+value.cno+'"> <p> 내용 : '+value.ccontent +'</p>';
-                a += '</div></div>';
-            });
-            
-            $(".commentList").html(a);
-        }
-    });
-}
-
-
-//댓글 삭제 
-function commentDelete(cno){
-	console.log("삭제할 번호 : " + cno);
-	var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
-	if(result){
-	     $.ajax({
-	         url : "/sharingcmtDelete/"+cno + "/" + sno,
-	         type : "post",
-	         success : function(data){
-	        	 alert("삭제가 완료되었습니다.");
-	        	 commentList(sno);
-	         }
-	     });
-	}
-}
-
-//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
-function commentUpdate(cno, ccontent){
-    var a ='';
-    
-    a += '<div class="input-group">';
-    a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
-    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
-    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
-    a += '</div>';
-    
-    $('.commentContent'+cno).html(a);
-    
-}
-//댓글 수정
-function commentUpdateProc(cno){
-    var updateContent = $('[name=ccontent_'+cno+']').val();
-    var result = confirm("수정하시겠습니까??");
-    console.log("수정할 cno : " + cno);
-    console.log("수정할 내용 : " + updateContent);
-    if(result){
-	     $.ajax({
-	         url : "/sharingcmtModify/"+cno + "/" +sno,
-	         type : "post",
-	         data : {'ccontent' : updateContent, 'cno' : cno},
-	         success : function(data){
-	            
-	             alert("수정이 완료되었습니다.");
-	             commentList(sno);
-	         }
-	     });
-    }
-}
-
-
-
-/* 이미지 슬라이드 */
-$(function() {	
-	 var swiper = new Swiper(".mySwiper", {
-	        cssMode: true,
-	        navigation: {
-	          nextEl: ".swiper-button-next",
-	          prevEl: ".swiper-button-prev",
-	        },
-	        pagination: {
-	          el: ".swiper-pagination",
-	        },
-	        mousewheel: true,
-	        keyboard: true,
-	      }); 
-});
-
-
 /* 찜 기능 */
-
 $(function () {
 	//로그인 확인
 	$("#letter_img").on("click", function() {
@@ -512,6 +388,138 @@ if(sstatus != '등록완료'){
 	}
 }
 
+function valid() {
+	var title = document.getElementById("mtitle");
+	var content = document.getElementById("mcontent");
+	if(title.value == "") {
+		alert("내용을 입력해주세요.");
+		return false;
+	}
+	if(content.value == "") {
+		alert("내용을 입력해주세요.");
+		return false;
+	}
+}
+
+/* 댓글 */
+var auth = "${authUser.sect}";
+var userno = $('#userno').val();
+var sno = $('#sno').val();
+var cno = $('#cno').val();
+console.log("댓글 번호 : " + cno);
+console.log("무료나눔 번호 : " + sno);
+console.log("로그인한 유저 : " + auth);
+console.log("사용자 로그인 한 번호 : " + userno);
+
+//리스트 뿌려주기 
+$(document).ready(function(){
+	  commentList(); 
+});
+//사용자
+$('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
+	    var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+	    if($('input[name=ccontent]').val() == '' ){
+	    	alert("댓글을 입력해 주시기 바랍니다.");
+	    	return false;
+	    }
+	    commentInsert(insertData); //Insert 함수호출(아래)
+	});
+
+//댓글 등록[사용자]
+function commentInsert(insertData){
+	 var userno = $('#userno').val();
+	 console.log("댓글 등록");
+	    $.ajax({
+	        url : '/sharingView/'+sno+'/'+userno,
+	        type : 'post',
+	        data : insertData,
+	        success : function(data){		            
+	            commentList(); //댓글 작성 후 댓글 목록 reload
+				$('[name=ccontent]').val('');
+	            
+	        }
+	    });
+	}
+
+
+//댓글 목록 
+function commentList(){
+	 console.log("댓글리스트");
+    $.ajax({
+        url : '/Slist/'+sno,
+        type : 'get',
+        data : {'sno':sno},
+        success : function(data){
+            var a =''; 
+            $.each(data, function(key, value){ 
+                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                
+                //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
+                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';
+                if(auth != ''){
+                	if(auth == 'users'){
+		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+		                a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
+                	}
+                }
+                a += '<div class="commentContent'+value.cno+'"> <p> 내용 : '+value.ccontent +'</p>';
+                a += '</div></div>';
+            });
+            
+            $(".commentList").html(a);
+        }
+    });
+}
+
+
+//댓글 삭제 
+function commentDelete(cno){
+	console.log("삭제할 번호 : " + cno);
+	var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
+	if(result){
+	     $.ajax({
+	         url : "/sharingcmtDelete/"+cno + "/" + sno,
+	         type : "post",
+	         success : function(data){
+	        	 alert("삭제가 완료되었습니다.");
+	        	 commentList(sno);
+	         }
+	     });
+	}
+}
+
+//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+function commentUpdate(cno, ccontent){
+    var a ='';
+    
+    a += '<div class="input-group">';
+    a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
+    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
+    a += '</div>';
+    
+    $('.commentContent'+cno).html(a);
+    
+}
+//댓글 수정
+function commentUpdateProc(cno){
+    var updateContent = $('[name=ccontent_'+cno+']').val();
+    var result = confirm("수정하시겠습니까??");
+    console.log("수정할 cno : " + cno);
+    console.log("수정할 내용 : " + updateContent);
+    if(result){
+	     $.ajax({
+	         url : "/sharingcmtModify/"+cno + "/" +sno,
+	         type : "post",
+	         data : {'ccontent' : updateContent, 'cno' : cno},
+	         success : function(data){
+	            
+	             alert("수정이 완료되었습니다.");
+	             commentList(sno);
+	         }
+	     });
+    }
+}
 
 </script>
 </body>

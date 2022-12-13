@@ -286,7 +286,7 @@
 	</delete>
 	
 	<!-- 개인정보탈퇴 -->
-	<delete id="deletecommet" parameterType="Integer">
+	<delete id="deletecomment" parameterType="Integer">
 		<![CDATA[
 			delete  
 			from comments		 
@@ -309,6 +309,22 @@
 			delete  
 			from message		 
 			where sendUserno = #{userno} and recvUserno = #{userno}
+		]]>
+	</delete>
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletechatroom" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from chatroom		 
+			where sellerno = #{userno} or buyerno = #{userno}
+		]]>
+	</delete>
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletewapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where wuserno = #{userno}
 		]]>
 	</delete>
 	
@@ -351,6 +367,14 @@
 			where bno = #{bno}
 		]]>
 	</delete>
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebcomments" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from comments		 
+			where bno = #{bno}
+		]]>
+	</delete>
 	
 	<!-- 업체정보탈퇴 -->
 	<delete id="deletebreview" parameterType="Integer">
@@ -360,6 +384,7 @@
 			where bno = #{bno}
 		]]>
 	</delete>
+	
 	
 	<!--userno로 모든 정보 가져오기 -->
 	<select id="selectuAll" parameterType="Integer" resultType="Users">

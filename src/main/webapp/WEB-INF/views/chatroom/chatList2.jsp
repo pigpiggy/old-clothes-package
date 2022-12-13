@@ -97,10 +97,10 @@
 			
 	 		var str =
 	 		'<a href="/chatRoom/' + ino + '/' + buyerno + '">' +
-	 				'<div id="title">' + ititle + '</div>' + 
+	 				'<div id="titlename"><div id="title">' + ititle + '</div>' + 
 	 				'<div id="sellerName">' +
 	 					'<img id="usericon" src="/image/yellowuser.png">' + senderName +'&nbsp;'+
-	 				'</div>' +
+	 				'</div></div>' +
 	 				'<div id="message">' + 
 	 		messageUnread+'</div></a>';
 	 		

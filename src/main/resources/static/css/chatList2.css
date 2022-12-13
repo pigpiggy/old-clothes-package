@@ -12,45 +12,59 @@
   height: 30px;
 }
 h5 {
-  margin: 0;
+  margin: 0 7px;
   color: white;
+  font-weight: bold;
 }
 #chatHeader {
   display: flex;
+  align-items: center;
   background-color: #42A7A1;
   font-size: 2em;
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
 }
-.chatMessageInfo {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-top: 1.5rem;
-  padding-left: 1rem;
-  border-bottom: 1px solid #ddd;
-  margin: 2em;
+.chatMessageInfo0 {
+    height: 25%;
+    margin: 4% 2%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2%;
 }
 #user {
   display: flex;
   margin: 10px;
 }
 #usericon {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
 #wrapSellerTitle {
+	display: flex;
 	width: 80%;
 }
+#wrapSellerTitle a {
+	color: black;
+	display: flex;
+}
+
 #title {
-  margin-bottom: 1%;
+	font-size: 1.5rem;
+	margin-bottom: 1%;
 }
 #sellerName {
-  font-size: small;
+  font-size: 1rem;
   color: gray;
+  display: flex;
+  align-items: center;
+}
+#titlename {
+	width: 100%;
 }
 #alert {
-  width: 10%;
+  width: 15%;
 }
 
-
+#message {
+	position: relative;
+    right: -39%;
+}

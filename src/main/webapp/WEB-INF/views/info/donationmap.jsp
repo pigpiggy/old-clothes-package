@@ -100,16 +100,16 @@ input[type=radio] {
 				<div class="select" style="margin-left:170px; top:-5px;">
 					<select id="sigugun"><option value="">선택</option></select>
 				</div>
-				<div class="select" style="margin-left:340px; top:-39px;">
+				<!-- <div class="select" style="margin-left:340px; top:-39px;">
 					<select id="dong"><option value="">선택</option></select>
-				</div>
+				</div>  -->
 				<%-- 지도를 표시할 div 입니다 --%>
 			
 					
 				<div>
 					<%-- 텍스트: <span id="dongName"></span><br/>--%>
-					<input type="text" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-					<input type="button" id="searchBtn" value="검색">
+					<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+					<!-- <input type="button" id="searchBtn" value="검색"> --> 
 		
 				</div>
 				<div id="a">
@@ -249,7 +249,7 @@ input[type=radio] {
 					
 					
 	            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
-	            document.querySelectorAll("#listdnames")[i].addEventListener('mouseenter', (event) =>{
+	            document.querySelectorAll("#listdnames")[i].addEventListener('click', (event) =>{
 	            	this.map.panTo(marker1.getPosition());	 
 	            	infowindow.open(map,marker1);
 	            });
@@ -262,15 +262,17 @@ input[type=radio] {
 			}
 		}
 		
-		<%--검색 버튼 클릭시 --%>
-		$('#searchBtn').click(function(){
+		<%--검색 --%>
+		$(document).on("change","#sigugun",function(){
+		/* $('#sigugun').click(function(){ */
 			let sido = $("#sido option:selected").text(); //selectbox에서 sido 선택값
 			let sigugun = $('#sigugun option:selected').text(); //selectbox에서 sigugun 선택값
-			let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값
-			if(sido=="선택"||sigugun=="선택"||dong=="선택"){
+			/* let dong = $('#dong option:selected').text(); //selectbox에서 dong 선택값 */
+			if(sido=="선택"||sigugun=="선택"){
 				alert("지역을 전부 설정해주세요"); //하나라도 미선택 시 alert창
 				return false;
 			}
+			console.log("기부안내!!!");
 			geocoder.addressSearch($('#dongName').val(),function(result,status){
 				//정상적으로 검색이 되었을 경우
 				if(status === kakao.maps.services.Status.OK){
@@ -283,11 +285,9 @@ input[type=radio] {
 						info=[];
 					};
 					var coords = new kakao.maps.LatLng(result[0].y,result[0].x); //좌표추출
-					var address = $('input[name=totaladdress]').val();
-					var address1 = document.getElementById('totaladdress').value;
-										
-					console.log("total address : " +  address);
-					console.log("total address : " +  address1);
+					var address = $('input[name=totaladdress]').val();					
+					console.log("기부안내!!!");							
+					console.log("total address : " +  address);					
 					//추출한 좌료를 통해 도로명 주소 추출
 					var contentadd = document.getElementById('dongName').value;
 					var contentfinal = '<div style="width:100%; padding:5px;">'+contentadd+'</div>';
@@ -299,6 +299,7 @@ input[type=radio] {
 					console.log("lat: " + lat);	
 					console.log("lng: " + lng);
 					getAddr(lat,lng);
+					console.log("기부안내!!!");
 					function getAddr(lat,lng){
 						//주소=>좌표 전환 객체 선언
 						var geocoder = new kakao.maps.services.Geocoder();
@@ -349,7 +350,7 @@ input[type=radio] {
 	
 	
 <%--js 불러와서 사용하기. --%>	
-	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
+	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/map.js'/>"></script>
 	<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>

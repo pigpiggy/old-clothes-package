@@ -257,11 +257,11 @@ public class InfoController {
 		            System.out.println("ㅁㅁ" + business);
 				}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					//업체가 로그인 했을 때 
-					business = businessService.cateException(sido,sigungu,category);
+					business = businessService.cateusers(sido,sigungu,category);
 					System.out.println("bb" + business);
 				}
 			}else {// 그외
-				business = businessService.cateException(sido,sigungu,category);
+				business = businessService.cateusers(sido,sigungu,category);
 				System.out.println("bb" + business);
 			}
 		}catch(Exception e) {

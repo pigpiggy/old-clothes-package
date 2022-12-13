@@ -51,6 +51,11 @@
   		</div>
     <section class="content_main">
       <section id="content_left">
+      		<div id="myModal" class="modal">
+			  <span class="close">&times;</span>
+			  <img class="modal-content" id="img01">
+			  <div id="caption"></div>
+			</div>
         <!-- Swiper -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
@@ -58,7 +63,7 @@
           		<c:when test="${!empty files }">
 					<c:forEach var="ifileids" items="${files }">
 		            	<div class="swiper-slide">
-		                	<img src="/upload/${ifileids}" alt="개인판매 옷">
+		                	<img id="myImg" src="/upload/${ifileids}" alt="개인판매 옷">
 		        		</div>
         			</c:forEach>    
         		 </c:when>
@@ -134,7 +139,6 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		        <div id="ireview">거래 후기: ${reviewcount }건</div>
 		      	<span>신청 인원 : ${sell.applycount }명</span>
 		        <div id="sbtn">
 					<c:choose>
@@ -241,6 +245,50 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </footer> --%>
 <script>
+/* 이미지 슬라이드 */
+$(function() {	
+	 var swiper = new Swiper(".mySwiper", {
+	        cssMode: true,
+	        navigation: {
+	          nextEl: ".swiper-button-next",
+	          prevEl: ".swiper-button-prev",
+	        },
+	        pagination: {
+	          el: ".swiper-pagination",
+	        },
+	        mousewheel: true,
+	        keyboard: true,
+	      }); 
+});
+
+/* 사진 확대 기능(모달) */
+//Get the modal
+var modal = document.getElementById("myModal");
+
+//Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+if(img != null) {
+	$(document).on("click","#myImg",function(){
+		modal.style.display = "block";
+		console.log("modalImg.src :"+modalImg.src);
+		modalImg.src = this.src;
+		console.log("this.src :"+modalImg.src);
+		captionText.innerHTML = this.alt;
+	})
+}
+var files = "${files[1]}";
+console.log(modalImg);
+
+//Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+//When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+	modal.style.display = "none";
+}
+
 //댓글 
 var auth = "${authUser.sect}";
 var userno = $('#userno').val();
@@ -360,24 +408,6 @@ function commentUpdateProc(cno){
     }
 }
 
-
-
-//
-/* 이미지 슬라이드 */
-$(function() {	
-	 var swiper = new Swiper(".mySwiper", {
-	        cssMode: true,
-	        navigation: {
-	          nextEl: ".swiper-button-next",
-	          prevEl: ".swiper-button-prev",
-	        },
-	        pagination: {
-	          el: ".swiper-pagination",
-	        },
-	        mousewheel: true,
-	        keyboard: true,
-	      }); 
-});
 
 /* 찜 기능 */
 

@@ -191,7 +191,7 @@ public class UsersController {
     @GetMapping("/loginfail")
     public String loginfail(Model model) {
     	model.addAttribute("result", "fail");
-    	return "user/loginform";
+    	return "redirect:/login";
     }
     @PostMapping("/loginaction")
     public void loginaction() {
@@ -340,7 +340,7 @@ public class UsersController {
 	  }catch(Exception e) {
 		  e.printStackTrace();
 	  }
-	  return "user/loginform";
+	  return "redirect:/login";
   }
   
 //비밀번호 확인
@@ -386,7 +386,7 @@ public class UsersController {
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
-	  return "user/loginform";
+	  return "redirect:/login";
   }
   
 
@@ -425,7 +425,7 @@ public class UsersController {
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
-	  return "user/loginform";
+	  return "redirect:/login";
   }
 //업체회원 탈퇴
   
@@ -440,7 +440,7 @@ public class UsersController {
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
-	  return "user/loginform";
+	  return "redirect:/";
   }
   
  //개인회원 탈퇴
@@ -456,7 +456,7 @@ public class UsersController {
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
-	  return "user/loginform";
+	  return "redirect:/";
   }
 }
 

@@ -260,7 +260,7 @@ div.contents {
 						setMarkers2(null); //기존에 있는 마커 있으면 초기화
 						setInfo2(null); //기존에 있는 인포윈도우 초기화
 						var bli = "";
-						bli += "<ul id='itl'>"
+						bli += "<ul id='itl' style='border:2px;'>"
 						bli += "<br>";
 						data.forEach(function(item,i){
 							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
@@ -321,6 +321,7 @@ div.contents {
 								}
 							})
 						})
+						bli += "<br>";
 						bli += "</ul>"
 						$('#binlist').append(bli); //binlist 위치에 받아온 리스트 출력
 						console.log(markers2);

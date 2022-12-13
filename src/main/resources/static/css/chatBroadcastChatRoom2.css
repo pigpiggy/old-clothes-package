@@ -472,3 +472,7 @@ body {
   flex-direction: column;
   align-items: center;
 } 
+
+#chatbackimg {
+	width: 30px;
+}

@@ -123,7 +123,7 @@ public class ChatApplicationController {
 	
 	@RequestMapping(value="/chatList", method=RequestMethod.GET)
 	public String getChatList(Model model, HttpSession session) {
-		 return "chatroom/chatList";
+		 return "chatroom/chatList2";
 	}
 	
 	@RequestMapping(value="/chatRoom/{ino}/{buyerno}", method=RequestMethod.GET)
@@ -201,7 +201,7 @@ public class ChatApplicationController {
 		 		//읽지 않은 chatRoomId들과 현재 chatRoomId 대조 후 처리 
 				 for (int ele : unreadChatId) {
 					 	if (chatList.getChatno() == ele) {
-					 		jo.put("messageUnread", "새 메세지");
+					 		jo.put("messageUnread", "<img id='alert' src='/image/newmessage.png'>");
 					 		break;
 					 	} else {
 					 		jo.put("messageUnread", "");

@@ -74,7 +74,7 @@
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
-		          		<button class="review1"><a href="#demo-modal">거래 후기</a></button>
+		          		<button class="review1">거래 후기</button>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -127,7 +127,7 @@
 	    <div id="cards" class="sharingCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysharing" items="${buysharingList}">
-			  <div class="sellList">
+			  <div class="sellList sharingList">
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 		     <a href="/sharingView/${buysharing.sno}">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
@@ -171,7 +171,7 @@
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-		          		<button class="review"><a href="#demo-modal2">거래 후기</a></button>
+		          		<button class="review">거래 후기</button>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>
@@ -180,7 +180,6 @@
 	    
 	    <div id="demo-modal2" class="firstmodal">
 	      		<div class="modal__content" id="modal__content">
-	      			<form action="smessage" method="post" id="messageform">
 	      				<div class="stars">
 		      				<button class="star">1</button>
 		      				<button class="star">2</button>
@@ -191,7 +190,6 @@
 		      			</div>
 	      				<textarea name="content" class="content"></textarea>
 	      				<button id="reviewcomplete">작성완료</button>	
-	      			</form>
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>
@@ -226,6 +224,7 @@
 	<script>
 		$('.cancel3').click(function(){
 			var index = $(this).parent().index();
+			console.log(index);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -245,6 +244,7 @@
 		
 		$('.cancel4').click(function(){
 			var index = $(this).parent().index();
+			console.log(index);
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -325,8 +325,23 @@
 		
 		var ino=0;
 		$('.review1').click(function(){
-			var reviewIndex = $(this).prev('.selectedIno').index()+1;
+			var reviewIndex = $('.sellList').index($(this).parent());
+			console.log($(this).parent());
+			console.log(reviewIndex);
 			ino = $(".card2:eq("+reviewIndex+")").attr("data-sno");
+			$('#demo-modal').css('visibility','visible');
+			$('#demo-modal').css('opacity','1');
+			$('#demo-modal').css('z-index','2');
+		})
+		
+		$('.modal__close').click(function(e){
+			e.preventDefault();
+			$('#demo-modal').css('visibility','hidden');
+			$('#demo-modal').css('opacity','0');
+			$('#demo-modal').css('z-index','0');
+			$('#demo-modal2').css('visibility','hidden');
+			$('#demo-modal2').css('opacity','0');
+			$('#demo-modal2').css('z-index','0');
 		})
 		
 		$("#reviewcomplete1").click(function(){
@@ -349,8 +364,13 @@
 		
 		var sno=0;
 		$('.review').click(function(){
-			var reviewIndex = $(this).prev('.selectedSno').index()+1;
+			var reviewIndex = $('.sharingList').index($(this).parent());
+			console.log($(this).parent());
+			console.log(reviewIndex);
 			sno = $(".sharingcard2:eq("+reviewIndex+")").attr("data-sno");
+			$('#demo-modal2').css('visibility','visible');
+			$('#demo-modal2').css('opacity','1');
+			$('#demo-modal2').css('z-index','2');
 		})
 		
 		$("#reviewcomplete").click(function(){

@@ -16,6 +16,9 @@
 <body>
 	<div class="container">
 		<div class="chat-header">
+			<div id="chatback">
+				<img id="chatbackimg" src="/image/back.png">
+			</div>
 			<h1 class="chat-header__name">${ititle}</h1>
         </div>
 		<div class="row">
@@ -246,7 +249,9 @@
 				contentType: 'application/json'
 			})
 		}
-	
+	$('#chatback').click(function(){
+		location.replace("http://localhost:8088/chatList")
+	})
 	</script>
 </body>
 </html>

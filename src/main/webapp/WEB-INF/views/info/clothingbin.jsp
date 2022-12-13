@@ -260,10 +260,10 @@ div.contents {
 						setMarkers2(null); //기존에 있는 마커 있으면 초기화
 						setInfo2(null); //기존에 있는 인포윈도우 초기화
 						var bli = "";
-						bli += "<ul id='itl' style='border:2px;'>"
+						bli += "<ul id='itl'>"
 						bli += "<br>";
 						data.forEach(function(item,i){
-							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
+							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%; border-bottom:2px solid gray;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -321,7 +321,6 @@ div.contents {
 								}
 							})
 						})
-						bli += "<br>";
 						bli += "</ul>"
 						$('#binlist').append(bli); //binlist 위치에 받아온 리스트 출력
 						console.log(markers2);

@@ -62,6 +62,10 @@
 	          	<c:when test="${apply.astatus == '수거완료'}">
 	          			<div class="aindividualStatus">수거완료</div>
 	          	</c:when>
+	          	
+	          	<c:when test="${apply.astatus == '후기등록완료'}">
+	          			<div class="aindividualStatus">완료</div>
+	          	</c:when>
 	          	<c:otherwise>
 	          		<c:if test="${apply.astatus == '신청거절' }">
 	          			<div class="aindividualStatus">수거거절</div>

@@ -92,7 +92,7 @@
 	     				<label for="content1">거래 후기</label>
 					</div>
 	   				<textarea name="content1" class="content1"></textarea>
-	   				<button id="reviewcomplete1">작성완료</button>	
+	   				<button id="reviewcomplete1">개인판매 후기 작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>
@@ -189,7 +189,7 @@
 		      				<label for="content">거래 후기</label>
 		      			</div>
 	      				<textarea name="content" class="content"></textarea>
-	      				<button id="reviewcomplete">작성완료</button>	
+	      				<button id="reviewcomplete">무료나눔 후기 작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>

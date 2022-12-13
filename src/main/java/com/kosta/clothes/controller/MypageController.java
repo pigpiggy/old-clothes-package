@@ -1383,7 +1383,7 @@ public class MypageController {
     	  map.put("content", content);
     	  map.put("sno", sno);
     	  map.put("userno", userno);
-         mypageService.sendIReview(map);
+         mypageService.sendSReview(map);
       }catch(Exception e) {
          e.printStackTrace();
       }

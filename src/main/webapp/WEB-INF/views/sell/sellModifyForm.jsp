@@ -104,30 +104,9 @@
     // 첨부파일 개수 확인
     	if (curFileCnt > remainFileCnt) {
         	alert("첨부파일은 최대 " + 5 + "개 까지 첨부 가능합니다.");
-    		} else {
-        		for (const file of obj.files) {// 첨부파일 검증
-            		if (validation(file)) {// 파일 배열에 담기
-                		var reader = new FileReader();
-                		reader.onload = function () {
-                    	filesArr.push(file);
-                		};
-                	reader.readAsDataURL(file);
-
-                // 목록 추가
-                let htmlData = '';
-                htmlData += '<div id="file' + fileNo + '" class="filebox">';
-                htmlData += '   <p class="name">' + file.name + '</p>';
-                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
-                htmlData += '</div>';
-                $('#imglist').append(htmlData);
-                fileNo++;
-            		} else {
-                		continue;
-            		}
-        		}
-    		}
-   // 초기화
-    	document.querySelector("input[type=file]").value = "";
+    	} else {
+    	
+    	}
 	}
 
 	/* 유효성 검사 */

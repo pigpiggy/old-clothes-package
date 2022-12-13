@@ -1318,6 +1318,24 @@ public class MypageController {
    }
    
    @ResponseBody
+   @GetMapping("/sendSReview")
+   public void sendSReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
+		   @RequestParam("sno") Integer sno) {
+      try {
+    	  Users users = (Users) session.getAttribute("authUser");
+    	  Integer userno = users.getUserno();
+    	  Map<String, Object> map = new HashMap<String, Object>();
+    	  map.put("star", star);
+    	  map.put("content", content);
+    	  map.put("sno", sno);
+    	  map.put("userno", userno);
+         mypageService.sendIReview(map);
+      }catch(Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   @ResponseBody
    @GetMapping("/sendUapplyReview")
    public void sendUapplyReview(@RequestParam("star") Integer star, @RequestParam("content") String content,
 		   @RequestParam("bno") Integer bno, @RequestParam("ano") Integer ano) {

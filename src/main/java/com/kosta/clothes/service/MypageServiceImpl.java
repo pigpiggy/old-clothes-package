@@ -251,6 +251,13 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void sendIReview(Map map) throws Exception {
 		mypageDAO.sendIReview(map);
+		mypageDAO.changeIReviewStatus(map);
+	}
+	
+	@Override
+	public void sendSReview(Map map) throws Exception {
+		mypageDAO.sendSReview(map);
+		mypageDAO.changeSReviewStatus(map);
 	}
 	public List<Sell> getLikeSellList(Integer userno) throws Exception {
 		return mypageDAO.getLikeSellList(userno);//개인판매 좋아요 리스트 불러오기

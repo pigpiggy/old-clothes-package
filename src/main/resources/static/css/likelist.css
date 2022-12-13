@@ -329,6 +329,11 @@ h2 {
 	border: none;
     background: none;
 }
+
+#applymodal:focus {
+	outline: 0;
+}
+
 /* 개인 찜목록 */
 .sidebar {
   list-style: none;

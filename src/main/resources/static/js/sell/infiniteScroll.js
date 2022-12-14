@@ -19,7 +19,6 @@ $(window).scroll(function(){
 function surveyList(){
 	if(!loading){
 		loading = true;
-		
 		let lastsno = $(".card:last").attr("data-sno");
 		let keyword = document.getElementById('keyword').value;
 		console.log("키워드"+keyword);
@@ -52,9 +51,15 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<div class="+"'priceAndDate'"+"><span class="+"'price'"+">"+this.price+"원</span><span class="+"'date'"+">"+this.regDate+"</span></div>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.ititle+"</h2>";
-		              		str	+= "<p>"+this.addressCity+" "+this.addressTown+"</p>";
+		              		const address = this.iaddress.split(" ");
+		              		if(address[2].match("^.*.구$")!=null){
+								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
+							}
+		              		else{
+								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
+							}
 		          			str	+= "</div>";
-		          			if(this.addressCity !=null && this.addressCity !=""){
+		          			if(this.iaddress !=null && this.iaddress !=""){
 								str	+= "<div class="+"'card-footer'"+">";
 								str	+= this.idealType;
 								str	+= "</div>";

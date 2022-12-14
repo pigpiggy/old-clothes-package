@@ -90,6 +90,9 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>			
 	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

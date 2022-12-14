@@ -35,113 +35,116 @@
 			</ul>			
 	</div>
 	</c:if>
-	
-	<div id="rCards">
-		<div class="rCard-list">
-			<c:forEach var="review" items="${reviewList }">
-				<c:if test = "${review.bno != null }">
-				    <div class="rcard rcard-2">
-				        <div class="cardbody">
-				            <div id="reviewStar">
-				                <c:if test="${review.rstar == 1}">
-					            	<span class="starcontent">"최악이에요"</span>
-					                <span class="eachstar">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					               		<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                </span>
-				            	</c:if>
-				            	<c:if test="${review.rstar == 2}">
-					            	<span class="starcontent">"별로예요"</span>
-					                <span class="eachstar">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					               		<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                </span>
-				            	</c:if>
-				            	<c:if test="${review.rstar == 3}">
-					            	<span class="starcontent">"보통이에요"</span>
-					                <span class="eachstar">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					               		<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                </span>
-				            	</c:if>
-				            	<c:if test="${review.rstar == 4}">
-					            	<span class="starcontent">"만족해요"</span>
-					                <span class="eachstar">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					               		<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/graystar.png" alt="로고">
-					                </span>
-				            	</c:if>
-				            	<c:if test="${review.rstar == 5}">
-					            	<span class="starcontent">"아주 만족해요"</span>
-					                <span class="eachstar">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					               		<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                	<img src="/image/yellowstar.png" alt="로고">
-					                </span>
-				            	</c:if>
-				            </div>
-				            <div class="reviewCenter">
-				                <h3 class="reviewTitle">상호명: ${review.bname }</h3>
-				            	<p class="reviewContent">'${review.rcontent}'</p>
-				            </div>	
-				        </div>
-				        <div id="reviewWriter">
-				        	<div class="rNickname">
-				        		<img src="/image/yellowuser.png">
-				            	<span class="cardheader">${review.nickname }</span>
-				            </div>
-				            <span class="cardheader">${review.regdate }</span>
-				        </div>
-				    </div>
-				</c:if> 
-		    </c:forEach>
+	<div id="reviewcontainer">
+		<div id="rCards">
+			<div class="rCard-list">
+				<c:forEach var="review" items="${reviewList }">
+					<c:if test = "${review.bno != null }">
+					    <div class="rcard rcard-2">
+					        <div class="cardbody">
+					            <div id="reviewStar">
+					                <c:if test="${review.rstar == 1}">
+						            	<span class="starcontent">"최악이에요"</span>
+						                <span class="eachstar">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						               		<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                </span>
+					            	</c:if>
+					            	<c:if test="${review.rstar == 2}">
+						            	<span class="starcontent">"별로예요"</span>
+						                <span class="eachstar">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						               		<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                </span>
+					            	</c:if>
+					            	<c:if test="${review.rstar == 3}">
+						            	<span class="starcontent">"보통이에요"</span>
+						                <span class="eachstar">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						               		<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                </span>
+					            	</c:if>
+					            	<c:if test="${review.rstar == 4}">
+						            	<span class="starcontent">"만족해요"</span>
+						                <span class="eachstar">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						               		<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/graystar.png" alt="로고">
+						                </span>
+					            	</c:if>
+					            	<c:if test="${review.rstar == 5}">
+						            	<span class="starcontent">"아주 만족해요"</span>
+						                <span class="eachstar">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						               		<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/image/yellowstar.png" alt="로고">
+						                </span>
+					            	</c:if>
+					            </div>
+					            <div class="reviewCenter">
+					                <h3 class="reviewTitle">상호명: ${review.bname }</h3>
+					            	<p class="reviewContent">'${review.rcontent}'</p>
+					            </div>	
+					        </div>
+					        <div id="reviewWriter">
+					        	<div class="rNickname">
+					        		<img src="/image/yellowuser.png">
+					            	<span class="cardheader">${review.nickname }</span>
+					            </div>
+					            <span class="cardheader">${review.regdate }</span>
+					        </div>
+					    </div>
+					</c:if> 
+			    </c:forEach>
+			</div>
 		</div>
-	</div>
-	
-	<%-- 페이징 --%>
-	<div class="center">
-			<ul class="pagination rpaging">
-				<c:choose>
-					<c:when test="${rpageInfo.page<=1}">
-						<li><a id="prev"><<</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
+		
+		<%-- 페이징 --%>
+		<div class="center">
+				<ul class="pagination rpaging">
 					<c:choose>
-						<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:when test="${rpageInfo.page<=1}">
+							<li><a id="prev"><<</a></li>
+						</c:when>
 						<c:otherwise>
-							<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${i}&select=1">${i }</a></li>
+							<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 						</c:otherwise>
 					</c:choose>
-				</c:forEach>
-				<c:choose>
-					<c:when test="${rpageInfo.page>=rpageInfo.maxPage }">
-						<li><a id="next">>></a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page+1}&select=1" id="next">>></a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>		
-		</div>		
-		
+					<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
+						<c:choose>
+							<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+							<c:otherwise>
+								<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${i}&select=1">${i }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${rpageInfo.page>=rpageInfo.maxPage }">
+							<li><a id="next">>></a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page+1}&select=1" id="next">>></a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>		
+		</div>
+	</div>		
+<div>
+	<c:import url='/WEB-INF/views/includes/footer.jsp' />
+</div>		
 		<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

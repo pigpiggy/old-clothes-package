@@ -3,6 +3,7 @@
 #full{
 	width: 900px;
 	margin: 0 auto;
+	margin-bottom: 25%;
 }
 h2 {
 	margin-bottom: 8px;
@@ -31,7 +32,7 @@ h2 {
 }
 
 .form{
-	witdh:300px;
+	width:300px;
 }
 .allapply{	
 	padding: 5px 20px;

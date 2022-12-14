@@ -10,9 +10,10 @@
     <title>Document</title>
 <style>
 .fsite-footer-bottom {
+	display: block;
+	height: 112px;
 	box-sizing: border-box;
     background-color: #5a6f80;
-    position: relative;
     z-index: 2;
     margin: 0;
     color: #212529;

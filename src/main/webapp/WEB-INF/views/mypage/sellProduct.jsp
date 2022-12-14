@@ -182,7 +182,9 @@
 			</c:choose>
 		</ul>
 	</div>
-	
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>		
 	<script>
 		$('.cancel').click(function(){
 			var index = $(this).parent().index();

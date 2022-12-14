@@ -63,6 +63,9 @@ h2{
 	position: absolute;
     left: 40%;    
 }
+#finalbusin {
+	margin-bottom: 25%;
+}
 </style>
 <script>
 //유효성 검사
@@ -150,6 +153,9 @@ h2{
     
 		
 		
+	</div>
+	<div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
 	<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

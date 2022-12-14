@@ -177,6 +177,9 @@
 			</ul>		
 		</div>					      
       </div>
+      <div>
+      	<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	  </div>	
       <script src="<c:url value='/resources/js/mypage/message.js'/>"></script>
 </body>
 </html>

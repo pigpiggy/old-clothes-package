@@ -18,7 +18,10 @@ a {
 
 .board_wrap {
     width: 1100px;
-    margin: 100px auto;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+	margin-bottom: 25%;
 }
 
 #subjectAndSearch {

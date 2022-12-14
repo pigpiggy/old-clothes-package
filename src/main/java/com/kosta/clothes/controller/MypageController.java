@@ -106,10 +106,14 @@ public class MypageController {
 	                  Integer dcount= (Integer) astatuscount.get("신청중");
 	                  Integer ecount= (Integer) astatuscount.get("신청완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("dcount",dcount);
 	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("ccount",ccount);
 	                  
 	              }else {//로그인 안했을 때
 	                 System.out.println("bmypage 무무");
@@ -219,10 +223,14 @@ public class MypageController {
 	                  Integer dcount= (Integer) astatuscount.get("신청중");
 	                  Integer ecount= (Integer) astatuscount.get("신청완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("dcount",dcount);
 	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("ccount",ccount);
 	                      
 	              }else {//로그인 안했을 때
 	            	  //페이징
@@ -341,10 +349,14 @@ public class MypageController {
 	                  Integer dcount= (Integer) astatuscount.get("신청중");
 	                  Integer ecount= (Integer) astatuscount.get("신청완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("dcount",dcount);
 	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("ccount",ccount);
 	                  
 	              }else {//로그인 안했을 때
 	            	  Business business = messageService.mypageBusiness(bno);

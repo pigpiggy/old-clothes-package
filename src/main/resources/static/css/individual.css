@@ -263,7 +263,8 @@ h1 {
 }
 
 #price {
-	width: 50%;
+	width: 310px;
+	margin-right: 10px;
 }
 
 .form-control {
@@ -276,63 +277,56 @@ h1 {
 .form-control:disabled {
 	width: 110px;
 }
-
+#title {
+	margin-bottom: -8px;
+}
 #dealcontainer {
 	padding-bottom: 20px;
 	display: flex;
 	flex-direction: column;
 }
-
-#dealarea {
-	display: -webkit-inline-box;
-	align-items: center;	
+#priceAndAI {
+	display: flex;	
 }
-
+#dealprice {
+	display: flex;
+}
+#dealarea {
+	display: flex;
+    margin-top: 13px;
+    align-items: center;
+}
+.row {
+	margin: 0 auto;
+	width: 470px;
+	display: flex;
+}
+#addresssearch {
+	margin-left: 10px;
+	padding: 2px 4px;
+}
 .postarea {
+	width: 298px;
+	height: 38px;
 	border: 1px solid #ced4da;
 	border-radius: 4px;
 	padding: 10px;
 }
-
-#member_post {
-	margin: 8px;
-	width: 90px;
-	height: 35px;
-	border: 1px solid #ced4da;
-	border-radius: 4px;
-}
-
-#jibunAddress {
-	width: 300px;
-	height: 35px;
-	border: 1px solid #ced4da;
-	border-radius: 4px;
-}
-
 #btncontainer {
 	text-align: center;
 	padding-top: 10px;
 }
 
-#priceAndAI {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    display: -webkit-inline-box;
-    margin-right: 70px;
-}
-
 .sellfont {
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
+	font-size: 1rem;
+	font-weight: bold;
+	width: 5rem;
 }
 
 .price {
     align-items: center;
     display: flex;
-    margin-right: 5px;
+    width: 14%;
 }
 
 .nav-link {

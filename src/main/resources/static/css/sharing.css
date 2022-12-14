@@ -316,47 +316,47 @@ h1 {
 .form-control:disabled {
 	width: 110px;
 }
-
+#title {
+	margin-bottom: -8px;
+}
 #dealcontainer {
 	padding-bottom: 20px;
 	display: flex;
 	flex-direction: column;
 }
 
-#dealarea {
-	margin: 5px 0 5px 5px;
+#dealprice {
+	display: flex;
 }
-
+#dealarea {
+	display: flex;
+    margin-top: 13px;
+    align-items: center;
+}
+.row {
+	margin: 0 auto;
+	width: 470px;
+	display: flex;
+}
+#addresssearch {
+	margin-left: 10px;
+	padding: 2px 4px;
+}
 .postarea {
-	width: 100%;
+	width: 298px;
+	height: 38px;
 	border: 1px solid #ced4da;
 	border-radius: 4px;
 	padding: 10px;
 }
-
-
-#member_post {
-	margin: 5px;
-	width: 100px;
-	height: 32px;
-}
-
-#jibunAddress {
-	width: 359px;
-	height: 32px;
-}
-
 #btncontainer {
 	text-align: center;
 	padding-top: 10px;
 }
-
-#priceAndAI {
-	display: flex;
-	justify-content: flex-start;
-}
 .sellfont {
+	font-size: 1rem;
 	font-weight: bold;
+	width: 5rem;
 }
 .nav-link {
 	margin-left: 185px;
@@ -369,6 +369,7 @@ h1 {
 
 /* view */
 .content_main {
+	margin-top: 5%;
 	height: 100%;
 	display: flex;
 	justify-content: space-evenly;
@@ -427,7 +428,7 @@ h1 {
 
 .scontent {
 	position: absolute;
-    top: 67%;
+    top: 60%;
     border-top: solid gray;
     border-bottom: solid gray;
     padding: 20px;
@@ -461,6 +462,10 @@ h1 {
 #heart_img {
 	cursor: pointer;
 }
+#home_img {
+	width: 30px;
+	height: 30px;
+}
 #sreview {
 	margin-bottom: 5px;
 }
@@ -481,6 +486,9 @@ svg {
 
 #modifydelete a {
 	margin-right: 15px;
+}
+#sdetail {
+	padding: 4%;
 }
 /*무료나눔 댓글*/
 #totalsharing{	

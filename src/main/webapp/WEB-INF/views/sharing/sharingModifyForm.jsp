@@ -29,19 +29,24 @@
 			</div>
 			<br>
 			<div id="dealcontainer">
-				<div class="form-group">
-					<select class="form-control" name="sdealType" id="sel1">
-						<option id="d">직거래</option>
-						<option id="p">택배거래</option>
-						<option id="ev">모두가능</option>
-					</select> <br>
-					<div id="priceAndAI">
-						<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled /> 
-					</div> <br>
+				<div class="form-group row">
+					<div id="dealprice">
+						<span class="selectdealprice">
+							<select class="form-control" name="sdealType" id="sel1">
+								<option id="d">직거래</option>
+								<option id="p">택배거래</option>
+								<option id="ev">모두가능</option>
+							</select>
+						</span>
+						<span class="selectdealprice"> 
+							<input type="text" class="form-control" placeholder="가격: 0원" id="price" disabled />
+						</span>
+					</div>
 					<div id="dealarea">
-						<input type="button" onclick="findAddr()" value="주소검색" />
+						<span class="sellfont">거래 지역: </span> 
 						<input id="member_post" type="hidden" readonly> 
-						<input class="postarea" name="saddress" id="saddress" type="text" placeholder="'동'을 입력하세요." readonly value="${sharing.saddress }"><br> 
+						<input class="postarea" name="saddress" id="saddress" type="text" placeholder="'동'을 입력하세요." readonly value="${sharing.saddress }">
+						<input id="addresssearch" type="button" onclick="findAddr()" value="주소 검색" />
 					</div>
 				</div>
 

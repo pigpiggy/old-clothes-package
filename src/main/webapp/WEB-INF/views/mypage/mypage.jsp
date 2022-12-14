@@ -208,11 +208,11 @@
 	 /* 마이페이지에서 채팅 */
 	 // 채팅 아이콘 클릭했을 때 새 창으로
 	 function openDetail(url) {
-			var width = 850;
+			var width = 470;
 			var height = 650;
-			var left = (window.screen.width - width) / 2;
-			var top = (window.screen.height - height) / 2;
-			window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
+			//var left = (window.screen.width - width) / 2;
+			//var top = (window.screen.height - height) / 2;
+			window.open(url, 'detail', 'width=' + width +', height='+height +', location=no, status=no, scrollbar=yes');
 		} 
 	 
 		var chatuserno = document.getElementById('chatuserno').value;

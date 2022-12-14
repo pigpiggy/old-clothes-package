@@ -221,9 +221,9 @@
     <div class="container" style="position: relative;top: 63%;">
         <div class="commentList"></div>
     </div>
-<%-- <footer>
+    <div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer> --%>
+	</div>	
 <script>
 /* 이미지 슬라이드 */
 $(function() {	

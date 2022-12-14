@@ -15,6 +15,8 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
+	<c:if test="${authUser.sect eq 'users' }">
+		<c:if test="${authUser.userno eq users.userno }">
 	<div class="my_Tab">
 			<ul class="tabs">
 				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
@@ -23,6 +25,8 @@
 				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
 			</ul>
 	</div>
+	</c:if>
+	</c:if>
 	<div class="buyProductWrap">
 		<select class="buyProductSelect">
 	    	<option value="개인 판매">개인 판매</option>

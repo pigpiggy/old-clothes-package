@@ -42,6 +42,8 @@
 </head>
 <body>	
 	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
+	<c:if test="${authUser.sect eq 'users' }">
+		<c:if test="${authUser.userno eq users.userno }">
 	<div class="my_Tab">
 			<ul class="tabs">
 				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
@@ -50,6 +52,8 @@
 				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
 			</ul>
 	</div>
+	</c:if>
+	</c:if>
 	 <c:if test="${authUser.sect eq 'users' }">
 	<div id="total" style="width:1000px; margin:0 auto; margin-bottom: 25%;">
 	<div id="ucards">

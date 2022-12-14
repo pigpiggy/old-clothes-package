@@ -14,15 +14,38 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
-	<div class="my_Tab">
+		<c:if test="${authUser.sect eq 'users' }">
+		<c:if test="${authUser.userno eq users.userno }">	
+		<div class="my_Tab">
 			<ul class="tabs">
 				<li class="on"><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
 				<li><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
 				<li><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
 				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
-			</ul>
-			
-	</div>
+			</ul>			
+		</div>
+		</c:if>
+		
+		<c:if test="${authUser.userno ne users.userno }">
+		<div class="my_Tab">
+			<ul class="tabs">
+				<li class="on"><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+				</ul>			
+		</div>
+		</c:if>
+		</c:if>
+		
+		<c:if test="${authUser.sect eq 'business' || empty authUser}">		
+			<div class="my_Tab">
+			<ul class="tabs">
+				<li class="on"><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+				</ul>			
+		</div>
+		</c:if>				
+				
+				
 	<div class="sellProductWrap">
 		<select class="sellProductSelect">
 	    	<option value="개인 판매">개인 판매</option>

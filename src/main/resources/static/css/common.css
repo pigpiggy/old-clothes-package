@@ -66,6 +66,8 @@ li {
     height: auto;
     min-height: 100%;
     position: relative;
+    padding-bottom:300px;
+    margin-bottom:5px;
 }
 	
 .container { width:500px;}
@@ -82,35 +84,7 @@ li {
 }
 
 
-/* footer */
 
-footer {
-	width: 100%;
-	position: absolute;
-	box-shadow: -4px -4px 4px 0 #f3f3f4;
-	border-top: 1px solid #E9E9E9;
-    padding-top: 7px;
-    font-size: 11px;
-}
-
-footer a {
-	display: inline-block;
-	margin: 0 20px 10px 20px;
-	color: #808080; font-size: 11px;
-}
-
-footer a:visited {
-  color: #808080;
-}
-
-footer p {
-  margin-top: -5px; margin-bottom: 0;   
-}
-
-footer p span {
-  display: inline-block;
-  margin-left: 20px;
-}
 
 
  

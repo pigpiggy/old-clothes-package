@@ -16,10 +16,12 @@
 	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>	
 	<div class="wrapper">
 		<div class="chatHeader" id="chatHeader">
-			채팅
+			<img id="greenchat" src="/image/greenyellowchat.png" />
+        	<h5>채팅</h5>
 		</div>
-		<div id="chatRoom">
-		</div>
+		<div id="chatContainer">
+	        
+      	</div>
 	</div>
 	 
 	 <script type="text/javascript">
@@ -49,7 +51,11 @@
 				contentType: "application/json",
 				//전달을 성공했을때 Controller로부터 data를 return 받아 처리해주는 메서드	
 				success: function(data) {
-					
+					 console.log("data.length"+data.length)
+					 if(data.length<=15){
+						 alert("채팅 내역이 없습니다.")
+						 window.close();
+					 }
 					 var parsed = JSON.parse(data);
 					 var length = parsed.chatList.length;
 					 for (var i = 0; i < length; i++) {
@@ -92,20 +98,15 @@
 	 	
 	 	//일정 간격으로 업데이트된 데이터를 화면에 출력하는 메서드 됨
 	 	function addChatList(ino, buyerno, senderName, ititle, messageUnread, idx) {
-
+			
 	 		var str =
-	 		'<a href="/chatRoom/' + 
-	 		ino +
-	 		'/' + 
-	 		buyerno + 
-	 		'">' +
-	 		'<h3><span id="sellerName">' + 
-	 		senderName +
-	 		'&nbsp;</span>' +
-	 		'<span id="title">' + 
-	 		ititle + 
-	 		'</span><span id="message">' + 
-	 		messageUnread+'</span></h3></div></a>';
+	 		'<a href="/chatRoom/' + ino + '/' + buyerno + '">' +
+	 				'<span id="titlename"><div id="title">' + ititle + '</div>' + 
+	 				'<div id="sellerName">' +
+	 					'<img id="usericon" src="/image/orangeuser.png">' + senderName +'&nbsp;'+
+	 				'</div></span>' +
+	 				'<span id="message">' + 
+	 		messageUnread+'</span></a>';
 	 		
 	 		//HTML화면의 <div class="wrapSellerTitle0,1,...etc"> 하위에 str 변수를 추가해준다.		 		 
 	 		 $('.wrapSellerTitle' + idx).append(str);
@@ -113,7 +114,7 @@
 	 	
 	 	//페이지가 로드되는 시점 한 번만 출력하면 되는 div, img를 출력하는 메서드
 	 	function addChatDivImg(idx) {
-	 			$(document.body).append('<div class= chatMessageInfo' + idx + '><div class="wrapSellerTitle' +
+	 			$(document.body).append('<div class="chatcontainer chatMessageInfo' + idx + '"><div class="sellertitle wrapSellerTitle' +
 	 					idx +
 	 					'"></div></div>');
 	 	}

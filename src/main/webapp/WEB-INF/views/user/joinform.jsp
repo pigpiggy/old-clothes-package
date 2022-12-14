@@ -260,9 +260,9 @@
 	            </div>
 	        </div>
 	    </section>
-	    <footer>
-			<c:import url='/WEB-INF/views/includes/footer.jsp' />
-		</footer>
+	</div>
+	<div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
 	<!-- The Modal -->
 <div class="modal" id="myModal">

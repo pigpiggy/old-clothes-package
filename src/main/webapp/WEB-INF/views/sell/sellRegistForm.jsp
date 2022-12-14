@@ -17,7 +17,6 @@
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body>
-	<div id="wrap">
 		<header>
 			<c:import url='/WEB-INF/views/includes/header.jsp' />
 		</header>
@@ -30,23 +29,28 @@
 				</div>
 				<br>
 				<div id="dealcontainer">
-					<div class="form-group">
-						<select class="form-control selectbox" name="idealType" id="sel1">
-							<option>직거래</option>
-							<option>택배거래</option>
-							<option>모두가능</option>
-						</select> <br>
-						<div id="priceAndAI">
-							<span class="sellfont price">가격:</span> 
-							<input type="number" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
-							<span class="sellfont price">원</span> 
+					<div class="form-group row">
+						<div id="dealprice">					
+							<span class="selectdealprice">
+								<select class="form-control selectbox" name="idealType" id="sel1">
+									<option>직거래</option>
+									<option>택배거래</option>
+									<option>모두가능</option>
+								</select>
+							</span>
+							<span class="selectdealprice" id="priceAndAI">
+								<span class="sellfont price">가격:</span> 
+								<input type="number" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" /> 
+								<span class="sellfont price">원</span> 
+							</span>
 						</div>
-					</div>
 						<div id="dealarea">
 							<span class="sellfont">거래지역:</span> 
-							<input class="postarea" id="member_post" type="text" placeholder="주소검색" readonly onclick="findAddr()"> 
+							<input class="postarea" id="member_post" type="hidden" placeholder="주소검색" readonly onclick="findAddr()"> 
 							<input class="postarea" name="iaddress" id="iaddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
+							<input id="addresssearch" type="button" onclick="findAddr()" value="주소 검색" />
 						</div>
+					</div>	
 				</div>
 	
 				<div class="form-group">
@@ -66,7 +70,7 @@
 <%-- 		<footer>
 			<c:import url='/WEB-INF/views/includes/footer.jsp' />
 		</footer>
- --%>	</div>
+ --%>	
 		<script>
 		/* 파일 선택 - 미리보기 */
 		$(function() { 

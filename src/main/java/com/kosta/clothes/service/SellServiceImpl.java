@@ -91,7 +91,7 @@ public class SellServiceImpl implements SellService{
 		for(int i = 0; i < sellList.size(); i++) {
 			String addr = sellList.get(i).getIaddress();
 			String[] addChange = addr.split(" ");
-			if(addChange[2].matches("^+구$")) {
+			if(addChange[2].matches("^.*.구$")) {
 				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 				sellList.get(i).setIaddress(join1);
 				System.out.println("join1:" + join1);
@@ -113,7 +113,7 @@ public class SellServiceImpl implements SellService{
 		for(int i = 0; i < sellList.size(); i++) {
 			String addr = sellList.get(i).getIaddress();
 			String[] addChange = addr.split(" ");
-			if(addChange[2].matches("^+구$")) {
+			if(addChange[2].matches("^.*.구$")) {
 				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 				sellList.get(i).setIaddress(join1);
 				System.out.println("join1:" + join1);

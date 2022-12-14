@@ -73,8 +73,10 @@
 		    
 		    <div class="modal_layer"></div>
 		</div>	
-
 	</div>
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>	
 <script>
 $(document).ready(function(){
 	let category = "free";

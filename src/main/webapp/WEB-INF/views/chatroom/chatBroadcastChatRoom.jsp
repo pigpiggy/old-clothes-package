@@ -15,9 +15,12 @@
 </head>
 <body>
 	<div class="container">
-		<div class="title_text">
-			<h2>${ititle}</h2>
-		</div>
+		<div class="chat-header">
+			<div id="chatback">
+				<img id="chatbackimg" src="/image/back.png">
+			</div>
+			<h1 class="chat-header__name">${ititle}</h1>
+        </div>
 		<div class="row">
 			<div class="col_6">
 				<div class="row_3">
@@ -33,17 +36,34 @@
 					</div>				
 				</div>				
 				<div class="col_6">
-					<div id="content">
 						<div id="content">
 							<c:forEach var="chatRoom" items="${chatHistory}">
-								<p>
-									<span id="chatRoomSenderName">${chatRoom.senderName}</span><br>
-									<span id="chatRoomContent">${chatRoom.content}</span><br>
-									<span id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
-								</p>	
+								<c:choose>
+									<c:when test="${chatRoom.senderName eq authUser.nickname}">
+										<div class="chat-item chat-item-me">
+											<div class="message">
+													<span class="message__user-name" id="chatRoomSenderName">${chatRoom.senderName}</span><br>
+													<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+													<i class="fa fa-clock-o"></i>
+													<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
+											</div>
+											<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar">
+										</div>
+									</c:when>
+								<c:otherwise>		
+									<div class="chat-item chat-item-other">
+										<img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/matthew.png" alt="avatar">
+										<div class="message">
+											<span class="message__user-name" id="chatRoomSellerName">${chatRoom.senderName}</span><br>
+											<span class="message__text" id="chatRoomContent">${chatRoom.content}</span><br>
+											<i class="fa fa-clock-o"></i>
+											<span class="message__time" id="chatRoomSendTime">${chatRoom.sendTime}</span><br>
+										</div>
+									</div>
+								</c:otherwise>
+								</c:choose>	
 							</c:forEach>
 						</div>
-					</div>
 					<!-- 
 					<div>
 						<span class="float-right">
@@ -53,10 +73,10 @@
 					-->
 				</div>
 				<div class="row_3">
-					<div class="input_group" id="sendMessage">
-						<input type="text" placeholder="Message" id="message" class="form_control"/>
+					<div class="input_group chat-controls" id="sendMessage">
+						<input type="text" class="chat-controls__textarea" id="message" placeholder="message" />
 						<div class="input_group_append">
-							<button id="send" class="btn btn-primary" onclick="send()">보내기</button>
+							<button id="send" class="chat-controls-buttons__send" onclick="send()">보내기</button>
 							<input type="hidden" value="${authUser.getNickname()}" id="senderName"/>
 							<input type="hidden" value="${authUser.getUserno()}" id="senderId"/>
 							<input type="hidden" value="${chatno}" id="chatno"/>					
@@ -173,14 +193,30 @@
 		function createTextNode(messageObj) {
 			console.log("createTextNode");
 			console.log("messageObj: " + messageObj.content);
-            return '<p><div class="row alert alert-info"><div class="col_8">' +
-            messageObj.senderName +
-            '</div><div class="col_4 text-right">' +
-            messageObj.content+
-            '</div><div>[' +
-            messageObj.sendTime +
-            ']</div></p>';
-        }
+			console.log("buyername:" + buyerName);
+			console.log("sellername:" + sellerName);
+			console.log("senderName:" + messageObj.senderName);
+			if(messageObj.senderName==senderName) {
+				return '<div class="chat-item chat-item-me"><div class="message"><span class="message__user-name" id="chatRoomSenderName">' +
+				messageObj.senderName +
+	            '</span><br><span class="message__text" id="chatRoomContent">' +
+	            messageObj.content+
+	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            messageObj.sendTime +
+	            ']</span><br></div><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar"></div>';
+			} else {
+				return '<div class="chat-item chat-item-other"><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/matthew.png">'+
+	            '<div class="message"><span class="message__user-name" id="chatRoomSellerName">'+ 
+	            messageObj.senderName + 
+	            '</span><br><span class="message__text" id="chatRoomContent">' + 
+	            messageObj.content+
+	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            messageObj.sendTime +
+				'</span><br></div></div>';
+				
+			}
+       
+		}
 		
 		function showBroadcastMessage(message) {
             $("#content").html($("#content").html() + message);
@@ -213,7 +249,9 @@
 				contentType: 'application/json'
 			})
 		}
-	
+	$('#chatback').click(function(){
+		location.replace("http://localhost:8088/chatList")
+	})
 	</script>
 </body>
 </html>

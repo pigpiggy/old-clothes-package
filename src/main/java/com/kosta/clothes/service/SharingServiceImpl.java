@@ -129,7 +129,7 @@ public class SharingServiceImpl implements SharingService{
 		for(int i = 0; i < sharingList.size(); i++) {
 			String addr = sharingList.get(i).getSaddress();
 			String[] addChange = addr.split(" "); //주소 공백으로 분
-			if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+			if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
 				String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 				sharingList.get(i).setSaddress(join1);
 				System.out.println("join1:" + join1);

@@ -20,6 +20,9 @@
  port = 9090 => 3c4f67ffd89ba5324a466e5a4f4bd0f5 
  --%>
 <style>
+#donationcontainer {
+	margin-bottom: 25%;
+}
 div.contents {
   text-align: left;
   padding-left: 50px;
@@ -81,79 +84,82 @@ input[type=radio] {
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
 	
-	
-	<div class="contents">
-		<div class="form-radio" style="text-align:left; margin-left:180px; margin-top:-100px;">
-	        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
-	        <label for="person" style="width:120px;">온라인</label>
-			&nbsp; &nbsp;
-	        <input type="radio" name="donation_level" value="offline" id="offline" />
-	        <label for="business">오프라인</label>
-		</div>
-		<br>		
-		<br>
-	<%--오프라인 위치 안내 --%>
-			<div id="offlineview">
-				<div class="select" style="top:30px;">
-					<select id="sido"><option value="">선택</option></select>
-				</div>
-				<div class="select" style="margin-left:170px; top:-5px;">
-					<select id="sigugun"><option value="">선택</option></select>
-				</div>
-				<!-- <div class="select" style="margin-left:340px; top:-39px;">
-					<select id="dong"><option value="">선택</option></select>
-				</div>  -->
-				<%-- 지도를 표시할 div 입니다 --%>
-			
-					
-				<div>
-					<%-- 텍스트: <span id="dongName"></span><br/>--%>
-					<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-					<!-- <input type="button" id="searchBtn" value="검색"> --> 
-		
-				</div>
-				<div id="a">
-					<div id="map"></div>
-					<div id="c">
-					<h1 id="donationlist">[기부업체 리스트 목록]</h1>
-				
-						<div id="b">		
-							<c:forEach var="donation" items="${donation}">
-								<input type="hidden" class="allname" name="allname" id="allname" value="${donation.dname}">
-								<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
-								<input type="hidden" class="allphone" name="totalphone" id="totalphone" value="${donation.dphone}">
-								<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
-								<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
-								<div id="indexlist">
-									<div class="listdnames"id="listdnames"><h2> &nbsp; &nbsp; ${donation.dname }</h2></div>
-									<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
-									<br>
-								</div>	
-							</c:forEach>
-						</div>
+	<div id="donationcontainer">
+		<div class="contents">
+			<div class="form-radio" style="text-align:left; margin-left:180px; margin-top:-100px;">
+		        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
+		        <label for="person" style="width:120px;">온라인</label>
+				&nbsp; &nbsp;
+		        <input type="radio" name="donation_level" value="offline" id="offline" />
+		        <label for="business">오프라인</label>
+			</div>
+			<br>		
+			<br>
+		<%--오프라인 위치 안내 --%>
+				<div id="offlineview">
+					<div class="select" style="top:30px;">
+						<select id="sido"><option value="">선택</option></select>
 					</div>
-				</div>						
-			</div>			
-		</div>	
-		<%--온라인 사이트 안내 --%>
-		<div id="onlineview">
-			<h1 id=donationsite>기부사이트 안내</h1>
-			<a href="https://www.beautifulstore.org/donation" target="_blank"><button style="cursor:pointer;" class="storebtn">신청서 작성</button></a>
-			<c:forEach var="online" items="${donation }">	
-				<c:if test="${online.dname eq '굿윌스토어 굿윌본부' || online.dname eq '아름다운 가게 서울본부' || online.dname eq '숲스토리 의정부본점'}">			
-					<hr width="1000px;">									
-					<div class="leftimg"><img class="dimg" src="/image/${online.dfile }" alt="굿윌 본부점"></div>
-					<div class="rightcontent"><br>
-						<h3 class="names">[업체명 : ${online.dname }]</h3>
-						<h4>주소 : ${online.daddress }  </h4>
-						<h4>전화 번호 : ${online.dphone }</h4>						
-					</div>											
-				</c:if>				
-			</c:forEach>
-			<a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button style="cursor:pointer;" class="storybtn">신청서 작성</button></a>
-			<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a>
-		</div>
-
+					<div class="select" style="margin-left:170px; top:-5px;">
+						<select id="sigugun"><option value="">선택</option></select>
+					</div>
+					<!-- <div class="select" style="margin-left:340px; top:-39px;">
+						<select id="dong"><option value="">선택</option></select>
+					</div>  -->
+					<%-- 지도를 표시할 div 입니다 --%>
+				
+						
+					<div>
+						<%-- 텍스트: <span id="dongName"></span><br/>--%>
+						<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+						<!-- <input type="button" id="searchBtn" value="검색"> --> 
+			
+					</div>
+					<div id="a">
+						<div id="map"></div>
+						<div id="c">
+						<h1 id="donationlist">[기부업체 리스트 목록]</h1>
+					
+							<div id="b">		
+								<c:forEach var="donation" items="${donation}">
+									<input type="hidden" class="allname" name="allname" id="allname" value="${donation.dname}">
+									<input type="hidden" class="alladdress" name="totaladdress" id="totaladdress" value="${donation.daddress}">
+									<input type="hidden" class="allphone" name="totalphone" id="totalphone" value="${donation.dphone}">
+									<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">		
+									<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">
+									<div id="indexlist">
+										<div class="listdnames"id="listdnames"><h2> &nbsp; &nbsp; ${donation.dname }</h2></div>
+										<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${donation.daddress }<br/></div>
+										<br>
+									</div>	
+								</c:forEach>
+							</div>
+						</div>
+					</div>						
+				</div>			
+			</div>	
+			<%--온라인 사이트 안내 --%>
+			<div id="onlineview">
+				<h1 id=donationsite>기부사이트 안내</h1>
+				<a href="https://www.beautifulstore.org/donation" target="_blank"><button style="cursor:pointer;" class="storebtn">신청서 작성</button></a>
+				<c:forEach var="online" items="${donation }">	
+					<c:if test="${online.dname eq '굿윌스토어 굿윌본부' || online.dname eq '아름다운 가게 서울본부' || online.dname eq '숲스토리 의정부본점'}">			
+						<hr width="1000px;">									
+						<div class="leftimg"><img class="dimg" src="/image/${online.dfile }" alt="굿윌 본부점"></div>
+						<div class="rightcontent"><br>
+							<h3 class="names">[업체명 : ${online.dname }]</h3>
+							<h4>주소 : ${online.daddress }  </h4>
+							<h4>전화 번호 : ${online.dphone }</h4>						
+						</div>											
+					</c:if>				
+				</c:forEach>
+				<a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button style="cursor:pointer;" class="storybtn">신청서 작성</button></a>
+				<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a>
+			</div>
+	</div>	
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>	
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 

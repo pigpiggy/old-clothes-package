@@ -87,6 +87,9 @@
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart" id="icons">
+		          		<a href="/mypage/umypage/${sharing.userno }/sell">
+		          			<img src="/image/home.png" id="letter_img" alt="옷장 열기">
+		          		</a>			        		
 	        			<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
@@ -241,9 +244,9 @@
     <div class="container" style="position: relative;top: 63%;">
         <div class="commentList"></div>
     </div>
-<%-- <footer>
-		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer> --%>
+	<footer>
+			<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</footer> 
 <script>
 /* 이미지 슬라이드 */
 $(function() {	

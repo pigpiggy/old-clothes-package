@@ -80,7 +80,7 @@
 	<!-- 거래 상태 카운트 -->
 	<select id="astatuscount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
-				select count(*) from apply where bno=#{bno} and astatus='신청완료'
+				select count(*) from apply where bno=#{bno} and astatus='후기등록완료'
 			]]>
 		</select>
 		
@@ -93,6 +93,18 @@
 	<select id="cstatuscount"  parameterType="Integer" resultType="Integer">
 			<![CDATA[
 				select count(*) from apply where bno=#{bno} and astatus='수거완료'
+			]]>
+		</select>
+		
+	<select id="dstatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='신청중'
+			]]>
+		</select>
+		
+	<select id="estatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='신청완료'
 			]]>
 		</select>
 	

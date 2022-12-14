@@ -47,6 +47,7 @@ dependencies {
 	//비밀번호 암호화
 	// https://mvnrepository.com/artifact/org.mindrot/jbcrypt
 	implementation 'org.mindrot:jbcrypt:0.4'
+	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'    /* thumbnailator */
 }
 
 tasks.named('test') {

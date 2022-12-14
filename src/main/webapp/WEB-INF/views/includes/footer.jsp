@@ -20,9 +20,9 @@
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
-.fsite-footer-bottom h4{
+.fsite-footer-bottom h5{
     font-family: var(--bs-body-font-family);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
     
@@ -196,8 +196,7 @@ transform:translateY:(-100%);
                 </div>
 
                 <div class="fcol-lg-6 fcol-md-5 fcol-12 fjustify-content-center falign-items-center fmx-auto">
-                    <h4 class="fsite-footer-title fmb-3">팀원</h4>
-                    
+                    <h5 class="fsite-footer-title fmb-3">팀원</h5>
                     <p class="ftext-white fd-flex fmt-3">
                         <i class="fbi-geo-alt fme-2"></i>
                         김갑경, 김문진, 김해나, 조정학, 홍소미

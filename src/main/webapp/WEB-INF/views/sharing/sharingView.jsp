@@ -81,7 +81,8 @@
           <span>${sharing.sname }</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
-	        		<div class="letterAndHeart">	
+	        		<div class="letterAndHeart">
+		          		<img src="/image/home.png" id="letter_img" alt="쪽지">
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
 		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
 	        		</div>
@@ -92,6 +93,7 @@
 	        				<c:if test="${authUser.userno ne sharing.userno }">
 				          		<div class="letterAndHeart">	
 					          		<a href="#demo-modal">
+					          			<img src="/image/home.png" id="letter_img" alt="옷장 열기">
 					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
 					          		</a>
 					          			<c:choose>

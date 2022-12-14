@@ -101,7 +101,7 @@
 				        </div>
 				        <div id="reviewWriter">
 				        	<div class="rNickname">
-				        		<img src="/image/orangeuser.png">
+				        		<img src="/image/yellowuser.png">
 				            	<span class="cardheader">${review.nickname }</span>
 				            </div>
 				            <span class="cardheader">${review.regdate }</span>

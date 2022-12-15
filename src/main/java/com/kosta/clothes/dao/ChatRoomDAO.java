@@ -19,7 +19,7 @@ public interface ChatRoomDAO {
 	
 	//String chatId, String pr_id, String senderId, String recipientId
 	
-	public List<ChatList> findByEmail(String chatuserno);
+	public List<ChatList> findByEmail(Integer chatuserno);
 	
 	public int countByChatId(@Param("ino") Integer ino, @Param("buyerno") Integer buyerno);
 	
@@ -35,9 +35,9 @@ public interface ChatRoomDAO {
 	
 	public void updateChatReadSell(@Param("chatno")Integer chatno, @Param("chatReadSell")int chatReadSell);
 
-	public int getUnreadMessages(String chatuserno);
+	public int getUnreadMessages(Integer chatuserno);
 	
-	public List<Integer> getUnreadChatRoom(String chatuserno);
+	public List<Integer> getUnreadChatRoom(Integer chatuserno);
 	
 	public void deleteChat(@Param("sellerno") Integer sellerno, @Param("ino") Integer ino);
 }

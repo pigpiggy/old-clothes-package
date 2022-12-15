@@ -37,12 +37,6 @@
 }
 <!--카카오 ID 넣는 방법 설명[hover 순서 중요] 안 될시 req위로 display:block올리고 none 그 밑으로 올리고 왔다갔다하면 됩니다.. -->
 
-#wrapper{
-  height: auto;
-  min-height: 100%;
-  padding-bottom: 50px;
-}
-
 .my_img {
 	display:none;
 	width:495px;
@@ -51,16 +45,20 @@
 .form-outline:hover .my_img {
     display: block;
 }
+
+#wrap{
+	padding-bottom:16%;
+}
  
 
  
 </style>
 </head>
 <body>
-	<div id="wrap">
-		<div>
+	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
-		</div>
+	</div>
+	<div id="wrap">
 		<br>
 	    <section class="vh-100 bg-image">
 	        <div class="mask d-flex align-items-center h-100 gradient-custom-3">

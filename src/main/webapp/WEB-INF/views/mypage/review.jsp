@@ -21,7 +21,7 @@
 			</ul>
 	</div>
 	</c:if>
-	
+
 	<c:if test="${authUser.userno ne users.userno }">
 		<div class="my_Tab">
 			<ul class="tabs">
@@ -31,7 +31,7 @@
 			</div>
 		</c:if>
 		</c:if>
-		
+
 		<c:if test="${authUser.sect eq 'business' || empty authUser}">		
 			<div class="my_Tab">
 			<ul class="tabs">
@@ -40,7 +40,7 @@
 			</ul>
 			</div>
 		</c:if>
-	
+
 	<div id="rCards">
 		<div class="rCard-list">
 			<c:forEach var="review" items="${reviewList }">

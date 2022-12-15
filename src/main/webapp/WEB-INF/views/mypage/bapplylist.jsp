@@ -52,7 +52,7 @@
 			</c:if>
 	
 	<c:if test="${authUser.sect eq 'business' }">	
-	<div id="total" style="width:1000px; margin:0 auto;">
+	<div id="total" style="width:1000px; margin:0 auto; margin-bottom: 25%;">
 	<div id="bcards">		
 	<c:forEach var="apply" items="${apply }">	
 	<c:if test="${authUser.bno eq apply.bno }">		 
@@ -162,7 +162,9 @@
 		</c:choose>
 	</ul>
     </div>
-	
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>	
 	<script>
 	var anos;
 	var usernos;	

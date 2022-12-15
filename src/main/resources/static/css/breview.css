@@ -6,6 +6,9 @@
 html {
 	font-size: 1em;
 }
+#reviewcontainer{ 
+	margin-bottom: 25%;
+}
 .rcard {
 	background: #fff;
 	border-radius: 2px;

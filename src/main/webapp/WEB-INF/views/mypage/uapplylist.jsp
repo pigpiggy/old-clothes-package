@@ -38,6 +38,7 @@
 	position: relative;
     display: block;
 }
+
 </style>
 </head>
 <body>	
@@ -55,7 +56,7 @@
 	</c:if>
 	</c:if>
 	 <c:if test="${authUser.sect eq 'users' }">
-	<div id="total" style="width:1000px; margin:0 auto;">
+	<div id="total" style="width:1000px; margin:0 auto; margin-bottom: 25%;">
 	<div id="ucards">
 	<c:forEach var="wapply" items="${wapply }">
 	<input type="hidden" id="bno" name="bno" value="${wapply.bno }" data-sno="${wapply.bno }">
@@ -182,9 +183,9 @@
 		</c:choose>
 	</ul>
     </div>
-
-
-	 
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>
 	<script>
 	var bnoo = $('#bno').val();
 	console.log("bnoo :" + bnoo);

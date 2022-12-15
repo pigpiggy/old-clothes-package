@@ -63,10 +63,17 @@ public class ApplyServiceImpl implements ApplyService{
 		Integer a=applyDAO.astatuscount(bno);
 		Integer b=applyDAO.bstatuscount(bno);
 		Integer c=applyDAO.cstatuscount(bno);
+		Integer d=applyDAO.dstatuscount(bno);
+		Integer e=applyDAO.estatuscount(bno);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("신청완료", a);
+		map.put("후기등록완료", a);
 		map.put("신청거절", b);
 		map.put("수거완료", c);
+		map.put("신청중", d);
+		System.out.println("신청중:"+d);
+		map.put("신청완료", e);
+		System.out.println("신청완료:"+e);
+		
 		return  map;
 	}
 

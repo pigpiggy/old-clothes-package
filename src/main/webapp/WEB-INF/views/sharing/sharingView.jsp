@@ -185,45 +185,47 @@
       </div>
       
     </section>
-    </div>
     <%--무료나눔 댓글 --%>
-    <label for="content" style="position:relative; top:63%; left:38%; ">Comment</label>
-    <br><br>
-    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
-    <c:if test="${authUser.sect eq 'users' }">
-				<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
-	</c:if>
-	<c:choose>
-		<c:when test="${authUser.sect eq 'users' }">
-		     <div class="container" style="top: 60%;position: relative;">				        
-		        <form name="commentInsertForm">
-		            <div class="input-group">
-		               <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
-		               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-		               <span class="input-group-btn">
-		                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-		               </span>
-		              </div>
-		        </form>
+    <div id="commentcontainer">
+	    <label for="content" >Comment</label>
+	    <br><br>
+	    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
+	    <c:if test="${authUser.sect eq 'users' }">
+					<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
+		</c:if>
+		<c:choose>
+			<c:when test="${authUser.sect eq 'users' }">
+			     <div class="container" style="top: 60%;position: relative;">				        
+			        <form name="commentInsertForm">
+			            <div class="input-group">
+			               <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
+			               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+			               <span class="input-group-btn">
+			                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+			               </span>
+			              </div>
+			        </form>
+			    </div>
+	    	</c:when>
+		    <c:otherwise>
+		    	<div class="container" style="top: 60%;position: relative;">
+		    		<form name="commentInsertForm">
+		            	<div class="input-group">                
+		               		<input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="로그인 및 사용자로그인 후 가능합니다." readonly>              
+		            	</div>
+		        	</form>
+		        </div>
+		    </c:otherwise>
+	    </c:choose>
+	    <br><br> 
+		    <div class="container" style="position: relative;top: 63%;">
+		        <div class="commentList"></div>
 		    </div>
-    	</c:when>
-	    <c:otherwise>
-	    	<div class="container" style="top: 60%;position: relative;">
-	    		<form name="commentInsertForm">
-	            	<div class="input-group">                
-	               		<input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="로그인 및 사용자로그인 후 가능합니다." readonly>              
-	            	</div>
-	        	</form>
-	        </div>
-	    </c:otherwise>
-    </c:choose>
-    <br><br> 
-    <div class="container" style="position: relative;top: 63%;">
-        <div class="commentList"></div>
+		</div>		    
     </div>
-<%-- <footer>
+    <div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer> --%>
+	</div>	
 <script>
 /* 이미지 슬라이드 */
 $(function() {	

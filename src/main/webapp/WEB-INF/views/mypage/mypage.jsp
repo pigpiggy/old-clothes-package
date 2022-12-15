@@ -102,10 +102,41 @@
 			  <span>받은 거래후기 : ${reviewcount }개</span>
 			 </c:when>
 			 <c:otherwise>
-			 <span>신청목록 : ${applycount} 개</span>
-			 <span>수거 중 : ${acount} 개</span>
-			 <span>수거완료 : ${ccount} 개</span>
-			 <span>수거거절 : ${bcount} 개</span>
+			 	<c:choose>
+			 		<c:when test="${!empty authUser}">
+			 			<c:choose>
+			 				<c:when test="${authUser.sect eq 'users'}">
+					 			<span>신청목록 : ${applycount} 개</span>
+								<span>수거완료 : ${ccount} 개</span>
+								<span>수거거절: ${bcount} 개</span>
+								<span>거래후기 : ${acount} 개</span>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${authUser.bno eq business.bno}">
+										<span>신청목록 : ${applycount} 개</span>
+										<span>수거신청 : ${dcount} 개</span>
+										<span>수거중 : ${ecount} 개</span>
+										<span>신청거절 : ${bcount} 개</span>
+									</c:when>
+									<c:otherwise>
+										<span>신청목록 : ${applycount} 개</span>
+										<span>수거완료 : ${ccount} 개</span>
+										<span>수거거절: ${bcount} 개</span>
+										<span>거래후기 : ${acount} 개</span>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+			 		</c:when>
+			 		<c:otherwise>
+			 			<span>신청목록 : ${applycount} 개</span>
+						<span>수거완료 : ${ccount} 개</span>
+						<span>수거거절 : ${bcount} 개</span>
+						<span>거래후기 : ${acount} 개</span>
+			 		</c:otherwise>	
+			 
+			 	</c:choose>
 			 </c:otherwise>
 			</c:choose>	   
       	  

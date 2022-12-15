@@ -27,6 +27,7 @@
 .buyProductWrap {
 	width: 1000px;
 	margin: 0 auto;
+	margin-bottom: 25%;
 }
 
 .card2, .card-body, .card-footer {

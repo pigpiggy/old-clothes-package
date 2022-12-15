@@ -78,7 +78,7 @@ public class MypageController {
 	                  
 	                  //수거상태개수
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
@@ -103,12 +103,16 @@ public class MypageController {
 	              
 	                  //사업자개수개수
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer dcount= (Integer) astatuscount.get("신청중");
+	                  Integer ecount= (Integer) astatuscount.get("신청완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
-	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("dcount",dcount);
+	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("ccount",ccount);
 	                  
 	              }else {//로그인 안했을 때
@@ -123,12 +127,13 @@ public class MypageController {
 	               
 	               //사업자 개수
 	               Map astatuscount= applyService.astatuscount(bno);
-	               Integer acount= (Integer) astatuscount.get("신청완료");
-	               Integer bcount= (Integer) astatuscount.get("신청거절");
-	               Integer ccount= (Integer) astatuscount.get("수거완료");
-	               System.out.println("astatuscount:"+astatuscount);
-	               model.addAttribute("acount",acount);
-	               model.addAttribute("bcount",bcount);model.addAttribute("ccount",ccount);
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer ccount= (Integer) astatuscount.get("수거완료");
+	                  System.out.println("astatuscount:"+astatuscount);
+	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("ccount",ccount);
 	              }
 	         }else {
 	            System.out.println("bmypage 무무무");
@@ -143,7 +148,7 @@ public class MypageController {
                  
                  //수거상태
                  Map astatuscount= applyService.astatuscount(bno);
-                 Integer acount= (Integer) astatuscount.get("신청완료");
+                 Integer acount= (Integer) astatuscount.get("후기등록완료");
                  Integer bcount= (Integer) astatuscount.get("신청거절");
                  Integer ccount= (Integer) astatuscount.get("수거완료");
                  System.out.println("astatuscount:"+astatuscount);
@@ -186,7 +191,7 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
@@ -215,12 +220,16 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer dcount= (Integer) astatuscount.get("신청중");
+	                  Integer ecount= (Integer) astatuscount.get("신청완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
-	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("dcount",dcount);
+	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("ccount",ccount);
 	                      
 	              }else {//로그인 안했을 때
@@ -243,7 +252,7 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("신청완료");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
@@ -273,7 +282,7 @@ public class MypageController {
                  
                  //수거상태
                  Map astatuscount= applyService.astatuscount(bno);
-                 Integer acount= (Integer) astatuscount.get("신청완료");
+                 Integer acount= (Integer) astatuscount.get("후기등록완료");
                  Integer bcount= (Integer) astatuscount.get("신청거절");
                  Integer ccount= (Integer) astatuscount.get("수거완료");
                  System.out.println("astatuscount:"+astatuscount);
@@ -313,8 +322,8 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
@@ -337,12 +346,16 @@ public class MypageController {
 	           
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer dcount= (Integer) astatuscount.get("신청중");
+	                  Integer ecount= (Integer) astatuscount.get("신청완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
-	                  model.addAttribute("acount",acount);
+	                  model.addAttribute("dcount",dcount);
+	                  model.addAttribute("ecount",ecount);
 	                  model.addAttribute("bcount",bcount);
+	                  model.addAttribute("acount",acount);
 	                  model.addAttribute("ccount",ccount);
 	                  
 	              }else {//로그인 안했을 때
@@ -362,8 +375,8 @@ public class MypageController {
 	                  
 	                  //수거상태
 	                  Map astatuscount= applyService.astatuscount(bno);
-	                  Integer acount= (Integer) astatuscount.get("수거중");
-	                  Integer bcount= (Integer) astatuscount.get("수거거절");
+	                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+	                  Integer bcount= (Integer) astatuscount.get("신청거절");
 	                  Integer ccount= (Integer) astatuscount.get("수거완료");
 	                  System.out.println("astatuscount:"+astatuscount);
 	                  model.addAttribute("acount",acount);
@@ -374,6 +387,19 @@ public class MypageController {
                  //거래후기
                  reviewList = reviewService.getBReviewList(bno, rpage, rpageInfo);
                  model.addAttribute("reviewList", reviewList);	
+                 
+                 Map astatuscount= applyService.astatuscount(bno);
+                 Integer acount= (Integer) astatuscount.get("후기등록완료");
+                 Integer bcount= (Integer) astatuscount.get("신청거절");
+                 Integer ccount= (Integer) astatuscount.get("수거완료");
+                 System.out.println("astatuscount:"+astatuscount);
+                 model.addAttribute("acount",acount);
+                 model.addAttribute("bcount",bcount);
+                 model.addAttribute("ccount",ccount);
+                 
+                 Integer applycount = applyService.applycount(bno);
+           	  	 System.out.println("applycount : " + applycount);
+                 model.addAttribute("applycount",applycount);
 	         }
 			Business business = messageService.mypageBusiness(bno);
 			System.out.println("business mypage" +  business.toString());         

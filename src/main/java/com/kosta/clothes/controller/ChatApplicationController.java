@@ -161,7 +161,7 @@ public class ChatApplicationController {
 	public int chatUnread(@RequestBody String json) {
 		
 		JSONObject jsn = new JSONObject(json);
-		String chatuserno = (String) jsn.get("chatuserno");
+		Integer chatuserno = Integer.parseInt((String) jsn.get("chatuserno"));
     	int messages = chatRoomService.getUnreadMessages(chatuserno);
 
 		return messages;
@@ -173,7 +173,7 @@ public class ChatApplicationController {
 		//ajax가 전송한 String을 key, value로 분류하기 위해 JSON Object convert
 		JSONObject jsn = new JSONObject(json);
 		//JSON.get([mapped name])으로 value 추출하기
-		String chatuserno = (String) jsn.get("chatuserno");
+		Integer chatuserno = Integer.parseInt((String)jsn.get("chatuserno"));
 		//email에 해당되는 모든 chatRoom select 받기
 		List<ChatList> chatRoomList = chatRoomService.findByEmail(chatuserno);
 		//chatRoom 정보는 JSON Array에 저장됨
@@ -187,9 +187,9 @@ public class ChatApplicationController {
 			 jo.put("ino", chatList.getIno());
 			 jo.put("buyerno", chatList.getBuyerno());
 		 	//리스트에 출력할 상대방 닉네임 확인
-		 if (chatList.getBuyerno().equals(chatuserno)) {
+		 if (chatList.getBuyerno()==chatuserno) {
 			 jo.put("senderName", chatList.getSellerName());
-		 } else {
+		 } else if(chatList.getSellerno()==chatuserno){
 			 jo.put("senderName", chatList.getBuyerName());
 		 }
 		 
@@ -225,7 +225,7 @@ public class ChatApplicationController {
 	public String chatList(@RequestBody String json) {
 		
 		JSONObject jsn = new JSONObject(json);
-		String chatuserno = (String) jsn.get("chatuserno");
+		Integer chatuserno = Integer.parseInt((String) jsn.get("chatuserno"));
 		List<ChatList> chatRoomList = chatRoomService.findByEmail(chatuserno);		 
 		JSONArray ja = new JSONArray();
 

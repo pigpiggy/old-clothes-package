@@ -52,9 +52,15 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.stitle+"</h2>";
-		              		str	+= "<p>"+this.addressCity+" "+this.addressTown+"</p>";
+		              		const address = this.saddress.split(" ");
+		              		if(address[2].match("^.*.구$")!=null){
+								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
+							}
+		              		else{
+								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
+							}
 		          			str	+= "</div>";
-		          			if(this.addressCity !=null && this.addressCity !=""){
+		          			if(this.saddress !=null && this.saddress !=""){
 								str	+= "<div class="+"'card-footer'"+">";
 								str	+= this.sdealType;
 								str	+= "</div>";

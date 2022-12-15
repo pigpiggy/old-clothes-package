@@ -160,6 +160,9 @@ if (msg != ""){
             </div>
         </div>
     </section>
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>
 </body>
 
 </html>

@@ -107,7 +107,7 @@ public class ChatRoomService implements ChatRoomDAO {
 	}
 
 	@Override
-	public List<ChatList> findByEmail(String chatuserno) {
+	public List<ChatList> findByEmail(Integer chatuserno) {
 		return chatRoomDAO.findByEmail(chatuserno);
 	}
 
@@ -177,12 +177,12 @@ public class ChatRoomService implements ChatRoomDAO {
 	}
 	
 	@Override
-	public int getUnreadMessages(String chatuserno) {
+	public int getUnreadMessages(Integer chatuserno) {
 		return chatRoomDAO.getUnreadMessages(chatuserno);
 	}
 
 	@Override
-	public List<Integer> getUnreadChatRoom(String chatuserno) {
+	public List<Integer> getUnreadChatRoom(Integer chatuserno) {
 		List<Integer> unread = chatRoomDAO.getUnreadChatRoom(chatuserno); 
 		return unread;
 	}

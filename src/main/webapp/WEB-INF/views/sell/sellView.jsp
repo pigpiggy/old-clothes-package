@@ -244,9 +244,9 @@
     <div class="container" style="position: relative;top: 63%;">
         <div class="commentList"></div>
     </div>
-<%-- <footer>
-		<c:import url='/WEB-INF/views/includes/footer.jsp' />
-</footer> --%>
+	<footer>
+			<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</footer> 
 <script>
 /* 이미지 슬라이드 */
 $(function() {	

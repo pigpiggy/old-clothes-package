@@ -121,6 +121,8 @@
 		
 		$(document).ready(connect());
 		
+	//send를 통해 메시지를 전송했을 때 broker를 거쳐 유저에게 전달
+	//메시지를 다이렉트로 전달 받는 경로는 subscribe로 설정
 		function connect() {
 			var socket = new SockJS('/broadcast');
 			var url = '/user/' + chatno + '/queue/messages';
@@ -160,6 +162,7 @@
 			
 			stompClient.send("/app/broadcast", {}, JSON.stringify(json));
 		}
+		
 		
 		function send() {
 			//ajaxChatRoom();
@@ -201,7 +204,7 @@
 				messageObj.senderName +
 	            '</span><br><span class="message__text" id="chatRoomContent">' +
 	            messageObj.content+
-	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime"> [' +
 	            messageObj.sendTime +
 	            ']</span><br></div><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar"></div>';
 			} else {
@@ -210,7 +213,7 @@
 	            messageObj.senderName + 
 	            '</span><br><span class="message__text" id="chatRoomContent">' + 
 	            messageObj.content+
-	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime"> [' +
 	            messageObj.sendTime +
 				'</span><br></div></div>';
 				

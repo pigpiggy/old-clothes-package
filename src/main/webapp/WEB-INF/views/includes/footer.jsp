@@ -160,7 +160,7 @@ transform:translateY:(-100%);
 }
 
 .fsite-footer-title {
-	color: #5bc1ac;
+	color: skyblue;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: -1px;

@@ -219,7 +219,7 @@
 .chat-item-other .message {
   margin-left: 15px;
   background: #f6f6f6;
-  width: 224px;
+  width:35%;
 }
 
 .chat-item-other .message::before {
@@ -272,6 +272,7 @@
 .chat-item-me .message {
   margin-right: 15px;
   background: #f6f6f6;
+  width:35%;
 }
 .chat-item-me .message::after {
   left: 100%;

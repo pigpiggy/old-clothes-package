@@ -9,6 +9,7 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/bmypage.jsp' />
+	<div class="breview_wrap">
 	<c:if test="${authUser.sect eq 'business' }">
 		<c:if test="${authUser.bno eq business.bno }">
 			<div class="my_Tab">
@@ -19,6 +20,7 @@
 			</div>
 		</c:if>
 	
+<<<<<<< HEAD
 		<c:if test="${authUser.bno ne business.bno }">
 			<div class="my_Tab">
 					<ul class="tabs">						
@@ -34,6 +36,21 @@
 					<li class="on"><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
 				</ul>			
 		</div>
+=======
+	<c:if test="${authUser.bno ne business.bno }">
+	<div class="breview">
+	<strong>거래후기</strong>				
+	</div>
+	<div class="breview_cont"></div>
+	</c:if>
+	</c:if>
+	
+	<c:if test="${authUser.sect eq 'users' || empty authUser}">
+	<div class="breview">
+	<strong>받은 거래후기</strong>				
+	</div>
+	<div class="breview_cont"></div>
+>>>>>>> c49e5ed030985bf33312318e6655b89dd58f098b
 	</c:if>
 	
 	<div id="reviewcontainer">
@@ -112,10 +129,28 @@
 			    </c:forEach>
 			</div>
 		</div>
+<<<<<<< HEAD
+	</div>
+	</div>
+	
+	<%-- 페이징 --%>
+	<div class="center">
+			<ul class="pagination rpaging">
+				<c:choose>
+					<c:when test="${rpageInfo.page<=1}">
+						<li><a id="prev"><<</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
+=======
 		
 		<%-- 페이징 --%>
 		<div class="center">
 				<ul class="pagination rpaging">
+>>>>>>> d8bd4a4d252f06cdc93261a890c9335035696a10
 					<c:choose>
 						<c:when test="${rpageInfo.page<=1}">
 							<li><a id="prev"><<</a></li>
@@ -124,6 +159,21 @@
 							<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 						</c:otherwise>
 					</c:choose>
+<<<<<<< HEAD
+				</c:forEach>
+				<c:choose>
+					<c:when test="${rpageInfo.page>=rpageInfo.maxPage }">
+						<li><a id="next">>></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/bmypage/${business.bno }/review?rpage=${rpageInfo.page+1}&select=1" id="next">>></a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>		
+		</div>	
+			
+		
+=======
 					<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
 						<c:choose>
 							<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
@@ -146,6 +196,7 @@
 <div>
 	<c:import url='/WEB-INF/views/includes/footer.jsp' />
 </div>		
+>>>>>>> d8bd4a4d252f06cdc93261a890c9335035696a10
 		<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>
 </html>

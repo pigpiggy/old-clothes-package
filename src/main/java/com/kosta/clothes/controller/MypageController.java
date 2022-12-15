@@ -297,7 +297,11 @@ public class MypageController {
 		}
 		return "/mypage/bapplylist";
 	}
+<<<<<<< HEAD
 	//사업자 거래 후기 탭
+=======
+	//마이페이지 거래후기(사업자)
+>>>>>>> c49e5ed030985bf33312318e6655b89dd58f098b
 	@GetMapping ("/mypage/bmypage/{bno}/review")
 	String bmypagereview(@PathVariable("bno") Integer bno, Model model,
 			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
@@ -521,7 +525,12 @@ public class MypageController {
 	      }
 	      return "/mypage/usermypage";
 	   }
+<<<<<<< HEAD
 	   //사용자 거래 후기 탭 
+=======
+
+	//마이페이지 거래후기(개인)
+>>>>>>> c49e5ed030985bf33312318e6655b89dd58f098b
 	@GetMapping ("mypage/umypage/{userno}/review")
 	public String umypage(@PathVariable("userno") Integer userno, Model model,
 			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
@@ -651,7 +660,7 @@ public class MypageController {
 						/* 주소 띄우기 */
 						String addr = sellList.get(i).getIaddress();
 						String[] addChange = addr.split(" ");
-						if(addChange[2].matches("^+구$")) {
+						if(addChange[2].matches("^.*.구$")) {
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							sellList.get(i).setIaddress(join1);
 						} else {
@@ -687,7 +696,7 @@ public class MypageController {
 						/* 주소 띄우기*/
 						String addr = sharingList.get(i).getSaddress();
 						String[] addChange = addr.split(" "); //주소 공백으로 분
-						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							sharingList.get(i).setSaddress(join1);
 						} else {
@@ -711,7 +720,7 @@ public class MypageController {
 						 /* 주소 띄우기 */
 							String addr = sellList.get(i).getIaddress();
 							String[] addChange = addr.split(" ");
-							if(addChange[2].matches("^+구$")) {
+							if(addChange[2].matches("^.*.구$")) {
 								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 								sellList.get(i).setIaddress(join1);
 							} else {
@@ -747,7 +756,7 @@ public class MypageController {
 							/* 주소 띄우기*/
 							String addr = sharingList.get(i).getSaddress();
 							String[] addChange = addr.split(" "); //주소 공백으로 분
-							if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
 								String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 								sharingList.get(i).setSaddress(join1);
 							} else {
@@ -772,7 +781,7 @@ public class MypageController {
 					/* 주소 띄우기 */
 					String addr = sellList.get(i).getIaddress();
 					String[] addChange = addr.split(" ");
-					if(addChange[2].matches("^+구$")) {
+					if(addChange[2].matches("^.*.구$")) {
 						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 						sellList.get(i).setIaddress(join1);
 					} else {
@@ -808,7 +817,7 @@ public class MypageController {
 					/* 주소 띄우기*/
 					String addr = sharingList.get(i).getSaddress();
 					String[] addChange = addr.split(" "); //주소 공백으로 분
-					if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+					if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
 						String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 						sharingList.get(i).setSaddress(join1);
 					} else {
@@ -871,7 +880,7 @@ public class MypageController {
 					 /* 주소 띄우기 */
 						String addr = buysellList.get(i).getIaddress();
 						String[] addChange = addr.split(" ");
-						if(addChange[2].matches("^+구$")) {
+						if(addChange[2].matches("^.*.구$")) {
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							buysellList.get(i).setIaddress(join1);
 						} else {
@@ -890,7 +899,7 @@ public class MypageController {
 						/* 주소 띄우기*/
 						String addr = buysharingList.get(i).getSaddress();
 						String[] addChange = addr.split(" "); //주소 공백으로 분
-						if(addChange[2].matches("^+구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+						if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
 							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
 							buysharingList.get(i).setSaddress(join1);
 						} else {
@@ -1081,12 +1090,13 @@ public class MypageController {
 		return "/mypage/uapplylist";
 	}	
 	
+	 //개인 쪽지함
 	 @GetMapping ("/mypage/umessage/{userno}")
 	   String myuMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
 	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
 	         @RequestParam(value = "select", required = false, defaultValue = "0") Integer select,
 	         @RequestParam(value = "submitcheck", required = false, defaultValue = "") String submitcheck,
-	         @PathVariable("userno") Integer userno) {
+	         @PathVariable("userno") Integer userno) { 
 	      List<MessageVO> rmessageList = new ArrayList<>();
 	      List<MessageVO> smessageList = new ArrayList<>();
 	      Map<String, Object> map = new HashMap<String, Object>();
@@ -1143,6 +1153,7 @@ public class MypageController {
 	      return "/mypage/message";
 	   }
 	 
+	 //사업자 쪽지함
 	 @GetMapping ("/mypage/bmessage/{bno}")
 	   String mybMessage(@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage,
 	         @RequestParam(value = "spage", required = false, defaultValue = "1") Integer spage, Model model,
@@ -1178,8 +1189,9 @@ public class MypageController {
 	    	  e.printStackTrace();
 	      }
 	      return "/mypage/message";
-	   }	 
-	
+	   }	
+	 
+	//쪽지 보내기
 	@PostMapping("/mypage/smessage")
     public ModelAndView submitMessage(@ModelAttribute MessageVO message, Model model, RedirectAttributes r) {
       ModelAndView mav = new ModelAndView();
@@ -1199,7 +1211,7 @@ public class MypageController {
          String submitcheck = messageService.submitMessage(message, sect);
          System.out.println("submitcheck:"+submitcheck);
          if(submitcheck.equals("true")) {
-            r.addAttribute("submitcheck", "true");
+            r.addAttribute("submitcheck", "true"); //쪽지가 정상적으로 보내졌으면 전송완료
          }else {
             r.addAttribute("submitcheck", "false");
          }
@@ -1271,9 +1283,11 @@ public class MypageController {
 		}
 		return "/mypage/message";
 	}
+   
+	//받은 쪽지함 쪽지 내용 확인
    @ResponseBody
    @GetMapping("/viewRecvMessage")
-   public MessageVO viewRecvMessage(@RequestParam("mno") Integer mno) {
+   public MessageVO viewRecvMessage(@RequestParam("mno") Integer mno) { 
       MessageVO message = new MessageVO();
       try {
            Business bauthuser = new Business();
@@ -1292,9 +1306,10 @@ public class MypageController {
       return message;
    }
    
+   //보낸 쪽지함 쪽지 내용 확인
    @ResponseBody
    @GetMapping("/viewSendMessage")
-   public MessageVO viewSendMessage(@RequestParam("mno") Integer mno) {
+   public MessageVO viewSendMessage(@RequestParam("mno") Integer mno) { 
       MessageVO message = new MessageVO();
       try {
            Business bauthuser = new Business();
@@ -1312,6 +1327,7 @@ public class MypageController {
       return message;
    }
    
+   //받은 쪽지함에서 쪽지 삭제   
    @ResponseBody
    @GetMapping("/recvDelete")
    public void recvDelete(@RequestParam("mno") Integer mno) {
@@ -1321,10 +1337,10 @@ public class MypageController {
          e.printStackTrace();
       }
    }
-   
+   //보낸 쪽지함에서 쪽지 삭제
    @ResponseBody
    @GetMapping("/sendDelete")
-   public void sendDelete(@RequestParam("mno") Integer mno) {
+   public void sendDelete(@RequestParam("mno") Integer mno) { //보낸 쪽지함에서 쪽지 삭제 
       try {
          messageService.deleteMessage(mno);
       }catch(Exception e) {
@@ -1332,15 +1348,6 @@ public class MypageController {
       }
    }
    
-   @GetMapping("/mypage/review")
-   public String review() {
-      try {
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
-      return "/mypage/review";
-   }
-
    //마이페이지 자기소개란 수정
    @ResponseBody
    @PostMapping("/mypage")

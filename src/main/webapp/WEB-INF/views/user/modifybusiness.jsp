@@ -57,10 +57,10 @@
 </style>
 </head>
 <body>
-	<div id="wrap">
-		<div>
+	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
-		</div>
+	</div>
+	<div id="wrap">
 		<br>
 	    <section class="vh-100 bg-image">
 	        <div class="mask d-flex align-items-center h-100 gradient-custom-3">

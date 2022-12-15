@@ -7,157 +7,208 @@
 <meta charset="utf-8"/>
 <title>지도</title>
 <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
 
 <style>
-div.contents {
-  text-align: left;
-  padding-left: 4%;
-  padding-top: 10%;
+#wrap {
+    width: 100%;
+    min-width: 1280px;
+    position: relative;
+    overflow: hidden;
 }
 
-#map {
-	left: 4%;
-	top: 5%;
-	width:45%;
-	height:55%;
+#container>#contents>h2 {
+    padding-bottom: 30px;
+    font-size: 34px;
+    line-height: 1;
+    color: #020000;
 }
-#binpage {
-	display:flex;
-	width:100%;
-	height:100%;
+#section {
+    width: 100%;
+    position: relative;
 }
-#binlist {
-	display:flex;	
-	position:relative;
-	overflow-y:scroll;
-	flex-direction:column;
-	width:99%;
-	height:99%;
-	border:1px solid black;	
+/*
+body, div, ul, li, h1, h2, h3, h4, h5, p{
+    margin: 0;
+    padding: 0;
 }
-#listtitle{
-	display:flex;
-	align-items:center;
-	flex-direction:column;
-	justify-content:center;
-	width:45%;
-	height:56%;
-	margin-left:7%;
-	margin-top:2%;
-
-}
-#border{
-	display:flex;	
-	position:relative;
-	flex-direction:column;
-	width:91%;
-	height:81%;
-	padding:5px;	
-	border:1px solid black;	
-}
-.search-box {
-	padding-top:2%;
-  	width: 250px;
-  	position: relative;
-  	display: flex;
-	bottom: 0;
-	left: 0;
-	right: 0;
-}
-#dongName{
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  padding: 9px 45px 9px 9px;
-  background-color: #fff;
-  color: #6c6c6c;
-  border-radius: 6px;
-  border:1px solid #b8c6db;
-  transition: all .4s;
+*/
+#container {
+    width: 100%;
+    max-width: 1530px;
+    padding: 0 60px 0 30px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 12px;
+    position: relative;
+    box-sizing: border-box;
 }
 
-#searchBtn{
-  background-color: transparent;
-  font-size: 18px;
-  padding: 6px 9px;
-  margin-left:-45px;
-  border:none;
-  color: #6c6c6c;
-  transition: all .4s;
-  z-index: 1;	
+#container {
+	padding-bottom: 80px;
+}
+#container>#contents {
+    padding-top: 30px;
+}
+#selectbox {
+    margin: 0;
+    padding: 0;
+}
+.shop {
+    width: 100%;
+    padding: 30px 0;
+    border: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
+    text-align: center;
+}
+.shopSchList {
+    width: 100%;
+    margin-top: 23px;
+    padding-left: 430px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+.shopSchList>.list {
+    width: 370px;
+    height: 528px;
+    overflow: hidden;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top:0px;
+    border: 1px solid #ddd;
+}
+.shopSchList>.list>li {
+    width: 116%;
+    position: relative;
+    left:-40px;
+}
+.shopSchList>.list>li>a {
+    width: 100%;
+    padding-right: 30px;
+    border-bottom: 1px solid #ddd;
+    display: table;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+ul,li {
+    list-style: none outside;
+}
+a {
+    text-decoration: none;
+}
+.shopSchList>.list>li>a> em {
+    font-style: normal;
+}
+h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
+    font-size: 100%;
+    font-weight: normal;
+}
+.shopSchList>#map {
+    height: 528px;
+    border: 1px solid #f1ede2;
+    overflow: hidden;
+    position: relative;
+}
+#header {
+    width: 100%;
+    position: relative;
 }
 
-#searchBtn:hover{
-  transform: scale(1.2);
-  cursor: pointer;
-  color: black;
+.shop>.select {
+    margin: 0 15px;
+}
+.select {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+.select>#sido {
+    width: 100%;
+    height:50px;
+}
+.select>#sigugun {
+    width: 100%;
+    height:50px;
+}
+.select>#dong {
+    width: 100%;
+    height:50px;
+}
+.shopSchList>.list>li>a>.store_item {
+    width: 100%;
+    height: 100px;
+    padding: 8px 85px 0 15px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    letter-spacing: -1px;
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: block;
+}
+ .bin:hover{
+	 background-color:skyblue;
 }
 
-#searchBtn:focus{
-  outline:none;
-  color:black;
-}
-#searchBtn:focus{
-  outline:none;
-  color:black;
-}
-.select{
-	margin-right:1%;
-}
 
 </style>
 
 </head>
 <body>
-	<div>
+<div id="wrap">
+	<div id="header">
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
-	
-	<div class="contents">
-		<div id="selectbox" style="display:flex;">
-		<div class="select">
-		<select id="sido"><option value="">선택</option></select>
-		</div>
-		<div class="select">
-		<select id="sigugun"><option value="">선택</option></select>
-		</div>
-		<div class="select">
-		<select id="dong"><option value="">선택</option></select>
-		</div>
-		</div>
-		
-		
-		<div class="search-box">
-			<%-- 텍스트: <span id="dongName"></span><br/>--%>
-			<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-			<!--<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>-->
+	<div id="container">
+		<div id="contents">
+		<h2>헌옷수거함</h2>
+			<div id="section">
+				<div id="selectbox" style="display:flex;">
+					<div class="shop">
+						<div class="select" style="width: 156px;">
+						<select id="sido"><option value="">선택</option></select>
+						</div>
+						<div class="select" style="width: 156px;">
+						<select id="sigugun"><option value="">선택</option></select>
+						</div>
+						<div class="select" style="width: 156px;">
+						<select id="dong"><option value="">선택</option></select>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="search-box">
+					<%-- 텍스트: <span id="dongName"></span><br/>--%>
+					<input type="hidden" id="dongName" name="dongName" size="25"> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+					<!--<button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button>-->
+					
+				</div>		
 			
-		</div>		
-	</div>
-	
-	<%-- 지도를 표시할 div 입니다 --%>
-	<div id="binpage">
-		<div id="map"></div>
-		<div id="listtitle">
-			<h1 id="binlisttitle">[헌옷수거함 목록]</h1>
-			<div id = "border">
-			<div id="binlist">
-			</div>
+			
+				<%-- 지도를 표시할 div 입니다 --%>
+				<div class="shopSchList">
+					<ul class="list"></ul>
+					<div id="map"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
+</div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 	<script>
 		$(document).ready(function(){
-			let requ = '<h3 style="margin:auto auto;">지역을 선택하면 목록이 나타납니다.</h3>'
-			$('#binlist').append(requ);
+			let requ = '<li><a><span class="store_item"><h3 style="margin:auto auto;">지역을 선택하면 목록이 나타납니다.</h3><span><a></li>'
+			$('.list').append(requ);
 		})
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
@@ -182,8 +233,8 @@ div.contents {
 		            lon = position.coords.longitude; // 경도
 		        
 		        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-		            message = '<div style="width:100%; padding:5px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
-		        
+		            message = '<div style="width:100%; padding:5px;">&nbsp&nbsp&nbsp&nbsp&nbsp현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+		        	console.log(message);
 		        // 마커와 인포윈도우를 표시합니다
 		        displayMarker(locPosition, message);
 		            
@@ -322,14 +373,12 @@ div.contents {
 					}),
 					contentType: "application/json",
 					success: function(data){
-						$('#binlist').empty(); //리스트 나타나는 곳에 기존 데이터 있을 수 있으니 비우기
+						$('.list').empty(); //리스트 나타나는 곳에 기존 데이터 있을 수 있으니 비우기
 						setMarkers2(null); //기존에 있는 마커 있으면 초기화
 						setInfo2(null); //기존에 있는 인포윈도우 초기화
 						var bli = "";
-						bli += "<ul id='itl'>"
-						bli += "<br>";
 						data.forEach(function(item,i){
-							bli += "<li id='listmove' style='margin-bottom:4%; padding-left:3%; border-bottom:2px solid gray;'  ><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"' onclick='listCheck(this)'>["+item+"]</a></li>";
+							bli += "<li id='listmove'><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"'><span class='store_item'>"+item+"</span></a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -388,7 +437,7 @@ div.contents {
 							})
 						})
 						bli += "</ul>"
-						$('#binlist').append(bli); //binlist 위치에 받아온 리스트 출력
+						$('.list').append(bli); //binlist 위치에 받아온 리스트 출력
 						console.log(markers2);
 						
 					},
@@ -434,6 +483,7 @@ div.contents {
 			})	
 		}
 		*/
+		
 	</script>
 	
 <%--js 불러와서 사용하기. --%>	

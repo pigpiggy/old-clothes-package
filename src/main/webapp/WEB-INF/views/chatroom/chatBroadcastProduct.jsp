@@ -165,7 +165,7 @@
 	            messageObj.senderName + 
 	            '</span><br><span class="message__text" id="chatRoomContent">' + 
 	            messageObj.content+
-	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            '</span><br><i class="fa fa-clock-o" aria-hidden="true"></i><span class="message__time" id="chatRoomSendTime"> [' +
 	            messageObj.sendTime +
 				'</span><br></div></div>';
 			} else{
@@ -173,7 +173,7 @@
 	            messageObj.senderName +
 	            '</span><br><span class="message__text" id="chatRoomContent">' +
 	            messageObj.content+
-	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime">[' +
+	            '</span><br><i class="fa fa-clock-o"></i><span class="message__time" id="chatRoomSendTime"> [' +
 	            messageObj.sendTime +
 	            ']</span><br></div><img class="chat-item__img" src="https://raw.githubusercontent.com/heysafronov/mangosteen-chat/master/src/assets/img/kristy.png" alt="avatar"></div>';
 			}

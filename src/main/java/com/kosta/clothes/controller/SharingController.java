@@ -129,9 +129,9 @@ public class SharingController {
 		try {
 			Sharing sharing = sharingService.viewSharing(sno);
 			System.out.println("sharingview" + sharing);
-			Integer reviewcount = reviewService.reviewcount(sharing.getUserno());
-			model.addAttribute("reviewcount", reviewcount);
-			if (sharing.getSfileids() != null) {
+			//Integer reviewcount = reviewService.reviewcount(sharing.getUserno()); //거래후기 개수 (현재 삭제)
+			//model.addAttribute("reviewcount", reviewcount);
+			if (sharing.getSfileids() != null) { //tfile에 있는 파일 번호가 개수 만큼 sfileid로 들어감 
 				String[] fidArr = sharing.getSfileids().split(","); // 1,2,3이라는 문자열로 돼있으면 콤마로 잘라서 스트링 배열로 만들어줌
 				mav.addObject("files", fidArr);
 			}
@@ -154,7 +154,7 @@ public class SharingController {
 					uservo = sharingService.getSnickname(sno);
 					System.out.println("sharingviewuservo"+uservo);
 					model.addAttribute("uservo", uservo);
-					model.addAttribute("submitcheck", submitcheck);
+					model.addAttribute("submitcheck", submitcheck); //쪽지 발송 완료 확인
 					mav.addObject("sharing", sharing);
 					mav.setViewName("/sharing/sharingView");
 				}else {
@@ -179,7 +179,7 @@ public class SharingController {
 				likevo.setSno(sno);
 				likevo.setUserno(uauthuser.getUserno());
 				Long likeselect = likesService.getSlikescheck(likevo);
-				if (likeselect != null) {
+				if (likeselect != null) { //slikescheck로 좋아요 확인 (1이면 빨간 하트, 0이면 빈하트로 보이게)
 					mav.addObject("likes", likeselect);
 				}
 			}else {
@@ -250,7 +250,7 @@ public class SharingController {
 		try {
 			System.out.println("modifycontroller: " + sharing);
 			sharingService.modifySharing(sharing);
-			sharingService.modifySfileids(sharing, fileVo, files);
+			sharingService.modifySfileids(sharing, fileVo, files); // sharing테이블의 sfileids는 수정하고, tfile에는 새로운 첨부파일이 등록되도록
 			// String[] fidArr = sharing.getSfileids().split(",");
 			// mav.addObject("files", fidArr);
 			mav.setViewName("redirect:/sharingView/" + sharing.getSno());
@@ -265,8 +265,8 @@ public class SharingController {
 	public ModelAndView deleteSharing(@RequestParam(value = "sno", required = false) Integer sno, Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			sharingService.deleteSharing(sno);
-			mav.setViewName("redirect:/sharingList");
+			sharingService.deleteSharing(sno); 
+			mav.setViewName("redirect:/sharingList"); //삭제는 ajax로 확인 버튼을 눌렀을 때 삭제되도록
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -287,14 +287,14 @@ public class SharingController {
 			Sharing sharing = new Sharing();
 			sharing.setSno(sno);
 			likescheck = likesService.getSlikescheck(likes); //likescheck를 가져와(지금 무슨 상태죠?)
-			if(likescheck == null) { //처음 눌렀을 때
+			if(likescheck == null) { //처음 눌렀을 때(테이블에 값이 아예 없을 때)
 				likesService.registSlikes(likes);
 				sharingService.upSharingLikes(sharing);
 			}else if(likescheck == 1) {
 				System.out.println("1일때"+ likescheck);
-				likes.setLikescheck(likesService.getSlikescheck(likes));
-				likesService.updateSlikes(likes);
-				sharingService.downSharingLikes(sharing);
+				likes.setLikescheck(likesService.getSlikescheck(likes)); //사용자가 해당 글번호에 좋아요를 눌렀는지 확인
+				likesService.updateSlikes(likes); //likes 컬럼을 0으로 바꾸고
+				sharingService.downSharingLikes(sharing); //sharing 테이블의 likescheck(총 좋아요를 받은 개수)를 -1 해줌
 			}else { //likescheck가 0일 때 1로 올려주는
 				System.out.println("0일때"+ likescheck);
 				likes.setLikescheck(likesService.getSlikescheck(likes));
@@ -357,8 +357,8 @@ public class SharingController {
 					System.out.println("들어옴");
 					registcheck = applyService.registSwapply(apply);
 					System.out.println("registcheck:"+registcheck);
-					sharingService.upApplycount(sharing);
-					if(registcheck == "true") {
+					sharingService.upApplycount(sharing); //신청인원 개수 올려줌
+					if(registcheck == "true") { //신청되었는지 확인
 						mav.addObject("registcheck", "true");
 						System.out.println("registcheck:"+registcheck);
 					} else {

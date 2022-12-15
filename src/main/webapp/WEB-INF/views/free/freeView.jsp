@@ -226,7 +226,11 @@
 	                 if(value.csect =='users'){
 	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
 	                 }else if(value.csect == 'business'){
-	                 	a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/apply">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                	 if(bno == value.bno){
+	                 		a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/apply">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                	 }else{
+	                		 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/review">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                	 }
 	                 }
 	                 if(auth != ''){
 	                	 if(auth =='users' && userno == value.userno){

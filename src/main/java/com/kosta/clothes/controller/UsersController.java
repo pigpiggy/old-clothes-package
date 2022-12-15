@@ -98,8 +98,8 @@ public class UsersController {
 		            numStr += ranNum;   // 랜덤으로 나온 숫자를 하나씩 누적해서 담는다.
 		        }
 		        // 확인용
-		        System.out.println("수신자 번호 : " + phone);
-		        System.out.println("인증번호 : " + numStr);
+		        System.out.println("수신자 번호 : " + phone); //인증번호를 받을 번호
+		        System.out.println("인증번호 : " + numStr); //인증번호
 		        // 문자 보내기
 		        certificationService.certifiedPhoneNumber(phone , numStr);
 			}

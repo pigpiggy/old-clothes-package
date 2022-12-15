@@ -9,6 +9,7 @@
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/bmypage.jsp' />
+	<div class="breview_wrap">
 	<c:if test="${authUser.sect eq 'business' }">
 	<c:if test="${authUser.bno eq business.bno }">
 	<div class="my_Tab">
@@ -20,20 +21,18 @@
 	</c:if>
 	
 	<c:if test="${authUser.bno ne business.bno }">
-	<div class="my_Tab">
-			<ul class="tabs">						
-				<li class="on"><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
-			</ul>			
+	<div class="breview">
+	<strong>거래후기</strong>				
 	</div>
+	<div class="breview_cont"></div>
 	</c:if>
 	</c:if>
 	
 	<c:if test="${authUser.sect eq 'users' || empty authUser}">
-	<div class="my_Tab">
-			<ul class="tabs">						
-				<li class="on"><a href ="/mypage/bmypage/${business.bno }/review">거래 후기</a></li>
-			</ul>			
+	<div class="breview">
+	<strong>받은 거래후기</strong>				
 	</div>
+	<div class="breview_cont"></div>
 	</c:if>
 	
 	<div id="rCards">
@@ -111,6 +110,7 @@
 		    </c:forEach>
 		</div>
 	</div>
+	</div>
 	
 	<%-- 페이징 --%>
 	<div class="center">
@@ -140,7 +140,8 @@
 					</c:otherwise>
 				</c:choose>
 			</ul>		
-		</div>		
+		</div>	
+			
 		
 		<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
 </body>

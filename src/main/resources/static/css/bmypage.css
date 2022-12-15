@@ -1,5 +1,6 @@
 .applyList {
 	padding:2%;
+
     
 }
 .applyList ul {
@@ -248,4 +249,6 @@
 
 .stars {
 	display: flex;
+	padding-left: 20%;
+	margin-bottom: 7%;
 }

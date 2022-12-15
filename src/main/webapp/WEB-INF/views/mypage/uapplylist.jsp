@@ -8,6 +8,7 @@
 <title>사용자신청목록</title>
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/reviewmodal.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
@@ -136,17 +137,17 @@
 
 
 	<div id="demo-modal2" class="firstmodal">
-      		<div class="modal__content" id="modal__content">
-      				<div class="stars">
+      		<div class="modal__content7" id="modal__content7">
+      		<strong>[ 거래후기 ]</strong>
+      				<div class="stars7">
 	      				<button class="star">1</button>
 	      				<button class="star">2</button>
 	      				<button class="star">3</button>
 	      				<button class="star">4</button>
-	      				<button class="star">5</button>
-	      				<label for="content">거래 후기</label>
+	      				<button class="star">5</button>	      				
 	      			</div>
-      				<textarea name="content" class="content"></textarea>
-      				<button id="uapplyReviewcomplete">작성완료</button>	
+      				<textarea style= "height: 58%; width: 100%; resize:none;" name="content" class="content" placeholder="거래 후기를 입력해 주세요."></textarea>
+      				<button id="uapplyReviewcomplete7">작성완료</button>	
 				<a href="#" class="modal__close">&times;</a>
       		</div>
   	</div>

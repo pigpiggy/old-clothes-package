@@ -82,7 +82,6 @@
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart">
-		          		<img src="/image/home.png" id="letter_img" alt="쪽지">
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
 		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
 	        		</div>
@@ -93,7 +92,6 @@
 	        				<c:if test="${authUser.userno ne sharing.userno }">
 				          		<div class="letterAndHeart">	
 					          		<a href="#demo-modal">
-					          			<img src="/image/home.png" id="letter_img" alt="옷장 열기">
 					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
 					          		</a>
 					          			<c:choose>
@@ -129,18 +127,18 @@
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+				        	<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="" value="옷장열기" /></a>
 				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        					<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="" value="옷장열기" /></a>
 			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="" value="나의옷장" /></a>
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<input type="button" class="btn btn-info" value="구매 신청 목록" />
 				        					<form action="/selectSharingApply" method="get">
@@ -260,7 +258,7 @@ if(img != null) {
 		captionText.innerHTML = this.alt;
 	})
 }
-var files = "${files[1]}";
+//var files = "${files[1]}";
 console.log(modalImg);
 
 // Get the <span> element that closes the modal

@@ -47,7 +47,8 @@
 }
 
 #wrap{
-	padding-bottom:16%;
+	margin-top:5%;
+	margin-bottom:30%;
 }
  
 

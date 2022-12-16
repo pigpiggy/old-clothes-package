@@ -107,14 +107,14 @@
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${bspageInfo.startPage }" end="${bspageInfo.endPage }">
 				<c:choose>
 					<c:when test="${bspageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?bspage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -123,7 +123,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${bspageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
@@ -204,14 +204,14 @@
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${ppageInfo.startPage }" end="${ppageInfo.endPage }">
 				<c:choose>
 					<c:when test="${ppageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?ppage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -220,7 +220,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${ppageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

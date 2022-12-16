@@ -274,7 +274,7 @@
 			star = starindex + 1;
 		})
 		
-	$("#uapplyReviewcomplete").click(function(){
+	$("#uapplyReviewcomplete7").click(function(){
 			console.log($('.bno:eq('+uapplyIndex+')'));
 			bno = $('.bnoContent:eq('+uapplyIndex+')').attr("data-sno");
 			var ano = $('.anoContent:eq('+uapplyIndex+')').attr("data-sno");

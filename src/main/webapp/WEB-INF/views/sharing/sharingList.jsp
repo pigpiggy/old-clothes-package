@@ -13,7 +13,7 @@
 </head>
 <body id="sharingBody">
 	<div>
-		<c:import url='/WEB-INF/views/includes/header.jsp' />
+		<c:import url='/WEB-INF/views/includes/header1.jsp' />
 	</div>
   <div id="sharingList">
     <h1 id="sharingListSubject">무료나눔</h1>

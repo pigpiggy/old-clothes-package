@@ -13,7 +13,7 @@
 </head>
 <body id="sharingBody">
 	<div>
-		<c:import url='/WEB-INF/views/includes/header1.jsp' />
+		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
 	 <section class="news-detail-header-section text-center">
             <div class="section-overlay"></div>

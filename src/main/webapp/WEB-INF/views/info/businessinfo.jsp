@@ -6,65 +6,200 @@
 <head>
 <meta charset="UTF-8">
 <title>판매업체</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
-label{
-	flex:1;
-	text-align: left;
+#wrap {
+    width: 100%;
+    min-width: 1280px;
+    position: relative;
+    overflow: hidden;
 }
-.form>div {
-	display:flex;
-	margin-bottom: 20px;
-	padding-bottm:7px;
-	align-items:center;	
+#container {
+    width: 100%;
+    max-width: 1530px;
+    padding: 0 60px 0 30px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 12px;
+    position: relative;
+    box-sizing: border-box;
 }
-.allapply{	
-	padding: 5px 20px;
-	position: absolute;
-	top: 50%;
-	left:50%;
-	width:360px; height: 265px;
-	margin-left: -220px;
-	margin-top: -170px;
-	display:flex;
-	flex-direction:column;
-	justify-content: center;
-	align-items:center;
+
+#container {
+	padding-bottom: 80px;
 }
-.form{
-	witdh:300px;
+#container>#contents {
+    padding-top: 30px;
 }
-.allapply>button{
-	width:85px;
-	float:right;
-	padding:3px;
+#container>#contents>h2 {
+    padding-bottom: 30px;
+    font-size: 34px;
+    line-height: 1;
+    color: #020000;
 }
-.form>div>input{	
-	width:250px;
-	margin-left:15px;
-	padding:5px;
+#section {
+    width: 100%;
+    position: relative;
 }
-#alladdress{
-	display:block;
+#selectbox {
+    margin: 0;
+    padding: 0;
 }
-.allbutton>button{
-   display:inline-block;
-   width:100px;
-   height:25px;
-   margin-left:calc(50% - 100px - 10px);
+.select>#sido {
+    width: 100%;
+    height:50px;
 }
-h2{
-	position: absolute;
-    left: 40%;    
+.select>#sigugun {
+    width: 100%;
+    height:50px;
 }
-#finalbusin {
-	margin-bottom: 25%;
+.select {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+.shop>.select {
+    margin: 0 15px;
+}
+.shop {
+    width: 100%;
+    padding: 30px 0;
+    border: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
+    text-align: center;
+}
+.shopSchList {
+    width: 98%;
+    margin-top: 23px;
+    padding-left: 430px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    margin-left:1%;
+}
+.shopSchList>.list {
+    width: 400px;
+    height: 525px;
+    overflow: hidden;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 9%;
+    margin-top:0px;
+    border: 1px solid #ddd;
+}
+.shopSchList>#map {
+    height: 528px;
+    border: 1px solid #f1ede2;
+    overflow: hidden;
+    position: relative;
+    z-index:0;
+}
+
+.shopSchList>.list>li {
+   width: 110%;
+    position: relative;
+    left: -33px;
+    border-bottom: 1px solid #ddd;
+}
+}
+.shopSchList>.list>li>span>a {
+    width: 100%;
+    padding-right: 30px;
+    border-bottom: 1px solid #ddd;
+    display: table;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+ul,li {
+    list-style: none outside;
+}
+a {
+    text-decoration: none;
+}
+.shopSchList>.list>li> em {
+    font-style: normal;
+}
+h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.shopSchList>.list>li>.store_item {
+    width: 100%;
+    height: 140px;
+    padding: 23px 85px 0 15px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    letter-spacing: -1px;
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: block;
+}
+
+
+body, div, ul, li, h1, h2, h3, h4, h5, p{
+    margin: 0;
+    padding: 0;
+}
+#heart_img {
+	width: 10%;
+    position: relative;
+    right: -5%;
+    top: -0%;
+    cursor:pointer;
+}
+#star{
+	position:absolute;
+	width:100%;
+	overflow:hidden;
+	color:#cdcdcd;
+}
+#star>img{
+	margin-right: 2px;
+}
+
+#starEnd{
+	position:absolute;
+	overflow:hidden;
+	white-space:nowrap;
+}
+#starEnd>img{
+	margin-right: 2px;	
+}
+#totalstar{
+	position: relative;
+    width: 130px;
+    top: -21%;
+    right: -80%;
+    
+}
+#cate {
+	left: -43.8%;
+	width:15%;
+}
+#catelist{
+	width:100%;
+	height:50px;
+}
+#btotaladdress{
+	position: relative;
+    top: 10%;
+}
+#btotalphone{
+	position: relative;
+    top: 10%;
+}
+
+#applymodal>img{
+	width: 40px;
+    height: 35px;
 }
 </style>
 <script>
@@ -74,41 +209,8 @@ h2{
 
 </script>
 </head>
-<body>	
-		<div>
-			<c:import url='/WEB-INF/views/includes/header.jsp' />
-		</div>
-	<div id="finalbusin">
-		<h2>[ 사업자 판매 안내 ]</h2>
-	<%--시,구,동  --%>
-		<div id="selectbox">
-			<div class="select" style="top:30px;">
-				<select id="sido"><option value="">선택</option></select>
-			</div>
-			<div class="select" style="margin-left:170px; top:-5px;">
-				<select id="sigugun"><option value="">선택</option></select>
-			</div>	
-			
-			<div class="search-box">
-				<%-- 텍스트: <span id="dongName"></span><br/>--%>
-				<input type="hidden" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
-				<!-- <button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button> -->
-			</div>
-			<div id="cate" class="select">
-			<select id="catelist" onchange="catelist()">
-				<option value="">선택하세요</option>
-				<option value="review">후기 많은순</option>
-				<option value="high">높은 평점순</option>
-				<option value="low">낮은 평점순</option>
-			</select>
-			</div>
-		</div>		
-		<input type="hidden" class="list" id="list" name="list" value="${list }">			
-		<div id="allbusiness">
-			<div id="map"></div>				
-			<div id="blist"></div>				
-		</div>
-		<!-- 헌옷 수거 신청 모달창 -->
+<body>
+<!-- 헌옷 수거 신청 모달창 -->
 		<div id="modal" class="modal">
    
 		    <div class="modal_content">
@@ -150,13 +252,52 @@ h2{
 		    
 		    <div class="modal_layer"></div>
 		</div>
-    
-		
-		
+<div id="wrap">	
+	<div>
+		<c:import url='/WEB-INF/views/includes/header.jsp' />
+	</div>
+	<div id="container">
+		<div id="contents">
+		<h2>수거 업체 안내</h2>
+	<%--시,구,동  --%>
+		<div id="section">
+			<div id="selectbox">
+				<div class="shop">
+					<div class="select" style="width: 156px;">
+						<select id="sido"><option value="">선택</option></select>
+					</div>
+					<div class="select" style="width: 156px;">
+						<select id="sigugun"><option value="">선택</option></select>
+					</div>	
+					
+					<div class="search-box">
+						<%-- 텍스트: <span id="dongName"></span><br/>--%>
+						<input type="hidden" id="dongName" name="dongName" size="25" placeholder="Search something.."> <%--도로명 주소로 표시됨[선택된 값말고] --%>
+						<!-- <button type="button" id="searchBtn" value="검색"><i class="fas fa-search"></i></button> -->
+					</div>
+				</div>
+			</div>		
+			<input type="hidden" class="list" id="list" name="list" value="${list }">			
+			<div id="shopSchList" class="shopSchList">
+				<div id="cate" class="select">
+					<select id="catelist" onchange="catelist()">
+						<option value="">선택하세요</option>
+						<option value="review">후기 많은순</option>
+						<option value="high">높은 평점순</option>
+						<option value="low">낮은 평점순</option>
+					</select>
+					</div>
+				<ul id="blist" class="list"></ul>
+				<div id="map"></div>				
+			</div>
+			
+			</div>
+		</div>
 	</div>
 	<div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
+</div>
 	<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
@@ -216,50 +357,43 @@ h2{
 			setMarkers2(null); //기존에 있는 마커 있으면 초기화
 			setInfo2(null); //기존에 있는 인포윈도우 초기화
 			var bli = "";
-			bli += "<div id='itl'>"
-			bli += "<br>";		
-			bli += "<ul id='a'>"
-			
 				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
-				console.log("찍히나 " +data.baddress);				
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<a href="/mypage/bmypage/'+data.bno+'/review"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
-				console.log("너냐" + bbno);
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-					console.log("안뜬다");
+					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
+						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
 					}else if(data.likescheck == null){
-						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
 					}else{
-						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
 					}
 				}
+				if(authsect != 'business'){
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
+				}			
 				console.log(data.bstar +"별점");
 				bli += '<div id="totalstar">';
 				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
-				bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
+				bli += '<em id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</em>';
 				if(data.bphone != null){
-					bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+					bli += '<br><em id="btotalphone">' + "전화 번호 : " + data.bphone + '</em>';
 				}else{
-					bli += '<p id="btotalphone">' + "전화 번호 : 없음"+'</p>';
+					bli += '<em id="btotalphone">' + "전화 번호 : 없음"+'</em>';
 				}
 				
 				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
 			
-				if(authsect != 'business'){
-					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
-				}								
-				bli += '</li>' ;
+				bli += '</span></li>' ;
 				
 				var businaddress = data.baddress;
 				var businname = data.bname;
@@ -287,10 +421,10 @@ h2{
 				        markers2.push(marker2); 
 				        
 				     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-				        var iwContent = '<div style="width:100%; padding:5px;">' +
-				        				'<div>'+ businname + '</div>' + 
-				        				'<div>'+ businaddress + data.bdetailadd +'</div>' +
-				        				'<div>'+ businphone + '</div>' +
+				        var iwContent = '<div style="width:100%; padding:5px;box-sizing:content-box;">' +
+				        				'<div style="margin-bottom:10px;">상호명 : '+ businname + '</div>' + 
+				        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + data.bdetailadd +'</div>' +
+				        				'<div>전화번호 : '+ businphone + '</div>' +
 				        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				     // 인포윈도우를 생성합니다
@@ -360,8 +494,6 @@ h2{
 					}//status 상태
 				})//geocoder 
 			}); //data.forEach							
-			bli += "</ul>"
-			bli += "</div>"			
 			$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력			
 			},	
 		error: function(){alert("조건 전송 오류");}
@@ -387,7 +519,7 @@ h2{
 				//console.log("total address : " +  address1);
 				//추출한 좌료를 통해 도로명 주소 추출
 				var contentadd = document.getElementById('dongName').value;
-				var contentfinal = '<div style="width:100%; padding:5px;">'+contentadd+'</div>';
+				var contentfinal = '<div style="width:100%; padding:5px;box-sizing:content-box;">'+contentadd+'</div>';
 				var lat = result[0].y;
 				var lng = result[0].x;
 				var daddress = $('input[name=totaladdress]').val();								
@@ -506,49 +638,43 @@ h2{
 				setMarkers2(null); //기존에 있는 마커 있으면 초기화
 				setInfo2(null); //기존에 있는 인포윈도우 초기화
 				var bli = "";
-				bli += "<div id='itl'>"
-				bli += "<br>";		
-				bli += "<ul id='a'>"
-				
-					//for(var i in data){				
-					data.forEach(function(data,i){	
-					//리스트 목록 보여주기					
-					console.log("찍히나 " +data.baddress);				
-					var bbno = data.bno;				
-					bli += '<li class="listdnames" id="listmove">' ;
-					bli += '<a href="/mypage/bmypage/'+data.bno+'/review"><p id="bnames">' + "상호명 : "+ data.bname + '</p></a>';
-					console.log("너냐" + bbno);
-					if(auth==""){ //둘 다 로그인 안했을 때 
-						bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-						console.log("안뜬다");
-					}else if(authsect == 'business'){
-						bli += '';
-					}else if(authsect == 'users'){	
-						if(data.likescheck == 1){								
-							bli += '<img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'">';
-						}else if(data.likescheck == null){
-							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-						}else{
-							bli += '<img src="/image/heart.png" id="heart_img" alt="'+data.bno+'">';
-						}
-					}
-					console.log(data.bstar +"별점");
-					bli += '<div id="totalstar">';
-					bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
-					bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
-					bli += '</div>';
-					bli += '<p id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</p>';
-					if(data.bphone != null){
-						bli += '<p id="btotalphone">' + "전화 번호 : " + data.bphone + '</p>';
+				//for(var i in data){				
+				data.forEach(function(data,i){	
+				//리스트 목록 보여주기					
+				var bbno = data.bno;				
+				bli += '<li class="listdnames" id="listmove">' ;
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				if(auth==""){ //둘 다 로그인 안했을 때 
+					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+				}else if(authsect == 'business'){
+					bli += '';
+				}else if(authsect == 'users'){	
+					if(data.likescheck == 1){								
+						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
+					}else if(data.likescheck == null){
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
 					}else{
-						bli += '<p id="btotalphone">' + "전화 번호 : 없음"+'</p>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
 					}
-					console.log(data.bkakaoid + "kakaoid");
-					bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼					
-					if(authsect == 'users'){
-						bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'">신청서 작성</button>'; //신청서 작성 form [modal]	
-					}
-					bli += '</li>' ;
+				}
+				if(authsect != 'business'){
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
+				}			
+				console.log(data.bstar +"별점");
+				bli += '<div id="totalstar">';
+				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
+				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
+				bli += '</div>';
+				bli += '<em id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</em>';
+				if(data.bphone != null){
+					bli += '<br><em id="btotalphone">' + "전화 번호 : " + data.bphone + '</em>';
+				}else{
+					bli += '<em id="btotalphone">' + "전화 번호 : 없음"+'</em>';
+				}
+				
+				bli += '<div class="kakaoids" id="kakao-talk-channel-chat-button'+data.bno+'"></div>'; //카카오 버튼
+			
+				bli += '</span></li>' ;
 					
 					
 					var businaddress = data.baddress;
@@ -577,10 +703,10 @@ h2{
 					        markers2.push(marker2); 
 					        
 					     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-					        var iwContent = '<div style="width:100%; padding:5px;">' +
-					        				'<div>'+ businname + '</div>' + 
-					        				'<div>'+ businaddress + data.bdetailadd +'</div>' +
-					        				'<div>'+ businphone + '</div>' +
+					        var iwContent = '<div style="width:100%; padding:5px;box-sizing:content-box;">' +
+					        				'<div style="margin-bottom:10px;">상호명 : '+ businname + '</div>' + 
+					        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + data.bdetailadd +'</div>' +
+					        				'<div>전화번호 : '+ businphone + '</div>' +
 					        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 					     // 인포윈도우를 생성합니다
@@ -642,8 +768,6 @@ h2{
 						}//status 상태
 					})//geocoder 
 				}); //data.forEach							
-				bli += "</ul>"
-				bli += "</div>"			
 				$('#blist').append(bli); //binlist 위치에 받아온 리스트 출력
 				console.log(markers2);			
 			},	

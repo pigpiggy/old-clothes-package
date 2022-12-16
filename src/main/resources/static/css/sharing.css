@@ -214,6 +214,10 @@ select::-ms-expand {
   flex-wrap: wrap;
 }
 
+.card-list>a {
+	height: 370px;
+}
+
 .card, .card-body, .card-footer {
 	display: flex;
 	flex-direction: column;
@@ -257,6 +261,23 @@ select::-ms-expand {
     border-radius: 2px;
 }
 
+.sharingDealNick {
+	display: flex;
+	width: 100%;
+}
+
+.sharingDealNick img {
+	width: 20px;
+	margin-right: 3px;
+}
+
+.sharingCard-header {
+	width: 100%;
+	border-bottom: 1px solid rgb(238, 238, 238);
+  	text-align: center;
+  	padding: 2px;
+}
+
 .card-image img {
 	max-height: 100%;
 	width: 100%;
@@ -269,7 +290,7 @@ select::-ms-expand {
 	width: 100%;
 }
 
-.card-body .date {
+.card-body .sdate {
 	font-weight: bolder;
 }
 
@@ -285,17 +306,30 @@ select::-ms-expand {
 
 .card-body p {
 	color: gray;
-	font-size: 0.7em;
-	line-height: 22px;
-	text-align: center;
-	width: 100%;
+    font-size: 0.9em;
+    line-height: 22px;
+    text-align: center;
+    width: 100%;
 }
 
 .card-footer {
 	width: 100%;
-	display: grid;
+	display: flex;
 	border-top: 1px solid rgb(238, 238, 238);
-  text-align: center;
+    text-align: center;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.card-footer p {
+	font-size: 0.8em;
+	margin: 0;
+}
+
+.card-footer img {
+	width: 20px;
+	margin-right: 5px;
 }
 
 /* insert */

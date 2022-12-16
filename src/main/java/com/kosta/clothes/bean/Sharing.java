@@ -18,6 +18,7 @@ public class Sharing {
 	private Date regDate;
 	private Long sellCompletedCount;
 	private Long buyCompletedCount;
+	private String nickname;
 	public Integer getSno() {
 		return sno;
 	}
@@ -110,6 +111,12 @@ public class Sharing {
 	}
 	public void setBuyCompletedCount(Long buyCompletedCount) {
 		this.buyCompletedCount = buyCompletedCount;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public Sharing(Integer sno, String stitle, String scontent, String sstatus, String sname, String sfileids,
 			String sdealType, String saddress, Long likes, Long selectedno, Long applycount, Integer userno,

@@ -98,11 +98,14 @@
     width: 107%;
     position: relative;
     left: -31px;
-    padding-left: 7px;
+    padding-left: 22px;
     padding-top: 13px;
     padding-bottom: 18px;
     border-bottom: 1px solid #ddd;
 }
+
+
+
 .shopSchList>#b>li>a {
     width: 100%;
     padding-right: 30px;
@@ -154,6 +157,7 @@ h3{
 	cursor: pointer;
 }
  .dnames:hover{
+ 	 cursor:pointer;
 	 background-color:skyblue;
 }
 #donationcontainer {
@@ -257,9 +261,28 @@ input[type=radio] {
     
 }
 .dnames h3{
-	color: black;
+	position: relative;
+    left: 3.6%;
+    top: 12px;
+	color: var(--p-color);
 	font-weight: bold;
-	font-size: 17.5px;
+	font-size: 15.5px;
+}
+.info{
+
+	width: 100%;
+    padding: 2px;
+    position: relative;
+    top: 5px;
+    box-sizing: content-box;
+}
+
+#listmove{
+	width: 139%;
+    font-size: 14px;
+    position: relative;
+    box-sizing: content-box;
+    top: -3px;
 }
 </style>
 
@@ -314,7 +337,7 @@ input[type=radio] {
                         		<input type="hidden" class="allphone" name="totalphone" id="totalphone" value="${donation.dphone}">
                         		<input type="hidden" class="lngx" name="lngx" id="lngx" value="${donation.lngx }">      
                         		<input type="hidden" class="laty" name="laty" id="laty" value="${donation.laty }">                        		
-                           			<li class="dnames"id="dnames"><h3>기부 업체명 : ${donation.dname }</h3><br>
+                           			<li class="dnames"id="dnames"><h3><strong>기부 업체명 : ${donation.dname }</strong></h3><br>
                            			&nbsp;&nbsp;&nbsp;&nbsp;주소 : ${donation.daddress }<br><br>
                            			&nbsp;&nbsp;&nbsp; 전화 번호 : ${donation.dphone }</li>
 								 
@@ -354,7 +377,7 @@ input[type=radio] {
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+        level: 6 // 지도의 확대 레벨
     };		
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);     
@@ -391,7 +414,7 @@ input[type=radio] {
 	         function getmultiAddr(alllaty,allngx){
 	             var coord1 = new kakao.maps.LatLng(alllaty, alllngx); //좌표를 담아준다.
 	             var inputcontent = '<div class="wrap">' +
-	              '<div class="info">' +
+	              '<div class="info"  style="box-sizing:content-box;">' +
 	                '<div class="title">' + 
 	                        allname +                        
 	                        '</div><br>' +
@@ -399,7 +422,7 @@ input[type=radio] {
 	                      '<div class="desc">'+
 	                          '<div class="ellipsis">' +'주소 :'+ alladdress +'</div><br>' +                          
 	                          '<div class="phone ellipsis">'+'전화 번호 :' + allphone  +'</div>' +
-	                       '<div style="padding:5px;"><br><a href="https://map.kakao.com/link/to/'+alladdress+','+alllaty+','+alllngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
+	                       '<div style="padding:-1px;"><br><a href="https://map.kakao.com/link/to/'+alladdress+','+alllaty+','+alllngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
 	                       '</div>' +
 	                   '</div>' +
 	                   '</div>' +
@@ -426,13 +449,27 @@ input[type=radio] {
 	                   removeable : true
 	             });
 	             info1.push(infowindow);
+	             
+	           	   //인포윈도우 열리는 function
+			        function displayInfowindow1(marker1) {
+					    infowindow.open(map, marker1);
+					}
+			      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
+			        kakao.maps.event.addListener(marker1, 'mouseover', function() {
+			    		map.panTo(marker1.getPosition());
+	              		displayInfowindow1(marker1);
+	              	});
+			        /* //마우스 아웃 시 인포윈도우 클로즈
+			       kakao.maps.event.addListener(marker1, 'mouseout', function() {
+			        	infowindow.close();
+			        }); */
 	             //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 	               document.querySelectorAll("#dnames")[i].addEventListener('click', (event) =>{	            	  
 	                  this.map.panTo(marker1.getPosition());    
 	                  infowindow.open(map,marker1);
 	               });
 	             
-	               //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+	              //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
 	               document.querySelectorAll("#dnames")[i].addEventListener('mouseout', (event) =>{	                     
 	                  infowindow.close();
 	               });
@@ -557,7 +594,7 @@ input[type=radio] {
 				console.log("dno : " + ddno);
 				console.log("찍히나 : " + data.daddress);
 				
-				dli += '<li class="listdnames" id="listmove" style="cursor:pointer;"><br>';
+				dli += '<li class="listdnames" id="listmove" style="cursor:pointer;" ><br>';
 				dli += '<span id="bnames"><strong>기부업체명: '+data.dname +'</strong><br>';	
 				dli += '<br>주소 :'+ data.daddress +'<br>';                      
                 dli += '<br>전화 번호 :' + data.dphone  +'<br>';						
@@ -592,7 +629,7 @@ input[type=radio] {
 				        markers2.push(marker2); 
 				        
 				        // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-				        var iwContent = '<div style="width:128%;">&nbsp&nbsp' +
+				        var iwContent = '<div style="width:128%;box-sizing:content-box;">&nbsp&nbsp' +
 				        				'<div>'+ "주소 :  "+ donationaddress + '</div><br>' +
 				        				'<div>'+ "업체명 :  "+ donationname + '</div><br>' + 
 				        				'<div>'+  "전화 번호 :  "+ donationphone + '</div>' + 
@@ -612,7 +649,7 @@ input[type=radio] {
 				      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
 				        kakao.maps.event.addListener(marker2, 'mouseover', function() {
 				    		map.panTo(marker2.getPosition());
-		              	displayInfowindow2(marker2);
+		              		displayInfowindow2(marker2);
 		              	});
 					  	//마우스 아웃 시 인포윈도우 클로즈
 		             /*  	kakao.maps.event.addListener(marker2, 'mouseout', function() {

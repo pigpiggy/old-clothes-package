@@ -55,17 +55,19 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		session.setAttribute("authUser", bauthUser);
 		}
     	
-    	if("http://localhost:8088/joinform".equals(reurl)) {
+    	if(reurl==null) {
     		response.sendRedirect(url);
-    	}else if("http://localhost:8088/login".equals(reurl)) {
+    	}else if(reurl.contains("joinform")) {
     		response.sendRedirect(url);
-    	}else if("http://localhost:8088/searchid".equals(reurl)) {
+    	}else if(reurl.contains("login")) {
     		response.sendRedirect(url);
-    	}else if("http://localhost:8088/checkidnphone".equals(reurl)) {
+    	}else if(reurl.contains("searchid")) {
     		response.sendRedirect(url);
-    	}else if(reurl==null) {
+    	}else if(reurl.contains("checkidnphone")) {
     		response.sendRedirect(url);
     	}else if(reurl.contains("mypage")) {
+    		response.sendRedirect(url);
+    	}else if(reurl.contains("passcheck")) {
     		response.sendRedirect(url);
     	}else {
     		response.sendRedirect(reurl);

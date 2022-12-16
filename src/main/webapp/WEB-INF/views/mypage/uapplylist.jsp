@@ -28,7 +28,7 @@
     background: black;
     opacity: 0.4;
     color: white;
-    width: 45%;
+    width: 51%;
     text-align: center;
     font-size: 30px;
     line-height: 2;
@@ -98,7 +98,7 @@
 	                    </c:when>
 	                    <c:when test="${wapply.astatus eq '신청완료' }">
 		                    <div class="btn">	                        
-		                        <button type="submit" form="form" id="applying" disabled >수거대기</button>
+		                      <!-- 버튼 사라짐 -->
 		                    </div>                   
 	                    </c:when>	                    
 		                    
@@ -115,7 +115,7 @@
 							</c:if>
 		                 </c:otherwise>	
 		                 </c:choose> 
-		                 <c:if test="${wapply.astatus eq '후기대기' }">
+		                 <c:if test="${wapply.astatus eq '후기작성예쩡' }">
 			                  <button type="button" class="applying1">후기작성</button>
 		                 </c:if>	                 
 	                 </div>		               	            

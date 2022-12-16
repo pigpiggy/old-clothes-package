@@ -107,14 +107,14 @@
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/sell?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?page=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/sell?page=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -123,7 +123,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?page=${pageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/sell?page=${pageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
@@ -184,14 +184,14 @@
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/sell?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
 				<c:choose>
 					<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?spage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/sell?spage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -200,7 +200,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?spage=${spageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/sell?spage=${spageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

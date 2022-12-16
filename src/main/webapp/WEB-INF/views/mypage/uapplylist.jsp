@@ -106,7 +106,7 @@
 	                    <c:choose> 
 	                    <c:when test="${wapply.astatus eq '수거완료' }">
 			                    <div class="btn">	                        
-			                        <button type="submit" form="form" id="applying" class="complete">수거완료</button>
+			                        <button type="submit" form="form" id="applying" class="complete">후기작성</button>
 			                    </div>                   
 		                 </c:when>
 		                 <c:otherwise>
@@ -115,7 +115,7 @@
 							</c:if>
 		                 </c:otherwise>	
 		                 </c:choose> 
-		                 <c:if test="${wapply.astatus eq '후기작성예쩡' }">
+		                 <c:if test="${wapply.astatus eq '후기대기' }">
 			                  <button type="button" class="applying1">후기작성</button>
 		                 </c:if>	                 
 	                 </div>		               	            

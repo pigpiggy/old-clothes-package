@@ -17,7 +17,7 @@
 <body>
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div id="full">
-	<h2><strong>찜 목록</strong></h2>
+		<h2><strong>찜 목록</strong></h2>
 		<div id="cate" class="select" >
 			<div id="selectbox">
 				<select id="catelist" onchange="catelist()">
@@ -81,7 +81,7 @@
 $(document).ready(function(){
 	let category = "free";
 	let totalData; //총 데이터 수
-	let dataPerPage=2; //한 페이지에 나타낼 글 수
+	let dataPerPage=7; //한 페이지에 나타낼 글 수
 	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
@@ -259,7 +259,7 @@ $(document).ready(function(){
 function catelist(){
 	let category = $("#catelist option:selected").val();
 	let totalData; //총 데이터 수
-	let dataPerPage=2; //한 페이지에 나타낼 글 수
+	let dataPerPage=7; //한 페이지에 나타낼 글 수
 	let pageCount=5; //페이징에 나타낼 페이지 수
 	let globalCurrentPage=1; //현재 페이지
 	let pageHtml="";
@@ -363,7 +363,7 @@ function catelist(){
 							chartHtml +='</span>'	
 							chartHtml +='</div>'
 							chartHtml +='<div class="expand"></div>';
-							chartHtml +='</div>';	
+							chartHtml +='</div></div>';	
 						}
 					}
 					i++
@@ -489,8 +489,8 @@ function catelist(){
 function refreshlist(category,globalCurrentPage){
 	console.log(category);
 	let totalData; //총 데이터 수
-	let dataPerPage=2; //한 페이지에 나타낼 글 수
-	let pageCount=10; //페이징에 나타낼 페이지 수
+	let dataPerPage=7; //한 페이지에 나타낼 글 수
+	let pageCount=5; //페이징에 나타낼 페이지 수
 	let pageHtml="";
 	 $.ajax({
 		type: 'post',

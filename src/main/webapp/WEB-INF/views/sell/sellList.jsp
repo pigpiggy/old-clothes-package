@@ -39,6 +39,9 @@
 	  <c:forEach var="sell" items="${sellList}">
      <a href="sellView/${sell.ino}">
 	     <div class="card" data-sno=${sell.ino }>
+     		  <div class="individualCard-header">
+	     	  	  ${sell.idealType}
+	     	  </div>
 	          <div class="card-image">
 	          	<c:if test="${'거래 완료' == sell.istatus}">
 	          		<div class="individualStatus">${sell.istatus }</div>
@@ -55,7 +58,7 @@
 	          <div class="card-body">
 	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <p>${sell.iaddress}</p>
+	              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
 	          </div>
 	          <c:choose>
 	          	<c:when test="${empty sell.iaddress}">
@@ -65,7 +68,7 @@
 	          	</c:when>
 	          	<c:otherwise>
 		          <div class="card-footer">
-		              ${sell.idealType} 
+		              <img src="/image/pin.png"><p>${sell.iaddress}</p>
 		          </div>
 	          	</c:otherwise>
 	          </c:choose>

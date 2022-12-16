@@ -87,22 +87,21 @@
 	
 	<select id="selectSharingList" resultType="sharing">
 		<![CDATA[
-			select * from ( select * from sharing order by sno desc)
-
-			where rownum <= 6
+			select * from ( select u.NICKNAME,s.* from users u, sharing s where u.userno=s.userno order by sno desc) 
+			where rownum <= 6 
 		]]>
 	</select>
 	
 	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
 		<![CDATA[
-			select * from ( select * from sharing where (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc )
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' AND u.userno=s.userno order by sno desc )
 			where rownum <= 6
 		]]>
 	</select>
 	
 	<select id="infiniteScrollDown" parameterType="Integer" resultType="sharing">
 		<![CDATA[
-			select * from ( select * from sharing where sno <=#{snoToStart} order by sno desc)
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where sno <=#{snoToStart} and u.userno=s.userno order by sno desc)
 
 			where rownum <= 6
 		]]>
@@ -110,7 +109,7 @@
 	
 	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="sharing">
 		<![CDATA[
-			select * from ( select * from sharing where sno <=#{sno} and (stitle||scontent||sstatus||addressCity||addressTown||ai||sdealType||regdate) like '%'||#{kwd}||'%' order by sno desc)
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where sno <=#{sno} and (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' and u.userno=s.userno order by sno desc)
 			where rownum <= 6
 		]]>
 	</select>

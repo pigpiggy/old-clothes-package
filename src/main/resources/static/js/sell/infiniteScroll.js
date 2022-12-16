@@ -38,6 +38,7 @@ function surveyList(){
 						function(){
 							str += "<a href="+"'sellView/"+this.ino+"'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.ino+"'>";
+							str += "<div class='individualCard-header'>"+this.idealType+"</div>";
 		          			str	+= "<div class="+"'card-image'"+">";
 		          			if(this.istatus == '거래 완료'){
 								str += "<div class="+"'individualStatus'"+">"+this.istatus+"</div>";
@@ -51,23 +52,17 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<div class="+"'priceAndDate'"+"><span class="+"'price'"+">"+this.price+"원</span><span class="+"'date'"+">"+this.regDate+"</span></div>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.ititle+"</h2>";
-		              		const address = this.iaddress.split(" ");
+		              		str += "<div class='individualDealNick'><p><img src='/image/yellowuser.png'>"+this.nickname+"</p></div>";
+		          			str	+= "</div>";
+							str	+= "<div class="+"'card-footer'"+">";
+							const address = this.iaddress.split(" ");
 		              		if(address[2].match("^.*.구$")!=null){
-								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
+								str+="<img src='/image/pin.png'><p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
 							}
 		              		else{
-								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
+								str+="<img src='/image/pin.png'><p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
 							}
-		          			str	+= "</div>";
-		          			if(this.iaddress !=null && this.iaddress !=""){
-								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.idealType;
-								str	+= "</div>";
-							} else {
-								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.idealType;
-								str	+= "</div>";
-							}
+							str	+= "</div>";
 		          			str	+= "</div>";
 		          			str	+= "</div>";
 		          			str += "</a>";

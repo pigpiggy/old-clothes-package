@@ -19,6 +19,7 @@ public class Sell {
 	private Long price;
 	private Long sellCompletedCount;
 	private Long buyCompletedCount;
+	private String nickname;
 	public Integer getIno() {
 		return ino;
 	}
@@ -118,6 +119,12 @@ public class Sell {
 	}
 	public void setBuyCompletedCount(Long buyCompletedCount) {
 		this.buyCompletedCount = buyCompletedCount;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public Sell(Integer ino, String iname, String ititle, String icontent, String istatus, String ifileids,
 			String iaddress, String idealType, Date regDate, Long likes, Long selectedno, Long applycount,

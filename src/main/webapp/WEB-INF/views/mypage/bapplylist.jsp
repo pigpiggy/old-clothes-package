@@ -66,11 +66,7 @@
 	          	</c:when>
 	          	<c:when test="${apply.astatus == '수거완료'}">
 	          			<div class="aindividualStatus">수거완료</div>
-	          	</c:when>
-	          	
-	          	<c:when test="${apply.astatus == '후기등록예쩡'}">
-	          			<div class="aindividualStatus">후기등록대기</div>
-	          	</c:when>
+	          	</c:when>	          		          
 	          	
 	          	<c:when test="${apply.astatus == '후기등록완료'}">
 	          			<div class="aindividualStatus">완료</div>
@@ -115,7 +111,7 @@
 		                    		<div class="btn">		      
 		                    			<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
 		                    			<input type="hidden" id="ano" name="ano" value="${apply.ano }">										
-		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="applyend" name="applyend">수거중</button>
+		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="applyend" name="applyend">수거완료</button>
 	                        		</div>
 	                        	</c:when>	                        	
 	                        </c:choose>				                   
@@ -124,8 +120,7 @@
 	                        <c:when test="${apply.astatus eq '수거완료' }">
 	                        		<div class="btn">		      
 			                    		<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
-			                    		<input type="hidden" id="ano" name="ano" value="${apply.ano }">
-		                        		<button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="end" name="end">수거완료</button>
+			                    		<input type="hidden" id="ano" name="ano" value="${apply.ano }">		                        		
 	                        		</div>
 	                        	</c:when>
 	                        </c:choose>

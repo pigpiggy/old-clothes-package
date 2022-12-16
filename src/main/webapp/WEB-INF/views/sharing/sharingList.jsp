@@ -54,7 +54,7 @@
 	     <a href="sharingView/${sharing.sno}">
 		     <div class="card" data-sno=${sharing.sno }>
 		          <div class="card-image">
-		          	<c:if test="${'등록완료' != sharing.sstatus}">
+		          	<c:if test="${'거래 완료' == sharing.sstatus}">
 		          		<div class="sharingStatus">${sharing.sstatus }</div>
 		          	</c:if>
 		          	<c:choose>

@@ -39,7 +39,7 @@ function surveyList(){
 							str += "<a href="+"'sellView/"+this.ino+"'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.ino+"'>";
 		          			str	+= "<div class="+"'card-image'"+">";
-		          			if(this.istatus != '등록완료'){
+		          			if(this.istatus == '거래 완료'){
 								str += "<div class="+"'individualStatus'"+">"+this.istatus+"</div>";
 							}
 		          			if(this.ifileids!=null && this.ifileids !=""){

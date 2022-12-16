@@ -30,7 +30,7 @@
 	
 	<c:if test="${authUser.sect eq 'users' || empty authUser}">
 	<div class="breview">
-	<strong>받은 거래후기</strong>				
+	<strong>거래후기</strong>				
 	</div>
 	<div class="breview_cont"></div>
 	</c:if>

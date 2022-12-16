@@ -78,7 +78,7 @@ body {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/sharingList">무료나눔</a>
+                        <a class="nav-link" href="/sharingList">무료나눔</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -90,14 +90,8 @@ body {
                         </ul>        
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">커뮤니티</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/freeList">자유게시판</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/freeList">커뮤니티</a>
                     </li>
 				<c:choose>
 					<c:when test="${authUser == null }">
@@ -117,8 +111,8 @@ body {
 				        </c:if>
 				        <c:if test="${authUser.sect=='business' }">
 				       		<li class="nav-item ms-3">
-					        	<a class="nav-link custom-btn custom-border-btn btn" href="/mypage/bmypage/${authUser.bno }/apply">마이페이지</a>
-						        <a class="nav-link custom-btn custom-border-btn btn" href="/logout">로그아웃</a>
+					        	<a class="nav-link custom-btn custom-border-btn btn" href="/mypage/bmypage/${authUser.bno }/apply">Mypage</a>
+						        <a class="nav-link custom-btn custom-border-btn btn" href="/logout">Logout</a>
 						    </li>    
 						</c:if>		                
 	                </c:otherwise>
@@ -197,27 +191,27 @@ body {
                     
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
+                            <a href="/clothingbin" class="d-block">
                                 <img src="image/earthheart.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"><strong>헌 옷</strong> 수거함 찾기</p>
+                                <p class="featured-block-text">헌 옷<strong> 수거함</strong> 찾기</p>
                             </a>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
+                            <a href="/information" class="d-block">
                                 <img src="image/receive.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"><strong>기부하기</strong></p>
+                                <p class="featured-block-text">헌 옷<strong> 기부</strong>하기</p>
                             </a>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
+                            <a href="/sharingList" class="d-block">
                                 <img src="image/hands.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">헌 옷 <strong>무료 나눔</strong>하기</p>
@@ -227,7 +221,7 @@ body {
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="donate.html" class="d-block">
+                            <a href="/businessinfo" class="d-block">
                                 <img src="image/scholarship.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">헌 옷 <strong>사고 팔기</strong></p>

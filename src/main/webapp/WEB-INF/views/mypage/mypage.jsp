@@ -27,7 +27,7 @@
       		<input type="hidden" value="${authUser.userno }" id="chatuserno"/>
       </c:if>
       
-      <img id="clostick1" src="/image/clostick.png" alt="옷걸이">
+      
       <c:choose>    
 	    	<c:when test="${users.sect eq 'users' }">
 	    			<strong>${users.nickname }의 옷장</strong>
@@ -36,7 +36,7 @@
       				<strong>${business.bname }의 옷장</strong>
       </c:otherwise>
       </c:choose>            
-        <img id="clostick2" src="/image/clostick.png" alt="옷걸이"> 
+       
       </div>   
       <div class="fname_closet">
       			<c:if test="${authUser.sect eq 'users' }">
@@ -65,7 +65,7 @@
 		        <c:if test="${authUser.sect eq 'users'}">
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">
-							<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+							<img src="/image/chaticon2.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
 								<span class="nav__notification nbadge" id="messageAlert"></span>
 						</a>
 					</c:if>	

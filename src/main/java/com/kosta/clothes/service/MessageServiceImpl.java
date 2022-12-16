@@ -37,7 +37,8 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageVO> uRecvMessage(Map map) throws Exception {
+	public List<MessageVO> uRecvMessage(Map map) throws Exception { //개인이 받은 쪽지함
+		//페이징
 		int listCount = messageDAO.selectRmessageCount((Integer)map.get("recvUserno")); //전체 데이터 개수 가져오기 (전체 게시글 수)
 		listCount += messageDAO.selectBmessageCount((Integer)map.get("recvUserno"));
 		int maxPage = (int)Math.ceil((double)listCount/10);
@@ -65,7 +66,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageVO> bRecvMessage(Map map) throws Exception {
+	public List<MessageVO> bRecvMessage(Map map) throws Exception { //사업자가 받은 쪽지함
 		int listCount = messageDAO.selectBRmessageCount((Integer)map.get("recvUserno")); //전체 데이터 개수 가져오기 (전체 게시글 수)
 		listCount += messageDAO.selectBRBmessageCount((Integer)map.get("recvUserno"));
 		System.out.println("listcount"+listCount);
@@ -94,7 +95,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageVO> uSendMessage(Integer sendUserno, Integer page, PageInfo spageInfo) throws Exception {
+	public List<MessageVO> uSendMessage(Integer sendUserno, Integer page, PageInfo spageInfo) throws Exception { //개인이 보낸 쪽지함
 		int listCount = messageDAO.selectSmessageCount(sendUserno); //전체 데이터 개수 가져오기 (전체 게시글 수)
 		listCount += messageDAO.selectSBmessageCount(sendUserno);
 		int maxPage = (int)Math.ceil((double)listCount/10);  
@@ -123,7 +124,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageVO> bSendMessage(Integer sendUserno, Integer spage, PageInfo pageInfo) throws Exception {
+	public List<MessageVO> bSendMessage(Integer sendUserno, Integer spage, PageInfo pageInfo) throws Exception {//사업자가 보낸 쪽지함
 		int listCount = messageDAO.selectBSmessageCount(sendUserno); //전체 데이터 개수 가져오기 (전체 게시글 수)
 		listCount += messageDAO.selectBSBmessageCount(sendUserno);
 		System.out.println("bsendlistcount:"+listCount);

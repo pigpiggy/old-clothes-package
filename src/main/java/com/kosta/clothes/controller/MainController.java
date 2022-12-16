@@ -20,7 +20,7 @@ public class MainController {
 	
 	@GetMapping("/")
 	String main() {
-		return "/home";
+		return "/home2";
 	}
 	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.
 	//Main에 이미지 보여주기위한 컨트롤러

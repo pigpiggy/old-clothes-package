@@ -41,13 +41,13 @@ public class CertificationService implements UsersService {
         String api_secret = "QNZICKM2RTJY1NBJYIEEEK92YXSVXTCL";//coolsms에서 발급받은 api_secret key
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
-        params.put("to", phone);    // 수신전화번호 
-        params.put("from", "폰번호넣으세요");    // 발신전화번호 테스트 시에는 본인 번호 다 넣기 수신/발신 
-        params.put("type", "SMS");
+        params.put("to", phone);    // 수신전화번호 문자인증받을 번호
+        params.put("from", "폰번호넣으세요");    // 발신전화번호 테스트 시에는 본인 번호 다 넣기 수신/발신  
+        params.put("type", "SMS"); //문자형식
         params.put("text", "하우헌옷의 인증번호 : " + "["+cerNum+"]" + "입니다."); //문자 받을 때 문구 넣 을 곳 
         params.put("app_version", "test app 1.2"); // application name and version
         try {
-            JSONObject obj = coolsms.send(params);  // 문자 보내기
+            JSONObject obj = coolsms.send(params);  // 문자 보내기 JSONObject = 데이터 전달 위한 타입으로 정의
             System.out.println(obj.toString());
         } catch (CoolsmsException e) {  // 문자전송 실패 시 메세지
             System.out.println(e.getMessage());

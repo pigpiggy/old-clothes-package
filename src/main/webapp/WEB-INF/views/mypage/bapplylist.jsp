@@ -68,6 +68,10 @@
 	          			<div class="aindividualStatus">수거완료</div>
 	          	</c:when>
 	          	
+	          	<c:when test="${apply.astatus == '후기대기'}">
+	          			<div class="aindividualStatus">후기등록대기</div>
+	          	</c:when>
+	          	
 	          	<c:when test="${apply.astatus == '후기등록완료'}">
 	          			<div class="aindividualStatus">완료</div>
 	          	</c:when>

@@ -9,5 +9,11 @@
 			select * from donation
 		]]>
 	</select>
-	
+	<select resultType="Donation" id="selectDonation1" parameterType="map">	
+	<![CDATA[
+				SELECT *
+				FROM  DONATION  
+				WHERE daddress LIKE '%'||#{sido}||'%' AND daddress LIKE '%'||#{sigungu}||'%'
+			]]>
+	</select>
 </mapper>

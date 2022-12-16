@@ -53,11 +53,33 @@ public class InfoController {
 	LikesService likesService;
 
 	// 정보 안내(기부업체)
+	// 판매업체
+		@ResponseBody
+		@PostMapping("/donationlist")
+		public List<Donation> donationlist(@RequestBody Map<String,Object> params,Model model) {
+			List<Donation> Donation = null;	
+			
+			//ajax로 데이터 받아온 것
+			String sido = (String) params.get("sido");		
+			String sigungu = (String) params.get("sigugun");
+						
+			System.out.println("기부 : sido : " + sido);
+			System.out.println("기부 : sigungu : " + sigungu);
+			try {				
+				System.out.println("기부들어왔다");
+				Donation = donationService.allDonationInfo1(sido,sigungu);				
+				System.out.println("기부 주소: " + Donation.toString());
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return Donation;
+		}
+	//기부업체 이동
 	@GetMapping("/information")
 	ModelAndView alladdress(Model model) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			
+			//온라인 메인 로고에 사용
 			List<Donation> dona = donationService.allDonationInfo();
 			//List<Donation> donation = donationService.DonationInfo(store,good,story);
 			System.out.println("dona" +dona.toString());

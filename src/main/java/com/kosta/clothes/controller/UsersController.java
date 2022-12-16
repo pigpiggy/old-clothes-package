@@ -98,8 +98,8 @@ public class UsersController {
 		            numStr += ranNum;   // 랜덤으로 나온 숫자를 하나씩 누적해서 담는다.
 		        }
 		        // 확인용
-		        System.out.println("수신자 번호 : " + phone);
-		        System.out.println("인증번호 : " + numStr);
+		        System.out.println("수신자 번호 : " + phone); //인증번호를 받을 번호
+		        System.out.println("인증번호 : " + numStr); //인증번호
 		        // 문자 보내기
 		        certificationService.certifiedPhoneNumber(phone , numStr);
 			}
@@ -189,8 +189,8 @@ public class UsersController {
     }
     //로그인 실패
     @GetMapping("/loginfail")
-    public String loginfail(Model model) {
-    	model.addAttribute("result", "fail");
+    public String loginfail(RedirectAttributes re) {
+    	re.addFlashAttribute("result", "fail");
     	return "redirect:/login";
     }
     @PostMapping("/loginaction")
@@ -271,7 +271,7 @@ public class UsersController {
 		 System.out.println(fbId);
 		 model.addAttribute("business", fbId);
 		 
-		 if(fuId==null&&fbId==null) { // 검색 결과 둘 다 없을 때
+		 if(fuId.size()==0&&fbId.size()==0) { // 검색 결과 둘 다 없을 때
 			 model.addAttribute("msg", "정보와 일치하는 아이디가 없습니다.");
 			 return "user/searchid";
 		 }
@@ -319,7 +319,7 @@ public class UsersController {
   //새 비밀번호
   @PostMapping("/changepass")
   public String changePass(@RequestParam("id")String id, 
-		  @RequestParam("password") String password, Model model) {
+		  @RequestParam("password") String password, RedirectAttributes re) {
 	  try { 
 		  System.out.println("id:"+id);
 		  boolean cuserid = usersService.checkuserid(id); //개인 테이블 아이디 확인
@@ -333,8 +333,8 @@ public class UsersController {
 	  	  usersService.changebPass(id, bpassword); // 비밀번호 변경
 	  	  }
 	  	  else {
-	  		  model.addAttribute("msg", "비밀번호 수정에 실패했습니다.");
-	  		  return "user/changepass";
+	  		  re.addFlashAttribute("msg", "비밀번호 수정에 실패했습니다.");
+	  		  return "redirect:/changepass";
 	  	  }
 		  
 	  }catch(Exception e) {
@@ -378,11 +378,11 @@ public class UsersController {
   
   //개인회원정보 수정
   @PostMapping("modifyuser")
-  public String modifyuser(@ModelAttribute Users user, Model model) {
+  public String modifyuser(@ModelAttribute Users user, RedirectAttributes re) {
 	  try {
 		  usersService.modifyuser(user);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","회원정보 수정 완료!");
+		  re.addFlashAttribute("msg","회원정보 수정 완료!");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -417,11 +417,11 @@ public class UsersController {
   
 //업체회원정보 수정
   @PostMapping("modifybusiness")
-  public String modifyuser(@ModelAttribute Business business, Model model) {
+  public String modifyuser(@ModelAttribute Business business, RedirectAttributes re) {
 	  try {
 		  usersService.modifybusiness(business); //업체 정보 수정
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","회원정보 수정 완료");
+		  re.addFlashAttribute("msg","회원정보 수정 완료");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -430,13 +430,13 @@ public class UsersController {
 //업체회원 탈퇴
   
   @PostMapping("bretire")
-  public String bretire(Model model) {
+  public String bretire(RedirectAttributes re) {
 	  try {
 		  Business bauthuser = (Business) session.getAttribute("authUser");
 		  Integer bno = bauthuser.getBno();
 		  usersService.deletebusiness(bno);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","탈퇴 완료");
+		  re.addFlashAttribute("msg","탈퇴 완료");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }
@@ -446,13 +446,13 @@ public class UsersController {
  //개인회원 탈퇴
   
   @PostMapping("uretire")
-  public String uretire(Model model) {
+  public String uretire(RedirectAttributes re) {
 	  try {
 		  Users uauthuser = (Users) session.getAttribute("authUser");
 		  Integer userno = uauthuser.getUserno();
 		  usersService.deleteuser(userno);
 		  session.removeAttribute("authUser");
-		  model.addAttribute("msg","탈퇴 완료!!");
+		  re.addFlashAttribute("msg","탈퇴 완료!!");
 	  }catch (Exception e) {
 		  e.printStackTrace();		  
 	  }

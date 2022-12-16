@@ -6,7 +6,6 @@
 <head>
 <meta charset="utf-8"/>
 <title>지도</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
@@ -64,12 +63,13 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     text-align: center;
 }
 .shopSchList {
-    width: 100%;
+    width: 98%;
     margin-top: 23px;
     padding-left: 430px;
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
+    margin-left:1%;
 }
 .shopSchList>.list {
     width: 370px;
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 	<script>
 		$(document).ready(function(){
-			let requ = '<li><a><span class="store_item"><h3 style="margin:auto auto;">지역을 선택하면 목록이 나타납니다.</h3><span><a></li>'
+			let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;">지역을 선택해주세요</h4><span><a></li>'
 			$('.list').append(requ);
 		})
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -233,7 +233,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 		            lon = position.coords.longitude; // 경도
 		        
 		        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-		            message = '<div style="width:100%; padding:5px;">&nbsp&nbsp&nbsp&nbsp&nbsp현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+		            message = '<div style="width:100%; padding:5px;margin-left:60%;box-sizing:content-box;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
 		        	console.log(message);
 		        // 마커와 인포윈도우를 표시합니다
 		        displayMarker(locPosition, message);
@@ -307,7 +307,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 					};
 					
 					//추출한 좌표를 통해 도로명 주소 추출
-					var contentadd = "<div style= 'width:100%; padding:5px;'>"+document.getElementById('dongName').value+"</div>";
+					var contentadd = "<div style= 'width:100%; padding:5px; box-sizing:content-box;'>"+document.getElementById('dongName').value+"</div>";
 					var lat = result[0].y;
 					var lng = result[0].x;
 					console.log(geocoder+"geo");
@@ -401,7 +401,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 							        markers2.push(marker2); 
 							        
 							     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-							        var iwContent = '<div style="width:100%; padding:5px;">'+item+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+							        var iwContent = '<div style="width:100%; padding:5px;box-sizing:content-box;">'+item+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 							            iwRemoveable = false; // removeable 속성을 true 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 							     // 인포윈도우를 생성합니다
 							        var infowindow2 = new kakao.maps.InfoWindow({
@@ -423,16 +423,17 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 					              	infowindow2.close();
 					              });
 					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
-				            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+				            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 				            		//this.map.panTo(marker2.getPosition());
+				            		setInfo2(null);
 				            		map.setCenter(marker2.getPosition())
 				            		infowindow2.open(map,marker2);
 				           		});
 				            
-					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
-					            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
+					            /* //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+					            document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 					            	infowindow2.close();
-					            });	
+					            });	 */
 								}
 							})
 						})

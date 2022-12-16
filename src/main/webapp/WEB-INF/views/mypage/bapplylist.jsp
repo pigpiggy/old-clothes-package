@@ -62,13 +62,13 @@
 	          			<div class="aindividualStatus">신청대기</div>
 	          	</c:when>
 	          	<c:when test="${apply.astatus == '신청완료'}">
-	          			<div class="aindividualStatus">수거대상</div>
+	          			<div class="aindividualStatus">수거중</div>
 	          	</c:when>
 	          	<c:when test="${apply.astatus == '수거완료'}">
 	          			<div class="aindividualStatus">수거완료</div>
 	          	</c:when>
 	          	
-	          	<c:when test="${apply.astatus == '후기대기'}">
+	          	<c:when test="${apply.astatus == '후기등록예쩡'}">
 	          			<div class="aindividualStatus">후기등록대기</div>
 	          	</c:when>
 	          	

@@ -19,12 +19,10 @@
             <div class="section-overlay"></div>
 
             <div class="container">
-                <div class="row">
-
+                <div class="row" id="sharingheader">
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">무료 나눔</h1>
                     </div>
-
                 </div>
             </div>
      </section>
@@ -54,7 +52,7 @@
 	     <a href="sharingView/${sharing.sno}">
 		     <div class="card" data-sno=${sharing.sno }>
 		          <div class="card-image">
-		          	<c:if test="${'등록완료' != sharing.sstatus}">
+		          	<c:if test="${'거래 완료' == sharing.sstatus}">
 		          		<div class="sharingStatus">${sharing.sstatus }</div>
 		          	</c:if>
 		          	<c:choose>

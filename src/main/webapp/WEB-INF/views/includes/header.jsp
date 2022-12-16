@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -89,14 +89,8 @@ body {
                         </ul>        
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">커뮤니티</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/freeList">자유게시판</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/freeList">커뮤니티</a>
                     </li>
 				<c:choose>
 					<c:when test="${authUser == null }">
@@ -116,8 +110,8 @@ body {
 				        </c:if>
 				        <c:if test="${authUser.sect=='business' }">
 				       		<li class="nav-item ms-3">
-					        	<a class="nav-link custom-btn custom-border-btn btn" href="/mypage/bmypage/${authUser.bno }/apply">마이페이지</a>
-						        <a class="nav-link custom-btn custom-border-btn btn" href="/logout">로그아웃</a>
+					        	<a class="nav-link custom-btn custom-border-btn btn" href="/mypage/bmypage/${authUser.bno }/apply">Mypage</a>
+						        <a class="nav-link custom-btn custom-border-btn btn" href="/logout">Logout</a>
 						    </li>    
 						</c:if>		                
 	                </c:otherwise>

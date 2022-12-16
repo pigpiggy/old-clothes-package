@@ -62,7 +62,7 @@ body {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#top">하우헌옷</a>
+                        <a class="nav-link click-scroll" href="/">하우헌옷</a>
                     </li>
 
                     <li class="nav-item dropdown">

@@ -81,7 +81,7 @@
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
-		          		<button class="review1">거래 후기</button>
+		          		<button class="buttoncontent review1">거래 후기</button>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -173,12 +173,14 @@
 		     		</a>
 		     		<c:if test="${'거래중' eq buysharing.sstatus}">
 		     			<c:if test="${buysharing.buyCompletedCount eq 0}">
-		          			<button class="gray buttoncontent cancel4">거래 취소</button>
-		          			<button class="buttoncontent complete4">거래 완료</button>
+		     				<div class="buttonbox">
+			          			<button class="gray buttoncontent cancel4">거래 취소</button>
+			          			<button class="buttoncontent complete4">거래 완료</button>
+			          		</div>	
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-		          		<button class="review">거래 후기</button>
+		          		<button class="buttoncontent review">거래 후기</button>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>

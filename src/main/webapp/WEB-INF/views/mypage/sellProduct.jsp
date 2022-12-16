@@ -95,8 +95,10 @@
 				     </a>
 				     <c:if test="${'거래중' eq sell.istatus}">
 				     	<c:if test="${sell.sellCompletedCount eq 0}">
-		          			<button class="gray buttoncontent cancel">거래 취소</button>
-		          			<button class="buttoncontent complete">거래 완료</button>
+				     		<div class="buttonbox">
+			          			<button class="gray buttoncontent cancel">거래 취소</button>
+			          			<button class="buttoncontent complete">거래 완료</button>
+			          		</div>	
 		          		</c:if>
 		          	</c:if>
 			  	</div>

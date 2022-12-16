@@ -15,9 +15,17 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
+	<section class="news-detail-header-section-sell text-center">
+            <div class="section-overlay"></div>
+            <div class="container">
+                <div class="row" id="individualheader">
+                    <div class="col-lg-12 col-12">
+                        <h1 class="text-white">개인 판매</h1>
+                    </div>
+                </div>
+            </div>
+    </section>
   <div id="individualList">
-    <h1 id="individualListSubject">개인판매</h1>
-    
     <div id="buttonAndSelect">
       <div class="bt_wrap">
 	    <c:if test="${!empty authUser}">    

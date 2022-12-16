@@ -9,6 +9,17 @@ body {
 	min-height: 100vh;
 	width: 100%;
 }
+/*맨 위 사진 부분*/
+.news-detail-header-section-sell {
+  background-image: url('/image/medium-shot-people-collecting-donations.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
 
 /* list */
 :root {
@@ -26,7 +37,9 @@ a {
 #individualHtml {
 	overflow-y: scroll;
 }
-
+#individualheader {
+	margin: 0 auto;
+}
 #individualBody {
 	min-height: 101%;
 }

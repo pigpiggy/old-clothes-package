@@ -159,6 +159,8 @@ $(function(){
 
 
 
+
+
 //인증번호 5자리 번호 = 전송(개인)
 $(function(){
 	$('#phone').keyup(function(){
@@ -171,6 +173,7 @@ $(function(){
 	$('#confirmBnt').hide();
 	$('#authNumber').hide();
 	$('#authlabel').hide();
+	$('#timer').hide();
 	$(document).on('click','#goSMS', function () {		// 버튼을 클릭 했을 경우
 		let phone = $('#phone').val();	// 사용자가 입력한 전화번호
 		let authCode= $("#authCode");	//휴대폰 인증번호 담을 변수		
@@ -179,6 +182,7 @@ $(function(){
 		$('#confirmBnt').show();
 		$('#authNumber').show();
 		$('#authlabel').show();
+		$('#timer').show();
 		$("#phone").attr("readonly",true);        // readonly 처리
 			$.ajax({
 				url: '/main/execute',	// 요청보낼 url
@@ -188,10 +192,10 @@ $(function(){
 					if(response=="true"){
 						alert("동일번호로 가입할 수 있는 아이디는 최대 3개입니다.");
 					}else{
-					
 					authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
 					console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
 					alert('인증 번호가 발송 되었습니다.');
+					startCountdown();
 					}
 				},
 				error: function(response) {
@@ -222,18 +226,43 @@ $(function(){
 					cnfCheck = true;
 					alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
 					$('#confirmBnt').hide();
+					$('#timer').hide();
 					$('#checkedauthNumber').show();
 					$("#authNumber").attr("readonly",true);        // readonly 처리
+					stopCountdown();
 				} else {
 					alert('인증번호가 일치하지 않습니다.');
 				}
 				// 인증번호를 입력하지 않았을 경우
-			}else{alert("인증번호를 입력 해 주세요"); cnfCheck = false;}
+			}else{alert("인증번호를 입력해 주세요"); cnfCheck = false;}
 		});
 	})
 })
+//개인 인증 타이머
+var countdownTimer;
+var countdownTime;
+function startCountdown(){
+  if(countdownTimer) clearInterval(countdownTimer);
+  countdownTime = 180; //시간초
+  countdownTimer = setInterval(function(){ //타이머 시작
+    if(countdownTime>0){ //타이머가 진행중이라면
+      var ct = new Date(null);
+      ct.setSeconds(countdownTime);
+      var rt = ct.toISOString().substr(14, 5); //시간을 표시하기 위한 변수정의  
+      document.getElementById('timer').value=rt; //텍스트에 표시
+      countdownTime -= 1; //1초씩 줄어든다.
+    }else { //타이머가 끝났다면
+      clearInterval(countdownTimer); //끝
+      alert('입력시간이 끝났습니다. 본인인증 버튼을 다시 눌러주세요.'); 
+      document.getElementById('timer').value="";//텍스트를 비운다.
+    }
+  },1000); //1초씩 줄어든다.
+}	
 
-
+function stopCountdown(){ //타이머 멈춤
+  clearInterval(countdownTimer);
+  document.getElementById('timer').value='';
+}
 //인증번호 5자리 번호 = 전송(업체)
 $(function(){
 	$('#buserPhoneNum').change(function(){
@@ -248,6 +277,7 @@ $(function(){
 	$('#bconfirmBnt').hide();
 	$('#bauthNumber').hide();
 	$('#bauthlabel').hide();
+	$('#timer1').hide();
 	$(document).on('click','#bgoSMS', function () {		// 버튼을 클릭 했을 경우
 		let bphone = $('#bphone').val();	// 사용자가 입력한 전화번호
 		let authCode= $("#bauthCode");	//휴대폰 인증번호 담을 변수
@@ -257,19 +287,20 @@ $(function(){
 			$('#bconfirmBnt').show();
 			$('#bauthNumber').show();
 			$('#bauthlabel').show();
+			$('#timer1').show();
 			$("#bphone").attr("readonly",true);        // readonly 처리
 			$.ajax({
 				url: '/main/execute',	// 요청보낼 url
 				method: 'get',
 				data: {'phone': bphone},	// 사용자가 입력한 휴대폰번호 전송
-				success: function (response) {
+				success: function (response) {					
 					if(response=="true"){
 						alert("동일번호로 가입할 수 있는 아이디는 최대 3개입니다.");
 					}else{
 					authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
 					console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
-	
 					alert('인증 번호가 발송 되었습니다.');
+					startCountdown1();
 					}
 				},
 				error: function(response) {
@@ -297,8 +328,10 @@ $(function(){
 					cnfCheck = true;
 					alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
 					$('#bconfirmBnt').hide();
+					$('#timer1').hide();
 					$('#bcheckedauthNumber').show();
 					$("#bauthNumber").attr("readonly",true);        // readonly 처리
+					stopCountdown1();
 				} else {
 					alert('인증번호가 일치하지 않습니다.');
 				}
@@ -308,6 +341,34 @@ $(function(){
 
 	});
 });
+
+//인증번호 타이머 [업체]
+var countdownTimer1;
+var countdownTime1;
+function startCountdown1(){
+  if(countdownTimer1) clearInterval(countdownTimer1);
+  countdownTime1 = 180; //시간초
+  countdownTimer1 = setInterval(function(){ //타이머 시작
+    if(countdownTime1>0){ //타이머가 진행중이라면
+      var ct = new Date(null);
+      ct.setSeconds(countdownTime1);
+      var rt = ct.toISOString().substr(14, 5); //시간을 표시하기 위한 변수정의  
+      document.getElementById('timer1').value=rt; //텍스트에 표시
+      countdownTime1 -= 1; //1초씩 줄어든다.
+    }else { //타이머가 끝났다면
+      clearInterval(countdownTimer1); //끝
+      alert('입력시간이 끝났습니다. 본인인증 버튼을 다시 눌러주세요.');
+      document.getElementById('timer1').value="";//텍스트를 비운다.
+    }
+  },1000); //1초씩 줄어든다.
+}	
+
+function stopCountdown1(){ //타이머 멈춤
+  clearInterval(countdownTimer1);
+  document.getElementById('timer1').value='';
+}
+
+
 //비밀번호 일치여부(개인)
 function isSame(){
 	var password = document.getElementById('password');

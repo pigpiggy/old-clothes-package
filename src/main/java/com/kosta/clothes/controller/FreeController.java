@@ -73,7 +73,11 @@ public class FreeController {
 		return mav;
 	}
 	
-					
+	//글 작성 폼 띄우기
+		@GetMapping("/cmtModify")
+		public String cmtModify() {
+			return "free/cmtModify";
+		}				
 	
 	//글 작성 폼 띄우기
 	@GetMapping("/freeRegistForm")

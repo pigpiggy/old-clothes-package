@@ -19,9 +19,19 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
 
+
+</script>
 <style>
-
+#timer{
+	position: relative;
+    width: 18%;
+}
+#timer1{
+	position: relative;
+    width: 18%;
+}
 .req{
 	color:red;
 }
@@ -117,6 +127,7 @@
 					                        <label class="form-label" id="authlabel" for="authNumber" style="position:absolute; margin:2.5%;" >인증번호<span class="req">*</span></label>
 					                 		<input type="tel" id="authNumber" name="authNumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 8rem;" />
 					                 		<input type="hidden" id="authCode"/>
+					                 		<input type="text" id="timer" value="" readonly>
 						                    <input type="button" id="confirmBnt" class="btn btn-light" value="인증확인" style="margin-left:2%;">
 						                    <input type="button" id="checkedauthNumber" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
 				                        </div>
@@ -204,6 +215,7 @@
 					                        <label class="form-label" id="bauthlabel" for="bauthNumber" style="position:absolute; margin:2.5%;" >인증번호<span class="req">*</span></label>
 					                 	 	<input type="tel" id="bauthNumber" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 8rem;" />
 					                 		<input type="hidden" id="bauthCode"/>
+					                 		<input type="text" id="timer1" value="" readonly>
 						                    <input type="button" id="bconfirmBnt" class="btn btn-light" value="인증확인" style="margin-left:2%;">
 						                    <input type="button" id="bcheckedauthNumber" class="btn btn-light disabled" value="확인완료" style="margin-left:2%; display:none;">
 				                        </div>

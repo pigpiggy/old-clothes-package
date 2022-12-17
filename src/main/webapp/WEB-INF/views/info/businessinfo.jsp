@@ -299,6 +299,10 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 	</div>
 </div>
 	<script>	
+	$(document).ready(function(){
+		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;">지역을 선택해주세요</h4><span><a></li>'
+		$('#blist').append(requ);
+	})
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(35.3732436, 129.147811), // 지도의 중심좌표
@@ -328,7 +332,63 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 	//시도 변수 선언
 	let sido;
 	let sigugun;
-		
+
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        var lat = position.coords.latitude, // 위도
+	            lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	            message = '<div style="padding:5px;"> 현재 나의 위치 </div>'; // 인포윈도우에 표시될 내용입니다
+	        
+	        // 마커와 인포윈도우를 표시합니다
+	        displayMarker(locPosition, message);
+	            
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	        message = 'geolocation을 사용할수 없어요..'
+	        
+	    displayMarker(locPosition, message);
+	}
+
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	function displayMarker(locPosition, message) {
+
+	    // 마커를 생성합니다
+	    var marker3 = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition
+	    }); 
+	    
+	    var iwContent = message, // 인포윈도우에 표시할 내용
+	        iwRemoveable = true;
+
+	    // 인포윈도우를 생성합니다
+	    var infowindow3 = new kakao.maps.InfoWindow({
+	        content : iwContent,
+	        removable : iwRemoveable
+	    });
+	    
+	    
+	  //마우스 오버 시 인포윈도우 오픈 + 위치 이동
+	      kakao.maps.event.addListener(marker3, 'click', function() {
+	    	map.panTo(marker3.getPosition());
+	    	 infowindow3.open(map, marker3);
+      });
+		  //마우스 아웃 시 인포윈도우 클로즈
+      /* kakao.maps.event.addListener(marker3, 'mouseout', function() {
+      	infowindow3.close();
+      }); */
+		  
+	    map.setCenter(locPosition);   
+	}	
 	
 	<%--검색 버튼 클릭시 --%>
 	$(document).on("change","#sigugun",function(){
@@ -357,11 +417,14 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			setMarkers2(null); //기존에 있는 마커 있으면 초기화
 			setInfo2(null); //기존에 있는 인포윈도우 초기화
 			var bli = "";
+			if(data.length==0){
+				bli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 업체가 없습니다.</h3></span></a></li><br>';
+			}
 				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
-				bli += '<li class="listdnames" id="listmove">' ;
+				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
@@ -419,12 +482,17 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				        });
 				        marker2.setMap(map);
 				        markers2.push(marker2); 
-				        
+				        var lat = result[0].y;
+						var lng = result[0].x;
+														
+						console.log("업체lat: " + lat);	
+						console.log("업체 lng: " + lng);
 				     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 				        var iwContent = '<div style="width:100%; padding:5px;box-sizing:content-box;">' +
 				        				'<div style="margin-bottom:10px;">상호명 : '+ businname + '</div>' + 
-				        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + data.bdetailadd +'</div>' +
+				        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + ' ' + data.bdetailadd +'</div>' +
 				        				'<div>전화번호 : '+ businphone + '</div>' +
+				        				'<div style="margin-bottom:10px;"><br><a href="https://map.kakao.com/link/to/'+businaddress+','+lat+','+lng+'"style="color:blue" target="_blank">길찾기</a></div>'+
 				        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				     // 인포윈도우를 생성합니다
@@ -442,12 +510,12 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				    		map.panTo(marker2.getPosition());
 		              	displayInfowindow2(marker2);
 		              	});
-					  	//마우스 아웃 시 인포윈도우 클로즈
+					  	/* //마우스 아웃 시 인포윈도우 클로즈
 		              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
 		              		infowindow2.close();
-		              	});
+		              	}); */
 		            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
-		            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+		            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 		            		this.map.panTo(marker2.getPosition());	 
 		            		infowindow2.open(map,marker2);
 		           		});
@@ -701,19 +769,25 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 					        });
 					        marker2.setMap(map);
 					        markers2.push(marker2); 
-					        
+					            
+					        var lat = result[0].y;
+							var lng = result[0].x;
+															
+							console.log("업체lat: " + lat);	
+							console.log("업체 lng: " + lng);
 					     // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 					        var iwContent = '<div style="width:100%; padding:5px;box-sizing:content-box;">' +
 					        				'<div style="margin-bottom:10px;">상호명 : '+ businname + '</div>' + 
-					        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + data.bdetailadd +'</div>' +
+					        				'<div style="margin-bottom:10px;">주소 : '+ businaddress + ' ' + data.bdetailadd +'</div>' +
 					        				'<div>전화번호 : '+ businphone + '</div>' +
+					        				'<div style="margin-bottom:10px;"><br><a href="https://map.kakao.com/link/to/'+businaddress+','+lat+','+lng+'"style="color:blue" target="_blank">길찾기</a></div>'+
 					        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					            iwRemoveable = false; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 					     // 인포윈도우를 생성합니다
 					        var infowindow2 = new kakao.maps.InfoWindow({
 					            content : iwContent,
 					            removable : iwRemoveable
-					        });
+					        });//    
 					        info2.push(infowindow2);
 					        //인포윈도우 열리는 function
 					        function displayInfowindow2(marker2) {
@@ -724,12 +798,12 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 					    		map.panTo(marker2.getPosition());
 			              	displayInfowindow2(marker2);
 			              	});
-						  	//마우스 아웃 시 인포윈도우 클로즈
+						  	/* //마우스 아웃 시 인포윈도우 클로즈
 			              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
 			              		infowindow2.close();
-			              	});
+			              	}); */
 			            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
-			            	document.querySelectorAll("#listmove")[i].addEventListener('mouseenter', (event) =>{
+			            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 			            		this.map.panTo(marker2.getPosition());	 
 			            		infowindow2.open(map,marker2);
 			           		});

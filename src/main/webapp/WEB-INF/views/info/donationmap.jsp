@@ -414,20 +414,21 @@ input[type=radio] {
 	         function getmultiAddr(alllaty,allngx){
 	             var coord1 = new kakao.maps.LatLng(alllaty, alllngx); //좌표를 담아준다.
 	             var inputcontent = '<div class="wrap">' +
-	              '<div class="info"  style="box-sizing:content-box;">' +
-	                '<div class="title">' + 
+	              '<div class="info"  style="width:100%; padding:2px;box-sizing:content-box;">' +
+	                '<div class="title" style="margin-bottom:10px;font-weight: var(--font-weight-bold);">' + 
 	                        allname +                        
 	                        '</div><br>' +
-	                   '<div class="body">' +                        
-	                      '<div class="desc">'+
+	                   '<div class="body" style="margin-bottom:10px;">' +                        
+	                      '<div class="desc" style="margin-bottom:10px;">'+
 	                          '<div class="ellipsis">' +'주소 :'+ alladdress +'</div><br>' +                          
 	                          '<div class="phone ellipsis">'+'전화 번호 :' + allphone  +'</div>' +
-	                       '<div style="padding:-1px;"><br><a href="https://map.kakao.com/link/to/'+alladdress+','+alllaty+','+alllngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
+	                       '<div style="margin-bottom:10px;"><br><a href="https://map.kakao.com/link/to/'+alladdress+','+alllaty+','+alllngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
 	                       '</div>' +
 	                   '</div>' +
 	                   '</div>' +
 	               '</div>';
 	             var contentt11 = '<div style="width:100%; padding:5px;">'+inputcontent+'</div>';
+	             var iwRemoveable = true; 
 	           //이미지 마커 
 	             var imageSrc1 = "image/icons8-marker-100.png",
 	             imageSize1 = new kakao.maps.Size(40,44),
@@ -446,7 +447,7 @@ input[type=radio] {
 	             //정보를 담아서 보여준다.    
 	             var infowindow = new kakao.maps.InfoWindow({
 	                   content : contentt11,
-	                   removeable : true
+	                   removable : iwRemoveable
 	             });
 	             info1.push(infowindow);
 	             
@@ -583,7 +584,7 @@ input[type=radio] {
 				setInfo2(null); //기존에 있는 인포윈도우 초기화
 				var dli = "";
 				if(data.length==0){
-					dli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 기부업체가 없습니다.</h3></span></a></li><br>';
+					dli += '<li><a><span class="store_item"><h3 style="text-align: center;font-size: 19px;font-weight: 700;">선택된 지역엔 기부업체가 없습니다.</h3></span></a></li><br>';
 				}
 				data.forEach(function(data,i){
 					
@@ -629,11 +630,11 @@ input[type=radio] {
 				        markers2.push(marker2); 
 				        
 				        // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-				        var iwContent = '<div style="width:128%;box-sizing:content-box;">&nbsp&nbsp' +
-				        				'<div>'+ "주소 :  "+ donationaddress + '</div><br>' +
-				        				'<div>'+ "업체명 :  "+ donationname + '</div><br>' + 
-				        				'<div>'+  "전화 번호 :  "+ donationphone + '</div>' + 
-				        				'<div><br><a href="https://map.kakao.com/link/to/'+donationaddress+','+laty+','+lngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
+				        var iwContent = '<div style="width:100%; padding:3px;box-sizing:content-box;">&nbsp&nbsp' +
+				        				'<div style="margin-bottom:10px;font-weight: var(--font-weight-bold);">'+ "주소 :  "+ donationaddress + '</div><br>' +
+				        				'<div style="margin-bottom:10px;">'+ "업체명 :  "+ donationname + '</div><br>' + 
+				        				'<div style="margin-bottom:10px;">'+ "전화 번호 :  "+ donationphone + '</div>' + 
+				        				'<div style="margin-bottom:10px;"><br><a href="https://map.kakao.com/link/to/'+donationaddress+','+laty+','+lngx+'"style="color:blue" target="_blank">길찾기</a></div>'+
 				        				'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				            iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				     // 인포윈도우를 생성합니다

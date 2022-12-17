@@ -99,4 +99,9 @@ public class FreeServiceImpl implements FreeService{
 		Integer row = (page - 1) * 10 + 1; //ex) (5페이지 -1) * 10 + 1 => 41
 		return freeDao.searchedFreeList(kwd, row);
 	}
+	@Override
+	public void freecmtDel(Integer freeNum) throws Exception {
+		freeDao.deleteCmt(freeNum);
+		
+	}
 }

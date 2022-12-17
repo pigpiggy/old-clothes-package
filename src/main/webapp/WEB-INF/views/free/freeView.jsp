@@ -98,6 +98,12 @@
 	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
 	                </c:if>               
                 </c:if>
+                <c:if test="${authUser.sect eq 'business'}">                
+	                <c:if test="${authUser.bno eq article.bno}">	                                  
+	                   <a href="/modifyform/${article.fno }">수정</a>
+	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+	                </c:if>               
+                </c:if>
             </div>
             <%--댓글 리스트 --%>
             <br><br>                    

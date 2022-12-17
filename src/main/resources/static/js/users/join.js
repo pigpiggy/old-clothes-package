@@ -162,19 +162,24 @@ $(function(){
 //인증번호 5자리 번호 = 전송(개인)
 $(function(){
 	$('#phone').keyup(function(){
-		$('#confirmBnt').show();
+		$('#confirmBnt').hide();
 		$('#checkedauthNumber').hide();
 	});
 $(function(){
-	
-	let phone;
+	var check = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;	
 	let authCode= $('#authCode');
+	$('#confirmBnt').hide();
+	$('#authNumber').hide();
+	$('#authlabel').hide();
 	$(document).on('click','#goSMS', function () {		// 버튼을 클릭 했을 경우
 		let phone = $('#phone').val();	// 사용자가 입력한 전화번호
-		let authCode= $("#authCode");	//휴대폰 인증번호 담을 변수
-	
+		let authCode= $("#authCode");	//휴대폰 인증번호 담을 변수		
 		// 사용자가 입력한 전화번호가 공백이 아니고, 8자리 이상일 경우
-		if (phone != '' && phone.length > 8) {
+		if (phone != '' && phone.length == 11) {
+		$('#confirmBnt').show();
+		$('#authNumber').show();
+		$('#authlabel').show();
+		$("#phone").attr("readonly",true);        // readonly 처리
 			$.ajax({
 				url: '/main/execute',	// 요청보낼 url
 				method: 'get',
@@ -186,7 +191,6 @@ $(function(){
 					
 					authCode.attr('value', response);	// authCode의 속성 value값을 인증번호로 설정
 					console.log("input태그에 담긴 인증번호: " + authCode.val());	// 확인용
-	
 					alert('인증 번호가 발송 되었습니다.');
 					}
 				},
@@ -194,11 +198,18 @@ $(function(){
 					alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')
 				}
 			});
+		}else if(!check.test(phone.value)){
+			alert("휴대폰 번호를 제대로 입력해 주세요");
+			return false;
 		}else{
-			alert("휴대폰 번호를 입력 해 주세요");
-		}
+			alert("휴대폰 번호를 입력해 주세요");
+			return false;
+		} 
 	});
 
+ $("#txt").attr("readonly",true);        // readonly 처리
+        
+        $("#txt").removeAttr("readonly");       // readonly 삭제
 	
 	//인증번호 확인 (개인)
 	let authNumbers = document.getElementById("authNumber");
@@ -212,6 +223,7 @@ $(function(){
 					alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
 					$('#confirmBnt').hide();
 					$('#checkedauthNumber').show();
+					$("#authNumber").attr("readonly",true);        // readonly 처리
 				} else {
 					alert('인증번호가 일치하지 않습니다.');
 				}
@@ -225,20 +237,27 @@ $(function(){
 //인증번호 5자리 번호 = 전송(업체)
 $(function(){
 	$('#buserPhoneNum').change(function(){
-		$('#bconfirmBnt').show();
+		$('#bconfirmBnt').hide();
 		$('#bcheckedauthNumber').hide();
 
 	});
 $(function(){
-	
+	var check = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 	let bnumber;
 	let authCode= $('#bauthCode');
+	$('#bconfirmBnt').hide();
+	$('#bauthNumber').hide();
+	$('#bauthlabel').hide();
 	$(document).on('click','#bgoSMS', function () {		// 버튼을 클릭 했을 경우
 		let bphone = $('#bphone').val();	// 사용자가 입력한 전화번호
 		let authCode= $("#bauthCode");	//휴대폰 인증번호 담을 변수
 		console.log(bphone);
 		// 사용자가 입력한 전화번호가 공백이 아니고, 8자리 이상일 경우
-		if (bphone != '' && bphone.length > 8) {
+		if (bphone != '' && bphone.length == 11) {
+			$('#bconfirmBnt').show();
+			$('#bauthNumber').show();
+			$('#bauthlabel').show();
+			$("#bphone").attr("readonly",true);        // readonly 처리
 			$.ajax({
 				url: '/main/execute',	// 요청보낼 url
 				method: 'get',
@@ -257,9 +276,13 @@ $(function(){
 					alert('인증번호 발송에 실패하였습니다.\n잠시 후 다시 시도해주시기 바랍니다.')
 				}
 			});
+		}else if(!check.test(bphone.value)){
+			alert("휴대폰 번호를 제대로 입력해 주세요");
+			return false;
 		}else{
-			alert("휴대폰 번호를 입력 해 주세요");
-		}
+			alert("휴대폰 번호를 입력해 주세요");
+			return false;
+		} 
 	});
 
 	
@@ -275,6 +298,7 @@ $(function(){
 					alert('휴대폰 번호 인증이 완료되었습니다. 감사합니다.');
 					$('#bconfirmBnt').hide();
 					$('#bcheckedauthNumber').show();
+					$("#bauthNumber").attr("readonly",true);        // readonly 처리
 				} else {
 					alert('인증번호가 일치하지 않습니다.');
 				}

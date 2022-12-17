@@ -666,6 +666,10 @@ public class MypageController {
 							sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
 						}
 					}
+					
+
+					
+
 					//상품등록
 	                Integer sharingcount = sharingService.sharingcount(userno);
 	                System.out.println("sharingcount : " + sharingcount);
@@ -726,7 +730,7 @@ public class MypageController {
 								sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
 							}
 						}
-					//상품등록
+					 	//상품등록
 		                Integer sharingcount = sharingService.sharingcount(userno);
 		                System.out.println("sharingcount : " + sharingcount);
 		                Integer sellcount = sellService.sellcount(userno);
@@ -764,6 +768,66 @@ public class MypageController {
 						}
 					 model.addAttribute("spageInfo", spageInfo);
 					 model.addAttribute("sharingList", sharingList);
+				}else {
+					//users 값을 가져온다
+		            Users users = mypageService.getMypage(userno);
+		            System.out.println("userssss" + users.toString());
+		            model.addAttribute("users",users);
+		            
+					sellList = mypageService.getSellList(userno,page,pageInfo);
+					for (int i = 0; i < sellList.size(); i++) {
+						/* 주소 띄우기 */
+						String addr = sellList.get(i).getIaddress();
+						String[] addChange = addr.split(" ");
+						if(addChange[2].matches("^.*.구$")) {
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sellList.get(i).setIaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sellList.get(i).setIaddress(join2);
+						}
+						if (sellList.get(i).getIfileids() != null) {
+							sellList.get(i).setIfileids(sellList.get(i).getIfileids().split(",")[0]);
+						}
+					}
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+					model.addAttribute("pageInfo", pageInfo);
+					model.addAttribute("sellList", sellList);
+					System.out.println("sellList:"+sellList);
+					sharingList = mypageService.getSharingList(userno,spage,spageInfo);
+					for (int i = 0; i < sharingList.size(); i++) {
+						/* 주소 띄우기*/
+						String addr = sharingList.get(i).getSaddress();
+						String[] addChange = addr.split(" "); //주소 공백으로 분
+						if(addChange[2].matches("^.*.구$")) { //세 번째 단어에서 '구'로 끝나면 동까지 입력 
+							String join1 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).add(addChange[3]).toString();
+							sharingList.get(i).setSaddress(join1);
+						} else {
+							String join2 = new StringJoiner(" ").add(addChange[0]).add(addChange[1]).add(addChange[2]).toString();
+							sharingList.get(i).setSaddress(join2);
+						}
+						if (sharingList.get(i).getSfileids() != null) {
+							sharingList.get(i).setSfileids(sharingList.get(i).getSfileids().split(",")[0]);
+						}
+					}
+					model.addAttribute("spageInfo", spageInfo);
+					model.addAttribute("sharingList", sharingList);
 				}
 			}else {
 				//users 값을 가져온다
@@ -931,6 +995,29 @@ public class MypageController {
 	                statuscount +=sellService.statuscount(userno);
 	                System.out.println("statuscount:"+statuscount);
 	                model.addAttribute("statuscount",statuscount);
+				}else {
+					//users 값을 가져온다
+		             Users users = mypageService.getMypage(userno);
+		             System.out.println("userssss" + users.toString());
+		             model.addAttribute("users",users);
+		             
+		           //상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
 				}
 			}else {
 				//users 값을 가져온다
@@ -1018,6 +1105,41 @@ public class MypageController {
 					//wapply = applyService.getUapply(userno);
 					model.addAttribute("wapply",wapply);
 					System.out.println("Umypage apply : " + wapply.toString());	
+					
+					//상품등록
+	                Integer sharingcount = sharingService.sharingcount(userno);
+	                System.out.println("sharingcount : " + sharingcount);
+	                Integer sellcount = sellService.sellcount(userno);
+	                System.out.println("sellcount:" + sellcount);
+	                Integer totalcount = sharingcount + sellcount;
+	                System.out.println("totalcount : " + totalcount);
+	                model.addAttribute("totalcount",totalcount);
+
+	                //거래후기
+	                Integer reviewcount = reviewService.reviewcount(userno);
+	                model.addAttribute("reviewcount",reviewcount);       
+
+	                //거래완료
+	                Integer statuscount = sharingService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                statuscount +=sellService.statuscount(userno);
+	                System.out.println("statuscount:"+statuscount);
+	                model.addAttribute("statuscount",statuscount);
+	                model.addAttribute("apageInfo", apageInfo);
+				}else {
+					//users 값을 가져온다
+		            Users users = mypageService.getMypage(userno);
+		            System.out.println("userssss" + users.toString());
+		            model.addAttribute("users",users);
+		            
+					wapply = applyService.getApplyList(userno, apage, apageInfo);
+					System.out.println("reviewpage:" + wapply + apageInfo);
+					
+					//개인이 신청한 목록 리스트
+					//wapply = applyService.getUapply(userno);
+					model.addAttribute("wapply",wapply);
+					System.out.println("Umypage apply : " + wapply.toString());
+						
 					
 					//상품등록
 	                Integer sharingcount = sharingService.sharingcount(userno);

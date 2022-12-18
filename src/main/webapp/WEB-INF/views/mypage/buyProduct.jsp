@@ -10,8 +10,8 @@
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/buyProduct.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -41,7 +41,10 @@
 			  	<div class="sellList">
 			  			<input type="hidden" value="${buysell.ino}" class="selectedIno"/>
 					     <a href="/sellView/${buysell.ino}">
-						     <div class="card2" data-sno=${buysell.ino }>
+						     <div class="card2 card" data-sno=${buysell.ino }>
+						      <div class="individualCard-header">
+					     	  	  ${buysell.idealType}
+					     	  </div>
 					          <div class="card-image">
 					          	<c:if test="${'등록완료' != buysell.istatus}">
 					          		<div class="individualStatus">${buysell.istatus }</div>
@@ -58,30 +61,25 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${buysell.price}원</span><span class="date">${buysell.regDate}</span></div>
 					              <h2 class="sharingTitle">${buysell.ititle }</h2>
-					              <p>${buysell.iaddress}</p>
+					              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${buysell.nickname}</p></div>
 					          </div>
-					          <c:choose>
-					          	<c:when test="${empty buysell.iaddress}">
-					          		<div class="card-footer">
-					          			${buysell.idealType}
-					          		</div>
-					          	</c:when>
-					          	<c:otherwise>
-						          <div class="card-footer">
-						              ${buysell.idealType} 
-						          </div>
-					          	</c:otherwise>
-					          </c:choose>
+					          <div class="card-footer">
+					              <img src="/image/pin.png"><p>${buysell.iaddress}</p>
+					          </div>
 					      </div>
 				     </a>
 				     <c:if test="${'거래중' eq buysell.istatus}">
 				     	<c:if test="${buysell.buyCompletedCount eq 0}">
-		          			<button class="gray buttoncontent cancel3">거래 취소</button>
-		          			<button class="buttoncontent complete3">거래 완료</button>
+				     		<div class="buttonbox">
+		          				<button class="gray buttoncontent cancel3">거래 취소</button>
+		          				<button class="buttoncontent complete3">거래 완료</button>
+		          			</div>
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
-		          		<button class="buttoncontent review1">거래 후기</button>
+		          		<div class="buttonbox">
+		          			<button class="buttoncontent review1">거래 후기</button>
+		          		</div>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -134,10 +132,13 @@
 	    <div id="cards" class="sharingCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysharing" items="${buysharingList}">
-			  <div class="sellList sharingList">
+			  <div class="sharingList">
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 		     <a href="/sharingView/${buysharing.sno}">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
+			     	  <div class="sharingCard-header">
+			     	  	${buysharing.sdealType}
+			     	  </div>
 			          <div class="card-image">
 			          	<input type="hidden" name="sstatus" value="${buysharing.sstatus}">
 			          	<c:if test="${'등록완료' != buysharing.sstatus}">
@@ -155,20 +156,11 @@
 			          <div class="card-body">
 			              <span class="date">${buysharing.regDate}</span>
 			              <h2 class="sharingTitle">${buysharing.stitle }</h2>
-			              <p>${buysharing.saddress}</p>
+			              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${buysharing.nickname}</p></div>
 			          </div>
-			          <c:choose>
-			          	<c:when test="${empty buysharing.saddress}">
-			          		<div class="card-footer">
-			          			${buysharing.sdealType}
-			          		</div>
-			          	</c:when>
-			          	<c:otherwise>
-				          <div class="card-footer">
-				              ${buysharing.sdealType} 
-				          </div>
-			          	</c:otherwise>
-			          </c:choose>
+			          <div class="card-footer">
+			          	  <img src="/image/pin.png"><p>${buysharing.saddress}</p>
+			          </div>
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq buysharing.sstatus}">
@@ -180,7 +172,9 @@
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-		          		<button class="buttoncontent review">거래 후기</button>
+		          		<div class="buttonbox">
+		          			<button class="buttoncontent review">거래 후기</button>
+		          		</div>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>
@@ -234,8 +228,9 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>		
 	<script>
+		/* 개인판매 거래취소 */
 		$('.cancel3').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			console.log(index);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -254,8 +249,9 @@
 	
 		})
 		
+		/* 무료나눔 거래취소 */
 		$('.cancel4').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sharingList').index($(this).parent().parent());
 			console.log(index);
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -274,8 +270,10 @@
 
 		})
 		
+		/* 개인판매 거래완료 */
 		$('.complete3').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sellList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -293,8 +291,10 @@
 
 		})
 		
+		/* 무료나눔 거래완료 */
 		$('.complete4').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sharingList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -335,10 +335,11 @@
 			star1 = starindex+1;
 		})
 		
+		/* 개인판매 거래후기 */
 		var ino=0;
 		$('.review1').click(function(){
-			var reviewIndex = $('.sellList').index($(this).parent());
-			console.log($(this).parent());
+			var reviewIndex = $('.sellList').index($(this).parent().parent());
+			console.log($(this).parent().parent());
 			console.log(reviewIndex);
 			ino = $(".card2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal').css('visibility','visible');
@@ -374,10 +375,11 @@
 			});
 		})
 		
+		/* 무료나눔 거래후기 */
 		var sno=0;
 		$('.review').click(function(){
-			var reviewIndex = $('.sharingList').index($(this).parent());
-			console.log($(this).parent());
+			var reviewIndex = $('.sharingList').index($(this).parent().parent());
+			console.log($(this).parent().parent());
 			console.log(reviewIndex);
 			sno = $(".sharingcard2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal2').css('visibility','visible');

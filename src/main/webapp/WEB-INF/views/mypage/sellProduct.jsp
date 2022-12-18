@@ -61,6 +61,9 @@
 			  	<div class="sellList">
 					     <a href="/sellView/${sell.ino}">
 						     <div class="card" data-sno=${sell.ino }>
+						       <div class="individualCard-header">
+					     	  	  ${sell.idealType}
+					     	  </div>
 					          <div class="card-image">
 					          	<c:if test="${'등록완료' != sell.istatus}">
 					          		<div class="individualStatus">${sell.istatus }</div>
@@ -77,20 +80,11 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 					              <h2 class="sharingTitle">${sell.ititle }</h2>
-					              <p>${sell.iaddress}</p>
+					              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
 					          </div>
-					          <c:choose>
-					          	<c:when test="${empty sell.iaddress}">
-					          		<div class="card-footer">
-					          			${sell.idealType}
-					          		</div>
-					          	</c:when>
-					          	<c:otherwise>
-						          <div class="card-footer">
-						              ${sell.idealType} 
-						          </div>
-					          	</c:otherwise>
-					          </c:choose>
+					          <div class="card-footer">
+					              <img src="/image/pin.png"><p>${sell.iaddress}</p>
+					          </div>
 					      </div>				      
 				     </a>
 				     <c:if test="${'거래중' eq sell.istatus}">
@@ -136,9 +130,12 @@
 	    <div id="cards" class="sharingCards">
 	    	<div class="card-list">
 			  <c:forEach var="sharing" items="${sharingList}">
-			  <div class="sellList">
+			  <div class="sharingList">
 		     <a href="/sharingView/${sharing.sno}">
 			     <div class="card sharingcard" data-sno=${sharing.sno }>
+			     	  <div class="sharingCard-header">
+			     	  	${sharing.sdealType}
+			     	  </div>
 			          <div class="card-image">
 			          	<input type="hidden" name="sstatus" value="${sharing.sstatus}">
 			          	<c:if test="${'등록완료' != sharing.sstatus}">
@@ -156,20 +153,11 @@
 			          <div class="card-body">
 			              <span class="date">${sharing.regDate}</span>
 			              <h2 class="sharingTitle">${sharing.stitle }</h2>
-			              <p>${sharing.saddress}</p>
+			              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${sharing.nickname}</p></div>
 			          </div>
-			          <c:choose>
-			          	<c:when test="${empty sharing.saddress}">
-			          		<div class="card-footer">
-			          			${sharing.sdealType}
-			          		</div>
-			          	</c:when>
-			          	<c:otherwise>
-				          <div class="card-footer">
-				              ${sharing.sdealType} 
-				          </div>
-			          	</c:otherwise>
-			          </c:choose>
+			          <div class="card-footer">
+			          	  <img src="/image/pin.png"><p>${sharing.saddress}</p>
+			          </div>
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq sharing.sstatus}">
@@ -216,8 +204,9 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>		
 	<script>
+		/* 개인판매 거래취소 */
 		$('.cancel').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -235,8 +224,9 @@
 
 		})
 		
+		/* 개인판매 거래완료 */
 		$('.complete').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -256,7 +246,7 @@
 		})
 		
 		$('.cancel1').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sharingList').index($(this).parent().parent());
 			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -275,7 +265,8 @@
 		})
 		
 		$('.complete1').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sharingList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -291,9 +282,11 @@
 					console.log(err);
 				}
 			});
-
+			
 		})
 		
+		
+		/* 개인판매,무료나눔 탭 */
 		$('.sharingCards').hide();
 		$('.sharingPage').hide();
 		

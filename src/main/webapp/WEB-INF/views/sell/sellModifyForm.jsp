@@ -19,7 +19,7 @@
 	<header>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</header>
-	<div class="container">
+	<div class="scontainer">
 		<h1>상품수정</h1>
 		<form action="sellModify" method="post" name="modifyForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 			<input type="hidden" name="ino" value="${sell.ino }">
@@ -40,15 +40,15 @@
 						</span>	
 						<span class="selectdealprice" id="priceAndAI">
 								<span class="sellfont price">가격:</span> 
-								<input type="text" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" value="${sell.price }" /> 
+								<input type="number" class="form-control" placeholder="숫자만 입력해주세요." id="price" name="price" value="${sell.price }" /> 
 								<span class="sellfont price">원</span>
 						</span>
 					</div>
 					<div id="dealarea">
-						<span class="sellfont">거래지역:</span> 
+						<span id="sellarea" class="sellfont">거래지역:</span> 
 						<input class="postarea" id="member_post" type="hidden" placeholder="주소검색" readonly onclick="findAddr()"> 
 						<input class="postarea" name="iaddress" id="iaddress" type="text" placeholder="'동'을 입력하세요." readonly value="${sell.iaddress }"><br> 
-						<input id="addresssearch" type="button" onclick="findAddr()" value="주소 검색" />
+						<input id="addresssearch" class="listbtn" type="button" onclick="findAddr()" value="주소 검색" />
 					</div>
 				</div>
 
@@ -57,12 +57,12 @@
 			<div class="form-group">
 				<textarea class="form-control" rows="12" id="icontent" name="icontent">${sell.icontent }</textarea>
 			</div>
-			<input type="file" multiple="multiple" name="iimageFile" id="image"
+			<input type="file" multiple="multiple" name="iimageFile" id="image" title="한 번에 최대 5개까지 선택가능"
 				onchange="addFile(this);" />
 			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sellList">
-					<button type="button" class="btn btn-info">취소</button>
+					<button type="button" id="listbtn">취소</button>
 				</a> 
 				<input type="submit" id="uploadBtn" class="btn btn-warning" value="수정">
 			</div>

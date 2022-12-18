@@ -100,8 +100,14 @@
 					            	</c:if>
 					            </div>
 					            <div class="reviewCenter">
-					                <h3 class="reviewTitle">거래물품: ${review.stitle }</h3>
-					                <div class="reviewDealType">거래유형: ${review.sdealtype }</div>
+					                <div class="reviewfirst">
+					                	<span class="reviewBox">상품명 </span>
+					                	<h3 class="reviewTitle">${review.stitle }</h3>
+					                </div>
+					                <div class="reviewfirst">
+					                	<span class="reviewBox">거래유형 </span>
+					                	<h3 class="reviewTitle">${review.sdealtype }</h3>
+					                </div>
 					            	<p class="reviewContent">'${review.rcontent}'</p>
 					            </div>	
 					        </div>
@@ -170,9 +176,15 @@
 					            	</c:if>
 					            </div>
 					            <div class="reviewCenter">
-					                <div class="reviewTitle">거래물품: ${review.ititle }</div>
-					                <div class="reviewDealType">거래유형: ${review.idealtype }</div>
-					            	<span class="reviewContent">'${review.rcontent}'</span>
+					                <div class="reviewfirst">
+					                	<span class="reviewBox">상품명 </span>
+					                	<h3 class="reviewTitle">${review.ititle }</h3>
+					                </div>
+					                <div class="reviewfirst">
+					                	<span class="reviewBox">거래유형 </span>
+					                	<h3 class="reviewTitle">${review.idealtype }</h3>
+					                </div>					            	
+					                <span class="reviewContent">'${review.rcontent}'</span>
 					            </div>	
 					        </div>
 					        <div id="reviewWriter">

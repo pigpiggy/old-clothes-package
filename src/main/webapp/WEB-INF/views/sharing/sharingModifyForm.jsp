@@ -19,7 +19,7 @@
 	<header>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</header>
-	<div class="container">
+	<div class="scontainer">
 		<h1>상품수정</h1>
 		<form action="sharingModify" method="post" name="modifyForm" enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
 			<input type="hidden" name="sno" value="${sharing.sno }">
@@ -29,7 +29,7 @@
 			</div>
 			<br>
 			<div id="dealcontainer">
-				<div class="form-group row">
+				<div id="srow" class="form-group row">
 					<div id="dealprice">
 						<span class="selectdealprice">
 							<select class="form-control" name="sdealType" id="sel1">
@@ -43,10 +43,10 @@
 						</span>
 					</div>
 					<div id="dealarea">
-						<span class="sellfont">거래 지역: </span> 
+						<span id="sellarea" class="sellfont">거래 지역: </span> 
 						<input id="member_post" type="hidden" readonly> 
 						<input class="postarea" name="saddress" id="saddress" type="text" placeholder="'동'을 입력하세요." readonly value="${sharing.saddress }">
-						<input id="addresssearch" type="button" onclick="findAddr()" value="주소 검색" />
+						<input id="addresssearch" class="listbtn" type="button" onclick="findAddr()" value="주소 검색" />
 					</div>
 				</div>
 
@@ -60,7 +60,7 @@
 			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sharingList">
-					<button type="button" class="btn btn-info">취소</button>
+					<button type="button" id="listbtn">취소</button>
 				</a> 
 				<input type="submit" id="uploadBtn" class="btn btn-warning" value="수정">
 			</div>

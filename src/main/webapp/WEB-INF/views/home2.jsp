@@ -222,7 +222,7 @@ body {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="/businessinfo" class="d-block">
-                                <img src="image/scholarship.png" class="featured-block-image img-fluid" alt="">
+                                <img src="image/donator.png" class="featured-block-image img-fluid" style="width: 128px; height: 128px;" alt="">
 
                                 <p class="featured-block-text">헌 옷 <strong>사고 팔기</strong></p>
                             </a>

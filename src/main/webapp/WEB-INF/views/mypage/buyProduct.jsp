@@ -10,8 +10,8 @@
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/buyProduct.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -41,7 +41,10 @@
 			  	<div class="sellList">
 			  			<input type="hidden" value="${buysell.ino}" class="selectedIno"/>
 					     <a href="/sellView/${buysell.ino}">
-						     <div class="card2" data-sno=${buysell.ino }>
+						     <div class="card2 card" data-sno=${buysell.ino }>
+						      <div class="individualCard-header">
+					     	  	  ${buysell.idealType}
+					     	  </div>
 					          <div class="card-image">
 					          	<c:if test="${'등록완료' != buysell.istatus}">
 					          		<div class="individualStatus">${buysell.istatus }</div>
@@ -58,20 +61,11 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${buysell.price}원</span><span class="date">${buysell.regDate}</span></div>
 					              <h2 class="sharingTitle">${buysell.ititle }</h2>
-					              <p>${buysell.iaddress}</p>
+					              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${buysell.nickname}</p></div>
 					          </div>
-					          <c:choose>
-					          	<c:when test="${empty buysell.iaddress}">
-					          		<div class="card-footer">
-					          			${buysell.idealType}
-					          		</div>
-					          	</c:when>
-					          	<c:otherwise>
-						          <div class="card-footer">
-						              ${buysell.idealType} 
-						          </div>
-					          	</c:otherwise>
-					          </c:choose>
+					          <div class="card-footer">
+					              <img src="/image/pin.png"><p>${buysell.iaddress}</p>
+					          </div>
 					      </div>
 				     </a>
 				     <c:if test="${'거래중' eq buysell.istatus}">
@@ -138,6 +132,9 @@
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 		     <a href="/sharingView/${buysharing.sno}">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
+			     	  <div class="sharingCard-header">
+			     	  	${buysharing.sdealType}
+			     	  </div>
 			          <div class="card-image">
 			          	<input type="hidden" name="sstatus" value="${buysharing.sstatus}">
 			          	<c:if test="${'등록완료' != buysharing.sstatus}">
@@ -155,20 +152,11 @@
 			          <div class="card-body">
 			              <span class="date">${buysharing.regDate}</span>
 			              <h2 class="sharingTitle">${buysharing.stitle }</h2>
-			              <p>${buysharing.saddress}</p>
+			              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${buysharing.nickname}</p></div>
 			          </div>
-			          <c:choose>
-			          	<c:when test="${empty buysharing.saddress}">
-			          		<div class="card-footer">
-			          			${buysharing.sdealType}
-			          		</div>
-			          	</c:when>
-			          	<c:otherwise>
-				          <div class="card-footer">
-				              ${buysharing.sdealType} 
-				          </div>
-			          	</c:otherwise>
-			          </c:choose>
+			          <div class="card-footer">
+			          	  <img src="/image/pin.png"><p>${buysharing.saddress}</p>
+			          </div>
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq buysharing.sstatus}">

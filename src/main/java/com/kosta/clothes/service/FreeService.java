@@ -15,6 +15,7 @@ public interface FreeService {
 	void modifyFree(Free free) throws Exception; // 글 수정
 
 	void freeDelete(Integer freeNum) throws Exception;// 글 삭제
+	void freecmtDel(Integer freeNum) throws Exception;// 글 삭제
 	 
 	Free Freehit(Integer freadcount) throws Exception; //조회수 증가
 	

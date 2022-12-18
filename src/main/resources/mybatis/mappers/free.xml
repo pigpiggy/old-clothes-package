@@ -85,6 +85,13 @@
 		]]>
 	</delete>
 	
+	<!-- 글 삭제하기 -->
+	<delete id="deleteCmt" parameterType="Integer">
+		<![CDATA[
+			DELETE FROM  COMMENTS  WHERE FNO = #{fno}
+		]]>
+	</delete>
+	
 	<select id="selectFreeSearchedList" resultType="free" parameterType="String">
 	<![CDATA[
  			select * from 

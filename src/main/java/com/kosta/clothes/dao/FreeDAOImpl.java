@@ -51,6 +51,8 @@ public class FreeDAOImpl implements FreeDAO {
 	public void deleteFree(Integer freeNum) throws Exception {
 		sqlSession.delete("deleteFree",freeNum);
 	}
+	
+	
 
 	////글 클릭 시 관련 num 으로 정보 값 가져오기
 	@Override
@@ -80,6 +82,12 @@ public class FreeDAOImpl implements FreeDAO {
 		map.put("kwd",kwd);
 		map.put("row", row);
 		return sqlSession.selectList("searchedFreeList",map);
+	}
+
+	@Override
+	public void deleteCmt(Integer freeNum) throws Exception {
+		sqlSession.delete("deleteCmt",freeNum);
+		
 	}
 
 	

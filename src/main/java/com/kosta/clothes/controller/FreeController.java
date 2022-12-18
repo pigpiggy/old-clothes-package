@@ -73,7 +73,11 @@ public class FreeController {
 		return mav;
 	}
 	
-					
+	//글 작성 폼 띄우기
+		@GetMapping("/cmtModify")
+		public String cmtModify() {
+			return "free/cmtModify";
+		}				
 	
 	//글 작성 폼 띄우기
 	@GetMapping("/freeRegistForm")
@@ -84,14 +88,16 @@ public class FreeController {
 	//글 등록 동작
 	@PostMapping("/freeInsert")
 	public ModelAndView boardwrite(@ModelAttribute Free free,
-			HttpSession session ) {//값을 전부 받아온다.
+			HttpSession session,Model model ) {//값을 전부 받아온다.
 		System.out.println("들어옴");
 		ModelAndView mav = new ModelAndView(); // 뷰 데이터 동시 설정 가능함
+		System.out.println("freeinsert : " + free.getFcontent());
+		
 		try {
-			
 			if (session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
 				Users users = (Users) session.getAttribute("authUser");
 				free.setUserno(users.getUserno());
+				
 				String nickname=users.getNickname();
 				free.setFname(nickname);
 				System.out.println("users:"+free);
@@ -246,6 +252,7 @@ public class FreeController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("삭제 : " + fno);
+			freeService.freecmtDel(Integer.parseInt(fno));
 			freeService.freeDelete(Integer.parseInt(fno));
 			mav.setViewName("redirect:/freeList");
 		}catch(Exception e) {

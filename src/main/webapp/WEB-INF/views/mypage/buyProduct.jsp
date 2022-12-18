@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 <link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
@@ -28,10 +29,12 @@
 	</c:if>
 	</c:if>
 	<div class="buyProductWrap">
-		<select class="buyProductSelect">
-	    	<option value="개인 판매">개인 판매</option>
-	    	<option value="무료 나눔">무료 나눔</option>
-	    </select>
+		<div class="select" id="buyselect">
+			<select class="buyProductSelect">
+		    	<option value="개인 판매">개인 판매</option>
+		    	<option value="무료 나눔">무료 나눔</option>
+		    </select>
+		</div>    
 		<div id="cards" class="sellCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysell" items="${buysellList}">
@@ -73,12 +76,12 @@
 				     </a>
 				     <c:if test="${'거래중' eq buysell.istatus}">
 				     	<c:if test="${buysell.buyCompletedCount eq 0}">
-		          			<button class="cancel3">거래 취소</button>
-		          			<button class="complete3">거래 완료</button>
+		          			<button class="gray buttoncontent cancel3">거래 취소</button>
+		          			<button class="buttoncontent complete3">거래 완료</button>
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
-		          		<button class="review1">거래 후기</button>
+		          		<button class="buttoncontent review1">거래 후기</button>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -101,20 +104,20 @@
 	      		</div>
 	  	</div>
 	    
-	    <ul class="pagination sellPage1">
+	    <ul class="pagination sellPage1" id="buypropage">
 			<c:choose>
 				<c:when test="${bspageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${bspageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${bspageInfo.startPage }" end="${bspageInfo.endPage }">
 				<c:choose>
 					<c:when test="${bspageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?bspage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -123,7 +126,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?bspage=${bspageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?bspage=${bspageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
@@ -170,12 +173,14 @@
 		     		</a>
 		     		<c:if test="${'거래중' eq buysharing.sstatus}">
 		     			<c:if test="${buysharing.buyCompletedCount eq 0}">
-		          			<button class="cancel4">거래 취소</button>
-		          			<button class="complete4">거래 완료</button>
+		     				<div class="buttonbox">
+			          			<button class="gray buttoncontent cancel4">거래 취소</button>
+			          			<button class="buttoncontent complete4">거래 완료</button>
+			          		</div>	
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-		          		<button class="review">거래 후기</button>
+		          		<button class="buttoncontent review">거래 후기</button>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>
@@ -198,20 +203,20 @@
 	      		</div>
 	  	</div>
 	    
-	    <ul class="pagination sharingPage1">
+	    <ul class="pagination sharingPage1" id="buypropage">
 			<c:choose>
 				<c:when test="${ppageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${ppageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${ppageInfo.startPage }" end="${ppageInfo.endPage }">
 				<c:choose>
 					<c:when test="${ppageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?ppage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -220,7 +225,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?ppage=${ppageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${authUser.userno}/buy?ppage=${ppageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

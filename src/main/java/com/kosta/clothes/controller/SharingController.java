@@ -91,6 +91,7 @@ public class SharingController {
 			System.out.println("컨트롤리스트:" + sharingList);
 			mav.addObject("sharingList", sharingList);
 			mav.addObject("kwd", kwd);
+			
 			mav.setViewName("/sharing/sharingList");
 		} catch (Exception e) {
 			e.printStackTrace();

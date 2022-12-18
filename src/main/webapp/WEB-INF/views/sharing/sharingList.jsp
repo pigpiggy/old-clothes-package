@@ -19,12 +19,10 @@
             <div class="section-overlay"></div>
 
             <div class="container">
-                <div class="row">
-
+                <div class="row" id="sharingheader">
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">무료 나눔</h1>
                     </div>
-
                 </div>
             </div>
      </section>
@@ -53,8 +51,11 @@
 		  <c:forEach var="sharing" items="${sharingList}">
 	     <a href="sharingView/${sharing.sno}">
 		     <div class="card" data-sno=${sharing.sno }>
+		     	  <div class="sharingCard-header">
+		     	  	${sharing.sdealType}
+		     	  </div>
 		          <div class="card-image">
-		          	<c:if test="${'등록완료' != sharing.sstatus}">
+		          	<c:if test="${'거래 완료' == sharing.sstatus}">
 		          		<div class="sharingStatus">${sharing.sstatus }</div>
 		          	</c:if>
 		          	<c:choose>
@@ -67,22 +68,13 @@
 		          	</c:choose>
 		          </div>
 		          <div class="card-body">
-		              <span class="date">${sharing.regDate}</span>
+		              <span class="sdate">${sharing.regDate}</span>
 		              <h2 class="sharingTitle">${sharing.stitle }</h2>
-		              <p>${sharing.saddress}</p>
+		              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${sharing.nickname}</p></div>
 		          </div>
-		          <c:choose>
-		          	<c:when test="${empty sharing.saddress}">
-		          		<div class="card-footer">
-		          			${sharing.sdealType}
-		          		</div>
-		          	</c:when>
-		          	<c:otherwise>
-			          <div class="card-footer">
-			              ${sharing.sdealType} 
-			          </div>
-		          	</c:otherwise>
-		          </c:choose>
+		          <div class="card-footer">
+		          	  <img src="/image/pin.png"><p>${sharing.saddress}</p>
+		          </div>
 		      </div>
 	     </a>
 	      

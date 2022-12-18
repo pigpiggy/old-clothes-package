@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
@@ -47,10 +48,12 @@
 				
 				
 	<div class="sellProductWrap">
-		<select class="sellProductSelect">
-	    	<option value="개인 판매">개인 판매</option>
-	    	<option value="무료 나눔">무료 나눔</option>
-	    </select>
+			<div class="select" id="sellselect">
+				<select class="sellProductSelect">
+			    	<option value="개인 판매">개인 판매</option>
+			    	<option value="무료 나눔">무료 나눔</option>
+			    </select>
+			</div>    
 	    
 		<div id="cards" class="sellCards">
 	    	<div class="card-list">
@@ -92,8 +95,10 @@
 				     </a>
 				     <c:if test="${'거래중' eq sell.istatus}">
 				     	<c:if test="${sell.sellCompletedCount eq 0}">
-		          			<button class="cancel">거래 취소</button>
-		          			<button class="complete">거래 완료</button>
+				     		<div class="buttonbox">
+			          			<button class="gray buttoncontent cancel">거래 취소</button>
+			          			<button class="buttoncontent complete">거래 완료</button>
+			          		</div>	
 		          		</c:if>
 		          	</c:if>
 			  	</div>
@@ -101,20 +106,20 @@
 		    </div>
 	    </div>
 	    
-	    <ul class="pagination sellPage">
+	    <ul class="pagination sellPage" id="sellpropage">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${users.userno}/sell?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?page=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${users.userno}/sell?page=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -123,7 +128,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?page=${pageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${users.userno}/sell?page=${pageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
@@ -169,8 +174,10 @@
 		     		</a>
 		     		<c:if test="${'거래중' eq sharing.sstatus}">
 		     			<c:if test="${sharing.sellCompletedCount eq 0}">
-		          			<button class="cancel1">거래 취소</button>
-		          			<button class="complete1">거래 완료</button>
+		     				<div class="buttonbox">
+			          			<button class="gray buttoncontent cancel1">거래 취소</button>
+			          			<button class="buttoncontent complete1">거래 완료</button>
+		          			</div>
 		          		</c:if>
 		          	</c:if>
 		     	 </div>
@@ -178,20 +185,20 @@
 		    </div>
 	    </div>
 	    
-	    <ul class="pagination sharingPage">
+	    <ul class="pagination sharingPage" id="sellpropage">
 			<c:choose>
 				<c:when test="${spageInfo.page<=1}">
 					<li><a id="prev"><<</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+					<li><a href="/mypage/umypage/${users.userno}/sell?spage=${spageInfo.page-1}" id="prev"><<</a></li>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
 				<c:choose>
 					<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 					<c:otherwise>
-						<li><a href="/mypage/umypage/${authUser.userno}?spage=${i}">${i }</a></li>
+						<li><a href="/mypage/umypage/${users.userno}/sell?spage=${i}">${i }</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -200,7 +207,7 @@
 					<li><a id="next">>></a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/mypage/umypage/${authUser.userno}?spage=${spageInfo.page+1}" id="next">>></a></li>
+					<li><a href="/mypage/umypage/${users.userno}/sell?spage=${spageInfo.page+1}" id="next">>></a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

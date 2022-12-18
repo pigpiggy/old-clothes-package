@@ -9,6 +9,17 @@ body {
 	min-height: 100vh;
 	width: 100%;
 }
+/*맨 위 사진 부분*/
+.news-detail-header-section-sell {
+  background-image: url('/image/medium-shot-people-collecting-donations.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
 
 /* list */
 :root {
@@ -26,7 +37,9 @@ a {
 #individualHtml {
 	overflow-y: scroll;
 }
-
+#individualheader {
+	margin: 0 auto;
+}
 #individualBody {
 	min-height: 101%;
 }
@@ -172,6 +185,13 @@ a {
 	width: 100%;
 }
 
+.individualCard-header {
+	width: 100%;
+	border-bottom: 1px solid rgb(238, 238, 238);
+  	text-align: center;
+  	padding: 2px;
+}
+
 .individualStatus {
     position: absolute;
     left: 50%;
@@ -232,11 +252,34 @@ a {
 	width: 100%;
 }
 
+.individualDealNick {
+	display: flex;
+	width: 100%;
+}
+
+.individualDealNick img {
+	width: 20px;
+	margin-right: 3px;
+}
+
 .card-footer {
 	width: 100%;
-	display: grid;
+	display: flex;
 	border-top: 1px solid rgb(238, 238, 238);
-  text-align: center;
+    text-align: center;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.card-footer p {
+	font-size: 0.8em;
+	margin: 0;
+}
+
+.card-footer img {
+	width: 20px;
+	margin-right: 5px;
 }
 /* insert */
 h1 {
@@ -326,7 +369,6 @@ h1 {
 .price {
     align-items: center;
     display: flex;
-    width: 14%;
 }
 
 .nav-link {

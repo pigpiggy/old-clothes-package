@@ -15,9 +15,17 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
+	<section class="news-detail-header-section-sell text-center">
+            <div class="section-overlay"></div>
+            <div class="container">
+                <div class="row" id="individualheader">
+                    <div class="col-lg-12 col-12">
+                        <h1 class="text-white">개인 판매</h1>
+                    </div>
+                </div>
+            </div>
+    </section>
   <div id="individualList">
-    <h1 id="individualListSubject">개인판매</h1>
-    
     <div id="buttonAndSelect">
       <div class="bt_wrap">
 	    <c:if test="${!empty authUser}">    
@@ -39,8 +47,11 @@
 	  <c:forEach var="sell" items="${sellList}">
      <a href="sellView/${sell.ino}">
 	     <div class="card" data-sno=${sell.ino }>
+     		  <div class="individualCard-header">
+	     	  	  ${sell.idealType}
+	     	  </div>
 	          <div class="card-image">
-	          	<c:if test="${'등록완료' != sell.istatus}">
+	          	<c:if test="${'거래 완료' == sell.istatus}">
 	          		<div class="individualStatus">${sell.istatus }</div>
 	          	</c:if>
 	          	<c:choose>
@@ -55,7 +66,7 @@
 	          <div class="card-body">
 	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <p>${sell.iaddress}</p>
+	              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
 	          </div>
 	          <c:choose>
 	          	<c:when test="${empty sell.iaddress}">
@@ -65,7 +76,7 @@
 	          	</c:when>
 	          	<c:otherwise>
 		          <div class="card-footer">
-		              ${sell.idealType} 
+		              <img src="/image/pin.png"><p>${sell.iaddress}</p>
 		          </div>
 	          	</c:otherwise>
 	          </c:choose>

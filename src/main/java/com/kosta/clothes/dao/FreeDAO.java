@@ -17,6 +17,7 @@ public interface FreeDAO {
 	void updateFree(Free free) throws Exception; // 글 수정
 	
 	void deleteFree(Integer freeNum) throws Exception; // 글 삭제
+	void deleteCmt(Integer freeNum) throws Exception; // 글 삭제
 	
 	Free selectFree(Integer free_num) throws Exception; // num으로 값 가져오기
 	

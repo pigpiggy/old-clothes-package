@@ -39,8 +39,9 @@ function surveyList(){
 						function(){
 							str += "<a href="+"'sharingView/"+this.sno+"'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
+							str += "<div class='sharingCard-header'>"+this.sdealType+"</div>"
 		          			str	+= "<div class="+"'card-image'"+">";
-		          			if(this.sstatus != '등록완료'){
+		          			if(this.sstatus == '거래 완료'){
 								str += "<div class="+"'sharingStatus'"+">"+this.sstatus+"</div>";
 							}
 		          			if(this.sfileids!=null && this.sfileids !=""){
@@ -52,23 +53,17 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<span class="+"'date'"+">"+this.regDate+"</span>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.stitle+"</h2>";
-		              		const address = this.saddress.split(" ");
+		              		str += "<div class='sharingDealNick'><p><img src='/image/yellowuser.png'>"+this.nickname+"</p></div>";
+		          			str	+= "</div>";
+							str	+= "<div class="+"'card-footer'"+">";
+							const address = this.saddress.split(" ");
 		              		if(address[2].match("^.*.구$")!=null){
-								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
+								str+="<img src='/image/pin.png'><p>"+address[0]+" "+address[1]+" "+address[2]+" "+address[3]+"</p>";
 							}
 		              		else{
-								str+="<p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
+								str+="<img src='/image/pin.png'><p>"+address[0]+" "+address[1]+" "+address[2]+"</p>";
 							}
-		          			str	+= "</div>";
-		          			if(this.saddress !=null && this.saddress !=""){
-								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.sdealType;
-								str	+= "</div>";
-							} else {
-								str	+= "<div class="+"'card-footer'"+">";
-								str	+= this.sdealType;
-								str	+= "</div>";
-							}
+							str	+= "</div>";
 		          			str	+= "</div>";
 		          			str	+= "</div>";
 		          			str += "</a>";

@@ -70,12 +70,16 @@
 				     </a>
 				     <c:if test="${'거래중' eq buysell.istatus}">
 				     	<c:if test="${buysell.buyCompletedCount eq 0}">
-		          			<button class="gray buttoncontent cancel3">거래 취소</button>
-		          			<button class="buttoncontent complete3">거래 완료</button>
+				     		<div class="buttonbox">
+		          				<button class="gray buttoncontent cancel3">거래 취소</button>
+		          				<button class="buttoncontent complete3">거래 완료</button>
+		          			</div>
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysell.istatus}">
-		          		<button class="buttoncontent review1">거래 후기</button>
+		          		<div class="buttonbox">
+		          			<button class="buttoncontent review1">거래 후기</button>
+		          		</div>
 		          	</c:if>
 			  	</div>
 		 	 </c:forEach>
@@ -128,7 +132,7 @@
 	    <div id="cards" class="sharingCards1">
 	    	<div class="card-list">
 			  <c:forEach var="buysharing" items="${buysharingList}">
-			  <div class="sellList sharingList">
+			  <div class="sharingList">
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
 		     <a href="/sharingView/${buysharing.sno}">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
@@ -168,7 +172,9 @@
 		          		</c:if>
 		          	</c:if>
 		          	<c:if test="${'거래 완료' eq buysharing.sstatus}">
-		          		<button class="buttoncontent review">거래 후기</button>
+		          		<div class="buttonbox">
+		          			<button class="buttoncontent review">거래 후기</button>
+		          		</div>
 		          	</c:if>
 		     	 </div>
 			  </c:forEach>
@@ -222,8 +228,9 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>		
 	<script>
+		/* 개인판매 거래취소 */
 		$('.cancel3').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			console.log(index);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -242,8 +249,9 @@
 	
 		})
 		
+		/* 무료나눔 거래취소 */
 		$('.cancel4').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sharingList').index($(this).parent().parent());
 			console.log(index);
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -262,8 +270,10 @@
 
 		})
 		
+		/* 개인판매 거래완료 */
 		$('.complete3').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sellList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var ino = $(".card2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -281,8 +291,10 @@
 
 		})
 		
+		/* 무료나눔 거래완료 */
 		$('.complete4').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sharingList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var sno = $(".sharingcard2:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -323,10 +335,11 @@
 			star1 = starindex+1;
 		})
 		
+		/* 개인판매 거래후기 */
 		var ino=0;
 		$('.review1').click(function(){
-			var reviewIndex = $('.sellList').index($(this).parent());
-			console.log($(this).parent());
+			var reviewIndex = $('.sellList').index($(this).parent().parent());
+			console.log($(this).parent().parent());
 			console.log(reviewIndex);
 			ino = $(".card2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal').css('visibility','visible');
@@ -362,10 +375,11 @@
 			});
 		})
 		
+		/* 무료나눔 거래후기 */
 		var sno=0;
 		$('.review').click(function(){
-			var reviewIndex = $('.sharingList').index($(this).parent());
-			console.log($(this).parent());
+			var reviewIndex = $('.sharingList').index($(this).parent().parent());
+			console.log($(this).parent().parent());
 			console.log(reviewIndex);
 			sno = $(".sharingcard2:eq("+reviewIndex+")").attr("data-sno");
 			$('#demo-modal2').css('visibility','visible');

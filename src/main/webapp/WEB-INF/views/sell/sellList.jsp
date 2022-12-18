@@ -68,18 +68,10 @@
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
 	              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
 	          </div>
-	          <c:choose>
-	          	<c:when test="${empty sell.iaddress}">
-	          		<div class="card-footer">
-	          			${sell.idealType}
-	          		</div>
-	          	</c:when>
-	          	<c:otherwise>
+	          	
 		          <div class="card-footer">
 		              <img src="/image/pin.png"><p>${sell.iaddress}</p>
 		          </div>
-	          	</c:otherwise>
-	          </c:choose>
 	      </div>
      </a>
       

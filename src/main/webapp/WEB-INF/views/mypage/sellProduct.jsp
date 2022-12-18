@@ -61,6 +61,9 @@
 			  	<div class="sellList">
 					     <a href="/sellView/${sell.ino}">
 						     <div class="card" data-sno=${sell.ino }>
+						       <div class="individualCard-header">
+					     	  	  ${sell.idealType}
+					     	  </div>
 					          <div class="card-image">
 					          	<c:if test="${'등록완료' != sell.istatus}">
 					          		<div class="individualStatus">${sell.istatus }</div>
@@ -77,20 +80,11 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 					              <h2 class="sharingTitle">${sell.ititle }</h2>
-					              <p>${sell.iaddress}</p>
+					              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
 					          </div>
-					          <c:choose>
-					          	<c:when test="${empty sell.iaddress}">
-					          		<div class="card-footer">
-					          			${sell.idealType}
-					          		</div>
-					          	</c:when>
-					          	<c:otherwise>
-						          <div class="card-footer">
-						              ${sell.idealType} 
-						          </div>
-					          	</c:otherwise>
-					          </c:choose>
+					          <div class="card-footer">
+					              <img src="/image/pin.png"><p>${sell.iaddress}</p>
+					          </div>
 					      </div>				      
 				     </a>
 				     <c:if test="${'거래중' eq sell.istatus}">
@@ -139,6 +133,9 @@
 			  <div class="sellList">
 		     <a href="/sharingView/${sharing.sno}">
 			     <div class="card sharingcard" data-sno=${sharing.sno }>
+			     	  <div class="sharingCard-header">
+			     	  	${sharing.sdealType}
+			     	  </div>
 			          <div class="card-image">
 			          	<input type="hidden" name="sstatus" value="${sharing.sstatus}">
 			          	<c:if test="${'등록완료' != sharing.sstatus}">
@@ -156,20 +153,11 @@
 			          <div class="card-body">
 			              <span class="date">${sharing.regDate}</span>
 			              <h2 class="sharingTitle">${sharing.stitle }</h2>
-			              <p>${sharing.saddress}</p>
+			              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${sharing.nickname}</p></div>
 			          </div>
-			          <c:choose>
-			          	<c:when test="${empty sharing.saddress}">
-			          		<div class="card-footer">
-			          			${sharing.sdealType}
-			          		</div>
-			          	</c:when>
-			          	<c:otherwise>
-				          <div class="card-footer">
-				              ${sharing.sdealType} 
-				          </div>
-			          	</c:otherwise>
-			          </c:choose>
+			          <div class="card-footer">
+			          	  <img src="/image/pin.png"><p>${sharing.saddress}</p>
+			          </div>
 			      </div>
 		     		</a>
 		     		<c:if test="${'거래중' eq sharing.sstatus}">

@@ -297,11 +297,8 @@ public class MypageController {
 		}
 		return "/mypage/bapplylist";
 	}
-
 	//사업자 거래 후기 탭
-
 	//마이페이지 거래후기(사업자)
-
 	@GetMapping ("/mypage/bmypage/{bno}/review")
 	String bmypagereview(@PathVariable("bno") Integer bno, Model model,
 			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {
@@ -525,7 +522,9 @@ public class MypageController {
 	      }
 	      return "/mypage/usermypage";
 	   }
+	   //사용자 거래 후기 탭 
 
+	//마이페이지 거래후기(개인)
 	@GetMapping ("mypage/umypage/{userno}/review")
 	public String umypage(@PathVariable("userno") Integer userno, Model model,
 			@RequestParam(value = "rpage", required = false, defaultValue = "1") Integer rpage) {

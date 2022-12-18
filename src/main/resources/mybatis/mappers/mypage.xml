@@ -6,7 +6,7 @@
 	<select id="getSellList" parameterType="map" resultType="Sell">
 		<![CDATA[
 			SELECT * FROM 
-			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, i.* FROM INDIVIDUAL i WHERE userno=#{userno})
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, u.NICKNAME,i.* FROM users u, individual i WHERE i.userno=#{userno} and u.userno=i.userno)
 			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
@@ -15,7 +15,7 @@
 	<select id="getSharingList" parameterType="map" resultType="Sharing">
 		<![CDATA[
 			SELECT * FROM 
-			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, s.* FROM sharing s WHERE userno=#{userno})
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, u.NICKNAME,s.* FROM users u, sharing s WHERE s.userno=#{userno} and u.userno=s.userno)
 			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
@@ -23,7 +23,7 @@
 	<select id="getBuySellList" parameterType="map" resultType="Sell">
 		<![CDATA[
 			SELECT * FROM 
-			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, i.* FROM INDIVIDUAL i WHERE selectedno=#{userno})
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, u.NICKNAME,i.* FROM users u, individual i WHERE i.selectedno=#{userno} and u.userno=i.userno)
 			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>
@@ -31,7 +31,7 @@
 	<select id="getBuySharingList" parameterType="map" resultType="Sharing">
 		<![CDATA[
 			SELECT * FROM 
-			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, s.* FROM sharing s WHERE selectedno=#{userno})
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, u.NICKNAME,s.* FROM users u, sharing s WHERE s.selectedno=#{userno} and u.userno=s.userno)
 			WHERE num BETWEEN #{row} AND #{row}+9
 		]]>
 	</select>

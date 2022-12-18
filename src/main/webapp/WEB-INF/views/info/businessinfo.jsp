@@ -201,6 +201,223 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 	width: 40px;
     height: 35px;
 }
+
+
+
+.kakaoids{
+	position: relative;
+    right: -85%;
+    top: -23%;
+}
+#applymodal{
+    position: relative;
+    right: -4%;
+    height: 35px;
+    background:none;
+    border:none;
+    top:0%;
+}
+
+
+ #modal {
+    display: none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1;
+}
+        
+ 
+ #modal .modal_content {
+   width: 30%;
+   height: 70%;
+   top: 20%;
+   margin:5% auto;
+   padding: 1%;
+   text-align: center;
+   background:#fff;
+   border-radius: 10px;
+   border:2px solid #666;
+   position:relative;
+ }
+ 
+ #modal .modal_layer {
+   position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+   background:rgba(0, 0, 0, 0.5);
+   z-index:-1;
+ }  
+ 
+.modal .item .title {
+    height: 6rem;
+    position: relative;
+}
+
+.modal .item .title:after {
+	content: '';
+    display: block;
+    width: 100%;
+    border-top: 2px solid navy;
+}
+.hr2{
+ 	position: relative;
+    background-color: gray;
+    width: 70%;
+    bottom: 26%;
+    height: 1px;
+    width: 84%;
+    left: 6%;
+ } 
+.modal ul {
+  font-size: 0;
+  padding-left:0;
+}
+
+
+.modal .modal_content .item:nth-child(-n+3){
+  margin-top: 0;
+}
+.modal .modal_content .item:nth-child(3n-2){
+  margin-left: 0;
+}
+
+
+.modal .modal_content .item .title p {
+   font-size: 12px;
+    text-align: center;
+    padding-top: 17%;
+    width: 114%;
+    margin-left: -18px;
+}
+.modal .item strong {
+    display: block;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-bottom: -35px;
+}
+.modal .modal_content .item .allapply .form .cont {
+ 	padding: 11px;
+    height: 56%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.modal .modal_content .item .allapply .form .btn{
+  top: -27%;  
+  position: relative;
+}
+.modal .modal_content .item .allapply .form .btn ::before{
+  content: '';
+  left: 20;
+  right: 20;
+  top: 0;
+  position: absolute;
+  height: 1.5px;
+  width: auto 230px;
+  background: #ddd;
+}
+
+#aname {
+     position: relative;
+    left: 11%;
+    height: 30px;
+    width: 30%;
+}
+.modal .modal_content .item .allapply .form .cont .adre {
+  display: flex;
+  height: 30px;
+  width: 122%;
+  margin-top:4%;
+}
+#aaddress{
+   position: relative;
+   left: 11%;
+   width: 58%;
+}
+#aad_bt{
+  	width: 19%;
+    margin-left: 15%;
+    border: 1.5px solid #ddd;
+    border-radius: 9px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background-color: #ddd;
+    cursor: pointer;
+    text-align: center;
+}
+#aphone{
+  position: relative;
+  height: 30px;
+  width: 57%;
+  left: 11%;
+  margin-top:4%;
+}
+.modal .modal_content .item .allapply .form .cont .wei{
+  display: flex;
+  height: 30px;
+  justify-content: space-evenly;	
+  margin-top:4%;
+}
+#weight{
+  	position: relative;
+    width: 30%;
+    left: 27%;
+}
+.modal .modal_content .item .allapply .form .cont .wei p {
+  	margin-left: -29px;
+    font-size: 1.1rem;
+    margin-top: 0px;
+    position: relative;
+    left: 23%;
+}
+#apickup{
+   position: relative;
+   height: 30px;
+   width: 57%;
+   margin-top: 4%;
+   left: 11%;
+}
+#applycloth{
+  display: inline-block;
+    margin-top: 13px;
+    margin-left: 179px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#modal_close_btn{
+ display: inline-block;
+    margin-top: 14px;
+    margin-left: 52px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+
+
 </style>
 <script>
 //유효성 검사

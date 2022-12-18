@@ -8,7 +8,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/likelist.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet'/>
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

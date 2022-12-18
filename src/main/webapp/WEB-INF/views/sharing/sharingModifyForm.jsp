@@ -12,7 +12,6 @@
 <head>
 <meta charset="UTF-8">
 <title>무료나눔 상품 수정</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
 <body>

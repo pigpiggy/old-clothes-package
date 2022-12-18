@@ -9,28 +9,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>joinform</title>
-    
      <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 
 </script>
 <style>
 #timer{
-	position: relative;
-    width: 18%;
+	position: absolute;
+    width: 8%;
+    border:none;
+    left:65%;
+    top:48%;
 }
 #timer1{
-	position: relative;
-    width: 18%;
+	position: absolute;
+    width: 8%;
+    border:none;
+    left:66%;
+    top:44.5%;
 }
 .req{
 	color:red;
@@ -58,7 +61,7 @@
 
 #wrap{
 	margin-top:5%;
-	margin-bottom:30%;
+	margin-bottom:35%;
 }
  
 
@@ -208,7 +211,7 @@
 					                        <label class="form-label" for="bphone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
 					                 		placeholder="'-'없이입력 ex)01012344321"/>
-						                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" >
+						                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" style="margin-left:2%;" >
 				                        </div>
 				                        
 				                        <div class="form-outline mb-4" style="display:flex;">

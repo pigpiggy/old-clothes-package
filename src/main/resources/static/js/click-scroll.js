@@ -20,13 +20,13 @@ $.each(sectionArray, function(index, value){
          
      });
     
-    $('.click-scroll').eq(index).click(function(e){
-        var offsetClick = $('#' + 'section_' + value).offset().top - 90;
+/*    $('.click-scroll').eq(index).click(function(e){
+        var offsetClick = $('#' + 'section_' + value).offset().top;
         e.preventDefault();
         $('html, body').animate({
             'scrollTop':offsetClick
         }, 300)
-    });
+    });*/
     
 });
 

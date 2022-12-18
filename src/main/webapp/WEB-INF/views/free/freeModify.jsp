@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자유게시판 글수정</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
@@ -33,15 +32,16 @@
 	/*유효성검사*/
 	 function valid() {
 				
-				var contentCheck = document.getElementById("editor");				
-				
-				if(contentCheck.value == "") {
-					alert("내용을 입력해주세요.");
-					return false;
-				}
-			}
+			if (window.editor.getData() == "") {  //then   window.editor = editor;
+		        alert("내용을 입력해주세요");
+		        window.editor.editing.view.focus();    
+		        return false; 
+		 	} 
+	}
 </script>
+<style>
 
+</style>
 </head>
 <body>
 	<div>

@@ -10,7 +10,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>나의 옷장</title>
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 </head>

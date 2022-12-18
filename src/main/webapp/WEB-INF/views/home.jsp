@@ -9,13 +9,9 @@
 		<title>Home</title>
 	<!-- Bootstrap CSS -->
   		<link rel="stylesheet" href="<c:url value="/resources/sidebar/css/bootstrap.min.css"/>"/>
-  
     <!-- Style -->
     <link rel="stylesheet" href="<c:url value="/resources/sidebar/css/style.css"/>"/>
-	
-	<link href="<c:url value="/resources/css/common.css"/>" rel="stylesheet" type="text/css"/>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Montserrat:ital,wght@0,400;1,100&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="styl	esheet">
 	<link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>

@@ -10,7 +10,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>나의 옷장</title>
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
 </head>
@@ -66,7 +65,7 @@
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">
 							<img src="/image/chaticon2.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
-								<span class="nav__notification nbadge" id="messageAlert"></span>
+								<span class="nav__notification nbadge" id="messageAlert" style="display:none;"></span>
 						</a>
 					</c:if>	
 				</c:if>

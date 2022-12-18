@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판 글보기</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
+    
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' /> 
 	<style>
 .deletecmt{

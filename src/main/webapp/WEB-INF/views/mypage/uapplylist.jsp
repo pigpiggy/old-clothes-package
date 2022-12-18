@@ -12,6 +12,10 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
+.center{
+	position: relative;
+    top: -400px
+}
 .item{	
 	width:100%;
 }

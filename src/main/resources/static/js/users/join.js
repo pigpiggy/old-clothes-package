@@ -117,7 +117,7 @@ $(function(){
             }else if(checkPname.value.search(" ") != -1 ){ 
          	   alert("공백이 포함되면 안됩니다.");
             }else{
-               alert("사용가능한 닉네임입니다..");
+               alert("사용가능한 닉네임입니다.");
                 $('#nicknamecheck').hide();
        			$('#checkednickname').show();
             }

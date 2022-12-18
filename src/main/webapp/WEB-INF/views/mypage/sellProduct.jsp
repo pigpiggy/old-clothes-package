@@ -130,7 +130,7 @@
 	    <div id="cards" class="sharingCards">
 	    	<div class="card-list">
 			  <c:forEach var="sharing" items="${sharingList}">
-			  <div class="sellList">
+			  <div class="sharingList">
 		     <a href="/sharingView/${sharing.sno}">
 			     <div class="card sharingcard" data-sno=${sharing.sno }>
 			     	  <div class="sharingCard-header">
@@ -204,8 +204,9 @@
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>		
 	<script>
+		/* 개인판매 거래취소 */
 		$('.cancel').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -223,8 +224,9 @@
 
 		})
 		
+		/* 개인판매 거래완료 */
 		$('.complete').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sellList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var ino = $(".card:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -244,7 +246,7 @@
 		})
 		
 		$('.cancel1').click(function(){
-			var index = $(this).parent().index();
+			var index = $('.sharingList').index($(this).parent().parent());
 			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
 			$.ajax({
 				type : "get",
@@ -263,7 +265,8 @@
 		})
 		
 		$('.complete1').click(function(){
-			var index = $(this).parent().index();
+			console.log($(this).parent().parent());
+			var index = $('.sharingList').index($(this).parent().parent());
 			$(this).attr("disabled", true);
 			var sno = $(".sharingcard:eq("+index+")").attr("data-sno");
 			$.ajax({
@@ -279,9 +282,11 @@
 					console.log(err);
 				}
 			});
-
+			
 		})
 		
+		
+		/* 개인판매,무료나눔 탭 */
 		$('.sharingCards').hide();
 		$('.sharingPage').hide();
 		

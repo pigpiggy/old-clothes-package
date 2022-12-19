@@ -177,7 +177,7 @@
 					            </div>
 					            <div class="reviewCenter">
 					                <div class="reviewfirst">
-					                	<span class="reviewBox">상품명 </span>
+					                	<span id="reviewSpace" class="reviewBox">상품명 </span>
 					                	<h3 class="reviewTitle">${review.ititle }</h3>
 					                </div>
 					                <div class="reviewfirst">

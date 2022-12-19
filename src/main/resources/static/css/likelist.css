@@ -31,10 +31,10 @@ h2 {
     align-items: center;
 }
 
-.form{
+/* .form{
 	width:300px;
-}
-.allapply{	
+} */
+/* .allapply{	
 	padding: 5px 20px;
 	position: absolute;
 	top: 50%;
@@ -46,8 +46,8 @@ h2 {
 	flex-direction:column;
 	justify-content: center;
 	align-items:center;
-}
-.form>div {
+} */
+/* .form>div {
 	display:flex;
 	margin-bottom: 20px;
 	padding-bottom:7px;
@@ -63,34 +63,39 @@ h2 {
 	margin-left:15px;
 	padding:5px;
 }
+ */
+/* 찜목록 신청서 */
 
-<!--찜목록 신청서-->
- #modal {
+
+#lmodal{
     display: none;
     position:absolute;
     width:100%;
     height:100%;
     top:0px;
     left:0px;
-    z-index:1;
+    z-index:10;
 }
         
- 
- #modal .modal_content {
-   width: 289px;
-   height: 368px;
-   top: 50%;
-   left: 50%;
-   margin:100px auto;
-   padding: 40px;
+ #litem{
+ box-shadow:none;
+ width:100%;
+ }
+ #lmodal .lmodal_content {
+   width: 20%;
+   height: 54%;
+   top: 10%;
+   margin:5% auto;
+   padding: 1%;
    text-align: center;
    background:#fff;
    border-radius: 10px;
    border:2px solid #666;
+   position:relative;
  }
  
- #modal .modal_layer {
-   position:fixed;
+ #lmodal .lmodal_layer {
+    position:fixed;
    top:0;
    left:0;
    width:100%;
@@ -99,34 +104,27 @@ h2 {
    z-index:-1;
  }  
  
-.modal .item .title {
-    padding: 15px;
-    height: 50px;
-    position: relative;
-    margin-top: -10%;
+.lmodal .litem .ltitle {
+     height: 6rem;
+     position: relative;
 }
 
-/* .modal .item .title:after {
+.lmodal .litem .ltitle:after {
 	content: '';
     display: block;
-    width: 307px;
+    width: 100%;
     border-top: 2px solid navy;
-    margin: 16px 0px;
-    margin-bottom: -14%;
-    margin-right: auto;
-    margin-left: -10%;
-} */
+}
 .hr2{
  	position: relative;
     background-color: gray;
-    width: 70%;
-    bottom: 15%;
+    bottom: 26%;
     height: 1px;
-    width: 84%;
-    left: 21%;
+    width: 100%;
+    margin-top:6%;
  } 
  
- .hr1{
+ /* .hr1{
 	position: relative;
     background-color: navy;
     width: 70%;
@@ -134,47 +132,53 @@ h2 {
     height: 1px;
     width: 109%;
     left: -8%;
-}
+} */
  
- input:focus{
+/*  input:focus{
  	z-index:5;
- }
-.modal ul {
+ } */
+.lmodal ul {
   font-size: 0;
+  padding-left:0;
 }
 
-.modal .modal_content .item:nth-child(-n+3){
-  margin-top: 0;
+.lmodal .lmodal_content .litem:nth-child(-n+3){
+  margin-top: 10%;
 }
-.modal .modal_content .item:nth-child(3n-2){
+.lmodal .lmodal_content .litem:nth-child(3n-2){
   margin-left: 0;
 }
 
-.modal .modal_content #item{
+/* .lmodal .lmodal_content #litem{
 	position: relative;
-    /* width: 139%; */
-    /* height: 48px; */
-    /* left: -6%; */
-    display: contents;
-}
-
-.modal .modal_content .item .title #strong{
-	position: fixed;
-}
-.modal .modal_content .item .title #p{
-	position: fixed;
-	font-size: 11px;
-    top: -7%;
+    width: 139%;
+    height: 48px;
     left: -6%;
+    display: contents;
+} */
+
+.lmodal .lmodal_content .litem .ltitle #lstrong{
+	display: block;
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-bottom: -10%;
 }
-.modal .modal_content .item .title p {
-   font-size: 12px;
+ .lmodal .lmodal_content .litem .ltitle #p{
+	font-size: 12px;
     text-align: center;
     padding-top: 17%;
     width: 114%;
-    margin-left: -18px;
+    margin-left: -6%;
+} 
+.lmodal .lmodal_content .litem .ltitle p {
+    font-size: 12px;
+    text-align: center;
+    padding-top: 17%;
+    width: 114%;
+    margin-left: -6%;
 }
-.modal .item strong {
+.lmodal .litem strong {
     display: block;
     margin: 0 0 -25px 0;
     font-size: 17px;
@@ -183,23 +187,27 @@ h2 {
     margin-top: 10px;
     margin-bottom: -35px;
 }
-.modal .modal_content .item .allapply .form .cont {
+.allapply{
+	margin-top: 6%;
+}
+.lmodal .lmodal_content .litem .allapply .form .cont {
  	padding: 11px;
     height: 56%;
     display: flex;
-    margin-bottom: 75px;
     flex-wrap: wrap;
     align-content: flex-start;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.modal .modal_content .item .allapply .form .btn{
+.lmodal .lmodal_content .litem .allapply .form .btn{
   top: -27%;  
   position: relative;
+  display:flex;
+  justify-content:center;
 }
-.modal .modal_content .item .allapply .form .btn ::before{
-  content: '';
+.lmodal .lmodal_content .litem .allapply .form .btn ::before{
+ content: '';
   left: 20;
   right: 20;
   top: 0;
@@ -210,31 +218,25 @@ h2 {
 }
 
 #lname {
-    position: relative;
+      position: relative;
     left: 11%;
-    top: 21%;
-    height: 28px;
+    height: 30px;
     width: 30%;
-    margin-top: -38px;
 }
-.modal .modal_content .item .allapply .form .cont .adre {
-  display: flex;
-  height: 37px;
+.lmodal .lmodal_content .litem .allapply .form .cont .adre {
+   display: flex;
+  height: 30px;
   width: 122%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top:4%;
 }
 #laddress{
-   position: relative;
-    left: 17%;
-    width: 58%;
-    height: 158%;
-    bottom: -72%;
+    position: relative;
+   left: 11%;
+   width: 58%;
 }
 #lad_bt{
-    position: relative;
-    width: 23%;
-    margin-left: 45px;
+   width: 19%;
+    margin-left: 15%;
     border: 1.5px solid #ddd;
     border-radius: 9px;
     font-size: 0.7rem;
@@ -242,77 +244,61 @@ h2 {
     background-color: #ddd;
     cursor: pointer;
     text-align: center;
-    top: 79%;
-    height: 131%;
 }
 #lphone{
    position: relative;
-   height: 27px;
-   top: 15%;
-    width: 58%;
-    left: 11%;
+  height: 30px;
+  width: 62%;
+  left: 11%;
+  margin-top:4%;
 }
 
-.modal .modal_content .item .allapply .form .cont .wei #kg{
+/* .lmodal .lmodal_content .litem .allapply .form .cont .wei #kg{
 	position: relative;
     top: 515%;
-}
+} */
 
-.modal .modal_content .item .allapply .form .cont .wei{
+.lmodal .lmodal_content .litem .allapply .form .cont .wei{
   display: flex;
-  height: 28px;
-  padding-top: 9px;
-  margin-left: -21px;
-  padding-bottom: 8px;
-  justify-content: space-evenly;	
+  height: 30px;
+  margin-top:4%;
+  width:122%;	
 }
 #lweight{
-	position: fixed;
-    height: 26px;
-    width: 3%;
-    left: 44%;
-    top: 46%;
+	position: relative;
+    width: 18%;
+    left: 11%;
 }
-.modal .modal_content .item .allapply .form .cont .wei p {
-  	margin-left: -29px;
-    font-size: 1.1rem;
+.lmodal .lmodal_content .litem .allapply .form .cont .wei p {
+  	font-size: 1.1rem;
     margin-top: 0px;
     position: relative;
-    left: 23%;
+    left:12%;
 }
 #lpickup{
-  position: relative;
-    height: 27px;
-    width: 58%;
-    margin-top: 8px;
-    left: 11%;
-    top: 16%;
+   position: relative;
+   height: 30px;
+   width: 57%;
+   margin-top: 4%;
+   left: 11%;
 }
 #lapplycloth{
-    position: relative;
-    /* display: inline-block; */
-    /* margin-top: 10px; */
-    margin-left: 140px;
-    /* margin-bottom: 10px; */
-    padding: 8px;
+    display: inline-block;
+    margin-left: 22%;
+    padding: 3%;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
     border-radius: 0.25rem;
     color: white;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
-    left: 6%;
-    top: 18px;
+    height:3rem;
 }
 #lmodal_close_btn{
-    position: relative;
-    /* display: inline-block; */
-    /* margin-top: 10px; */
-    /* margin-left: 20px; */
-    /* margin-bottom: 10px; */
-    padding: 8px;
+    display: inline-block;
+    padding: 3%;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
@@ -321,9 +307,8 @@ h2 {
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
-    left: 22%;
-    /* bottom: 27%; */
-    top: 20px;
+    height:3rem;
+    width:4.8rem;
 }
 
 #applymodal {

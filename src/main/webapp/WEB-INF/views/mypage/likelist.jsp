@@ -11,6 +11,7 @@
 <link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,17 +33,16 @@
 			</div>
 		</div>
 	<!-- 헌옷 수거 신청 모달창 -->
-		<div id="modal" class="modal">
+		<div id="lmodal" class="lmodal">
    
-		    <div class="modal_content">
+		    <div class="lmodal_content">
 		    	<ul>
-		    		<li class="item" id="item">		    			 
+		    		<li class="litem" id="litem">		    			 
 				            
-				             <div class="title">
-				                 <strong id="strong">[ 헌옷 수거 신청 ]</strong>
+				             <div class="ltitle">
+				                 <strong id="lstrong">[ 헌옷 수거 신청 ]</strong>
 				            	 <p id="p">※접수가 완료되면 업체가 확인 후 연락드리겠습니다.</p>
 				       	     </div>
-				         <hr class="hr1">
 				         <div class="allapply">
 			         	 	<form class="form" id="form" action="apply" method="POST" onsubmit="return Valids();">
 			         	 		<div class="cont">
@@ -70,7 +70,7 @@
 		    	</ul>
 		    </div>
 		    
-		    <div class="modal_layer"></div>
+		    <div class="lmodal_layer"></div>
 		</div>	
 	</div>
     <div>
@@ -466,20 +466,18 @@ function catelist(){
 			})
 			//모달 켜기
 			$(document).off("click","#applymodal").on("click","#applymodal",function(m){
-				alert("얍");
 				var apclick = m.target;
 				var bno = apclick.getAttribute('data-value');
-	           	document.getElementById("modal").style.display="block";
+	           	document.getElementById("lmodal").style.display="block";
 	           	document.getElementById("bno").value=bno;
 			})
 			
-			$(".buttonapply"+data.bno+"").click(function(){
-				alert("얍");
+			/* $(".buttonapply"+data.bno+"").click(function(){
             	 document.getElementById("modal").style.display="block";
             	 var bno = $(".buttonapply"+data.bno+"").data('value');
             	 document.getElementById("bno").value=bno;
             	 
-            });
+            }); */
 		},
 		error:function(){alert("에러입니다.");}
 	})
@@ -598,13 +596,19 @@ function refreshlist(category,globalCurrentPage){
 				$("#list").html(chartHtml);
 				$("#pagingul").html(pageHtml);
 				
-				 //모달 켜기
+				/*  //모달 켜기
 	            $(".buttonapply"+data.bno+"").click(function(){
 	            	 document.getElementById("modal").style.display="block";
 	            	 var bno = $(".buttonapply"+data.bno+"").data('value');
 	            	 document.getElementById("bno").value=bno;
 	            	 
-	            });
+	            }); */
+	            $(document).off("click","#applymodal").on("click","#applymodal",function(m){
+					var apclick = m.target;
+					var bno = apclick.getAttribute('data-value');
+		           	document.getElementById("lmodal").style.display="block";
+		           	document.getElementById("bno").value=bno;
+				}) 
 			}
 			function paging(totalData, dataPerPage, pageCount, currentPage){
 				console.log("currentPage:" +currentPage);
@@ -703,7 +707,7 @@ function refreshlist(category,globalCurrentPage){
 }
 //모달 닫기
 $("#lmodal_close_btn").click(function(){
-	 document.getElementById("modal").style.display="none";
+	 document.getElementById("lmodal").style.display="none";
 });
 //날짜 
  $(function(){

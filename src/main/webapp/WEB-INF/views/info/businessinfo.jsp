@@ -226,13 +226,13 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     height:100%;
     top:0px;
     left:0px;
-    z-index:1;
+    z-index:10;
 }
         
  
  #modal .modal_content {
-   width: 30%;
-   height: 60%;
+   width: 20%;
+   height: 55%;
    top: 25%;
    margin:5% auto;
    padding: 1%;
@@ -373,7 +373,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 }
 #weight{
   	position: relative;
-    width: 15%;
+    width: 18%;
     left: 11%;
 }
 .modal .modal_content .item .allapply .form .cont .wei p {

@@ -316,7 +316,8 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 .modal .modal_content .item .allapply .form .btn{
   top: -27%;  
   position: relative;
-  display:felx;
+  display:flex;
+  justify-content:center;
 }
 .modal .modal_content .item .allapply .form .btn ::before{
   content: '';
@@ -368,17 +369,18 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
   display: flex;
   height: 30px;
   margin-top:4%;
+  width:122%;
 }
 #weight{
   	position: relative;
-    width: 30%;
-    left: 17%;
+    width: 15%;
+    left: 11%;
 }
 .modal .modal_content .item .allapply .form .cont .wei p {
-  	margin-left: 21%;
     font-size: 1.1rem;
     margin-top: 0px;
     position: relative;
+    left:12%;
 }
 #apickup{
    position: relative;
@@ -390,7 +392,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 #applycloth{
   display: inline-block;
     margin-left: 22%;
-    padding: 4%;
+    padding: 3%;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
     border-radius: 0.25rem;
@@ -403,7 +405,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 }
 #modal_close_btn{
  display: inline-block;
-    padding: 4%;
+    padding: 3%;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
@@ -412,7 +414,6 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
-    margin-left:18%;
     height:3rem;
     width:4.8rem;
 }

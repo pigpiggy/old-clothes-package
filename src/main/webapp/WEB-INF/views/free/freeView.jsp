@@ -45,6 +45,21 @@
         <div class="board_title">
             <strong>자유게시판</strong>
         </div>
+        <div class="bt_wrap">            
+            <a id="input4" href="/freeList" class="on">목록</a>
+            <c:if test="${authUser.sect eq 'users'}">                
+             <c:if test="${authUser.userno eq article.userno}">	                                  
+                <a href="/modifyform/${article.fno }">수정</a>
+                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+             </c:if>               
+            </c:if>
+            <c:if test="${authUser.sect eq 'business'}">                
+             <c:if test="${authUser.bno eq article.bno}">	                                  
+                <a href="/modifyform/${article.fno }">수정</a>
+                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+             </c:if>               
+            </c:if>
+        </div>
         <div class="board_view_wrap">
             <div class="board_view">
                   <div class="title">
@@ -90,21 +105,7 @@
 			</c:if>
 			<input type="hidden" name="cno" id="cno" value="${comment.cno }">
 			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
-            <div class="bt_wrap">            
-                <a id="input4" href="/freeList" class="on">목록</a>
-                <c:if test="${authUser.sect eq 'users'}">                
-	                <c:if test="${authUser.userno eq article.userno}">	                                  
-	                   <a href="/modifyform/${article.fno }">수정</a>
-	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
-	                </c:if>               
-                </c:if>
-                <c:if test="${authUser.sect eq 'business'}">                
-	                <c:if test="${authUser.bno eq article.bno}">	                                  
-	                   <a href="/modifyform/${article.fno }">수정</a>
-	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
-	                </c:if>               
-                </c:if>
-            </div>
+
             <%--댓글 리스트 --%>
             <br><br>                    
             <!--  댓글  -->
@@ -112,7 +113,7 @@
             <c:if test="${authUser ne null }">                 
             	<c:choose>
                 <c:when test="${authUser.sect eq 'users' }"> 	
-				    <div class="container">				        
+				    <div class="commentContainer">				        
 				        <form name="commentInsertForm" onsubmit="return check();">
 				            <div class="input-group">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
@@ -125,7 +126,7 @@
 				    </div>
 			    </c:when>
 			    <c:otherwise>
-				    <div class="container">				        
+				    <div class="commentContainer">				        
 				        <form name="commentInsertForm">
 				            <div class="input-group">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
@@ -140,7 +141,7 @@
 			    </c:choose>
 		    </c:if>
 		    <br><br>
-		    <div class="container">
+		    <div class="commentContainer">
 		        <div class="commentList"></div>
 		    </div>
                                 

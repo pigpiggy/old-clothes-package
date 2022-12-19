@@ -57,9 +57,9 @@
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="title">
-						<dl>
-							<dt>제목</dt>
-							<dd>
+						<dl class="dltitle">
+							<dt class="dttitle">제목</dt>
+							<dd class="ddtitle">
 								<input type="text" name="ftitle" value="${article.ftitle}" required>
 							</dd>
 						</dl>
@@ -68,9 +68,9 @@
 						<textarea id="editor" name="fcontent" value="${article.fcontent}"></textarea>
 					</div>
 				</div>
-				<div class="bt_wrap">
-					<input id="input3"  type="submit"  value="수정"> 
-					<a href="/freeList">취소</a>
+				<div class="bt_wrap_regist">
+					<input id="input1"  type="submit"  value="수정"> 
+					<a id="input2" href="/freeList">취소</a>
 				</div>
 			</div>
 		</form>

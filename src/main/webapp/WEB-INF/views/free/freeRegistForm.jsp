@@ -53,9 +53,9 @@ function valid(){
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="title">
-						<dl>
-							<dt>제목</dt>
-							<dd>
+						<dl class="dltitle">
+							<dt class="dttitle">제목</dt>
+							<dd class="ddtitle">
 								<input type="text" name="ftitle" id="ftitle" placeholder="제목 입력" required>
 							</dd>
 						</dl>
@@ -63,7 +63,7 @@ function valid(){
 					<textarea id="editor" name="fcontent"></textarea>
 				</div>
 				<div id="registview" class="viewregist"></div>
-				<div class="bt_wrap">
+				<div class="bt_wrap_regist">
 					<input id="input1" type="submit" value="등록"> 
 					<a id="input2" href="freeList">취소</a>
 				</div>

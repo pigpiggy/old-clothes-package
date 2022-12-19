@@ -62,7 +62,6 @@ html {
 .reviewBox {
 	color: #000;
     font-size: 15px;
-    font-family: 'NotoSans-Medium';
     background: #eee;
     border-radius: 60px;
     height: 25px;
@@ -70,6 +69,9 @@ html {
     padding: 0 10px;
     display: inline-block;
     margin-right: 0.5em;
+}
+#reviewSpace {
+	letter-spacing: 0.28em;
 }
 .reviewTitle {
 	font-size: 17.5px;

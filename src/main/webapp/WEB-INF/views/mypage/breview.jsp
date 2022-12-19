@@ -95,7 +95,10 @@
 						            	</c:if>
 						            </div>
 						            <div class="reviewCenter">
-						                <h3 class="reviewTitle">상호명: ${review.bname }</h3>
+							            <div id="reviewfirst">
+						                	<span class="reviewBox">상호명 </span>
+						                	<h3 class="reviewTitle">${review.bname }</h3>
+						                </div>
 						            	<p class="reviewContent">'${review.rcontent}'</p>
 						            </div>	
 						        </div>

@@ -11,6 +11,7 @@
  	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/templatemo-kind-heart-charity.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet" type="text/css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -28,15 +29,15 @@ body {
 
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
-                       	<img src="/image/location-pin.png" style="width:30px;" class="bi-geo-alt me-2" alt="쪽지">
-							KOSTA
+                       	<img src="/image/location.png" style="width: 13px;height: 18px;" class="bi-geo-alt me-2" alt="쪽지">
+							KOSTA, 70, Gasan digital 1-ro, Geumcheon-gu, Seoul, Republic of Korea
                     </p>
 
                 </div>
 
-                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                <div class="col-lg-4 col-12 d-lg-block d-none">
                     <ul class="social-icon">
-                            <a href="https://github.com/sajo4jo/old-clothes-package" class="social-icon-link">
+                            <a href="https://github.com/sajo4jo/old-clothes-package">
                                	<img src="/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="쪽지" />
                    	 		</a>
                     </ul>
@@ -67,7 +68,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_2" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">버리기/기부 ∨
+                            aria-expanded="false">버리기/기부 <img class="down" src="/image/down-arrow.png">
                         </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
 	                            <li><a class="dropdown-item" href="/clothingbin">내 주변 헌옷 수거함</a></li>
@@ -82,7 +83,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_4" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">헌옷 사고 팔기</a>
+                            aria-expanded="false">헌옷 사고 팔기 <img class="down" src="/image/down-arrow.png"></a>
                    		<ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                             <li><a class="dropdown-item" href="/businessinfo">업체 판매</a></li>
                             <li><a class="dropdown-item" href="/sellList">개인 판매</a></li>
@@ -125,4 +126,5 @@ body {
     <script src="/resources/js/jquery.sticky.js"></script>
     <script src="/resources/js/click-scroll.js"></script>
     <script src="/resources/js/counter.js"></script>
-    <script src="/resources/js/custom.js"></script>    
+    <script src="/resources/js/custom.js"></script>
+    <script src="/resources/js/header.js"></script>    

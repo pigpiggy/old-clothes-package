@@ -86,9 +86,6 @@
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart" id="icons">
-		          		<a href="/mypage/umypage/${sharing.userno }/sell">
-		          			<img src="/image/home.png" id="letter_img" alt="옷장 열기">
-		          		</a>			        		
 	        			<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
@@ -141,25 +138,28 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		      	<span>신청 인원 : ${sell.applycount }명</span>
+        		<div class="applyfirst">
+			        <span class="applyBox">신청 인원</span> 
+			        <span class="applyCounts">${sell.applycount } 명 </span>
+		        </div>		        
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
-				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+				        	<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="buttoncontent openclothes" value="옷장열기" /></a>
+				        	<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sell.userno }">	
-			        					<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
-			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        					<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="buttoncontent openclothes" value="옷장열기" /></a>
+			        					<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
 			        			
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sell.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="btn btn-info" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="buttoncontent openclothes" value="나의옷장" /></a>
 			        					<c:if test="${fn:length(users) > 0}">
-				        					<input type="button" class="btn btn-info" value="구매 신청 목록" />
+				        					<input type="button" class="" value="구매 신청 목록" />
 				        					<form action="/selectSellApply" method="get">
 					        					<ul>
 													<c:forEach var="users" items="${users }">
@@ -174,7 +174,7 @@
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        				<a href="/mypage/umypage/${sell.userno}/sell"><input type="button" class="buttoncontent openclothes" value="옷장열기" /></a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -217,7 +217,7 @@
 	</c:if>
 	<c:choose>
 		<c:when test="${authUser.sect eq 'users' }">
-		     <div class="container" style="top: 60%;position: relative;">				        
+		     <div class="commentcontainer" style="top: 60%;position: relative;">				        
 		        <form name="commentInsertForm">
 		            <div class="input-group">
 		               <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
@@ -230,7 +230,7 @@
 		    </div>
     	</c:when>
 	    <c:otherwise>
-	    	<div class="container" style="top: 60%;position: relative;">
+	    	<div class="commentcontainer" style="top: 60%;position: relative;">
 	    		<form name="commentInsertForm">
 	            	<div class="input-group">                
 	               		<input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="로그인 및 사용자로그인 후 가능합니다." readonly>              
@@ -240,7 +240,7 @@
 	    </c:otherwise>
     </c:choose>
     <br><br> 
-    <div class="container" style="position: relative;top: 63%;">
+    <div class="commentcontainer" style="position: relative;top: 63%;">
         <div class="commentList"></div>
     </div>
 	<footer>

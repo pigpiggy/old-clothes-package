@@ -3,17 +3,19 @@ ul,
 li {
 	list-style: none;
 }
-.headerContainer {
-	max-width: 1500px;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-} 
 
+.down {
+	width: 15px;
+	opacity: 0.8;
+}
 .logo {
 	width: 100px;
 }
 
 .navbar-nav {
 	display: flex;
+}
+
+.d-flex {
+    align-items: center;
 }

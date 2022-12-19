@@ -17,10 +17,12 @@ a {
     margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
-	margin-bottom: 25%;
+    margin-bottom: 25%;
 	font-size: 10px;
 }
-
+#basicInfoArea {
+	display: flex;
+}
 #subjectAndSearch {
 	display: flex;
 	justify-content: space-between;
@@ -41,11 +43,38 @@ a {
 }
 
 .bt_wrap {
-    margin-top: 23px;
+    margin-top: 1em;
     text-align: center;
-    margin-bottom: 3px;
+    margin-bottom: 1em;
+	display: flex;
+	justify-content: flex-end;
 }
 
+.bt_wrap_regist {
+    margin-top: 2em;
+    text-align: center;
+    margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+}
+.dltitle {
+	margin: 0.5em;
+	display: flex;
+	align-items: baseline;
+}
+.dttitle {
+	margin-bottom: 0.5em;
+	margin-left: 0.5em;
+}
+.ddtitle {
+	margin-left: -3em;
+}
+#dttitleView {
+	margin-left: 1em;
+}
+#ddtitleView {
+	margin-left: 1em;
+}
 .searching{
     margin-top: 20px;
     text-align: center;
@@ -73,7 +102,7 @@ a {
 	background:rgb(23,162,184); /*등록버튼 색깔*/
     color: white;
     display: inline-block;
-    min-width: 74px;
+    min-width: 64px;
     margin-left: 10px;
     padding: 6px;
     border: 1px solid rgb(23,162,184); /*테두리*/
@@ -119,7 +148,7 @@ display: inline-block;
 }
 #freeDelete{
 	display: inline-block;
-    min-width: 74px;
+    min-width: 60px;
     margin-left: 10px;
     padding: 6px;
     border: 1px solid; /*테두리*/
@@ -231,15 +260,16 @@ display: inline-block;
 }
 
 .board_view .title {
-    padding: 20px 15px;
+    padding: 18px 15px 3px;
     border-bottom: 1px dashed #ddd;
     font-size: 2em;
 }
 
 .board_view .info {
-    padding: 15px;
+	margin-top: 7px;
+    padding: 5px 0;
     border-bottom: 1px solid #999;
-    font-size: 0;
+    font-size: 10px;
 }
 
 .board_view .info dl {
@@ -248,14 +278,10 @@ display: inline-block;
     padding: 0 20px;
 }
 
-.board_view .info dl:first-child {
-    padding-left: 0;
-}
-
 .board_view .info dl::before {
     content: "";
     position: absolute;
-    top: 1px;
+    top: 3px;
     left: 0;
     display: block;
     width: 1px;
@@ -305,7 +331,7 @@ div#registview.viewregist{
 
 
 .board_write .title dl {
-    font-size: 0;
+	font-size: 10px;
 }
 
 
@@ -330,7 +356,7 @@ div#registview.viewregist{
 }
 
 .board_write .title input[type="text"] {
-    width: 80%;
+    width: 100%;
 }
 
 .board_write .cont {
@@ -371,16 +397,16 @@ div#registview.viewregist{
 	right: 0;
 }
 
-#contentp{
+#contentp {
 	width: 1030px;
     position: relative;
-    left: 3%;
+    margin-left: 2em;
 }
 .search-input {
   width: 100%;
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  padding: 9px 45px 9px 9px;
+  font-size: 15px;
+  padding: 9px 38px 9px 13px;
   background-color: #fff;
   color: #6c6c6c;
   border-radius: 6px;
@@ -538,46 +564,88 @@ div#cdatelist.listcdate{
 
 .blabel{
 	position: relative;
-    height: 30px;
-    bottom: 1%;
-    left: 22%;
+    font-size: 18.5px;
+    font-weight: bold;
+    margin: 1.5em;
 }
 
+.commentBox {
+	width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid var(--bs-gray-300);
+}
+.commentContent {
+	padding: 1em;
+}
 #ccontent{
-	left: 9%;
-    height: 87px;
-    position: absolute;
-    width: 80%;
-}
 
+	position: relative;
+    height: 91px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
+}
+#ccontent:focus {
+	outline: none;
+
+}
 #bbtn{
 	position: relative;
-    left: 270%;
-    height: 95px;
-    width: 17%;
     bottom: 95px;
 }
 
 #ubtn{
 	position: relative;
-    left: 270%;
-    height: 95px;
-    width: 17%;
-    bottom: 95px;
+    bottom: 0;
+    margin: 0 100%;
+    transform: translateX(-100%);
+    font-size: 15px;
 }
 
 #writer{
 	position: relative;
-    left: 79%;
-    bottom: 76px;
     font-size: x-large;
+    font-weight: bold;
 }
 
 #contentss{
 	position: relative;
-    padding: 2%;
-    left: 78%;
-    bottom: 74px;
-    font-size: xx-large;
+    font-size: large;
+	margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+.commentArea {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 1em;
+}
+.commentArea a {
+	font-size: 0.7em;
+	cursor: pointer;
+	color: black;
+}
+.commentContent .commenta a:before {
+	content: '/';
+    position: absolute;
+    top: 0;
+    opacity: 0.3;
+}
+.commentList {
+	margin: 2em 0;
+}
+.commenta {
+	font-size: 2.2em;
 }
 
+.commenta a:nth-child(2):before {
+	content: '/';
+    opacity: 0.3;	
+}
+
+.commentregdate {
+    font-size: 15px;
+    margin-left: 1em;
+    color: gray;
+}

@@ -1,3 +1,191 @@
+#wrap {
+    width: 100%;
+    min-width: 1280px;
+    position: relative;
+    overflow: hidden;
+}
+#container {
+    width: 100%;
+    max-width: 1530px;
+    padding: 0 60px 0 30px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 12px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+#container {
+	padding-bottom: 80px;
+}
+#container>#contents {
+    padding-top: 30px;
+}
+#container>#contents>h2 {
+    padding-bottom: 30px;
+    font-size: 34px;
+    line-height: 1;
+    color: #020000;
+}
+#section {
+    width: 100%;
+    position: relative;
+}
+#selectbox {
+    margin: 0;
+    padding: 0;
+}
+.select>#sido {
+    width: 100%;
+    height:50px;
+}
+.select>#sigugun {
+    width: 100%;
+    height:50px;
+}
+.select {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+.shop>.select {
+    margin: 0 15px;
+}
+.shop {
+    width: 100%;
+    padding: 30px 0;
+    border: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
+    text-align: center;
+}
+.shopSchList {
+    width: 98%;
+    margin-top: 23px;
+    padding-left: 430px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    margin-left:1%;
+}
+.shopSchList>.list {
+    width: 400px;
+    height: 525px;
+    overflow: hidden;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 9%;
+    margin-top:0px;
+    border: 1px solid #ddd;
+}
+.shopSchList>#map {
+    height: 528px;
+    border: 1px solid #f1ede2;
+    overflow: hidden;
+    position: relative;
+    z-index:0;
+}
+
+.shopSchList>.list>li {
+   width: 110%;
+    position: relative;
+    left: -33px;
+    border-bottom: 1px solid #ddd;
+}
+
+.shopSchList>.list>li>span>a {
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+ul,li {
+    list-style: none outside;
+}
+a {
+    text-decoration: none;
+}
+.shopSchList>.list>li> em {
+    font-style: normal;
+}
+h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.shopSchList>.list>li>.store_item {
+    width: 100%;
+    height: 140px;
+    padding: 23px 85px 0 15px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    letter-spacing: -1px;
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: block;
+}
+
+
+body, div, ul, li, h1, h2, h3, h4, h5, p{
+    margin: 0;
+    padding: 0;
+}
+#heart_img {
+	width: 10%;
+    position: relative;
+    right: -5%;
+    top: -0%;
+    cursor:pointer;
+}
+#star{
+	position:absolute;
+	width:100%;
+	overflow:hidden;
+	color:#cdcdcd;
+}
+#star>img{
+	margin-right: 2px;
+}
+
+#starEnd{
+	position:absolute;
+	overflow:hidden;
+	white-space:nowrap;
+}
+#starEnd>img{
+	margin-right: 2px;	
+}
+#totalstar{
+	position: relative;
+    width: 130px;
+    top: -21%;
+    right: -80%;
+    
+}
+#cate {
+	left: -43.8%;
+	width:15%;
+}
+#catelist{
+	width:100%;
+	height:50px;
+}
+#btotaladdress{
+	position: relative;
+    top: 10%;
+}
+#btotalphone{
+	position: relative;
+    top: 10%;
+}
+
+#applymodal>img{
+	width: 40px;
+    height: 35px;
+}
+
+
 
 .kakaoids{
 	position: relative;
@@ -21,14 +209,14 @@
     height:100%;
     top:0px;
     left:0px;
-    z-index:1;
+    z-index:10;
 }
         
  
  #modal .modal_content {
-   width: 25%;
+   width: 20%;
    height: 55%;
-   top: 10%;
+   top: 25%;
    margin:5% auto;
    padding: 1%;
    text-align: center;
@@ -49,7 +237,7 @@
  }  
  
 .modal .item .title {
-    height: 10rem;
+    height: 6rem;
     position: relative;
 }
 
@@ -62,11 +250,10 @@
 .hr2{
  	position: relative;
     background-color: gray;
-    width: 70%;
     bottom: 26%;
     height: 1px;
-    width: 84%;
-    left: 6%;
+    width: 100%;
+    margin-top:6%;
  } 
 .modal ul {
   font-size: 0;
@@ -75,7 +262,7 @@
 
 
 .modal .modal_content .item:nth-child(-n+3){
-  margin-top: 0;
+  margin-top: 10%;
 }
 .modal .modal_content .item:nth-child(3n-2){
   margin-left: 0;
@@ -87,20 +274,22 @@
     text-align: center;
     padding-top: 17%;
     width: 114%;
-    margin-left: -18px;
+    margin-left: -6%;
 }
 .modal .item strong {
     display: block;
-    font-size: 17px;
+    font-size: 20px;
     letter-spacing: -1px;
     text-align: center;
-    margin-bottom: -35px;
+    margin-bottom: -10%;
+}
+.allapply{
+	margin-top: 6%;
 }
 .modal .modal_content .item .allapply .form .cont {
  	padding: 11px;
     height: 56%;
     display: flex;
-    margin-bottom: 75px;
     flex-wrap: wrap;
     align-content: flex-start;
     align-items: flex-start;
@@ -110,6 +299,8 @@
 .modal .modal_content .item .allapply .form .btn{
   top: -27%;  
   position: relative;
+  display:flex;
+  justify-content:center;
 }
 .modal .modal_content .item .allapply .form .btn ::before{
   content: '';
@@ -125,25 +316,23 @@
 #aname {
      position: relative;
     left: 11%;
-    height: 24px;
+    height: 30px;
     width: 30%;
-    margin-top: -38px;
 }
 .modal .modal_content .item .allapply .form .cont .adre {
   display: flex;
-  height: 37px;
+  height: 30px;
   width: 122%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top:4%;
 }
 #aaddress{
    position: relative;
-   left: 15%;
+   left: 11%;
    width: 58%;
 }
 #aad_bt{
   	width: 19%;
-    margin-left: 57px;
+    margin-left: 15%;
     border: 1.5px solid #ddd;
     border-radius: 9px;
     font-size: 0.7rem;
@@ -154,43 +343,39 @@
 }
 #aphone{
   position: relative;
-  height: 25px;
-  width: 56%;
+  height: 30px;
+  width: 57%;
   left: 11%;
+  margin-top:4%;
 }
 .modal .modal_content .item .allapply .form .cont .wei{
   display: flex;
-  height: 28px;
-  padding-top: 9px;
-  margin-left: -21px;
-  padding-bottom: 8px;
-  justify-content: space-evenly;	
+  height: 30px;
+  margin-top:4%;
+  width:122%;
 }
 #weight{
   	position: relative;
-    width: 30%;
-    left: 27%;
+    width: 18%;
+    left: 11%;
 }
 .modal .modal_content .item .allapply .form .cont .wei p {
-  	margin-left: -29px;
     font-size: 1.1rem;
     margin-top: 0px;
     position: relative;
-    left: 23%;
+    left:12%;
 }
 #apickup{
    position: relative;
-   height: 22px;
+   height: 30px;
    width: 57%;
-   margin-top: 8px;
+   margin-top: 4%;
    left: 11%;
 }
 #applycloth{
   display: inline-block;
-    margin-top: 13px;
-    margin-left: 179px;
-    margin-bottom: 9px;
-    padding: 6px;
+    margin-left: 22%;
+    padding: 3%;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
     border-radius: 0.25rem;
@@ -199,13 +384,11 @@
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    height:3rem;
 }
 #modal_close_btn{
  display: inline-block;
-    margin-top: 14px;
-    margin-left: 52px;
-    margin-bottom: 9px;
-    padding: 6px;
+    padding: 3%;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
@@ -214,5 +397,21 @@
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    height:3rem;
+    width:4.8rem;
+}
+.active{
+	background-color:skyblue;
+}
+.applyBox{
+color: #000;
+    font-size: 15px;
+    background: #eee;
+    border-radius: 60px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    display: inline-block;
+    margin-right: 0.5em;
 }
 

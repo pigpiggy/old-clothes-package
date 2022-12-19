@@ -77,7 +77,7 @@
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
         <div class="letterAndHeart" id="sharingname">
-          <span>${sharing.sname }</span>
+          <span class="sharingnick">${sharing.sname }</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart">
@@ -122,39 +122,53 @@
 	         	</c:otherwise>
 			</c:choose>
         </div>
-		        <span>신청 인원 : ${sharing.applycount }명</span>
+        		<div class="applyfirst">
+			        <span class="applyBox">신청 인원</span> 
+			        <span class="applyCounts">${sharing.applycount } 명 </span>
+		        </div>
 		        <div id="sbtn">
 					<c:choose>
 						<c:when test="${empty authUser }">		        
-				        	<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="" value="옷장열기" /></a>
-				        	<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+				        	<a href="/mypage/umypage/${sharing.userno }/sell">
+				        		<input type="button" class="buttoncontent openclothes" value="옷장열기" />
+				        	</a>
+				        	<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
 								<c:when test="${authUser.sect eq 'users' }">
 			        				<c:if test="${authUser.userno ne sharing.userno }">	
-			        					<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="" value="옷장열기" /></a>
-			        					<input type="button" id="wapply" class="btn btn-warning" value="구매신청" />
+			        					<a href="/mypage/umypage/${sharing.userno }/sell">
+			        						<input type="button" class="buttoncontent openclothes" value="옷장열기" />
+			        					</a>
+			        					<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
-			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="" value="나의옷장" /></a>
+			        					<a href="/mypage/umypage/${authUser.userno}/sell">
+			        						<input type="button" class="buttoncontent openclothes" value="나의옷장" />
+			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
-			        						<input type="button" class="btn btn-info" value="구매 신청 목록" />
-				        					<form action="/selectSharingApply" method="get">
-					        					<ul>
-													<c:forEach var="users" items="${users }">
-														<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-														<li>${users.joinDate }</li>
-													</c:forEach>			        					
-					        					</ul>
-					        					<input type="hidden" name="sno" value="${sharing.sno }">
-					        					<input type="submit" value="확인" class="submitButton"/>
-					        				</form>
+			        						<div class="sharingApplyList">
+				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('', '_blank', 
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=no, copyhistory=no, resizable=no');">
+					        					<form action="/selectSharingApply" method="get">
+						        					<ul>
+														<c:forEach var="users" items="${users }">
+															<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
+															<li>${users.joinDate }</li>
+														</c:forEach>			        					
+						        					</ul>
+						        					<input type="hidden" name="sno" value="${sharing.sno }">
+						        					<input type="submit" value="확인" class="submitButton"/>
+						        				</form>
+					        				</div>
 				        				</c:if>
 			        				</c:if>
 			        			</c:when>
 			        			<c:otherwise>
-			        				<a href="/mypage/umypage/${sharing.userno }/sell"><input type="button" class="btn btn-info" value="옷장열기" /></a>
+			        				<a href="/mypage/umypage/${sharing.userno }/sell">
+			        					<input type="button" class="buttoncontent openclothes" value="옷장열기" />
+			        				</a>
 			        			</c:otherwise>
 			        		</c:choose>	
 		        		</c:otherwise>
@@ -192,7 +206,7 @@
 		</c:if>
 		<c:choose>
 			<c:when test="${authUser.sect eq 'users' }">
-			     <div class="container" style="top: 60%;position: relative;">				        
+			     <div class="commentcontainer">				        
 			        <form name="commentInsertForm">
 			            <div class="input-group">
 			               <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
@@ -205,7 +219,7 @@
 			    </div>
 	    	</c:when>
 		    <c:otherwise>
-		    	<div class="container" style="top: 60%;position: relative;">
+		    	<div class="commentcontainer">
 		    		<form name="commentInsertForm">
 		            	<div class="input-group">                
 		               		<input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="로그인 및 사용자로그인 후 가능합니다." readonly>              
@@ -215,7 +229,7 @@
 		    </c:otherwise>
 	    </c:choose>
 	    <br><br> 
-		    <div class="container" style="position: relative;top: 63%;">
+		    <div class="commentcontainer">
 		        <div class="commentList"></div>
 		    </div>
 		</div>		    

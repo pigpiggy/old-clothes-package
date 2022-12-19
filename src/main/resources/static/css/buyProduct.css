@@ -23,7 +23,12 @@
 .stars {
 	display: flex;
 }
-
+#sellListCard {
+	text-decoration: none;
+}
+#sellListCard:hover {
+	color: black;
+}
 .buyProductWrap {
 	width: 1000px;
 	margin: 0 auto;

@@ -33,7 +33,7 @@
 	
 	<select id="selectComments" parameterType="Integer" resultType="comments">
 		<![CDATA[
-			select * from comments where fno=#{fno}
+			select * from comments where fno=#{fno} order by cno desc
 		]]>
 	</select>
 	
@@ -71,7 +71,7 @@
 	
 	<select id="selectCommentsno" parameterType="Integer" resultType="comments">
 		<![CDATA[
-			select * from comments where sno=#{sno}
+			select * from comments where sno=#{sno} order by cno desc
 		]]>
 	</select>
 	
@@ -114,7 +114,7 @@
 	
 	<select id="selectCommentino" parameterType="Integer" resultType="comments">
 		<![CDATA[
-			select * from comments where ino=#{ino}
+			select * from comments where ino=#{ino} order by cno desc
 		]]>
 	</select>
 	

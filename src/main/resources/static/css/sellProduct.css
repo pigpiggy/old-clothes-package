@@ -9,6 +9,12 @@ html {
 	margin-bottom: 25%;
 }
 
+#sellListCard {
+	text-decoration: none;
+}
+#sellListCard:hover {
+	color: black;
+}
 #sellselect {
 	margin-left: 6%;
     margin-bottom: 4%;

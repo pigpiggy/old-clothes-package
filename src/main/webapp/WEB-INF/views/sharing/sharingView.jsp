@@ -148,17 +148,20 @@
 			        						<input type="button" class="buttoncontent openclothes" value="나의옷장" />
 			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
-			        						<input type="button" class="btn btn-info" value="구매 신청 목록" />
-				        					<form action="/selectSharingApply" method="get">
-					        					<ul>
-													<c:forEach var="users" items="${users }">
-														<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-														<li>${users.joinDate }</li>
-													</c:forEach>			        					
-					        					</ul>
-					        					<input type="hidden" name="sno" value="${sharing.sno }">
-					        					<input type="submit" value="확인" class="submitButton"/>
-					        				</form>
+			        						<div class="sharingApplyList">
+				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('', '_blank', 
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=no, copyhistory=no, resizable=no');">
+					        					<form action="/selectSharingApply" method="get">
+						        					<ul>
+														<c:forEach var="users" items="${users }">
+															<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
+															<li>${users.joinDate }</li>
+														</c:forEach>			        					
+						        					</ul>
+						        					<input type="hidden" name="sno" value="${sharing.sno }">
+						        					<input type="submit" value="확인" class="submitButton"/>
+						        				</form>
+					        				</div>
 				        				</c:if>
 			        				</c:if>
 			        			</c:when>

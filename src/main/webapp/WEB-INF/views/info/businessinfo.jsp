@@ -232,8 +232,8 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
  
  #modal .modal_content {
    width: 30%;
-   height: 70%;
-   top: 20%;
+   height: 60%;
+   top: 25%;
    margin:5% auto;
    padding: 1%;
    text-align: center;
@@ -267,11 +267,10 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 .hr2{
  	position: relative;
     background-color: gray;
-    width: 70%;
     bottom: 26%;
     height: 1px;
-    width: 84%;
-    left: 6%;
+    width: 100%;
+    margin-top:6%;
  } 
 .modal ul {
   font-size: 0;
@@ -280,7 +279,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 
 
 .modal .modal_content .item:nth-child(-n+3){
-  margin-top: 0;
+  margin-top: 10%;
 }
 .modal .modal_content .item:nth-child(3n-2){
   margin-left: 0;
@@ -292,14 +291,17 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     text-align: center;
     padding-top: 17%;
     width: 114%;
-    margin-left: -18px;
+    margin-left: -6%;
 }
 .modal .item strong {
     display: block;
-    font-size: 17px;
+    font-size: 20px;
     letter-spacing: -1px;
     text-align: center;
-    margin-bottom: -35px;
+    margin-bottom: -10%;
+}
+.allapply{
+	margin-top: 6%;
 }
 .modal .modal_content .item .allapply .form .cont {
  	padding: 11px;
@@ -314,6 +316,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 .modal .modal_content .item .allapply .form .btn{
   top: -27%;  
   position: relative;
+  display:felx;
 }
 .modal .modal_content .item .allapply .form .btn ::before{
   content: '';
@@ -364,20 +367,18 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 .modal .modal_content .item .allapply .form .cont .wei{
   display: flex;
   height: 30px;
-  justify-content: space-evenly;	
   margin-top:4%;
 }
 #weight{
   	position: relative;
     width: 30%;
-    left: 27%;
+    left: 17%;
 }
 .modal .modal_content .item .allapply .form .cont .wei p {
-  	margin-left: -29px;
+  	margin-left: 21%;
     font-size: 1.1rem;
     margin-top: 0px;
     position: relative;
-    left: 23%;
 }
 #apickup{
    position: relative;
@@ -388,10 +389,8 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 }
 #applycloth{
   display: inline-block;
-    margin-top: 13px;
-    margin-left: 179px;
-    margin-bottom: 9px;
-    padding: 6px;
+    margin-left: 22%;
+    padding: 4%;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
     border-radius: 0.25rem;
@@ -400,13 +399,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    height:3rem;
 }
 #modal_close_btn{
  display: inline-block;
-    margin-top: 14px;
-    margin-left: 52px;
-    margin-bottom: 9px;
-    padding: 6px;
+    padding: 4%;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
@@ -415,6 +412,9 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     font-weight: bold;
     letter-spacing: -1px;
     cursor: pointer;
+    margin-left:18%;
+    height:3rem;
+    width:4.8rem;
 }
 
 

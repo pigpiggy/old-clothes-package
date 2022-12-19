@@ -48,11 +48,11 @@
 			         	 		<div class="cont">
 						              <input type="text" id="lname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="laddress" name="aaddress" placeholder="주소(동 까지만 입력)">
+						                  <input type="text" id="laddress" name="aaddress" placeholder="주소(동 까지만 입력)" readonly>
 						                  <input type="button" id="lad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="lphone" name="aphone" placeholder="휴대폰 번호(- 제외하고 입력 )">
-							              <input type="text" id="lpickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="lpickup" name="apickup" placeholder="수거 희망 날짜[시간]" readonly>
 						              <div class="wei">
 						                  <input type="text" id="lweight" name="weight" placeholder="옷 무게">
 						                  <p id="kg">kg</p>

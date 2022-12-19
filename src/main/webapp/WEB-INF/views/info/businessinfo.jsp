@@ -6,420 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>판매업체</title>
-<link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
-<style>
-#wrap {
-    width: 100%;
-    min-width: 1280px;
-    position: relative;
-    overflow: hidden;
-}
-#container {
-    width: 100%;
-    max-width: 1530px;
-    padding: 0 60px 0 30px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 12px;
-    position: relative;
-    box-sizing: border-box;
-}
+<link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
 
-#container {
-	padding-bottom: 80px;
-}
-#container>#contents {
-    padding-top: 30px;
-}
-#container>#contents>h2 {
-    padding-bottom: 30px;
-    font-size: 34px;
-    line-height: 1;
-    color: #020000;
-}
-#section {
-    width: 100%;
-    position: relative;
-}
-#selectbox {
-    margin: 0;
-    padding: 0;
-}
-.select>#sido {
-    width: 100%;
-    height:50px;
-}
-.select>#sigugun {
-    width: 100%;
-    height:50px;
-}
-.select {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-}
-.shop>.select {
-    margin: 0 15px;
-}
-.shop {
-    width: 100%;
-    padding: 30px 0;
-    border: 1px solid #9e9e9e;
-    border-top: 2px solid #17191f;
-    text-align: center;
-}
-.shopSchList {
-    width: 98%;
-    margin-top: 23px;
-    padding-left: 430px;
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
-    margin-left:1%;
-}
-.shopSchList>.list {
-    width: 400px;
-    height: 525px;
-    overflow: hidden;
-    overflow-y: auto;
-    position: absolute;
-    left: 0;
-    top: 9%;
-    margin-top:0px;
-    border: 1px solid #ddd;
-}
-.shopSchList>#map {
-    height: 528px;
-    border: 1px solid #f1ede2;
-    overflow: hidden;
-    position: relative;
-    z-index:0;
-}
-
-.shopSchList>.list>li {
-   width: 110%;
-    position: relative;
-    left: -33px;
-    border-bottom: 1px solid #ddd;
-}
-}
-.shopSchList>.list>li>span>a {
-    width: 100%;
-    padding-right: 30px;
-    border-bottom: 1px solid #ddd;
-    display: table;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-ul,li {
-    list-style: none outside;
-}
-a {
-    text-decoration: none;
-}
-.shopSchList>.list>li> em {
-    font-style: normal;
-}
-h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
-    font-size: 100%;
-    font-weight: normal;
-}
-
-.shopSchList>.list>li>.store_item {
-    width: 100%;
-    height: 140px;
-    padding: 23px 85px 0 15px;
-    font-size: 14px;
-    line-height: 20px;
-    color: #666;
-    letter-spacing: -1px;
-    display: table-cell;
-    vertical-align: middle;
-    box-sizing: border-box;
-    display: block;
-}
-
-
-body, div, ul, li, h1, h2, h3, h4, h5, p{
-    margin: 0;
-    padding: 0;
-}
-#heart_img {
-	width: 10%;
-    position: relative;
-    right: -5%;
-    top: -0%;
-    cursor:pointer;
-}
-#star{
-	position:absolute;
-	width:100%;
-	overflow:hidden;
-	color:#cdcdcd;
-}
-#star>img{
-	margin-right: 2px;
-}
-
-#starEnd{
-	position:absolute;
-	overflow:hidden;
-	white-space:nowrap;
-}
-#starEnd>img{
-	margin-right: 2px;	
-}
-#totalstar{
-	position: relative;
-    width: 130px;
-    top: -21%;
-    right: -80%;
-    
-}
-#cate {
-	left: -43.8%;
-	width:15%;
-}
-#catelist{
-	width:100%;
-	height:50px;
-}
-#btotaladdress{
-	position: relative;
-    top: 10%;
-}
-#btotalphone{
-	position: relative;
-    top: 10%;
-}
-
-#applymodal>img{
-	width: 40px;
-    height: 35px;
-}
-
-
-
-.kakaoids{
-	position: relative;
-    right: -85%;
-    top: -23%;
-}
-#applymodal{
-    position: relative;
-    right: -4%;
-    height: 35px;
-    background:none;
-    border:none;
-    top:0%;
-}
-
-
- #modal {
-    display: none;
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px;
-    z-index:10;
-}
-        
- 
- #modal .modal_content {
-   width: 20%;
-   height: 55%;
-   top: 25%;
-   margin:5% auto;
-   padding: 1%;
-   text-align: center;
-   background:#fff;
-   border-radius: 10px;
-   border:2px solid #666;
-   position:relative;
- }
- 
- #modal .modal_layer {
-   position:fixed;
-   top:0;
-   left:0;
-   width:100%;
-   height:100%;
-   background:rgba(0, 0, 0, 0.5);
-   z-index:-1;
- }  
- 
-.modal .item .title {
-    height: 6rem;
-    position: relative;
-}
-
-.modal .item .title:after {
-	content: '';
-    display: block;
-    width: 100%;
-    border-top: 2px solid navy;
-}
-.hr2{
- 	position: relative;
-    background-color: gray;
-    bottom: 26%;
-    height: 1px;
-    width: 100%;
-    margin-top:6%;
- } 
-.modal ul {
-  font-size: 0;
-  padding-left:0;
-}
-
-
-.modal .modal_content .item:nth-child(-n+3){
-  margin-top: 10%;
-}
-.modal .modal_content .item:nth-child(3n-2){
-  margin-left: 0;
-}
-
-
-.modal .modal_content .item .title p {
-   font-size: 12px;
-    text-align: center;
-    padding-top: 17%;
-    width: 114%;
-    margin-left: -6%;
-}
-.modal .item strong {
-    display: block;
-    font-size: 20px;
-    letter-spacing: -1px;
-    text-align: center;
-    margin-bottom: -10%;
-}
-.allapply{
-	margin-top: 6%;
-}
-.modal .modal_content .item .allapply .form .cont {
- 	padding: 11px;
-    height: 56%;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.modal .modal_content .item .allapply .form .btn{
-  top: -27%;  
-  position: relative;
-  display:flex;
-  justify-content:center;
-}
-.modal .modal_content .item .allapply .form .btn ::before{
-  content: '';
-  left: 20;
-  right: 20;
-  top: 0;
-  position: absolute;
-  height: 1.5px;
-  width: auto 230px;
-  background: #ddd;
-}
-
-#aname {
-     position: relative;
-    left: 11%;
-    height: 30px;
-    width: 30%;
-}
-.modal .modal_content .item .allapply .form .cont .adre {
-  display: flex;
-  height: 30px;
-  width: 122%;
-  margin-top:4%;
-}
-#aaddress{
-   position: relative;
-   left: 11%;
-   width: 58%;
-}
-#aad_bt{
-  	width: 19%;
-    margin-left: 15%;
-    border: 1.5px solid #ddd;
-    border-radius: 9px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    background-color: #ddd;
-    cursor: pointer;
-    text-align: center;
-}
-#aphone{
-  position: relative;
-  height: 30px;
-  width: 57%;
-  left: 11%;
-  margin-top:4%;
-}
-.modal .modal_content .item .allapply .form .cont .wei{
-  display: flex;
-  height: 30px;
-  margin-top:4%;
-  width:122%;
-}
-#weight{
-  	position: relative;
-    width: 18%;
-    left: 11%;
-}
-.modal .modal_content .item .allapply .form .cont .wei p {
-    font-size: 1.1rem;
-    margin-top: 0px;
-    position: relative;
-    left:12%;
-}
-#apickup{
-   position: relative;
-   height: 30px;
-   width: 57%;
-   margin-top: 4%;
-   left: 11%;
-}
-#applycloth{
-  display: inline-block;
-    margin-left: 22%;
-    padding: 3%;
-    background: rgb(23,162,184);
-    border: 1px solid rgb(23,162,184);
-    border-radius: 0.25rem;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    cursor: pointer;
-    height:3rem;
-}
-#modal_close_btn{
- display: inline-block;
-    padding: 3%;
-    background: #ddd;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    cursor: pointer;
-    height:3rem;
-    width:4.8rem;
-}
-
-
-</style>
 <script>
 //유효성 검사
 
@@ -445,11 +37,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			         	 		<div class="cont">
 						              <input type="text" id="aname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)" readonly>
 						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="aphone" name="aphone" placeholder="(- 제외 (01012341234 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]" readonly>
 						              <div class="wei">
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
 						                  <p>kg</p>
@@ -725,23 +317,31 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 						}
 				      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
 				        kakao.maps.event.addListener(marker2, 'mouseover', function() {
-				    		map.panTo(marker2.getPosition());
-		              	displayInfowindow2(marker2);
+				        	setInfo2(null);  
+					    	$(".listdnames").removeClass("active");
+				        	map.panTo(marker2.getPosition());
+			              	displayInfowindow2(marker2);
+			              	document.querySelectorAll("#listmove")[i].classList.add("active");
+			              	document.querySelectorAll("#listmove")[i].scrollIntoView();
 		              	});
-					  	/* //마우스 아웃 시 인포윈도우 클로즈
+					  	//마우스 아웃 시 인포윈도우 클로즈
 		              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+		              		$(".listdnames").removeClass("active");  
 		              		infowindow2.close();
-		              	}); */
+		              	}); 
 		            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 		            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
-		            		this.map.panTo(marker2.getPosition());	 
+		            		$(".listdnames").removeClass("active");
+		            		setInfo2(null);
+		            		document.querySelectorAll("#listmove")[i].classList.add("active");
+		            		map.setCenter(marker2.getPosition())
 		            		infowindow2.open(map,marker2);
 		           		});
 		            
-			            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+			           /*  //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
 			            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
 			            	infowindow2.close();
-			            });	
+			            });	 */
 			            $(document).ready(function(){
 							
 							if (!Kakao.isInitialized()) {
@@ -1013,23 +613,31 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 							}
 					      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
 					        kakao.maps.event.addListener(marker2, 'mouseover', function() {
-					    		map.panTo(marker2.getPosition());
-			              	displayInfowindow2(marker2);
+					        	setInfo2(null);  
+						    	$(".listdnames").removeClass("active");
+					        	map.panTo(marker2.getPosition());
+				              	displayInfowindow2(marker2);
+				              	document.querySelectorAll("#listmove")[i].classList.add("active");
+				              	document.querySelectorAll("#listmove")[i].scrollIntoView();
 			              	});
-						  	/* //마우스 아웃 시 인포윈도우 클로즈
+						  	 //마우스 아웃 시 인포윈도우 클로즈
 			              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+			              		$(".listdnames").removeClass("active");  
 			              		infowindow2.close();
-			              	}); */
+			              	}); 
 			            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 			            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
-			            		this.map.panTo(marker2.getPosition());	 
+			            		$(".listdnames").removeClass("active");
+			            		setInfo2(null);
+			            		document.querySelectorAll("#listmove")[i].classList.add("active");
+			            		map.setCenter(marker2.getPosition())
 			            		infowindow2.open(map,marker2);
 			           		});
 			            
-				            //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
+				            /* //mouseenter 와 mouseover는 비슷한 유형의 이벤트. 마우스 나갈 때 
 				            document.querySelectorAll("#listmove")[i].addEventListener('mouseout', (event) =>{
 				            	infowindow2.close();
-				            });	
+				            });	 */
 				            $(document).ready(function(){
 								
 								if (!Kakao.isInitialized()) {

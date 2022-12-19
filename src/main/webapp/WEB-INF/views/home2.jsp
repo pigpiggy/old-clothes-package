@@ -12,6 +12,7 @@
    	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/templatemo-kind-heart-charity.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet" type="text/css"/>
 <style>
 body {
     font-family: 'SUIT-Regular';
@@ -29,15 +30,15 @@ body {
 
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
-                       	<img src="/image/location-pin.png" style="width:30px;" class="bi-geo-alt me-2" alt="쪽지">
-							KOSTA
+                       	<img src="/image/location.png" style="width: 13px;height: 18px;" class="bi-geo-alt me-2" alt="쪽지">
+							KOSTA, 70, Gasan digital 1-ro, Geumcheon-gu, Seoul, Republic of Korea
                     </p>
 
                 </div>
 
-                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                <div class="col-lg-4 col-12 d-lg-block d-none">
                     <ul class="social-icon">
-                            <a href="https://github.com/sajo4jo/old-clothes-package" class="social-icon-link">
+                            <a href="https://github.com/sajo4jo/old-clothes-package">
                                	<img src="/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="쪽지" />
                    	 		</a>
                     </ul>

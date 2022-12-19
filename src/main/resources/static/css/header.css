@@ -17,3 +17,7 @@ li {
 .navbar-nav {
 	display: flex;
 }
+
+.d-flex {
+    align-items: center;
+}

@@ -59,7 +59,7 @@
 	    	<div class="card-list">
 			  <c:forEach var="sell" items="${sellList}">
 			  	<div class="sellList">
-					     <a href="/sellView/${sell.ino}">
+					     <a href="/sellView/${sell.ino}" id="sellListCard">
 						     <div class="card" data-sno=${sell.ino }>
 						       <div class="individualCard-header">
 					     	  	  ${sell.idealType}
@@ -86,7 +86,7 @@
 					              <img src="/image/pin.png"><p>${sell.iaddress}</p>
 					          </div>
 					      </div>				      
-				     </a>
+				     	</a>
 				     <c:if test="${'거래중' eq sell.istatus}">
 				     	<c:if test="${sell.sellCompletedCount eq 0}">
 				     		<div class="buttonbox">
@@ -131,7 +131,7 @@
 	    	<div class="card-list">
 			  <c:forEach var="sharing" items="${sharingList}">
 			  <div class="sharingList">
-		     <a href="/sharingView/${sharing.sno}">
+		      <a href="/sharingView/${sharing.sno}" id="sellListCard">
 			     <div class="card sharingcard" data-sno=${sharing.sno }>
 			     	  <div class="sharingCard-header">
 			     	  	${sharing.sdealType}

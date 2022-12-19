@@ -18,7 +18,7 @@
             <div class="section-overlay"></div>
 
             <div class="container">
-                <div class="row" id="sharingheader">
+                <div class="sharingrow" id="sharingheader">
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">무료 나눔</h1>
                     </div>

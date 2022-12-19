@@ -150,7 +150,7 @@
 		
 				                        <div class="d-flex justify-content-center">
 					                        <button type="submit"
-					                            class="btn btn-outline-primary">수정하기</button>
+					                            class="btn btn-outline-primary" style="margin-right:3%;">수정하기</button>
 					                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">탈퇴하기</button>    
 				                        </div>
 		

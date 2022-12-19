@@ -544,10 +544,10 @@ div#cdatelist.listcdate{
 }
 
 #ccontent{
-	position: relative;
-    left: 80%;
-    height: 91px;
-    width: 189%;
+	left: 9%;
+    height: 87px;
+    position: absolute;
+    width: 80%;
 }
 
 #bbtn{

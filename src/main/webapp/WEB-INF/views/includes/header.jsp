@@ -11,6 +11,7 @@
  	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/templatemo-kind-heart-charity.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet" type="text/css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -67,7 +68,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_2" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">버리기/기부 ∨
+                            aria-expanded="false">버리기/기부 <img class="down" src="/image/down-arrow.png">
                         </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
 	                            <li><a class="dropdown-item" href="/clothingbin">내 주변 헌옷 수거함</a></li>
@@ -82,7 +83,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_4" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">헌옷 사고 팔기</a>
+                            aria-expanded="false">헌옷 사고 팔기 <img class="down" src="/image/down-arrow.png"></a>
                    		<ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                             <li><a class="dropdown-item" href="/businessinfo">업체 판매</a></li>
                             <li><a class="dropdown-item" href="/sellList">개인 판매</a></li>

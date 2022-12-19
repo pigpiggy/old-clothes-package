@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
 </head>
 <body id="sharingBody">
@@ -19,7 +18,7 @@
             <div class="section-overlay"></div>
 
             <div class="container">
-                <div class="row" id="sharingheader">
+                <div class="sharingrow" id="sharingheader">
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">무료 나눔</h1>
                     </div>

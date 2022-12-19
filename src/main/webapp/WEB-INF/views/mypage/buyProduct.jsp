@@ -40,7 +40,7 @@
 			  <c:forEach var="buysell" items="${buysellList}">
 			  	<div class="sellList">
 			  			<input type="hidden" value="${buysell.ino}" class="selectedIno"/>
-					     <a href="/sellView/${buysell.ino}">
+					     <a href="/sellView/${buysell.ino}" id="sellListCard">
 						     <div class="card2 card" data-sno=${buysell.ino }>
 						      <div class="individualCard-header">
 					     	  	  ${buysell.idealType}
@@ -134,7 +134,7 @@
 			  <c:forEach var="buysharing" items="${buysharingList}">
 			  <div class="sharingList">
 			  <input type="hidden" value="${buysharing.sno}" class="selectedSno"/>
-		     <a href="/sharingView/${buysharing.sno}">
+		     <a href="/sharingView/${buysharing.sno}" id="sellListCard">
 			     <div class="card sharingcard2" data-sno=${buysharing.sno }>
 			     	  <div class="sharingCard-header">
 			     	  	${buysharing.sdealType}

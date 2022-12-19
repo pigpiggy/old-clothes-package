@@ -8,17 +8,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보수정</title>
-    
+    <title>회원정보수정</title>    
      <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
 
@@ -153,7 +150,7 @@
 		
 				                        <div class="d-flex justify-content-center">
 					                        <button type="submit"
-					                            class="btn btn-outline-primary">수정하기</button>
+					                            class="btn btn-outline-primary" style="margin-right:3%;">수정하기</button>
 					                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">탈퇴하기</button>    
 				                        </div>
 		

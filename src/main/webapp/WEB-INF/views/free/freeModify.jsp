@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자유게시판 글수정</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
@@ -33,15 +32,16 @@
 	/*유효성검사*/
 	 function valid() {
 				
-				var contentCheck = document.getElementById("editor");				
-				
-				if(contentCheck.value == "") {
-					alert("내용을 입력해주세요.");
-					return false;
-				}
-			}
+			if (window.editor.getData() == "") {  //then   window.editor = editor;
+		        alert("내용을 입력해주세요");
+		        window.editor.editing.view.focus();    
+		        return false; 
+		 	} 
+	}
 </script>
+<style>
 
+</style>
 </head>
 <body>
 	<div>
@@ -57,9 +57,9 @@
 			<div class="board_write_wrap">
 				<div class="board_write">
 					<div class="title">
-						<dl>
-							<dt>제목</dt>
-							<dd>
+						<dl class="dltitle">
+							<dt class="dttitle">제목</dt>
+							<dd class="ddtitle">
 								<input type="text" name="ftitle" value="${article.ftitle}" required>
 							</dd>
 						</dl>
@@ -68,9 +68,9 @@
 						<textarea id="editor" name="fcontent" value="${article.fcontent}"></textarea>
 					</div>
 				</div>
-				<div class="bt_wrap">
-					<input id="input3"  type="submit"  value="수정"> 
-					<a href="/freeList">취소</a>
+				<div class="bt_wrap_regist">
+					<input id="input1"  type="submit"  value="수정"> 
+					<a id="input2" href="/freeList">취소</a>
 				</div>
 			</div>
 		</form>

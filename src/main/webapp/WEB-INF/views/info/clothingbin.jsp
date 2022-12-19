@@ -152,10 +152,12 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
     box-sizing: border-box;
     display: block;
 }
- .bin:hover{
+/*  .bin:focus{
 	 background-color:skyblue;
+} */
+.active{
+	background-color:skyblue;
 }
-
 
 </style>
 
@@ -377,8 +379,12 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 						setMarkers2(null); //기존에 있는 마커 있으면 초기화
 						setInfo2(null); //기존에 있는 인포윈도우 초기화
 						var bli = "";
+						console.log("데이터길이:"+data.length);
+						if(data.length==0){
+							bli += '<li id="listmove" class="listmove"><a href="javascript:void(0);"><span class="store_item"><h3 style="text-align: center; font-size: 16px;">선택된 지역에 헌옷수거함 데이터가 없습니다</h3><br></span></a></li><br>';
+						}
 						data.forEach(function(item,i){
-							bli += "<li id='listmove'><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"'><span class='store_item'>"+item+"</span></a></li>";
+							bli += "<li id='listmove' class='listmove'><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"'><span class='store_item'>"+item+"</span></a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
 							var imageSrc = "image/icons8-marker-100.png",
@@ -415,17 +421,24 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 									}
 							      //마우스 오버 시 인포윈도우 오픈 + 위치 이동
 							      kakao.maps.event.addListener(marker2, 'mouseover', function() {
+							    	setInfo2(null);  
+							    	$(".listmove").removeClass("active");  
 							    	map.panTo(marker2.getPosition());
 					              	displayInfowindow2(marker2, item);
+					              	document.querySelectorAll("#listmove")[i].classList.add("active");
+					              	document.querySelectorAll("#listmove")[i].scrollIntoView();
 					              });
 								  //마우스 아웃 시 인포윈도우 클로즈
 					              kakao.maps.event.addListener(marker2, 'mouseout', function() {
+					            	document.querySelectorAll("#listmove")[i].classList.remove("active");
 					              	infowindow2.close();
 					              });
 					            //mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 				            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 				            		//this.map.panTo(marker2.getPosition());
+				            		$(".listmove").removeClass("active");
 				            		setInfo2(null);
+				            		document.querySelectorAll("#listmove")[i].classList.add("active");
 				            		map.setCenter(marker2.getPosition())
 				            		infowindow2.open(map,marker2);
 				           		});

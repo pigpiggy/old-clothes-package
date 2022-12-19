@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판 글보기</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
+    
 	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' /> 
 	<style>
 .deletecmt{
@@ -28,11 +28,46 @@
 }
 
 .viewcont {
-	left: 21%;
     position: relative;
-    width: 1100px;
     height: 216px;
     border-bottom: 2px solid navy;
+}
+.viewcont p {
+	margin-left: 2em;
+	height: auto;
+}
+#freeview {
+	width: 1100px;
+	margin: 0 auto;
+	padding: 10px;
+}
+.buttoncontent {
+    width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5bc1ac;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 5% 3%;
+}
+.buttoncontent:hover {
+	opacity: 0.8;
+}
+.cccontent {
+	display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 </style>
 </head>
@@ -40,47 +75,60 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 	</div>
-	<section id="articleForm">
     <div class="board_wrap">
-        <div class="board_title">
-            <strong>자유게시판</strong>
-        </div>
-        <div class="board_view_wrap">
-            <div class="board_view">
-                  <div class="title">
-                   <section id="basicInfoArea">
-                   <dl>
-                        <dt>제목</dt>
-                        <dd>${article.ftitle }</dd>
-                    </dl>
-                         </section>
-                </div>
-                <div class="info">
-                    <dl>
-                        <dt>글번호</dt>
-                        <dd>${article.fno }</dd>
-                    </dl>
-                    <dl>
-                        <dt>닉네임</dt>
-                        <dd>${article.fname }</dd>
-                    </dl>
-                    <dl>
-                        <dt>작성일</dt>
-                        <dd>${article.regdate }</dd>
-                    </dl>
-                    <dl>
-                        <dt>조회수</dt>
-                        <dd>${article.freadcount}</dd>
-                    </dl>
-                </div>
-            </div>
-          </div>
-    </div> 
-                </section>
+		<section id="articleForm">
+	        <div class="board_title">
+	            <strong>자유게시판</strong>
+	        </div>
+	        <div class="bt_wrap">            
+	            <a id="input4" href="/freeList" class="on">목록</a>
+	            <c:if test="${authUser.sect eq 'users'}">                
+	             <c:if test="${authUser.userno eq article.userno}">	                                  
+	                <a href="/modifyform/${article.fno }">수정</a>
+	                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+	             </c:if>               
+	            </c:if>
+	            <c:if test="${authUser.sect eq 'business'}">                
+	             <c:if test="${authUser.bno eq article.bno}">	                                  
+	                <a href="/modifyform/${article.fno }">수정</a>
+	                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
+	             </c:if>               
+	            </c:if>
+	        </div>
+	        <div class="board_view_wrap">
+	            <div class="board_view">
+	                  <div class="title">
+	                   <section id="basicInfoArea">
+	                   <dl class="dltitle">
+	                        <dt class="dttitle">제목</dt>
+	                        <dd id="ddtitleView" class="ddtitle">${article.ftitle }</dd>
+	                    </dl>
+	                         </section>
+	                </div>
+	                <div class="info">
+	                    <dl class="dltitle">
+	                        <dt id="dttitleView" class="dttitle">글번호</dt>
+	                        <dd class="ddtitle">${article.fno }</dd>
+	                    </dl>
+	                    <dl class="dltitle">
+	                        <dt class="dttitle">닉네임</dt>
+	                        <dd class="ddtitle">${article.fname }</dd>
+	                    </dl>
+	                    <dl class="dltitle">
+	                        <dt class="dttitle">작성일</dt>
+	                        <dd class="ddtitle">${article.regdate }</dd>
+	                    </dl>
+	                    <dl class="dltitle">
+	                        <dt class="dttitle">조회수</dt>
+	                        <dd class="ddtitle">${article.freadcount}</dd>
+	                    </dl>
+	                </div>
+	            </div>
+	          </div>
+		</section>
                 <div class="viewcont" id="freeview">               
                   <p id="contentp">${article.fcontent }</p>                                                
                 </div>                                
-                <br><br>                
             <c:if test="${authUser.sect eq 'business' }">                            
 				<input type="hidden" name="bno" id="bno" value="${authUser.bno }">				
 			</c:if>                
@@ -90,60 +138,53 @@
 			</c:if>
 			<input type="hidden" name="cno" id="cno" value="${comment.cno }">
 			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
-            <div class="bt_wrap">            
-                <a id="input4" href="/freeList" class="on">목록</a>
-                <c:if test="${authUser.sect eq 'users'}">                
-	                <c:if test="${authUser.userno eq article.userno}">	                                  
-	                   <a href="/modifyform/${article.fno }">수정</a>
-	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
-	                </c:if>               
-                </c:if>
-                <c:if test="${authUser.sect eq 'business'}">                
-	                <c:if test="${authUser.bno eq article.bno}">	                                  
-	                   <a href="/modifyform/${article.fno }">수정</a>
-	                   <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
-	                </c:if>               
-                </c:if>
-            </div>
+
             <%--댓글 리스트 --%>
-            <br><br>                    
             <!--  댓글  -->
-            <label class="blabel" for="content">댓글 등록</label>
+            <label class="blabel" for="content">댓글</label>
             <c:if test="${authUser ne null }">                 
             	<c:choose>
                 <c:when test="${authUser.sect eq 'users' }"> 	
-				    <div class="container">				        
-				        <form name="commentInsertForm" onsubmit="return check();">
-				            <div class="input-group">
+				    <div class="commentContainer">				        
+				        <form class="commentInsertForm" name="commentInsertForm" onsubmit="return check();">
+				            <div class="commentBox">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
-				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-				               <span class="input-group-btn">
-				                    <button id="ubtn" class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-				               </span>
+				               <div class="commentContent">
+				               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+				               <div class="commentbtn">
+				                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+				               </div>
 				              </div>
+				            </div>  
 				        </form>
 				    </div>
 			    </c:when>
 			    <c:otherwise>
-				    <div class="container">				        
-				        <form name="commentInsertForm">
-				            <div class="input-group">
+				    <div class="commentContainer">				        
+				        <form class="commentInsertForm" name="commentInsertForm">
+				            <div class="commentBox">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
-				               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-				               <span class="input-group-btn">
-				                    <button id="bbtn" class="btn btn-default" type="button" name="bcommentInsertBtn">등록</button>
-				               </span>
+				               <div class="commentContent">
+					               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+					               <div class="commentbtn">
+					                    <button id="bbtn" class="buttoncontent" type="button" name="bcommentInsertBtn">등록</button>
+					               </div>
+				               </div>
 				              </div>
 				        </form>
 				    </div>
 			    </c:otherwise>
 			    </c:choose>
 		    </c:if>
-		    <br><br>
-		    <div class="container">
-		        <div class="commentList"></div>
+		    <div class="commentContainer">
+		        <div class="commentList">
+
+		        </div>
 		    </div>
-                                
+    </div> 
+    <div>
+		<c:import url='/WEB-INF/views/includes/footer.jsp' />
+	</div>	
             <%--댓글 수정창 --%>
             
    <script>   
@@ -227,32 +268,33 @@
 	         success : function(data){
 	             var a =''; 
 	             $.each(data, function(key, value){ 
-	                 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+	                 a += '<div class="commentArea">';
 
 	                 if(value.csect =='users'){
-	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
+	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
 	                 }else if(value.csect == 'business'){
 	                	 if(bno == value.bno){
-	                 		a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/apply">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                 		a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/apply">'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';
 	                	 }else{
-	                		 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/review">'+'[ 작성자 ] :'+ value.cname +'</a>';
+	                		 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/bmypage/'+value.bno +'/review">'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';
 	                	 }
 	                 }
+	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
 	                 if(auth != ''){
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
-			                 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+			                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
 	                	 }else if(auth == 'business' && bno == value.bno){
 	                		 console.log("사업자 수정 삭제");
-	                		 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+	                		 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
 	                	 }
 	                 }
-	                 a += '';
-	                 a += '';
-	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss"> 내용 : '+value.ccontent +'</p>';
-	                 a += '</div></div>';
+	                 //a += '';
+	                 //a += '';
+	                 a += '</div>';
+	                 a += '</div>';
 	             });
 	             
 	             $(".commentList").html(a);
@@ -283,7 +325,7 @@
 	     var a ='';
 	     
 	     a += '<div class="input-group" style="position: relative;left: 82%; bottom: 63px;">';
-	     a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
+	     a += '<input type="text" class="ccontent" id="ccontent" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
 	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
 	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
 	     a += '</div>';

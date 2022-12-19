@@ -12,14 +12,13 @@
 <head>
 <meta charset="UTF-8">
 <title>무료나눔 상품 등록</title>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
 <body>
 		<header>
 			<c:import url='/WEB-INF/views/includes/header.jsp' />
 		</header>
-		<div class="container">
+		<div class="scontainer">
 			<h1>상품등록</h1>
 			<form action="sharingRegist" method="post" name="writeForm" 
 			enctype="multipart/form-data" accept="image/*" onsubmit="return valid();">
@@ -28,7 +27,7 @@
 				</div>
 				<br>
 				<div id="dealcontainer">
-					<div class="form-group row">
+					<div id="srow" class="form-group row">
 						<div id="dealprice">					
 							<span class="selectdealprice">
 								<select class="form-control" name="sdealType" id="sel1">
@@ -42,10 +41,10 @@
 							</span>
 						</div>
 						<div id="dealarea">
-							<span class="sellfont">거래지역:</span> 
+							<span id="sellarea" class="sellfont">거래지역:</span> 
 							<input class="postarea" id="member_post" type="hidden" readonly /> 
 							<input class="postarea" name="saddress" id="saddress" type="text" placeholder="'동'을 입력하세요." readonly><br> 
-							<input id="addresssearch" type="button" onclick="findAddr()" value="주소 검색" />
+							<input id="addresssearch" class="listbtn" type="button" onclick="findAddr()" value="주소 검색" />
 						</div>
 					</div>
 	
@@ -59,7 +58,7 @@
 				<div id=imglist class="filebox"></div>
 				<div id="btncontainer">
 					<a href="sharingList">
-						<button type="button" class="btn btn-info">목록으로</button>
+						<button type="button" id="listbtn">목록으로</button>
 					</a> 
 					<input type="submit" id="uploadBtn" class="btn btn-warning" value="등록">
 				</div>

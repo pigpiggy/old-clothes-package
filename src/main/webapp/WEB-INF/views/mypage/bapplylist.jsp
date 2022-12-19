@@ -9,6 +9,10 @@
 <link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
 <style>
+.center{
+	position: relative;
+    top: -400px
+}
 .item{	
 	width:100%;
 }

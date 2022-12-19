@@ -32,7 +32,6 @@ public class CommentServiceImpl implements CommentService {
 	//댓글 리스트 가져오기
 	@Override
 	public List<Comments> selectComments(Integer fno) throws Exception {
-		
 		return commentsDao.selectComments(fno);
 	}
 	//댓글 삭제
@@ -106,7 +105,7 @@ public class CommentServiceImpl implements CommentService {
 	//댓글 리스트
 	@Override
 	public List<Comments> selectCommentino(Integer ino) throws Exception {
-		return  commentsDao.selectCommentino(ino);
+		return commentsDao.selectCommentino(ino);
 	}
 	//댓글 삭제
 	@Override

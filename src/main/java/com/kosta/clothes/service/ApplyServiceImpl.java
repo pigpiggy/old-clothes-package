@@ -97,13 +97,14 @@ public class ApplyServiceImpl implements ApplyService{
 
 		@Override
 		public List<Apply> getApplyList(Integer userno, int apage, PageInfo apageInfo) throws Exception {
+			System.out.println("apage: " + apage);
 			int applyCount = applyDAO.applyListCount(userno);
 			System.out.print("ReviewRow:" + applyCount);
 			int maxPage = (int)Math.ceil((double)applyCount/10);  
 			System.out.println("maxPage : " + maxPage);
 			int startPage = apage/10 * 10 + 1;
 			System.out.println("startPage : " + startPage);
-			int endPage = startPage + 10 -1; 
+			int endPage = startPage + 6 -1; 
 			System.out.println("endPage : " + endPage);
 			if(endPage > maxPage) { 
 				endPage = maxPage; 
@@ -116,7 +117,7 @@ public class ApplyServiceImpl implements ApplyService{
 			apageInfo.setEndPage(endPage);
 			
 			//검색한 페이지의 시작 페이지 값을 구한 변수 
-			Integer row = (apage - 1) * 10 + 1;
+			Integer row = (apage - 1) * 5 + 1;
 			System.out.println("row : " + row);
 			Map<String, Object> map = new HashMap<String, Object>();
 			System.out.println("userno : " + userno);
@@ -134,7 +135,7 @@ public class ApplyServiceImpl implements ApplyService{
 			System.out.println("maxPage : " + maxPage);
 			int startPage = bapage/10 * 10 + 1;
 			System.out.println("startPage : " + startPage);
-			int endPage = startPage + 10 -1; 
+			int endPage = startPage + 6 -1; 
 			System.out.println("endPage : " + endPage);
 			if(endPage > maxPage) { 
 				endPage = maxPage; 
@@ -147,7 +148,7 @@ public class ApplyServiceImpl implements ApplyService{
 			bapageInfo.setEndPage(endPage);
 			
 			//검색한 페이지의 시작 페이지 값을 구한 변수 
-			Integer row = (bapage - 1) * 10 + 1;
+			Integer row = (bapage - 1) * 5 + 1;
 			System.out.println("row : " + row);
 			Map<String, Object> map = new HashMap<String, Object>();
 			System.out.println("userno : " + bno);

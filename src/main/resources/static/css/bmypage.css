@@ -195,9 +195,11 @@
 }
 #applying{
     display: inline-block;
-    margin-top: -15px;
-    margin-left: 96px;
-    margin-bottom: 9px;
+    position: relative;
+    top: -15px;
+    margin-top: -18px;
+    margin-left: 189px;
+    margin-bottom: 10px;
     padding: 6px;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
@@ -211,6 +213,8 @@
 }
 #apply_close_btn{
     display: inline-block;
+    position: relative;
+    top: 12px;
     margin-top: -15px;
     margin-left: 17px;
     margin-bottom: 9px;

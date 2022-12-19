@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<link href="<c:url value="/resources/css/common.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body id="individualBody">
@@ -18,7 +17,7 @@
 	<section class="news-detail-header-section-sell text-center">
             <div class="section-overlay"></div>
             <div class="container">
-                <div class="row" id="individualheader">
+                <div class="sellrow" id="individualheader">
                     <div class="col-lg-12 col-12">
                         <h1 class="text-white">개인 판매</h1>
                     </div>

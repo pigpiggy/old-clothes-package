@@ -269,6 +269,53 @@ public class FreeController {
 	
 
 	//자유게시판 댓글
+	//댓글 등록하기[통합]
+			@PostMapping("/freeView/{fno}/{num}")
+			public ModelAndView registcomments(@PathVariable("fno") Integer fno,
+					@PathVariable("num") Integer no,
+					@ModelAttribute Comments comments,Model model) {
+				ModelAndView mav = new ModelAndView();
+				try {
+					if(session.getAttribute("authUser")!=null) {
+						if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+							System.out.println("개인댓글");
+							Integer userno = no;
+							Users users = (Users)session.getAttribute("authUser");
+							comments.setFno(fno);
+							comments.setUserno(userno);
+							comments.setCsect(users.getSect());
+							comments.setCname(users.getNickname());
+							commentService.registUcomment(comments);					
+							mav.setViewName("redirect:/freeView/"+fno);
+						}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+							System.out.println("업체댓글");
+							Integer bno = no;
+							Business business = (Business)session.getAttribute("authUser");
+							System.out.println("sect : " + business.getSect());
+							String sect = business.getSect();
+							comments.setFno(fno);
+							comments.setBno(bno);
+							comments.setCsect(sect);
+							comments.setCname(business.getBname());
+							commentService.registBcomment(comments);			
+							mav.setViewName("redirect:/freeView/"+fno);
+						}
+					}else {
+						mav.setViewName("redirect:/login");
+						return mav;
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+					
+				}
+				return mav;	
+				
+			}
+	
+	
+	
+	
+	
 	
 	//댓글 등록하기[사용자]
 		@PostMapping("/ufreeView/{fno}/{userno}")

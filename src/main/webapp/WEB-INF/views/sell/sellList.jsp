@@ -65,7 +65,7 @@
 	          <div class="card-body">
 	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${sell.nickname}</p></div>
+	              <div class="individualDealNick"><p><img src="/image/greenuser.png">${sell.nickname}</p></div>
 	          </div>
 	          	
 		          <div class="card-footer">

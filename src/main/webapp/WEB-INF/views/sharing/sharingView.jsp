@@ -77,7 +77,7 @@
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
         <div class="letterAndHeart" id="sharingname">
-          <span class="sharingnick">${sharing.sname }</span>
+          <img src="/image/yellowuser.png" class="userprofile"><span class="sharingnick">${sharing.sname }</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart">

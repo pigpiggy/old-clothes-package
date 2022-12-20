@@ -52,7 +52,7 @@ function surveyList(){
 		          			str	+= "<div class="+"'card-body'"+">";
 		              		str	+= "<div class="+"'priceAndDate'"+"><span class="+"'price'"+">"+this.price+"원</span><span class="+"'date'"+">"+this.regDate+"</span></div>";
 		              		str	+= "<h2 class="+"'sharingTitle'"+">"+this.ititle+"</h2>";
-		              		str += "<div class='individualDealNick'><p><img src='/image/yellowuser.png'>"+this.nickname+"</p></div>";
+		              		str += "<div class='individualDealNick'><p><img src='/image/greenuser.png'>"+this.nickname+"</p></div>";
 		          			str	+= "</div>";
 							str	+= "<div class="+"'card-footer'"+">";
 							const address = this.iaddress.split(" ");

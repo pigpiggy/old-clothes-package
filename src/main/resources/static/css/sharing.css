@@ -570,6 +570,7 @@ h1 {
 
 #sbtn {
 	margin-top: 10px;
+	display: flex;
 }
 #sbtn a{
 	text-decoration: none;

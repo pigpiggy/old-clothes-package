@@ -1532,7 +1532,7 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/sharingView/"+sno;
+      return "redirect:/sharingapplyList/"+sno;
    }
    
    @ResponseBody

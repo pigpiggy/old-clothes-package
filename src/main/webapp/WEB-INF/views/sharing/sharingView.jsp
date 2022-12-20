@@ -149,18 +149,8 @@
 			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<div class="sharingApplyList">
-				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('', '_blank', 
-                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=no, copyhistory=no, resizable=no');">
-					        					<form action="/selectSharingApply" method="get">
-						        					<ul>
-														<c:forEach var="users" items="${users }">
-															<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-															<li>${users.joinDate }</li>
-														</c:forEach>			        					
-						        					</ul>
-						        					<input type="hidden" name="sno" value="${sharing.sno }">
-						        					<input type="submit" value="확인" class="submitButton"/>
-						        				</form>
+				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 					        				</div>
 				        				</c:if>
 			        				</c:if>
@@ -438,16 +428,6 @@ $("#wapply").on("click", function() {
 
 	}		
 })
-
-/* 신청확인 버튼 비활성화 */
-var sstatus = "${sharing.sstatus}";
-if(sstatus != '등록완료'){
-	$('.submitButton').attr("disabled", true);
-} else {
-	if(${fn:length(users) } == 0){
-		$('.submitButton').attr("disabled", true);
-	}
-}
 
 function valid() {
 	var title = document.getElementById("mtitle");

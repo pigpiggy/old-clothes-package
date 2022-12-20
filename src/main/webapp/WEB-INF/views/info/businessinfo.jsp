@@ -236,16 +236,16 @@
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){
@@ -529,16 +529,16 @@
 				bli += '<li class="listdnames" id="listmove">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){

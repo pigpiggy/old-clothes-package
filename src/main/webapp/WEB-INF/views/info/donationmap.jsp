@@ -284,6 +284,13 @@ input[type=radio] {
     box-sizing: content-box;
     top: -3px;
 }
+.refresh img{
+	cursor: pointer;
+}
+#refreshimg {
+	width: 20px;
+	margin: 0.65em 1em 0 -8em;
+}
 </style>
 
 </head>
@@ -294,13 +301,13 @@ input[type=radio] {
 	
 	<div id="donationcontainer">
 		<div class="radiobtn">
-		<div class="form-radio" style="text-align:left; margin-left:276px; margin-top:-100px;">
-	        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
-	        <label for="person" style="width: 45px;">온라인</label>
-			&nbsp; &nbsp;
-	        <input type="radio" name="donation_level" value="offline" id="offline" />
-	        <label for="business">오프라인</label>
-		</div>
+			<div class="form-radio" style="text-align:left; margin-left:30%; margin-top:-100px;">
+		        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
+		        <label for="person" style="width: 45px;">온라인</label>
+				&nbsp; &nbsp;
+		        <input type="radio" name="donation_level" value="offline" id="offline" />
+		        <label for="business">오프라인</label>
+			</div>
 		</div>
 		<br>		
 		<br>
@@ -310,7 +317,10 @@ input[type=radio] {
 			<h2 id="donationlist">기부업체 안내</h2>
 				<div id="section">
 					<div id="selectbox" style="display:flex;">
-						<div class="shop">				
+						<div class="shop">		
+							<span class="refresh">
+								<img id="refreshimg" src="/image/refresh.png">				
+							</span>								
 							<div class="select" style="width: 156px;">
 								<select id="sido"><option value="">선택</option></select>
 							</div>

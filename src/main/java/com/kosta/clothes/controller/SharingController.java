@@ -103,6 +103,25 @@ public class SharingController {
 	public String sharingRegistForm() {
 		return "/sharing/sharingRegistForm";
 	}
+	
+	//신청확인
+	@GetMapping("/sharingapplyList/{sno}")
+	public ModelAndView sharingapplyList(@PathVariable("sno") Integer sno, HttpServletRequest request, @RequestParam(value = "kwd", required = false) String kwd) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.setViewName("/sharing/sharingapplyList");
+			List<Users> users = mypageService.getSharingapplylist(sno);
+			Sharing sharing = sharingService.viewSharing(sno);
+			mav.addObject("users",users);
+			mav.addObject("sharing",sharing);
+			System.out.println(sharing);
+			System.out.println(users);
+			mav.addObject("sno",sno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 
 	@ResponseBody
 	@PostMapping("/sharingRegist")
@@ -145,7 +164,7 @@ public class SharingController {
 					sect = uauthuser.getSect();
 					model.addAttribute("sect", sect);
 					List<Users> users = mypageService.getSharingapplylist(sno);
-					mav.addObject("users",users);					
+					mav.addObject("users",users);
 					mav.setViewName("/sharing/sharingView");
 				} else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 					bauthuser = (Business) session.getAttribute("authUser");

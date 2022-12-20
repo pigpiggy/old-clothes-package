@@ -77,7 +77,7 @@
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
         <div class="letterAndHeart" id="sharingname">
-          <span class="sharingnick">${sharing.sname }</span>
+          <img src="/image/yellowuser.png" class="userprofile"><span class="sharingnick">${sharing.sname }</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart">
@@ -149,18 +149,8 @@
 			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<div class="sharingApplyList">
-				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('', '_blank', 
-                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=no, copyhistory=no, resizable=no');">
-					        					<form action="/selectSharingApply" method="get">
-						        					<ul>
-														<c:forEach var="users" items="${users }">
-															<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-															<li>${users.joinDate }</li>
-														</c:forEach>			        					
-						        					</ul>
-						        					<input type="hidden" name="sno" value="${sharing.sno }">
-						        					<input type="submit" value="확인" class="submitButton"/>
-						        				</form>
+				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 					        				</div>
 				        				</c:if>
 			        				</c:if>
@@ -176,6 +166,7 @@
         		</div>
         <!-- Swiper JS -->
       </section>
+    </section>
       <div class="scontent">
         <div id="modifydelete">
         	<h3>상품정보</h3>
@@ -183,10 +174,10 @@
 	        	<c:if test="${authUser.userno eq sharing.userno}">    
 		        	<div id="modifydelete">
 						<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
-	    	    			<i class="fa-solid fa-gear fa-lg"></i>
+		          			<img src="/image/edit.png" id="edit" alt="수정">
 	    	    		</a>
 						<a href="javascript:void(0);" onclick="removeSharing();">	        	
-	        				<span class="fa-solid fa-trash-can fa-lg"></span>
+		          			<img src="/image/viewdelete.png" id="viewdelete" alt="삭제">
 	        			</a>
 	        		</div>
 	        	</c:if>	
@@ -194,52 +185,67 @@
         </div>
         <div id=sdetail>${sharing.scontent}</div>
       </div>
-      
-    </section>
             <%--댓글 리스트 --%>
             <!--  댓글  -->
-            <label class="blabel" for="content">댓글</label>
-		    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
-            <c:if test="${authUser ne null }">                 
-            	<c:choose>
-                <c:when test="${authUser.sect eq 'users' }">
-					<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
-				    <div class="commentContainer">				        
-				        <form class="commentInsertForm" name="commentInsertForm" onsubmit="return check();">
-				            <div class="commentBox">
-			               	   <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
-				               <div class="commentContent">
-					               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-					               <div class="commentbtn">
-					                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+            <div class="commentWrap">
+	            <label class="blabel" for="content">댓글</label>
+			    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
+	            <c:if test="${authUser ne null }">                 
+	            	<c:choose>
+	                <c:when test="${authUser.sect eq 'users' }">
+						<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
+					    <div class="commentContainer">				        
+					        <form class="commentInsertForm" name="commentInsertForm" onsubmit="return check();">
+					            <div class="commentBox">
+				               	   <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
+					               <div class="commentContent">
+						               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+						               <div class="commentbtn">
+						                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+						               </div>
+					              </div>
+					            </div>  
+					        </form>
+					    </div>
+				    </c:when>
+				    <c:otherwise>
+					    <div class="commentContainer">				        
+					        <form class="commentInsertForm" name="commentInsertForm">
+					            <div class="commentBox">
+				               	   <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
+					               <div class="commentContent">
+						               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="개인 회원으로 로그인 후 이용하시기 바랍니다." readonly>
+						               <div class="commentbtn">
+						                    <button id="bbtn" class="buttoncontent" type="button" name="bcommentInsertBtn">등록</button>
+						               </div>
 					               </div>
-				              </div>
-				            </div>  
-				        </form>
-				    </div>
-			    </c:when>
-			    <c:otherwise>
+					              </div>
+					        </form>
+					    </div>
+				    </c:otherwise>
+				    </c:choose>
+			    </c:if>
+			 	<c:if test="${empty authUser }">
 				    <div class="commentContainer">				        
 				        <form class="commentInsertForm" name="commentInsertForm">
 				            <div class="commentBox">
 			               	   <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
 				               <div class="commentContent">
-					               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+								   <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="로그인 후 댓글 작성이 가능합니다." readonly />
 					               <div class="commentbtn">
 					                    <button id="bbtn" class="buttoncontent" type="button" name="bcommentInsertBtn">등록</button>
 					               </div>
 				               </div>
 				              </div>
 				        </form>
-				    </div>
-			    </c:otherwise>
-			    </c:choose>
-		    </c:if>
-		    <div class="commentContainer">
-		        <div class="commentList">
-
-		        </div>
-		    </div>    
+				    </div>			 	
+				</c:if>
+			    <div class="commentContainer">
+			        <div class="commentList">
+	
+			        </div>
+			    </div>
+			</div>			        
     
     
     <%--무료나눔 댓글 --%>
@@ -439,16 +445,6 @@ $("#wapply").on("click", function() {
 	}		
 })
 
-/* 신청확인 버튼 비활성화 */
-var sstatus = "${sharing.sstatus}";
-if(sstatus != '등록완료'){
-	$('.submitButton').attr("disabled", true);
-} else {
-	if(${fn:length(users) } == 0){
-		$('.submitButton').attr("disabled", true);
-	}
-}
-
 function valid() {
 	var title = document.getElementById("mtitle");
 	var content = document.getElementById("mcontent");
@@ -517,13 +513,13 @@ function commentList(){
                 
                 //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
 	            a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
+                a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 if(auth != ''){
                 	if(auth == 'users'){
 		                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 		                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
                 	}
                 }
-                a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 a += '</div></div>';
             });
             

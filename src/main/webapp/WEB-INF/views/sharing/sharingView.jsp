@@ -149,7 +149,7 @@
 			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<div class="sharingApplyList">
-				        						<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
+				        						<input type="button" class="buttoncontent" value="구매 신청 목록" style="width:7em;" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
                        'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 					        				</div>
 				        				</c:if>

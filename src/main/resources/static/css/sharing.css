@@ -470,6 +470,7 @@ h1 {
     justify-content: space-evenly;
     margin: 0 auto;
     padding-top: 3%;
+    padding-bottom: 4%;
 }
 
 #viewcontainer {
@@ -580,7 +581,7 @@ h1 {
 }
 
 .userprofile {
-	margin-right: 3px;
+	margin-right: 7px;
 }
 
 #modifydelete {

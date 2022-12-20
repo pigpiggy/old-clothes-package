@@ -466,8 +466,9 @@ function catelist(){
 			})
 			//모달 켜기
 			$(document).off("click","#applymodal").on("click","#applymodal",function(m){
-				var apclick = m.target;
+				var apclick = m.target.parentElement;
 				var bno = apclick.getAttribute('data-value');
+				console.log("bno:"+bno);
 	           	document.getElementById("lmodal").style.display="block";
 	           	document.getElementById("bno").value=bno;
 			})
@@ -604,8 +605,9 @@ function refreshlist(category,globalCurrentPage){
 	            	 
 	            }); */
 	            $(document).off("click","#applymodal").on("click","#applymodal",function(m){
-					var apclick = m.target;
+					var apclick = m.target.parentElement;
 					var bno = apclick.getAttribute('data-value');
+					console.log("bno:"+bno);
 		           	document.getElementById("lmodal").style.display="block";
 		           	document.getElementById("bno").value=bno;
 				}) 
@@ -763,6 +765,11 @@ $("#lpickup").datepicker({
          }
      }).open();
  }
+//msg 체크
+	var msg ="${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
 </script>
 <script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
 <script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>

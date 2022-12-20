@@ -420,30 +420,29 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			if(data.length==0){
 				bli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 업체가 없습니다.</h3></span></a></li><br>';
 			}
-				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){
 					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
 				}			
 				console.log(data.bstar +"별점");
-				bli += '<div id="totalstar">';
+				bli += '<div id="totalstar" class="totalstar">';
 				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
@@ -509,14 +508,45 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				        kakao.maps.event.addListener(marker2, 'mouseover', function() {
 				    		map.panTo(marker2.getPosition());
 		              	displayInfowindow2(marker2);
+				        	setInfo2(null);  
+					    	$(".listdnames").removeClass("active");
+					    	$(".heart_img").removeClass("overlay");
+		              		$(".totalstar").removeClass("overlay");
+		              		$(".apply").removeClass("overlay");
+		              		$(".kakaoids").removeClass("overlay");
+				        	map.panTo(marker2.getPosition());
+			              	displayInfowindow2(marker2);
+			              	document.querySelectorAll("#listmove")[i].classList.add("active");
+			              	document.querySelectorAll("#totalstar")[i].classList.add("overlay");
+		            		document.querySelectorAll("#heart_img")[i].classList.add("overlay");
+		            		document.querySelectorAll(".apply")[i].classList.add("overlay");
+		            		document.querySelectorAll(".kakaoids")[i].classList.add("overlay");
+			              	document.querySelectorAll("#listmove")[i].scrollIntoView();
 		              	});
 					  	/* //마우스 아웃 시 인포윈도우 클로즈
 		              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+		              		$(".listdnames").removeClass("active");  
+		              		$(".heart_img").removeClass("overlay");
+		              		$(".totalstar").removeClass("overlay");
+		              		$(".apply").removeClass("overlay");
+		              		$(".kakaoids").removeClass("overlay");
 		              		infowindow2.close();
 		              	}); */
 		            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 		            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 		            		this.map.panTo(marker2.getPosition());	 
+		            		$(".listdnames").removeClass("active");
+		            		$(".heart_img").removeClass("overlay");
+		              		$(".totalstar").removeClass("overlay");
+		              		$(".apply").removeClass("overlay");
+		              		$(".kakaoids").removeClass("overlay");
+		            		setInfo2(null);
+		            		document.querySelectorAll("#listmove")[i].classList.add("active");
+		            		document.querySelectorAll("#totalstar")[i].classList.add("overlay");
+		            		document.querySelectorAll("#heart_img")[i].classList.add("overlay");
+		            		document.querySelectorAll(".apply")[i].classList.add("overlay");
+		            		document.querySelectorAll(".kakaoids")[i].classList.add("overlay");
+		            		map.setCenter(marker2.getPosition())
 		            		infowindow2.open(map,marker2);
 		           		});
 		            
@@ -706,30 +736,29 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				setMarkers2(null); //기존에 있는 마커 있으면 초기화
 				setInfo2(null); //기존에 있는 인포윈도우 초기화
 				var bli = "";
-				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" alt="'+data.bno+'"></em>';
+						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){
 					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
 				}			
 				console.log(data.bstar +"별점");
-				bli += '<div id="totalstar">';
+				bli += '<div id="totalstar" class="totalstar">';
 				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
 				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
 				bli += '</div>';
@@ -797,14 +826,45 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 					        kakao.maps.event.addListener(marker2, 'mouseover', function() {
 					    		map.panTo(marker2.getPosition());
 			              	displayInfowindow2(marker2);
+					        	setInfo2(null);  
+						    	$(".listdnames").removeClass("active");
+						    	$(".heart_img").removeClass("overlay");
+			              		$(".totalstar").removeClass("overlay");
+			              		$(".apply").removeClass("overlay");
+			              		$(".kakaoids").removeClass("overlay");
+					        	map.panTo(marker2.getPosition());
+				              	displayInfowindow2(marker2);
+				              	document.querySelectorAll("#listmove")[i].classList.add("active");
+				              	document.querySelectorAll("#totalstar")[i].classList.add("overlay");
+			            		document.querySelectorAll("#heart_img")[i].classList.add("overlay");
+			            		document.querySelectorAll(".apply")[i].classList.add("overlay");
+			            		document.querySelectorAll(".kakaoids")[i].classList.add("overlay");
+				              	document.querySelectorAll("#listmove")[i].scrollIntoView();
 			              	});
 						  	/* //마우스 아웃 시 인포윈도우 클로즈
 			              	kakao.maps.event.addListener(marker2, 'mouseout', function() {
+			              		$(".listdnames").removeClass("active"); 
+			              		$(".heart_img").removeClass("overlay");
+			              		$(".totalstar").removeClass("overlay");
+			              		$(".apply").removeClass("overlay");
+			              		$(".kakaoids").removeClass("overlay");
 			              		infowindow2.close();
 			              	}); */
 			            	//mouseenter 와 mouseover는 비슷한 유형의 이벤트.마우스 올릴 때 
 			            	document.querySelectorAll("#listmove")[i].addEventListener('click', (event) =>{
 			            		this.map.panTo(marker2.getPosition());	 
+			            		$(".listdnames").removeClass("active");
+			            		$(".heart_img").removeClass("overlay");
+			              		$(".totalstar").removeClass("overlay");
+			              		$(".apply").removeClass("overlay");
+			              		$(".kakaoids").removeClass("overlay");
+			            		setInfo2(null);
+			            		document.querySelectorAll("#listmove")[i].classList.add("active");
+			            		document.querySelectorAll("#totalstar")[i].classList.add("overlay");
+			            		document.querySelectorAll("#heart_img")[i].classList.add("overlay");
+			            		document.querySelectorAll(".apply")[i].classList.add("overlay");
+			            		document.querySelectorAll(".kakaoids")[i].classList.add("overlay");
+			            		map.setCenter(marker2.getPosition())
 			            		infowindow2.open(map,marker2);
 			           		});
 			            

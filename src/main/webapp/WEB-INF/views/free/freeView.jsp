@@ -19,13 +19,6 @@
     bottom: 100px;
     height: 26px;
 }
-#cmtmodify{
-	position: relative;
-    width: 42px;
-    left: 1098px;
-    bottom: 100px;
-    height: 26px;
-}
 
 .viewcont {
     position: relative;
@@ -69,6 +62,18 @@
     border-radius: 0.375rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.commentmodifybtn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.commentbtn2 {
+	margin-left: 7px;
+}
+.cancelbtn {
+	background-color: var(--bs-gray-500);
+}
+
 </style>
 </head>
 <body>
@@ -80,8 +85,10 @@
 	        <div class="board_title">
 	            <strong>자유게시판</strong>
 	        </div>
+	        <input type="hidden" id="page"value="${page }">
+	        <input type="hidden" id="kwd"value="${kwd }">
 	        <div class="bt_wrap">            
-	            <a id="input4" href="/freeList" class="on">목록</a>
+	            <a id="input4" href="/freeList?page=${page}&kwd=${kwd}" class="on">목록</a>
 	            <c:if test="${authUser.sect eq 'users'}">                
 	             <c:if test="${authUser.userno eq article.userno}">	                                  
 	                <a href="/modifyform/${article.fno }">수정</a>
@@ -137,12 +144,28 @@
 				
 			</c:if>
 			<input type="hidden" name="cno" id="cno" value="${comment.cno }">
-			<input type="hidden" name="fno" id="fno" value="${article.fno }">               						
+			<input type="hidden" name="fno" id="fno" value="${article.fno }">   
+			<input type="hidden" name="sect" id="sect" value="${authUser.sect }">            						
 
             <%--댓글 리스트 --%>
             <!--  댓글  -->
             <label class="blabel" for="content">댓글</label>
             <c:if test="${authUser ne null }">                 
+			    <div class="commentContainer">				        
+			        <form class="commentInsertForm" name="commentInsertForm" onsubmit="return check();">
+			            <div class="commentBox">
+			               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
+			               <div class="commentContent">
+				               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+				               <div class="commentbtn">
+				                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+				               </div>
+			              </div>
+			            </div>  
+			        </form>
+			    </div>
+		    </c:if>
+            <%-- <c:if test="${authUser ne null }">                 
             	<c:choose>
                 <c:when test="${authUser.sect eq 'users' }"> 	
 				    <div class="commentContainer">				        
@@ -150,10 +173,10 @@
 				            <div class="commentBox">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
 				               <div class="commentContent">
-				               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-				               <div class="commentbtn">
-				                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
-				               </div>
+					               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+					               <div class="commentbtn">
+					                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+					               </div>
 				              </div>
 				            </div>  
 				        </form>
@@ -175,7 +198,7 @@
 				    </div>
 			    </c:otherwise>
 			    </c:choose>
-		    </c:if>
+		    </c:if> --%>
 		    <div class="commentContainer">
 		        <div class="commentList">
 
@@ -211,10 +234,12 @@
 	    	alert("댓글을 입력해 주시기 바랍니다.");
 	    	return false;
 	    }
-	    commentInsert(insertData); //Insert 함수호출(아래)
+	    var sect = $('#sect').val();
+	    console.log("sect:"+sect);
+	    commentInsert(insertData, sect); //Insert 함수호출(아래)
 	});
    
-   //사업자
+   /* //사업자
    $('[name=bcommentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
 	    var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
 	    if($('input[name=ccontent]').val() == '' ){
@@ -222,11 +247,33 @@
 	    	return false;
 	    }
 	    bcommentInsert(insertData); //Insert 함수호출(아래)
-	});
+	}); */
    
-	   
+	//댓글 등록 통합
+	function commentInsert(insertData,sect){
+		var num = "";
+		if(sect=="users"){
+			console.log("개인")
+			num = $('#userno').val();
+		}else if(sect="business"){
+			console.log("업자")
+			num = $('#userno').val();
+		}
+		$.ajax({
+	        url : '/freeView/'+fno+'/'+num,
+	        type : 'post',
+	        data : insertData,
+	        success : function(data){		            
+	            commentList(); //댓글 작성 후 댓글 목록 reload
+				$('[name=ccontent]').val('');
+	            
+	        }
+	    });
+		
+	}
+	
    
-	 //댓글 등록[사용자]
+	 /* //댓글 등록[사용자]
 	 function commentInsert(insertData){
 		 var userno = $('#userno').val();
 		 console.log("댓글 등록");
@@ -256,7 +303,7 @@
 		            
 		        }
 		    });
-		}
+		} */
 	 
 	 //댓글 목록 
 	 function commentList(){
@@ -281,6 +328,7 @@
 	                 }
 	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
 	                 if(auth != ''){
+	                	 a += '<a onclick="replywindow('+value.cno+');"> 댓글등록 </a>'
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
 			                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
@@ -301,8 +349,70 @@
 	         }
 	     });
 	 }
+	 //대댓글 등록창
+	 function replywindow(cno){
+		 var a = '';
+		 
+		 a += '<div class="commentContainer">';				        
+	     a += '<form class="commentInsertForm" name="replycommentInsertForm" onsubmit="return check();">';
+	     a += '<div class="commentBox">';
+	     a += '<div class="commentContent">';
+	     a += '<input type="text" class="ccontent" id="ccontent" name="replyccontent" placeholder="댓글을 작성해주세요.">';
+	     a += '<div class="commentbtn">';
+	     a += '<div class="commentmodifybtn"><span class="commentbtn">'
+	     a += '<button id="ubtn" class="buttoncontent" type="button" name="replycommentInsertBtn" data-value='+cno+'>등록</button></span>';
+	     a += '<span class="commentbtn commentbtn2"><button id="ubtn" class="buttoncontent cancelbtn" type="button" onclick="commentList();">취소</button></span></div>';
+	     a += '</div>';
+	     a += '</div>';
+	     a += '</div>'; 
+	     a += '</form>';
+	     a += '</div>';
+	     
+	     $('.commentContent'+cno).append(a);
+		 
+	 }
+	 $(document).off("click").on("click","[name=replycommentInsertBtn]",function(e){
+		 var targetElement = e.target;
+		 var cno = targetElement.getAttribute("data-value");
+		 console.log("cno:"+cno);
+		 
+		 var insertData = $('[name=replycommentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+		    if($('input[name=replyccontent]').val() == '' ){
+		    	alert("댓글을 입력해 주시기 바랍니다.");
+		    	return false;
+		    }
+		    var sect = $('#sect').val();
+		    console.log("sect:"+sect);
+		    replycommentInsert(insertData, sect, cno); //Insert 함수호출(아래)
+		 
+	 } )
 	 
+	 function replycommentInsert(insertData, sect, cno){
+		 console.log(insertData);
+		 console.log(sect);
+		 console.log(cno);
+		 var num = "";
+		 if(sect=="users"){
+		 	console.log("개인")
+		 	num = $('#userno').val();
+		 }else if(sect="business"){
+		 	console.log("업자")
+		 	num = $('#userno').val();
+		 }
+		 $.ajax({
+		        url : '/replycomment/'+fno+'/'+num+'/'+cno,
+		        type : 'post',
+		        data : insertData,
+		        success : function(data){		            
+		            commentList(); //댓글 작성 후 댓글 목록 reload
+		            
+		        }
+		  });
+		 
+		 
+	 }
 	 
+		
 	//댓글 삭제 
 	 function commentDelete(cno){
 		console.log("삭제할 번호 : " + cno);
@@ -319,16 +429,16 @@
 		}
 	 }
 	
-	
+
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	 function commentUpdate(cno, ccontent){
 	     var a ='';
 	     
-	     a += '<div class="input-group" style="position: relative;left: 82%; bottom: 63px;">';
+	     a += '<div id="commentModifyBox" class="commentBox"><div class="commentContent">';
 	     a += '<input type="text" class="ccontent" id="ccontent" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
-	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
-	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
-	     a += '</div>';
+	     a += '<div class="commentmodifybtn"><span class="commentbtn"><button id="ubtn" class="buttoncontent" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+	     a += '<span class="commentbtn commentbtn2"><button id="ubtn" class="buttoncontent cancelbtn" type="button" onclick="commentList();">취소</button> </span></div>';
+	     a += '</div></div>';
 	     
 	     $('.commentContent'+cno).html(a);
 	     
@@ -336,7 +446,7 @@
 	//댓글 수정
 	 function commentUpdateProc(cno){
 	     var updateContent = $('[name=ccontent_'+cno+']').val();
-	     var result = confirm("수정하시겠습니까??");
+	     var result = confirm("수정하시겠습니까?");
 	     console.log("수정할 cno : " + cno);
 	     console.log("수정할 내용 : " + updateContent);
 	     if(result){
@@ -362,15 +472,20 @@
    function freeRemove() {
 		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
 		var fno =  $('#fno').val();
-		
+		var kwd =  $('#kwd').val();
+		var page =  $('#page').val();
 		if(result) {
 			$.ajax({
 				type : "post",
 				url : "/freeDelete",
-				data : {fno:fno},
+				data : {
+					fno:fno,
+					kwd:kwd,
+					page:page
+					},
 				success : function(data) {
 					alert("삭제가 완료되었습니다.");
-					location.href="/freeList";
+					location.href="/freeList?page="+page+"&kwd="+kwd+""; 
 				},
 				error : function(err) {
 					console.log(err);

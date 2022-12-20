@@ -11,6 +11,27 @@ public class Comments {
 	  private Integer ino;
 	  private Integer bno;
 	  private Integer userno;
+	  private Integer ref;
+	  public Integer getRef() {
+		return ref;
+	}
+	public void setRef(Integer ref) {
+		this.ref = ref;
+	}
+	public Integer getPos() {
+		return pos;
+	}
+	public void setPos(Integer pos) {
+		this.pos = pos;
+	}
+	public Integer getDepth() {
+		return depth;
+	}
+	public void setDepth(Integer depth) {
+		this.depth = depth;
+	}
+	private Integer pos;
+	  private Integer depth;
 	  
 	public Integer getCno() {
 		return cno;
@@ -76,10 +97,8 @@ public class Comments {
 	public void setUserno(Integer userno) {
 		this.userno = userno;
 	}
-	
-	
 	public Comments(Integer cno, String cname, String ccontent, String regdate, String csect, Integer sno, Integer fno,
-			Integer ino, Integer bno, Integer userno) {
+			Integer ino, Integer bno, Integer userno, Integer ref, Integer pos, Integer depth) {
 		super();
 		this.cno = cno;
 		this.cname = cname;
@@ -91,6 +110,9 @@ public class Comments {
 		this.ino = ino;
 		this.bno = bno;
 		this.userno = userno;
+		this.ref = ref;
+		this.pos = pos;
+		this.depth = depth;
 	}
 	public Comments() {
 		super();
@@ -99,11 +121,7 @@ public class Comments {
 	public String toString() {
 		return "Comments [cno=" + cno + ", cname=" + cname + ", ccontent=" + ccontent + ", regdate=" + regdate
 				+ ", csect=" + csect + ", sno=" + sno + ", fno=" + fno + ", ino=" + ino + ", bno=" + bno + ", userno="
-				+ userno + "]";
+				+ userno + ", ref=" + ref + ", pos=" + pos + ", depth=" + depth + "]";
 	}
-	
-	  
-	  
-
 	  
 }

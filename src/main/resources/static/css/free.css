@@ -589,6 +589,7 @@ div#cdatelist.listcdate{
 }
 #ccontent:focus {
 	outline: none;
+
 }
 #bbtn{
 	position: relative;
@@ -634,7 +635,7 @@ div#cdatelist.listcdate{
 	margin: 2em 0;
 }
 .commenta {
-	font-size: 2.2em;
+	font-size: 2em;
 }
 
 .commenta a:nth-child(2):before {

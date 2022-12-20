@@ -524,12 +524,12 @@ h1 {
 }
 
 .scontent {
-	position: absolute;
     top: 45%;
     border-top: solid gray;
     border-bottom: solid gray;
-    height: 30%;
+    height: 500px;
     width: 1000px;
+    margin: 0 auto;
 }
 
 #stitle {
@@ -594,7 +594,13 @@ svg {
 	margin-right: 15px;
 }
 #sdetail {
-	padding: 4%;
+	padding: 3%;
+	height: 400px;
+  	scrollbar-width: none;
+  	-ms-overflow-style: none;	
+}
+#sdetail::-webkit-scrollbar {
+	display: none;
 }
 #sellarea {
 	width: 5rem;
@@ -840,91 +846,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
   }
 }
 /*댓글 */
-#cname{
-	background-color:aliceblue;
-	position:relative;
-	top:-12px;
-	width:100px;
-	height:30px;
-}
-
-#cmtbtn{
-	position:relative;
-	top:-12px;
-	width:100px;
-	height:30px;
-}
-
-div#totallist.listtotal{	
-    width: 1090px;
-    height: 50px;
-    position: relative;
-    left: 400px;
-}
-
-div#csectlist.listcsect{	
-    width: 84px;
-    height: 35px;
-    border: 1px solid;
-    position: relative;
-    top: 43px;
-    left: 100%;
-}
-
-
-div#cnamelist.listcname{
-	text-align: left;
-    width: 84px;
-    height: 35px;
-    border: 1px solid;
-    position: relative;
-    top: 6px;
-}
-
-div#ccontentlist.listccontent{
-	text-align: center;
-    bottom: 30px;
-    width: 764px;
-    height: 35px;
-    border: 1px solid;
-    position: relative;
-    left: 112px;
-}
-
-div#cdatelist.listcdate{
-	text-align: right;
-    width: 95px;
-    height: 35px;
-    border: 1px solid;
-    position: relative;
-    left: 895px;
-    bottom: 68px;
-}
-
-#modbtn{
-	position: relative;
-    bottom: 23px;
-    height: 27px;
-}
-
-#outbtn{
-	position: relative;
-    width: 56px;
-    height: 23px;
-    top: 9px;
-    right: 58px;
-
-}
 
 .blabel{
 	position: relative;
     font-size: 18.5px;
     font-weight: bold;
-    margin: 1.5em;
+    width: 1000px;
+	margin: 1em 1.2em;
+	padding: 0;
 }
 
 .commentBox {
-	width: 1100px;
+	width: 1000px;
     margin: 0 auto;
     position: relative;
     border: 1px solid var(--bs-gray-300);
@@ -948,14 +881,12 @@ div#cdatelist.listcdate{
 }
 #bbtn{
 	position: relative;
-    bottom: 95px;
+    bottom: 0;
 }
 
 #ubtn{
 	position: relative;
     bottom: 0;
-    margin: 0 100%;
-    transform: translateX(-100%);
     font-size: 15px;
 }
 
@@ -972,8 +903,10 @@ div#cdatelist.listcdate{
     margin-bottom: 0.3em;
 }
 .commentArea {
+	width: 1000px;
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 1em;
+	margin: 0 auto;
 }
 .commentArea a {
 	font-size: 0.7em;
@@ -990,7 +923,7 @@ div#cdatelist.listcdate{
 	margin: 2em 0;
 }
 .commenta {
-	font-size: 2.2em;
+	font-size: 1.3em;
 }
 
 .commenta a:nth-child(2):before {
@@ -1032,9 +965,17 @@ div#cdatelist.listcdate{
     justify-content: flex-end;
     align-items: center;
 }
+.commentbtn {
+	display: flex;
+    justify-content: flex-end;
+}
 .commentbtn2 {
 	margin-left: 7px;
 }
 .cancelbtn {
 	background-color: var(--bs-gray-500);
+}
+.commentWrap {
+	width: 1000px;
+    margin: 0 auto;
 }

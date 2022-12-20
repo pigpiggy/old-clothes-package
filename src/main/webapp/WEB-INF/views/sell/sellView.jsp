@@ -173,6 +173,7 @@
         		</div>
         <!-- Swiper JS -->
       </section>
+    </section>
       <div class="icontent">
         <div id="modifydelete">
         	<h3>상품정보</h3>
@@ -193,47 +194,67 @@
         </div>
         <div id=idetail>${sell.icontent} </div>
       </div>
-      
-    </section>
-    </div>
     <%--개인판매 댓글 --%>
-    <br><br>
-   <br><br>                    
-	<!--  댓글  -->
-	<label for="content" style="position:relative; top:63%; left:33%; ">Comment</label>
-    <br><br>
-    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
-    <c:if test="${authUser.sect eq 'users' }">
-				<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
-	</c:if>
-	<c:choose>
-		<c:when test="${authUser.sect eq 'users' }">
-		     <div class="commentcontainer" style="top: 60%;position: relative;">				        
-		        <form name="commentInsertForm">
-		            <div class="input-group">
-		               <input type="hidden" name="sno" id="sno" value="${sharing.sno }">  
-		               <input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-		               <span class="input-group-btn">
-		                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-		               </span>
-		              </div>
-		        </form>
-		    </div>
-    	</c:when>
-	    <c:otherwise>
-	    	<div class="commentcontainer" style="top: 60%;position: relative;">
-	    		<form name="commentInsertForm">
-	            	<div class="input-group">                
-	               		<input type="text" class="form-control" id="ccontent" name="ccontent" placeholder="로그인 및 사용자로그인 후 가능합니다." readonly>              
-	            	</div>
-	        	</form>
-	        </div>
-	    </c:otherwise>
-    </c:choose>
-    <br><br> 
-    <div class="commentcontainer" style="position: relative;top: 63%;">
-        <div class="commentList"></div>
-    </div>
+		<div class="commentWrap">
+	            <label class="blabel" for="content">댓글</label>
+			    <input type="hidden" name="cno" id="cno" value="${comment.cno }">
+	            <c:if test="${authUser ne null }">                 
+	            	<c:choose>
+	                <c:when test="${authUser.sect eq 'users' }">
+						<input type="hidden" class="userno" name="userno" id="userno" value="${authUser.userno }">
+					    <div class="commentContainer">				        
+					        <form class="commentInsertForm" name="commentInsertForm" onsubmit="return check();">
+					            <div class="commentBox">
+				               	   <input type="hidden" name="ino" id="ino" value="${sell.ino }">  
+					               <div class="commentContent">
+						               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+						               <div class="commentbtn">
+						                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+						               </div>
+					              </div>
+					            </div>  
+					        </form>
+					    </div>
+				    </c:when>
+				    <c:otherwise>
+					    <div class="commentContainer">				        
+					        <form class="commentInsertForm" name="commentInsertForm">
+					            <div class="commentBox">
+				               	   <input type="hidden" name="ino" id="ino" value="${sell.ino }">  
+					               <div class="commentContent">
+						               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="개인 회원으로 로그인 후 이용하시기 바랍니다." readonly>
+						               <div class="commentbtn">
+						                    <button id="bbtn" class="buttoncontent" type="button" name="bcommentInsertBtn">등록</button>
+						               </div>
+					               </div>
+					              </div>
+					        </form>
+					    </div>
+				    </c:otherwise>
+				    </c:choose>
+			    </c:if>
+			 	<c:if test="${empty authUser }">
+				    <div class="commentContainer">				        
+				        <form class="commentInsertForm" name="commentInsertForm">
+				            <div class="commentBox">
+			               	   <input type="hidden" name="ino" id="ino" value="${sell.ino }">  
+				               <div class="commentContent">
+								   <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="로그인 후 댓글 작성이 가능합니다." readonly />
+					               <div class="commentbtn">
+					                    <button id="bbtn" class="buttoncontent" type="button" name="bcommentInsertBtn">등록</button>
+					               </div>
+				               </div>
+				              </div>
+				        </form>
+				    </div>			 	
+				</c:if>
+			    <div class="commentContainer">
+			        <div class="commentList">
+	
+			        </div>
+			    </div>
+			</div>			        
+    	</div>
 	<footer>
 			<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</footer> 
@@ -333,16 +354,16 @@ function commentList(){
         success : function(data){
             var a =''; 
             $.each(data, function(key, value){ 
-                a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                a += '<div class="commentArea">';
                //a += '<div class="commentInfo'+value.cno+'">'+'[ 작성자 ] : '+value.cname;
-                a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+'[ 작성자 ] :'+ value.cname +'</a>';	 
+	            a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
+                a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 if(auth != ''){
                 	if(auth == 'users'){
-		                a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+		                a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 		                a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
                 	}
                 }
-                a += '<div class="commentContent'+value.cno+'"> <p> 내용 : '+value.ccontent +'</p>';
                 a += '</div></div>';
             });
             
@@ -372,11 +393,11 @@ function commentDelete(cno){
 function commentUpdate(cno, ccontent){
     var a ='';
     
-    a += '<div class="input-group">';
-    a += '<input type="text" class="form-control" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
-    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
-    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
-    a += '</div>';
+    a += '<div id="commentModifyBox" class="commentBox"><div class="commentContent">';
+    a += '<input type="text" class="ccontent" id="ccontent" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
+    a += '<div class="commentmodifybtn"><span class="commentbtn"><button id="ubtn" class="buttoncontent" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+    a += '<span class="commentbtn commentbtn2"><button id="ubtn" class="buttoncontent cancelbtn" type="button" onclick="commentList();">취소</button> </span></div>';
+    a += '</div></div>';
     
     $('.commentContent'+cno).html(a);
     

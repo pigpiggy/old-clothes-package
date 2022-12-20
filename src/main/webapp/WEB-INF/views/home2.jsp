@@ -39,7 +39,7 @@ body {
                 <div class="col-lg-4 col-12 d-lg-block d-none">
                     <ul class="social-icon">
                             <a href="https://github.com/sajo4jo/old-clothes-package">
-                               	<img src="/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="쪽지" />
+                               	<img src="/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="깃허브" />
                    	 		</a>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_2" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">버리기/기부 ∨
+                            aria-expanded="false">버리기/기부 <img class="down" src="/image/down-arrow.png">
                         </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
 	                            <li><a class="dropdown-item" href="/clothingbin">내 주변 헌옷 수거함</a></li>
@@ -84,7 +84,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_4" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">헌옷 사고 팔기</a>
+                            aria-expanded="false">헌옷 사고 팔기 <img class="down" src="/image/down-arrow.png"></a>
                    		<ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                             <li><a class="dropdown-item" href="/businessinfo">업체 판매</a></li>
                             <li><a class="dropdown-item" href="/sellList">개인 판매</a></li>
@@ -130,17 +130,6 @@ body {
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="image/first.jpg"
-                                        class="carousel-image img-fluid" alt="...">
-
-                                    <div class="carousel-caption d-flex flex-column justify-content-end">
-                                        <h1>기부하기</h1>
-
-                                        <p>헌 옷 기부로 당신의 마음을 나누어보세요.</p>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
                                     <img src="image/second.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
@@ -148,6 +137,17 @@ body {
                                         <h1>수거함 찾기</h1>
 
                                         <p>내 집 주변 헌옷 수거함을 찾아보세요.</p>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <img src="image/first.jpg"
+                                        class="carousel-image img-fluid" alt="...">
+
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>기부하기</h1>
+
+                                        <p>헌 옷 기부로 당신의 마음을 나누어보세요.</p>
                                     </div>
                                 </div>
 

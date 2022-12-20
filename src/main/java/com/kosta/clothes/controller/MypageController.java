@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +30,7 @@ import com.kosta.clothes.bean.Sell;
 import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.service.ApplyService;
+import com.kosta.clothes.service.BusinessService;
 import com.kosta.clothes.service.MessageService;
 import com.kosta.clothes.service.MypageService;
 import com.kosta.clothes.service.ReviewService;
@@ -52,7 +52,8 @@ public class MypageController {
 	MypageService mypageService;
 	@Autowired
 	ApplyService applyService;
-	
+	@Autowired
+	BusinessService businessService;
 	@Autowired
 	HttpSession session;
 	
@@ -1813,6 +1814,29 @@ public class MypageController {
 		}
 		return false;
 	}
+	
+	//신청 작성하기 
+		@PostMapping("/mypage/likelist/apply")
+		public String apply(@ModelAttribute Apply apply, RedirectAttributes re) {
+			System.out.println(apply.getBno());
+				Users users = (Users) session.getAttribute("authUser");
+				Integer userno = users.getUserno();
+			try {
+				System.out.println("userno:"+users);
+				apply.setUserno(users.getUserno());
+				System.out.println(apply.toString());
+				System.out.println("getAstatus" + apply.getAstatus());
+				if(apply.getAstatus() == null) {
+					apply.setAstatus("신청중");
+				}
+				
+				businessService.registapply(apply);
+				re.addFlashAttribute("msg", "수거 신청이 완료되었습니다.");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:/mypage/likelist/"+userno;
+		}
 	
 
 }

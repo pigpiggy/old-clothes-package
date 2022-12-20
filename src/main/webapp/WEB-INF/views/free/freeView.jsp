@@ -80,8 +80,10 @@
 	        <div class="board_title">
 	            <strong>자유게시판</strong>
 	        </div>
+	        <input type="hidden" id="page"value="${page }">
+	        <input type="hidden" id="kwd"value="${kwd }">
 	        <div class="bt_wrap">            
-	            <a id="input4" href="/freeList" class="on">목록</a>
+	            <a id="input4" href="/freeList?page=${page}&kwd=${kwd}" class="on">목록</a>
 	            <c:if test="${authUser.sect eq 'users'}">                
 	             <c:if test="${authUser.userno eq article.userno}">	                                  
 	                <a href="/modifyform/${article.fno }">수정</a>
@@ -360,17 +362,23 @@
    
  
    function freeRemove() {
+	   console.log("얍");
 		var result = confirm("삭제하시겠습니까? 삭제 후 취소가 불가능합니다.");
 		var fno =  $('#fno').val();
-		
+		var kwd =  $('#kwd').val();
+		var page =  $('#page').val();
 		if(result) {
 			$.ajax({
 				type : "post",
 				url : "/freeDelete",
-				data : {fno:fno},
+				data : {
+					fno:fno,
+					kwd:kwd,
+					page:page
+					},
 				success : function(data) {
 					alert("삭제가 완료되었습니다.");
-					location.href="/freeList";
+					location.href="/freeList?page="+page+"&kwd="+kwd+""; 
 				},
 				error : function(err) {
 					console.log(err);

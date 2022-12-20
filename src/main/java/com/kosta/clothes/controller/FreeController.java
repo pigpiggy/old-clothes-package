@@ -64,6 +64,7 @@ public class FreeController {
 			}
 			mav.addObject("articleList", articleList);
 			System.out.println("areticleList"+articleList.toString());
+			mav.addObject("kwd", kwd);
 			mav.addObject("pageInfo", pageInfo);
 			mav.setViewName("/free/freeList");
 		} catch(Exception e){
@@ -120,9 +121,10 @@ public class FreeController {
 	
 	   //글 상세보기(조회수증가)
 	   @GetMapping("freeView/{fno}")
-	   public ModelAndView freeView(@PathVariable("fno") Integer fno,
+	   public ModelAndView freeView(@PathVariable("fno") Integer fno,@RequestParam(value = "kwd", required = false) String kwd,
 	         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 	      System.out.println("들어옴");
+	      System.out.println("page:"+page);
 	      ModelAndView mav = new ModelAndView();      
 	      try {
 	    	  if(session.getAttribute("authUser")!=null) {//사용자가 로그인 했을 때 
@@ -136,6 +138,7 @@ public class FreeController {
 				        Free free = freeService.getFree(fno);				        				        
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
+				        mav.addObject("kwd", kwd);
 				        mav.setViewName("/free/freeView");
 		         }else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){ //사업자가 로그인 했을 때 
 			            System.out.println("B들어옴");
@@ -145,12 +148,14 @@ public class FreeController {
 				        Free free = freeService.getFree(fno);				       
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
+				        mav.addObject("kwd", kwd);
 				        mav.setViewName("/free/freeView");
 		         }else {
 		        	    Free free1 = freeService.Freehit(fno);
 				        Free free = freeService.getFree(fno);				     
 				        mav.addObject("article", free);
 				        mav.addObject("page", page);
+				        mav.addObject("kwd", kwd);
 				        mav.setViewName("/free/freeView");
 		         }
 	    	  }else {
@@ -159,6 +164,7 @@ public class FreeController {
 			        Free free = freeService.getFree(fno);			        
 			        mav.addObject("article", free);
 			        mav.addObject("page", page);
+			        mav.addObject("kwd", kwd);
 			        mav.setViewName("/free/freeView");
 	    	  }
 	    } catch (Exception e) {

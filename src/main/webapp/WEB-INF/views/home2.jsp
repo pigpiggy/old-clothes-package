@@ -50,7 +50,7 @@ body {
 
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <span>
                 	<img src="image/logo1.png" class="logo img-fluid" alt="Kind Heart Charity">
                 </span>

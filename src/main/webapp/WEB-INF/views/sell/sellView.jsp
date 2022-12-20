@@ -82,7 +82,7 @@
         <h4>${sell.ititle}</h4>
         <input type="hidden" name="ino" id="ino" value="${sell.ino }">
         <div class="letterAndHeart" id="sellname">
-          <span>${sell.iname}</span>
+          <img src="/image/greenuser.png" class="userprofile"><span>${sell.iname}</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart" id="icons">
@@ -159,17 +159,8 @@
 			        				<c:if test="${authUser.userno eq sell.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="buttoncontent openclothes" value="나의옷장" /></a>
 			        					<c:if test="${fn:length(users) > 0}">
-				        					<input type="button" class="" value="구매 신청 목록" />
-				        					<form action="/selectSellApply" method="get">
-					        					<ul>
-													<c:forEach var="users" items="${users }">
-														<li>${users.nickname }<input type="radio" name="list" value="${users.userno}"/><input type="hidden" name="userno" value="${users.userno}"/></li>
-														<li>${users.joinDate }</li>
-													</c:forEach>			        					
-					        					</ul>
-					        					<input type="hidden" name="ino" value="${sell.ino }">
-					        					<input type="submit" value="확인" class="submitButton"/>
-				        					</form>
+				        					<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('/sellapplyList/${sell.ino }', '_blank', 
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 			        					</c:if>
 			        				</c:if>
 			        			</c:when>
@@ -531,16 +522,6 @@ $("#wapply").on("click", function() {
 	}
 		
 })
-
-/* 신청확인 버튼 비활성화 */
-var istatus = "${sell.istatus}";
-if(istatus != '등록완료'){
-	$('.submitButton').attr("disabled", true);
-} else {
-	if(${fn:length(users) } == 0){
-		$('.submitButton').attr("disabled", true);
-	}
-}
 
 /* 채팅신청 */
 function chatSubmit() {

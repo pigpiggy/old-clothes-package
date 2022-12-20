@@ -30,6 +30,7 @@ import com.kosta.clothes.bean.FileVO;
 import com.kosta.clothes.bean.Likes;
 import com.kosta.clothes.bean.MessageVO;
 import com.kosta.clothes.bean.Sell;
+import com.kosta.clothes.bean.Sharing;
 import com.kosta.clothes.bean.Users;
 import com.kosta.clothes.bean.Wapply;
 import com.kosta.clothes.service.ApplyService;
@@ -213,6 +214,25 @@ public class SellController {
 		
 		return mav;
 	}	
+	
+	//신청확인
+	@GetMapping("/sellapplyList/{ino}")
+	public ModelAndView sharingapplyList(@PathVariable("ino") Integer ino, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			mav.setViewName("/sell/sellapplyList");
+			List<Users> users = mypageService.getSellapplylist(ino);
+			Sell sell = sellService.viewSell(ino);
+			mav.addObject("users",users);
+			mav.addObject("sell",sell);
+			System.out.println(sell);
+			System.out.println(users);
+			mav.addObject("ino",ino);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 	
 	//무료나눔 댓글등록
 	//댓글 등록하기

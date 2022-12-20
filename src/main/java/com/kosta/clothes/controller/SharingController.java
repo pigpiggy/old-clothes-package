@@ -104,7 +104,7 @@ public class SharingController {
 		return "/sharing/sharingRegistForm";
 	}
 	
-	
+	//신청확인
 	@GetMapping("/sharingapplyList/{sno}")
 	public ModelAndView sharingapplyList(@PathVariable("sno") Integer sno, HttpServletRequest request, @RequestParam(value = "kwd", required = false) String kwd) {
 		ModelAndView mav = new ModelAndView();

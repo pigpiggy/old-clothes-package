@@ -333,6 +333,9 @@
 		            		$(".listdnames").removeClass("active");
 		            		setInfo2(null);
 		            		document.querySelectorAll("#listmove")[i].classList.add("active");
+		            		document.querySelectorAll("#totalstar")[i].classList.add("overlay");
+		            		document.querySelectorAll("#heart_img")[i].classList.add("overlay");
+		            		document.querySelectorAll(".apply")[i].classList.add("overlay");
 		            		map.setCenter(marker2.getPosition())
 		            		infowindow2.open(map,marker2);
 		           		});

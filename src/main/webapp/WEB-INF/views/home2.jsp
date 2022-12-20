@@ -141,7 +141,7 @@ body {
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="image/first.jpg"
+                                    <img src="image/donation_box_home2.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -151,8 +151,19 @@ body {
                                     </div>
                                 </div>
 
+								<div class="carousel-item">
+                                    <img src="image/first.jpg"
+                                        class="carousel-image img-fluid" alt="...">
+
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>무료나눔</h1>
+
+                                        <p>입지 않는 옷들을 이웃들과 나누어보세요.</p>
+                                    </div>
+                                </div>
+                                
                                 <div class="carousel-item">
-                                    <img src="image/donationpeople.jpg"
+                                    <img src="image/donation_box_home4.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -239,8 +250,7 @@ body {
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="images/group-people-volunteering-foodbank-poor-people.jpg"
-                            class="custom-text-box-image img-fluid" alt="">
+                        <img src="/image/clothestrash.jpg" class="custom-text-box-image img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-6 col-12">

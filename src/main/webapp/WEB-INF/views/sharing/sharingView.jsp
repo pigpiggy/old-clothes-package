@@ -174,10 +174,10 @@
 	        	<c:if test="${authUser.userno eq sharing.userno}">    
 		        	<div id="modifydelete">
 						<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
-	    	    			<i class="fa-solid fa-gear fa-lg"></i>
+		          			<img src="/image/edit.png" id="edit" alt="수정">
 	    	    		</a>
 						<a href="javascript:void(0);" onclick="removeSharing();">	        	
-	        				<span class="fa-solid fa-trash-can fa-lg"></span>
+		          			<img src="/image/viewdelete.png" id="viewdelete" alt="삭제">
 	        			</a>
 	        		</div>
 	        	</c:if>	

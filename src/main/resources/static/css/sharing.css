@@ -575,8 +575,8 @@ h1 {
 #sbtn a{
 	text-decoration: none;
 } 
-svg {
-	width: 30px;
+#modifydelete img{
+	width: 25px;
 }
 
 #modifydelete {

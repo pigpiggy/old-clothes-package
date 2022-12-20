@@ -230,7 +230,6 @@
 			if(data.length==0){
 				bli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 업체가 없습니다.</h3></span></a></li><br>';
 			}
-				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
@@ -527,7 +526,6 @@
 				setMarkers2(null); //기존에 있는 마커 있으면 초기화
 				setInfo2(null); //기존에 있는 인포윈도우 초기화
 				var bli = "";
-				//for(var i in data){				
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				

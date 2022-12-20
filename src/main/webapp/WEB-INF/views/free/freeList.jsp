@@ -46,7 +46,7 @@
 				<div>
 					<div class="num">${free.fno}</div>
 					<div class="title">
-						<a href="/freeView/${free.fno}">${free.ftitle}</a>
+						<a href="/freeView/${free.fno}?page=${pageInfo.page}&kwd=${kwd}">${free.ftitle}</a>
 					</div>
 					<div class="writer">${free.fname}</div>
 					<div class="date">${free.regdate}</div>
@@ -67,14 +67,14 @@
 							<li><a id="prev"><<</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="freeList?page=${pageInfo.page-1}" id="prev"><<</a></li>&nbsp;
+							<li><a href="freeList?page=${pageInfo.page-1}&kwd=${kwd}" id="prev"><<</a></li>&nbsp;
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 						<c:choose>
 							<c:when test="${pageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 							<c:otherwise>
-								<li><a href="freeList?page=${i}">${i }</a></li>
+								<li><a href="freeList?page=${i}&kwd=${kwd}">${i }</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -83,7 +83,7 @@
 							<li><a id="next">>></a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="freeList?page=${pageInfo.page+1}" id="next">>></a></li>
+							<li><a href="freeList?page=${pageInfo.page+1}&kwd=${kwd}" id="next">>></a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>		

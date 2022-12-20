@@ -19,13 +19,6 @@
     bottom: 100px;
     height: 26px;
 }
-#cmtmodify{
-	position: relative;
-    width: 42px;
-    left: 1098px;
-    bottom: 100px;
-    height: 26px;
-}
 
 .viewcont {
     position: relative;
@@ -69,6 +62,18 @@
     border-radius: 0.375rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.commentmodifybtn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.commentbtn2 {
+	margin-left: 7px;
+}
+.cancelbtn {
+	background-color: var(--bs-gray-500);
+}
+
 </style>
 </head>
 <body>
@@ -150,10 +155,10 @@
 				            <div class="commentBox">
 				               <input type="hidden" name="fno" id="fno" value="${article.fno }">  
 				               <div class="commentContent">
-				               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
-				               <div class="commentbtn">
-				                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
-				               </div>
+					               <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">
+					               <div class="commentbtn">
+					                    <button id="ubtn" class="buttoncontent" type="button" name="commentInsertBtn">등록</button>
+					               </div>
 				              </div>
 				            </div>  
 				        </form>
@@ -319,16 +324,16 @@
 		}
 	 }
 	
-	
+
 	//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
 	 function commentUpdate(cno, ccontent){
 	     var a ='';
 	     
-	     a += '<div class="input-group" style="position: relative;left: 82%; bottom: 63px;">';
+	     a += '<div id="commentModifyBox" class="commentBox"><div class="commentContent">';
 	     a += '<input type="text" class="ccontent" id="ccontent" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
-	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
-	     a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentList();">취소</button> </span>';
-	     a += '</div>';
+	     a += '<div class="commentmodifybtn"><span class="commentbtn"><button id="ubtn" class="buttoncontent" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+	     a += '<span class="commentbtn commentbtn2"><button id="ubtn" class="buttoncontent cancelbtn" type="button" onclick="commentList();">취소</button> </span></div>';
+	     a += '</div></div>';
 	     
 	     $('.commentContent'+cno).html(a);
 	     
@@ -336,7 +341,7 @@
 	//댓글 수정
 	 function commentUpdateProc(cno){
 	     var updateContent = $('[name=ccontent_'+cno+']').val();
-	     var result = confirm("수정하시겠습니까??");
+	     var result = confirm("수정하시겠습니까?");
 	     console.log("수정할 cno : " + cno);
 	     console.log("수정할 내용 : " + updateContent);
 	     if(result){

@@ -285,7 +285,7 @@ public class FreeController {
 							comments.setUserno(userno);
 							comments.setCsect(users.getSect());
 							comments.setCname(users.getNickname());
-							commentService.registUcomment(comments);					
+							commentService.registUcomment(comments, fno);					
 							mav.setViewName("redirect:/freeView/"+fno);
 						}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
 							System.out.println("업체댓글");
@@ -297,7 +297,7 @@ public class FreeController {
 							comments.setBno(bno);
 							comments.setCsect(sect);
 							comments.setCname(business.getBname());
-							commentService.registBcomment(comments);			
+							commentService.registBcomment(comments, fno);			
 							mav.setViewName("redirect:/freeView/"+fno);
 						}
 					}else {
@@ -317,7 +317,7 @@ public class FreeController {
 	
 	
 	
-	//댓글 등록하기[사용자]
+	/*//댓글 등록하기[사용자]
 		@PostMapping("/ufreeView/{fno}/{userno}")
 		public ModelAndView comments(@PathVariable("fno") Integer fno,
 				@PathVariable("userno") Integer userno,
@@ -364,7 +364,7 @@ public class FreeController {
 			return mav;
 			
 		}
-			
+		*/	
 		
 		
 	//댓글 수정하기 동작	
@@ -416,5 +416,22 @@ public class FreeController {
         System.out.println("댓글리스트 ");
         return commentService.selectComments(fno);
     }
+	//대댓글
+	@PostMapping("/replycomment/{fno}/{num}/{cno}")
+	@ResponseBody
+	public boolean replycomment(@PathVariable("fno")Integer fno, @PathVariable("num") Integer no, @PathVariable("cno")Integer cno, @ModelAttribute Comments comments) throws Exception{
+		System.out.println("대댓글 등록");
+		if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Users")){
+			Users users = (Users)session.getAttribute("authUser");
+			comments.setCname(users.getNickname());
+			comments.setCsect(users.getSect());
+		}else if(session.getAttribute("authUser").getClass().getName().equals("com.kosta.clothes.bean.Business")){
+			Business business = (Business)session.getAttribute("authUser");
+			comments.setCname(business.getBname());
+			comments.setCsect(business.getSect());
+		}
+		System.out.println(comments);
+		return commentService.replycommentfree(fno, no, cno, comments);
+	}
 	
 }

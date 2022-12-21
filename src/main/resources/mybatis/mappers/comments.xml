@@ -14,8 +14,8 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into comments (cno,cname,ccontent,csect,regdate,fno,userno)
-			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{userno})
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,userno,ref,pos,depth)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{userno},#{ref},0,0)
 		]]>
 	</insert>
 	<!-- 사업자가 댓글 -->
@@ -26,14 +26,19 @@
 		]]>
 	</selectKey>		
 		<![CDATA[
-			insert into comments (cno,cname,ccontent,csect,regdate,fno,bno)
-			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{bno})
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,bno,ref,pos,depth)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{bno},#{ref},0,0)
 		]]>
 	</insert>
 	
 	<select id="selectComments" parameterType="Integer" resultType="comments">
 		<![CDATA[
-			select * from comments where fno=#{fno} order by cno desc
+			SELECT * 
+			FROM (SELECT a.* 
+	  			  FROM (SELECT * 
+	  					FROM COMMENTS c  
+	  					WHERE fno=#{fno}
+	  					ORDER BY REF desc, pos) a)
 		]]>
 	</select>
 	
@@ -140,6 +145,51 @@
 		<![CDATA[
 			delete from comments where ino=#{ino}
 		]]>
-	</delete>	
+	</delete>
+	
+	<!-- 대댓글 xml -->
+	<select id="getCmtcno" parameterType="Integer" resultType="comments">
+		<![CDATA[
+			select * from comments where cno=#{cno}
+		]]>
+	</select>
+	
+	<select id="selectReffree" parameterType="Integer" resultType="Integer">
+		<![CDATA[
+			select max(ref) from comments where fno=#{fno}
+		]]>
+	</select>
+	
+	<!-- 개인이 댓글 -->
+	<insert id="ureplycommentfree" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,userno,ref,pos,depth)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{userno},#{ref},#{pos},#{depth})
+		]]>
+	</insert>
+	<!-- 사업자가 댓글 -->
+	<insert id="breplycommentfree" parameterType="Comments">
+	<selectKey keyProperty="cno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select comments_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into comments (cno,cname,ccontent,csect,regdate,fno,bno,ref,pos,depth)
+			values (#{cno},#{cname},#{ccontent},#{csect},sysdate,#{fno},#{bno},#{ref},#{pos},#{depth})
+		]]>
+	</insert>
+	
+	<update id="replyupcommentfree" parameterType="Comments">
+		<![CDATA[
+			UPDATE COMMENTS SET pos = pos+1 WHERE fno=#{fno} AND ref=#{ref} and pos>#{pos}
+		]]>
+	</update>
+	
 	
 </mapper>	

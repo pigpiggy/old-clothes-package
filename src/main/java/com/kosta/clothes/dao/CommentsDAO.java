@@ -33,4 +33,11 @@ public interface CommentsDAO {
 	Comments getsellCmt(Map<String, Integer> map) throws Exception; //리스트 값 하나만 가져오기
 	void updatesellCmt(Comments comments) throws Exception; //댓글 수정
 	void commentIDelete(Integer ino) throws Exception; //개인판매에서 상품 삭제할 때 댓글도 삭제 
+	
+	//대댓글 작업
+	Comments getCmtcno(Integer cno) throws Exception;//cno로 코멘트 정보 가져오기
+	Integer selectReffree(Integer fno) throws Exception;//게시글의 max ref 정보 조회
+	void ureplycommentfree(Comments comments) throws Exception;//대댓글 등록[개인]
+	void breplycommentfree(Comments comments) throws Exception;//대댓글 등록[사업자]
+	void replyupcommentfree(Comments cmt) throws Exception;//pos+1시키는 것
 }

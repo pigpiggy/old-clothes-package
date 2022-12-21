@@ -12,6 +12,9 @@ public class Comments {
 	  private Integer bno;
 	  private Integer userno;
 	  private Integer ref;
+	  private Integer pos;
+	  private Integer depth;
+	  
 	  public Integer getRef() {
 		return ref;
 	}
@@ -30,9 +33,6 @@ public class Comments {
 	public void setDepth(Integer depth) {
 		this.depth = depth;
 	}
-	private Integer pos;
-	  private Integer depth;
-	  
 	public Integer getCno() {
 		return cno;
 	}

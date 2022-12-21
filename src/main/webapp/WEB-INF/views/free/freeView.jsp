@@ -257,7 +257,7 @@
 			num = $('#userno').val();
 		}else if(sect="business"){
 			console.log("업자")
-			num = $('#userno').val();
+			num = $('#bno').val();
 		}
 		$.ajax({
 	        url : '/freeView/'+fno+'/'+num,
@@ -315,7 +315,7 @@
 	         success : function(data){
 	             var a =''; 
 	             $.each(data, function(key, value){ 
-	                 a += '<div class="commentArea">';
+	                 a += '<div class="commentArea" style="margin-left:'+(value.depth*3)+'%;">';
 
 	                 if(value.csect =='users'){
 	                	 a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
@@ -328,17 +328,20 @@
 	                 }
 	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
 	                 if(auth != ''){
+	                	 a += '<div class="commenta">'
 	                	 a += '<a onclick="replywindow('+value.cno+');"> 댓글등록 </a>'
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
-			                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
-			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
+			                 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a>';
 	                	 }else if(auth == 'business' && bno == value.bno){
 	                		 console.log("사업자 수정 삭제");
-	                		 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
-			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
+	                		 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
+			                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a>';
 	                	 }
+	                	 a += '</div>'
 	                 }
+	                 
 	                 //a += '';
 	                 //a += '';
 	                 a += '</div>';
@@ -357,7 +360,7 @@
 	     a += '<form class="commentInsertForm" name="replycommentInsertForm" onsubmit="return check();">';
 	     a += '<div class="commentBox">';
 	     a += '<div class="commentContent">';
-	     a += '<input type="text" class="ccontent" id="ccontent" name="replyccontent" placeholder="댓글을 작성해주세요.">';
+	     a += '<input type="text" class="ccontent replyccontent" id="ccontent" name="ccontent" placeholder="댓글을 작성해주세요.">';
 	     a += '<div class="commentbtn">';
 	     a += '<div class="commentmodifybtn"><span class="commentbtn">'
 	     a += '<button id="ubtn" class="buttoncontent" type="button" name="replycommentInsertBtn" data-value='+cno+'>등록</button></span>';
@@ -371,13 +374,14 @@
 	     $('.commentContent'+cno).append(a);
 		 
 	 }
+	 //대댓글 등록 버튼 클릭 시
 	 $(document).off("click").on("click","[name=replycommentInsertBtn]",function(e){
 		 var targetElement = e.target;
 		 var cno = targetElement.getAttribute("data-value");
 		 console.log("cno:"+cno);
 		 
 		 var insertData = $('[name=replycommentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
-		    if($('input[name=replyccontent]').val() == '' ){
+		    if($('input[class=replyccontent]').val() == '' ){
 		    	alert("댓글을 입력해 주시기 바랍니다.");
 		    	return false;
 		    }
@@ -386,7 +390,7 @@
 		    replycommentInsert(insertData, sect, cno); //Insert 함수호출(아래)
 		 
 	 } )
-	 
+	 //대댓글 등록 함수
 	 function replycommentInsert(insertData, sect, cno){
 		 console.log(insertData);
 		 console.log(sect);
@@ -397,7 +401,7 @@
 		 	num = $('#userno').val();
 		 }else if(sect="business"){
 		 	console.log("업자")
-		 	num = $('#userno').val();
+		 	num = $('#bno').val();
 		 }
 		 $.ajax({
 		        url : '/replycomment/'+fno+'/'+num+'/'+cno,
@@ -406,7 +410,8 @@
 		        success : function(data){		            
 		            commentList(); //댓글 작성 후 댓글 목록 reload
 		            
-		        }
+		        },
+		        error : function(){alert("에러입니다");}
 		  });
 		 
 		 

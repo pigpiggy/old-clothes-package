@@ -23,7 +23,6 @@
 					bphone,
 					bpassword,
 					bnumber,
-					bstar,
 					sect, 
 					regdate)
 					values(
@@ -36,7 +35,6 @@
 					#{bphone},
 					#{bpassword},
 					#{bnumber},
-					0,
 					#{sect},
 					sysdate	)
 		]]>

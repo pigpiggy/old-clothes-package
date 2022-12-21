@@ -642,6 +642,10 @@ div#cdatelist.listcdate{
 	content: '/';
     opacity: 0.3;	
 }
+.commenta a:nth-child(3):before {
+	content: '/';
+    opacity: 0.3;	
+}
 
 .commentregdate {
     font-size: 15px;

@@ -2,12 +2,14 @@ package com.kosta.clothes.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.kosta.clothes.bean.Comments;
 
 public interface CommentService {
 	//자유게시판
-	public void registUcomment(Comments comments) throws Exception; //댓글등록[개인]
-	public void registBcomment(Comments comments) throws Exception; //댓글등록[사업자]
+	public void registUcomment(Comments comments, Integer fno) throws Exception; //댓글등록[개인]
+	public void registBcomment(Comments comments, Integer fno) throws Exception; //댓글등록[사업자]
 	List<Comments> selectComments(Integer fno) throws Exception; //전체 댓글 가져오기 
 	void CmtDelete(Integer cno, Integer fno) throws Exception;// 댓글 삭제
 	Comments getCmt(Integer fno,Integer cno) throws Exception; //하나의 값 가져오기
@@ -26,4 +28,10 @@ public interface CommentService {
 	void sellCmtDelete(Integer cno, Integer ino) throws Exception;// 댓글 삭제
 	Comments getsellCmt(Integer ino,Integer cno) throws Exception; //하나의 값 가져오기
 	void modifysellCmt (Comments comments) throws Exception; //댓글 수정
+	
+	
+	//대댓글
+	public boolean replycommentfree(Integer fno, Integer no, Integer cno, Comments comments) throws Exception;
+	
+	
 }

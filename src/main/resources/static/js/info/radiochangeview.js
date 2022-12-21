@@ -6,8 +6,7 @@
 $(function(){
 	$('#offlineview').hide();
 	$('#onlineview').show();
-	$('input[type="radio"][id="online"]').on('click', function(){
-		location.reload(true);
+	$('input[type="radio"][id="online"]').on('click', function(){		
 		var chkValue = $('input[type=radio][id="online"]:checked').val();
 		if(chkValue){
 			$('#offlineview').hide();

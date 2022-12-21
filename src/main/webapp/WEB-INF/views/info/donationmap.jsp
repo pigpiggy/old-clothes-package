@@ -164,7 +164,6 @@ h3{
 	margin-bottom: 25%;
 }
 
-
 label {
 	font-size:1rem;
 }
@@ -181,9 +180,9 @@ input[type=radio] {
 
 .radiobtn{
 	position: relative;
-	width: 30%;
+    width: 18%;
     top: 350px;
-    left: 12%;
+    left: 16%;   
     z-index: 50;
 }
 
@@ -285,11 +284,12 @@ input[type=radio] {
     top: -3px;
 }
 .refresh img{
-	cursor: pointer;
+	
 }
 #refreshimg {
 	width: 20px;
 	margin: 0.65em 1em 0 -8em;
+	
 }
 </style>
 
@@ -318,8 +318,8 @@ input[type=radio] {
 				<div id="section">
 					<div id="selectbox" style="display:flex;">
 						<div class="shop">		
-							<span class="refresh">
-								<img id="refreshimg" src="/image/refresh.png">				
+							<span class="refresh">								
+								<a onClick="history.go(0)" style="cursor: pointer;"><img id="refreshimg" src="/image/refresh.png"></a>											
 							</span>								
 							<div class="select" style="width: 156px;">
 								<select id="sido"><option value="">선택</option></select>

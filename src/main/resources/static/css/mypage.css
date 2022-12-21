@@ -343,9 +343,9 @@ position: relative;
     cursor: pointer;
 }
 #chaticon_img {
-	width: 30px;
-	height: 33px;
-	margin-right: 12px;
+	width: 28px;
+	height: 28px;
+	margin-right: 11px;
 }
 
 @keyframes notificationAnimation {

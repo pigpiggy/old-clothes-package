@@ -255,13 +255,11 @@ body {
 
                     <div class="col-lg-6 col-12">
                         <div class="custom-text-box">
-                            <h2 class="mb-2">Our Story</h2>
+                            <h2 class="mb-2">하우헌옷</h2>
 
-                            <h5 class="mb-3">Kind Heart Charity, Non-Profit Organization</h5>
+                            <h5 class="mb-3">버려지는 헌 옷 쓰레기, 누군가에겐 필요한 옷 한 벌 </h5>
 
-                            <p class="mb-0">This is a Bootstrap 5.2.2 CSS template for charity organization websites.
-                                You can feel free to use it. Please tell your friends about TemplateMo website. Thank
-                                you.</p>
+                            <p class="mb-0">옷을 위한 지구는 없다. ~~~~~~~</p>
                         </div>
 
                         <div class="row">

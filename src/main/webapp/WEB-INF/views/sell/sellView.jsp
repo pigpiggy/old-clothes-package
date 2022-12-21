@@ -104,7 +104,7 @@
 													<input type="hidden" name="sellerno" value="${sell.userno}"/>
 													<input type="hidden" name="ititle" value="${sell.ititle}"/>
 													<button id="btn_chat">
-					          							<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+					          							<img src="/image/blackchat.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
 													</button>
 												</a>
 											</form>
@@ -159,7 +159,7 @@
 			        				<c:if test="${authUser.userno eq sell.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}/sell"><input type="button" class="buttoncontent openclothes" value="나의옷장" /></a>
 			        					<c:if test="${fn:length(users) > 0}">
-				        					<input type="button" class="btn btn-info" value="구매 신청 목록" onclick="window.open('/sellapplyList/${sell.ino }', '_blank', 
+				        					<input type="button" class="buttoncontent" style="width:7em;" value="구매 신청 목록" onclick="window.open('/sellapplyList/${sell.ino }', '_blank', 
                        'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 			        					</c:if>
 			        				</c:if>
@@ -175,18 +175,16 @@
       </section>
     </section>
       <div class="icontent">
-        <div id="modifydelete">
+        <div class="modifydelete">
         	<h3>상품정보</h3>
         	<c:if test="${authUser.sect eq 'users'}">
 	        	<c:if test="${authUser.userno eq sell.userno}">    
-		        	<div
-		        	
-		        	 id="modifydelete">
+		        	<div class="modifydelete" id="modifydelete">
 						<a href="/sellModifyForm?ino=${sell.ino }">	        	
-	    	    			<i class="fa-solid fa-gear fa-lg"></i>
+		          			<img src="/image/edit.png" id="edit" alt="수정">
 	    	    		</a>
 						<a href="javascript:void(0);" onclick="removeSell();">	        	
-	        				<span class="fa-solid fa-trash-can fa-lg"></span>
+		          			<img src="/image/viewdelete.png" id="viewdelete" alt="삭제">
 	        			</a>
 	        		</div>
 	        	</c:if>

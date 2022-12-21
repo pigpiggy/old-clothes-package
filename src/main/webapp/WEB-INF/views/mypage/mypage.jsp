@@ -64,7 +64,7 @@
 		        <c:if test="${authUser.sect eq 'users'}">
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">
-							<img src="/image/chaticon2.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+							<img src="/image/blackchat.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
 								<span class="nav__notification nbadge" id="messageAlert" style="display:none;"></span>
 						</a>
 					</c:if>	

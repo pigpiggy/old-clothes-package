@@ -41,6 +41,10 @@
 	align-items: center;
 }
 
+.card-list {
+	justify-content: center;
+}
+
 .card2 {
 	border-radius: 18px;
 	background: #fff;

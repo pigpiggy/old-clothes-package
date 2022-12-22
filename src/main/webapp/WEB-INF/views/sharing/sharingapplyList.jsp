@@ -63,9 +63,17 @@ h2 {
 li {
 	list-style: none;
 }
-.submitButton {
-	margin: 0 auto;
-    display: flex;
+.buttoncontent {
+    width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5bc1ac;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 0 auto;
+    display: block;
 }
 
 /* 체크박스 */
@@ -134,7 +142,7 @@ label {
 		 	</ul>
 	 		<input type="hidden" name="sno" value="${sno }">
 	 	</div>
-	 	<input type="submit" value="확인" class="submitButton"/>
+	 	<input type="submit" value="확인" class="submitButton buttoncontent"/>
  	</form>
 </div> 	
  	<script>

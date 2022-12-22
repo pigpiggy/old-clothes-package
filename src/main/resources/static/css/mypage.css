@@ -6,6 +6,7 @@
 
 ul, li {
   list-style: none;
+  padding: 0;
 }
 
 a {
@@ -116,6 +117,7 @@ overflow-y: scroll;
   border-bottom: 2px solid #ddd;
   padding: 60px;
   font-size: 17px;
+  overflow-x: hidden;
 }
 
 .second {
@@ -134,6 +136,7 @@ overflow-y: scroll;
   	height: 50px;
   	border-bottom: 2px solid navy;
 	box-sizing: content-box;
+	padding: 0;
 }
 	
 .tabs li {

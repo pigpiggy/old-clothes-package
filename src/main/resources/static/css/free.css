@@ -462,9 +462,9 @@ ul.pagination li a {
 }
 
 ul.pagination li a.active {
-  background-color: #2196f3;
+  background-color: #5bc0ab;
   color: white;
-  border: 1px solid #2196f3;;
+  border: 1px solid #5bc0ab;
 }
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}

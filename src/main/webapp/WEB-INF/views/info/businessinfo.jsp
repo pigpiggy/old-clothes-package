@@ -68,7 +68,10 @@
 .shop {
     width: 100%;
     padding: 30px 0;
-    border: 1px solid #9e9e9e;
+    border-right:0px;
+    border-left: 0px;
+    border-bottom: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
     border-top: 2px solid #17191f;
     text-align: center;
 }
@@ -300,7 +303,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 </div>
 	<script>	
 	$(document).ready(function(){
-		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;">지역을 선택해주세요</h4><span><a></li>'
+		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요</h4><span><a></li>';
 		$('#blist').append(requ);
 	})
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

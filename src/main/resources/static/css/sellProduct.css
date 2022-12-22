@@ -9,6 +9,10 @@ html {
 	margin-bottom: 25%;
 }
 
+.card-list {
+	justify-content: center;
+}
+
 #sellListCard {
 	text-decoration: none;
 }

@@ -1260,6 +1260,7 @@ public class MypageController {
 		               model.addAttribute("select", select);
 		               model.addAttribute("submitcheck", submitcheck);
 		               model.addAttribute("users", users);
+		               model.addAttribute("userno", userno);
 		            } else {
 	
 		            }

@@ -215,7 +215,7 @@ select::-ms-expand {
   display: flex;
   grid-gap: 1em;
   margin: 0 auto;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 

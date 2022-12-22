@@ -224,6 +224,7 @@
    console.log("댓글 번호 : " + cno);
  //리스트 미리 뿌려주기
    $(document).ready(function(){
+	   windowopen=true;
 	  commentList(); 
    });
    
@@ -329,7 +330,7 @@
 	                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
 	                 if(auth != ''){
 	                	 a += '<div class="commenta">'
-	                	 a += '<a onclick="replywindow('+value.cno+');"> 댓글등록 </a>'
+	                	 a += '<a onclick="replywindow('+value.cno+');"> 답변 </a>'
 	                	 if(auth =='users' && userno == value.userno){
 	                		 console.log("사용자 수정 삭제");
 			                 a += '<a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
@@ -354,9 +355,13 @@
 	 }
 	 //대댓글 등록창
 	 function replywindow(cno){
+		 if(windowopen){
+		 console.log("참")	 
+		 windowopen=false;
+		 console.log(window);
 		 var a = '';
 		 
-		 a += '<div class="commentContainer">';				        
+		 a += '<div class="commentContainer replycontainer">';				        
 	     a += '<form class="commentInsertForm" name="replycommentInsertForm" onsubmit="return check();">';
 	     a += '<div class="commentBox">';
 	     a += '<div class="commentContent">';
@@ -370,7 +375,12 @@
 	     a += '</div>'; 
 	     a += '</form>';
 	     a += '</div>';
-	     
+		 }else{
+			 $(".replycontainer").empty();
+			 console.log("거짓")
+			 windowopen=true;
+			 var a='';
+		 }
 	     $('.commentContent'+cno).append(a);
 		 
 	 }

@@ -1513,7 +1513,7 @@ public class MypageController {
    }
    
    @GetMapping("/selectSellApply")
-   public String selectSellApply(@RequestParam("list") Integer list, @RequestParam("ino") Integer ino) {
+   public String selectSellApply(@RequestParam("radio-group") Integer list, @RequestParam("ino") Integer ino) {
       System.out.println("userno:"+list);
       try {
          mypageService.selectSellApply(list,ino);
@@ -1525,7 +1525,7 @@ public class MypageController {
    }
    
    @GetMapping("/selectSharingApply")
-   public String selectSharingApply(@RequestParam("list") Integer list, @RequestParam("sno") Integer sno) {
+   public String selectSharingApply(@RequestParam("radio-group") Integer list, @RequestParam("sno") Integer sno) {
       System.out.println("userno:"+list);
       try {
          mypageService.selectSharingApply(list,sno);

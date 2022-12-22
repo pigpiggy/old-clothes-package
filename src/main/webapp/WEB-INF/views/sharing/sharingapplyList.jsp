@@ -77,54 +77,55 @@ li {
 }
 
 /* 체크박스 */
-[type="radio"] {
-  border: 0; 
-  clip: rect(0 0 0 0); 
-  height: 1px; margin: -1px; 
-  overflow: hidden; 
-  padding: 0; 
-  position: absolute; 
-  width: 1px;
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
 }
-
-/* One radio button per line */
-label {
-  display: block;
-  cursor: pointer;
-  line-height: 2.5;
-  font-size: 1.5em;
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
 }
-
-[type="radio"] + span {
-  display: block;
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
 }
-
-/* the basic, unchecked style */
-[type="radio"] + span:before {
-  content: '';
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.25em;
-  border-radius: 1em;
-  border: 0.125em solid #fff;
-  box-shadow: 0 0 0 0.15em #000;
-  margin-right: 0.75em;
-  transition: 0.5s ease all;
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F87DA9;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
-
-/* the checked style using the :checked pseudo class */
-[type="radio"]:checked + span:before {
-  background: green;
-  box-shadow: 0 0 0 0.25em #000;
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
 }
-
-/* never forget focus styling */
-[type="radio"]:focus + span:after {
-  content: '\0020\2190';
-  font-size: 1.5em;
-  line-height: 1;
-  vertical-align: -0.125em;
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 </style>
 </head>
@@ -135,8 +136,8 @@ label {
 			<h2>구매 신청 목록</h2>
 			<div id="divider"></div>
 			<ul id="userInfo">
-				<c:forEach var="users" items="${users }">
-					<li class="nickDate" id="nickname" class="radio"><input type="radio" name="list" value="${users.userno}"/>${users.nickname }<input type="hidden" name="userno" value="${users.userno}"/></li>
+				<c:forEach var="users" items="${users }" varStatus="status">
+					<li class="nickDate" id="nickname" class="radio"><input type="radio" name="radio-group" id="test${status.index }" value="${users.userno}"/><label for="test${status.index }">${users.nickname }</label><input type="hidden" name="userno" value="${users.userno}"/></li>
 					<li class="nickDate" id="applyDate">${users.joinDate }</li>
 				</c:forEach>			        					
 		 	</ul>

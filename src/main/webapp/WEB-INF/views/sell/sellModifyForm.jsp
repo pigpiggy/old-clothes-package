@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>개인판매 상품 수정</title>
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<header>
@@ -108,7 +108,7 @@
 	/* 유효성 검사 */
 	function valid() {
 		var titleCheck = document.getElementById("title");
-		var addCheck = document.getElementById("member_post");
+		var addCheck = document.getElementById("iaddress");
 		var contentCheck = document.getElementById("scontent");
 		var priceCheck = document.getElementById("price");
 

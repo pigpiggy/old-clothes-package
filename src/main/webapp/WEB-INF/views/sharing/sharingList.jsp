@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
+<link href="<c:url value="/static/css/sharing.css"/>"rel='stylesheet' />
 </head>
 <body id="sharingBody">
 	<div>
@@ -59,7 +59,7 @@
 		          	</c:if>
 		          	<c:choose>
 		          		<c:when test="${empty sharing.sfileids }">
-		          			<img src="image/logo3.png" alt="로고">
+		          			<img src="/static/image/logo3.png" alt="로고">
 		          		</c:when>
 		          		<c:otherwise>
 		              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
@@ -69,10 +69,10 @@
 		          <div class="card-body">
 		              <span class="sdate">${sharing.regDate}</span>
 		              <h2 class="sharingTitle">${sharing.stitle }</h2>
-		              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${sharing.nickname}</p></div>
+		              <div class="sharingDealNick"><p><img src="/static/image/yellowuser.png">${sharing.nickname}</p></div>
 		          </div>
 		          <div class="card-footer">
-		          	  <img src="/image/pin.png"><p>${sharing.saddress}</p>
+		          	  <img src="/static/image/pin.png"><p>${sharing.saddress}</p>
 		          </div>
 		      </div>
 	     </a>
@@ -82,7 +82,7 @@
     </div>
     
   </div>
-<script src="<c:url value='/resources/js/sharing/sigungu.js'/>"></script>
-<script src="<c:url value='/resources/js/sharing/infiniteScroll.js'/>"></script>
+<script src="<c:url value='/static/js/sharing/sigungu.js'/>"></script>
+<script src="<c:url value='/static/js/sharing/infiniteScroll.js'/>"></script>
 </body>
 </html>

@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>판매업체</title>
-<link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/static/css/businessinfos.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
-<link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
+<link href="<c:url value="/static/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
 #wrap {
     width: 100%;
@@ -426,25 +426,25 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+					bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){
-					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/static/image/apply.png" /></button>'; //신청서 작성 form [modal]	
 				}			
 				console.log(data.bstar +"별점");
 				bli += '<div id="totalstar" class="totalstar">';
-				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
-				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
+				bli += '<div id="star"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"></div>' // 별점
+				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"></div>' // 별점
 				bli += '</div>';
 				bli += '<em id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</em>';
 				if(data.bphone != null){
@@ -463,7 +463,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				var businbno = data.bno;
 				var geocoder = new kakao.maps.services.Geocoder();
 				//리스트에 있는 위치들은 별도 마커로 표기
-				var imageSrc = "image/icons8-marker-100.png",
+				var imageSrc = "static/image/icons8-marker-100.png",
 					imageSize = new kakao.maps.Size(40,44),
 					imageOption = {offset: new kakao.maps.Point(20,44)};
 				var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
@@ -682,9 +682,9 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 					success: function(data) {
 						console.log("좋아요 수 : " + data);
 						if(data == 1) {
-							targetElement.setAttribute("src", "/image/redheart.png");							
+							targetElement.setAttribute("src", "/static/image/redheart.png");							
 						} else {
-							targetElement.setAttribute("src", "/image/heart.png");							
+							targetElement.setAttribute("src", "/static/image/heart.png");							
 						}
 					}, error: function() {
 		                console.log('바보야!');
@@ -742,25 +742,25 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				bli += '<li class="listdnames" id="listmove">' ;
 				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
-					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+					bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
 					bli += '';
 				}else if(authsect == 'users'){	
 					if(data.likescheck == 1){								
-						bli += '<em><img src="/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/redheart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else if(data.likescheck == null){
-						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}else{
-						bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
+						bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 					}
 				}
 				if(authsect != 'business'){
-					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]	
+					bli += '<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" title="신청서 작성" src="/static/image/apply.png" /></button>'; //신청서 작성 form [modal]	
 				}			
 				console.log(data.bstar +"별점");
 				bli += '<div id="totalstar" class="totalstar">';
-				bli += '<div id="star"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"><img src="/image/binstar.png"></div>' // 별점
-				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"><img src="/image/star.png"></div>' // 별점
+				bli += '<div id="star"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"><img src="/static/image/binstar.png"></div>' // 별점
+				bli += '<div id="starEnd" style="width:'+(data.bstar/5)*100+'%;"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"><img src="/static/image/star.png"></div>' // 별점
 				bli += '</div>';
 				bli += '<em id="btotaladdress">' +" 주소 : "  + data.baddress + ' ' + data.bdetailadd + '</em>';
 				if(data.bphone != null){
@@ -780,7 +780,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 					var businbno = data.bno;
 					var geocoder = new kakao.maps.services.Geocoder();
 					//리스트에 있는 위치들은 별도 마커로 표기
-					var imageSrc = "image/icons8-marker-100.png",
+					var imageSrc = "static/image/icons8-marker-100.png",
 						imageSize = new kakao.maps.Size(40,44),
 						imageOption = {offset: new kakao.maps.Point(20,44)};
 					var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
@@ -952,11 +952,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 	<%--js 불러오기 --%>
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
       integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>    
-	<script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/businessinfo.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/validations.js'/>"></script>
+	<script src="<c:url value='/static/js/info/datepicker.js'/>"></script>
+	<script src="<c:url value='/static/js/info/datepicker.ko.js'/>"></script>
+	<script src="<c:url value='/static/js/info/sigun.js'/>"></script>
+	<script src="<c:url value='/static/js/info/businessinfo.js'/>"></script>
+	<script src="<c:url value='/static/js/info/hangjungdong.js'/>"></script>
+	<script src="<c:url value='/static/js/info/validations.js'/>"></script>
 </body>
 </html>

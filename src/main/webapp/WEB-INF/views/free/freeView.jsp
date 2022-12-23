@@ -10,7 +10,7 @@
     <title>자유게시판 글보기</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' /> 
+	<link href="<c:url value="/static/css/free.css"/>" rel='stylesheet' /> 
 	<style>
 .deletecmt{
 	position: relative;

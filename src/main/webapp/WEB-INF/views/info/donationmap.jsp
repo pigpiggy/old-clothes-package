@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>지도</title>
-<link href="<c:url value="/resources/css/map.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/static/css/map.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -319,7 +319,7 @@ input[type=radio] {
 					<div id="selectbox" style="display:flex;">
 						<div class="shop">		
 							<span class="refresh">								
-								<a onClick="history.go(0)" style="cursor: pointer;"><img id="refreshimg" src="/image/refresh.png"></a>											
+								<a onClick="history.go(0)" style="cursor: pointer;"><img id="refreshimg" src="/static/image/refresh.png"></a>											
 							</span>								
 							<div class="select" style="width: 156px;">
 								<select id="sido"><option value="">선택</option></select>
@@ -367,7 +367,7 @@ input[type=radio] {
 			<c:forEach var="online" items="${donation }">	
 				<c:if test="${online.dname eq '굿윌스토어 굿윌본부' || online.dname eq '아름다운 가게 서울본부' || online.dname eq '숲스토리 의정부본점'}">			
 					<hr class="hrr" width="1000px;">									
-					<div class="leftimg"><img class="dimg" src="/image/${online.dfile }" alt="굿윌 본부점"></div>
+					<div class="leftimg"><img class="dimg" src="/static/image/${online.dfile }" alt="굿윌 본부점"></div>
 					<div class="rightcontent"><br>
 						<h3 class="names">[업체명 : ${online.dname }]</h3>
 						<h4 class="addressh4">주소 : ${online.daddress }  </h4>
@@ -440,7 +440,7 @@ input[type=radio] {
 	             var contentt11 = '<div style="width:100%; padding:5px;">'+inputcontent+'</div>';
 	             var iwRemoveable = true; 
 	           //이미지 마커 
-	             var imageSrc1 = "image/icons8-marker-100.png",
+	             var imageSrc1 = "static/image/icons8-marker-100.png",
 	             imageSize1 = new kakao.maps.Size(40,44),
 	             imageOption1 = {offset: new kakao.maps.Point(20,44)};
 	             var markerImage1 = new kakao.maps.MarkerImage(imageSrc1,imageSize1,imageOption1);
@@ -622,7 +622,7 @@ input[type=radio] {
 				var laty = data.laty;
 				var geocoder = new kakao.maps.services.Geocoder();
 				//리스트에 있는 위치들은 별도 마커로 표기
-				var imageSrc = "image/icons8-marker-100.png",
+				var imageSrc = "static/image/icons8-marker-100.png",
 					imageSize = new kakao.maps.Size(40,44),
 					imageOption = {offset: new kakao.maps.Point(20,44)};
 				var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
@@ -790,8 +790,8 @@ input[type=radio] {
 	
 	
 <%--js 불러와서 사용하기. --%>	
-	<script src="<c:url value='/resources/js/info/sigun.js'/>"></script>
-	<script src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>	
-	<script src="<c:url value='/resources/js/info/radiochangeview.js'/>"></script>
+	<script src="<c:url value='/static/js/info/sigun.js'/>"></script>
+	<script src="<c:url value='/static/js/info/hangjungdong.js'/>"></script>	
+	<script src="<c:url value='/static/js/info/radiochangeview.js'/>"></script>
 </body>
 </html>

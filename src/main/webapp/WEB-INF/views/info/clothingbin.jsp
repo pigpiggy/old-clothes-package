@@ -8,7 +8,7 @@
 <title>지도</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
-<script type="application/javascript" src="<c:url value='/resources/js/info/hangjungdong.js'/>"></script>
+<script type="application/javascript" src="<c:url value='/static/js/info/hangjungdong.js'/>"></script>
 
 <style>
 #wrap {
@@ -387,7 +387,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 							bli += "<li id='listmove' class='listmove'><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"'><span class='store_item'>"+item+"</span></a></li>";
 							var geocoder = new kakao.maps.services.Geocoder();
 							//리스트에 있는 위치들은 별도 마커로 표기
-							var imageSrc = "image/icons8-marker-100.png",
+							var imageSrc = "static/image/icons8-marker-100.png",
 								imageSize = new kakao.maps.Size(40,44),
 								imageOption = {offset: new kakao.maps.Point(20,44)};
 							var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption);
@@ -501,6 +501,6 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 	</script>
 	
 <%--js 불러와서 사용하기. --%>	
-	<script src="<c:url value='/resources/js/info/sigundong.js'/>"></script>
+	<script src="<c:url value='/static/js/info/sigundong.js'/>"></script>
 </body>
 </html>

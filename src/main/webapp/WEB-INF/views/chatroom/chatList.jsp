@@ -9,14 +9,14 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <head>
 <title>ChatList</title>
-<link href="<c:url value="/resources/css/chatList.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/chatList.css"/>" rel='stylesheet' />
 
 </head>
 <body>
 	<input type="hidden" value="${authUser.userno }" id="chatuserno"/>	
 	<div class="wrapper">
 		<div class="chatHeader" id="chatHeader">
-			<img id="greenchat" src="/image/greenyellowchat.png" />
+			<img id="greenchat" src="/static/image/greenyellowchat.png" />
         	<h5>채팅</h5>
 		</div>
 		<div id="chatContainer">
@@ -103,7 +103,7 @@
 	 		'<a href="/chatRoom/' + ino + '/' + buyerno + '">' +
 	 				'<span id="titlename"><div id="title">' + ititle + '</div>' + 
 	 				'<div id="sellerName">' +
-	 					'<img id="usericon" src="/image/orangeuser.png">' + senderName +'&nbsp;'+
+	 					'<img id="usericon" src="/static/image/orangeuser.png">' + senderName +'&nbsp;'+
 	 				'</div></span>' +
 	 				'<span id="message">' + 
 	 		messageUnread+'</span></a>';

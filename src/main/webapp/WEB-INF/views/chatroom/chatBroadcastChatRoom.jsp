@@ -10,14 +10,14 @@
 <title>채팅하기</title>
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-		<link href="<c:url value="/resources/css/chatBroadcastChatRoom.css"/>" rel='stylesheet' />
+		<link href="<c:url value="/static/css/chatBroadcastChatRoom.css"/>" rel='stylesheet' />
 		
 </head>
 <body>
 	<div class="container">
 		<div class="chat-header">
 			<div id="chatback">
-				<img id="chatbackimg" src="/image/back.png">
+				<img id="chatbackimg" src="/static/image/back.png">
 			</div>
 			<h1 class="chat-header__name">${ititle}</h1>
         </div>
@@ -253,7 +253,7 @@
 			})
 		}
 	$('#chatback').click(function(){
-		location.replace("http://localhost:8088/chatList")
+		location.replace("/chatList")
 	})
 	</script>
 </body>

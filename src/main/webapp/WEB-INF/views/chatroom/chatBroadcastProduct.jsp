@@ -11,7 +11,7 @@
 <title>채팅하기</title>
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<link href="<c:url value="/resources/css/chatBroadcastProduct.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/static/css/chatBroadcastProduct.css"/>" rel='stylesheet' />
 	
 </head>
 <body>

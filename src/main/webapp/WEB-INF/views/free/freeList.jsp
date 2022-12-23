@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자유게시판 글목록</title>
-<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/free.css"/>" rel='stylesheet' />
 
 
 </head>
@@ -93,6 +93,6 @@
 	<div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>			
-	<script src="<c:url value='/resources/js/free/paging.js'/>"></script>
+	<script src="<c:url value='/static/js/free/paging.js'/>"></script>
 </body>
 </html>

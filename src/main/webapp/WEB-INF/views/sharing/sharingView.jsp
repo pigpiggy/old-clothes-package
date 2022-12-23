@@ -16,8 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <title>무료나눔 상세</title>
-<link href="<c:url value="/static/css/sharing.css"/>" rel='stylesheet' />
-<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
 <header>
@@ -150,7 +150,7 @@
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<div class="sharingApplyList">
 				        						<input type="button" class="buttoncontent" value="구매 신청 목록" style="width:7em;" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
-                       'top=140, left=300, width=500, height=650, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
+                       'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 					        				</div>
 				        				</c:if>
 			        				</c:if>

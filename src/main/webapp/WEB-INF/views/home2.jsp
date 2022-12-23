@@ -9,10 +9,10 @@
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
     <!-- CSS FILES -->
-   	<link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value="/static/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value="/static/css/templatemo-kind-heart-charity.css"/>" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value="/static/css/header.css"/>" rel="stylesheet" type="text/css"/>
+   	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/templatemo-kind-heart-charity.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value="/resources/css/header.css"/>" rel="stylesheet" type="text/css"/>
 <style>
 body {
     font-family: 'SUIT-Regular';
@@ -30,7 +30,7 @@ body {
 
                 <div class="col-lg-8 col-12 d-flex flex-wrap">
                     <p class="d-flex me-4 mb-0">
-                       	<img src="/static/image/location.png" style="width: 13px;height: 18px;" class="bi-geo-alt me-2" alt="쪽지">
+                       	<img src="/image/location.png" style="width: 13px;height: 18px;" class="bi-geo-alt me-2" alt="쪽지">
 							KOSTA, 70, Gasan digital 1-ro, Geumcheon-gu, Seoul, Republic of Korea
                     </p>
 
@@ -39,7 +39,7 @@ body {
                 <div class="col-lg-4 col-12 d-lg-block d-none">
                     <ul class="social-icon">
                             <a href="https://github.com/sajo4jo/old-clothes-package">
-                               	<img src="/static/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="깃허브" />
+                               	<img src="/image/github.png" style="width:30px;" class="bi-geo-alt me-2" alt="깃허브" />
                    	 		</a>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@ body {
         <div class="container">
             <a class="navbar-brand" href="/">
                 <span>
-                	<img src="/static/image/logo1.png" class="logo img-fluid" alt="Kind Heart Charity">
+                	<img src="image/logo1.png" class="logo img-fluid" alt="Kind Heart Charity">
                 </span>
             </a>
 
@@ -69,7 +69,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_2" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">버리기/기부 <img class="down" src="/static/image/down-arrow.png">
+                            aria-expanded="false">버리기/기부 <img class="down" src="/image/down-arrow.png">
                         </a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
 	                            <li><a class="dropdown-item" href="/clothingbin">내 주변 헌옷 수거함</a></li>
@@ -84,7 +84,7 @@ body {
 
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_4" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">헌옷 사고 팔기 <img class="down" src="/static/image/down-arrow.png"></a>
+                            aria-expanded="false">헌옷 사고 팔기 <img class="down" src="/image/down-arrow.png"></a>
                    		<ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                             <li><a class="dropdown-item" href="/businessinfo">업체 판매</a></li>
                             <li><a class="dropdown-item" href="/sellList">개인 판매</a></li>
@@ -130,7 +130,7 @@ body {
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/static/image/second.jpg"
+                                    <img src="image/second.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -141,7 +141,7 @@ body {
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="/static/image/donation_box_home2.jpg"
+                                    <img src="image/donation_box_home2.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -152,7 +152,7 @@ body {
                                 </div>
 
 								<div class="carousel-item">
-                                    <img src="/static/image/first.jpg"
+                                    <img src="image/first.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -163,7 +163,7 @@ body {
                                 </div>
                                 
                                 <div class="carousel-item">
-                                    <img src="/static/image/donation_box_home4.jpg"
+                                    <img src="image/donation_box_home4.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
@@ -204,7 +204,7 @@ body {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="/clothingbin" class="d-block">
-                                <img src="/static/image/earthheart.png" class="featured-block-image img-fluid" alt="">
+                                <img src="image/earthheart.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">헌 옷<strong> 수거함</strong> 찾기</p>
                             </a>
@@ -214,7 +214,7 @@ body {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="/information" class="d-block">
-                                <img src="/static/image/receive.png" class="featured-block-image img-fluid" alt="">
+                                <img src="image/receive.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">헌 옷<strong> 기부</strong>하기</p>
                             </a>
@@ -224,7 +224,7 @@ body {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="/sharingList" class="d-block">
-                                <img src="/static/image/hands.png" class="featured-block-image img-fluid" alt="">
+                                <img src="image/hands.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">헌 옷 <strong>무료 나눔</strong>하기</p>
                             </a>
@@ -234,7 +234,7 @@ body {
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="/businessinfo" class="d-block">
-                                <img src="/static/image/donator.png" class="featured-block-image img-fluid" style="width: 128px; height: 128px;" alt="">
+                                <img src="image/donator.png" class="featured-block-image img-fluid" style="width: 128px; height: 128px;" alt="">
 
                                 <p class="featured-block-text">헌 옷 <strong>사고 팔기</strong></p>
                             </a>
@@ -250,7 +250,7 @@ body {
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="/static/image/clothestrash.jpg" class="custom-text-box-image img-fluid" alt="">
+                        <img src="/image/clothestrash.jpg" class="custom-text-box-image img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-6 col-12">
@@ -316,11 +316,11 @@ body {
 			<c:import url='/WEB-INF/views/includes/footer.jsp' />
 		</div>	        
     <!-- JAVASCRIPT FILES -->
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min2.js"></script>
-    <script src="/static/js/jquery.sticky.js"></script>
-    <script src="/static/js/click-scroll.js"></script>
-    <script src="/static/js/counter.js"></script>
-    <script src="/static/js/custom.js"></script>        
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/bootstrap.min2.js"></script>
+    <script src="/resources/js/jquery.sticky.js"></script>
+    <script src="/resources/js/click-scroll.js"></script>
+    <script src="/resources/js/counter.js"></script>
+    <script src="/resources/js/custom.js"></script>        
 </body>
 </html>

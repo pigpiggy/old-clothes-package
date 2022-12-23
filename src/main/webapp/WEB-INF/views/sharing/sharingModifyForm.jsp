@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>무료나눔 상품 수정</title>
-<link href="<c:url value="/static/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<header>
@@ -55,7 +55,7 @@
 				<textarea class="form-control" rows="12" id="scontent" name="scontent">${sharing.scontent }</textarea>
 			</div>
 			<input type="file" multiple="multiple" name="simageFile" id="image"
-				onchange="addFile(this);"/>
+				onchange="addFile(this);" />
 			<div id=imglist class="filebox"></div>
 			<div id="btncontainer">
 				<a href="sharingList">

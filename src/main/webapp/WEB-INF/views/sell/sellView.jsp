@@ -18,8 +18,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <title>개인판매 상세</title>
-<link href="<c:url value="/static/css/individual.css"/>" rel='stylesheet' />
-<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
 <header>
@@ -68,7 +68,7 @@
         		 </c:when>
 				<c:otherwise>
 					<div class="swiper-slide">
-						<img src="/static/image/logo3.png" alt="하우헌옷"/>
+						<img src="/image/logo3.png" alt="하우헌옷"/>
 					</div>
 				</c:otherwise>        	
         	</c:choose>          
@@ -82,13 +82,13 @@
         <h4>${sell.ititle}</h4>
         <input type="hidden" name="ino" id="ino" value="${sell.ino }">
         <div class="letterAndHeart" id="sellname">
-          <img src="/static/image/greenuser.png" class="userprofile"><span>${sell.iname}</span>
+          <img src="/image/greenuser.png" class="userprofile"><span>${sell.iname}</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart" id="icons">
-	        			<img src="/static/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
-		          		<img src="/static/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
-		          		<img src="/static/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
+	        			<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+		          		<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
+		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 	        		</div>
 	        	</c:when>
 	        	<c:otherwise>
@@ -104,20 +104,20 @@
 													<input type="hidden" name="sellerno" value="${sell.userno}"/>
 													<input type="hidden" name="ititle" value="${sell.ititle}"/>
 													<button id="btn_chat">
-					          							<img src="/static/image/blackchat.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+					          							<img src="/image/blackchat.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
 													</button>
 												</a>
 											</form>
 										</div>				          		
 					          		<a href="#demo-modal">
-					          			<img src="/static/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
+					          			<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 					          		</a>
 					          			<c:choose>
 					          				<c:when test="${likes eq 1}">
-					          					<img src="/static/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
+					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
 					          				</c:when>
 					          				<c:otherwise>
-					          					<img src="/static/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
+					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 			        						</c:otherwise>
 			        					</c:choose>
 			        			</div>
@@ -126,11 +126,11 @@
 		        		<c:otherwise>
 		        			<div class="letterAndHeart" id="icons">
 				          		<a href="#demo-modal">
-				          			<img src="/static/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
+				          			<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 				          		</a>
 		       					<c:if test="${authUser.sect eq 'users' and authUser.userno ne sell.userno}">
-		          					<img src="/static/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
-		          					<img src="/static/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
+		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후" title="찜하기" >
+		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 			          			</c:if>		
 				        	</div>
 		         		</c:otherwise>
@@ -181,10 +181,10 @@
 	        	<c:if test="${authUser.userno eq sell.userno}">    
 		        	<div class="modifydelete" id="modifydelete">
 						<a href="/sellModifyForm?ino=${sell.ino }">	        	
-		          			<img src="/static/image/edit.png" id="edit" alt="수정">
+		          			<img src="/image/edit.png" id="edit" alt="수정">
 	    	    		</a>
 						<a href="javascript:void(0);" onclick="removeSell();">	        	
-		          			<img src="/static/image/viewdelete.png" id="viewdelete" alt="삭제">
+		          			<img src="/image/viewdelete.png" id="viewdelete" alt="삭제">
 	        			</a>
 	        		</div>
 	        	</c:if>
@@ -458,9 +458,9 @@ $(function () {
 				success: function(data) {
 					console.log(data);
 					if(data == 1) {
-						$("#heart_img").attr("src", "/static/image/redheart.png");
+						$("#heart_img").attr("src", "/image/redheart.png");
 					} else {
-	                    $("#heart_img").attr("src", "/static/image/heart.png");
+	                    $("#heart_img").attr("src", "/image/heart.png");
 					}
 				}, error: function() {
                     console.log('바보야!')

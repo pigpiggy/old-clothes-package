@@ -5,6 +5,24 @@
   
 <configuration>
 	<mappers>
+		<mapper resource="mybatis/mappers/users.xml"/>
+		<mapper resource="mybatis/mappers/sharing.xml"/>
+		<mapper resource="mybatis/mappers/filedb.xml"/>
+		<mapper resource="mybatis/mappers/free.xml"/>
+		<mapper resource="mybatis/mappers/donation.xml"/>
+		<mapper resource="mybatis/mappers/likes.xml"/>
+		<mapper resource="mybatis/mappers/message.xml"/>
+		<mapper resource="mybatis/mappers/apply.xml"/>
+		<mapper resource="mybatis/mappers/business.xml"/>
+		<mapper resource="mybatis/mappers/sell.xml"/>
+		<mapper resource="mybatis/mappers/notice.xml"/>
+		<mapper resource="mybatis/mappers/comments.xml"/>
+		<mapper resource="mybatis/mappers/review.xml"/>
+		<mapper resource="mybatis/mappers/mypage.xml"/>
+		<mapper resource="mybatis/mappers/chatroom.xml"/>
 		
 	</mappers>
-</configuration>	
+</configuration>
+
+	
+

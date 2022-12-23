@@ -1,0 +1,107 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	font-size: 1em;
+}
+#reviewcontainer {
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 25%;
+}
+.rcard {
+	overflow: auto;
+	background: #fff;
+	border-radius: 2px;
+	display: inline-block;
+	height: 300px;
+	margin: 1rem;
+	position: relative;
+	width: 300px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.rcard-2 {
+  	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.rCard-list {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 2%;
+}
+
+.eachstar {
+	display: flex;
+}
+.eachstar img {
+	width: 20px;
+	line-height: 1;
+	margin: 1.5px;
+}
+
+#reviewStar {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 12px;
+}
+
+.reviewCenter {
+	text-align: left;
+	margin-left: 20px;
+}
+.reviewfirst {
+	display: flex;
+	align-items: center;
+	margin: 1em 0;
+}
+.reviewBox {
+	color: #000;
+    font-size: 15px;
+    background: #eee;
+    border-radius: 60px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+#reviewSpace {
+	letter-spacing: 0.28em;
+}
+.reviewTitle {
+	font-size: 17.5px;
+	margin-bottom: 0;
+}
+
+.reviewContent {
+	font-size: 16px;
+}
+#reviewWriter {
+	border-top: 1px solid #ddd;
+	width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+}
+#reviewWriter img {
+	width: 20px;
+}
+.rNickname {
+	display: flex;
+	align-items: center;
+}
+.rNickname img {
+	margin-right: 5px;
+}
+.cardheader {
+	font-size: 16px;
+}
+

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.MessageDAO">
+	<insert id="insertMessage" parameterType="MessageVO">
+	<selectKey keyProperty="mno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select message_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into message (mno,mtitle,mcontent,sendUserno,recvUserno,recvBno,readChk,regdate)
+			values (#{mno},#{mtitle},#{mcontent},#{sendUserno},#{recvUserno, jdbcType=INTEGER},#{recvBno, jdbcType=INTEGER},0,sysdate)
+		]]>
+	</insert>
+	
+	<!-- sharing에서 사업자가 개인에게 쪽지 보낼 때(recvBno는 필요없음) -->
+	<insert id="insertSBMessage" parameterType="MessageVO">
+	<selectKey keyProperty="mno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select message_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into message (mno,mtitle,mcontent,sendBno,recvUserno,readChk,regdate)
+			values (#{mno},#{mtitle},#{mcontent},#{sendBno},#{recvUserno},0,sysdate)
+		]]>
+	</insert>
+	
+	<!-- 받은쪽지 보낸쪽지 리스트 -->
+	<select id="uRecvMessage" parameterType="map" resultType="MessageVO">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.mno desc) num, a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE RECVUSERNO = #{recvUserno} AND m.SENDUSERNO = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE RECVUSERNO = #{recvUserno} AND m.SENDBNO = b.BNO) a ORDER BY mno DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<select id="bRecvMessage" parameterType="map" resultType="MessageVO">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.mno desc) num, a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE RECVBNO = #{recvUserno} AND m.SENDUSERNO = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE RECVBNO = #{recvUserno} AND m.SENDBNO = b.BNO) a ORDER BY mno DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>	
+	
+	<select id="uSendMessage" parameterType="map" resultType="MessageVO">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.mno desc) num, a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE sendUserno=#{sendUserno} AND m.recvuserno = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE sendUserno=#{sendUserno} AND m.recvbno = b.BNO) a ORDER BY mno DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>	
+		
+	<select id="bSendMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.mno desc) num, a.* FROM 
+			(SELECT m.*, u.NICKNAME FROM MESSAGE m, USERS u WHERE sendBno=#{sendUserno} AND m.recvuserno = u.USERNO UNION 
+			SELECT m.*, b.BNAME FROM MESSAGE m, BUSINESS b WHERE sendBno=#{sendUserno} AND m.recvbno = b.BNO) a ORDER BY mno DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>	
+	
+	<!-- 받은 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
+	<select id="uRecvViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,SENDBNO,u.NICKNAME 
+			from message m, users u
+			where mno=#{mno} and m.sendUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,sendUserno,SENDBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.SENDBNO = b.BNO
+		]]>
+	</select>
+	
+	<select id="bRecvViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,sendUserno,SENDBNO,u.NICKNAME 
+			from message m, users u
+			where mno=#{mno} and m.sendUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,sendUserno,SENDBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.SENDBNO = b.BNO
+		]]>
+	</select>	
+
+	<!-- 보낸 쪽지 상세페이지(제목 클릭하면 모달 상세보기) -->
+	<select id="uSendViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,recvUserno,RECVBNO,u.nickname
+			from message m, users u
+			where mno=#{mno} and m.recvUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,recvUserno,RECVBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.RECVBNO = b.BNO
+		]]>
+	</select>
+	
+	<select id="bSendViewMessage" parameterType="Integer" resultType="MessageVO">
+		<![CDATA[
+			select mno,mtitle,mcontent,recvUserno,RECVBNO,u.nickname
+			from message m, users u
+			where mno=#{mno} and m.recvUserno=u.userno UNION 
+			SELECT mno,mtitle,mcontent,recvUserno,RECVBNO,b.bname
+			FROM MESSAGE m, BUSINESS b 
+			WHERE mno=#{mno} AND m.RECVBNO = b.BNO
+		]]>
+	</select>		
+	
+	<delete id="deleteMessage" parameterType="Integer">
+		<![CDATA[
+			delete from message
+			where mno=#{mno}
+		]]>
+	</delete>
+	
+	<select id="selectRmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, users u
+			where recvUserno=#{recvUserno} and m.sendUserno=u.userno
+			]]>
+	</select>	
+	
+	<select id="selectBmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, business b
+			where recvUserno=#{recvUserno} and m.sendBno=b.bno
+			]]>
+	</select>	
+	
+	<select id="selectBRmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, users u
+			where recvBno=#{recvUserno} and m.sendUserno=u.userno
+			]]>
+	</select>	
+	
+	<select id="selectBRBmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, business b
+			where recvBno=#{recvUserno} and m.sendBno=b.bno
+			]]>
+	</select>	
+	
+	<select id="selectSmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, users u
+			where sendUserno=#{sendUserno} and m.recvUserno=u.userno
+			]]>
+	</select>
+	
+	<select id="selectBSmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, users u
+			where sendBno=#{sendBno} and m.recvUserno=u.userno
+			]]>
+	</select>
+	
+	<select id="selectSBmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, BUSINESS b 
+			where sendUserno=#{sendUserno} and m.recvBno=b.bno
+			]]>
+	</select>
+	
+	<select id="selectBSBmessageCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from message m, BUSINESS b 
+			where sendBno=#{sendBno} and m.recvBno=b.bno
+			]]>
+	</select>			
+	
+	
+	<select id="mypageBusiness" resultType="Business" parameterType="Integer">
+		<![CDATA[
+			select * 
+			from business
+			where bno=#{bno}
+			]]>
+	</select>		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>	

@@ -20,17 +20,18 @@ public class MainController {
 	
 	@GetMapping("/")
 	String main() {
-		return "/home";
+		return "/home2";
 	}
-	
+	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.
+	//Main에 이미지 보여주기위한 컨트롤러
 	@GetMapping("/image/{filename}")
 	public void viewImage(@PathVariable String filename, HttpServletResponse response) {
-		String path = servletContext.getRealPath("/image/");
-		FileInputStream fis = null;
+		String path = servletContext.getRealPath("/image/");//경로 얻어오기
+		FileInputStream fis = null;//finally에서 닫아주기 위해 여기에 정의
 		try {
-			fis = new FileInputStream(path+filename);
+			fis = new FileInputStream(path+filename);//file에 담아준다 경로+파일명
 			OutputStream out = response.getOutputStream();
-			FileCopyUtils.copy(fis, out);
+			FileCopyUtils.copy(fis, out);//fis에 out값을 복사한다.
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
@@ -40,6 +41,5 @@ public class MainController {
 				} catch(Exception e) {}
 			}
 		}
-		
 	}
 }

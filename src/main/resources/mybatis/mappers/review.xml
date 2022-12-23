@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kosta.clothes.dao.ReviewDAO">
+	<select id="reviewcount" parameterType="Integer" resultType="Integer">
+		<![CDATA[
+			select count (*) from review where userno=#{userno}
+		]]>
+	</select>
+
+	<!-- 개인이 받은 모든 후기 -->
+	<select id="getReviewList" parameterType="map" resultType="Review">
+		<![CDATA[
+			select b.* FROM (SELECT row_number() over(ORDER BY a.rno desc) num, a.* 
+			FROM (SELECT r.rno, r.RCONTENT, r.REGDATE, r.RSTAR, i.ITITLE, i.IDEALTYPE, u.NICKNAME 
+					FROM REVIEW r, USERS u, INDIVIDUAL i
+					WHERE u.USERNO = r.USERNO AND r.INO = i.INO AND i.USERNO = #{userno} UNION 
+					SELECT r.rno, r.RCONTENT, r.REGDATE, r.RSTAR, s.STITLE, s.SDEALTYPE, u.NICKNAME 
+					FROM REVIEW r, USERS u, SHARING s 
+					WHERE u.USERNO = r.USERNO AND r.SNO = s.SNO AND s.USERNO = #{userno}) a ORDER BY regdate DESC) b
+			WHERE num BETWEEN #{row} AND #{row}+9					
+		]]>
+	</select>
+	
+	<!-- 무료나눔 상품 후기 개수(페이징) -->
+	<select id="sReviewListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*)
+			FROM  review r, USERS u, SHARING s 
+			WHERE u.USERNO = r.USERNO AND r.SNO = s.SNO AND s.USERNO = #{userno}   
+		]]>
+	</select>
+	
+	<!-- 개인판매 상품 후기 개수(페이징) -->
+	<select id="iReviewListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*)  
+			FROM REVIEW r, USERS u, INDIVIDUAL i
+			WHERE u.USERNO = r.USERNO AND r.INO = i.INO AND i.USERNO = #{userno}    
+		]]>
+	</select>
+	
+	
+
+	<!-- 사업자가 받은 모든 후기 -->
+	<select id="getBReviewList" parameterType="map" resultType="Review">
+		<![CDATA[
+			SELECT b.* FROM (SELECT row_number() over(ORDER BY a.rno desc) num, a.* 
+						FROM (SELECT r.RNO, r.RCONTENT, r.REGDATE, r.RSTAR, r.BNO, b.BNAME, u.NICKNAME  
+			FROM REVIEW r, BUSINESS b, USERS u  
+			WHERE r.BNO = b.BNO AND u.USERNO = r.USERNO AND b.BNO = #{bno}) a ORDER BY rno DESC) b
+						WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<!-- 사업자가 받은 후기 개수 -->
+	<select id="bReviewListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*)
+			FROM REVIEW r, BUSINESS b, USERS u  
+			WHERE r.BNO = b.BNO AND u.USERNO = r.USERNO AND b.BNO = #{bno}
+		]]>
+	</select>
+	
+	<delete id="deleteSReview" parameterType="Integer">
+		<![CDATA[
+			delete from review where sno=#{sno}
+		]]>
+	</delete>
+	
+	<delete id="deleteIReview" parameterType="Integer">
+		<![CDATA[
+			delete from review where ino=#{ino}
+		]]>
+	</delete>
+</mapper>

@@ -1,0 +1,258 @@
+.applyList {
+	padding:2%;
+
+    
+}
+.applyList ul {
+    font-size: 0;
+}
+.applyList .item{
+    display: inline-block;
+    width: 35%;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+.applyList .item:nth-child(-n+3){
+    margin-top: 0;
+}
+.applyList .item:nth-child(3n-2){
+    margin-left: 0;
+}
+
+.applyList .item .title {
+    padding: 15px;
+    height: 30px;
+    position: relative;
+}
+
+.applyList .item .title:after {
+	content: '';
+    display: block;
+    width: 250px;
+    border-top: 2px solid navy;
+    margin: 0px 1px;
+    margin-bottom: -14%;
+    margin-right: auto;
+}
+
+.applyList .item strong {
+    display: block;
+    margin: 0 0 -25px 0;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -35px;
+}
+
+.applyList .item .cont {
+    padding: 12px;
+    height: 175;
+    padding-left: 16px;
+}
+
+.applyList .item .cont:after {
+	content: '';
+    display: block;
+    width: 250px;
+    border-top: 1.5px solid #ddd;
+    margin: 10px 0px;
+    margin-top: 10%;
+}
+
+.applyList .item .aname {
+    border: 1px solid black;
+    height: 28px;
+    width: 30%;
+    border-radius: 2px;
+    border-color: #ddd;
+    margin-bottom: 10px;
+}
+
+.applyList .item .aname p{
+    font-size: 15.5px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.applyList .item .aphone{
+    
+    border: 1px solid black;
+    height: 28px;
+    width: 50%;
+    border-radius: 2px;
+    border-color: #ddd;
+    margin-bottom: 10px;
+}
+
+.applyList .item .aphone p{
+    font-size: 15.5px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 2px;
+    
+   
+}
+.applyList .item .aadress{
+    border: 1px solid black;
+    height: 28px;
+    width: 97%;
+    border-radius: 2px;
+    border-color: #ddd;
+    margin-bottom: 10px;
+}
+
+.applyList .item .aadress p{
+    font-size: 15.5px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+.applyList .item .apickup{
+    border: 1px solid black;
+    height: 28px;
+    width: 82%;
+    border-radius: 2px;
+    border-color: #ddd;
+    margin-bottom: 0px;
+}
+
+.applyList .item .apickup p{
+    font-size: 15.5px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.applyList .item .wei{
+    display: flex;
+    height: 28px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+
+.applyList .item .wei p {
+
+    margin-left: 3px;
+    font-size: 1.1rem;
+    margin-top: 0px;
+}
+
+.applyList .item .wei .weight{
+    border: 1px solid black;
+    height: 28px;
+    width: 15%;
+    border-radius: 2px;
+    border-color: #ddd;
+    margin-bottom: 10px;
+}
+
+.applyList .item .wei .weight p {
+    
+    font-size: 15.5px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 1px;
+}
+
+.applyList .item .btn{
+    padding: 0.5px;
+    position: relative;
+    height: 30px;
+    display: flex;
+}
+#applyend{
+	display: inline-block;
+    margin-top: -15px;
+    margin-left: 96px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#end{
+	display: inline-block;
+    margin-top: -15px;
+    margin-left: 96px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#applying{
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    margin-top: -18px;
+    margin-left: 189px;
+    margin-bottom: 10px;
+    padding: 6px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+
+}
+#apply_close_btn{
+    display: inline-block;
+    position: relative;
+    top: 12px;
+    margin-top: -15px;
+    margin-left: 17px;
+    margin-bottom: 9px;
+    padding: 6px;
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+
+}
+
+.star,
+.star1 {
+	background: url('/image/graystar.png') no-repeat;
+	background-size: 32px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+	color: transparent;
+}
+.star.yellow,
+.star1.yellow {
+	background: url('/image/yellowstar.png') no-repeat;
+	background-size: 32px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+	color: transparent;
+}
+
+.stars {
+	display: flex;
+	padding-left: 20%;
+	margin-bottom: 7%;
+}

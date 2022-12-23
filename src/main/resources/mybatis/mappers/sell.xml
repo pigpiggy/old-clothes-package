@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.SellDAO">
+	<select id="getNextIndividualNo" resultType="Integer">
+		<![CDATA[
+			select individual_seq.nextval from dual
+		]]>
+	</select>
+	
+	<insert id="insertIndividual" parameterType="Sell">
+		<![CDATA[
+			insert into individual(ino,ititle,icontent,istatus,ifileids,idealType,
+			iaddress,userno,price,regDate)
+			values (#{ino},#{ititle},#{icontent},#{istatus},#{ifileids,jdbcType=VARCHAR},
+			#{idealType},#{iaddress},#{userno},#{price},sysdate)
+	
+		]]>
+	</insert>
+	
+	<select id="selectIndividual" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select u.nickname as iname, i.*
+			from users u, individual i 
+			where u.userno = i.userno and ino = #{ino}		
+		]]>
+	</select>
+	
+	<update id="updateIndividual" parameterType="Sell">
+		<![CDATA[
+			update individual set ititle=#{ititle},icontent=#{icontent},addressCity=#{addressCity},
+			addressTown=#{addressTown},ifileids=null,price=#{price}
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="updateIfileids" parameterType="Sell">
+		<![CDATA[
+			update individual set ifileids=#{ifileids, jdbcType=VARCHAR}
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<delete id="deleteIndividual" parameterType="Integer">
+		<![CDATA[
+			delete from individual where ino=#{ino}
+		]]>
+	</delete>
+	
+	<update id="upIndividualLikes" parameterType="Sell">
+		<![CDATA[
+			update individual set likes = likes + 1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="downIndividualLikes" parameterType="Sell">
+		<![CDATA[
+			update individual set likes = likes - 1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<select id="getInickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , individual i
+			WHERE u.USERNO = i.USERNO AND i.ino = #{ino}		
+		]]>
+	</select> 
+	
+	<update id="upApplycount" parameterType="sharing">
+		<![CDATA[
+			update individual set applycount = applycount + 1
+			where ino=#{ino}
+		]]>
+	</update>	
+	
+	<select id="getSellList" resultType="Sell">
+		<![CDATA[
+			select * from ( select u.NICKNAME,i.* from users u, individual i where u.userno=i.userno order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="getSellSearchedList" resultType="Sell" parameterType="String">
+		<![CDATA[
+			select * from ( select u.NICKNAME,i.* from users u, individual i where (ititle||icontent||istatus||iaddress||idealType||regdate||price) like '%'||#{kwd}||'%' AND u.userno=i.userno order by ino desc )
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="infiniteScrollDown" parameterType="Integer" resultType="Sell">
+		<![CDATA[
+			select * from ( select u.NICKNAME,i.* from users u, individual i where ino <=#{inoToStart} AND u.userno=i.userno order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="Sell">
+		<![CDATA[
+			select * from ( select u.NICKNAME,i.* from users u, individual i where ino <=#{ino} and (ititle||icontent||istatus||addressCity||addressTown||idealType||regdate||price) like '%'||#{kwd}||'%' AND u.userno=i.userno order by ino desc)
+			where rownum <= 6
+		]]>
+	</select>
+	
+	
+	<select id="sellcount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from individual where userno=#{userno}
+			]]>
+		</select>
+		
+		<select id="statuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from individual where userno=#{userno} and istatus='등록완료'
+			]]>
+		</select>
+		
+	<update id="alterStatus" parameterType="Integer">
+		<![CDATA[
+			update individual 
+			set (istatus, selectedno)=(select '거래중', #{userno} from dual)
+			where ino=#{ino}
+		]]>
+	</update>
+</mapper>	

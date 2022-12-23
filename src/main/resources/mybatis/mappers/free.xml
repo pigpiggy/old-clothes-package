@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="com.kosta.clothes.dao.FreeDAO">
+<!-- 글쓰기 등록  -->
+	<insert id="insertFree" parameterType="Free">
+		<selectKey keyProperty="fno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select free_seq.nextval from dual
+			]]>
+		</selectKey>
+		<![CDATA[
+			insert into free (fno,
+							   fname, 
+							   ftitle, 
+							   fcontent, 
+						 	   freadcount,
+						 	   regdate,
+						 	   userno,
+						 	   bno)
+			values(#{fno},
+				   #{fname},
+				   #{ftitle,jdbcType=VARCHAR},
+				   #{fcontent,jdbcType=VARCHAR},
+				   #{freadcount},
+				   sysdate,
+				   #{userno,jdbcType=INTEGER},
+				   #{bno,jdbcType=INTEGER})
+		]]>
+				
+
+	</insert>
+	<!-- 최신 글 등록 번호 가져오기 -->
+	<select id="selectMaxFreeNum" resultType="Integer">
+		<![CDATA[
+			select max(fno) from free
+		]]>
+	</select>
+	
+	<!-- 글 목록 보여주기 -->
+	<select id="selectFreeList" resultType="Free" parameterType="Integer">
+		<![CDATA[
+			select fno,fname,ftitle,fcontent,freadcount,regdate,userno,bno
+			from (select row_number() over (order by regdate desc) num, F.*
+					from FREE F)	
+			where num between #{row} AND #{row}+9
+					]]>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hitFree" parameterType="Free">
+	<![CDATA[
+		update free set freadcount=freadcount+1 where fno=#{fno}
+		]]>
+	</update>
+	
+		<!-- 실제 글 전체 개수 -->
+	<select id="selectFreeCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from free
+			]]>
+			</select>
+	
+	<!-- 글 클릭 시 정보 가져가기 -->
+	<select id="selectFree" parameterType="Free" resultType="Free">
+		<![CDATA[
+			select * from free where fno=#{fno}
+		]]>
+	</select>
+	
+	<!-- 글 수정  -->
+	<update id="updateFree"  parameterType="Free">
+		<![CDATA[
+			update free
+			set ftitle=#{ftitle}, fcontent=#{fcontent}
+			where fno=#{fno}
+		]]>
+	</update>	
+	
+	<!-- 글 삭제하기 -->
+	<delete id="deleteFree" parameterType="Integer">
+		<![CDATA[
+			delete from free where fno=#{fno}
+		]]>
+	</delete>
+	
+	<!-- 글 삭제하기 -->
+	<delete id="deleteCmt" parameterType="Integer">
+		<![CDATA[
+			DELETE FROM  COMMENTS  WHERE FNO = #{fno}
+		]]>
+	</delete>
+	
+	<select id="selectFreeSearchedList" resultType="free" parameterType="String">
+	<![CDATA[
+ 			select * from 
+ 			( select * from free where (ftitle||fcontent||fname) like '%'||#{kwd}||'%' order by fno desc ) 
+ 			where rownum <= 10 
+ 			]]>
+	</select>	
+	
+	<select id="searchedFreeCount" resultType="Integer">
+		<![CDATA[
+			select count(*) from free where (ftitle||fcontent||fname) like '%'||#{kwd}||'%'
+			]]>
+			</select>
+			
+	<select id="searchedFreeList" resultType="Free" parameterType="map">
+		<![CDATA[
+			select fno,fname,ftitle,fcontent,freadcount,regdate,userno,bno
+			from (select row_number() over (order by fno desc) num, F.*
+					from FREE F where (ftitle||fcontent||fname) like '%'||#{kwd}||'%')	
+			where num between #{row} AND #{row}+9
+					]]>
+	</select>
+</mapper>

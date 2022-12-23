@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.UsersDAO">
+	<!--회원가입[업체] 정보등록 -->
+	<insert id="insertBusiness" parameterType="business">
+		<selectKey keyProperty="bno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select business_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+
+		<![CDATA[
+			insert into business(
+					bno,
+					bname,
+					businessid,
+					baddress,
+					bdetailadd,
+					bkakaoid,
+					bphone,
+					bpassword,
+					bnumber,
+					sect, 
+					regdate)
+					values(
+					#{bno},
+					#{bname},
+					#{businessid},
+					#{baddress},
+					#{bdetailadd},
+					#{bkakaoid},
+					#{bphone},
+					#{bpassword},
+					#{bnumber},
+					#{sect},
+					sysdate	)
+		]]>
+	</insert>
+	
+	<!--회원가입[개인] 정보등록 -->
+	<insert id="insertUsers" parameterType="users">
+		<selectKey keyProperty="userno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select users_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into users(
+					userno,
+					nickname,
+					userid,
+					phone,
+					password,
+					sect,
+					joindate )
+					values(
+					#{userno},
+					#{nickname},
+					#{userid},
+					#{phone},
+					#{password},
+					#{sect},
+					sysdate	)
+		]]>
+	</insert>
+	
+	
+	<!--닉네임 중복체크[개인] -->
+	<select id="selectName" parameterType="String" resultType="com.kosta.clothes.bean.Users">
+		<![CDATA[
+			SELECT * 
+			FROM users 
+			WHERE nickname=#{checknick}
+		]]>
+	</select>
+
+	
+	<!--닉네임 중복체크[업체] -->
+	<select id="selectBname" parameterType="String" resultType="com.kosta.clothes.bean.Business">
+		<![CDATA[
+			SELECT * 
+			FROM business 
+			WHERE bname=#{checkname}
+		]]>
+	</select>
+
+
+	<!--아이디 중복체크[개인] -->
+	<select id="selectuserid" parameterType="String" resultType="com.kosta.clothes.bean.Users">
+		<![CDATA[
+			SELECT * 
+			FROM users 
+			WHERE userid=#{checkuserid}
+		]]>
+	</select>
+
+	<!--아이디 중복체크[업체] -->
+	<select id="selectbusinessid" parameterType="String" resultType="com.kosta.clothes.bean.Business">
+		<![CDATA[
+			SELECT * 
+			FROM business 
+			WHERE businessid=#{businessidCheck}
+		]]>
+	</select>
+	
+	<!--로그인[개인] -->
+	<select id="selectAccount" parameterType="String" resultType="Users">
+		<![CDATA[
+			SELECT userno, nickname, userid, sect
+			FROM users 
+			WHERE userid=#{userid}
+		]]>
+	</select>
+	<!--로그인[업체] -->
+	<select id="selectbAccount" parameterType="String" resultType="Business">
+		<![CDATA[
+			SELECT bno, bname, businessid, sect
+			FROM business 
+			WHERE businessid=#{businessid}
+		]]>
+	</select>
+	
+	<!--아이디찾기 -->
+	<select id="findUserId" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT userid
+			FROM users
+			WHERE phone=#{phone}
+		]]>
+	</select>
+	<select id="findBusinessId" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT businessid
+			FROM business 
+			WHERE bphone=#{bphone}
+		]]>
+	</select>
+	<!--아이디&전화번호 체크 -->
+	<select id="checkUserIdnPhone" parameterType="map" resultType="String">
+		<![CDATA[
+			SELECT userid
+			FROM users
+			WHERE userid = #{userid} and phone=#{phone}
+		]]>
+	</select>
+	<select id="checkBusinessIdnPhone" parameterType="map" resultType="String">
+		<![CDATA[
+			SELECT businessid
+			FROM business
+			WHERE businessid = #{businessid} and bphone=#{bphone}
+		]]>
+	</select>
+	<update id="updatepassword" parameterType="map">
+		<![CDATA[
+			update users set password = #{password} where userid = #{userid}
+		]]>
+	</update>
+	<update id="updatebpassword" parameterType="map">
+		<![CDATA[
+			update business set bpassword = #{bpassword} where businessid = #{businessid}
+		]]>
+	</update>
+	<select id="countUserIdbyPN" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT count(userid)
+			FROM users
+			WHERE phone=#{phone}
+		]]>
+	</select>
+	<select id="countBusinessIdbyPN" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT count(businessid)
+			FROM business
+			WHERE bphone=#{bphone}
+		]]>
+	</select>
+	
+		<!--비밀번호 체크[개인] -->
+	<select id="checkupass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT password
+			FROM users 
+			WHERE userid=#{id}
+		]]>
+	</select>
+	<!-- 개인정보ㅎ수정 -->
+	<update id="updateuser" parameterType="users">
+		<![CDATA[
+			update users 
+			set nickname = #{nickname},
+				password = #{password},
+				phone = #{phone}			 
+			where userid = #{userid}
+		]]>
+	</update>
+
+	
+	
+	
+	
+		<!--비밀번호 체크[업체] -->
+	<select id="checkbpass" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT bpassword
+			FROM business 
+			WHERE businessid=#{id}
+		]]>
+	</select>
+
+	<!-- 업체정보ㅎ수정 -->
+	<update id="updatebusiness" parameterType="business">
+		<![CDATA[
+			update business 
+			set bname = #{bname},
+				bpassword = #{bpassword},
+				bphone = #{bphone},
+				baddress = #{baddress},
+				bdetailadd=#{bdetailadd},
+				bkakaoid=#{bkakaoid},
+				bnumber=#{bnumber}
+			where businessid = #{businessid}
+		]]>
+	</update>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteuser" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from users		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletesharing" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from sharing		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletelikes" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from likes		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletefree" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from free		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteindivi" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from individual		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deleteapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from apply		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletecomment" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from comments		 
+			where userno = #{userno}
+		]]>
+	</delete>
+	
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletereview" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from review		 
+			where userno = #{userno}
+		]]>
+	</delete>	
+
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletemessage" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from message		 
+			where sendUserno = #{userno} and recvUserno = #{userno}
+		]]>
+	</delete>
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletechatroom" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from chatroom		 
+			where sellerno = #{userno} or buyerno = #{userno}
+		]]>
+	</delete>
+	<!-- 개인정보탈퇴 -->
+	<delete id="deletewapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where wuserno = #{userno}
+		]]>
+	</delete>
+	
+	
+		
+	
+
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebusiness" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from business		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebfree" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from free		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deleteblikes" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from likes		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebapply" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from apply		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebcomments" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from comments		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	<!-- 업체정보탈퇴 -->
+	<delete id="deletebreview" parameterType="Integer">
+		<![CDATA[
+			delete  
+			from review		 
+			where bno = #{bno}
+		]]>
+	</delete>
+	
+	
+	<!--userno로 모든 정보 가져오기 -->
+	<select id="selectuAll" parameterType="Integer" resultType="Users">
+		<![CDATA[
+			SELECT *
+			FROM users 
+			WHERE userno=#{userno}
+		]]>
+	</select>
+	<!--bno로 모든 정보 가져오기 -->
+	<select id="selectbAll" parameterType="Integer" resultType="Business">
+		<![CDATA[
+			SELECT *
+			FROM business 
+			WHERE bno=#{bno}
+		]]>
+	</select>	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

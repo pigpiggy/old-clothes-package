@@ -1,0 +1,472 @@
+@charset "UTF-8";
+
+#full{
+	width: 900px;
+	margin: 0 auto;
+	margin-bottom: 25%;
+}
+h2 {
+	margin-bottom: 8px;
+}
+#likeContainer {
+	width: 100%;
+	margin-bottom: 1rem;
+	margin-top: -1rem;
+}
+#list{
+	width:100%; padding:3%;
+}
+#selectbox {
+	display: flex;
+    position: relative;
+    width: 9em;
+    height: 2em;
+    border-radius: 0.25em;
+    overflow: hidden;
+}
+.select {
+	margin: 11px 0 0 0;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
+/* .form{
+	width:300px;
+} */
+/* .allapply{	
+	padding: 5px 20px;
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width:360px; height: 265px;
+	margin-left: -220px;
+	margin-top: -170px;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items:center;
+} */
+/* .form>div {
+	display:flex;
+	margin-bottom: 20px;
+	padding-bottom:7px;
+	align-items:center;	
+}
+.allapply>button{
+	width:85px;
+	float:right;
+	padding:3px;
+}
+.form>div>input{	
+	width:250px;
+	margin-left:15px;
+	padding:5px;
+}
+ */
+/* 찜목록 신청서 */
+
+
+#lmodal{
+    display: none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:10;
+}
+        
+ #litem{
+ box-shadow:none;
+ width:100%;
+ }
+ #lmodal .lmodal_content {
+   width: 20%;
+   height: 54%;
+   top: 10%;
+   margin:5% auto;
+   padding: 1%;
+   text-align: center;
+   background:#fff;
+   border-radius: 10px;
+   border:2px solid #666;
+   position:relative;
+ }
+ 
+ #lmodal .lmodal_layer {
+    position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+   background:rgba(0, 0, 0, 0.5);
+   z-index:-1;
+ }  
+ 
+.lmodal .litem .ltitle {
+     height: 6rem;
+     position: relative;
+}
+
+.lmodal .litem .ltitle:after {
+	content: '';
+    display: block;
+    width: 100%;
+    border-top: 2px solid navy;
+}
+.hr2{
+ 	position: relative;
+    background-color: gray;
+    bottom: 26%;
+    height: 1px;
+    width: 100%;
+    margin-top:6%;
+ } 
+ 
+ /* .hr1{
+	position: relative;
+    background-color: navy;
+    width: 70%;
+    bottom: 23%;
+    height: 1px;
+    width: 109%;
+    left: -8%;
+} */
+ 
+/*  input:focus{
+ 	z-index:5;
+ } */
+.lmodal ul {
+  font-size: 0;
+  padding-left:0;
+}
+
+.lmodal .lmodal_content .litem:nth-child(-n+3){
+  margin-top: 10%;
+}
+.lmodal .lmodal_content .litem:nth-child(3n-2){
+  margin-left: 0;
+}
+
+/* .lmodal .lmodal_content #litem{
+	position: relative;
+    width: 139%;
+    height: 48px;
+    left: -6%;
+    display: contents;
+} */
+
+.lmodal .lmodal_content .litem .ltitle #lstrong{
+	display: block;
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-bottom: -10%;
+}
+ .lmodal .lmodal_content .litem .ltitle #p{
+	font-size: 12px;
+    text-align: center;
+    padding-top: 17%;
+    width: 114%;
+    margin-left: -6%;
+} 
+.lmodal .lmodal_content .litem .ltitle p {
+    font-size: 12px;
+    text-align: center;
+    padding-top: 17%;
+    width: 114%;
+    margin-left: -6%;
+}
+.lmodal .litem strong {
+    display: block;
+    margin: 0 0 -25px 0;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -35px;
+}
+.allapply{
+	margin-top: 6%;
+}
+.lmodal .lmodal_content .litem .allapply .form .cont {
+ 	padding: 11px;
+    height: 56%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.lmodal .lmodal_content .litem .allapply .form .btn{
+  top: -27%;  
+  position: relative;
+  display:flex;
+  justify-content:center;
+}
+.lmodal .lmodal_content .litem .allapply .form .btn ::before{
+ content: '';
+  left: 20;
+  right: 20;
+  top: 0;
+  position: absolute;
+  height: 1.5px;
+  width: auto 230px;
+  background: #ddd;
+}
+
+#lname {
+      position: relative;
+    left: 11%;
+    height: 30px;
+    width: 30%;
+}
+.lmodal .lmodal_content .litem .allapply .form .cont .adre {
+   display: flex;
+  height: 30px;
+  width: 122%;
+  margin-top:4%;
+}
+#laddress{
+    position: relative;
+   left: 11%;
+   width: 58%;
+}
+#lad_bt{
+   width: 19%;
+    margin-left: 15%;
+    border: 1.5px solid #ddd;
+    border-radius: 9px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background-color: #ddd;
+    cursor: pointer;
+    text-align: center;
+}
+#lphone{
+   position: relative;
+  height: 30px;
+  width: 62%;
+  left: 11%;
+  margin-top:4%;
+}
+
+/* .lmodal .lmodal_content .litem .allapply .form .cont .wei #kg{
+	position: relative;
+    top: 515%;
+} */
+
+.lmodal .lmodal_content .litem .allapply .form .cont .wei{
+  display: flex;
+  height: 30px;
+  margin-top:4%;
+  width:122%;	
+}
+#lweight{
+	position: relative;
+    width: 18%;
+    left: 11%;
+}
+.lmodal .lmodal_content .litem .allapply .form .cont .wei p {
+  	font-size: 1.1rem;
+    margin-top: 0px;
+    position: relative;
+    left:12%;
+}
+#lpickup{
+   position: relative;
+   height: 30px;
+   width: 57%;
+   margin-top: 4%;
+   left: 11%;
+}
+#lapplycloth{
+    display: inline-block;
+    margin-left: 22%;
+    padding: 3%;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+    height:3rem;
+}
+#lmodal_close_btn{
+    display: inline-block;
+    padding: 3%;
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+    height:3rem;
+    width:4.8rem;
+}
+
+#applymodal {
+	border: none;
+    background: none;
+}
+
+#applymodal:focus {
+	outline: 0;
+}
+
+/* 개인 찜목록 */
+.sidebar {
+  list-style: none;
+  font-family: "Roboto";
+  background: #4b3e38;
+  color: black;
+  font-weight: 500;
+  padding: 0;
+}
+.sidebar-item {
+  height: 50px;
+  padding-left: 40px;
+  border-top: 1px solid #2d3b3e;
+}
+.user-list {
+  background: white;
+  font-family: "Roboto", sans-serif;
+}
+.user {
+  border-top: 1px solid #ebebeb;
+  padding-left: 20px;
+  list-style-type: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: background-color 100ms, border-left 50ms;
+}
+.user:hover:not(.selected) {
+  background-color: #ebebeb;
+}
+.user.selected {
+  background-color: #edf4fd;
+}
+.user > div,
+.user .info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 500;
+  width: 200px;
+  color: #504944;
+  margin-right: 100px;
+}
+.name a {
+	color: black;
+}
+.date {
+  margin-right: 100px;
+  width: 100px;
+  color: #7c7475;
+}
+.remove {
+  width: 15px;
+  height: 15px;
+  outline: none;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.user .productimg {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  transition: height 50ms, width 50ms;
+}
+.user .img-wrap {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EXPANDING */
+.user:not(.expanded) .expand {
+  max-height: 0%;
+  overflow: hidden;
+  transition: max-height 1s;
+}
+.user.expanded .expand {
+  max-height: 100%;
+}
+
+/* 사업자 찜목록 */
+.bname {
+  font-weight: bold;
+}
+
+.address {
+  margin-right: 100px;
+  width: 30%;
+  color: #7c7475;
+}
+#address {
+	font-size: 13px;
+	width: auto;
+}
+.icons {
+	display: flex;
+	align-items: center;
+}
+.icons img {
+	cursor: pointer;
+	margin-right: 5px;
+}
+.apply {
+	width: 30px;
+	border: transparent;
+}
+.nameandadd {
+	margin-right: 15%;
+}
+#delete{
+	border: 0px;
+    background-color: transparent
+}
+#paging {
+	margin-top: 2%;
+    display: flex;
+    justify-content: center;
+}
+#pagingul{
+	margin-top:1%;
+	list-style-type:none;
+}
+
+#pagingul li {
+float:left;
+display: inline;
+}
+
+#pagingul li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+#pagingul li a.active {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #2196f3;;
+}
+
+#pagingul li a:hover:not(.active) {background-color: #ddd;}
+

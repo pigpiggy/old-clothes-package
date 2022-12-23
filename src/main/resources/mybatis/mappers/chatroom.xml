@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kosta.clothes.dao.ChatRoomDAO">
+    <insert id="addChatRoom" parameterType="ChatRoom">
+	<selectKey keyProperty="chatno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select chatroom_seq.nextval from dual
+		]]>
+	</selectKey>
+		<![CDATA[
+    	INSERT INTO 
+    	CHATROOM(chatno,ino, sellerno, buyerno, fileName, createdDate, sellerName, buyerName, ititle, chatReadBuy, chatReadSell)
+    	VALUES (#{chatno},#{ino}, #{sellerno}, #{buyerno}, #{fileName, jdbcType=VARCHAR}, #{createdDate}, #{sellerName}, #{buyerName}, #{ititle}, 1, 1)
+   		]]>
+    </insert>
+    	
+    <select id="findByEmail" resultType="ChatList">
+		<![CDATA[
+		SELECT *
+		FROM chatroom c, INDIVIDUAL i
+		WHERE c.INO = i.INO AND (c.SELLERNO = #{chatuserno} 
+		OR c.BUYERNO =#{chatuserno})
+   		]]>
+    </select>
+    
+    <select id="countByChatId" parameterType="map" resultType="int">
+		<![CDATA[
+    	SELECT COUNT(*)
+    	FROM CHATROOM
+    	WHERE ino = #{ino} AND
+    	buyerno = #{buyerno}
+    	]]>    	
+    </select>
+    
+    <select id="findByChatId" parameterType="map" resultType="ChatRoom">
+		<![CDATA[
+    	select * from chatroom 
+    	where ino=#{ino} and buyerno=#{buyerno}
+   		]]>
+    </select>
+    
+    <select id="getId" parameterType="map" resultType="Integer">
+		<![CDATA[
+    	SELECT chatno
+    	FROM CHATROOM
+    	WHERE ino = #{ino} AND
+    	buyerno = #{buyerno}
+   		]]>
+    </select>
+
+    <update id="updateFileName" parameterType="map">
+		<![CDATA[
+    	UPDATE CHATROOM
+    	SET FILENAME = #{fileName}
+    	WHERE chatno = #{chatno}
+   		]]>
+    </update>
+
+    <update id="updateChatReadBuy" parameterType="map">
+		<![CDATA[
+    	UPDATE CHATROOM
+    	SET CHATREADBUY = #{chatReadBuy}
+    	WHERE chatno = #{chatno}
+   		]]>
+    </update>
+    
+    <update id="updateChatReadSell" parameterType="map">
+		<![CDATA[
+    	UPDATE CHATROOM
+    	SET CHATREADSELL = #{chatReadSell}
+    	WHERE chatno = #{chatno}
+   		]]>
+    </update>
+    
+   <select id="getUnreadMessages" resultType="int">
+		<![CDATA[
+		SELECT COUNT(chatno)
+		FROM CHATROOM
+		WHERE (sellerno = #{chatuserno} AND CHATREADSELL = 0) OR 
+		(BUYERNO = #{chatuserno} AND CHATREADBUY = 0)
+   		]]>
+   </select>
+   
+   <select id="getUnreadChatRoom" resultType="int">
+		<![CDATA[
+   		SELECT chatno
+   		FROM CHATROOM
+   		WHERE (sellerno = #{chatuserno} AND CHATREADSELL = 0) OR 
+   		(buyerno = #{chatuserno} AND CHATREADBUY = 0)
+   		]]>
+   </select>
+   
+   	<delete id="deleteChat" parameterType="map">
+		<![CDATA[
+			delete from chatroom where ino=#{ino} and sellerno=#{sellerno}
+		]]>
+	</delete>
+    
+</mapper>

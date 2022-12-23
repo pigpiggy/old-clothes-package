@@ -1,0 +1,21 @@
+@charset "UTF-8";
+ul,
+li {
+	list-style: none;
+}
+
+.down {
+	width: 15px;
+	opacity: 0.8;
+}
+.logo {
+	width: 100px;
+}
+
+.navbar-nav {
+	display: flex;
+}
+
+.d-flex {
+    align-items: center;
+}

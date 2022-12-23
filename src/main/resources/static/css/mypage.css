@@ -1,0 +1,386 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.closet_wrap {
+  width: 1000px;
+  margin: 100px auto;
+  font-size: 10px;
+}
+
+.nickname {
+  margin-bottom: 30px;
+  width: 46%;
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+}
+
+.nickname strong {
+  font-size: 3em;
+  text-align: center;
+}
+
+.title {  
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.fname_closet {
+  display: flex;
+  position: absolute;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+#like {
+	width: 30px;
+	position: relative;
+	right: 15px;
+	margin-left: 15px;
+}
+
+#letter {
+  width: 27px;
+  height: 27px;
+  position: relative;
+  right: 7.5px;
+}
+
+#prosetting {
+  width: 30px;
+}
+
+#clostick1 {
+  	margin-top: -40px;
+    height: 60px;
+    position: relative;
+    right: 20px;
+}
+
+#clostick2{
+  	margin-top: -40px;
+    height: 60px;
+    position: relative;
+    left: 19px;
+}
+
+#setting {
+	height: 25px;
+    position: relative;
+    right: -700px;
+    top: -55px;
+    cursor: pointer;
+	
+}
+
+.closetImage {
+	display: flex;	
+}
+
+.closetImage img {
+  width: 200px;
+}
+
+.self_Introduction {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.myRecord {
+  border-top: 2px solid #ddd; 
+  border-bottom: 2px solid #ddd;
+  padding: 15px;
+  justify-content: space-evenly;
+  display: flex;
+  font-size: 1.5em;  
+}
+
+.introduce {
+overflow-y: scroll;
+  border-bottom: 2px solid #ddd;
+  padding: 60px;
+  font-size: 17px;
+}
+
+.second {
+  width: 100%;
+}
+
+.my_Tab {
+	width: 1000px;
+  	margin: 10px auto;
+  	font-size: 10px;
+	padding: 20px;
+}
+
+.tabs { 
+	display: flex;
+  	height: 50px;
+  	border-bottom: 2px solid navy;
+	box-sizing: content-box;
+}
+	
+.tabs li {
+	flex: 1;
+	box-sizing: content-box;
+}
+
+.tabs li :first-child a{
+  border-left: 1px solid #ddd;
+}
+
+.tabs li a {
+	display: block;
+	height: 50px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	font-size: 14px;
+	color:#505050;
+	text-align: center;
+	line-height: 52px;
+	text-decoration: none;
+	box-sizing: content-box;
+}
+
+.tabs li.on a {
+position: relative;
+  height: 48px;
+  border-color: navy;
+  border-top-width: 2px;
+  line-height: 45px;
+  border-bottom: 2px solid #fff;
+
+}
+
+.tab_con {
+	margin-top:20px;
+	display: none;
+	font-size: 24px;
+}
+
+.tab_con.on {
+	display: block;
+	
+	}
+	
+.display {
+	display : none;
+	
+}
+.intro_check{
+	display: flex;
+}
+
+.intro_text{
+	resize:none;
+	height: 160px;
+    width: 95%;
+    font-size: 16px;
+}
+.intro_btn{
+	width: 8%;
+    outline: none;
+    border: none;
+    height: 160px;
+}
+.modal {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px;
+}
+.modal ul {
+    font-size: 0;
+}
+.modal .item{
+    display: inline-block;
+    width: 30%;
+    margin-top: 40px;
+    margin-left: 5%;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+.modal .item:nth-child(-n+3){
+    margin-top: 0;
+}
+.modal .item:nth-child(3n-2){
+    margin-left: 0;
+}
+.modal .item .title {
+    padding: 15px;
+    height: 50px;
+    position: relative;
+}
+.modal .item .title::before{
+    content: '';
+    left: 10;
+    right: 10;
+    bottom: 0;
+    position: absolute;
+    height: 2px;
+    width: auto 270px;
+    background: navy;
+}
+.modal .item p {
+    font-size: 10.5px;
+    text-align: center;
+}
+.modal .item strong {
+    display: block;
+    margin: 0 0 10px 0;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+}
+.modal .item .cont {
+    padding: 12px;
+    height: 175;
+}
+.modal .item .btn{
+    padding: 0.5px;
+    position: relative;
+}
+.modal .item .btn::before{
+    content: '';
+    left: 20;
+    right: 20;
+    top: 0;
+    position: absolute;
+    height: 1.5px;
+    width: auto 230px;
+    background: #ddd;
+}
+#aname {
+    height: 28px;
+    width: 30%;
+}
+.modal .item .adre {
+    display: flex;
+    height: 28px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#aadress{
+    width: 80%;
+}
+#aad_bt{
+    width: 20%;
+    margin-left: 3px;
+    border: 1.5px solid #ddd ;
+    border-radius: 9px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background-color:#ddd;
+    cursor: pointer;
+    text-align: center;
+}
+#aphone{
+    height: 28px;
+    width: 67%;
+}
+.modal .item .wei{
+    display: flex;
+    height: 28px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#weight{
+    width: 20%;
+}
+.modal .item .wei p {
+    margin-left: 3px;
+    font-size: 1.1rem;
+    margin-top: 0px;
+}
+#apickup{
+    height: 28px;
+    width: 67%;
+    margin-top: 8px;
+}
+#applycloth{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 140px;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: rgb(23,162,184);
+    border: 1px solid rgb(23,162,184);
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#modal_close_btn{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+#chaticon_img {
+	width: 28px;
+	height: 28px;
+	margin-right: 11px;
+}
+
+@keyframes notificationAnimation {
+  0% {
+    transform: none;
+  }
+  50% {
+    transform: translateY(-5px) rotateY(180deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.nav__notification {
+  position: absolute;
+  bottom: 15px;
+  right: 23%;
+  animation: notificationAnimation 2s ease-in-out infinite;
+}
+
+.nbadge {
+  background-color: tomato;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.fname_closet span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

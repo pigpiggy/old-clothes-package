@@ -1,0 +1,167 @@
+@charset "UTF-8";
+:root {
+  --background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+.messageContainer{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 25%;
+}
+
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: var(--darkgray);
+  background-color: #fff;
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 9em;
+  height: 2em;
+  border: 1px solid var(--darkgray);
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '▼';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  transition: .25s all ease;
+  pointer-events: none;
+  color: var(--darkgray);
+  line-height: 2em;
+  padding-right: 0.5em;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+/* content */
+h2 {
+	margin-bottom: 50px;
+}
+
+h5 {
+	font-weight: bold;
+	margin: 20px 0;
+}
+#select {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 13px;
+}
+
+#letter_img {
+	width: 25px;
+}
+
+thead {
+	text-align: center;
+}
+
+tbody {
+	text-align: center;
+}
+input[type="checkbox"] {
+	position: relative;
+	margin-left: 0;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modaltitle{
+	margin-bottom: 15px;
+}
+
+.mtitle {
+	cursor: pointer;
+}
+
+.mtitle a{
+	color: black;
+}
+
+#modal__content {
+	height: 375px;
+}
+
+.modalContent {
+  border-radius: 4px;
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  height: 360px;
+  background: #fff;
+  padding: 1em 2em;
+}
+
+.modalContent2 {
+  border-radius: 4px;
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  height: 360px;
+  background: #fff;
+  padding: 1em 2em;
+}
+
+/* paging */
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+  color: black;
+  padding: 6px 11px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+div.center {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+
+
+

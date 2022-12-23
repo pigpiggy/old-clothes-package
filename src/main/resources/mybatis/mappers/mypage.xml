@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.MypageDAO">
+	<select id="getSellList" parameterType="map" resultType="Sell">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, u.NICKNAME,i.* FROM users u, individual i WHERE i.userno=#{userno} and u.userno=i.userno)
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+
+	<select id="getSharingList" parameterType="map" resultType="Sharing">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, u.NICKNAME,s.* FROM users u, sharing s WHERE s.userno=#{userno} and u.userno=s.userno)
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<select id="getBuySellList" parameterType="map" resultType="Sell">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY ino desc) num, u.NICKNAME,i.* FROM users u, individual i WHERE i.selectedno=#{userno} and u.userno=i.userno)
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<select id="getBuySharingList" parameterType="map" resultType="Sharing">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER (ORDER BY sno desc) num, u.NICKNAME,s.* FROM users u, sharing s WHERE s.selectedno=#{userno} and u.userno=s.userno)
+			WHERE num BETWEEN #{row} AND #{row}+9
+		]]>
+	</select>
+	
+	<select id="getSellapplylist" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.nickname, w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE ino = #{ino} and wuserNo = u.userNo
+		]]>
+	</select>
+	
+	<select id="getSharingapplylist" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.nickname,  w.wuserno as userNo, to_char(w.regdate,'YY-MM-DD HH24:MI:SS') as joinDate FROM wapply w, users u WHERE sno = #{sno} and wuserNo = u.userNo
+		]]>
+	</select>
+
+	<insert id="uintroduce" parameterType="map">
+		<![CDATA[
+			update users set
+			introduce = #{introduce} where userno = #{userno}
+		]]>
+		</insert>
+		
+	<insert id="bintroduce" parameterType="map">
+		<![CDATA[
+			update business set
+			bintroduce = #{bintroduce} where bno = #{bno}
+		]]>
+		</insert>		
+		
+		<select id="uintromyself" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT INTRODUCE FROM USERS WHERE userno=#{userno}
+		]]>
+	</select>
+	
+	<select id="bintromyself" parameterType="Integer" resultType="String">
+		<![CDATA[
+			SELECT BINTRODUCE FROM BUSINESS WHERE bno=#{bno}
+		]]>
+	</select>
+		
+	<select id="getMypage" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT * FROM USERS WHERE userno=#{userno}
+
+		]]>
+	</select>
+	
+	<select id="sellListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM individual where userno = #{userno}
+    
+		]]>
+	</select>
+	
+	<select id="sharingListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM sharing where userno = #{userno}
+
+		]]>
+	</select>
+	
+	<delete id="selectSellApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where ino = #{ino} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<delete id="selectSharingApply" parameterType="map">
+		<![CDATA[
+			delete  
+			from wapply		 
+			where sno = #{sno} and not(wuserno=#{userno})
+		]]>
+	</delete>
+	
+	<update id="cancelDeal" parameterType="Integer">
+		<![CDATA[
+			update individual set istatus='거래 실패'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="cancelSharingDeal" parameterType="Integer">
+		<![CDATA[
+			update sharing set sstatus='거래 실패'
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<select id="completedCount" resultType="Sell" parameterType="Integer">
+		<![CDATA[
+			SELECT sellCompletedCount, buyCompletedCount FROM individual where ino=#{ino}
+
+		]]>
+	</select>
+	
+	<update id="upDealCount" parameterType="Integer">
+		<![CDATA[
+			update individual set sellCompletedCount=sellCompletedCount+1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="upSeDealCount" parameterType="Integer">
+		<![CDATA[
+			update individual set buyCompletedCount=buyCompletedCount+1
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="completeDeal" parameterType="Integer">
+		<![CDATA[
+			update individual set istatus='거래 완료'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<select id="completedSharingCount" resultType="Sharing" parameterType="Integer">
+		<![CDATA[
+			SELECT sellCompletedCount, buyCompletedCount FROM sharing where sno=#{sno}
+
+		]]>
+	</select>
+	
+	<update id="upSharingDealCount" parameterType="Integer">
+		<![CDATA[
+			update sharing set sellCompletedCount=sellCompletedCount+1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="upShDealCount" parameterType="Integer">
+		<![CDATA[
+			update sharing set buyCompletedCount=buyCompletedCount+1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="completeSharingDeal" parameterType="Integer">
+		<![CDATA[
+			update sharing set sstatus='거래 완료'
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<select id="buySellListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM individual where selectedno = #{userno}
+    
+		]]>
+	</select>
+	
+	<select id="buySharingListCount" resultType="Integer">
+		<![CDATA[
+			SELECT count(*) FROM sharing where selectedno = #{userno}
+    
+		]]>
+	</select>
+	<select id="getLikeSharingList" parameterType="map" resultType="Sharing">
+		<![CDATA[
+			SELECT s.* FROM sharing s WHERE sno in (SELECT sno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	<select id="getLikeSellList" parameterType="map" resultType="sell">
+		<![CDATA[
+			SELECT i.* FROM INDIVIDUAL i WHERE ino in (SELECT ino FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	<select id="getLikeBusinessList" parameterType="map" resultType="business">
+		<![CDATA[
+			SELECT b.* FROM BUSINESS b WHERE bno in (SELECT bno FROM LIKES WHERE userno = #{userno} AND likescheck = 1)
+    
+		]]>
+	</select>
+	
+	<update id="deletesLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where sno=#{sno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deleteiLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where ino=#{ino} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletebLike" parameterType="map">
+		<![CDATA[
+			update likes set likescheck=0
+			where bno=#{bno} and userno=#{userno}
+		]]>
+	</update>
+	<update id="deletesLikecount" parameterType="Integer">
+		<![CDATA[
+			update sharing set likes=likes-1
+			where sno=#{sno}
+		]]>
+	</update>
+	<update id="deleteiLikecount" parameterType="Integer">
+		<![CDATA[
+			update individual set likes=likes-1
+			where ino=#{ino}
+		]]>
+	</update>
+	<insert id="sendIReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, ino)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{ino})
+		]]>
+	</insert>
+	
+	<insert id="sendSReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, sno)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{sno})
+		]]>
+	</insert>
+	
+	<insert id="sendUapplyReview" parameterType="map">
+		<selectKey keyProperty="rno" resultType="Integer" order="BEFORE">
+			<![CDATA[
+				select review_seq.nextval from dual
+			]]>
+		</selectKey>
+		
+		<![CDATA[
+			insert into review(rno, rcontent, regDate, userno, rstar, bno)
+					values(#{rno},#{content},sysdate,#{userno},#{star},#{bno})
+		]]>
+	</insert>
+	
+	<update id="uapplyReviewCompleted" parameterType="map">
+		<![CDATA[
+			update apply set astatus='후기등록완료'
+			where ano=#{ano}
+		]]>
+	</update>
+	
+	<update id="uapplyReviewStatus" parameterType="Integer">
+		<![CDATA[
+			update apply set astatus='후기대기'
+			where ano=#{ano}
+		]]>
+	</update>
+	
+	<update id="changeIReviewStatus" parameterType="map">
+		<![CDATA[
+			update INDIVIDUAL set istatus='후기등록완료'
+			where ino=#{ino}
+		]]>
+	</update>
+	
+	<update id="changeSReviewStatus" parameterType="map">
+		<![CDATA[
+			update sharing set sstatus='후기등록완료'
+			where sno=#{sno}
+		]]>
+	</update>
+	
+</mapper>	

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+	<mapper namespace="com.kosta.clothes.dao.ApplyDAO">
+<!-- 개인이 개인에게 무료나눔/개인판매 신청(wapply 테이블) -->
+	<insert id="insertSwapply" parameterType="Wapply">
+	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select wapply_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into wapply (wno,wuserno,sno,regdate)
+			values (wapply_seq.nextval,#{wuserno},#{sno},sysdate)
+		]]>
+	</insert>
+	
+	<select id="getSapply" parameterType="map" resultType="Wapply">
+		<![CDATA[
+			select wuserno,sno
+			from wapply
+			where wuserno=#{wuserno} and sno=#{sno}
+		]]>
+	</select>
+	
+	<insert id="insertIwapply" parameterType="Wapply">
+	<selectKey keyProperty="wno" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select wapply_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into wapply (wno,wuserno,ino,regdate)
+			values (#{wno},#{wuserno},#{ino},sysdate)
+		]]>
+	</insert>
+
+	<select id="getIapply" parameterType="map" resultType="Wapply">
+		<![CDATA[
+			select wuserno,ino
+			from wapply
+			where wuserno=#{wuserno} and ino=#{ino}
+		]]>
+	</select>
+	 
+	<delete id="deleteSwapply" parameterType="Integer">
+		<![CDATA[
+			delete from wapply where sno=#{sno}
+		]]>
+	</delete>	 
+	
+	<delete id="deleteIwapply" parameterType="Integer">
+		<![CDATA[
+			delete from wapply where ino=#{ino}
+		]]>
+	</delete>	 	
+	 
+<!-- 개인이 업체에게 수거신청(apply 테이블) -->
+	<insert id="insertapply" parameterType="apply">
+	<selectKey keyProperty="ano" resultType="Integer" order="BEFORE">
+		<![CDATA[
+			select apply_seq.nextval from dual
+		]]>
+	</selectKey>		
+		<![CDATA[
+			insert into apply (ano,aname,aphone,weight,aaddress,apickup,userno,bno,astatus)
+			values (#{ano},#{aname},#{aphone},#{weight},#{aaddress},#{apickup},#{userno},#{bno},#{astatus})
+
+		]]>
+	</insert>
+
+	<!-- 신청 폼 개수 -->
+	<select id="applycount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno}
+			]]>
+		</select>
+		
+	<!-- 거래 상태 카운트 -->
+	<select id="astatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='후기등록완료'
+			]]>
+		</select>
+		
+	<select id="bstatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='신청거절'
+			]]>
+		</select>
+		
+	<select id="cstatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='수거완료'
+			]]>
+		</select>
+		
+	<select id="dstatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='신청중'
+			]]>
+		</select>
+		
+	<select id="estatuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from apply where bno=#{bno} and astatus='신청완료'
+			]]>
+		</select>
+	
+	<!-- 사용자 -> 사업자에게 신청한 목록 리스트  -->
+	<select id="getBapply" parameterType="Integer" resultType="apply">
+		<![CDATA[
+			SELECT * FROM apply WHERE bno = #{bno} ORDER BY ano desc
+		]]>
+	</select>
+	
+	<!-- 사용자가 신청한 목록 -->
+	<select id="getUapply" parameterType="Integer" resultType="apply">
+		<![CDATA[
+			SELECT * FROM apply a, business b 
+			WHERE a.bno = b.bno and userno = #{userno} ORDER BY a.ano asc
+		]]>
+	</select>
+	
+	<!-- 수거 승인시 -->
+	<update parameterType="map" id="updateApply">
+	<![CDATA[
+				UPDATE APPLY 
+				SET ASTATUS = #{astatus}
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</update>
+	
+	<!-- 수거 거절 -->
+	<update parameterType="map" id="deleteApply">
+	<![CDATA[
+				UPDATE APPLY 
+				SET ASTATUS = #{astatus}
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</update>
+	
+	<!-- 신청 취소 -->
+	<delete id="deletewApply" parameterType="map" >
+	<![CDATA[
+				delete
+				from apply
+				WHERE ano=#{ano} AND USERNO = #{userno}
+			]]>
+	</delete>
+	
+	<!-- 개인 마이페이지 개수(페이징) -->
+	<select id="applyListCount" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM apply WHERE USERNO =#{userno}
+		]]>
+	</select>
+	
+	<select id="getApplyList" parameterType="map" resultType="Apply">
+		<![CDATA[
+			SELECT * 
+			FROM (SELECT ROW_NUMBER() OVER(ORDER BY apickup) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,b.bno,b.BNAME  FROM apply a , business b WHERE userno=${userno} AND a.BNO = b.BNO) a) 
+			WHERE num BETWEEN #{row} AND #{row}+5
+		]]>
+	</select>
+	
+	<!-- 개인 마이페이지 개수(페이징) -->
+	<select id="bapplyListCount" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM apply WHERE BNO =#{bno}
+		]]>
+	</select>
+	
+	<select id="bgetApplyList" parameterType="map" resultType="Apply">
+		<![CDATA[
+			SELECT * 
+			FROM (SELECT ROW_NUMBER() OVER(ORDER BY apickup) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,bno FROM apply WHERE bno=#{bno})a) 
+			WHERE num BETWEEN #{row} AND #{row}+5
+		]]>
+	</select>
+
+</mapper>	

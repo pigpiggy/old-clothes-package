@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kosta.clothes.dao.BusinessDAO">
+	<select id="selectBusiness" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+		]]>
+	</select>
+	
+	<select id="likecheck" resultType="Long" parameterType="map">
+		<![CDATA[
+			SELECT likescheck
+			FROM likes
+			WHERE bno=${bno} and userno=${userno}
+		]]>
+	</select>
+	
+	<!-- <select id="selectBusiness1" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.* ,l.*
+			FROM BUSINESS b LEFT OUTER JOIN LIKES l ON b.bno = l.bno   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' AND userno=#{userno}
+			union
+			SELECT b.*,l.*
+			FROM BUSINESS b LEFT OUTER JOIN LIKES l ON b.bno = l.bno   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+		]]>
+	</select> -->
+	
+	<!-- 로그인 안 했을 때 카테고리 정렬 -->
+	<!-- <select id="selectCatereview" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY reviewcount desc nulls last			
+		]]>
+	</select>
+	
+
+	<select id="selectCatehigh" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO 
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar desc	nulls last		
+		]]>
+	</select>	
+	
+	<select id="selectCatelow" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM  BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'			
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar asc nulls first			
+		]]>
+	</select> -->
+	<!-- 로그인 했을 때 카테고리 정렬 -->
+	<select id="selectUserCatereview" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY reviewcount desc nulls last
+			
+		]]>
+	</select>
+	
+	<select id="selectUserCatehigh" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO   
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%'
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar desc nulls last
+		]]>
+	</select>
+	
+	<select id="selectUserCatelow" resultType="Business" parameterType="map">
+		<![CDATA[
+			SELECT b.BNO,b.BNAME,avg(r.rSTAR) AS bstar,count(r.RSTAR) AS reviewcount, b.BADDRESS, b.BUSINESSID, b.BDETAILADD, b.BKAKAOID, b.BPHONE, b.BNUMBER 
+			FROM BUSINESS b LEFT OUTER JOIN review r ON b.BNO = r.BNO  
+			WHERE baddress LIKE '%'||#{sido}||'%' AND baddress LIKE '%'||#{sigungu}||'%' 
+			GROUP BY b.BNO,b.BNAME,r.bno, b.BADDRESS, b.BUSINESSID,b.BDETAILADD,b.BKAKAOID,b.BPHONE, b.BNUMBER
+			ORDER BY bstar asc nulls first
+		]]>
+	</select>
+	
+</mapper>

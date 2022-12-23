@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.kosta.clothes.dao.SharingDAO">
+	<select id="getNextSharingNo" resultType="Integer">
+		<![CDATA[
+			select sharing_seq.nextval from dual
+		]]>
+	</select>
+	
+	<insert id="insertSharing" parameterType="sharing">
+		<![CDATA[
+			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,
+			saddress,userno,regDate)
+			values (#{sno},#{stitle},#{scontent},#{sstatus},#{sfileids,jdbcType=VARCHAR},
+			#{sdealType},#{saddress},#{userno},sysdate)
+	
+		]]>
+	</insert>
+	
+	<select id="selectSharing" parameterType="Integer" resultType="sharing">
+		<![CDATA[
+			select u.nickname as sname, s.*
+			from users u, sharing s 
+			where u.userno = s.userno and sno = #{sno}		
+		]]>
+	</select>
+	
+	<update id="updateSharing" parameterType="sharing">
+		<![CDATA[
+			update sharing set stitle=#{stitle},scontent=#{scontent},saddress=#{saddress},
+			sdealType=#{sdealType},sfileids=null
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="updateSfileids" parameterType="sharing">
+		<![CDATA[
+			update sharing set sfileids=#{sfileids, jdbcType=VARCHAR}
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<delete id="deleteSharing" parameterType="Integer">
+		<![CDATA[
+			delete from sharing where sno=#{sno}
+		]]>
+	</delete>
+	
+	<update id="upSharingLikes" parameterType="sharing">
+		<![CDATA[
+			update sharing set likes = likes + 1
+			where sno=#{sno}
+		]]>
+	</update>
+	
+	<update id="downSharingLikes" parameterType="sharing">
+		<![CDATA[
+			update sharing set likes = likes - 1
+			where sno=#{sno}
+		]]>
+	</update>
+		
+	<select id="getSnickname" parameterType="Integer" resultType="users">
+		<![CDATA[
+			SELECT u.NICKNAME, u.userno 
+			FROM USERS u , SHARING s 
+			WHERE u.USERNO = s.USERNO AND s.SNO = #{sno}		
+		]]>
+	</select> 
+
+	<update id="upApplycount" parameterType="sharing">
+		<![CDATA[
+			update sharing set applycount = applycount + 1
+			where sno=#{sno}
+		]]>
+	</update>	
+
+	<select id="getByUserid" parameterType="String" resultType="sharing">
+		<![CDATA[
+			select *
+			from users u, sharing s 
+			where u.userno = s.userno and userid=#{userid}
+		]]>
+	</select>
+	
+	<select id="selectSharingList" resultType="sharing">
+		<![CDATA[
+			select * from ( select u.NICKNAME,s.* from users u, sharing s where u.userno=s.userno order by sno desc) 
+			where rownum <= 6 
+		]]>
+	</select>
+	
+	<select id="selectSharingSearchedList" resultType="sharing" parameterType="String">
+		<![CDATA[
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' AND u.userno=s.userno order by sno desc )
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="infiniteScrollDown" parameterType="Integer" resultType="sharing">
+		<![CDATA[
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where sno <=#{snoToStart} and u.userno=s.userno order by sno desc)
+
+			where rownum <= 6
+		]]>
+	</select>
+	
+	<select id="searchedInfiniteScrollDown" parameterType="map" resultType="sharing">
+		<![CDATA[
+			select * from ( select u.NICKNAME,s.* from  users u, sharing s where sno <=#{sno} and (stitle||scontent||sstatus||saddress||sdealType||regdate) like '%'||#{kwd}||'%' and u.userno=s.userno order by sno desc)
+			where rownum <= 6
+		]]>
+	</select>
+
+	<select id="sharingcount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from sharing where userno=#{userno}
+			]]>
+		</select>
+		
+		<select id="statuscount"  parameterType="Integer" resultType="Integer">
+			<![CDATA[
+				select count(*) from sharing where userno=#{userno} and sstatus='등록완료'
+			]]>
+		</select>
+		
+	<update id="alterSharingStatus" parameterType="Integer">
+		<![CDATA[
+			update sharing set (sstatus, selectedno)=(select '거래중', #{userno} from dual)
+			where sno=#{sno}
+		]]>
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

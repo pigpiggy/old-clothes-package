@@ -132,7 +132,7 @@
 				        	<a href="/mypage/umypage/${sharing.userno }/sell">
 				        		<input type="button" id="openclothes" class="buttoncontent" value="옷장열기" />
 				        	</a>
-				        	<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
+				        	<input type="button" id="wapply" class="buttoncontent" value="나눔신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
@@ -141,7 +141,7 @@
 			        					<a href="/mypage/umypage/${sharing.userno }/sell">
 			        						<input type="button" id="openclothes" class="buttoncontent" value="옷장열기" />
 			        					</a>
-			        					<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
+			        					<input type="button" id="wapply" class="buttoncontent" value="나눔신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}/sell">

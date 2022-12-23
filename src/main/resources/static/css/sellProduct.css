@@ -35,6 +35,7 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+	margin-top: 7px;  
 }
 .buttoncontent {
     width: 6em;

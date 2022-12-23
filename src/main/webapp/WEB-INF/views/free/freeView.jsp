@@ -22,7 +22,7 @@
 
 .viewcont {
     position: relative;
-    height: 216px;
+    height: auto;
     border-bottom: 2px solid navy;
 }
 .viewcont p {

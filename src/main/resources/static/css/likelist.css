@@ -8,6 +8,10 @@
 h2 {
 	margin-bottom: 8px;
 }
+
+.likelistSub {
+	margin-bottom: 2.5rem;
+}
 #likeContainer {
 	width: 100%;
 	margin-bottom: 1rem;

@@ -17,7 +17,7 @@
 <body>
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div id="full">
-		<h2><strong>찜 목록</strong></h2>
+		<h2 class="likelistSub"><strong>찜 목록</strong></h2>
 		<div id="cate" class="select" >
 			<div id="selectbox">
 				<select id="catelist" onchange="catelist()">

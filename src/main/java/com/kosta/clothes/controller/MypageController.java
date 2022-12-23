@@ -1521,7 +1521,7 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/sellView/"+ino;
+      return "redirect:/sellapplyList/"+ino;
    }
    
    @GetMapping("/selectSharingApply")

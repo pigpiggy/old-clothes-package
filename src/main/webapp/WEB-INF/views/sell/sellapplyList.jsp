@@ -31,35 +31,7 @@ h2 {
   -webkit-animation: fade 2s 1.5s linear; 
   -webkit-animation-fill-mode: forwards;
 }
-#divider {
-  width: 0px; height: 2px; 
-  background: black;
-  margin: -30px auto 0;
-  opacity: 0;
-  -webkit-animation: fade 1s 0.75s linear,
-    						  stretch 1s 0.4s linear;
-  -webkit-animation-fill-mode: forwards;  
-  background: #ddd;
-}
 
-@-webkit-keyframes fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@-webkit-keyframes up {
-  0%    { margin-top: 90px; }
-  60%   { margin-top: 30px; }
-  70%   { margin-top: 25px;  }
-  80%   { margin-top: 30px; }
-  90%   { margin-top: 25px;  } 
-  100%  { margin-top: 30px; }
-}
-
-@-webkit-keyframes stretch {
-  from { width: 0px;   }
-  to   { width: 185px; } 
-}
 li {
 	list-style: none;
 }
@@ -159,6 +131,11 @@ li {
 				$('.submitButton').attr("disabled", true);
 			}
 		}
+		
+		$('.submitButton').click(function(){
+	          alert('신청이 완료되었습니다.');
+	          opener.parent.location.reload();
+	       });
  	</script>
 </body>
 </html>

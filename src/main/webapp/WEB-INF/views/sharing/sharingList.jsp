@@ -59,7 +59,7 @@
 		          	</c:if>
 		          	<c:choose>
 		          		<c:when test="${empty sharing.sfileids }">
-		          			<img src="image/logo3.png" alt="로고">
+		          			<img src="/static/imagelogo3.png" alt="로고">
 		          		</c:when>
 		          		<c:otherwise>
 		              		<img src="upload/${ sharing.sfileids}" alt="무료나눔 옷">
@@ -69,10 +69,10 @@
 		          <div class="card-body">
 		              <span class="sdate">${sharing.regDate}</span>
 		              <h2 class="sharingTitle">${sharing.stitle }</h2>
-		              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${sharing.nickname}</p></div>
+		              <div class="sharingDealNick"><p><img src="/static/image/yellowuser.png">${sharing.nickname}</p></div>
 		          </div>
 		          <div class="card-footer">
-		          	  <img src="/image/pin.png"><p>${sharing.saddress}</p>
+		          	  <img src="/static/image/pin.png"><p>${sharing.saddress}</p>
 		          </div>
 		      </div>
 	     </a>

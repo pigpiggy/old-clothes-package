@@ -55,7 +55,7 @@
 	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sell.ifileids }">
-	          			<img src="image/logo3.png" alt="로고">
+	          			<img src="/static/image/logo3.png" alt="로고">
 	          		</c:when>
 	          		<c:otherwise>
 	              		<img src="upload/${ sell.ifileids}" alt="무료나눔 옷">

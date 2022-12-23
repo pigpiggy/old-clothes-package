@@ -5,8 +5,8 @@
 <html>
 <head>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/static/css/review.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/static/css/free.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
@@ -51,51 +51,51 @@
 					                <c:if test="${review.rstar == 1}">
 						            	<span class="starcontent">"최악이에요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 2}">
 						            	<span class="starcontent">"별로예요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 3}">
 						            	<span class="starcontent">"보통이에요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 4}">
 						            	<span class="starcontent">"만족해요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 5}">
 						            	<span class="starcontent">"아주 만족해요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            </div>
@@ -113,7 +113,7 @@
 					        </div>
 					        <div id="reviewWriter">
 					        	<div class="rNickname">
-					        		<img src="/image/orangeuser.png">
+					        		<img src="/static/image/orangeuser.png">
 					            	<span class="cardheader">${review.nickname }</span>
 					            </div>
 					            <span class="cardheader">${review.regdate }</span>
@@ -127,51 +127,51 @@
 					                <c:if test="${review.rstar == 1}">
 						            	<span class="starcontent">"최악이에요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 2}">
 						            	<span class="starcontent">"별로예요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 3}">
 						            	<span class="starcontent">"보통이에요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 4}">
 						            	<span class="starcontent">"좋아요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/graystar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/graystar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            	<c:if test="${review.rstar == 5}">
 						            	<span class="starcontent">"아주 좋아요"</span>
 						                <span class="eachstar">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						               		<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
-						                	<img src="/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						               		<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
+						                	<img src="/static/image/yellowstar.png" alt="로고">
 						                </span>
 					            	</c:if>
 					            </div>
@@ -189,7 +189,7 @@
 					        </div>
 					        <div id="reviewWriter">
 					        	<div class="rNickname">
-					        		<img src="/image/skyuser.png">
+					        		<img src="/static/image/skyuser.png">
 					            	<span class="cardheader">${review.nickname }</span>
 					            </div>
 					            <span class="cardheader" id="rRegdate">${review.regdate }</span>
@@ -233,6 +233,6 @@
     <div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>		
-    <script src="<c:url value='/resources/js/free/paging.js'/>"></script>
+    <script src="<c:url value='/static/js/free/paging.js'/>"></script>
 </body>
 </html>

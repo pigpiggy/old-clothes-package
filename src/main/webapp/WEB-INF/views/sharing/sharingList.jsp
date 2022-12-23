@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
+<link href="<c:url value="/static/css/sharing.css"/>"rel='stylesheet' />
 </head>
 <body id="sharingBody">
 	<div>
@@ -82,7 +82,7 @@
     </div>
     
   </div>
-<script src="<c:url value='/resources/js/sharing/sigungu.js'/>"></script>
-<script src="<c:url value='/resources/js/sharing/infiniteScroll.js'/>"></script>
+<script src="<c:url value='/static/js/sharing/sigungu.js'/>"></script>
+<script src="<c:url value='/static/js/sharing/infiniteScroll.js'/>"></script>
 </body>
 </html>

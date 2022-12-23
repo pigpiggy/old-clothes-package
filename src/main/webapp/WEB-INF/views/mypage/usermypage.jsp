@@ -12,6 +12,6 @@
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	
 	
-<script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+<script src="<c:url value='/static/js/mypage/mypage.js'/>"></script>
 </body>
 </html>

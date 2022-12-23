@@ -202,7 +202,7 @@
 						                        <label class="form-label" for="bkakaoid" style="position:absolute; margin:2.5%;" >카카오ID</label>
 						                 		<input type="text" id="bkakaoid" name="bkakaoid" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
 						                 		title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다." placeholder="카카오채널 ex)_Qpdel"/>					                 		
-						                 		<img class="my_img" src="../../resources/image/kakaoid.png" title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다.">
+						                 		<img class="my_img" src="../../static/image/kakaoid.png" title="카카오톡채널상담에 필요하니, 카카오채널관리자 페이지에 나오는 아이디 입력 부탁드립니다.">
 					                 		</div>
 				                        </div>
 				                        
@@ -406,8 +406,8 @@ if(msg != ""){
 	alert(msg);
 }
 </script>
-<script src="<c:url value='/resources/js/users/join.js'/>"></script>
-<script src="<c:url value='/resources/js/users/validation.js'/>"></script>
+<script src="<c:url value='/static/js/users/join.js'/>"></script>
+<script src="<c:url value='/static/js/users/validation.js'/>"></script>
 </body>
 
 </html>

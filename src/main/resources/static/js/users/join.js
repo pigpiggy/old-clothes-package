@@ -35,7 +35,7 @@ $(function(){
      console.log(checkPid.value.length);
      $.ajax({
         type : "post",
-        url : "http://localhost:8088/checkuserid",
+        url : "/checkuserid",
         data : {checkuserid:checkuserid},
         success:function(data,textStatus){
            if(data=="true"){
@@ -68,7 +68,7 @@ $(function(){
      console.log(businessid.value);
      $.ajax({
         type : "post",
-        url : "http://localhost:8088/businessid",
+        url : "/businessid",
         data : {businessid:businessid},
         success:function(data,textStatus){
            if(data=="true"){
@@ -105,7 +105,7 @@ $(function(){
       console.log(nickname);
       $.ajax({
          type : "post",
-         url : "http://localhost:8088/nickname",
+         url : "/nickname",
          data : {nickname:nickname},
          success:function(data,textStatus){
             if(data=="true"){
@@ -138,7 +138,7 @@ $(function(){
       console.log(bname);
       $.ajax({
          type : "post",
-         url : "http://localhost:8088/bname",
+         url : "/bname",
          data : {bname:bname},
          success:function(data,textStatus){
             if(data=="true"){

@@ -91,7 +91,7 @@
 	            <a id="input4" href="/freeList?page=${page}&kwd=${kwd}" class="on">목록</a>
 	            <c:if test="${authUser.sect eq 'users'}">                
 	             <c:if test="${authUser.userno eq article.userno}">	                                  
-	                <a href="/modifyform/${article.fno }">수정</a>
+	                <a id="freeModify" href="/modifyform/${article.fno }">수정</a>
 	                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
 	             </c:if>               
 	            </c:if>

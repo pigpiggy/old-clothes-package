@@ -53,7 +53,7 @@
 				<%--메시지 입력창과 보내기 버튼 --%>
 				<div class="row_3">
 					<div class="input_group chat-controls" id="sendMessage">
-						<input type="text" class="chat-controls__textarea" id="message" placeholder="message" />
+						<input type="text" class="chat-controls__textarea" id="message" placeholder="메시지를 입력해주세요." />
 						<div class="input_group_append">
 							<button id="send" class="chat-controls-buttons__send" onclick="send()">보내기</button>
 							<input type="hidden" value="${authUser.getNickname()}" id="buyerName"/>

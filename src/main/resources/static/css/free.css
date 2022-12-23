@@ -593,7 +593,10 @@ div#cdatelist.listcdate{
 }
 #bbtn{
 	position: relative;
-    bottom: 95px;
+    bottom: 0;
+    margin: 0 100%;
+    transform: translateX(-100%);
+    font-size: 15px;
 }
 
 #ubtn{
@@ -651,4 +654,7 @@ div#cdatelist.listcdate{
     font-size: 15px;
     margin-left: 1em;
     color: gray;
+}
+#freeModify:hover {
+	color: #fff;
 }

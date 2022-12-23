@@ -75,6 +75,10 @@ li {
     font-size: 1em;
     margin: 0 auto;
     display: block;
+    position: absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);    
 }
 /* 체크박스 */
 [type="radio"]:checked,
@@ -132,7 +136,7 @@ li {
 <body>
 <div id="applyListContainer">
 	
-	<form action="/selectSellApply" method="get">
+	<form action="/selectSellApply" method="get" style="position:relative;">
 		<h2>구매신청목록</h2>
 		<div id="divider"></div>
 		<ul>

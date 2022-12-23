@@ -213,7 +213,7 @@ a {
 }
 
 .card-image img {
-	max-height: 100%;
+	max-height: 167px;
 	width: 100%;
 	background-size: cover;
 	object-fit: cover;

@@ -303,7 +303,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 </div>
 	<script>	
 	$(document).ready(function(){
-		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요</h4><span><a></li>';
+		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h5 style="height:100px; padding:8%; margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요.</h5><span><a></li>';
 		$('#blist').append(requ);
 	})
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -421,7 +421,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			setInfo2(null); //기존에 있는 인포윈도우 초기화
 			var bli = "";
 			if(data.length==0){
-				bli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 업체가 없습니다.</h3></span></a></li><br>';
+				bli += '<li><a><span class="store_item"><h4 style="text-align: center; height:100px; padding:8%; margin:auto auto; color: cadetblue;">선택된 지역에 업체가 없습니다.</h4></span></a></li><br>';
 			}
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					

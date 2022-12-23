@@ -12,7 +12,7 @@ $(function(){
      console.log(businessid.value);
      $.ajax({
         type : "post",
-        url : "http://localhost:8088/businessid",
+        url : "/businessid",
         data : {businessid:businessid},
         success:function(data,textStatus){
            if(data=="true"){
@@ -48,7 +48,7 @@ $(function(){
       console.log(bname);
       $.ajax({
          type : "post",
-         url : "http://localhost:8088/bname",
+         url : "/bname",
          data : {bname:bname},
          success:function(data,textStatus){
 			if(bname==hidden){

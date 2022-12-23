@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-	<link href="<c:url value="/resources/css/message.css"/>" rel='stylesheet' />
-	<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/static/css/message.css"/>" rel='stylesheet' />
+	<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<div>
@@ -75,7 +75,7 @@
               </td>
               <td>${recvmessage.regDate }
               <a href="#demo-modal">
-		          <img src="/image/letter.png" class="letter_img" id="letter_img" alt="쪽지" title="답장하기">
+		          <img src="/static/image/letter.png" class="letter_img" id="letter_img" alt="쪽지" title="답장하기">
 		      </a>
               </td>
             </tr>
@@ -180,6 +180,6 @@
       <div>
       	<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	  </div>	
-      <script src="<c:url value='/resources/js/mypage/message.js'/>"></script>
+      <script src="<c:url value='/static/js/mypage/message.js'/>"></script>
 </body>
 </html>

@@ -16,8 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
 <title>무료나눔 상세</title>
-<link href="<c:url value="/resources/css/sharing.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/sharing.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
 </head>
 <body>
 <header>
@@ -63,7 +63,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="swiper-slide">
-						<img src="/image/logo3.png" alt="하우헌옷"/>
+						<img src="/static/image/logo3.png" alt="하우헌옷"/>
 					</div>
 				</c:otherwise>        	
         	</c:choose>           
@@ -77,12 +77,12 @@
         <h4>${sharing.stitle}</h4>
         <input type="hidden" name="sno" id="sno" value="${sharing.sno }">
         <div class="letterAndHeart" id="sharingname">
-          <img src="/image/yellowuser.png" class="userprofile"><span class="sharingnick">${sharing.sname }</span>
+          <img src="/static/image/yellowuser.png" class="userprofile"><span class="sharingnick">${sharing.sname }</span>
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart">
-		          		<img src="/image/letter.png" id="letter_img" alt="쪽지">
-		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		          		<img src="/static/image/letter.png" id="letter_img" alt="쪽지">
+		          		<img src="/static/image/heart.png" id="heart_img" alt="찜신청전">
 	        		</div>
 	        	</c:when>
 	        	<c:otherwise>
@@ -91,14 +91,14 @@
 	        				<c:if test="${authUser.userno ne sharing.userno }">
 				          		<div class="letterAndHeart">	
 					          		<a href="#demo-modal">
-					          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+					          			<img src="/static/image/letter.png" id="letter_img" alt="쪽지">
 					          		</a>
 					          			<c:choose>
 					          				<c:when test="${likes eq 1}">
-					          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
+					          					<img src="/static/image/redheart.png" id="heart_img" alt="찜신청후">
 					          				</c:when>
 					          				<c:otherwise>
-					          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+					          					<img src="/static/image/heart.png" id="heart_img" alt="찜신청전">
 			        						</c:otherwise>
 			        					</c:choose>
 			        			</div>
@@ -107,11 +107,11 @@
 	        			<c:otherwise>
 	        				<div class="letterAndHeart">	
 				          		<a href="#demo-modal">
-				          			<img src="/image/letter.png" id="letter_img" alt="쪽지">
+				          			<img src="/static/image/letter.png" id="letter_img" alt="쪽지">
 				          		</a>
 			          			<c:if test="${authUser.sect eq 'users' and authUser.userno ne sharing.userno}">
-		          					<img src="/image/redheart.png" id="heart_img" alt="찜신청후">
-		          					<img src="/image/heart.png" id="heart_img" alt="찜신청전">
+		          					<img src="/static/image/redheart.png" id="heart_img" alt="찜신청후">
+		          					<img src="/static/image/heart.png" id="heart_img" alt="찜신청전">
 			          			</c:if>		
 			        		</div>
 	        			</c:otherwise>
@@ -174,10 +174,10 @@
 	        	<c:if test="${authUser.userno eq sharing.userno}">    
 		        	<div id="modifydelete">
 						<a href="/sharingModifyForm?sno=${sharing.sno }">	        	
-		          			<img src="/image/edit.png" id="edit" alt="수정">
+		          			<img src="/static/image/edit.png" id="edit" alt="수정">
 	    	    		</a>
 						<a href="javascript:void(0);" onclick="removeSharing();">	        	
-		          			<img src="/image/viewdelete.png" id="viewdelete" alt="삭제">
+		          			<img src="/static/image/viewdelete.png" id="viewdelete" alt="삭제">
 	        			</a>
 	        		</div>
 	        	</c:if>	
@@ -362,9 +362,9 @@ $(function () {
 				success: function(data) {
 					console.log(data);
 					if(data == 1) {
-						$("#heart_img").attr("src", "/image/redheart.png");
+						$("#heart_img").attr("src", "/static/image/redheart.png");
 					} else {
-	                    $("#heart_img").attr("src", "/image/heart.png");
+	                    $("#heart_img").attr("src", "/static/image/heart.png");
 					}
 				}, error: function() {
                     console.log('바보야!')

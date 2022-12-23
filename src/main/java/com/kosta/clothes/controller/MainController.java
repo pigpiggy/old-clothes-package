@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
@@ -18,9 +20,9 @@ public class MainController {
 	@Autowired
 	ServletContext servletContext;
 	
-	@GetMapping("/")
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	String main() {
-		return "/home2";
+		return "home2";
 	}
 	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.
 	//Main에 이미지 보여주기위한 컨트롤러

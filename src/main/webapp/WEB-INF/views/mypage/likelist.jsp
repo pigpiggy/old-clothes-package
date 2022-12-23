@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/likelist.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
+<link href="<c:url value="/static/css/selectoption.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/static/css/likelist.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/static/css/mypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <title>Insert title here</title>
@@ -132,7 +132,7 @@ $(document).ready(function(){
 							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
 								chartHtml +='<div class="img-wrap">';
-								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+								chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
 								chartHtml +='<div class="img-wrap">';
@@ -142,7 +142,7 @@ $(document).ready(function(){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/static/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -310,7 +310,7 @@ function catelist(){
 							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
 								chartHtml +='<div class="img-wrap">';
-								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+								chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
 								chartHtml +='<div class="img-wrap">';
@@ -320,7 +320,7 @@ function catelist(){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/static/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -330,7 +330,7 @@ function catelist(){
 								chartHtml +='<div class="eachuser">';
 								if(data.ifileids==null){
 									chartHtml +='<div class="img-wrap">';
-									chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+									chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 									chartHtml +='</div>';
 								}else{
 									chartHtml +='<div class="img-wrap">';
@@ -340,7 +340,7 @@ function catelist(){
 								chartHtml +='<div class="info">';
 								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
-								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/static/image/close.png" /></button>';
 								chartHtml +='</div>';
 								chartHtml +='</div>';
 								chartHtml +='<div class="expand"></div>';
@@ -349,16 +349,16 @@ function catelist(){
 							chartHtml +='<div class="user">';
 							chartHtml +='<div class="eachuser">';
 							chartHtml +='<div class="img-wrap">';
-							chartHtml +='<img src="/image/market.png" alt="업체로고" class="productimg">';
+							chartHtml +='<img src="/static/image/market.png" alt="업체로고" class="productimg">';
 							chartHtml +='</div>';
 							chartHtml +=' <div class="nameandadd">';
 							chartHtml +=' <div class="name bname"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
 							chartHtml +='<div id="address" class="address">'+data.baddress+' '+data.bdetailadd+'</div>'
 							chartHtml +='</div>'
 							chartHtml +='<span class="icons">'
-							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
+							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/static/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/close.png" /></button>';
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/static/image/close.png" /></button>';
 							chartHtml +='</span>'	
 							chartHtml +='</div>'
 							chartHtml +='<div class="expand"></div>';
@@ -534,7 +534,7 @@ function refreshlist(category,globalCurrentPage){
 							chartHtml +='<div class="eachuser">';
 							if(data.sfileids==null){
 								chartHtml +='<div class="img-wrap">';
-								chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+								chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 								chartHtml +='</div>';
 							}else{
 								chartHtml +='<div class="img-wrap">';
@@ -544,7 +544,7 @@ function refreshlist(category,globalCurrentPage){
 							chartHtml +='<div class="info">';
 							chartHtml +='<span class="name"><a href="/sharingView/'+data.sno+'">'+data.stitle+'</a></span>';
 							chartHtml +='<span class="date">'+data.regDate+'</span>';
-							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/image/close.png" /></button>';
+							chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.sno+'"><img class="remove" src="/static/image/close.png" /></button>';
 							chartHtml +='</div>';
 							chartHtml +='</div>';
 							chartHtml +='<div class="expand"></div>';
@@ -554,7 +554,7 @@ function refreshlist(category,globalCurrentPage){
 								chartHtml +='<div class="eachuser">';
 								if(data.ifileids==null){
 									chartHtml +='<div class="img-wrap">';
-// 									chartHtml +='<img class="productimg" src="/image/logo1.png" />';
+// 									chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 									chartHtml +='</div>';
 								}else{
 									chartHtml +='<div class="img-wrap">';
@@ -564,7 +564,7 @@ function refreshlist(category,globalCurrentPage){
 								chartHtml +='<div class="info">';
 								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
-								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
+								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/static/image/close.png" /></button>';
 								chartHtml +='</div>';
 								chartHtml +='</div>';
 								chartHtml +='<div class="expand"></div>';
@@ -573,16 +573,16 @@ function refreshlist(category,globalCurrentPage){
 							chartHtml +='<div class="user">';
 							chartHtml +='<div class="eachuser">';
 							chartHtml +='<div class="img-wrap">';
-							chartHtml +='<img src="/image/market.png" alt="업체로고" class="productimg">';
+							chartHtml +='<img src="/static/image/market.png" alt="업체로고" class="productimg">';
 							chartHtml +='</div>';
 							chartHtml +=' <div class="nameandadd">';
 							chartHtml +=' <div class="name bname"><a href="/mypage/bmypage/'+data.bno+'">'+data.bname+'</a></div>';
 							chartHtml +='<div id="address" class="address">'+data.baddress+' '+data.bdetailadd+'</div>'
 							chartHtml +='</div>'
 							chartHtml +='<span class="icons">'
-							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/image/apply.png" /></button>'; //신청서 작성 form [modal]
+							chartHtml +='<button class="buttonapply'+data.bno+'" id="applymodal" data-value="'+data.bno+'"><img class="apply" src="/static/image/apply.png" /></button>'; //신청서 작성 form [modal]
 							chartHtml +='<div id="deletebu">'
-							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/image/close.png" /></button>';
+							chartHtml +='<button id="delete" class="bdelete" data-value="'+data.bno+'"><img class="remove" src="/static/image/close.png" /></button>';
 							chartHtml +='</span>'	
 							chartHtml +='</div>'
 							chartHtml +='<div class="expand"></div>';
@@ -771,8 +771,8 @@ $("#lpickup").datepicker({
 		alert(msg);
 	}
 </script>
-<script src="<c:url value='/resources/js/info/datepicker.js'/>"></script>
-<script src="<c:url value='/resources/js/info/datepicker.ko.js'/>"></script>
+<script src="<c:url value='/static/js/info/datepicker.js'/>"></script>
+<script src="<c:url value='/static/js/info/datepicker.ko.js'/>"></script>
 
 
 </body>

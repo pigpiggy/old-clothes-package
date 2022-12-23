@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value="/resources/css/selectoption.css"/>" rel='stylesheet'/>
-<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/sharing.css"/>"rel='stylesheet' />
-<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/buyProduct.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/selectoption.css"/>" rel='stylesheet'/>
+<link href="<c:url value="/static/css/free.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/sharing.css"/>"rel='stylesheet' />
+<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/buyProduct.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/individual.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -51,7 +51,7 @@
 					          	</c:if>
 					          	<c:choose>
 					          		<c:when test="${empty buysell.ifileids }">
-					          			<img src="/image/logo3.png" alt="로고">
+					          			<img src="/static/image/logo3.png" alt="로고">
 					          		</c:when>
 					          		<c:otherwise>
 					              		<img src="/upload/${ buysell.ifileids}" alt="무료나눔 옷">
@@ -61,10 +61,10 @@
 					          <div class="card-body">
 					              <div class="priceAndDate"><span class="price">${buysell.price}원</span><span class="date">${buysell.regDate}</span></div>
 					              <h2 class="sharingTitle">${buysell.ititle }</h2>
-					              <div class="individualDealNick"><p><img src="/image/yellowuser.png">${buysell.nickname}</p></div>
+					              <div class="individualDealNick"><p><img src="/static/image/yellowuser.png">${buysell.nickname}</p></div>
 					          </div>
 					          <div class="card-footer">
-					              <img src="/image/pin.png"><p>${buysell.iaddress}</p>
+					              <img src="/static/image/pin.png"><p>${buysell.iaddress}</p>
 					          </div>
 					      </div>
 				     </a>
@@ -146,7 +146,7 @@
 			          	</c:if>
 			          	<c:choose>
 			          		<c:when test="${empty buysharing.sfileids }">
-			          			<img src="/image/logo3.png" alt="로고">
+			          			<img src="/static/image/logo3.png" alt="로고">
 			          		</c:when>
 			          		<c:otherwise>
 			              		<img src="/upload/${ buysharing.sfileids}" alt="무료나눔 옷">
@@ -156,10 +156,10 @@
 			          <div class="card-body">
 			              <span class="date">${buysharing.regDate}</span>
 			              <h2 class="sharingTitle">${buysharing.stitle }</h2>
-			              <div class="sharingDealNick"><p><img src="/image/yellowuser.png">${buysharing.nickname}</p></div>
+			              <div class="sharingDealNick"><p><img src="/static/image/yellowuser.png">${buysharing.nickname}</p></div>
 			          </div>
 			          <div class="card-footer">
-			          	  <img src="/image/pin.png"><p>${buysharing.saddress}</p>
+			          	  <img src="/static/image/pin.png"><p>${buysharing.saddress}</p>
 			          </div>
 			      </div>
 		     		</a>

@@ -9,9 +9,9 @@
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>나의 옷장</title>
-<link href="<c:url value="/resources/css/mypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/mypage.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link href="<c:url value="/resources/css/review.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/review.css"/>" rel='stylesheet' />
 </head>
 <body>
 	<div>
@@ -41,7 +41,7 @@
       			<c:if test="${authUser.sect eq 'users' }">
       				<c:if test = "${authUser.userno eq users.userno }">
 				        <a href="/mypage/likelist/${authUser.userno }">
-					      <img id="like" src="/image/redheart.png" alt="찜" title="나의 찜목록">
+					      <img id="like" src="/static/image/redheart.png" alt="찜" title="나의 찜목록">
 				        </a>
 		        	</c:if>
 		        </c:if>   
@@ -49,7 +49,7 @@
 	      				<c:if test = "${authUser.userno eq users.userno }">
 					        <a href="/mypage/umessage/${authUser.userno }">
 					          <input type="hidden" id="muserno" name="muserno" value="${users.userno }">
-						      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
+						      <img id="letter" src="/static/image/letter.png" alt="쪽지" title="나의 쪽지함">
 					        </a>
 				        </c:if>
 			        </c:if>
@@ -57,14 +57,14 @@
 			        	<c:if test="${authUser.bno eq business.bno }">
 					        <a href="/mypage/bmessage/${authUser.bno }">
 					         <input type="hidden" id="muserno" name="muserno" value="${business.bno }">
-						      <img id="letter" src="/image/letter.png" alt="쪽지" title="나의 쪽지함">
+						      <img id="letter" src="/static/image/letter.png" alt="쪽지" title="나의 쪽지함">
 					        </a>			        		
 			        	</c:if>
 			        </c:if>	
 		        <c:if test="${authUser.sect eq 'users'}">
 		        	<c:if test="${users.userno eq authUser.userno}">          
 		      			<a href="javascript:openDetail('/chatList')">
-							<img src="/image/blackchat.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
+							<img src="/static/image/blackchat.png" id="chaticon_img" alt="채팅" title="나의 채팅방">
 								<span class="nav__notification nbadge" id="messageAlert" style="display:none;"></span>
 						</a>
 					</c:if>	
@@ -72,7 +72,7 @@
 				<c:if test="${authUser.sect eq 'users' }">	
 					<c:if test="${authUser.userno eq users.userno }">			
 			        <a href="/passcheck">
-	              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
+	              	  <img id="prosetting" src="/static/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
 			        </a>
 			        </c:if>
 		        </c:if>
@@ -80,7 +80,7 @@
 		        <c:if test="${authUser.sect eq 'business' }">	
 					<c:if test="${authUser.bno eq business.bno }">			
 			        <a href="/passcheck">
-	              	  <img id="prosetting" src="/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
+	              	  <img id="prosetting" src="/static/image/profilesetting.png" alt="프로필수정" title="회원정보 수정">
 			        </a>
 			        </c:if>
 		        </c:if>
@@ -90,7 +90,7 @@
 
 	<div class="self_Introduction">
 		<div class="closetImage">
-			<img src="/image/closet.png" alt="옷장">
+			<img src="/static/image/closet.png" alt="옷장">
     	</div>
     <div class="second">
 		  <div class= "myRecord">
@@ -145,12 +145,12 @@
 		  	 		
 		  		<c:if test="${authUser.sect eq 'users'}">
 			  		<c:if test="${users.userno eq authUser.userno }">			 
-						<img id="setting" src="/image/setting1.png" alt="소개수정" >
+						<img id="setting" src="/static/image/setting1.png" alt="소개수정" >
 					</c:if>
 				</c:if>
 				<c:if test="${authUser.sect eq 'business'}">
 					<c:if test="${business.bno eq authUser.bno}">			 
-						<img id="setting" src="/image/setting1.png" alt="소개수정" >
+						<img id="setting" src="/static/image/setting1.png" alt="소개수정" >
 					</c:if>
 				</c:if>
 				<c:choose>
@@ -215,7 +215,7 @@
 				success : function(data) {
 					console.log(data);
 					var text ="";					
-					text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
+					text += '<img id="setting" src="/static/image/setting1.png" alt="소개수정" >';
 					text += "<p>"+data+"</p>";
 					console.log("text" + text);
 					document.getElementById('introduce').innerHTML = text;	
@@ -292,7 +292,7 @@
 			}*/
 		}
   </script>
-<script src="<c:url value='/resources/js/mypage/mypage.js'/>"></script>
+<script src="<c:url value='/static/js/mypage/mypage.js'/>"></script>
 
 </body>
 </html>

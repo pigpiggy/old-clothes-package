@@ -136,8 +136,8 @@
   </div>
 </div>
 	
-<script src="<c:url value='/resources/js/users/modifyuser.js'/>"></script>
-<script src="<c:url value='/resources/js/users/validation.js'/>"></script>
+<script src="<c:url value='/static/js/users/modifyuser.js'/>"></script>
+<script src="<c:url value='/static/js/users/validation.js'/>"></script>
 </body>
 
 </html>

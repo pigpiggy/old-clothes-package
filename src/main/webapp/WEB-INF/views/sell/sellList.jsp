@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
-<link href="<c:url value="/resources/css/individual.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/individual.css"/>" rel='stylesheet' />
 </head>
 <body id="individualBody">
 	<div>
@@ -55,7 +55,7 @@
 	          	</c:if>
 	          	<c:choose>
 	          		<c:when test="${empty sell.ifileids }">
-	          			<img src="image/logo3.png" alt="로고">
+	          			<img src="/static/image/logo3.png" alt="로고">
 	          		</c:when>
 	          		<c:otherwise>
 	              		<img src="upload/${ sell.ifileids}" alt="무료나눔 옷">
@@ -65,11 +65,11 @@
 	          <div class="card-body">
 	              <div class="priceAndDate"><span class="price">${sell.price}원</span><span class="date">${sell.regDate}</span></div>
 	              <h2 class="sharingTitle">${sell.ititle }</h2>
-	              <div class="individualDealNick"><p><img src="/image/greenuser.png">${sell.nickname}</p></div>
+	              <div class="individualDealNick"><p><img src="/static/image/greenuser.png">${sell.nickname}</p></div>
 	          </div>
 	          	
 		          <div class="card-footer">
-		              <img src="/image/pin.png"><p>${sell.iaddress}</p>
+		              <img src="/static/image/pin.png"><p>${sell.iaddress}</p>
 		          </div>
 	      </div>
      </a>
@@ -78,6 +78,6 @@
     </div>
     
   </div>
-<script src="<c:url value='/resources/js/sell/infiniteScroll.js'/>"></script>
+<script src="<c:url value='/static/js/sell/infiniteScroll.js'/>"></script>
 </body>
 </html>

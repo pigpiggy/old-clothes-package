@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>사용자신청목록</title>
-<link href="<c:url value="/resources/css/bmypage.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/modal.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/css/reviewmodal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/bmypage.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/modal.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/reviewmodal.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<link href="<c:url value="/resources/css/free.css"/>" rel='stylesheet' />
+<link href="<c:url value="/static/css/free.css"/>" rel='stylesheet' />
 <style>
 .center{
 	position: relative;
@@ -301,6 +301,6 @@
 		})
 	
 	</script>
-<script src="<c:url value='/resources/js/free/paging.js'/>"></script>	
+<script src="<c:url value='/static/js/free/paging.js'/>"></script>	
 </body>
 </html>

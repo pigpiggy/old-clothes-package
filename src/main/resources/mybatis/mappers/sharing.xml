@@ -11,8 +11,7 @@
 	
 	<insert id="insertSharing" parameterType="sharing">
 		<![CDATA[
-			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,
-			saddress,userno,regDate)
+			insert into sharing(sno,stitle,scontent,sstatus,sfileids,sdealType,saddress,userno,regDate)
 			values (#{sno},#{stitle},#{scontent},#{sstatus},#{sfileids,jdbcType=VARCHAR},
 			#{sdealType},#{saddress},#{userno},sysdate)
 	

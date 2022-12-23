@@ -14,7 +14,6 @@
 <style>
 .center{
 	position: relative;
-    top: -400px
 }
 .item{	
 	width:100%;
@@ -41,6 +40,35 @@
 .applyList{
 	position: relative;
     display: block;
+}
+
+.applying1{
+	width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5BC1AC;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 5% 3%;
+    cursor: pointer;
+}
+
+#applying1{
+	position: relative;
+    bottom: 96%;
+	width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5BC1AC;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 5% 3%;
+    cursor: pointer;
+
 }
 
 </style>
@@ -110,7 +138,7 @@
 	                    <c:choose> 
 	                    <c:when test="${wapply.astatus eq '수거완료' }">
 			                    <div class="btn">	                        
-			                        <button type="submit" form="form" id="applying" class="complete">후기작성</button>
+			                        <button type="submit" form="form" id="applying1" class="complete">후기작성</button>
 			                    </div>                   
 		                 </c:when>
 		                 <c:otherwise>
@@ -225,7 +253,7 @@
 		}
 	var bno;
 	var uapplyIndex;
-	$('#applying').click(function(){
+	$('#applying1').click(function(){
 		$('.firstmodal').css('visibility','visible');
 		$('.firstmodal').css('opacity','1');
 		$('.firstmodal').css('z-index','2');

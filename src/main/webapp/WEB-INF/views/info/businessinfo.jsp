@@ -230,11 +230,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			         	 		<div class="cont">
 						              <input type="text" id="aname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
-						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)" readonly>
+						                  <input type="button" id="aad_bt" name="aad_bt"  onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="aphone" name="aphone" placeholder="(- 제외 (01012341234 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]" readonly>
 						              <div class="wei">
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
 						                  <p>kg</p>

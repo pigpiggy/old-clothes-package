@@ -88,16 +88,16 @@
 	    
 	    <div id="demo-modal" class="firstmodal">
 	      		<div class="modal__content" id="modal__content">
+	      			<label for="content1"><strong>[거래 후기]</strong></label>
 	   				<div class="stars">
 	     				<button class="star1">1</button>
 	     				<button class="star1">2</button>
 	     				<button class="star1">3</button>
 	     				<button class="star1">4</button>
 	     				<button class="star1">5</button>
-	     				<label for="content1">거래 후기</label>
 					</div>
-	   				<textarea name="content1" class="content1"></textarea>
-	   				<button id="reviewcomplete1">작성완료</button>	
+	   				<textarea name="content1" class="content1" placeholder="거래 후기를 입력해 주세요."></textarea>
+	   				<button id="reviewcomplete1" class="buttoncontent">작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>
@@ -183,16 +183,16 @@
 	    
 	    <div id="demo-modal2" class="firstmodal">
 	      		<div class="modal__content" id="modal__content">
+	      				<label for="content"><strong>[거래 후기]</strong></label>
 	      				<div class="stars">
 		      				<button class="star">1</button>
 		      				<button class="star">2</button>
 		      				<button class="star">3</button>
 		      				<button class="star">4</button>
 		      				<button class="star">5</button>
-		      				<label for="content">거래 후기</label>
 		      			</div>
-	      				<textarea name="content" class="content"></textarea>
-	      				<button id="reviewcomplete">작성완료</button>	
+	      				<textarea name="content" class="content" placeholder="거래 후기를 입력해 주세요."></textarea>
+	      				<button id="reviewcomplete" class="buttoncontent">작성완료</button>	
 					<a href="#" class="modal__close">&times;</a>
 	      		</div>
 	  	</div>

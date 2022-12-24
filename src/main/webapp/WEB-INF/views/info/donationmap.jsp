@@ -188,8 +188,15 @@ input[type=radio] {
 
 #onlineview{
 	position: relative;
-    width: 100%;
-    top: 171px;
+    width: 1100px;
+    top: 145px;
+    margin: 0 auto;
+}
+
+#onlineview a {
+	display: block;
+	margin-left: auto;
+    width: 100px;
 }
 .hrr{
 	margin: 1rem 0;
@@ -198,30 +205,25 @@ input[type=radio] {
     border-top: 2px solid;
     opacity: .25;
     position: relative;
-    left: 22%;
 }
 
 .dimg{
 	position: relative;
-    left: -24%;
 }
 
 .names{
 	position: relative;
     color: green;
-    left: -28%;
     width: 130%;
 }
 
 .addressh4{
 	position: relative;
-    left: -28%;
     width: 121%;
 }
 
 .phoneh4{
 	position: relative;
-    left: -28%;
 }
 .storebtn{
 	background-color: #400000;
@@ -230,17 +232,11 @@ input[type=radio] {
     color: #ffffff;
     position: relative;
     /* top: 760px; */
-    left: -0.5%;
-    top:-270px;
 }
 
 .storybtn{
     background-color: #400000;
-    left: 120px;
     position: relative;
-    /* top: 40px; */
-    top: -45px;
-    left: -6%;
     width: 100px;
     height: 37px;
     color: #ffffff;
@@ -249,15 +245,8 @@ input[type=radio] {
 .goodbtn{
     position: relative;
     background-color: #400000;
-    /* margin-left: 1300px; */
-    /* margin-bottom: -30px; */
-    /* top: 540px; */
     width: 100px;
-    top: -502px;
-    height: 37px;
     color: #ffffff;
-    left: -11.5%;
-    
 }
 .dnames h3{
 	position: relative;
@@ -372,12 +361,17 @@ input[type=radio] {
 						<h3 class="names">[업체명 : ${online.dname }]</h3>
 						<h4 class="addressh4">주소 : ${online.daddress }  </h4>
 						<h4 class="phoneh4">전화 번호 : ${online.dphone }</h4>						
-					</div>											
-				</c:if>				
-			</c:forEach>			
+					</div>	
+				</c:if>
+				<c:if test="${online.dname eq '굿윌스토어 굿윌본부'}"><a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a></c:if>		
+				<c:if test="${online.dname eq '아름다운 가게 서울본부'}"><a href="https://www.beautifulstore.org/donation" target="_blank"><button style="cursor:pointer;" class="storebtn">신청서 작성</button></a></c:if>				
+				<c:if test="${online.dname eq '숲스토리 의정부본점'}"><a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button style="cursor:pointer;" class="storybtn">신청서 작성</button></a></c:if>						
+			</c:forEach>	
+			<c:if test="${empty donation}">		
 				<a href="https://www.beautifulstore.org/donation" target="_blank"><button style="cursor:pointer;" class="storebtn">신청서 작성</button></a>
 				<a href="https://www.soopstory.net/main/html.php?htmid=proc/go_donate.html" target="_blank"><button style="cursor:pointer;" class="storybtn">신청서 작성</button></a>
-				<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a>			
+				<a href="https://www.goodwillstore.org/donation/application.php" target="_blank"><button style="cursor:pointer;" class="goodbtn">신청서 작성</button></a>
+			</c:if>			
 		</div>
 	</div>	
     <div>

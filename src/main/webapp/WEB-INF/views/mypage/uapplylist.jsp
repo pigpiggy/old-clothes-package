@@ -135,149 +135,154 @@
   96% { -webkit-transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
 }
+#uapplyListContainer {
+	margin-bottom: 25%;
+}
+#uapplyPaging {
+	margin-top: 10%;
+}
 </style>
 </head>
 <body>	
 	<c:import url='/WEB-INF/views/mypage/usermypage.jsp' />
 	<c:if test="${authUser.sect eq 'users' }">
 		<c:if test="${authUser.userno eq users.userno }">
-	<div class="my_Tab">
-			<ul class="tabs">
-				<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
-				<li><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
-				<li class="on"><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
-				<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
-			</ul>
-	</div>
+			<div class="my_Tab">
+					<ul class="tabs">
+						<li><a href ="/mypage/umypage/${users.userno }/sell">판매 상품</a></li>
+						<li><a href ="/mypage/umypage/${users.userno }/buy">구매 상품</a></li>
+						<li class="on"><a href ="/mypage/umypage/${users.userno }/apply">신청 목록</a></li>
+						<li><a href ="/mypage/umypage/${users.userno }/review">거래 후기</a></li>
+					</ul>
+			</div>
+		</c:if>
 	</c:if>
+	<div id="uapplyListContainer">
+		<c:if test="${authUser.sect eq 'users' }">
+			<div id="total" style="width:1000px; margin:0 auto;">
+				<div id="ucards">
+					<c:forEach var="wapply" items="${wapply }">
+					<input type="hidden" id="bno" name="bno" value="${wapply.bno }" data-sno="${wapply.bno }">
+					<c:if test="${authUser.userno eq wapply.userno }">	  
+						<div class="applyList">
+							<c:choose>	        
+								<c:when test="${'신청중' != wapply.astatus}">
+					          			<div class="aindividualStatus">${wapply.astatus }</div>
+					          	</c:when>
+					          	<c:when test="${wapply.astatus == '신청중'}">
+					          			<div class="aindividualStatus">신청중</div>
+					          	</c:when>
+							</c:choose>	          	
+					            <div class="item" style="width:100%;">		            
+					            <strong>[ ${wapply.bname } ]</strong>		
+					            	<div class="title"></div>                                 		                
+					                <div class="allapply" style="padding: 2%;">		                
+					                    <div class="cont">	
+					                    	<input type="hidden" class="bnoContent" name="bnoContent" value="${wapply.bno }" data-sno="${wapply.bno }">
+					                    	<input type="hidden" class="anoContent" name="anoContent" value="${wapply.ano }" data-sno="${wapply.ano }">                    	
+					                        <div class="aname"><p>${wapply.aname }</p></div>
+					                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
+					                        <div class="aadress"><p>${wapply.aaddress }</p></div>
+					                        <div class="apickup"><p>${wapply.apickup }</p></div>                                          
+					                        <div class="wei">
+					                            <div class="weight"><p>${wapply.weight }</p></div>                        
+					                        	<p>kg</p>
+					                        </div>		                    
+					                     </div>
+					                  
+					                    
+					                    <c:choose>                     
+					                    <c:when test="${wapply.astatus eq '신청중' }">
+						                     <div class="btn">
+						                        <input type="hidden" id="userno" name="userno" value="${wapply.userno }">             	                    			                    		                      
+					                   			<input type="hidden" id="ano" name="ano" value="${wapply.ano }">										
+						                        <button type="button" id="apply_close_btn" name="cancel" data-abtn2="${wapply.userno }" data-abtn3="${wapply.ano }">신청취소</button>
+						                    </div>
+					                    </c:when>
+					                    <c:when test="${wapply.astatus eq '신청완료' }">
+						                    <div class="btn">	                        
+						                      <!-- 버튼 사라짐 -->
+						                    </div>                   
+					                    </c:when>	                    
+						                    
+					                    </c:choose>
+					                    <c:choose> 
+					                    <c:when test="${wapply.astatus eq '수거완료' }">
+							                    <div class="btn">	                        
+							                        <button type="submit" form="form" id="applying1" class="complete">후기작성</button>
+							                    </div>                   
+						                 </c:when>
+						                 <c:otherwise>
+						                 	<c:if test="${wapply.astatus eq '신청거절' }">
+												<!-- 버튼 안 나옴 거절 당했을 시 -->
+											</c:if>
+						                 </c:otherwise>	
+						                 </c:choose> 
+						                 <c:if test="${wapply.astatus eq '후기대기' }">
+							                  <button type="button" class="applying1">후기작성</button>
+						                 </c:if>	                 
+					                 </div>		               	            
+					        	</div>		        
+					    	</div>
+					    	<div id="modal" class="modal">
+				   				<div class="modal_content">
+				   				
+				   				
+				   					<div class="modal_layer"></div>
+				   				</div>
+				   			</div>
+					    		
+					    </c:if> 
+					</c:forEach>	 
+				</div>
+			</div>
 	</c:if>
-	 <c:if test="${authUser.sect eq 'users' }">
-	<div id="total" style="width:1000px; margin:0 auto; margin-bottom: 25%;">
-	<div id="ucards">
-	<c:forEach var="wapply" items="${wapply }">
-	<input type="hidden" id="bno" name="bno" value="${wapply.bno }" data-sno="${wapply.bno }">
-	<c:if test="${authUser.userno eq wapply.userno }">	  
-		<div class="applyList">
-			<c:choose>	        
-				<c:when test="${'신청중' != wapply.astatus}">
-	          			<div class="aindividualStatus">${wapply.astatus }</div>
-	          	</c:when>
-	          	<c:when test="${wapply.astatus == '신청중'}">
-	          			<div class="aindividualStatus">신청중</div>
-	          	</c:when>
-			</c:choose>	          	
-	            <div class="item" style="width:100%;">		            
-	            <strong>[ ${wapply.bname } ]</strong>		
-	            	<div class="title"></div>                                 		                
-	                <div class="allapply" style="padding: 2%;">		                
-	                    <div class="cont">	
-	                    	<input type="hidden" class="bnoContent" name="bnoContent" value="${wapply.bno }" data-sno="${wapply.bno }">
-	                    	<input type="hidden" class="anoContent" name="anoContent" value="${wapply.ano }" data-sno="${wapply.ano }">                    	
-	                        <div class="aname"><p>${wapply.aname }</p></div>
-	                        <div class="aphone"><p>${wapply.aphone }</p></div>                        
-	                        <div class="aadress"><p>${wapply.aaddress }</p></div>
-	                        <div class="apickup"><p>${wapply.apickup }</p></div>                                          
-	                        <div class="wei">
-	                            <div class="weight"><p>${wapply.weight }</p></div>                        
-	                        	<p>kg</p>
-	                        </div>		                    
-	                     </div>
-	                  
-	                    
-	                    <c:choose>                     
-	                    <c:when test="${wapply.astatus eq '신청중' }">
-		                     <div class="btn">
-		                        <input type="hidden" id="userno" name="userno" value="${wapply.userno }">             	                    			                    		                      
-	                   			<input type="hidden" id="ano" name="ano" value="${wapply.ano }">										
-		                        <button type="button" id="apply_close_btn" name="cancel" data-abtn2="${wapply.userno }" data-abtn3="${wapply.ano }">신청취소</button>
-		                    </div>
-	                    </c:when>
-	                    <c:when test="${wapply.astatus eq '신청완료' }">
-		                    <div class="btn">	                        
-		                      <!-- 버튼 사라짐 -->
-		                    </div>                   
-	                    </c:when>	                    
-		                    
-	                    </c:choose>
-	                    <c:choose> 
-	                    <c:when test="${wapply.astatus eq '수거완료' }">
-			                    <div class="btn">	                        
-			                        <button type="submit" form="form" id="applying1" class="complete">후기작성</button>
-			                    </div>                   
-		                 </c:when>
-		                 <c:otherwise>
-		                 	<c:if test="${wapply.astatus eq '신청거절' }">
-								<!-- 버튼 안 나옴 거절 당했을 시 -->
-							</c:if>
-		                 </c:otherwise>	
-		                 </c:choose> 
-		                 <c:if test="${wapply.astatus eq '후기대기' }">
-			                  <button type="button" class="applying1">후기작성</button>
-		                 </c:if>	                 
-	                 </div>		               	            
-	        	</div>		        
-	    	</div>
-	    	<div id="modal" class="modal">
-   				<div class="modal_content">
-   				
-   				
-   					<div class="modal_layer"></div>
-   				</div>
-   			</div>
-	    		
-	    </c:if> 
-	</c:forEach>	 
-	</div>
-</div>
-
-</c:if>
-
-
-	<div id="demo-modal2" class="firstmodal">
-      		<div class="modal__content7" id="modal__content7">
-      		<strong>[ 거래후기 ]</strong>
-      				<div class="stars7">
-	      				<button class="star">1</button>
-	      				<button class="star">2</button>
-	      				<button class="star">3</button>
-	      				<button class="star">4</button>
-	      				<button class="star">5</button>	      				
-	      			</div>
-      				<textarea style= "height: 58%; width: 100%; resize:none;" name="content" class="content" placeholder="거래 후기를 입력해 주세요."></textarea>
-      				<button id="uapplyReviewcomplete7">작성완료</button>	
-				<a href="#" class="modal__close">&times;</a>
-      		</div>
-  	</div>
 	
-    
-
-    <div class="center">
-    <ul class="pagination apaging">
-		<c:choose>
-			<c:when test="${apageInfo.page<=1}">
-				<li><a id="prev"><<</a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="i" begin="${apageInfo.startPage }" end="${apageInfo.endPage }">
-			<c:choose>
-				<c:when test="${apageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
-				<c:otherwise>
-					<li><a href="/mypage/umypage/${users.userno }/apply?apage=${i}&select=1">${i }</a></li>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${apageInfo.page>=apageInfo.maxPage }">
-				<li><a id="next">>></a></li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page+1}&select=1" id="next">>></a></li>
-			</c:otherwise>
-		</c:choose>
-	</ul>
+	
+		<div id="demo-modal2" class="firstmodal">
+	      		<div class="modal__content7" id="modal__content7">
+	      		<strong>[ 거래후기 ]</strong>
+	      				<div class="stars7">
+		      				<button class="star">1</button>
+		      				<button class="star">2</button>
+		      				<button class="star">3</button>
+		      				<button class="star">4</button>
+		      				<button class="star">5</button>	      				
+		      			</div>
+	      				<textarea style= "padding: 3%; height: 58%; width: 100%; resize:none;" name="content" class="content" placeholder="거래 후기를 입력해 주세요."></textarea>
+	      				<button id="uapplyReviewcomplete7">작성완료</button>	
+					<a href="#" class="modal__close">&times;</a>
+	      		</div>
+	  	</div>
+	
+	    <div class="center" id="uapplyPaging">
+		    <ul class="pagination apaging">
+				<c:choose>
+					<c:when test="${apageInfo.page<=1}">
+						<li><a id="prev"><<</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+					</c:otherwise>
+				</c:choose>
+				<c:forEach var="i" begin="${apageInfo.startPage }" end="${apageInfo.endPage }">
+					<c:choose>
+						<c:when test="${apageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
+						<c:otherwise>
+							<li><a href="/mypage/umypage/${users.userno }/apply?apage=${i}&select=1">${i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${apageInfo.page>=apageInfo.maxPage }">
+						<li><a id="next">>></a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/mypage/umypage/${users.userno }/apply?apage=${apageInfo.page+1}&select=1" id="next">>></a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+	    </div>
     </div>
     <div>
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />

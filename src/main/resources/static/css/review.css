@@ -104,4 +104,6 @@ html {
 .cardheader {
 	font-size: 16px;
 }
-
+#reviewPaging {
+	margin-top: 10%;	
+}

@@ -17,7 +17,7 @@ html {
 	text-decoration: none;
 }
 #sellListCard:hover {
-	color: black;
+	color: var(--p-color);
 }
 #sellselect {
 	margin-left: 6%;

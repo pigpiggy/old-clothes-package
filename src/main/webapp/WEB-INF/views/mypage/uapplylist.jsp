@@ -286,6 +286,8 @@
 	var bnoo = $('#bno').val();
 	console.log("bnoo :" + bnoo);
 	//모달 켜기
+	
+	
     
 	
 	var cano;
@@ -392,9 +394,7 @@
 			});
 		})
 		
-		var height = document.scrollHeight;
-		$('.firstmodal').css('height',height);
-	
+		
 	</script>
 <script src="<c:url value='/resources/js/free/paging.js'/>"></script>	
 </body>

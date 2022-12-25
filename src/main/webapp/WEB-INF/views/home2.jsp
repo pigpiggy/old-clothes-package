@@ -259,16 +259,16 @@ body {
 
                             <h5 class="mb-3"></h5>
 
-                            <p class="mb-0">옷을 사는 것은 쉽지만 입지 않는 옷을 처리하는 것은 생각보다 어렵습니다.</p>
+                            <p class="mb-0">옷을 사는 것은 쉽지만 옷을 처리하는 것은 생각보다 어렵습니다.</p>
                             <p class="mb-0">입지 않는 옷들을 하우헌옷에서 다양한 방법으로 처리해보세요. </p>
                         </div>
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">하우헌옷</h5>
+                                    <h5 class="mb-3">하우헌옷에서는</h5>
 
-                                    <p style="font-size: 15px;">버려지는 헌 옷 쓰레기들, &nbsp;누군가에게는 필요한 옷 한 벌이 될 수 있습니다.</p>
+                                    <p style="font-size: 15px;">버려지는 헌 옷 쓰레기들, 누군가에게는 필요한 옷 한 벌이 될 수 있습니다.</p>
 
                                     <ul class="custom-list mt-2">
                                         <li class="custom-list-item d-flex">
@@ -300,7 +300,7 @@ body {
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-12">
-                                <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
+                                <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0" style="height: 325px; padding: 9%;">
                                     <div class="counter-thumb">
                                         <div class="d-flex">
                                             <span class="counter-number" data-from="1" data-to="2022"
@@ -310,12 +310,20 @@ body {
 
                                         <span class="counter-text">Founded</span>
                                     </div>
-
                                     <div class="counter-thumb mt-4">
                                         <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="120"
+                                            <span class="counter-number" data-from="1" data-to="6456"
                                                 data-speed="1000"></span>
-                                            <span class="counter-number-text">B</span>
+                                            <span class="counter-number-text"></span>
+                                        </div>
+
+                                        <span class="counter-text">Clothing bins</span>
+                                    </div>   
+                                    <div class="counter-thumb mt-4">
+                                        <div class="d-flex">
+                                            <span class="counter-number" data-from="1" data-to="30"
+                                                data-speed="1000"></span>
+                                            <span class="counter-number-text"></span>
                                         </div>
 
                                         <span class="counter-text">Donations</span>

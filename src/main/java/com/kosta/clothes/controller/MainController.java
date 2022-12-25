@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ public class MainController {
 	ServletContext servletContext;
 	
 	@GetMapping("/")
-	String main() {
+	String main(HttpServletRequest request) {
+		String sepath = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(sepath);
 		return "/home2";
 	}
 	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.

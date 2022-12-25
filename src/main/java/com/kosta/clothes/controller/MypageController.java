@@ -389,7 +389,8 @@ public class MypageController {
                  //거래후기
                  reviewList = reviewService.getBReviewList(bno, rpage, rpageInfo);
                  model.addAttribute("reviewList", reviewList);	
-                 
+                 model.addAttribute("rpageInfo", rpageInfo);
+
                  Map astatuscount= applyService.astatuscount(bno);
                  Integer acount= (Integer) astatuscount.get("후기등록완료");
                  Integer bcount= (Integer) astatuscount.get("신청거절");
@@ -1521,7 +1522,7 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/sellView/"+ino;
+      return "redirect:/sellapplyList/"+ino;
    }
    
    @GetMapping("/selectSharingApply")

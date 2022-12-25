@@ -132,7 +132,7 @@
 				        	<a href="/mypage/umypage/${sharing.userno }/sell">
 				        		<input type="button" id="openclothes" class="buttoncontent" value="옷장열기" />
 				        	</a>
-				        	<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
+				        	<input type="button" id="wapply" class="buttoncontent" value="나눔신청" />
 				        </c:when>
 				        <c:otherwise>
 					        <c:choose>
@@ -141,7 +141,7 @@
 			        					<a href="/mypage/umypage/${sharing.userno }/sell">
 			        						<input type="button" id="openclothes" class="buttoncontent" value="옷장열기" />
 			        					</a>
-			        					<input type="button" id="wapply" class="buttoncontent" value="구매신청" />
+			        					<input type="button" id="wapply" class="buttoncontent" value="나눔신청" />
 			        				</c:if>
 			        				<c:if test="${authUser.userno eq sharing.userno }">
 			        					<a href="/mypage/umypage/${authUser.userno}/sell">
@@ -149,7 +149,7 @@
 			        					</a>
 			        					<c:if test="${fn:length(users) > 0}">
 			        						<div class="sharingApplyList">
-				        						<input type="button" class="buttoncontent" value="구매 신청 목록" style="width:7em;" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
+				        						<input type="button" class="buttoncontent" value="나눔 신청 목록" style="width:7em;" onclick="window.open('/sharingapplyList/${sharing.sno }', '_blank', 
                        'top=140, left=300, width=500, height=600, menubar=no, toolbar=no, location=no, directories=no, status=no, scrollbars=yes, copyhistory=no, resizable=no');">
 					        				</div>
 				        				</c:if>
@@ -515,7 +515,7 @@ function commentList(){
 	            a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 if(auth != ''){
-                	if(auth == 'users'){
+                	if(auth == 'users' && userno == value.userno){
 		                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 		                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
                 	}

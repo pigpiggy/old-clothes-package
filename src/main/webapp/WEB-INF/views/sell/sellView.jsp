@@ -86,7 +86,7 @@
 	        <c:choose>
 	        	<c:when test="${empty authUser }">
 	        		<div class="letterAndHeart" id="icons">
-	        			<img src="/image/chaticon.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
+	        			<img src="/image/blackchat.png" id="chaticon_img" alt="채팅" title="판매자와 채팅하기">
 		          		<img src="/image/letter.png" id="letter_img" alt="쪽지" title="쪽지 보내기">
 		          		<img src="/image/heart.png" id="heart_img" alt="찜신청전" title="찜하기" >
 	        		</div>
@@ -357,7 +357,7 @@ function commentList(){
 	            a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 if(auth != ''){
-                	if(auth == 'users'){
+                	if(auth == 'users' && userno == value.userno){
 		                a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 		                a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
                 	}

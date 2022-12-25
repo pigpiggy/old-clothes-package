@@ -185,8 +185,6 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
     height: 35px;
 }
 
-
-
 .kakaoids{
 	position: relative;
     right: -85%;
@@ -373,8 +371,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
    left: 11%;
 }
 #applycloth{
-  display: inline-block;
-    margin-left: 22%;
+  	display: inline-block;
     padding: 3%;
     background: rgb(23,162,184);
     border: 1px solid rgb(23,162,184);
@@ -417,4 +414,10 @@ color: #000;
     display: inline-block;
     margin-right: 0.5em;
 }
-
+#applybtn {
+	display: flex;
+	justify-content: space-around;
+}
+#applybtn:active {
+	border: none;
+}

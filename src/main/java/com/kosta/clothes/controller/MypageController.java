@@ -1738,9 +1738,14 @@ public class MypageController {
 				System.out.println("SLIST:"+sList);
 				return sList;
 			}else if("indi".equals(category)) {
-				iList = mypageService.getLikeSellList(userno);
-				System.out.println("ILIST:"+iList);
-				return iList;
+	            iList = mypageService.getLikeSellList(userno);
+	            for (int i = 0; i < iList.size(); i++) {
+	               if (iList.get(i).getIfileids() != null) {
+	                  iList.get(i).setIfileids(iList.get(i).getIfileids().split(",")[0]);
+	               }
+	            }
+	            System.out.println("ILIST:"+iList);
+	            return iList;
 			}else {
 				bList = mypageService.getLikeBusinessList(userno);
 				System.out.println("BLIST:"+bList);

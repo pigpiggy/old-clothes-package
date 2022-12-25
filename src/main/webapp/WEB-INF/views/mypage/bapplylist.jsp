@@ -40,6 +40,40 @@
    position: relative;
     display: block;
 }
+
+.bapplyButtons {
+	position: relative;
+    bottom: 4px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn1,
+.btn {
+	display: inline;
+}
+
+#bapplyBtn {
+	display: inline;
+	padding: 0;
+	height: auto;
+	border: 0;
+	vertical-align: top;
+}
+
+#applying {
+	width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5BC1AC;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 5% 3%;
+    cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -97,13 +131,14 @@
                               </div>   
                               <input type="hidden" id="astatus" name="astatus" value="${apply.astatus }">                       
                            </div>   
+                           <div class="bapplyButtons">
                            <c:if test="${apply.astatus eq '신청중' }">
                              <div class="btn1">
                                 <input type="hidden" id="userno" name="userno" value="${apply.userno }">                                                                                             
                                 <input type="hidden" id="ano" name="ano" value="${apply.ano }">
                                 <button type="button" id="apply_close_btn" name="cancel" data-abtn4="${apply.astatus }" data-abtn5="${apply.userno }" data-abtn6="${apply.ano }">수거거절</button>
                              </div>                                            
-                             <div class="btn">             
+                             <div class="btn" id="bapplyBtn">             
                                 <input type="hidden" id="userno" name="userno" value="${apply.userno }">                                                                                             
                                 <input type="hidden" id="ano" name="ano" value="${apply.ano }">
                                  <button type="submit" form="form" data-abtn1="${apply.astatus }" data-abtn2="${apply.userno }" data-abtn3="${apply.ano }" id="applying" name="applying" >수거승인</button>
@@ -128,6 +163,7 @@
                                  </div>
                               </c:when>
                            </c:choose>
+                           </div>
                        </form>                   
                     </div>                                    
            </div>              

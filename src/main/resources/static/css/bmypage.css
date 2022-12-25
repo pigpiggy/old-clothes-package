@@ -172,7 +172,7 @@
     text-decoration: none;
     border-radius: 9px;
     font-size: 1em;
-    margin: 5% 3%;
+    margin: 5% auto;
     cursor: pointer;
     position: relative;
 }
@@ -192,10 +192,7 @@
     cursor: pointer;
 }
 #applying{
-     position: relative;
-    left: 61%;
-    bottom: 208%;
-    width: 6em;
+	    width: 6em;
     height: 2.5em;
     border: none;
     background: #5BC1AC;
@@ -203,9 +200,8 @@
     text-decoration: none;
     border-radius: 9px;
     font-size: 1em;
-    /* margin: 3% 6%; */
+    margin: 5% 3%;
     cursor: pointer;
-
 }
 #apply_close_btn{
      width: 6em;
@@ -218,7 +214,6 @@
     font-size: 1em;
     margin: 5% 3%;
     cursor: pointer;
-
 }
 
 .star,

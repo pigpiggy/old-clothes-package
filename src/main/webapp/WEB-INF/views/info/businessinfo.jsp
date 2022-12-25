@@ -427,7 +427,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
@@ -743,7 +743,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){

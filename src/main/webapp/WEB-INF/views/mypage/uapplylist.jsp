@@ -51,7 +51,7 @@
     text-decoration: none;
     border-radius: 9px;
     font-size: 1em;
-    margin: 5% 3%;
+    margin: 5% auto;
     cursor: pointer;
 }
 
@@ -72,11 +72,7 @@
 }
 
 #applying1{    
-   display: block;
-    margin: 0 auto;
-   position: relative;
-    bottom: 96%;
-   width: 6em;
+     width: 6em;
     height: 2.5em;
     border: none;
     background: #5BC1AC;
@@ -84,8 +80,9 @@
     text-decoration: none;
     border-radius: 9px;
     font-size: 1em;
+    margin: 5% auto;
     cursor: pointer;
-    margin-bottom: 5px;
+    bottom: 2px;
 }
 /* Hover state animation applied here */
 .applying1:hover { 
@@ -153,6 +150,31 @@
 #uapplyPaging {
    margin-top: 10%;
 }
+
+.uapplybtn {
+	bottom: 12px;
+}
+
+#uapplybtn {
+	display: block;
+}
+
+#applying{
+	    width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5BC1AC;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 5% 3%;
+    cursor: pointer;
+}
+
+#apply_close_btn {
+	
+}
 </style>
 </head>
 <body>   
@@ -205,14 +227,14 @@
                                    
                                    <c:choose>                     
                                    <c:when test="${wapply.astatus eq '신청중' }">
-                                       <div class="btn">
+                                       <div class="btn uapplybtn" id="uapplybtn">
                                           <input type="hidden" id="userno" name="userno" value="${wapply.userno }">                                                                                             
                                            <input type="hidden" id="ano" name="ano" value="${wapply.ano }">                              
                                           <button type="button" id="apply_close_btn" name="cancel" data-abtn2="${wapply.userno }" data-abtn3="${wapply.ano }">신청취소</button>
                                       </div>
                                    </c:when>
                                    <c:when test="${wapply.astatus eq '신청완료' }">
-                                      <div class="btn">                           
+                                      <div class="btn uapplybtn">                           
                                         <!-- 버튼 사라짐 -->
                                       </div>                   
                                    </c:when>                       
@@ -220,7 +242,7 @@
                                    </c:choose>
                                    <c:choose> 
                                    <c:when test="${wapply.astatus eq '수거완료' }">
-                                         <div class="btn">                           
+                                         <div class="btn uapplybtn" id="uapplybtn">                           
                                              <button type="submit" form="form" id="applying1" class="complete">후기작성</button>
                                          </div>                   
                                    </c:when>
@@ -231,7 +253,9 @@
                                    </c:otherwise>   
                                    </c:choose> 
                                    <c:if test="${wapply.astatus eq '후기대기' }">
+                                   	<div class="btn uapplybtn" id="uapplybtn">         
                                        <button type="button" class="applying1">후기작성</button>
+                                      </div>
                                    </c:if>                    
                                 </div>                                    
                           </div>              

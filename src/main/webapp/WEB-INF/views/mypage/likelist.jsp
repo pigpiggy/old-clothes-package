@@ -59,7 +59,7 @@
 						              </div>
 						          </div>	
 						          <hr class="hr2">		         	 	
-			         	 	<div class="btn">			         	 	  
+			         	 	<div id="likebtn">			         	 	  
 				              <button type="button" id="lmodal_close_btn">Close</button>
 				              <button type="submit" form="form" id="lapplycloth">수거신청</button>
 				           </div>

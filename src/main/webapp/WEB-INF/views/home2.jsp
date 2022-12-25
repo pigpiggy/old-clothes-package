@@ -255,29 +255,45 @@ body {
 
                     <div class="col-lg-6 col-12">
                         <div class="custom-text-box">
-                            <h2 class="mb-2">하우헌옷</h2>
+                            <h2 class="mb-3" style="font-size:30px;">헌 옷 처리는 하우헌옷에서</h2>
 
-                            <h5 class="mb-3">버려지는 헌 옷 쓰레기, 누군가에겐 필요한 옷 한 벌 </h5>
+                            <h5 class="mb-3"></h5>
 
-                            <p class="mb-0">옷을 위한 지구는 없다. ~~~~~~~</p>
+                            <p class="mb-0">옷을 사는 것은 쉽지만 입지 않는 옷을 처리하는 것은 생각보다 어렵습니다.</p>
+                            <p class="mb-0">입지 않는 옷들을 하우헌옷에서 다양한 방법으로 처리해보세요. </p>
                         </div>
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">Our Mission</h5>
+                                    <h5 class="mb-3">하우헌옷</h5>
 
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
+                                    <p style="font-size: 15px;">버려지는 헌 옷 쓰레기들, &nbsp;누군가에게는 필요한 옷 한 벌이 될 수 있습니다.</p>
 
                                     <ul class="custom-list mt-2">
                                         <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Charity Theme
+                                        	<div class="custom-text-box-icon me-2" style="display:flex; justify-content:center; align-items:center;">
+	                                            <img src="/image/mainrecycling.png" style="width:13px;">
+                                        	</div>
+                                            헌 옷 수거함 찾기
                                         </li>
-
                                         <li class="custom-list-item d-flex">
-                                            <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Semantic HTML
+                                        	<div class="custom-text-box-icon me-2" style="display:flex; justify-content:center; align-items:center;">
+	                                            <img src="/image/mainheart.png" style="width:13px;">
+                                        	</div>                                           
+                                        	기부처 안내	
+                                        </li>
+                                        <li class="custom-list-item d-flex">
+                                        	<div class="custom-text-box-icon me-2" style="display:flex; justify-content:center; align-items:center;">
+	                                            <img src="/image/mainbox.png" style="width:13px;">
+                                        	</div>                                           
+                                        	무료 나눔	
+                                        </li>
+                                        <li class="custom-list-item d-flex">
+                                        	<div class="custom-text-box-icon me-2" style="display:flex; justify-content:center; align-items:center;">
+	                                            <img src="/image/maindollar.png" style="width:14px;">
+                                        	</div>                                           
+                                       		대량 및 소량 판매	
                                         </li>
                                     </ul>
                                 </div>
@@ -287,7 +303,7 @@ body {
                                 <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
                                     <div class="counter-thumb">
                                         <div class="d-flex">
-                                            <span class="counter-number" data-from="1" data-to="2009"
+                                            <span class="counter-number" data-from="1" data-to="2022"
                                                 data-speed="1000"></span>
                                             <span class="counter-number-text"></span>
                                         </div>

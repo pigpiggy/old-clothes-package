@@ -247,7 +247,7 @@ strong {
   background: var(--white-color);
   border-radius: var(--border-radius-medium);
   margin-bottom: 24px;
-  padding: 40px;
+  padding: 39px;
 }
 
 .custom-text-box-image {
@@ -678,7 +678,7 @@ strong {
 .counter-number,
 .counter-number-text {
   color: var(--primary-color);
-  font-size: var(--h1-font-size);
+  font-size: 30px;
   font-weight: var(--font-weight-bold);
   line-height: normal;
 }

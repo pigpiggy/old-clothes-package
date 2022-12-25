@@ -55,6 +55,7 @@ li {
     bottom: 34px;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
 }
 
 /* 체크박스 */

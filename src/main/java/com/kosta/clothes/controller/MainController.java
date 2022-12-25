@@ -2,6 +2,7 @@ package com.kosta.clothes.controller;
 
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ public class MainController {
 	
 	@GetMapping("/")
 	String main(HttpServletRequest request) {
+		Set<String> pathSet = request.getSession().getServletContext().getResourcePaths("/");
+		System.out.println(pathSet);
 		return "/home2";
 	}
 	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.

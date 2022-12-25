@@ -37,7 +37,7 @@
 	text-decoration: none;
 }
 #sellListCard:hover {
-	color: black;
+	color: var(--p-color);
 }
 .buyProductWrap {
 	width: 1000px;

@@ -242,7 +242,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 						              <input type="hidden" id="astatus" name="astatus" value="신청중">
 						          </div>	
 						          <hr class="hr2">		         	 	
-			         	 	<div class="btn">			         	 	  
+			         	 	<div class="applybtn" id="applybtn">			         	 	  
 				              <button type="button" id="modal_close_btn">Close</button>
 				              <button type="submit" form="form" id="applycloth">수거신청</button>
 				           </div>

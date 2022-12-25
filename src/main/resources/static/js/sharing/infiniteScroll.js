@@ -37,7 +37,7 @@ function surveyList(){
 				if(data!=""){
 					$(data).each(
 						function(){
-							str += "<a href="+"'sharingView/"+this.sno+"'>"
+							str += "<a href="+"'sharingView/"+this.sno+"' id='sharingListCard'>"
 							str	+= "<div class="+"'card'"+" data-sno='"+this.sno+"'>";
 							str += "<div class='sharingCard-header'>"+this.sdealType+"</div>"
 		          			str	+= "<div class="+"'card-image'"+">";

@@ -116,7 +116,7 @@
 			</div>
 		</div>
 		<%-- 페이징 --%>
-		<div class="center">
+		<div class="center" id="breviewPaging">
 				<ul class="pagination rpaging">
 					<c:choose>
 						<c:when test="${rpageInfo.page<=1}">

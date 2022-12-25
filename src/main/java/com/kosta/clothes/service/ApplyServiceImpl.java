@@ -100,9 +100,9 @@ public class ApplyServiceImpl implements ApplyService{
 			System.out.println("apage: " + apage);
 			int applyCount = applyDAO.applyListCount(userno);
 			System.out.print("ReviewRow:" + applyCount);
-			int maxPage = (int)Math.ceil((double)applyCount/10);  
+			int maxPage = (int)Math.ceil((double)applyCount/6);  
 			System.out.println("maxPage : " + maxPage);
-			int startPage = apage/10 * 10 + 1;
+			int startPage = apage/6 * 6 + 1;
 			System.out.println("startPage : " + startPage);
 			int endPage = startPage + 6 -1; 
 			System.out.println("endPage : " + endPage);
@@ -131,9 +131,9 @@ public class ApplyServiceImpl implements ApplyService{
 		public List<Apply> bgetApplyList(Integer bno, int bapage, PageInfo bapageInfo) throws Exception {
 			int applyCount = applyDAO.bapplyListCount(bno);
 			System.out.print("ReviewRow:" + applyCount);
-			int maxPage = (int)Math.ceil((double)applyCount/10);  
+			int maxPage = (int)Math.ceil((double)applyCount/6);  
 			System.out.println("maxPage : " + maxPage);
-			int startPage = bapage/10 * 10 + 1;
+			int startPage = bapage/6 * 6 + 1;
 			System.out.println("startPage : " + startPage);
 			int endPage = startPage + 6 -1; 
 			System.out.println("endPage : " + endPage);

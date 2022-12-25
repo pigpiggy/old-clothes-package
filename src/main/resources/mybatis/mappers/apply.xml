@@ -175,7 +175,7 @@
 	<select id="bgetApplyList" parameterType="map" resultType="Apply">
 		<![CDATA[
 			SELECT * 
-			FROM (SELECT ROW_NUMBER() OVER(ORDER BY apickup) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,bno FROM apply WHERE bno=#{bno})a) 
+			FROM (SELECT ROW_NUMBER() OVER(ORDER BY ano desc) num , a.* FROM (SELECT ano,aname,aphone,weight,aaddress,astatus,apickup,userno,bno FROM apply WHERE bno=#{bno})a) 
 			WHERE num BETWEEN #{row} AND #{row}+5
 		]]>
 	</select>

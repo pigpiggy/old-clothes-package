@@ -40,6 +40,12 @@
 	position: relative;
     display: block;
 }
+
+.bapplyButtons {
+	position: relative;
+    bottom: 12px;
+}
+
 </style>
 </head>
 <body>
@@ -97,6 +103,7 @@
 		                        </div>	
 		                        <input type="hidden" id="astatus" name="astatus" value="${apply.astatus }">	                    
 		                     </div>	
+		                     <div class="bapplyButtons">
 		                     <c:if test="${apply.astatus eq '신청중' }">
 			                    <div class="btn1">
 			                    	<input type="hidden" id="userno" name="userno" value="${apply.userno }">             	                    			                    		                      
@@ -128,6 +135,7 @@
 	                        		</div>
 	                        	</c:when>
 	                        </c:choose>
+	                        </div>
 	                    </form>                   
 	                 </div>		               	            
 	        </div>		        

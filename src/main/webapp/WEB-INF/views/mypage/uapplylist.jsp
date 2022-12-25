@@ -157,6 +157,8 @@
 
 #uapplybtn {
 	display: block;
+	border: none;
+	cursor: default;
 }
 
 #applying{

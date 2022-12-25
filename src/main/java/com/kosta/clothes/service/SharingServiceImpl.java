@@ -64,7 +64,7 @@ public class SharingServiceImpl implements SharingService{
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
-			String path = request.getSession().getServletContext().getRealPath("/home/ubuntu/app/upload");
+			String path = request.getSession().getServletContext().getRealPath("/static/upload");
 //			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {

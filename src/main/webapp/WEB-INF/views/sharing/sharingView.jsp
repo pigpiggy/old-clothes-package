@@ -515,7 +515,7 @@ function commentList(){
 	            a += '<div id="writer" class="commentInfo'+value.cno+'">'+'<a href="/mypage/umypage/'+value.userno +'/sell" >'+ value.cname +'</a><span class="commentregdate">'+ value.regdate +'</span></div>';	 
                 a += '<div class="commentContent'+value.cno+'"> <p id="contentss">'+value.ccontent +'</p>';
                 if(auth != ''){
-                	if(auth == 'users'){
+                	if(auth == 'users' && userno == value.userno){
 		                 a += '<div class="commenta"><a onclick="commentUpdate('+value.cno+',\''+value.ccontent+'\');"> 수정 </a>';
 		                 a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
                 	}

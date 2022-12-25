@@ -15,7 +15,7 @@ html {
 #applyListContainer {
     background-color: white;
     border-radius: 18px;
-    width: 400px;
+    width: 350px;
     height: 500px;
     display: flex;
     justify-content: center;
@@ -27,11 +27,14 @@ h2 {
   text-align: center;
   margin-top: 15px;
   padding: 10px;
-  opacity: 0;
-  -webkit-animation: fade 2s 1.5s linear; 
-  -webkit-animation-fill-mode: forwards;
 }
-
+#divider {
+  width: 230px; 
+  height: 2px; 
+  background: black;
+  margin: -30px auto 0;
+  background: #ddd;
+}
 li {
 	list-style: none;
 }
@@ -50,7 +53,8 @@ li {
     position: absolute;
     bottom: 34px;
     left: 50%;
-    transform: translateX(-50%);    
+    transform: translateX(-50%);   
+    cursor: pointer; 
 }
 /* 체크박스 */
 [type="radio"]:checked,
@@ -103,21 +107,41 @@ li {
     -webkit-transform: scale(1);
     transform: scale(1);
 }
+#userInfo {
+	padding: 0;
+    width: 100%;
+}
+#nickname {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+#applyDate {
+	color: gray;
+}
+#liContainer {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 12px;
+    padding-bottom: 7px;
+}
 </style>
 </head>
 <body>
 <div id="applyListContainer">
 	
 	<form action="/selectSellApply" method="get" style="position:relative;">
-		<h2>구매신청목록</h2>
-		<div id="divider"></div>
-		<ul>
-			<c:forEach var="users" items="${users }" varStatus="status">
-				<li><input type="radio" name="radio-group" id="test${status.index }" value="${users.userno}"/><label for="test${status.index }">${users.nickname }</label><input type="hidden" name="userno" value="${users.userno}"/></li>
-				<li>${users.joinDate }</li>
-			</c:forEach>			        					
-	 	</ul>
-	 	<input type="hidden" name="ino" value="${sell.ino }">
+		<div id="applyList">
+			<h2>구매신청목록</h2>
+			<ul id="userInfo">
+				<c:forEach var="users" items="${users }" varStatus="status">
+					<div id="liContainer">
+						<li><input type="radio" name="radio-group" id="test${status.index }" value="${users.userno}"/><label for="test${status.index }">${users.nickname }</label><input type="hidden" name="userno" value="${users.userno}"/></li>
+						<li>${users.joinDate }</li>
+					</div>	
+				</c:forEach>			        					
+		 	</ul>
+		 	<input type="hidden" name="ino" value="${sell.ino }">
+	 	</div>
 		<input type="submit" value="확인" class="submitButton buttoncontent"/>
  	</form>
  </div>

@@ -201,7 +201,7 @@ public class ChatApplicationController {
 		 		//읽지 않은 chatRoomId들과 현재 chatRoomId 대조 후 처리 
 				 for (int ele : unreadChatId) {
 					 	if (chatList.getChatno() == ele) {
-					 		jo.put("messageUnread", "<img id='alert' src='/static/image/newmessage.png'>");
+					 		jo.put("messageUnread", "<img id='alert' src='/image/newmessage.png'>");
 					 		break;
 					 	} else {
 					 		jo.put("messageUnread", "");

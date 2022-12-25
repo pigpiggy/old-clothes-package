@@ -191,18 +191,7 @@
     letter-spacing: -1px;
     cursor: pointer;
 }
-#applying{
-	    width: 6em;
-    height: 2.5em;
-    border: none;
-    background: #5BC1AC;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 9px;
-    font-size: 1em;
-    margin: 5% 3%;
-    cursor: pointer;
-}
+
 #apply_close_btn{
      width: 6em;
     height: 2.5em;

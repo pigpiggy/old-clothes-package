@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,9 @@ public class SharingServiceImpl implements SharingService{
 	@Autowired
 	ServletContext servletContext;
 	
+	@Autowired
+	HttpServletRequest request;
+	
 	@Override
 	public void registSharing(Sharing sharing, MultipartFile[] files) throws Exception {
 		Integer sharingid = sharingDAO.getNextSharingNo(); //sharing sequence
@@ -60,7 +64,8 @@ public class SharingServiceImpl implements SharingService{
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
-			String path = servletContext.getRealPath("/upload/");
+			String path = request.getSession().getServletContext().getRealPath("/home/ubuntu/app/upload");
+//			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
 					fileVo.setDirectory_name(path);

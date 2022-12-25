@@ -338,7 +338,7 @@ function catelist(){
 									chartHtml +='</div>';
 								}
 								chartHtml +='<div class="info">';
-								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="name"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
 								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/static/image/close.png" /></button>';
 								chartHtml +='</div>';
@@ -554,7 +554,7 @@ function refreshlist(category,globalCurrentPage){
 								chartHtml +='<div class="eachuser">';
 								if(data.ifileids==null){
 									chartHtml +='<div class="img-wrap">';
-// 									chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
+ 									chartHtml +='<img class="productimg" src="/static/image/logo1.png" />';
 									chartHtml +='</div>';
 								}else{
 									chartHtml +='<div class="img-wrap">';
@@ -562,7 +562,7 @@ function refreshlist(category,globalCurrentPage){
 									chartHtml +='</div>';
 								}
 								chartHtml +='<div class="info">';
-								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="name"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
 								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/static/image/close.png" /></button>';
 								chartHtml +='</div>';

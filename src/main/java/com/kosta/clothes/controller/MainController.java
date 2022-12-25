@@ -22,7 +22,7 @@ public class MainController {
 	@GetMapping("/")
 	String main(HttpServletRequest request) {
 		String sepath = request.getSession().getServletContext().getRealPath("/");
-		System.out.println(sepath);
+		System.out.println(sepath.toString());
 		return "/home2";
 	}
 	//이미지 경로(서버에서 가져오기) filename 경로를 받아온다.

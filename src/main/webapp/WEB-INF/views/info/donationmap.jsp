@@ -180,9 +180,9 @@ input[type=radio] {
 
 .radiobtn{
 	position: relative;
-    width: 18%;
+    width: 17%;
     top: 350px;
-    left: 16%;   
+    left: 15%;   
     z-index: 50;
 }
 
@@ -290,7 +290,7 @@ input[type=radio] {
 	
 	<div id="donationcontainer">
 		<div class="radiobtn">
-			<div class="form-radio" style="text-align:left; margin-left:30%; margin-top:-100px;">
+			<div class="form-radio" style="text-align:left; margin-left:29%; margin-top:-100px;">
 		        <input type="radio" name="donation_level" value="online" id="online" checked="checked" />
 		        <label for="person" style="width: 45px;">온라인</label>
 				&nbsp; &nbsp;

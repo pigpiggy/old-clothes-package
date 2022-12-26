@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://kit.fontawesome.com/5231ffc51c.js" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>하우헌옷</title>
     <!-- CSS FILES -->
    	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css"/>
 	<link href="<c:url value="/resources/css/bootstrap-icons.css"/>" rel="stylesheet" type="text/css"/>

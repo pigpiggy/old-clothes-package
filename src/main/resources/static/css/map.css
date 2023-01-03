@@ -58,14 +58,12 @@
 #donationsite {
   margin-bottom: 30px;
   font-size: 45px;
-  text-align: left;
-  margin-left:800px;  
+  text-align: center;
   padding: 0;
 }
 
  .leftimg {
   float:left; width:350px; height:200px; background-color:#ffffff;
-  margin-left:600px;
   }
  .rightcontent {
   display:inline-block; width:350px; height:200px; background-color:#ffffff; margin-left:0px;}
@@ -80,8 +78,6 @@
 
 .goodbtn {
 	background-color:#400000;
-	left:120px;
-	top:40px;
 	width:100px;	
 	height:37px;
 	color:#ffffff;
@@ -90,9 +86,6 @@
 .storebtn{
 	position:absolute;
 	background-color:#400000;
-	margin-left:1300px;
-	margin-bottom:-30px;
-	top:540px;
 	width:100px;	
 	height:37px;
 	color:#ffffff;
@@ -104,5 +97,4 @@
 	height:37px;
 	color:#ffffff;
 	position:absolute;
-	top:760px;
 }

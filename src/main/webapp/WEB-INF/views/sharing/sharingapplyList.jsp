@@ -15,7 +15,7 @@ html {
 #applyListContainer {
     background-color: white;
     border-radius: 18px;
-    width: 400px;
+    width: 350px;
     height: 500px;
     display: flex;
     justify-content: center;
@@ -27,63 +27,123 @@ h2 {
   text-align: center;
   margin-top: 15px;
   padding: 10px;
-  opacity: 0;
-  -webkit-animation: fade 2s 1.5s linear; 
-  -webkit-animation-fill-mode: forwards;
+
 }
 #divider {
-  width: 0px; height: 2px; 
+  width: 230px; 
+  height: 2px; 
   background: black;
   margin: -30px auto 0;
-  opacity: 0;
-  -webkit-animation: fade 1s 0.75s linear,
-    						  stretch 1s 0.4s linear;
-  -webkit-animation-fill-mode: forwards;  
   background: #ddd;
 }
 
-@-webkit-keyframes fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@-webkit-keyframes up {
-  0%    { margin-top: 90px; }
-  60%   { margin-top: 30px; }
-  70%   { margin-top: 25px;  }
-  80%   { margin-top: 30px; }
-  90%   { margin-top: 25px;  } 
-  100%  { margin-top: 30px; }
-}
-
-@-webkit-keyframes stretch {
-  from { width: 0px;   }
-  to   { width: 185px; } 
-}
 li {
 	list-style: none;
 }
-.submitButton {
-	margin: 0 auto;
-    display: flex;
+.buttoncontent {
+    width: 6em;
+    height: 2.5em;
+    border: none;
+    background: #5bc1ac;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 1em;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+/* 체크박스 */
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F87DA9;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+#userInfo {
+	padding: 0;
+    width: 100%;
+}
+#nickname {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+#applyDate {
+	color: gray;
+}
+#liContainer {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 12px;
+    padding-bottom: 7px;
 }
 </style>
 </head>
 <body>
 <div id="applyListContainer">
-	<form action="/selectSharingApply" method="get">
+	<form action="/selectSharingApply" method="get" style="position:relative;">
 		<div id="applyList">
 			<h2>구매 신청 목록</h2>
-			<div id="divider"></div>
 			<ul id="userInfo">
-				<c:forEach var="users" items="${users }">
-					<li class="nickDate" id="nickname"><input type="radio" name="list" value="${users.userno}"/>${users.nickname }<input type="hidden" name="userno" value="${users.userno}"/></li>
-					<li class="nickDate" id="applyDate">${users.joinDate }</li>
+				<c:forEach var="users" items="${users }" varStatus="status">
+					<div id="liContainer">
+						<li class="nickDate" id="nickname" class="radio"><input type="radio" name="radio-group" id="test${status.index }" value="${users.userno}"/><label for="test${status.index }">${users.nickname }</label><input type="hidden" name="userno" value="${users.userno}"/></li>
+						<li class="nickDate" id="applyDate">${users.joinDate }</li>
+					</div>	
 				</c:forEach>			        					
 		 	</ul>
 	 		<input type="hidden" name="sno" value="${sno }">
 	 	</div>
-	 	<input type="submit" value="확인" class="submitButton"/>
+	 	<input type="submit" value="확인" class="submitButton buttoncontent"/>
  	</form>
 </div> 	
  	<script>
@@ -96,6 +156,11 @@ li {
 	 			$('.submitButton').attr("disabled", true);
 	 		}
 	 	}
+	 	
+	 	$('.submitButton').click(function(){
+	          alert('신청이 완료되었습니다.');
+	          opener.parent.location.reload();
+	       });
  	</script>
 </body>
 </html>

@@ -62,9 +62,10 @@ h2 {
 	margin-bottom: 50px;
 }
 
-h5 {
+.mUser {
 	font-weight: bold;
 	margin: 20px 0;
+	color: black;
 }
 #select {
 	display: flex;
@@ -84,6 +85,26 @@ thead {
 tbody {
 	text-align: center;
 }
+
+tbody tr {
+	border-bottom: 1px solid #dee2e6;
+}
+
+.table .messageChk {
+	border-top: none;
+}
+
+.table thead .messageChk {
+	border-bottom: 2px solid #dee2e6;
+	border-top: 1px solid #dee2e6;
+}
+
+
+
+.messageSubject {
+	margin-bottom: 2.5rem;
+}
+
 input[type="checkbox"] {
 	position: relative;
 	margin-left: 0;
@@ -93,6 +114,8 @@ input[type="checkbox"] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	border: none;
+	height: 45px;
 }
 
 .modaltitle{
@@ -149,9 +172,9 @@ ul.pagination li a {
 }
 
 ul.pagination li a.active {
-  background-color: #4CAF50;
+  background-color: #5bc0ab;
   color: white;
-  border: 1px solid #4CAF50;
+  border: 1px solid #5bc0ab;
 }
 
 ul.pagination li a:hover:not(.active) {background-color: #ddd;}
@@ -160,8 +183,9 @@ div.center {
 	margin: 20px;
 	display: flex;
 	justify-content: center;
+	margin-top: 10%;
 }
-
-
-
+#checkcontent {
+	margin-bottom: 5px;
+}
 

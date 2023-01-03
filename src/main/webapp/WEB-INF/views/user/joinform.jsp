@@ -122,7 +122,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="phone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="phone" name="phone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없이입력 ex)01012344321."/>
+					                 		placeholder="'-'없이 입력해주세요."/>
 						                    <input type="button" id="goSMS" class="btn btn-light" value="본인인증" style="margin-left:2%;">
 				                        </div>
 				                        
@@ -210,7 +210,7 @@
 				                        <div class="form-outline mb-4" style="display:flex;">
 					                        <label class="form-label" for="bphone" style="position:absolute; margin:2.5%;" >전화번호<span class="req">*</span></label>
 					                 		<input type="text" id="bphone" name="bphone" class="form-control form-control-lg" style="padding:.5rem 1rem .5rem 7rem;" 
-					                 		placeholder="'-'없이입력 ex)01012344321"/>
+					                 		placeholder="'-'없이 입력해주세요."/>
 						                    <input type="button" id="bgoSMS"class="btn btn-light" value="본인인증" style="margin-left:2%;" >
 				                        </div>
 				                        

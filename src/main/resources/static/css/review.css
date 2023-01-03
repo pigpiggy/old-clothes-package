@@ -7,7 +7,7 @@ html {
 	font-size: 1em;
 }
 #reviewcontainer {
-	width: 80%;
+	width: 1000px;
 	margin: 0 auto;
 	margin-bottom: 25%;
 }
@@ -104,4 +104,6 @@ html {
 .cardheader {
 	font-size: 16px;
 }
-
+#reviewPaging {
+	margin-top: 10%;	
+}

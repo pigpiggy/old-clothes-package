@@ -29,8 +29,7 @@
 	
 	<update id="updateIndividual" parameterType="Sell">
 		<![CDATA[
-			update individual set ititle=#{ititle},icontent=#{icontent},addressCity=#{addressCity},
-			addressTown=#{addressTown},ifileids=null,price=#{price}
+			update individual set ititle=#{ititle},icontent=#{icontent},iaddress=#{iaddress},ifileids=null,price=#{price}
 			where ino=#{ino}
 		]]>
 	</update>

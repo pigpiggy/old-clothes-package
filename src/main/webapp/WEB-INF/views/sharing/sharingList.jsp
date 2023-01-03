@@ -45,10 +45,10 @@
       </div>
     </div>
 	
-    <div id="cards">
+    <div id="cards" class="sharingCards">
     	<div class="card-list">
 		  <c:forEach var="sharing" items="${sharingList}">
-	     <a href="sharingView/${sharing.sno}">
+	     <a href="sharingView/${sharing.sno}" id="sharingListCard">
 		     <div class="card" data-sno=${sharing.sno }>
 		     	  <div class="sharingCard-header">
 		     	  	${sharing.sdealType}

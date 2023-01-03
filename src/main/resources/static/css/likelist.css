@@ -8,6 +8,10 @@
 h2 {
 	margin-bottom: 8px;
 }
+
+.likelistSub {
+	margin-bottom: 2.5rem;
+}
 #likeContainer {
 	width: 100%;
 	margin-bottom: 1rem;
@@ -82,8 +86,8 @@ h2 {
  width:100%;
  }
  #lmodal .lmodal_content {
-   width: 20%;
-   height: 54%;
+   width: 24%;
+   height: 65%;
    top: 10%;
    margin:5% auto;
    padding: 1%;
@@ -463,10 +467,13 @@ display: inline;
 }
 
 #pagingul li a.active {
-  background-color: #2196f3;
+  background-color: #5bc0ab;
   color: white;
-  border: 1px solid #2196f3;;
+  border: 1px solid #5bc0ab;
 }
 
 #pagingul li a:hover:not(.active) {background-color: #ddd;}
 
+#likebtn:active {
+	border: none;
+}

@@ -18,7 +18,7 @@ $(function(){
       console.log(nickname);
       $.ajax({
          type : "post",
-         url : "http://localhost:8088/nickname",
+         url : "/nickname",
          data : {nickname:nickname},
          success:function(data,textStatus){
 	 		if(nickname==hidden){

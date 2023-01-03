@@ -26,7 +26,7 @@
 			</div>		
 			<div class="search-box">
 		      	<form id="search_form" action="freeList" method="get">
-		        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="검색어를 입력하세요">
+		        	<input class="search-input" type="text" id="kwd" name="kwd" placeholder="Search something..">
 		        	<button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
 		        	<input type="hidden" name="keyword" id="keyword" value="${kwd}"/>
 		        </form>

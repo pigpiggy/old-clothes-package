@@ -9,7 +9,7 @@
 <link href="<c:url value="/resources/css/businessinfos.css"/>" rel='stylesheet'/>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd142efc33a45727f19cee4fb015dc51&libraries=services"></script>
 <link href="<c:url value="/resources/css/datepicker.min.css"/>" rel='stylesheet' type="text/css" media="all"/>
 <style>
 #wrap {
@@ -68,7 +68,10 @@
 .shop {
     width: 100%;
     padding: 30px 0;
-    border: 1px solid #9e9e9e;
+    border-right:0px;
+    border-left: 0px;
+    border-bottom: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
     border-top: 2px solid #17191f;
     text-align: center;
 }
@@ -227,11 +230,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			         	 		<div class="cont">
 						              <input type="text" id="aname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
-						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)" readonly>
+						                  <input type="button" id="aad_bt" name="aad_bt"  onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="aphone" name="aphone" placeholder="(- 제외 (01012341234 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]" readonly>
 						              <div class="wei">
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
 						                  <p>kg</p>
@@ -239,7 +242,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 						              <input type="hidden" id="astatus" name="astatus" value="신청중">
 						          </div>	
 						          <hr class="hr2">		         	 	
-			         	 	<div class="btn">			         	 	  
+			         	 	<div class="applybtn" id="applybtn">			         	 	  
 				              <button type="button" id="modal_close_btn">Close</button>
 				              <button type="submit" form="form" id="applycloth">수거신청</button>
 				           </div>
@@ -300,7 +303,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 </div>
 	<script>	
 	$(document).ready(function(){
-		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;">지역을 선택해주세요</h4><span><a></li>'
+		let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h5 style="height:100px; padding:8%; margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요.</h5><span><a></li>';
 		$('#blist').append(requ);
 	})
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -418,13 +421,13 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			setInfo2(null); //기존에 있는 인포윈도우 초기화
 			var bli = "";
 			if(data.length==0){
-				bli += '<li><a><span class="store_item"><h3 style="text-align: center;">선택된 지역엔 업체가 없습니다.</h3></span></a></li><br>';
+				bli += '<li><a><span class="store_item"><h4 style="text-align: center; height:100px; padding:8%; margin:auto auto; color: cadetblue;">선택된 지역에 업체가 없습니다.</h4></span></a></li><br>';
 			}
 				data.forEach(function(data,i){	
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
@@ -740,7 +743,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){

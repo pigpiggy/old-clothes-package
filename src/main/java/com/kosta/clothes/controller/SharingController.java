@@ -265,7 +265,7 @@ public class SharingController {
 
 	@PostMapping("/sharingModify")
 	public ModelAndView modifySharing(@ModelAttribute Sharing sharing, @ModelAttribute FileVO fileVo,
-			@RequestParam("simageFile") MultipartFile[] files) {
+			@RequestParam("simageFile") MultipartFile[] files) {		
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("modifycontroller: " + sharing);

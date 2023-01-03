@@ -389,7 +389,8 @@ public class MypageController {
                  //거래후기
                  reviewList = reviewService.getBReviewList(bno, rpage, rpageInfo);
                  model.addAttribute("reviewList", reviewList);	
-                 
+                 model.addAttribute("rpageInfo", rpageInfo);
+
                  Map astatuscount= applyService.astatuscount(bno);
                  Integer acount= (Integer) astatuscount.get("후기등록완료");
                  Integer bcount= (Integer) astatuscount.get("신청거절");
@@ -1260,6 +1261,7 @@ public class MypageController {
 		               model.addAttribute("select", select);
 		               model.addAttribute("submitcheck", submitcheck);
 		               model.addAttribute("users", users);
+		               model.addAttribute("userno", userno);
 		            } else {
 	
 		            }
@@ -1301,6 +1303,29 @@ public class MypageController {
 		               model.addAttribute("spageInfo", spageInfo);
 		               model.addAttribute("select", select);
 		               model.addAttribute("submitcheck", submitcheck);
+		               
+		               Business business = messageService.mypageBusiness(bno);
+		                  System.out.println("business mypage" +  business.toString());         
+		                  model.addAttribute("business",business);
+		                  
+		                  //신청목록개수
+		                  Integer applycount = applyService.applycount(bno);
+		                  System.out.println("applycount : " + applycount);
+		                  model.addAttribute("applycount",applycount);
+		                  
+		                  //수거상태
+		                  Map astatuscount= applyService.astatuscount(bno);
+		                  Integer dcount= (Integer) astatuscount.get("신청중");
+		                  Integer ecount= (Integer) astatuscount.get("신청완료");
+		                  Integer bcount= (Integer) astatuscount.get("신청거절");
+		                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+		                  Integer ccount= (Integer) astatuscount.get("수거완료");
+		                  System.out.println("astatuscount:"+astatuscount);
+		                  model.addAttribute("dcount",dcount);
+		                  model.addAttribute("ecount",ecount);
+		                  model.addAttribute("bcount",bcount);
+		                  model.addAttribute("acount",acount);
+		                  model.addAttribute("ccount",ccount);
 				}
 	      }catch(Exception e) {
 	    	  e.printStackTrace();
@@ -1512,7 +1537,7 @@ public class MypageController {
    }
    
    @GetMapping("/selectSellApply")
-   public String selectSellApply(@RequestParam("list") Integer list, @RequestParam("ino") Integer ino) {
+   public String selectSellApply(@RequestParam("radio-group") Integer list, @RequestParam("ino") Integer ino) {
       System.out.println("userno:"+list);
       try {
          mypageService.selectSellApply(list,ino);
@@ -1520,11 +1545,11 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/sellView/"+ino;
+      return "redirect:/sellapplyList/"+ino;
    }
    
    @GetMapping("/selectSharingApply")
-   public String selectSharingApply(@RequestParam("list") Integer list, @RequestParam("sno") Integer sno) {
+   public String selectSharingApply(@RequestParam("radio-group") Integer list, @RequestParam("sno") Integer sno) {
       System.out.println("userno:"+list);
       try {
          mypageService.selectSharingApply(list,sno);
@@ -1713,9 +1738,14 @@ public class MypageController {
 				System.out.println("SLIST:"+sList);
 				return sList;
 			}else if("indi".equals(category)) {
-				iList = mypageService.getLikeSellList(userno);
-				System.out.println("ILIST:"+iList);
-				return iList;
+	            iList = mypageService.getLikeSellList(userno);
+	            for (int i = 0; i < iList.size(); i++) {
+	               if (iList.get(i).getIfileids() != null) {
+	                  iList.get(i).setIfileids(iList.get(i).getIfileids().split(",")[0]);
+	               }
+	            }
+	            System.out.println("ILIST:"+iList);
+	            return iList;
 			}else {
 				bList = mypageService.getLikeBusinessList(userno);
 				System.out.println("BLIST:"+bList);

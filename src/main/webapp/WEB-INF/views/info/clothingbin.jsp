@@ -58,7 +58,10 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 .shop {
     width: 100%;
     padding: 30px 0;
-    border: 1px solid #9e9e9e;
+    border-right:0px;
+    border-left: 0px;
+    border-bottom: 1px solid #9e9e9e;
+    border-top: 2px solid #17191f;
     border-top: 2px solid #17191f;
     text-align: center;
 }
@@ -142,7 +145,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 .shopSchList>.list>li>a>.store_item {
     width: 100%;
     height: 100px;
-    padding: 8px 85px 0 15px;
+    padding: 9%;
     font-size: 14px;
     line-height: 20px;
     color: #666;
@@ -206,10 +209,10 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
 </div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6c505216c8faffd1bf7690ddd222d68e&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cd142efc33a45727f19cee4fb015dc51&libraries=services"></script>
 	<script>
 		$(document).ready(function(){
-			let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h4 style="margin:auto auto;">지역을 선택해주세요</h4><span><a></li>'
+			let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h5 style="margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요.</h5><span><a></li>';
 			$('.list').append(requ);
 		})
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -381,7 +384,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 						var bli = "";
 						console.log("데이터길이:"+data.length);
 						if(data.length==0){
-							bli += '<li id="listmove" class="listmove"><a href="javascript:void(0);"><span class="store_item"><h3 style="text-align: center; font-size: 16px;">선택된 지역에 헌옷수거함 데이터가 없습니다</h3><br></span></a></li><br>';
+							bli += '<li id="listmove" class="listmove"><a href="javascript:void(0);"><span class="store_item"><h3 style="text-align: center; font-size: 17px; margin-left: 16px; margin-top:7px; color: cadetblue;">선택된 지역에 헌옷수거함 데이터가 없습니다.</h3><br></span></a></li><br>';
 						}
 						data.forEach(function(item,i){
 							bli += "<li id='listmove' class='listmove'><a href='javascript:void(0);' class='bin' data-value='"+item+"' data-value2='"+i+"'><span class='store_item'>"+item+"</span></a></li>";

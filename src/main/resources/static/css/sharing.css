@@ -215,7 +215,7 @@ select::-ms-expand {
   display: flex;
   grid-gap: 1em;
   margin: 0 auto;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -283,9 +283,14 @@ select::-ms-expand {
   	text-align: center;
   	padding: 2px;
 }
-
+#sharingListCard {
+	text-decoration: none;
+}
+#sharingListCard:hover {
+	color: var(--p-color);
+	}
 .card-image img {
-	max-height: 100%;
+	max-height: 167px;
 	width: 100%;
 	background-size: cover;
 	object-fit: cover;

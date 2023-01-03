@@ -9,11 +9,15 @@ html {
 	margin-bottom: 25%;
 }
 
+.card-list {
+	justify-content: center;
+}
+
 #sellListCard {
 	text-decoration: none;
 }
 #sellListCard:hover {
-	color: black;
+	color: var(--p-color);
 }
 #sellselect {
 	margin-left: 6%;
@@ -31,6 +35,7 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+	margin-top: 7px;  
 }
 .buttoncontent {
     width: 6em;

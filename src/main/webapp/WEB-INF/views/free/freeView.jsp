@@ -22,7 +22,7 @@
 
 .viewcont {
     position: relative;
-    height: 216px;
+    height: auto;
     border-bottom: 2px solid navy;
 }
 .viewcont p {
@@ -91,7 +91,7 @@
 	            <a id="input4" href="/freeList?page=${page}&kwd=${kwd}" class="on">목록</a>
 	            <c:if test="${authUser.sect eq 'users'}">                
 	             <c:if test="${authUser.userno eq article.userno}">	                                  
-	                <a href="/modifyform/${article.fno }">수정</a>
+	                <a id="freeModify" href="/modifyform/${article.fno }">수정</a>
 	                <input id="freeDelete"  onclick="freeRemove()" type="submit" value="삭제">
 	             </c:if>               
 	            </c:if>
@@ -165,6 +165,21 @@
 			        </form>
 			    </div>
 		    </c:if>
+		    <c:if test="${empty authUser }">
+				    <div class="commentContainer">				        
+				        <form class="commentInsertForm" name="commentInsertForm">
+				            <div class="commentBox">
+			               	   <input type="hidden" name="fno" id="fno" value="${article.fno }">  
+				               <div class="commentContent">
+								   <input type="text" class="ccontent" id="ccontent" name="ccontent" placeholder="로그인 후 댓글 작성이 가능합니다." readonly />
+					               <div class="commentbtn">
+					                    <button id="bbtn" class="buttoncontent" type="button">등록</button>
+					               </div>
+				               </div>
+				              </div>
+				        </form>
+				    </div>			 	
+				</c:if>
             <%-- <c:if test="${authUser ne null }">                 
             	<c:choose>
                 <c:when test="${authUser.sect eq 'users' }"> 	

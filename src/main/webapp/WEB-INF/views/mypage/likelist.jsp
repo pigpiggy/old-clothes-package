@@ -17,7 +17,7 @@
 <body>
 	<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	<div id="full">
-		<h2><strong>찜 목록</strong></h2>
+		<h2 class="likelistSub"><strong>찜 목록</strong></h2>
 		<div id="cate" class="select" >
 			<div id="selectbox">
 				<select id="catelist" onchange="catelist()">
@@ -59,7 +59,7 @@
 						              </div>
 						          </div>	
 						          <hr class="hr2">		         	 	
-			         	 	<div class="btn">			         	 	  
+			         	 	<div id="likebtn">			         	 	  
 				              <button type="button" id="lmodal_close_btn">Close</button>
 				              <button type="submit" form="form" id="lapplycloth">수거신청</button>
 				           </div>
@@ -338,7 +338,7 @@ function catelist(){
 									chartHtml +='</div>';
 								}
 								chartHtml +='<div class="info">';
-								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="name"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
 								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
 								chartHtml +='</div>';
@@ -562,7 +562,7 @@ function refreshlist(category,globalCurrentPage){
 									chartHtml +='</div>';
 								}
 								chartHtml +='<div class="info">';
-								chartHtml +='<span class="name"><a href="/sharingView/'+data.ino+'">'+data.ititle+'</a></span>';
+								chartHtml +='<span class="name"><a href="/sellView/'+data.ino+'">'+data.ititle+'</a></span>';
 								chartHtml +='<span class="date">'+data.regDate+'</span>';
 								chartHtml +='<button type="button" id="delete" class="sdelete" data-value="'+data.ino+'"><img class="remove" src="/image/close.png" /></button>';
 								chartHtml +='</div>';

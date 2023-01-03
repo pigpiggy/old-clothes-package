@@ -70,7 +70,7 @@ $(function () {
 				var content = data.mcontent;
 				$(".modalContent").empty();  
 				let modalcontext = "";
-				modalcontext += "<h5>보낸 사람: "+ sendUser +"</h5>";
+				modalcontext += "<h5 class='mUser'>보낸 사람: "+ sendUser +"</h5>";
 				modalcontext += "<div class='modaltitle'><label class="+"'mcontext'"+" for="+"'mtitle'"+">제목 </label><br> "+title+"</div>";
 				modalcontext += "<div><label class='mcontext' for='mcontent'>내용 </label><br>"+content+"</div>";
 				modalcontext += "<a href='#' class='modal__close'>&times;</a></div>";
@@ -97,7 +97,7 @@ $(function () {
 				var content = data.mcontent;
 				$(".modalContent2").empty();  
 				let modalcontext = "";
-				modalcontext += "<h5>받는 사람: "+ recvUser +"</h5>";
+				modalcontext += "<h5 class='mUser'>받는 사람: "+ recvUser +"</h5>";
 				modalcontext += "<div class='modaltitle'><label class="+"'mcontext'"+" for="+"'mtitle'"+">제목 </label><br> "+title+"</div>";
 				modalcontext += "<div><label class='mcontext' for='mcontent'>내용 </label><br>"+content+"</div>";
 				modalcontext += "<a href='#' class='modal__close'>&times;</a></div>";

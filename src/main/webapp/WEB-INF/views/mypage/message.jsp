@@ -19,7 +19,7 @@
 		<c:import url='/WEB-INF/views/mypage/mypage.jsp' />
 	</div>	
     <div class="messageContainer">
-    <h2><strong>쪽지함</strong></h2>
+    <h2 class="messageSubject"><strong>쪽지함</strong></h2>
     <div id="demo-modal" class="firstmodal">
       		<div class="modal__content" id="modal__content">
       			<form action="/mypage/smessage" method="post" id="messageform" onsubmit="alert("홍소미");">
@@ -46,7 +46,7 @@
         <table class="table table-hover" id="recvtable">
           <thead>
             <tr>
-              <th>
+              <th class="messageChk">
                 <input type="checkbox" class="form-check-input" id="checkhead" name="optionth" value="something" checked>
               </th>
               <th>보낸 사람</th>
@@ -57,7 +57,7 @@
           <tbody>
           <c:forEach var="recvmessage" items="${recvmessage }">
             <tr>
-              <td class="checkbox">     
+              <td class="checkbox messageChk">     
                 <input type="checkbox" class="form-check-input1" id="checkcontent" name="option1" value="something" checked>
 	            <input type="hidden" name="mno" class="mno" value="${recvmessage.mno }" />
 	            <c:if test="${!empty recvmessage.sendUserno}">
@@ -89,7 +89,7 @@
         <table class="table table-hover" id="sendtable">
           <thead>
             <tr>
-              <th>
+              <th class="messageChk">
                 <input type="checkbox" class="form-check-input" id="checkhead2" name="optionth" value="something" checked>
               </th>
               <th>받는 사람</th>
@@ -100,7 +100,7 @@
           <tbody>
           <c:forEach var="sendmessage" items="${sendmessage }">
             <tr>
-              <td class="checkbox">     
+              <td class="checkbox messageChk">     
                 <input type="checkbox" class="form-check-input2" id="checkcontent2" name="option2" value="something" checked>
                 <input type="hidden" name="mno" class="mno2" value="${sendmessage.mno }" />
               </td>
@@ -126,14 +126,14 @@
 						<li><a id="prev"><<</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/message?rpage=${rpageInfo.page-1}&select=0" id="prev"><<</a></li>&nbsp;
+						<li><a href="/mypage/umessage/${userno}?rpage=${rpageInfo.page-1}&select=0" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${rpageInfo.startPage }" end="${rpageInfo.endPage }">
 					<c:choose>
 						<c:when test="${rpageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 						<c:otherwise>
-							<li><a href="/mypage/message?rpage=${i}&select=0">${i }</a></li>
+							<li><a href="/mypage/umessage/${userno}?rpage=${i}&select=0">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -142,7 +142,7 @@
 						<li><a id="next">>></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/message?rpage=${rpageInfo.page+1}&select=0" id="next">>></a></li>
+						<li><a href="/mypage/umessage/${userno}?rpage=${rpageInfo.page+1}&select=0" id="next">>></a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>		
@@ -155,14 +155,14 @@
 						<li><a id="prev"><<</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/message?spage=${spageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
+						<li><a href="/mypage/umessage/${userno}?spage=${spageInfo.page-1}&select=1" id="prev"><<</a></li>&nbsp;
 					</c:otherwise>
 				</c:choose>
 				<c:forEach var="i" begin="${spageInfo.startPage }" end="${spageInfo.endPage }">
 					<c:choose>
 						<c:when test="${spageInfo.page==i }"><li><a class="active">${i }</a></li></c:when>
 						<c:otherwise>
-							<li><a href="/mypage/message?spage=${i}&select=1">${i }</a></li>
+							<li><a href="/mypage/umessage/${userno}?spage=${i}&select=1">${i }</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -171,7 +171,7 @@
 						<li><a id="next">>></a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/mypage/message?spage=${spageInfo.page+1}&select=1" id="next">>></a></li>
+						<li><a href="/mypage/umessage/${userno}?spage=${spageInfo.page+1}&select=1" id="next">>></a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>		

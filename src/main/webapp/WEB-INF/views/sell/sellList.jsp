@@ -44,7 +44,7 @@
 	
     <div class="card-list">
 	  <c:forEach var="sell" items="${sellList}">
-     <a href="sellView/${sell.ino}">
+     <a href="sellView/${sell.ino}" id="sellListCard">
 	     <div class="card" data-sno=${sell.ino }>
      		  <div class="individualCard-header">
 	     	  	  ${sell.idealType}

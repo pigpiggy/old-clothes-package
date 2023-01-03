@@ -22,11 +22,11 @@ function Validation(){
 		return false;
 	}
 	
-	/*최종때 주석 풀어야 해요!
+	//최종때 주석 풀어야 해요!
 	if($('#checkedauthNumber').css("display")=="none"){
 	      alert("본인 인증 완료해주세요.");
 	      return false;
-	}*/
+	}
 	
 	if(PPwd.value==''){
 		alert("비밀 번호를 입력해주세요.");
@@ -91,12 +91,12 @@ function Valid(){
 		return false;
 	}
 
-	/* 최종때 주석 풀어야 해요!
+	//최종때 주석 풀어야 해요!
 	if($('#bcheckedauthNumber').css("display")=="none"){
 	      alert("본인 인증 완료해주세요.");
 	      return false;
 	}
-	*/
+	
 	if(BPwd.value==''){
 		alert("비밀 번호를 입력해주세요.");
 		return false;

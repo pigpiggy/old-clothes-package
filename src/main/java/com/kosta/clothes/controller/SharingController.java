@@ -395,7 +395,8 @@ public class SharingController {
 	/* commons에 필요한 애들 */
 	@GetMapping("/img/{sfileids}")
 	public void viewImage(@PathVariable Integer sfileids, HttpServletResponse response) {
-		String path = servletContext.getRealPath("/upload/");
+		String path = "/home/ubuntu/app/oldclothes/upload/";
+//		String path = servletContext.getRealPath("/upload/");
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(path + sfileids);
@@ -415,7 +416,8 @@ public class SharingController {
 
 	@GetMapping("/upload/{fileid}")
 	public void imgView(@PathVariable String fileid, HttpServletResponse response) {
-		String path = servletContext.getRealPath("/upload/");
+		String path = "/home/ubuntu/app/oldclothes/upload/";
+//		String path = servletContext.getRealPath("/upload/");
 		try {
 			FileInputStream fis = new FileInputStream(path + fileid);
 			OutputStream out = response.getOutputStream();

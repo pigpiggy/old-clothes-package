@@ -58,7 +58,8 @@ public class SellServiceImpl implements SellService{
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
-			String path = servletContext.getRealPath("/upload/");
+			String path = "/home/ubuntu/app/oldclothes/upload/";
+//			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
 					fileVo.setDirectory_name(path);
@@ -163,7 +164,8 @@ public class SellServiceImpl implements SellService{
 		String fileids = "";
 		FileVO nfileVo = new FileVO();
 		if(files!=null) {
-			String path = servletContext.getRealPath("/upload/");
+			String path = "/home/ubuntu/app/oldclothes/upload/";
+//			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
 					nfileVo.setDirectory_name(path);

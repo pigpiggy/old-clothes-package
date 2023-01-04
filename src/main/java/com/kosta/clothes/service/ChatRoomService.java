@@ -50,7 +50,8 @@ public class ChatRoomService implements ChatRoomDAO {
 	
 	//no connection with DB
 	public List<ChatRoom> readChatHistory(ChatRoom chatRoom) throws IOException {
-		String fileUploadPath = servletContext.getRealPath("/chat/");
+		String fileUploadPath = "/home/ubuntu/app/oldclothes/chat/";
+//		String fileUploadPath = servletContext.getRealPath("/chat/");
 		String pathName = fileUploadPath + chatRoom.getFileName();
 		
 		//DB에 저장된 chat.txt 파일을 읽어옴 
@@ -94,7 +95,8 @@ public class ChatRoomService implements ChatRoomDAO {
 	}
 	
 	public void createFile(Integer ino, Integer chatno) throws IOException {
-		String fileUploadPath = servletContext.getRealPath("/chat/");
+		String fileUploadPath = "/home/ubuntu/app/oldclothes/chat/";
+//		String fileUploadPath = servletContext.getRealPath("/chat/");
 
 		String fileName = ino + "_" + chatno + ".txt";
 		String pathName = fileUploadPath + fileName;
@@ -120,8 +122,8 @@ public class ChatRoomService implements ChatRoomDAO {
 
 	//no connection with DB
 	public void appendMessage(ChatRoom chatRoom) throws IOException {
-		
-		String fileUploadPath = servletContext.getRealPath("/chat/");
+		String fileUploadPath = "/home/ubuntu/app/oldclothes/chat/";
+//		String fileUploadPath = servletContext.getRealPath("/chat/");
 		Integer ino = chatRoom.getIno();
 		Integer buyerno = chatRoom.getBuyerno();
 		

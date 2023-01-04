@@ -179,7 +179,8 @@ public class FreeController {
 	@ResponseBody
 	@PostMapping("/upload")
 	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
-		String path = servletContext.getRealPath("/upload/");
+		String path = "/home/ubuntu/app/oldclothes/upload/";
+//		String path = servletContext.getRealPath("/upload/");
 		String filename = file.getOriginalFilename();
 		File destfile = new File(path+filename);
 		Map<String, Object> json = new HashMap<>();
@@ -196,7 +197,8 @@ public class FreeController {
 	//as CK에디터
 	@GetMapping("/fileview/{filename}")
 	public void fileview(@PathVariable String filename, HttpServletResponse response) {
-		String path=servletContext.getRealPath("/upload/");
+		String path = "/home/ubuntu/app/oldclothes/upload/";
+//		String path=servletContext.getRealPath("/upload/");
 		File file = new File(path+filename);
 		FileInputStream fis = null;
 		try {

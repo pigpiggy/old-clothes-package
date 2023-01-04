@@ -64,7 +64,7 @@ public class SharingServiceImpl implements SharingService{
 		String fileids = "";
 		FileVO fileVo = new FileVO();
 		if(files!=null) {
-			String path = request.getSession().getServletContext().getRealPath("/static/upload");
+			String path = "/home/ubuntu/app/oldclothes/upload/";
 //			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
@@ -180,7 +180,8 @@ public class SharingServiceImpl implements SharingService{
 		String fileids = "";
 		FileVO nfileVo = new FileVO();
 		if(files!=null) {
-			String path = servletContext.getRealPath("/upload/");
+			String path = "/home/ubuntu/app/oldclothes/upload/";
+//			String path = servletContext.getRealPath("/upload/");
 			for(MultipartFile file : files) {
 				if(!file.isEmpty()) {
 					nfileVo.setDirectory_name(path);

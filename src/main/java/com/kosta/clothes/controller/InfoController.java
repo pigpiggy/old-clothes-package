@@ -109,7 +109,7 @@ public class InfoController {
 		Trash trash = null;
 		List<String> list = new ArrayList<String>();
 		//csv 파일 경로
-		String path = "/home/ubuntu/app/oldclothes/";
+		String path = "/home/ubuntu/app/oldclothes/csv/";
 //		String path = servletContext.getRealPath("/csv/");
 		path += "oldclothesutf.csv";
 		List<Trash> data = trashService.readCsvToBean(path); //읽어온 것을 data에 담는다

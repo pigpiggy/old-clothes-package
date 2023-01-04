@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .star,
 .star1 {
-	background: url('/image/graystar.png') no-repeat;
+	background: url('/static/image/graystar.png') no-repeat;
 	background-size: 32px;
 	width: 32px;
 	height: 32px;
@@ -11,7 +11,7 @@
 }
 .star.yellow,
 .star1.yellow {
-	background: url('/image/yellowstar.png') no-repeat;
+	background: url('/static/image/yellowstar.png') no-repeat;
 	background-size: 32px;
 	width: 32px;
 	height: 32px;

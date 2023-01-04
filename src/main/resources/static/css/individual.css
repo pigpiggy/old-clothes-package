@@ -11,7 +11,7 @@ body {
 }
 /*맨 위 사진 부분*/
 .news-detail-header-section-sell {
-  background-image: url('/image/medium-shot-people-collecting-donations.jpg');
+  background-image: url('/static/image/medium-shot-people-collecting-donations.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

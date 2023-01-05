@@ -388,7 +388,8 @@ public class MypageController {
 	         }else {
                  //거래후기
                  reviewList = reviewService.getBReviewList(bno, rpage, rpageInfo);
-                 model.addAttribute("reviewList", reviewList);	
+                 model.addAttribute("reviewList", reviewList);
+                 model.addAttribute("rpageInfo", rpageInfo);
                  
                  Map astatuscount= applyService.astatuscount(bno);
                  Integer acount= (Integer) astatuscount.get("후기등록완료");
@@ -1302,6 +1303,29 @@ public class MypageController {
 		               model.addAttribute("spageInfo", spageInfo);
 		               model.addAttribute("select", select);
 		               model.addAttribute("submitcheck", submitcheck);
+		               
+		               Business business = messageService.mypageBusiness(bno);
+		                  System.out.println("business mypage" +  business.toString());         
+		                  model.addAttribute("business",business);
+
+		                  //신청목록개수
+		                  Integer applycount = applyService.applycount(bno);
+		                  System.out.println("applycount : " + applycount);
+		                  model.addAttribute("applycount",applycount);
+
+		                  //수거상태
+		                  Map astatuscount= applyService.astatuscount(bno);
+		                  Integer dcount= (Integer) astatuscount.get("신청중");
+		                  Integer ecount= (Integer) astatuscount.get("신청완료");
+		                  Integer bcount= (Integer) astatuscount.get("신청거절");
+		                  Integer acount= (Integer) astatuscount.get("후기등록완료");
+		                  Integer ccount= (Integer) astatuscount.get("수거완료");
+		                  System.out.println("astatuscount:"+astatuscount);
+		                  model.addAttribute("dcount",dcount);
+		                  model.addAttribute("ecount",ecount);
+		                  model.addAttribute("bcount",bcount);
+		                  model.addAttribute("acount",acount);
+		                  model.addAttribute("ccount",ccount);
 				}
 	      }catch(Exception e) {
 	    	  e.printStackTrace();
@@ -1521,7 +1545,7 @@ public class MypageController {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/sellView/"+ino;
+      return "redirect:/sellapplyList/"+ino;
    }
    
    @GetMapping("/selectSharingApply")

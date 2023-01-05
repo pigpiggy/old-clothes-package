@@ -230,11 +230,11 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 			         	 		<div class="cont">
 						              <input type="text" id="aname" name="aname" placeholder="이름">
 						              <div class="adre">
-						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)">
-						                  <input type="button" id="aad_bt" name="aad_bt" readonly onclick="findAddr()" value="주소검색">
+						                  <input type="text" id="aaddress" name="aaddress" placeholder="주소(동 까지만 입력)" readonly>
+						                  <input type="button" id="aad_bt" name="aad_bt" onclick="findAddr()" value="주소검색">
 						              </div>
 							              <input type="text" id="aphone" name="aphone" placeholder="(- 제외 (01012341234 )">
-							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]">
+							              <input type="text" id="apickup" name="apickup" placeholder="수거 희망 날짜[시간]" readonly>
 						              <div class="wei">
 						                  <input type="text" id="weight" name="weight" placeholder="옷 무게">
 						                  <p>kg</p>
@@ -242,7 +242,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 						              <input type="hidden" id="astatus" name="astatus" value="신청중">
 						          </div>	
 						          <hr class="hr2">		         	 	
-			         	 	<div class="btn">			         	 	  
+			         	 	<div class="applybtn" id="applybtn">			         	 	  
 				              <button type="button" id="modal_close_btn">Close</button>
 				              <button type="submit" form="form" id="applycloth">수거신청</button>
 				           </div>
@@ -427,7 +427,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove" style="cursor:pointer;">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){
@@ -743,7 +743,7 @@ body, div, ul, li, h1, h2, h3, h4, h5, p{
 				//리스트 목록 보여주기					
 				var bbno = data.bno;				
 				bli += '<li class="listdnames" id="listmove">' ;
-				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
+				bli += '<span id="bnames" class="store_item"><a href="/mypage/bmypage/'+data.bno+'/review" target="_blank">' + "<strong>상호명 : "+ data.bname + '</strong></a>';
 				if(auth==""){ //둘 다 로그인 안했을 때 
 					bli += '<em><img src="/static/image/heart.png" id="heart_img" class="heart_img" alt="'+data.bno+'" title="찜하기"></em>';
 				}else if(authsect == 'business'){

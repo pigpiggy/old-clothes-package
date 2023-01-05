@@ -37,8 +37,8 @@ public class CertificationService implements UsersService {
 	
 	// 인증번호(전화번호, 인증번호)
     public void certifiedPhoneNumber(String phone, String cerNum) {
-        String api_key = "NCSDPJ0B6C6QCEYN"; //coolsms에서 발급받은 api_key
-        String api_secret = "QNZICKM2RTJY1NBJYIEEEK92YXSVXTCL";//coolsms에서 발급받은 api_secret key
+        String api_key = "NCSCEHWVJIO1GW6M"; //coolsms에서 발급받은 api_key
+        String api_secret = "R7FQWGT4EPXFS1N4BLHXAGILZWZBFNEG";//coolsms에서 발급받은 api_secret key
         Message coolsms = new Message(api_key, api_secret);
         HashMap<String, String> params = new HashMap<>();
         params.put("to", phone);    // 수신전화번호 문자인증받을 번호

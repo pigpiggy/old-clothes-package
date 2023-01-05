@@ -22,12 +22,20 @@
 
 .stars {
 	display: flex;
+	justify-content: center;
+	margin-bottom: 7%;
+}
+.content, 
+.content1 {
+	height: 58%;
+    width: 100%;
+    resize: none;
 }
 #sellListCard {
 	text-decoration: none;
 }
 #sellListCard:hover {
-	color: black;
+	color: var(--p-color);
 }
 .buyProductWrap {
 	width: 1000px;
@@ -35,7 +43,7 @@
 	margin-bottom: 25%;
 }
 
-.card2, .card-body, .card-footer {
+.card2, .card-body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -69,12 +77,38 @@
 	justify-content: center;
 	margin-top: 10%;
 }
+.modal__content {
+	border-radius: 4px;
+    position: relative;
+    width: 30%;
+    max-width: 40%;
+    height: 24%;
+    background: #fff;
+    padding: 1em 2em;
+}
+
+.modal__content label {
+	text-align: center;
+    width: 100%;
+}
+
+.modal__content strong{
+	display: block;
+    margin: 0 0 -25px 0;
+    font-size: 17px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: navy;
+}
 /* 버튼 */
 .buttonbox {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+   margin-top: 7px;
 }
 .buttoncontent {
     width: 6em;
@@ -85,7 +119,8 @@
     text-decoration: none;
     border-radius: 9px;
     font-size: 1em;
-    margin: 5% 3%;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Hover state animation applied here */

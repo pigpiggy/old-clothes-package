@@ -283,7 +283,12 @@ select::-ms-expand {
   	text-align: center;
   	padding: 2px;
 }
-
+#sharingListCard {
+	text-decoration: none;
+}
+#sharingListCard:hover {
+	color: var(--p-color);
+	}
 .card-image img {
 	max-height: 167px;
 	width: 100%;

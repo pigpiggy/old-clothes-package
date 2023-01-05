@@ -55,6 +55,7 @@ li {
     bottom: 34px;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
 }
 
 /* 체크박스 */
@@ -155,6 +156,10 @@ li {
 	 			$('.submitButton').attr("disabled", true);
 	 		}
 	 	}
+	 	$('.submitButton').click(function(){
+	          alert('신청이 완료되었습니다.');
+	          opener.parent.location.reload();
+	       });
  	</script>
 </body>
 </html>

@@ -62,9 +62,10 @@ h2 {
 	margin-bottom: 50px;
 }
 
-h5 {
+.mUser {
 	font-weight: bold;
 	margin: 20px 0;
+	color: black;
 }
 #select {
 	display: flex;
@@ -114,6 +115,7 @@ input[type="checkbox"] {
 	align-items: center;
 	justify-content: center;
 	border: none;
+	height: 45px;
 }
 
 .modaltitle{
@@ -181,8 +183,11 @@ div.center {
 	margin: 20px;
 	display: flex;
 	justify-content: center;
+	margin-top: 10%;
 }
-
+#checkcontent {
+	margin-bottom: 5px;
+}
 
 
 

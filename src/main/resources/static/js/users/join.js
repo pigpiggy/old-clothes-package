@@ -30,6 +30,7 @@ $(function(){
      $('#checkeduserid').hide();
   });
   $('#useridcheck').click(function(){
+	 var engid = /^[a-zA-Z0-9]*$/;
      var checkuserid =$('#userid').val();
      var checkPid = document.getElementById("userid");
      console.log(checkPid.value.length);
@@ -46,7 +47,9 @@ $(function(){
         	   alert("아이디가 너무 길어요 10자 이하로 해주세요.");
            }else if(checkPid.value.search(" ") != -1 ){ 
         	   alert("공백이 포함되면 안됩니다.");
-           }else{
+          }else if(!engid.test(checkuserid)){
+			   alert("영문+숫자 조합만 가능합니다.");
+		   }else{
               alert("사용 가능한 아이디입니다.");
                $('#useridcheck').hide();
                $('#checkeduserid').show();
@@ -63,6 +66,7 @@ $(function(){
      $('#b_checkedbusinessid').hide();
   });
   $('#b_businessidcheck').click(function(){
+	 var bengid = /^[a-zA-Z0-9]*$/;
      var businessid =$('#businessid').val();
      var checkBid = document.getElementById("businessid");
      console.log(businessid.value);
@@ -79,7 +83,9 @@ $(function(){
         	   alert("아이디가 너무 길어요 10자 이하로 해주세요.");
            }else if(checkBid.value.search(" ") != -1 ){ 
         	   alert("공백이 포함되면 안됩니다.");
-           }else{
+           }else if(!bengid.test(businessid)){
+			   alert("영문+숫자 조합만 가능합니다.");
+		   }else{
               alert("사용 가능한 아이디입니다.");
                $('#b_businessidcheck').hide();
                $('#b_checkedbusinessid').show();

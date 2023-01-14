@@ -209,7 +209,7 @@ h1, h2, h3, h4, h5, h6, address, caption, cite, code, dfn, em, th, var {
 		<c:import url='/WEB-INF/views/includes/footer.jsp' />
 	</div>
 </div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16eca872f65e4b62c53c5fe87a69979b&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b4526704a905bd19e6e5a004c8a8d4d&libraries=services"></script>
 	<script>
 		$(document).ready(function(){
 			let requ = '<li><a href="javascript:void(0);"><span class="store_item"><h5 style="margin:auto auto;text-align: center; color: cadetblue;">지역을 선택해주세요.</h5><span><a></li>';
